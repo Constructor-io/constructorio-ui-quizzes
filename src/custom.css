@@ -1,0 +1,12 @@
+.select-question-container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.select-question-container .question-options-container {
+  flex-wrap: wrap;
+}
+
+.question-option-container {
+  margin-bottom: 0.5rem;
+}

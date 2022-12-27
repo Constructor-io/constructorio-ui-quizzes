@@ -1,0 +1,102 @@
+{
+    "next_question": {
+        "options": [
+            {
+                "id": 1,
+                "value": "Pour Over",
+                "attribute": null,
+                "images": {
+                    "primary_url": "https://demo.constructor.io/sandbox_files/farmstandquizassets/preferredBrewingPourOver.png",
+                    "primary_alt": "Hario V60",
+                    "secondary_url": null,
+                    "secondary_alt": null
+                }
+            },
+            {
+                "id": 2,
+                "value": "Chemex",
+                "attribute": null,
+                "images": {
+                    "primary_url": "https://demo.constructor.io/sandbox_files/farmstandquizassets/preferredBrewingChemex.png",
+                    "primary_alt": "Chemex",
+                    "secondary_url": null,
+                    "secondary_alt": null
+                }
+            },
+            {
+                "id": 3,
+                "value": "AeroPress",
+                "attribute": null,
+                "images": {
+                    "primary_url": "https://demo.constructor.io/sandbox_files/farmstandquizassets/preferredBrewingAeroPress.png",
+                    "primary_alt": "Aeropress",
+                    "secondary_url": null,
+                    "secondary_alt": null
+                }
+            },
+            {
+                "id": 4,
+                "value": "Moka Pot",
+                "attribute": null,
+                "images": {
+                    "primary_url": "https://demo.constructor.io/sandbox_files/farmstandquizassets/preferredBrewingMoka.png",
+                    "primary_alt": "Moka Pot",
+                    "secondary_url": null,
+                    "secondary_alt": null
+                }
+            },
+            {
+                "id": 5,
+                "value": "French Press",
+                "attribute": null,
+                "images": {
+                    "primary_url": "https://demo.constructor.io/sandbox_files/farmstandquizassets/preferredBrewingFrenchPress.png",
+                    "primary_alt": "French Press",
+                    "secondary_url": null,
+                    "secondary_alt": null
+                }
+            },
+            {
+                "id": 6,
+                "value": "Espresso Machine",
+                "attribute": null,
+                "images": {
+                    "primary_url": "https://demo.constructor.io/sandbox_files/farmstandquizassets/preferredBrewingEspressoMachine.png",
+                    "primary_alt": "La Marzocco Espresso Machine",
+                    "secondary_url": null,
+                    "secondary_alt": null
+                }
+            },
+            {
+                "id": 7,
+                "value": "Coffee Maker",
+                "attribute": null,
+                "images": {
+                    "primary_url": "https://demo.constructor.io/sandbox_files/farmstandquizassets/preferredBrewingCoffeeMaker.png",
+                    "primary_alt": "Drip Coffee Maker",
+                    "secondary_url": null,
+                    "secondary_alt": null
+                }
+            },
+            {
+                "id": 8,
+                "value": "Other",
+                "attribute": null,
+                "images": {
+                    "primary_url": "https://demo.constructor.io/sandbox_files/farmstandquizassets/preferredBrewingOther.png",
+                    "primary_alt": "Clever Dripper",
+                    "secondary_url": null,
+                    "secondary_alt": null
+                }
+            }
+        ],
+        "id": 4,
+        "title": "What are your preferred brewing methods?",
+        "description": "Some test text",
+        "images": null,
+        "cta_text": null,
+        "type": "multiple"
+    },
+    "is_last_question": false,
+    "version_id": "0929ca69-2772-4d03-b2b4-1951d6657b70"
+}

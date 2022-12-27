@@ -1,0 +1,33 @@
+.select-question-container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+.question-title {
+  text-align: center;
+}
+
+.question-options-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.question-option-container {
+  display: flex;
+  flex-direction: column;
+  margin: 1px;
+  border: 1px solid transparent;
+}
+
+.question-option-container.selected {
+  border: 1px solid #6b7280;
+}
+
+.question-option-value {
+  text-align: center;
+}
+
+.question-cta-button {
+  margin: 1rem auto;
+}
