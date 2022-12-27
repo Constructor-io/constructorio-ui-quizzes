@@ -1,15 +1,23 @@
 import { useState } from 'react';
+import CTAButton from './CTAButton';
+import QuestionTitle from './QuestionTitle';
+import QuestionDescription from './QuestionDescription';
+import { Question, QuestionOption } from '../types';
 
 interface Selected {
-  [key: string]: boolean;
+  [key: number]: boolean;
 }
-function SelectTypeQuestion(props: any) {
+interface SelectTypeQuestionProps {
+  question: Question
+}
+
+function SelectTypeQuestion(props: SelectTypeQuestionProps) {
   const { question } = props;
   const { type } = question;
   const [selected, setSelected] = useState<Selected>({});
 
-  const renderImages = (option: any) => {
-    if (option?.images) {
+  const renderImages = (option: QuestionOption) => {
+    if (option.images) {
       const {
         primary_url: primaryUrl,
         primary_alt: primaryAlt,
@@ -17,17 +25,21 @@ function SelectTypeQuestion(props: any) {
         secondary_alt: secondaryAlt,
       } = option.images;
 
-      const replaceImage = (e: any) => {
-        if (secondaryUrl) {
-          e.currentTarget.src = secondaryUrl;
-          e.currentTarget.alt = secondaryAlt;
-        }
-      };
-      const restoreImage = (e: any) => {
-        e.currentTarget.src = primaryUrl;
-        e.currentTarget.alt = primaryAlt;
-      };
+      type ImageFocusEvent =
+        React.MouseEvent<HTMLImageElement> | React.FocusEvent<HTMLImageElement>;
+
       if (primaryUrl) {
+        const replaceImage = (e: ImageFocusEvent) => {
+          if (secondaryUrl) {
+            e.currentTarget.src = secondaryUrl;
+            e.currentTarget.alt = secondaryAlt || '';
+          }
+        };
+        const restoreImage = (e: ImageFocusEvent) => {
+          e.currentTarget.src = primaryUrl;
+          e.currentTarget.alt = primaryAlt || '';
+        };
+
         return (
           <img
             src={primaryUrl}
@@ -43,14 +55,14 @@ function SelectTypeQuestion(props: any) {
     return '';
   };
 
-  const toggleIdSelected = (id: string) => {
+  const toggleIdSelected = (id: number) => {
     if (type === 'single') {
       setSelected({ [id]: true });
     } else if (type === 'multiple') {
       setSelected({ ...selected, [id]: !selected[id] });
     }
   };
-  const onOptionKeyDown = (event: React.KeyboardEvent<HTMLDivElement>, id: string) => {
+  const onOptionKeyDown = (event: React.KeyboardEvent<HTMLDivElement>, id: number) => {
     if (event?.key === ' ' || event?.key === 'Enter') {
       toggleIdSelected(id);
     }
@@ -58,10 +70,10 @@ function SelectTypeQuestion(props: any) {
 
   return (
     <div className="select-question-container">
-      <h1 className="question-title">{ question?.title }</h1>
-      <p className="question-description">{ question?.description }</p>
+      <QuestionTitle title={question.title} />
+      { question?.description ? <QuestionDescription description={question.description} /> : ''}
       <div className="question-options-container">
-        { question?.options?.map((option: any, index: number) => (
+        { question?.options?.map((option: QuestionOption, index: number) => (
           <div
             className={`question-option-container ${selected[option.id] ? 'selected' : ''}`}
             onClick={() => { toggleIdSelected(option.id); }}
@@ -75,7 +87,7 @@ function SelectTypeQuestion(props: any) {
           </div>
         ))}
       </div>
-      <button type="button" className="question-cta-button">{ question?.cta_text || 'Continue' }</button>
+      <CTAButton ctaText={question?.cta_text || undefined} />
     </div>
   );
 }
