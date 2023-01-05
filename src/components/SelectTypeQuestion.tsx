@@ -42,6 +42,7 @@ function SelectTypeQuestion(props: SelectTypeQuestionProps) {
 
         return (
           <img
+            className="question-option-image"
             src={primaryUrl}
             alt={secondaryAlt}
             onMouseOver={replaceImage}
