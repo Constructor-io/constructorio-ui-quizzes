@@ -26,6 +26,7 @@ export const renderImages = (images: Partial<QuestionImages>) => {
 
     return (
       <img
+        className="question-option-image"
         src={primaryUrl}
         alt={secondaryAlt}
         onMouseOver={replaceImage}

@@ -37,6 +37,11 @@
   border: 1px solid #6b7280;
 }
 
+.question-option-image {
+  height: 320px;
+  width: 320px;
+}
+
 .question-option-value {
   text-align: center;
 }
