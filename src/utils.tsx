@@ -1,7 +1,10 @@
 import { QuestionImages } from './types';
 
 // eslint-disable-next-line import/prefer-default-export
-export const renderImages = (images: Partial<QuestionImages>) => {
+export const renderImages = (
+  images: Partial<QuestionImages>,
+  cssClasses?: string,
+) => {
   const {
     primary_url: primaryUrl,
     primary_alt: primaryAlt,
@@ -26,7 +29,7 @@ export const renderImages = (images: Partial<QuestionImages>) => {
 
     return (
       <img
-        className="question-option-image"
+        className={`question-image ${cssClasses || ''}`.trim()}
         src={primaryUrl}
         alt={secondaryAlt}
         onMouseOver={replaceImage}

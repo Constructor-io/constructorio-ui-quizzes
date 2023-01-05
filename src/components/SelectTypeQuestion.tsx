@@ -44,7 +44,7 @@ function SelectTypeQuestion(props: SelectTypeQuestionProps) {
             tabIndex={index + 1}
             key={option.id}
           >
-            { option.images ? renderImages(option.images) : ''}
+            { option.images ? renderImages(option.images, 'question-option-image') : ''}
             <p className="question-option-value">{ option?.value }</p>
           </div>
         ))}
