@@ -21,8 +21,8 @@ export interface Question extends Record<string, any> {
   description: string;
   type: 'single' | 'multiple' | 'open' | 'cover';
   cta_text: string;
-  images: Partial<QuestionImages>;
-  options: QuestionOption[];
+  images?: Partial<QuestionImages>;
+  options?: QuestionOption[];
   input_placeholder?: string;
 }
 

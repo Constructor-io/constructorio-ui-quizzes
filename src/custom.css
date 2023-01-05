@@ -10,3 +10,15 @@
 .question-option-container {
   margin-bottom: 0.5rem;
 }
+
+.open-text-question-left {
+  background-color: rgb(251 244 238);
+  align-items: center;
+  justify-content: center;
+  padding: 10% 15%;
+
+}
+
+.question-input-text {
+  padding: 8px;
+}

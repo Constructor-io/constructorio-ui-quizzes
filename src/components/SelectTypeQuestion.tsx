@@ -2,6 +2,7 @@ import { useState } from 'react';
 import CTAButton from './CTAButton';
 import QuestionTitle from './QuestionTitle';
 import QuestionDescription from './QuestionDescription';
+import { renderImages } from '../utils';
 import { Question, QuestionOption } from '../types';
 
 interface Selected {
@@ -15,45 +16,6 @@ function SelectTypeQuestion(props: SelectTypeQuestionProps) {
   const { question } = props;
   const { type } = question;
   const [selected, setSelected] = useState<Selected>({});
-
-  const renderImages = (option: QuestionOption) => {
-    if (option.images) {
-      const {
-        primary_url: primaryUrl,
-        primary_alt: primaryAlt,
-        secondary_url: secondaryUrl,
-        secondary_alt: secondaryAlt,
-      } = option.images;
-
-      type ImageFocusEvent =
-        React.MouseEvent<HTMLImageElement> | React.FocusEvent<HTMLImageElement>;
-
-      if (primaryUrl) {
-        const replaceImage = (e: ImageFocusEvent) => {
-          if (secondaryUrl) {
-            e.currentTarget.src = secondaryUrl;
-            e.currentTarget.alt = secondaryAlt || '';
-          }
-        };
-        const restoreImage = (e: ImageFocusEvent) => {
-          e.currentTarget.src = primaryUrl;
-          e.currentTarget.alt = primaryAlt || '';
-        };
-
-        return (
-          <img
-            src={primaryUrl}
-            alt={secondaryAlt}
-            onMouseOver={replaceImage}
-            onMouseOut={restoreImage}
-            onFocus={replaceImage}
-            onBlur={restoreImage}
-          />
-        );
-      }
-    }
-    return '';
-  };
 
   const toggleIdSelected = (id: number) => {
     if (type === 'single') {
@@ -82,7 +44,7 @@ function SelectTypeQuestion(props: SelectTypeQuestionProps) {
             tabIndex={index + 1}
             key={option.id}
           >
-            { renderImages(option) }
+            { option.images ? renderImages(option.images) : ''}
             <p className="question-option-value">{ option?.value }</p>
           </div>
         ))}

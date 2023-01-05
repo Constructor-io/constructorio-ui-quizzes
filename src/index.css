@@ -4,6 +4,19 @@
   align-content: center;
 }
 
+.open-text-question-container {
+  display: flex;
+  justify-content: center;
+}
+
+.open-text-question-left,
+.open-text-question-right {
+  width: 50%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
 .question-title {
   text-align: center;
 }
@@ -30,4 +43,14 @@
 
 .question-cta-button {
   margin: 1rem auto;
+}
+
+.question-input-text-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.question-input-text {
+  width: 100%;
+  box-sizing: border-box;
 }
