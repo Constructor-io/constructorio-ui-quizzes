@@ -1,26 +1,57 @@
 /* This file is for CSS rules that apply to our example. They will be removed before we ship the library */
 
-.select-question-container {
+.cio-select-question-container {
   max-width: 1200px;
   margin: auto;
 }
 
-.select-question-container .question-options-container {
+.cio-select-question-container .cio-question-options-container {
   flex-wrap: wrap;
 }
 
-.question-option-container {
-  margin-bottom: 0.5rem;
+.cio-question-option-container {
+  margin-bottom: 0;
 }
 
-.open-text-question-left {
+/* Example */
+.cio-open-text-question-form,
+.cio-open-text-question-image {
+  box-sizing: border-box;
+  width: 50%;
+}
+
+.cio-open-text-question-form {
   background-color: rgb(251 244 238);
-  align-items: center;
-  justify-content: center;
-  padding: 10% 15%;
-
+  padding: 10% 10%;
 }
 
-.question-input-text {
+
+/* Re-ordering of elements */
+/* .cio-open-text-question-container {
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+.cio-open-text-question-form {
+  grid-column-start: 2;
+}
+
+.cio-open-text-question-image {
+  grid-column-start: 1;
+  grid-row-start: 1;
+  width: 100%;
+} */
+
+
+/* .cio-open-text-question-left,
+.cio-open-text-question-right {
+  width: 50%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+} */
+
+.cio-question-input-text {
   padding: 8px;
 }

@@ -7,7 +7,7 @@ function CTAButton(props: CTAButtonProps) {
   return (
     <button
       type="button"
-      className="question-cta-button"
+      className="cio-question-cta-button"
     >
       { ctaText }
     </button>

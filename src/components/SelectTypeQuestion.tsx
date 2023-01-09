@@ -31,21 +31,21 @@ function SelectTypeQuestion(props: SelectTypeQuestionProps) {
   };
 
   return (
-    <div className="select-question-container">
+    <div className="cio-select-question-container">
       <QuestionTitle title={question.title} />
       { question?.description ? <QuestionDescription description={question.description} /> : ''}
-      <div className="question-options-container">
+      <div className="cio-question-options-container">
         { question?.options?.map((option: QuestionOption, index: number) => (
           <div
-            className={`question-option-container ${selected[option.id] ? 'selected' : ''}`}
+            className={`cio-question-option-container ${selected[option.id] ? 'selected' : ''}`}
             onClick={() => { toggleIdSelected(option.id); }}
             onKeyDown={(event) => { onOptionKeyDown(event, option.id); }}
             role="button"
             tabIndex={index + 1}
             key={option.id}
           >
-            { option.images ? renderImages(option.images, 'question-option-image') : ''}
-            <p className="question-option-value">{ option?.value }</p>
+            { option.images ? renderImages(option.images, 'cio-question-option-image') : ''}
+            <p className="cio-question-option-value">{ option?.value }</p>
           </div>
         ))}
       </div>

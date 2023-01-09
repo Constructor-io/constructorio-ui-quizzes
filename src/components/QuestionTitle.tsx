@@ -6,7 +6,7 @@ function QuestionTitle(props: QuestionTitleProps) {
   const { title } = props;
 
   return (
-    <h1 className="question-title">{ title }</h1>
+    <h1 className="cio-question-title">{ title }</h1>
   );
 }
 

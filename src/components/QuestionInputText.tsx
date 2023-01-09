@@ -14,9 +14,9 @@ function QuestionInputText(props: QuestionInputTextProps) {
   } = props;
 
   return (
-    <div className="question-input-text-container">
-      {label ? <label htmlFor={id} className="question-input-text-label">{label}</label> : ''}
-      <input id={id} className="question-input-text" placeholder={placeholder} onChange={onChangeHandler} />
+    <div className="cio-question-input-text-container">
+      {label ? <label htmlFor={id} className="cio-question-input-text-label">{label}</label> : ''}
+      <input id={id} className="cio-question-input-text" placeholder={placeholder} onChange={onChangeHandler} />
     </div>
   );
 }
