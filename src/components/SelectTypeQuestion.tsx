@@ -20,9 +20,9 @@ function SelectTypeQuestion() {
   const isDisabled = Object.keys(selected).length === 0;
 
   const toggleIdSelected = (id: number) => {
-    if (type === 'single') {
+    if (type === QuestionTypes.SingleSelect) {
       setSelected({ [id]: true });
-    } else if (type === 'multiple') {
+    } else if (type === QuestionTypes.MultipleSelect) {
       setSelected({ ...selected, [id]: !selected[id] });
     }
   };

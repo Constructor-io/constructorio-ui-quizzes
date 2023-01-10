@@ -5,6 +5,7 @@ import QuizContext from './context';
 import CoverTypeQuestion from '../CoverTypeQuestion';
 import SelectTypeQuestion from '../SelectTypeQuestion';
 import reducer from './reducer';
+import { QuestionTypes } from './actions';
 
 export interface IQuizProps {
 }
@@ -14,10 +15,10 @@ export default function Quiz() {
   const [state, dispatch] = React.useReducer(reducer, { answers: [] });
   const [questionRespone, setQuestionResponse] = React.useState<any>();
   const quesitonType = questionRespone?.next_question?.type;
-  const isOpenQuestion = quesitonType === 'open';
-  const isCoverQuestion = quesitonType === 'cover';
-  const isSingleQuestion = quesitonType === 'single';
-  const isMultipleQuestion = quesitonType === 'multiple';
+  const isOpenQuestion = quesitonType === QuestionTypes.OpenText;
+  const isCoverQuestion = quesitonType === QuestionTypes.OpenText;
+  const isSingleQuestion = quesitonType === QuestionTypes.SingleSelect;
+  const isMultipleQuestion = quesitonType === QuestionTypes.MultipleSelect;
   const isSelectQuestion = isSingleQuestion || isMultipleQuestion;
 
   const contextValue = React.useMemo(
