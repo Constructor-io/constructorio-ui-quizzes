@@ -11,6 +11,12 @@ function OpenTextQuestion() {
   const { dispatch, questionRespone } = useContext(QuizContext);
   const { next_question: question } = questionRespone;
 
+  const onNextClick = () => {
+    if (dispatch && input) {
+      dispatch({ type: QuestionTypes.OpenText });
+    }
+  };
+
   return (
     <div className="open-text-question-container">
       <div className="open-text-question-left">
@@ -27,11 +33,7 @@ function OpenTextQuestion() {
         <CTAButton
           disabled={!input}
           ctaText={question.cta_text}
-          onClick={() => {
-            if (dispatch && input) {
-              dispatch({ type: QuestionTypes.OpenText });
-            }
-          }}
+          onClick={onNextClick}
         />
       </div>
       <div className="open-text-question-right">

@@ -32,6 +32,22 @@ function SelectTypeQuestion() {
     }
   };
 
+  const onNextClick = () => {
+    if (dispatch && !isDisabled) {
+      if (type === QuestionTypes.SingleSelect) {
+        dispatch({
+          type: QuestionTypes.SingleSelect,
+          payload: Object.keys(selected).filter((key) => selected[Number(key)]),
+        }!);
+      } else {
+        dispatch({
+          type: QuestionTypes.MultipleSelect,
+          payload: Object.keys(selected).filter((key) => selected[Number(key)]),
+        }!);
+      }
+    }
+  };
+
   React.useEffect(() => {
     setSelected({});
   }, [type]);
@@ -58,21 +74,7 @@ function SelectTypeQuestion() {
       <CTAButton
         disabled={isDisabled}
         ctaText={question?.cta_text || undefined}
-        onClick={() => {
-          if (dispatch && !isDisabled) {
-            if (type === QuestionTypes.SingleSelect) {
-              dispatch({
-                type: QuestionTypes.SingleSelect,
-                payload: Object.keys(selected).filter((key) => selected[Number(key)]),
-              }!);
-            } else {
-              dispatch({
-                type: QuestionTypes.MultipleSelect,
-                payload: Object.keys(selected).filter((key) => selected[Number(key)]),
-              }!);
-            }
-          }
-        }}
+        onClick={onNextClick}
       />
     </div>
   );

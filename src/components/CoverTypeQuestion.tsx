@@ -10,6 +10,12 @@ export default function CoverTypeQuestion() {
   const { dispatch, questionRespone } = React.useContext(QuizContext);
   const { next_question: question } = questionRespone;
 
+  const onNextClick = () => {
+    if (dispatch) {
+      dispatch({ type: QuestionTypes.Cover });
+    }
+  };
+
   return (
     <div className="cover-question-container">
       <div className="cover-question-text">
@@ -17,11 +23,7 @@ export default function CoverTypeQuestion() {
         <QuestionDescription description={question.description} />
         <CTAButton
           ctaText={question.cta_text}
-          onClick={() => {
-            if (dispatch) {
-              dispatch({ type: QuestionTypes.Cover });
-            }
-          }}
+          onClick={onNextClick}
         />
       </div>
       <div className="cover-question-img">
