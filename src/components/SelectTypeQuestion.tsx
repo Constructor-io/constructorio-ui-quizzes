@@ -1,60 +1,23 @@
+import * as React from 'react';
 import { useState } from 'react';
 import CTAButton from './CTAButton';
 import QuestionTitle from './QuestionTitle';
 import QuestionDescription from './QuestionDescription';
-import { Question, QuestionOption } from '../types';
+import QuizContext from './Quiz/context';
+import { QuestionOption } from '../types';
+import { renderImages } from '../utils';
+import { QuestionTypes } from './Quiz/actions';
 
 interface Selected {
   [key: number]: boolean;
 }
-interface SelectTypeQuestionProps {
-  question: Question
-}
 
-function SelectTypeQuestion(props: SelectTypeQuestionProps) {
-  const { question } = props;
+function SelectTypeQuestion() {
+  const { dispatch, questionRespone } = React.useContext(QuizContext);
+  const { next_question: question } = questionRespone;
   const { type } = question;
   const [selected, setSelected] = useState<Selected>({});
-
-  const renderImages = (option: QuestionOption) => {
-    if (option.images) {
-      const {
-        primary_url: primaryUrl,
-        primary_alt: primaryAlt,
-        secondary_url: secondaryUrl,
-        secondary_alt: secondaryAlt,
-      } = option.images;
-
-      type ImageFocusEvent =
-        React.MouseEvent<HTMLImageElement> | React.FocusEvent<HTMLImageElement>;
-
-      if (primaryUrl) {
-        const replaceImage = (e: ImageFocusEvent) => {
-          if (secondaryUrl) {
-            e.currentTarget.src = secondaryUrl;
-            e.currentTarget.alt = secondaryAlt || '';
-          }
-        };
-        const restoreImage = (e: ImageFocusEvent) => {
-          e.currentTarget.src = primaryUrl;
-          e.currentTarget.alt = primaryAlt || '';
-        };
-
-        return (
-          <img
-            className="question-option-image"
-            src={primaryUrl}
-            alt={secondaryAlt}
-            onMouseOver={replaceImage}
-            onMouseOut={restoreImage}
-            onFocus={replaceImage}
-            onBlur={restoreImage}
-          />
-        );
-      }
-    }
-    return '';
-  };
+  const isDisabled = Object.keys(selected).length === 0;
 
   const toggleIdSelected = (id: number) => {
     if (type === 'single') {
@@ -68,6 +31,10 @@ function SelectTypeQuestion(props: SelectTypeQuestionProps) {
       toggleIdSelected(id);
     }
   };
+
+  React.useEffect(() => {
+    setSelected({});
+  }, [type]);
 
   return (
     <div className="select-question-container">
@@ -83,12 +50,30 @@ function SelectTypeQuestion(props: SelectTypeQuestionProps) {
             tabIndex={index + 1}
             key={option.id}
           >
-            { renderImages(option) }
+            { option.images && renderImages(option.images) }
             <p className="question-option-value">{ option?.value }</p>
           </div>
         ))}
       </div>
-      <CTAButton ctaText={question?.cta_text || undefined} />
+      <CTAButton
+        disabled={isDisabled}
+        ctaText={question?.cta_text || undefined}
+        onClick={() => {
+          if (dispatch && !isDisabled) {
+            if (type === QuestionTypes.SingleSelect) {
+              dispatch({
+                type: QuestionTypes.SingleSelect,
+                payload: Object.keys(selected).filter((key) => selected[Number(key)]),
+              }!);
+            } else {
+              dispatch({
+                type: QuestionTypes.MultipleSelect,
+                payload: Object.keys(selected).filter((key) => selected[Number(key)]),
+              }!);
+            }
+          }
+        }}
+      />
     </div>
   );
 }
