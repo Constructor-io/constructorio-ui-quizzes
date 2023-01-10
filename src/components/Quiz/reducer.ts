@@ -9,7 +9,7 @@ export default function reducer(
 ) {
   switch (action.type) {
     case QuestionTypes.OpenText:
-      return { answers: [['true']] };
+      return { answers: [...state.answers, ['true']] };
     case QuestionTypes.Cover:
       return { answers: [...state.answers, ['seen']] };
     case QuestionTypes.SingleSelect:
