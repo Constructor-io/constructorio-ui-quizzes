@@ -1,5 +1,4 @@
 // import { useEffect } from 'react';
-import { useState } from 'react';
 // import useCioClient from './hooks/useCioClient';
 import singleSelect from './dummy/singleSelect.json';
 import multipleSelect from './dummy/multipleSelect.json';
@@ -13,10 +12,6 @@ import './custom.css';
 function App() {
   const singleQ = singleSelect.next_question as unknown as Question;
   const multipleQ = multipleSelect.next_question as unknown as Question;
-  const [openTextInput, setOpenTextInput] = useState('');
-  const onChangeHandler = (event: React.FormEvent<HTMLInputElement>) => {
-    setOpenTextInput(event.currentTarget.value);
-  };
 
   // const cioClient = useCioClient({ apiKey: 'key_jaqzPcUDnK66puIO' });
   // useEffect(() => {
@@ -30,8 +25,7 @@ function App() {
     <div>
       <SelectTypeQuestion question={singleQ} />
       <SelectTypeQuestion question={multipleQ} />
-      { openTextInput }
-      <OpenTextQuestion question={openTextQ} onChangeHandler={onChangeHandler} />
+      <OpenTextQuestion question={openTextQ} />
     </div>
   );
 }
