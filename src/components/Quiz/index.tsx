@@ -16,7 +16,7 @@ export default function Quiz() {
   const [questionRespone, setQuestionResponse] = React.useState<any>();
   const quesitonType = questionRespone?.next_question?.type;
   const isOpenQuestion = quesitonType === QuestionTypes.OpenText;
-  const isCoverQuestion = quesitonType === QuestionTypes.OpenText;
+  const isCoverQuestion = quesitonType === QuestionTypes.Cover;
   const isSingleQuestion = quesitonType === QuestionTypes.SingleSelect;
   const isMultipleQuestion = quesitonType === QuestionTypes.MultipleSelect;
   const isSelectQuestion = isSingleQuestion || isMultipleQuestion;
