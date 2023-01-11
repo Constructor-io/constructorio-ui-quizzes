@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import QuestionTitle from './QuestionTitle';
 import QuestionDescription from './QuestionDescription';
 import CTAButton from './CTAButton';
@@ -12,8 +12,14 @@ interface OpenTextQuestionProps {
 }
 
 function OpenTextQuestion(props: OpenTextQuestionProps) {
-  const { question, initialValue, onChangeHandler } = props;
+  const { question, initialValue, onChangeHandler: userDefinedHandler } = props;
   const [, setOpenTextInput] = useState(initialValue);
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setOpenTextInput(e.target.value)
+    if (userDefinedHandler) {
+      userDefinedHandler(e)
+    }
+  }
   return (
     <div className="cio-open-text-question-container">
       <div className="cio-open-text-question-form">
@@ -23,10 +29,7 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
           className="cio-question-input-text"
           placeholder={question.input_placeholder}
           defaultValue={initialValue}
-          onChange={(e) => {
-            setOpenTextInput(e.target.value);
-            if (onChangeHandler) { onChangeHandler(e); }
-          }}
+          onChange={onChangeHandler}
         />
         <CTAButton ctaText={question.cta_text} />
       </div>
