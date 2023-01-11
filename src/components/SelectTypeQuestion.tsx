@@ -2,6 +2,7 @@ import { useState } from 'react';
 import CTAButton from './CTAButton';
 import QuestionTitle from './QuestionTitle';
 import QuestionDescription from './QuestionDescription';
+import { renderImages } from '../utils';
 import { Question, QuestionOption } from '../types';
 
 interface Selected {
@@ -15,46 +16,6 @@ function SelectTypeQuestion(props: SelectTypeQuestionProps) {
   const { question } = props;
   const { type } = question;
   const [selected, setSelected] = useState<Selected>({});
-
-  const renderImages = (option: QuestionOption) => {
-    if (option.images) {
-      const {
-        primary_url: primaryUrl,
-        primary_alt: primaryAlt,
-        secondary_url: secondaryUrl,
-        secondary_alt: secondaryAlt,
-      } = option.images;
-
-      type ImageFocusEvent =
-        React.MouseEvent<HTMLImageElement> | React.FocusEvent<HTMLImageElement>;
-
-      if (primaryUrl) {
-        const replaceImage = (e: ImageFocusEvent) => {
-          if (secondaryUrl) {
-            e.currentTarget.src = secondaryUrl;
-            e.currentTarget.alt = secondaryAlt || '';
-          }
-        };
-        const restoreImage = (e: ImageFocusEvent) => {
-          e.currentTarget.src = primaryUrl;
-          e.currentTarget.alt = primaryAlt || '';
-        };
-
-        return (
-          <img
-            className="question-option-image"
-            src={primaryUrl}
-            alt={secondaryAlt}
-            onMouseOver={replaceImage}
-            onMouseOut={restoreImage}
-            onFocus={replaceImage}
-            onBlur={restoreImage}
-          />
-        );
-      }
-    }
-    return '';
-  };
 
   const toggleIdSelected = (id: number) => {
     if (type === 'single') {
@@ -70,21 +31,21 @@ function SelectTypeQuestion(props: SelectTypeQuestionProps) {
   };
 
   return (
-    <div className="select-question-container">
+    <div className="cio-select-question-container">
       <QuestionTitle title={question.title} />
       { question?.description ? <QuestionDescription description={question.description} /> : ''}
-      <div className="question-options-container">
+      <div className="cio-question-options-container">
         { question?.options?.map((option: QuestionOption, index: number) => (
           <div
-            className={`question-option-container ${selected[option.id] ? 'selected' : ''}`}
+            className={`cio-question-option-container ${selected[option.id] ? 'selected' : ''}`}
             onClick={() => { toggleIdSelected(option.id); }}
             onKeyDown={(event) => { onOptionKeyDown(event, option.id); }}
             role="button"
             tabIndex={index + 1}
             key={option.id}
           >
-            { renderImages(option) }
-            <p className="question-option-value">{ option?.value }</p>
+            { option.images ? renderImages(option.images, 'cio-question-option-image') : ''}
+            <p className="cio-question-option-value">{ option?.value }</p>
           </div>
         ))}
       </div>

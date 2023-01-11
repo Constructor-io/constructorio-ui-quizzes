@@ -1,14 +1,29 @@
 /* This file is for CSS rules that apply to our example. They will be removed before we ship the library */
 
-.select-question-container {
+.cio-select-question-container {
   max-width: 1200px;
   margin: auto;
 }
 
-.select-question-container .question-options-container {
+.cio-select-question-container .cio-question-options-container {
   flex-wrap: wrap;
 }
 
-.question-option-container {
-  margin-bottom: 0.5rem;
+.cio-question-option-container {
+  margin-bottom: 0;
+}
+
+.cio-open-text-question-form,
+.cio-open-text-question-image {
+  box-sizing: border-box;
+  width: 50%;
+}
+
+.cio-open-text-question-form {
+  background-color: rgb(251 244 238);
+  padding: 10% 10%;
+}
+
+.cio-question-input-text {
+  padding: 8px;
 }
