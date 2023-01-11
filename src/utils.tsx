@@ -29,7 +29,7 @@ export const renderImages = (
 
     return (
       <img
-        className={`question-image ${cssClasses || ''}`.trim()}
+        className={`cio-question-image ${cssClasses || ''}`.trim()}
         src={primaryUrl}
         alt={secondaryAlt}
         onMouseOver={replaceImage}

@@ -1,46 +1,55 @@
-import { useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import QuestionTitle from './QuestionTitle';
 import QuestionDescription from './QuestionDescription';
 import CTAButton from './CTAButton';
 import { renderImages } from '../utils';
-import QuizContext from './Quiz/context';
+import QuizContext from './Quiz/context'
 import { QuestionTypes } from './Quiz/actions';
 
-function OpenTextQuestion() {
-  const [input, setInput] = useState('');
+interface OpenTextQuestionProps {
+  initialValue?: string,
+  onChangeHandler?: React.ChangeEventHandler<HTMLInputElement>
+}
+
+function OpenTextQuestion(props: OpenTextQuestionProps) {
+  const { initialValue = '', onChangeHandler: userDefinedHandler } = props;
+  const [openTextInput, setOpenTextInput] = useState(initialValue);
   const { dispatch, questionRespone } = useContext(QuizContext);
   const { next_question: question } = questionRespone;
 
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setOpenTextInput(e.target.value)
+    if (userDefinedHandler) {
+      userDefinedHandler(e)
+    }
+  }
   const onNextClick = () => {
-    if (dispatch && input) {
+    if (dispatch && openTextInput) {
       dispatch({ type: QuestionTypes.OpenText });
     }
   };
 
   return (
-    <div className="open-text-question-container">
-      <div className="open-text-question-left">
+    <div className="cio-open-text-question-container">
+      <div className="cio-open-text-question-form">
         <QuestionTitle title={question.title} />
         <QuestionDescription description={question.description} />
         <input
-          className="question-input-text"
+          className="cio-question-input-text"
           placeholder={question.input_placeholder}
-          value={input}
-          onChange={(e) => {
-            setInput(e.target.value);
-          }}
+          defaultValue={initialValue}
+          onChange={onChangeHandler}
         />
-        <CTAButton
-          disabled={!input}
-          ctaText={question.cta_text}
-          onClick={onNextClick}
-        />
+        <CTAButton disabled={!openTextInput} ctaText={question.cta_text} onClick={onNextClick} />
       </div>
-      <div className="open-text-question-right">
-        {question.images ? renderImages(question.images) : ''}
-      </div>
+      {question.images ? renderImages(question.images, 'cio-open-text-question-image') : ''}
     </div>
   );
 }
+
+OpenTextQuestion.defaultProps = {
+  initialValue: '',
+  onChangeHandler: null,
+};
 
 export default OpenTextQuestion;

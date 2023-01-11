@@ -7,7 +7,7 @@ function CTAButton(props: CTAButtonProps) {
   return (
     <button
       type="button"
-      className={`${disabled ? 'question-cta-button disabled' : 'question-cta-button'}`}
+      className={`${disabled ? 'cio-question-cta-button disabled' : 'cio-question-cta-button'}`}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...rest}
     >

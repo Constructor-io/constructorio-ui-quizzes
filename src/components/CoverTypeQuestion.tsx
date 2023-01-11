@@ -17,8 +17,8 @@ export default function CoverTypeQuestion() {
   };
 
   return (
-    <div className="cover-question-container">
-      <div className="cover-question-text">
+    <div className="cio-cover-question-container">
+      <div className="cio-cover-question-text">
         <QuestionTitle title={question.title} />
         <QuestionDescription description={question.description} />
         <CTAButton
@@ -26,7 +26,7 @@ export default function CoverTypeQuestion() {
           onClick={onNextClick}
         />
       </div>
-      <div className="cover-question-img">
+      <div className="cio-cover-question-img">
         {question.images ? renderImages(question.images) : ''}
       </div>
     </div>

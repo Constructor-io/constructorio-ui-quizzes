@@ -1,32 +1,30 @@
-.select-question-container {
+/* Default styles */
+.cio-select-question-container {
   display: flex;
   flex-direction: column;
   align-content: center;
 }
 
-.open-text-question-container {
+.cio-open-text-question-container {
   display: flex;
   justify-content: center;
 }
 
-.open-text-question-left,
-.open-text-question-right {
-  width: 50%;
-  box-sizing: border-box;
+.cio-open-text-question-form {
   display: flex;
   flex-direction: column;
 }
 
-.question-title {
+.cio-question-title {
   text-align: center;
 }
 
-.question-options-container {
+.cio-question-options-container {
   display: flex;
   justify-content: space-between;
 }
 
-.question-option-container {
+.cio-question-option-container {
   display: flex;
   flex-direction: column;
   margin: 1px;
@@ -34,20 +32,20 @@
   cursor: pointer;
 }
 
-.question-option-container.selected {
+.cio-question-option-container.selected {
   border: 1px solid #6b7280;
 }
 
-.question-option-image {
+.cio-question-option-image {
   height: 320px;
   width: 320px;
 }
 
-.question-option-value {
+.cio-question-option-value {
   text-align: center;
 }
 
-.question-cta-button {
+.cio-question-cta-button {
   margin: 1rem auto;
   background: hsl(0, 0%, 25%);
   border: 0;
@@ -57,22 +55,22 @@
   cursor: pointer;
 }
 
-.question-cta-button.disabled {
+.cio-question-cta-button.disabled {
   background-color: gray !important;
   cursor: auto;
 }
 
-.question-input-text-container {
+.cio-question-input-text-container {
   display: flex;
   flex-direction: column;
 }
 
-.question-input-text {
+.cio-question-input-text {
   width: 100%;
   box-sizing: border-box;
 }
 
-.cover-question-container {
+.cio-cover-question-container {
   position: relative;
   display: flex;
   align-items: center;
@@ -80,18 +78,18 @@
   height: 100vh;
 }
 
-.cover-question-img {
+.cio-cover-question-img {
   width: 100%;
   height: 100%;
 }
 
-.cover-question-img .question-image {
+.cio-cover-question-img .cio-question-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.cover-question-text {
+.cio-cover-question-text {
   position: absolute;
   background-color: rgb(251 244 238);
   padding: 20px;

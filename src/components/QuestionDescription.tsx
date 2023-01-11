@@ -6,7 +6,7 @@ function QuestionDescription(props: QuestionDescriptionProps) {
   const { description } = props;
 
   return (
-    <p className="question-description">{ description }</p>
+    <p className="cio-question-description">{ description }</p>
   );
 }
 
