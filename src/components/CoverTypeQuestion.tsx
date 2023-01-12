@@ -37,4 +37,6 @@ export default function CoverTypeQuestion() {
       </div>
     );
   }
+
+  return null
 }

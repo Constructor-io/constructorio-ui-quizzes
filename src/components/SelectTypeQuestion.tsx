@@ -79,7 +79,9 @@ function SelectTypeQuestion() {
         />
       </div>
     );
-  } 
+  }
+  
+  return null
 }
 
 export default SelectTypeQuestion;

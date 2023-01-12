@@ -51,6 +51,8 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
       </div>
     );
   }
+
+  return null
 }
 
 OpenTextQuestion.defaultProps = {

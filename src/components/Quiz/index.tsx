@@ -6,6 +6,7 @@ import CoverTypeQuestion from '../CoverTypeQuestion';
 import SelectTypeQuestion from '../SelectTypeQuestion';
 import reducer, { initialState } from './reducer';
 import { QuestionTypes } from './actions';
+import { NextQuestionResponse } from '../../types';
 
 export interface IQuizProps {
   quizName: string
@@ -15,7 +16,7 @@ export default function Quiz(props: IQuizProps) {
   const { quizName } = props;
   const cioClient = useCioClient({ apiKey: 'key_jaqzPcUDnK66puIO' }) as any;
   const [state, dispatch] = React.useReducer(reducer, initialState);
-  const [questionResponse, setQuestionResponse] = React.useState<any>();
+  const [questionResponse, setQuestionResponse] = React.useState<NextQuestionResponse>();
   const questionType = questionResponse?.next_question?.type;
   const isOpenQuestion = questionType === QuestionTypes.OpenText;
   const isCoverQuestion = questionType === QuestionTypes.Cover;
@@ -41,9 +42,9 @@ export default function Quiz(props: IQuizProps) {
 
   return (
     <QuizContext.Provider value={contextValue}>
-      {isOpenQuestion && <OpenTextQuestion />}
-      {isCoverQuestion && <CoverTypeQuestion />}
-      {isSelectQuestion && <SelectTypeQuestion />}
+      {isOpenQuestion && <OpenTextQuestion key={questionResponse?.next_question.id} />}
+      {isCoverQuestion && <CoverTypeQuestion key={questionResponse?.next_question.id} />}
+      {isSelectQuestion && <SelectTypeQuestion key={questionResponse?.next_question.id} />}
     </QuizContext.Provider>
   );
 }
