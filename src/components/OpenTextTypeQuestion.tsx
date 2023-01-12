@@ -25,7 +25,7 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
   }
   const onNextClick = () => {
     if (dispatch && openTextInput) {
-      dispatch({ type: QuestionTypes.OpenText });
+      dispatch({ type: QuestionTypes.OpenText, payload: openTextInput });
     }
   };
 

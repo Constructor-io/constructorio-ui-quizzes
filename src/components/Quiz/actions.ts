@@ -6,7 +6,7 @@ export enum QuestionTypes {
 }
 
 export type ActionAnswerQuestion =
-  | { type: QuestionTypes.OpenText }
+  | { type: QuestionTypes.OpenText, payload: string }
   | { type: QuestionTypes.Cover }
   | { type: QuestionTypes.SingleSelect; payload: string[] }
   | { type: QuestionTypes.MultipleSelect; payload: string[] };

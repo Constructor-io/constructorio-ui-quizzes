@@ -7,7 +7,7 @@ import { renderImages } from '../utils';
 import { QuestionTypes } from './Quiz/actions';
 
 export default function CoverTypeQuestion() {
-  const { dispatch, questionRespone } = React.useContext(QuizContext);
+  const { dispatch, questionRespone, state } = React.useContext(QuizContext);
   const { next_question: question } = questionRespone;
 
   const onNextClick = () => {
@@ -19,7 +19,7 @@ export default function CoverTypeQuestion() {
   return (
     <div className="cio-cover-question-container">
       <div className="cio-cover-question-text">
-        <QuestionTitle title={question.title} />
+        <QuestionTitle title={`${question.title} ${state?.openTextInput}`} />
         <QuestionDescription description={question.description} />
         <CTAButton
           ctaText={question.cta_text}
