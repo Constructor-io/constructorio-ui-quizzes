@@ -13,9 +13,13 @@ interface Selected {
 }
 
 function SelectTypeQuestion() {
-  const { dispatch, questionRespone } = React.useContext(QuizContext);
-  const { next_question: question } = questionRespone;
-  const { type } = question;
+  const { dispatch, questionResponse } = React.useContext(QuizContext);
+  let question;
+  let type: `${QuestionTypes}`;
+  if(questionResponse) {
+    question  = questionResponse.next_question;
+    type = question.type;
+  };
   const [selected, setSelected] = useState<Selected>({});
   const isDisabled = Object.keys(selected).length === 0;
 
@@ -48,36 +52,34 @@ function SelectTypeQuestion() {
     }
   };
 
-  React.useEffect(() => {
-    setSelected({});
-  }, [type]);
-
-  return (
-    <div className="cio-select-question-container">
-      <QuestionTitle title={question.title} />
-      { question?.description ? <QuestionDescription description={question.description} /> : ''}
-      <div className="cio-question-options-container">
-        { question?.options?.map((option: QuestionOption, index: number) => (
-          <div
-            className={`cio-question-option-container ${selected[option.id] ? 'selected' : ''}`}
-            onClick={() => { toggleIdSelected(option.id); }}
-            onKeyDown={(event) => { onOptionKeyDown(event, option.id); }}
-            role="button"
-            tabIndex={index + 1}
-            key={option.id}
-          >
-            { option.images ? renderImages(option.images, 'cio-question-option-image') : ''}
-            <p className="cio-question-option-value">{ option?.value }</p>
-          </div>
-        ))}
+  if(question) {
+    return (
+      <div className="cio-select-question-container">
+        <QuestionTitle title={question.title} />
+        { question?.description ? <QuestionDescription description={question.description} /> : ''}
+        <div className="cio-question-options-container">
+          { question?.options?.map((option: QuestionOption, index: number) => (
+            <div
+              className={`cio-question-option-container ${selected[option.id] ? 'selected' : ''}`}
+              onClick={() => { toggleIdSelected(option.id); }}
+              onKeyDown={(event) => { onOptionKeyDown(event, option.id); }}
+              role="button"
+              tabIndex={index + 1}
+              key={option.id}
+            >
+              { option.images ? renderImages(option.images, 'cio-question-option-image') : ''}
+              <p className="cio-question-option-value">{ option?.value }</p>
+            </div>
+          ))}
+        </div>
+        <CTAButton
+          disabled={isDisabled}
+          ctaText={question?.cta_text}
+          onClick={onNextClick}
+        />
       </div>
-      <CTAButton
-        disabled={isDisabled}
-        ctaText={question?.cta_text || undefined}
-        onClick={onNextClick}
-      />
-    </div>
-  );
+    );
+  } 
 }
 
 export default SelectTypeQuestion;

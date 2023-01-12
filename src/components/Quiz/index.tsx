@@ -15,8 +15,8 @@ export default function Quiz(props: IQuizProps) {
   const { quizName } = props;
   const cioClient = useCioClient({ apiKey: 'key_jaqzPcUDnK66puIO' }) as any;
   const [state, dispatch] = React.useReducer(reducer, initialState);
-  const [questionRespone, setQuestionResponse] = React.useState<any>();
-  const questionType = questionRespone?.next_question?.type;
+  const [questionResponse, setQuestionResponse] = React.useState<any>();
+  const questionType = questionResponse?.next_question?.type;
   const isOpenQuestion = questionType === QuestionTypes.OpenText;
   const isCoverQuestion = questionType === QuestionTypes.Cover;
   const isSingleQuestion = questionType === QuestionTypes.SingleSelect;
@@ -26,10 +26,10 @@ export default function Quiz(props: IQuizProps) {
   const contextValue = React.useMemo(
     () => ({
       dispatch,
-      questionRespone,
+      questionResponse,
       state
     }),
-    [state, dispatch, questionRespone],
+    [state, dispatch, questionResponse],
   );
 
   React.useEffect(() => {

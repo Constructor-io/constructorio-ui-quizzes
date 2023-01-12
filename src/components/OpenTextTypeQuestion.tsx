@@ -12,10 +12,13 @@ interface OpenTextQuestionProps {
 }
 
 function OpenTextQuestion(props: OpenTextQuestionProps) {
-  const { initialValue = '', onChangeHandler: userDefinedHandler } = props;
+  const { initialValue, onChangeHandler: userDefinedHandler } = props;
   const [openTextInput, setOpenTextInput] = useState(initialValue);
-  const { dispatch, questionRespone } = useContext(QuizContext);
-  const { next_question: question } = questionRespone;
+  const { dispatch, questionResponse } = useContext(QuizContext);
+  let question;
+  if(questionResponse) {
+    question  = questionResponse.next_question;
+  }
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setOpenTextInput(e.target.value)
@@ -23,28 +26,31 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
       userDefinedHandler(e)
     }
   }
+
   const onNextClick = () => {
     if (dispatch && openTextInput) {
       dispatch({ type: QuestionTypes.OpenText, payload: openTextInput });
     }
   };
 
-  return (
-    <div className="cio-open-text-question-container">
-      <div className="cio-open-text-question-form">
-        <QuestionTitle title={question.title} />
-        <QuestionDescription description={question.description} />
-        <input
-          className="cio-question-input-text"
-          placeholder={question.input_placeholder}
-          defaultValue={initialValue}
-          onChange={onChangeHandler}
-        />
-        <CTAButton disabled={!openTextInput} ctaText={question.cta_text} onClick={onNextClick} />
+  if(question) {
+    return (
+      <div className="cio-open-text-question-container">
+        <div className="cio-open-text-question-form">
+          <QuestionTitle title={question.title} />
+          <QuestionDescription description={question.description} />
+          <input
+            className="cio-question-input-text"
+            placeholder={question.input_placeholder}
+            defaultValue={initialValue}
+            onChange={onChangeHandler}
+          />
+          <CTAButton disabled={!openTextInput} ctaText={question.cta_text} onClick={onNextClick} />
+        </div>
+        {question.images ? renderImages(question.images, 'cio-open-text-question-image') : ''}
       </div>
-      {question.images ? renderImages(question.images, 'cio-open-text-question-image') : ''}
-    </div>
-  );
+    );
+  }
 }
 
 OpenTextQuestion.defaultProps = {

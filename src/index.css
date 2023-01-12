@@ -56,7 +56,7 @@
 }
 
 .cio-question-cta-button.disabled {
-  background-color: gray !important;
+  background-color: gray;
   cursor: auto;
 }
 

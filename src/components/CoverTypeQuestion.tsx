@@ -5,10 +5,14 @@ import QuestionDescription from './QuestionDescription';
 import CTAButton from './CTAButton';
 import { renderImages } from '../utils';
 import { QuestionTypes } from './Quiz/actions';
+import { Question } from '../types';
 
 export default function CoverTypeQuestion() {
-  const { dispatch, questionRespone, state } = React.useContext(QuizContext);
-  const { next_question: question } = questionRespone;
+  const { dispatch, questionResponse, state } = React.useContext(QuizContext);
+  let question;
+  if(questionResponse) {
+    question = questionResponse.next_question;
+  }
 
   const onNextClick = () => {
     if (dispatch) {
@@ -16,19 +20,21 @@ export default function CoverTypeQuestion() {
     }
   };
 
-  return (
-    <div className="cio-cover-question-container">
-      <div className="cio-cover-question-text">
-        <QuestionTitle title={`${question.title} ${state?.openTextInput}`} />
-        <QuestionDescription description={question.description} />
-        <CTAButton
-          ctaText={question.cta_text}
-          onClick={onNextClick}
-        />
+  if(question) {
+    return (
+      <div className="cio-cover-question-container">
+        <div className="cio-cover-question-text">
+          <QuestionTitle title={`${question?.title} ${state?.openTextInput}`} />
+          <QuestionDescription description={question.description} />
+          <CTAButton
+            ctaText={question?.cta_text}
+            onClick={onNextClick}
+          />
+        </div>
+        <div className="cio-cover-question-img">
+          {question?.images ? renderImages(question.images) : ''}
+        </div>
       </div>
-      <div className="cio-cover-question-img">
-        {question.images ? renderImages(question.images) : ''}
-      </div>
-    </div>
-  );
+    );
+  }
 }

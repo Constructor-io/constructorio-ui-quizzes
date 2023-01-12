@@ -1,9 +1,10 @@
 import React from 'react';
+import { NextQuestionResponse } from '../../types';
 import { ActionAnswerQuestion } from './actions';
 import { QuizReducerState } from './reducer';
 
 interface QuizContextValue {
-  questionRespone: any,
+  questionResponse: NextQuestionResponse,
   state: QuizReducerState,
   dispatch: React.Dispatch<ActionAnswerQuestion>
 }
