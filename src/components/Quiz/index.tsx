@@ -24,7 +24,6 @@ export default function Quiz(props: IQuizProps) {
   const isMultipleQuestion = questionType === QuestionTypes.MultipleSelect;
   const isSelectQuestion = isSingleQuestion || isMultipleQuestion;
 
-  console.log(state)
   const contextValue = React.useMemo(
     () => ({
       dispatch,

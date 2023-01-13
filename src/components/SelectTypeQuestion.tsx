@@ -43,7 +43,7 @@ function SelectTypeQuestion() {
           type: QuestionTypes.SingleSelect,
           payload: {
             questionId: questionResponse?.next_question.id,
-            input:  Object.keys(selected).filter((key) => selected[Number(key)])
+            input: Object.keys(selected).filter((key) => selected[Number(key)])
           },
         }!);
       } else {
@@ -51,7 +51,7 @@ function SelectTypeQuestion() {
           type: QuestionTypes.MultipleSelect,
           payload: {
             questionId: questionResponse?.next_question.id,
-            input:  Object.keys(selected).filter((key) => selected[Number(key)])
+            input: Object.keys(selected).filter((key) => selected[Number(key)])
           },
         }!);
       }
