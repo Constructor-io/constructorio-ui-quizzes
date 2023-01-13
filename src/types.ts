@@ -27,7 +27,7 @@ export interface Question extends Record<string, any> {
 }
 
 export interface NextQuestionResponse extends Record<string, any> {
-  next_question: Partial<Question>;
+  next_question: Question;
   is_last_question?: boolean;
   version_id?: string;
 }
