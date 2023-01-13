@@ -1,19 +1,15 @@
 import { QuestionImages } from './types';
 
 // eslint-disable-next-line import/prefer-default-export
-export const renderImages = (
-  images: Partial<QuestionImages>,
-  cssClasses?: string,
-) => {
+export const renderImages = (images: Partial<QuestionImages>, cssClasses?: string) => {
   const {
     primary_url: primaryUrl,
     primary_alt: primaryAlt,
     secondary_url: secondaryUrl,
-    secondary_alt: secondaryAlt,
+    secondary_alt: secondaryAlt
   } = images;
 
-  type ImageFocusEvent =
-    React.MouseEvent<HTMLImageElement> | React.FocusEvent<HTMLImageElement>;
+  type ImageFocusEvent = React.MouseEvent<HTMLImageElement> | React.FocusEvent<HTMLImageElement>;
 
   if (primaryUrl) {
     const replaceImage = (e: ImageFocusEvent) => {

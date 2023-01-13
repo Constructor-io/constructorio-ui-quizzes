@@ -9,7 +9,7 @@ import { QuestionTypes } from './actions';
 import { NextQuestionResponse } from '../../types';
 
 export interface IQuizProps {
-  quizId: string
+  quizId: string;
 }
 
 export default function Quiz(props: IQuizProps) {
@@ -30,15 +30,14 @@ export default function Quiz(props: IQuizProps) {
       questionResponse,
       state
     }),
-    [state, dispatch, questionResponse],
+    [state, dispatch, questionResponse]
   );
 
   React.useEffect(() => {
-    cioClient?.quizzes.getQuizNextQuestion(
-      quizId,
-      { answers: state.answers },
-    ).then((e:any) => setQuestionResponse(e));
-  }, [cioClient, state]);
+    cioClient?.quizzes
+      .getQuizNextQuestion(quizId, { answers: state.answers })
+      .then((e: any) => setQuestionResponse(e));
+  }, [cioClient, state, quizId]);
 
   return (
     <QuizContext.Provider value={contextValue}>

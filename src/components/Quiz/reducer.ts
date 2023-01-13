@@ -1,35 +1,37 @@
-import { ActionAnswerQuestion, OpenTextQuestionPayload, QuestionAnswer, QuestionTypes, SelectQuestionPayload } from './actions';
+import {
+  ActionAnswerQuestion,
+  OpenTextQuestionPayload,
+  QuestionTypes,
+  SelectQuestionPayload
+} from './actions';
 
 export type Answers = string[][];
-export type QuizReducerState = { 
-  answers: Answers, 
-  openTextInputs: OpenTextQuestionPayload[],
-  singleSelectInputs: SelectQuestionPayload[],
-  multipleSelectInputs: SelectQuestionPayload[], 
+export type QuizReducerState = {
+  answers: Answers;
+  openTextInputs: OpenTextQuestionPayload[];
+  singleSelectInputs: SelectQuestionPayload[];
+  multipleSelectInputs: SelectQuestionPayload[];
 };
 
-export const initialState: QuizReducerState  = {
+export const initialState: QuizReducerState = {
   answers: [],
   openTextInputs: [],
   singleSelectInputs: [],
-  multipleSelectInputs: [],
-}
+  multipleSelectInputs: []
+};
 
-export default function reducer(
-  state: QuizReducerState,
-  action: ActionAnswerQuestion,
-) {
+export default function reducer(state: QuizReducerState, action: ActionAnswerQuestion) {
   switch (action.type) {
     case QuestionTypes.OpenText:
       return {
         ...state,
-        answers: [...state.answers, ['true']], 
+        answers: [...state.answers, ['true']],
         openTextInputs: [...state.openTextInputs, action.payload!]
       };
     case QuestionTypes.Cover:
       return {
         ...state,
-        answers: [...state.answers, ['seen']],
+        answers: [...state.answers, ['seen']]
       };
     case QuestionTypes.SingleSelect:
       return {
@@ -38,7 +40,7 @@ export default function reducer(
         singleSelectInputs: [...state.singleSelectInputs, action.payload!]
       };
     case QuestionTypes.MultipleSelect:
-      return { 
+      return {
         ...state,
         answers: [...state.answers, action.payload?.input!],
         multipleSelectInputs: [...state.multipleSelectInputs, action.payload!]
