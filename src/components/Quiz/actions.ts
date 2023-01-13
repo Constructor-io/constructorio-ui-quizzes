@@ -5,8 +5,22 @@ export enum QuestionTypes {
   MultipleSelect = 'multiple',
 }
 
+export interface QuestionAnswer<Value> {
+  questionId: number;
+  input: Value;
+}
+
+export type SelectQuestionPayload = QuestionAnswer<string[]>
+
+export type OpenTextQuestionPayload = QuestionAnswer<string>
+
+interface Action<Type, Payload = {}> {
+  type: Type,
+  payload?: Payload
+} 
+
 export type ActionAnswerQuestion =
-  | { type: QuestionTypes.OpenText, payload: string }
-  | { type: QuestionTypes.Cover }
-  | { type: QuestionTypes.SingleSelect; payload: string[] }
-  | { type: QuestionTypes.MultipleSelect; payload: string[] };
+  | Action<QuestionTypes.Cover>
+  | Action<QuestionTypes.OpenText, OpenTextQuestionPayload>
+  | Action<QuestionTypes.SingleSelect, SelectQuestionPayload>
+  | Action<QuestionTypes.MultipleSelect, SelectQuestionPayload>

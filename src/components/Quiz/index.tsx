@@ -9,11 +9,11 @@ import { QuestionTypes } from './actions';
 import { NextQuestionResponse } from '../../types';
 
 export interface IQuizProps {
-  quizName: string
+  quizId: string
 }
 
 export default function Quiz(props: IQuizProps) {
-  const { quizName } = props;
+  const { quizId } = props;
   const cioClient = useCioClient({ apiKey: 'key_jaqzPcUDnK66puIO' }) as any;
   const [state, dispatch] = React.useReducer(reducer, initialState);
   const [questionResponse, setQuestionResponse] = React.useState<NextQuestionResponse>();
@@ -24,6 +24,7 @@ export default function Quiz(props: IQuizProps) {
   const isMultipleQuestion = questionType === QuestionTypes.MultipleSelect;
   const isSelectQuestion = isSingleQuestion || isMultipleQuestion;
 
+  console.log(state)
   const contextValue = React.useMemo(
     () => ({
       dispatch,
@@ -35,7 +36,7 @@ export default function Quiz(props: IQuizProps) {
 
   React.useEffect(() => {
     cioClient?.quizzes.getQuizNextQuestion(
-      quizName,
+      quizId,
       { answers: state.answers },
     ).then((e:any) => setQuestionResponse(e));
   }, [cioClient, state]);

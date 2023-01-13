@@ -4,7 +4,7 @@ import Quiz from './components/Quiz';
 
 function App() {
   return (
-    <Quiz quizName='coffee-quiz' />
+    <Quiz quizId='coffee-quiz' />
   );
 }
 

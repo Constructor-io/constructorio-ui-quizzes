@@ -37,16 +37,22 @@ function SelectTypeQuestion() {
   };
 
   const onNextClick = () => {
-    if (dispatch && !isDisabled) {
+    if (dispatch && !isDisabled && questionResponse) {
       if (type === QuestionTypes.SingleSelect) {
         dispatch({
           type: QuestionTypes.SingleSelect,
-          payload: Object.keys(selected).filter((key) => selected[Number(key)]),
+          payload: {
+            questionId: questionResponse?.next_question.id,
+            input:  Object.keys(selected).filter((key) => selected[Number(key)])
+          },
         }!);
       } else {
         dispatch({
           type: QuestionTypes.MultipleSelect,
-          payload: Object.keys(selected).filter((key) => selected[Number(key)]),
+          payload: {
+            questionId: questionResponse?.next_question.id,
+            input:  Object.keys(selected).filter((key) => selected[Number(key)])
+          },
         }!);
       }
     }

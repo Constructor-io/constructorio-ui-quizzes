@@ -28,8 +28,16 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
   }
 
   const onNextClick = () => {
-    if (dispatch && openTextInput) {
-      dispatch({ type: QuestionTypes.OpenText, payload: openTextInput });
+    if (dispatch && openTextInput && questionResponse) {
+      dispatch(
+        { 
+          type: QuestionTypes.OpenText,
+          payload: { 
+            questionId: questionResponse.next_question.id,
+            input: openTextInput
+          }
+        }
+      );
     }
   };
 
