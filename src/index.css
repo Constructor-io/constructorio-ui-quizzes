@@ -101,11 +101,11 @@
   background-color: transparent !important;
   max-width: 300px !important;
   flex: 1 0 calc(33% - 36px);
-height: auto;
-min-width: 280px;
-margin: 18px;
-box-sizing: border-box;
-text-decoration: none;
+  height: auto;
+  min-width: 280px;
+  margin: 18px;
+  box-sizing: border-box;
+  text-decoration: none;
 }
 
 .cio-result-card-text {
@@ -158,7 +158,7 @@ text-decoration: none;
 }
 
 .cio-hero-card {
-  display:flex;
+  display: flex;
   flex-direction: row;
   margin: 18px;
 }
