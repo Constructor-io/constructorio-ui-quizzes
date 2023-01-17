@@ -13,15 +13,29 @@ interface Selected {
 }
 
 function SelectTypeQuestion() {
-  const { dispatch, questionResponse } = React.useContext(QuizContext);
+  const { dispatch, questionResponse, state, setShowResults } = React.useContext(QuizContext);
   let question;
   let type: `${QuestionTypes}`;
-  if(questionResponse) {
-    question  = questionResponse.next_question;
+  if (questionResponse) {
+    question = questionResponse.next_question;
     type = question.type;
   };
   const [selected, setSelected] = useState<Selected>({});
   const isDisabled = Object.keys(selected).length === 0;
+
+  React.useEffect(() => {
+    if (questionResponse && type) {
+      let answers;
+      if (type === QuestionTypes.SingleSelect && state?.singleSelectInputs?.[questionResponse?.next_question.id]) {
+        answers = state?.singleSelectInputs?.[questionResponse?.next_question.id];
+      } else if (type === QuestionTypes.MultipleSelect && state?.multipleSelectInputs?.[questionResponse?.next_question.id]) {
+        answers = state?.multipleSelectInputs?.[questionResponse?.next_question.id];
+      }
+      let prevSelected: Selected = {};
+      answers?.forEach((answer) => { prevSelected[Number(answer)] = true })
+      setSelected(prevSelected);
+    }
+  }, [])
 
   const toggleIdSelected = (id: number) => {
     if (type === QuestionTypes.SingleSelect) {
@@ -55,16 +69,21 @@ function SelectTypeQuestion() {
           },
         }!);
       }
+
+      if (questionResponse.is_last_question) {
+        setShowResults!(true);
+        return;
+      }
     }
   };
 
-  if(question) {
+  if (question) {
     return (
       <div className="cio-select-question-container">
         <QuestionTitle title={question.title} />
-        { question?.description ? <QuestionDescription description={question.description} /> : ''}
+        {question?.description ? <QuestionDescription description={question.description} /> : ''}
         <div className="cio-question-options-container">
-          { question?.options?.map((option: QuestionOption, index: number) => (
+          {question?.options?.map((option: QuestionOption, index: number) => (
             <div
               className={`cio-question-option-container ${selected[option.id] ? 'selected' : ''}`}
               onClick={() => { toggleIdSelected(option.id); }}
@@ -73,8 +92,8 @@ function SelectTypeQuestion() {
               tabIndex={index + 1}
               key={option.id}
             >
-              { option.images ? renderImages(option.images, 'cio-question-option-image') : ''}
-              <p className="cio-question-option-value">{ option?.value }</p>
+              {option.images ? renderImages(option.images, 'cio-question-option-image') : ''}
+              <p className="cio-question-option-value">{option?.value}</p>
             </div>
           ))}
         </div>
@@ -86,7 +105,7 @@ function SelectTypeQuestion() {
       </div>
     );
   }
-  
+
   return null
 }
 
