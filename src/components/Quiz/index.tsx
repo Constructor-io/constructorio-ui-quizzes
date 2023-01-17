@@ -39,14 +39,14 @@ export default function Quiz(props: IQuizProps) {
     [state, dispatch, questionResponse, resultsResponse, setShowResults],
   );
 
-  const quizBackHandler = (popAnswers: boolean) => {
+  const quizBackHandler = (popAnswers: boolean) => { // back handler for a back button. Passing true will pop the latest answers. Should be true unless on result page.
     dispatch({ type: QuestionTypes.Back, payload: popAnswers });
     setShowResults(false);
   }
 
   React.useEffect(() => {
     if (showResults) {
-      setResultsResponse(undefined);
+      setResultsResponse(undefined); // set undefined in cases where user redoes quiz, gets no results.
       cioClient?.quizzes?.getQuizResults(quizId, { answers: state.answers })
         .then((response: any) => { if (response?.result?.results_url) return fetch(response?.result.results_url) })
         .then((response: Response) => response.json())
@@ -63,8 +63,6 @@ export default function Quiz(props: IQuizProps) {
     return (
       <QuizContext.Provider value={contextValue}>
         <ResultContainer />
-        <button type="button" onClick={() => quizBackHandler(false)}>Back</button>
-        <button type="button" onClick={() => { setShowResults(true); }}>Show Results</button>
       </QuizContext.Provider>
     )
   }
@@ -74,8 +72,6 @@ export default function Quiz(props: IQuizProps) {
       {isOpenQuestion && <OpenTextQuestion key={questionResponse?.next_question.id} />}
       {isCoverQuestion && <CoverTypeQuestion key={questionResponse?.next_question.id} />}
       {isSelectQuestion && <SelectTypeQuestion key={questionResponse?.next_question.id} />}
-      <button type="button" onClick={() => quizBackHandler(true)}>Back</button>
-      <button type="button" onClick={() => { setShowResults(true); }}>Show Results</button>
     </QuizContext.Provider>
   );
 }

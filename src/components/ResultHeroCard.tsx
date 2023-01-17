@@ -23,6 +23,7 @@ interface ResultHeroCardProps {
 //     return res;
 //   }, [])
 // }
+// Code used to flatten facets and extract the key. TBD if we are using it for facet pills
 
 export default function ResultHeroCard(props: ResultHeroCardProps) {
   const { heroItem } = props;

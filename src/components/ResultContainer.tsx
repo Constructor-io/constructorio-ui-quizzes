@@ -8,7 +8,7 @@ interface ResultContainerProps {
 }
 
 export default function ResultContainer(props: ResultContainerProps) {
-  const { dispatch, resultsResponse } = React.useContext(QuizContext);
+  const { resultsResponse } = React.useContext(QuizContext);
   const { numResults = 6 } = props;
 
   if (resultsResponse) {
@@ -17,7 +17,7 @@ export default function ResultContainer(props: ResultContainerProps) {
         <div className="cio-result-container-text" />
         <ResultHeroCard resultRequest={resultsResponse?.request} heroItem={resultsResponse?.response?.results?.[0]} />
         <div className="cio-results">
-          {resultsResponse?.response?.results?.slice(1, numResults + 1).map((result: any) =>
+          {resultsResponse?.response?.results?.slice(1, numResults).map((result: any) =>
             <ResultCard result={result} />
           )}
         </div>
