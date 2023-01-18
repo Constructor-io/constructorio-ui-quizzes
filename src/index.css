@@ -96,3 +96,91 @@
   margin-left: 20px;
   max-width: 400px;
 }
+
+.cio-result-card {
+  background-color: transparent !important;
+  max-width: 300px !important;
+  flex: 1 0 calc(33% - 36px);
+  height: auto;
+  min-width: 280px;
+  margin: 18px;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+.cio-result-card-text {
+  align-items: flex-start;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 0 6px;
+  width: 100%;
+  margin-bottom: 16px;
+  margin-top: 16px;
+  display: flex;
+  flex-direction: row;
+}
+
+.cio-result-container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1000px;
+  padding-bottom: 50px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.cio-results {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cio-result-card-cta-btn {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  height: 40px;
+  padding: 8px 0px;
+  color: black;
+  border-color: black;
+  border-style: solid;
+  border-width: 1px;
+  font-size: 14px;
+  background-color: transparent;
+  font-family: 'Roboto', sans-serif;
+}
+
+.cio-result-card-cta-btn:hover {
+  box-shadow: 0 0 10px lightgray;
+  cursor: pointer;
+}
+
+.cio-hero-card {
+  display: flex;
+  flex-direction: row;
+  margin: 18px;
+}
+
+.cio-hero-card-contents {
+  display: flex;
+  flex-direction: column;
+}
+
+.cio-hero-cta-btn {
+  margin-top: auto;
+}
+
+.cio-hero-card-facet-pills {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  margin: 5px 0;
+}
+
+.cio-hero-card-facet-pill {
+  border: solid 1px black;
+  margin-right: 1em;
+  padding: 2px 4px;
+}

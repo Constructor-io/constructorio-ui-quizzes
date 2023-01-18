@@ -13,7 +13,7 @@ interface Selected {
 }
 
 function SelectTypeQuestion() {
-  const { dispatch, questionResponse } = React.useContext(QuizContext);
+  const { dispatch, questionResponse, state, setShowResults } = React.useContext(QuizContext);
   let question;
   let type: `${QuestionTypes}`;
   if (questionResponse) {
@@ -22,6 +22,20 @@ function SelectTypeQuestion() {
   }
   const [selected, setSelected] = useState<Selected>({});
   const isDisabled = Object.keys(selected).length === 0;
+
+  React.useEffect(() => {
+    if (questionResponse && type) {
+      let answers;
+      if (type === QuestionTypes.SingleSelect && state?.singleSelectInputs?.[questionResponse?.next_question.id]) {
+        answers = state?.singleSelectInputs?.[questionResponse?.next_question.id];
+      } else if (type === QuestionTypes.MultipleSelect && state?.multipleSelectInputs?.[questionResponse?.next_question.id]) {
+        answers = state?.multipleSelectInputs?.[questionResponse?.next_question.id];
+      }
+      let prevSelected: Selected = {};
+      answers?.forEach((answer) => { prevSelected[Number(answer)] = true })
+      setSelected(prevSelected);
+    }
+  }, [])
 
   const toggleIdSelected = (id: number) => {
     if (type === QuestionTypes.SingleSelect) {
@@ -59,6 +73,11 @@ function SelectTypeQuestion() {
           }!
         );
       }
+
+      if (questionResponse.is_last_question) {
+        setShowResults!(true);
+        return;
+      }
     }
   };
 
@@ -67,7 +86,7 @@ function SelectTypeQuestion() {
       <div className='cio-select-question-container'>
         <QuestionTitle title={question.title} />
         {question?.description ? <QuestionDescription description={question.description} /> : ''}
-        <div className='cio-question-options-container'>
+        <div className="cio-question-options-container">
           {question?.options?.map((option: QuestionOption, index: number) => (
             <div
               className={`cio-question-option-container ${selected[option.id] ? 'selected' : ''}`}
@@ -79,9 +98,10 @@ function SelectTypeQuestion() {
               }}
               role='button'
               tabIndex={index + 1}
-              key={option.id}>
+              key={option.id}
+            >
               {option.images ? renderImages(option.images, 'cio-question-option-image') : ''}
-              <p className='cio-question-option-value'>{option?.value}</p>
+              <p className="cio-question-option-value">{option?.value}</p>
             </div>
           ))}
         </div>
