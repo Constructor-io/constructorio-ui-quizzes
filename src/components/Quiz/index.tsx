@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useReducer, useState, useMemo, useEffect } from 'react';
 import useCioClient from '../../hooks/useCioClient';
 import OpenTextQuestion from '../OpenTextTypeQuestion';
 import QuizContext from './context';
@@ -17,10 +17,10 @@ export interface IQuizProps {
 export default function Quiz(props: IQuizProps) {
   const { quizId, apiKey } = props;
   const cioClient = useCioClient({ apiKey }) as any;
-  const [state, dispatch] = React.useReducer(reducer, initialState);
-  const [questionResponse, setQuestionResponse] = React.useState<NextQuestionResponse>();
-  const [resultsResponse, setResultsResponse] = React.useState<any>();
-  const [showResults, setShowResults] = React.useState<boolean>(false);
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const [questionResponse, setQuestionResponse] = useState<NextQuestionResponse>();
+  const [resultsResponse, setResultsResponse] = useState<any>();
+  const [showResults, setShowResults] = useState<boolean>(false);
   const questionType = questionResponse?.next_question?.type;
   const isOpenQuestion = questionType === QuestionTypes.OpenText;
   const isCoverQuestion = questionType === QuestionTypes.Cover;
@@ -28,43 +28,56 @@ export default function Quiz(props: IQuizProps) {
   const isMultipleQuestion = questionType === QuestionTypes.MultipleSelect;
   const isSelectQuestion = isSingleQuestion || isMultipleQuestion;
 
-  const contextValue = React.useMemo(
+  const contextValue = useMemo(
     () => ({
       dispatch,
       questionResponse,
       state,
       resultsResponse,
-      setShowResults,
+      setShowResults
     }),
-    [state, dispatch, questionResponse, resultsResponse, setShowResults],
+    [state, dispatch, questionResponse, resultsResponse, setShowResults]
   );
 
-  const quizBackHandler = (popAnswers: boolean) => { // back handler for a back button. Passing true will pop the latest answers. Should be true unless on result page.
+  /* const quizBackHandler = (popAnswers: boolean) => {
+    // back handler for a back button. Passing true will pop the latest answers. Should be true unless on result page.
     dispatch({ type: QuestionTypes.Back, payload: popAnswers });
     setShowResults(false);
-  }
+  }; */
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (showResults) {
       setResultsResponse(undefined); // set undefined in cases where user redoes quiz, gets no results.
-      cioClient?.quizzes?.getQuizResults(quizId, { answers: state.answers })
-        .then((response: any) => { if (response?.result?.results_url) return fetch(response?.result.results_url) })
+
+      cioClient?.quizzes
+        ?.getQuizResults(quizId, { answers: state.answers })
+        .then((response: any) => {
+          if (response?.result?.results_url) {
+            return fetch(response?.result.results_url);
+          }
+
+          return null;
+        })
         .then((response: Response) => response.json())
-        .then((e: any) => { setResultsResponse(e); });
+        .then((e: any) => {
+          setResultsResponse(e);
+        })
+        .catch(() => {
+          setResultsResponse(undefined);
+        });
     } else if (!questionResponse?.is_last_question) {
-      cioClient?.quizzes.getQuizNextQuestion(
-        quizId,
-        { answers: state.answers },
-      ).then((e: any) => setQuestionResponse(e));
+      cioClient?.quizzes
+        .getQuizNextQuestion(quizId, { answers: state.answers })
+        .then((e: any) => setQuestionResponse(e));
     }
-  }, [cioClient, state, showResults]);
+  }, [cioClient, state, showResults, quizId, questionResponse?.is_last_question]);
 
   if (showResults) {
     return (
       <QuizContext.Provider value={contextValue}>
         <ResultContainer />
       </QuizContext.Provider>
-    )
+    );
   }
 
   return (
