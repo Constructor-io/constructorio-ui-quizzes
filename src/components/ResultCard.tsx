@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { KeyboardEvent } from 'react';
 import ResultCtaButton from './ResultCtaButton';
 
 interface ResultCardProps {
@@ -13,39 +13,51 @@ export default function ResultCard(props: ResultCardProps) {
     if (callback && typeof callback === 'function') {
       callback(result);
     }
-  }
+  };
 
-  const resultCardContent = () => {
-    return (<>
-      <div className="cio-result-card-image">
-        <img src={result?.data?.image_url} />
+  const keyDownHandler = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event?.key === ' ' || event?.key === 'Enter') {
+      if (callback && typeof callback === 'function') {
+        callback(result);
+      }
+    }
+  };
+
+  const resultCardContent = () => (
+    <>
+      <div className='cio-result-card-image'>
+        <img src={result?.data?.image_url} alt='product' />
       </div>
-      <div className="cio-result-card-text">
-        <div className="cio-result-card-title">
+      <div className='cio-result-card-text'>
+        <div className='cio-result-card-title'>
           <span>{result?.value}</span>
         </div>
-        <div className="cio-result-card-price">
+        <div className='cio-result-card-price'>
           <span>${result?.data?.price}</span>
         </div>
       </div>
       <ResultCtaButton items={[result]} />
     </>
-    )
-  }
+  );
 
   if (callback) {
     return (
-      <div onClick={clickHandler} className="cio-result-card">
+      <div
+        onClick={clickHandler}
+        onKeyDown={keyDownHandler}
+        className='cio-result-card'
+        role='button'
+        tabIndex={0}>
         {resultCardContent()}
       </div>
     );
   }
 
   return (
-    <div className="cio-result-card">
-      <a className="cio-result-card-anchor" href={result?.data?.url}>
+    <div className='cio-result-card'>
+      <a className='cio-result-card-anchor' href={result?.data?.url}>
         {resultCardContent()}
       </a>
     </div>
-  )
+  );
 }

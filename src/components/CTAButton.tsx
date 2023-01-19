@@ -7,15 +7,13 @@ function CTAButton(props: CTAButtonProps) {
 
   return (
     <button
-      type="button"
+      type='button'
       className={`${disabled ? 'cio-question-cta-button disabled' : 'cio-question-cta-button'}`}
       // eslint-disable-next-line react/jsx-props-no-spreading
-      {...rest}
-    >
-      { ctaText || 'Continue'  }
+      {...rest}>
+      {ctaText || 'Continue'}
     </button>
   );
 }
-
 
 export default CTAButton;

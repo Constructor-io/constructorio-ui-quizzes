@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useContext } from 'react';
 import QuestionTitle from './QuestionTitle';
 import QuizContext from './Quiz/context';
 import QuestionDescription from './QuestionDescription';
@@ -7,9 +7,9 @@ import { renderImages } from '../utils';
 import { QuestionTypes } from './Quiz/actions';
 
 export default function CoverTypeQuestion() {
-  const { dispatch, questionResponse, setShowResults } = React.useContext(QuizContext);
+  const { dispatch, questionResponse, setShowResults } = useContext(QuizContext);
   let question;
-  if(questionResponse) {
+  if (questionResponse) {
     question = questionResponse.next_question;
   }
 
@@ -19,28 +19,24 @@ export default function CoverTypeQuestion() {
 
       if (questionResponse?.is_last_question) {
         setShowResults!(true);
-        return;
       }
     }
   };
 
-  if(question) {
+  if (question) {
     return (
-      <div className="cio-cover-question-container">
-        <div className="cio-cover-question-text">
+      <div className='cio-cover-question-container'>
+        <div className='cio-cover-question-text'>
           <QuestionTitle title={question?.title} />
           <QuestionDescription description={question.description} />
-          <CTAButton
-            ctaText={question?.cta_text}
-            onClick={onNextClick}
-          />
+          <CTAButton ctaText={question?.cta_text} onClick={onNextClick} />
         </div>
-        <div className="cio-cover-question-img">
+        <div className='cio-cover-question-img'>
           {question?.images ? renderImages(question.images) : ''}
         </div>
       </div>
     );
   }
 
-  return null
+  return null;
 }

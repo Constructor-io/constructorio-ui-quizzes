@@ -5,9 +5,7 @@ interface QuestionTitleProps {
 function QuestionTitle(props: QuestionTitleProps) {
   const { title } = props;
 
-  return (
-    <h1 className="cio-question-title">{ title }</h1>
-  );
+  return <h1 className='cio-question-title'>{title}</h1>;
 }
 
 export default QuestionTitle;
