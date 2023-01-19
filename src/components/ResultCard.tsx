@@ -12,12 +12,12 @@ export default function ResultCard(props: ResultCardProps) {
     if (callback && typeof callback === 'function') {
       callback(result);
     }
-  }
+  };
 
-  const resultCardContent = () => {
-    return (<>
-      <div className="cio-result-card-image">
-        <img src={result?.data?.image_url} />
+  const resultCardContent = () => (
+    <>
+      <div className='cio-result-card-image'>
+        <img src={result?.data?.image_url} alt='product' />
       </div>
       <div className='cio-result-card-text'>
         <div className='cio-result-card-title'>
@@ -29,22 +29,21 @@ export default function ResultCard(props: ResultCardProps) {
       </div>
       <ResultCtaButton items={[result]} />
     </>
-    )
-  }
+  );
 
   if (callback) {
     return (
-      <div onClick={clickHandler} className="cio-result-card">
+      <div onClick={clickHandler} className='cio-result-card'>
         {resultCardContent()}
       </div>
     );
   }
 
   return (
-    <div className="cio-result-card">
-      <a className="cio-result-card-anchor" href={result?.data?.url}>
+    <div className='cio-result-card'>
+      <a className='cio-result-card-anchor' href={result?.data?.url}>
         {resultCardContent()}
       </a>
     </div>
-  )
+  );
 }
