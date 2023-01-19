@@ -3,7 +3,7 @@
   "compilerOptions": {
     "moduleResolution": "node",
     "removeComments": false,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "sourceMap": true,
     "target": "es2015",
     "outDir": "lib/src",
