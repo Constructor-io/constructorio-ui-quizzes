@@ -7,16 +7,20 @@ import SelectTypeQuestion from '../SelectTypeQuestion';
 import reducer, { initialState } from './reducer';
 import { QuestionTypes } from './actions';
 import { NextQuestionResponse } from '../../types';
+import ResultContainer from '../ResultContainer';
 
 export interface IQuizProps {
-  quizId: string
+  quizId: string;
+  apiKey: string;
 }
 
 export default function Quiz(props: IQuizProps) {
-  const { quizId } = props;
-  const cioClient = useCioClient({ apiKey: 'key_jaqzPcUDnK66puIO' }) as any;
+  const { quizId, apiKey } = props;
+  const cioClient = useCioClient({ apiKey }) as any;
   const [state, dispatch] = React.useReducer(reducer, initialState);
   const [questionResponse, setQuestionResponse] = React.useState<NextQuestionResponse>();
+  const [resultsResponse, setResultsResponse] = React.useState<any>();
+  const [showResults, setShowResults] = React.useState<boolean>(false);
   const questionType = questionResponse?.next_question?.type;
   const isOpenQuestion = questionType === QuestionTypes.OpenText;
   const isCoverQuestion = questionType === QuestionTypes.Cover;
@@ -28,17 +32,43 @@ export default function Quiz(props: IQuizProps) {
     () => ({
       dispatch,
       questionResponse,
-      state
+      state,
+      resultsResponse,
+      setShowResults,
     }),
-    [state, dispatch, questionResponse],
+    [state, dispatch, questionResponse, resultsResponse, setShowResults],
   );
 
+  const quizBackHandler = (popAnswers: boolean) => { // back handler for a back button. Passing true will pop the latest answers. Should be true unless on result page.
+    dispatch({ type: QuestionTypes.Back, payload: popAnswers });
+    setShowResults(false);
+  }
+
   React.useEffect(() => {
-    cioClient?.quizzes.getQuizNextQuestion(
-      quizId,
-      { answers: state.answers },
-    ).then((e:any) => setQuestionResponse(e));
-  }, [cioClient, state]);
+    if (showResults) {
+      setResultsResponse(undefined); // set undefined in cases where user redoes quiz, gets no results.
+      cioClient?.quizzes?.getQuizResults(quizId, { answers: state.answers })
+        .then((response: any) => {
+          if (response?.result?.results_url)
+            return fetch(response?.result.results_url)
+        })
+        .then((response: Response) => response.json())
+        .then((e: any) => { setResultsResponse(e); });
+    } else if (!questionResponse?.is_last_question) {
+      cioClient?.quizzes.getQuizNextQuestion(
+        quizId,
+        { answers: state.answers },
+      ).then((e: any) => setQuestionResponse(e));
+    }
+  }, [cioClient, state, showResults]);
+
+  if (showResults) {
+    return (
+      <QuizContext.Provider value={contextValue}>
+        <ResultContainer />
+      </QuizContext.Provider>
+    )
+  }
 
   return (
     <QuizContext.Provider value={contextValue}>

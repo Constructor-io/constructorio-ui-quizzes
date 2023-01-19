@@ -7,7 +7,7 @@ import { renderImages } from '../utils';
 import { QuestionTypes } from './Quiz/actions';
 
 export default function CoverTypeQuestion() {
-  const { dispatch, questionResponse } = React.useContext(QuizContext);
+  const { dispatch, questionResponse, setShowResults } = React.useContext(QuizContext);
   let question;
   if(questionResponse) {
     question = questionResponse.next_question;
@@ -16,6 +16,11 @@ export default function CoverTypeQuestion() {
   const onNextClick = () => {
     if (dispatch) {
       dispatch({ type: QuestionTypes.Cover });
+
+      if (questionResponse?.is_last_question) {
+        setShowResults!(true);
+        return;
+      }
     }
   };
 

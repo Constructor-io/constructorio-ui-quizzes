@@ -6,7 +6,9 @@ import { QuizReducerState } from './reducer';
 interface QuizContextValue {
   questionResponse: NextQuestionResponse,
   state: QuizReducerState,
-  dispatch: React.Dispatch<ActionAnswerQuestion>
+  dispatch: React.Dispatch<ActionAnswerQuestion>,
+  resultsResponse: any,
+  setShowResults: (showResults: boolean) => void,
 }
 
 export default React.createContext<Partial<QuizContextValue>>({});

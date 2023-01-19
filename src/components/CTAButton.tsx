@@ -3,7 +3,8 @@ interface CTAButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 function CTAButton(props: CTAButtonProps) {
-  const { ctaText, disabled, ...rest } = props;
+  const { ctaText = 'Continue', disabled, ...rest } = props;
+
   return (
     <button
       type="button"
@@ -16,8 +17,5 @@ function CTAButton(props: CTAButtonProps) {
   );
 }
 
-CTAButton.defaultProps = {
-  ctaText: 'Continue',
-};
 
 export default CTAButton;
