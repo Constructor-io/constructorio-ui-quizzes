@@ -7,7 +7,9 @@ interface ResultCtaButtonProps {
 export default function ResultCtaButton(props: ResultCtaButtonProps) {
   const { items, callback, className } = props;
 
-  const clickHandler = () => {
+  const clickHandler = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    
     if (callback && typeof callback === 'function') {
       callback(items);
     }

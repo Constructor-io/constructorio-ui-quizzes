@@ -152,6 +152,12 @@
   font-family: 'Roboto', sans-serif;
 }
 
+.cio-result-card-anchor {
+  text-decoration: none;
+  background-color: transparent;
+  color: inherit;
+}
+
 .cio-result-card-cta-btn:hover {
   box-shadow: 0 0 10px lightgray;
   cursor: pointer;

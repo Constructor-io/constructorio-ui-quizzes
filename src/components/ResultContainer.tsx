@@ -18,7 +18,7 @@ export default function ResultContainer(props: ResultContainerProps) {
         <ResultHeroCard resultRequest={resultsResponse?.request} heroItem={resultsResponse?.response?.results?.[0]} />
         <div className="cio-results">
           {resultsResponse?.response?.results?.slice(1, numResults).map((result: any) =>
-            <ResultCard result={result} />
+            <ResultCard result={result} key={result?.data?.id}/>
           )}
         </div>
       </div>
