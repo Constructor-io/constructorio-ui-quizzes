@@ -8,6 +8,7 @@ import reducer, { initialState } from './reducer';
 import { QuestionTypes } from './actions';
 import { NextQuestionResponse } from '../../types';
 import ResultContainer from '../ResultContainer';
+import './quiz.css';
 
 export interface IQuizProps {
   quizId: string;
