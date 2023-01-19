@@ -48,7 +48,10 @@ export default function Quiz(props: IQuizProps) {
     if (showResults) {
       setResultsResponse(undefined); // set undefined in cases where user redoes quiz, gets no results.
       cioClient?.quizzes?.getQuizResults(quizId, { answers: state.answers })
-        .then((response: any) => { if (response?.result?.results_url) return fetch(response?.result.results_url) })
+        .then((response: any) => {
+          if (response?.result?.results_url)
+            return fetch(response?.result.results_url)
+        })
         .then((response: Response) => response.json())
         .then((e: any) => { setResultsResponse(e); });
     } else if (!questionResponse?.is_last_question) {

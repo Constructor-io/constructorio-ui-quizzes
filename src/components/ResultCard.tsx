@@ -16,40 +16,40 @@ export default function ResultCard(props: ResultCardProps) {
   }
 
   if (callback) {
-  return (
-    <div onClick={clickHandler} className="cio-result-card">
-      <div className="cio-result-card-image">
-        <img src={result?.data?.image_url} />
-      </div>
-      <div className="cio-result-card-text">
-        <div className="cio-result-card-title">
-          <span>{result?.value}</span>
+    return (
+      <div onClick={clickHandler} className="cio-result-card">
+        <div className="cio-result-card-image">
+          <img src={result?.data?.image_url} />
         </div>
-        <div className="cio-result-card-price">
-          <span>${result?.data?.price}</span>
+        <div className="cio-result-card-text">
+          <div className="cio-result-card-title">
+            <span>{result?.value}</span>
+          </div>
+          <div className="cio-result-card-price">
+            <span>${result?.data?.price}</span>
+          </div>
         </div>
+        <ResultCtaButton items={[result]} />
       </div>
-      <ResultCtaButton items={[result]} />
-    </div>
-  );
+    );
   }
 
-    return (
+  return (
     <div className="cio-result-card">
       <a className="cio-result-card-anchor" href={result?.data?.url}>
-      <div className="cio-result-card-image">
-        <img src={result?.data?.image_url} />
-      </div>
-      <div className="cio-result-card-text">
-        <div className="cio-result-card-title">
-          <span>{result?.value}</span>
+        <div className="cio-result-card-image">
+          <img src={result?.data?.image_url} />
         </div>
-        <div className="cio-result-card-price">
-          <span>${result?.data?.price}</span>
+        <div className="cio-result-card-text">
+          <div className="cio-result-card-title">
+            <span>{result?.value}</span>
+          </div>
+          <div className="cio-result-card-price">
+            <span>${result?.data?.price}</span>
+          </div>
         </div>
-      </div>
-      <ResultCtaButton items={[result]} />
+        <ResultCtaButton items={[result]} />
       </a>
     </div>
-    )
+  )
 }

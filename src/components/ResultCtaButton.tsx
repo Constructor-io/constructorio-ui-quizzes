@@ -9,7 +9,7 @@ export default function ResultCtaButton(props: ResultCtaButtonProps) {
 
   const clickHandler = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    
+
     if (callback && typeof callback === 'function') {
       callback(items);
     }
