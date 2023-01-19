@@ -1,3 +1,4 @@
+import { KeyboardEvent } from 'react';
 import ResultCtaButton from './ResultCtaButton';
 
 interface ResultCardProps {
@@ -11,6 +12,14 @@ export default function ResultCard(props: ResultCardProps) {
   const clickHandler = () => {
     if (callback && typeof callback === 'function') {
       callback(result);
+    }
+  };
+
+  const keyDownHandler = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event?.key === ' ' || event?.key === 'Enter') {
+      if (callback && typeof callback === 'function') {
+        callback(result);
+      }
     }
   };
 
@@ -33,7 +42,12 @@ export default function ResultCard(props: ResultCardProps) {
 
   if (callback) {
     return (
-      <div onClick={clickHandler} className='cio-result-card'>
+      <div
+        onClick={clickHandler}
+        onKeyDown={keyDownHandler}
+        className='cio-result-card'
+        role='button'
+        tabIndex={0}>
         {resultCardContent()}
       </div>
     );
