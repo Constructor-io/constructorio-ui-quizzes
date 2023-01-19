@@ -131,3 +131,6 @@ build
 .pnp.*
 
 .DS_Store
+
+# lib folder
+lib
