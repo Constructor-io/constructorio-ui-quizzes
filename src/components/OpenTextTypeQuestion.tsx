@@ -12,7 +12,7 @@ interface OpenTextQuestionProps {
 }
 
 function OpenTextQuestion(props: OpenTextQuestionProps) {
-  const { initialValue, onChangeHandler: userDefinedHandler } = props;
+  const { initialValue = '', onChangeHandler: userDefinedHandler = null} = props;
   const [openTextInput, setOpenTextInput] = useState(initialValue);
   const { dispatch, questionResponse, setShowResults } = useContext(QuizContext);
   let question;
@@ -64,10 +64,5 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
 
   return null;
 }
-
-OpenTextQuestion.defaultProps = {
-  initialValue: '',
-  onChangeHandler: null
-};
 
 export default OpenTextQuestion;
