@@ -1,0 +1,31 @@
+.cio-select-question-container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+.cio-question-options-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cio-question-option-container {
+  display: flex;
+  flex-direction: column;
+  margin: 1px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.cio-question-option-container.selected {
+  border: 1px solid #6b7280;
+}
+
+.cio-question-option-image {
+  height: 320px;
+  width: 320px;
+}
+
+.cio-question-option-value {
+  text-align: center;
+}

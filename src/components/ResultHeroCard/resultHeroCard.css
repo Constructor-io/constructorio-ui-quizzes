@@ -1,0 +1,27 @@
+.cio-hero-card {
+  display: flex;
+  flex-direction: row;
+  margin: 18px;
+}
+
+.cio-hero-card-contents {
+  display: flex;
+  flex-direction: column;
+}
+
+.cio-hero-cta-btn {
+  margin-top: auto;
+}
+
+.cio-hero-card-facet-pills {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  margin: 5px 0;
+}
+
+.cio-hero-card-facet-pill {
+  border: solid 1px black;
+  margin-right: 1em;
+  padding: 2px 4px;
+}

@@ -1,7 +1,8 @@
 import { useContext } from 'react';
-import QuizContext from './Quiz/context';
-import ResultCard from './ResultCard';
-import ResultHeroCard from './ResultHeroCard';
+import QuizContext from '../Quiz/context';
+import ResultCard from '../ResultCard/ResultCard';
+import ResultHeroCard from '../ResultHeroCard/ResultHeroCard';
+import './resultContainer.css';
 
 interface ResultContainerProps {
   numResults?: number;

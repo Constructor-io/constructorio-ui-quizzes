@@ -1,0 +1,26 @@
+.cio-cover-question-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  height: 100vh;
+}
+
+.cio-cover-question-img {
+  width: 100%;
+  height: 100%;
+}
+
+.cio-cover-question-img .cio-question-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cio-cover-question-text {
+  position: absolute;
+  background-color: rgb(251 244 238);
+  padding: 20px;
+  margin-left: 20px;
+  max-width: 400px;
+}

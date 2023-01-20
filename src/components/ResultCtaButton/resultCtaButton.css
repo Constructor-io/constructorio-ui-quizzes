@@ -1,0 +1,25 @@
+.cio-result-card-cta-btn {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  height: 40px;
+  padding: 8px 0px;
+  color: black;
+  border-color: black;
+  border-style: solid;
+  border-width: 1px;
+  font-size: 14px;
+  background-color: transparent;
+  font-family: 'Roboto', sans-serif;
+}
+
+.cio-result-card-anchor {
+  text-decoration: none;
+  background-color: transparent;
+  color: inherit;
+}
+
+.cio-result-card-cta-btn:hover {
+  box-shadow: 0 0 10px lightgray;
+  cursor: pointer;
+}

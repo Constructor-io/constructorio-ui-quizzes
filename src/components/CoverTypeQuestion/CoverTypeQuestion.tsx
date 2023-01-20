@@ -1,10 +1,11 @@
 import { useContext } from 'react';
-import QuestionTitle from './QuestionTitle';
-import QuizContext from './Quiz/context';
-import QuestionDescription from './QuestionDescription';
-import CTAButton from './CTAButton';
-import { renderImages } from '../utils';
-import { QuestionTypes } from './Quiz/actions';
+import QuestionTitle from '../QuestionTitle/QuestionTitle';
+import QuizContext from '../Quiz/context';
+import QuestionDescription from '../QuestionDescription/QuestionDescription';
+import CTAButton from '../CTAButton/CTAButton';
+import { renderImages } from '../../utils';
+import { QuestionTypes } from '../Quiz/actions';
+import './coverTypeQuestion.css';
 
 export default function CoverTypeQuestion() {
   const { dispatch, questionResponse, setShowResults } = useContext(QuizContext);
