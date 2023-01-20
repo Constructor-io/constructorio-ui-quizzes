@@ -1,3 +1,5 @@
+import './resultCtaButton.css';
+
 interface ResultCtaButtonProps {
   items: any;
   className?: string;

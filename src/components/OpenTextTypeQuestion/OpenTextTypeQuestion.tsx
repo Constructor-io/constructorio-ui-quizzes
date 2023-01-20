@@ -1,10 +1,11 @@
 import React, { useContext, useState } from 'react';
-import QuestionTitle from './QuestionTitle';
-import QuestionDescription from './QuestionDescription';
-import CTAButton from './CTAButton';
-import { renderImages } from '../utils';
-import QuizContext from './Quiz/context';
-import { QuestionTypes } from './Quiz/actions';
+import QuestionTitle from '../QuestionTitle/QuestionTitle';
+import QuestionDescription from '../QuestionDescription/QuestionDescription';
+import CTAButton from '../CTAButton/CTAButton';
+import { renderImages } from '../../utils';
+import QuizContext from '../Quiz/context';
+import { QuestionTypes } from '../Quiz/actions';
+import './openTextTypeQuestion.css';
 
 interface OpenTextQuestionProps {
   initialValue?: string;

@@ -1,11 +1,12 @@
 import { useEffect, useState, useContext, KeyboardEvent } from 'react';
-import CTAButton from './CTAButton';
-import QuestionTitle from './QuestionTitle';
-import QuestionDescription from './QuestionDescription';
-import QuizContext from './Quiz/context';
-import { QuestionOption } from '../types';
-import { renderImages } from '../utils';
-import { QuestionTypes } from './Quiz/actions';
+import CTAButton from '../CTAButton/CTAButton';
+import QuestionTitle from '../QuestionTitle/QuestionTitle';
+import QuestionDescription from '../QuestionDescription/QuestionDescription';
+import QuizContext from '../Quiz/context';
+import { QuestionOption } from '../../types';
+import { renderImages } from '../../utils';
+import { QuestionTypes } from '../Quiz/actions';
+import './selectTypeQuestion.css';
 
 interface Selected {
   [key: number]: boolean;

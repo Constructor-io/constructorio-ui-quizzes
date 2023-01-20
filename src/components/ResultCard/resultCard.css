@@ -1,0 +1,22 @@
+.cio-result-card {
+  background-color: transparent !important;
+  max-width: 300px !important;
+  flex: 1 0 calc(33% - 36px);
+  height: auto;
+  min-width: 280px;
+  margin: 18px;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+.cio-result-card-text {
+  align-items: flex-start;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 0 6px;
+  width: 100%;
+  margin-bottom: 16px;
+  margin-top: 16px;
+  display: flex;
+  flex-direction: row;
+}

@@ -1,3 +1,5 @@
+import './questionTitle.css';
+
 interface QuestionTitleProps {
   title: string;
 }

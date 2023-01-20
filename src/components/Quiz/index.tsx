@@ -1,13 +1,13 @@
 import { useReducer, useState, useMemo, useEffect } from 'react';
 import useCioClient from '../../hooks/useCioClient';
-import OpenTextQuestion from '../OpenTextTypeQuestion';
+import OpenTextQuestion from '../OpenTextTypeQuestion/OpenTextTypeQuestion';
 import QuizContext from './context';
-import CoverTypeQuestion from '../CoverTypeQuestion';
-import SelectTypeQuestion from '../SelectTypeQuestion';
+import CoverTypeQuestion from '../CoverTypeQuestion/CoverTypeQuestion';
+import SelectTypeQuestion from '../SelectTypeQuestion/SelectTypeQuestion';
 import reducer, { initialState } from './reducer';
 import { QuestionTypes } from './actions';
 import { NextQuestionResponse } from '../../types';
-import ResultContainer from '../ResultContainer';
+import ResultContainer from '../ResultContainer/ResultContainer';
 import './quiz.css';
 
 export interface IQuizProps {

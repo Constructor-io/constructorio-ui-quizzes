@@ -1,5 +1,6 @@
 import { KeyboardEvent } from 'react';
-import ResultCtaButton from './ResultCtaButton';
+import ResultCtaButton from '../ResultCtaButton/ResultCtaButton';
+import './resultCard.css';
 
 interface ResultCardProps {
   result: any;

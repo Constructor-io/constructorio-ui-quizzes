@@ -1,4 +1,5 @@
-import ResultCtaButton from './ResultCtaButton';
+import ResultCtaButton from '../ResultCtaButton/ResultCtaButton';
+import './resultHeroCard.css';
 
 interface ResultHeroCardProps {
   heroItem: any;
