@@ -1,4 +1,5 @@
 .cio-result-card {
+  /* TODO: Remove the important, make sure nothing breaks */
   background-color: transparent !important;
   max-width: 300px !important;
   flex: 1 0 calc(33% - 36px);
