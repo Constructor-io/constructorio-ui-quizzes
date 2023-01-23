@@ -15,7 +15,7 @@ interface OpenTextQuestionProps {
 function OpenTextQuestion(props: OpenTextQuestionProps) {
   const { initialValue = '', onChangeHandler: userDefinedHandler = null } = props;
   const [openTextInput, setOpenTextInput] = useState(initialValue);
-  const { dispatch, questionResponse, setShowResults } = useContext(QuizContext);
+  const { dispatch, questionResponse, quizNextHandler } = useContext(QuizContext);
   let question;
   if (questionResponse) {
     question = questionResponse.next_question;
@@ -29,18 +29,14 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
   };
 
   const onNextClick = () => {
-    if (dispatch && openTextInput && questionResponse) {
-      dispatch({
+    if (quizNextHandler && openTextInput && questionResponse) {
+      quizNextHandler({
         type: QuestionTypes.OpenText,
         payload: {
           questionId: questionResponse.next_question.id,
           input: openTextInput
         }
       });
-
-      if (questionResponse.is_last_question) {
-        setShowResults!(true);
-      }
     }
   };
 

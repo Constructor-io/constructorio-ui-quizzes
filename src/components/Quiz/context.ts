@@ -9,6 +9,7 @@ interface QuizContextValue {
   dispatch: React.Dispatch<ActionAnswerQuestion>;
   resultsResponse: any;
   setShowResults: (showResults: boolean) => void;
+  quizNextHandler: (action?: ActionAnswerQuestion) => void;
 }
 
 export default React.createContext<Partial<QuizContextValue>>({});

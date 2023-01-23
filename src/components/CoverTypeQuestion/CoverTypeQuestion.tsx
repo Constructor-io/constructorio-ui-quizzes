@@ -8,19 +8,15 @@ import { QuestionTypes } from '../Quiz/actions';
 import './coverTypeQuestion.css';
 
 export default function CoverTypeQuestion() {
-  const { dispatch, questionResponse, setShowResults } = useContext(QuizContext);
+  const { dispatch, questionResponse, quizNextHandler } = useContext(QuizContext);
   let question;
   if (questionResponse) {
     question = questionResponse.next_question;
   }
 
   const onNextClick = () => {
-    if (dispatch) {
-      dispatch({ type: QuestionTypes.Cover });
-
-      if (questionResponse?.is_last_question) {
-        setShowResults!(true);
-      }
+    if (quizNextHandler) {
+      quizNextHandler({ type: QuestionTypes.Cover });
     }
   };
 
