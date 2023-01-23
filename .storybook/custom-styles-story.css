@@ -1,1 +1,29 @@
 /* This is where the custom CSS would go that we use for showcasing purposes */
+
+.cio-select-question-container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.cio-select-question-container .cio-question-options-container {
+  flex-wrap: wrap;
+}
+
+.cio-question-option-container {
+  margin-bottom: 0;
+}
+
+.cio-open-text-question-form,
+.cio-open-text-question-image {
+  box-sizing: border-box;
+  width: 50%;
+}
+
+.cio-open-text-question-form {
+  background-color: rgb(251 244 238);
+  padding: 10% 10%;
+}
+
+.cio-question-input-text {
+  padding: 8px;
+}

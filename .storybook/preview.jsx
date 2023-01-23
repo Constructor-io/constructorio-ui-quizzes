@@ -27,5 +27,8 @@ export const parameters = {
         <Stories />
       </>
     )
-  }
+  },
+  backgrounds: {
+    default: 'light',
+  },
 };
