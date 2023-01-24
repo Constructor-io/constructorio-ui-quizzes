@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import Quiz, { IQuizProps } from '../../components/Quiz';
-import { getStoryParams } from '../../utils';
+import Quiz, { IQuizProps } from '../../../components/Quiz';
+import { getStoryParams } from '../../../utils';
 
 export function ComponentTemplate(args: IQuizProps) {
   return <Quiz {...args} />;
