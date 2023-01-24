@@ -26,10 +26,10 @@ interface Action<Type, Payload = {}> {
   payload?: Payload;
 }
 
-export type ActionAnswerInputQuestion = 
+export type ActionAnswerInputQuestion =
   | Action<QuestionTypes.OpenText, OpenTextQuestionPayload>
   | Action<QuestionTypes.SingleSelect, SelectQuestionPayload>
-  | Action<QuestionTypes.MultipleSelect, SelectQuestionPayload>
+  | Action<QuestionTypes.MultipleSelect, SelectQuestionPayload>;
 
 export type ActionAnswerQuestion =
   | ActionAnswerInputQuestion

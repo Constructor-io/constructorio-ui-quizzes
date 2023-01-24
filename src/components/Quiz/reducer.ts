@@ -4,7 +4,7 @@ import {
   CoverQuestionPayload,
   OpenTextQuestionPayload,
   SelectQuestionPayload,
-  ActionAnswerInputQuestion,
+  ActionAnswerInputQuestion
 } from './actions';
 
 export type Answers = string[][];
@@ -14,17 +14,17 @@ export type QuizReducerState = {
 };
 export type AnswerInputState = {
   [key: string]: CoverQuestionPayload | OpenTextQuestionPayload | SelectQuestionPayload;
-}
+};
 
 export const initialState: QuizReducerState = {
   answers: [],
-  answerInputs: {},
+  answerInputs: {}
 };
 
 function answerInputReducer(state: AnswerInputState, action: ActionAnswerInputQuestion) {
   return {
     ...state,
-    ...{ [String(action.payload!.questionId)]: action.payload!.input },
+    ...{ [String(action.payload!.questionId)]: action.payload!.input }
   };
 }
 
@@ -39,7 +39,7 @@ export default function reducer(state: QuizReducerState, action: ActionAnswerQue
     case QuestionTypes.Cover:
       return {
         ...state,
-        answers: [...state.answers, ['seen']],
+        answers: [...state.answers, ['seen']]
       };
     case QuestionTypes.SingleSelect:
       return {
