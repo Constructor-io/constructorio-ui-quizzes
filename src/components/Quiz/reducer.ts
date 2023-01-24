@@ -40,7 +40,6 @@ export default function reducer(state: QuizReducerState, action: ActionAnswerQue
       return {
         ...state,
         answers: [...state.answers, ['seen']],
-        answerInputs: answerInputReducer(state.answerInputs, action)
       };
     case QuestionTypes.SingleSelect:
       return {

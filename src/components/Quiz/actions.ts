@@ -27,12 +27,12 @@ interface Action<Type, Payload = {}> {
 }
 
 export type ActionAnswerInputQuestion = 
-  | Action<QuestionTypes.Cover, CoverQuestionPayload>
   | Action<QuestionTypes.OpenText, OpenTextQuestionPayload>
   | Action<QuestionTypes.SingleSelect, SelectQuestionPayload>
   | Action<QuestionTypes.MultipleSelect, SelectQuestionPayload>
 
 export type ActionAnswerQuestion =
   | ActionAnswerInputQuestion
+  | Action<QuestionTypes.Cover>
   | Action<QuestionTypes.Back, boolean>
   | Action<QuestionTypes.Reset>;
