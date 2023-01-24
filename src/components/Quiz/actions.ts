@@ -12,13 +12,8 @@ export interface QuestionAnswer<Value> {
   input: Value;
 }
 
-export interface QuestionState<Value> {
-  [key: string]: Value;
-}
-
 export type SelectQuestionPayload = QuestionAnswer<string[]>;
 export type OpenTextQuestionPayload = QuestionAnswer<string>;
-export type CoverQuestionPayload = QuestionAnswer<string>;
 export type ShowResultsPayload = string;
 
 interface Action<Type, Payload = {}> {

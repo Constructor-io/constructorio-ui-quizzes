@@ -1,7 +1,6 @@
 import {
   ActionAnswerQuestion,
   QuestionTypes,
-  CoverQuestionPayload,
   OpenTextQuestionPayload,
   SelectQuestionPayload,
   ActionAnswerInputQuestion
@@ -24,7 +23,7 @@ export const initialState: QuizReducerState = {
 function answerInputReducer(state: AnswerInputState, action: ActionAnswerInputQuestion) {
   return {
     ...state,
-    ...{ [String(action.payload!.questionId)]: action.payload!.input }
+    [String(action.payload!.questionId)]: action.payload!.input
   };
 }
 
