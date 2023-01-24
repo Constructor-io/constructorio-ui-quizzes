@@ -8,7 +8,7 @@ import { QuestionTypes } from '../Quiz/actions';
 import './coverTypeQuestion.css';
 
 export default function CoverTypeQuestion() {
-  const { dispatch, questionResponse, quizNextHandler } = useContext(QuizContext);
+  const { questionResponse, quizNextHandler } = useContext(QuizContext);
   let question;
   if (questionResponse) {
     question = questionResponse.next_question;

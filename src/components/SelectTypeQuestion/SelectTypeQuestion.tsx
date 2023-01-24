@@ -13,7 +13,7 @@ interface Selected {
 }
 
 function SelectTypeQuestion() {
-  const { dispatch, questionResponse, state, quizNextHandler } = useContext(QuizContext);
+  const { questionResponse, state, quizNextHandler } = useContext(QuizContext);
   let question;
   let type: `${QuestionTypes}`;
 

@@ -30,7 +30,7 @@ export default function Quiz(props: IQuizProps) {
   const isSelectQuestion = isSingleQuestion || isMultipleQuestion;
 
   const quizNextHandler = useCallback(
-    (action: ActionAnswerQuestion) => {
+    (action?: ActionAnswerQuestion) => {
       if (action) {
         dispatch(action);
       }

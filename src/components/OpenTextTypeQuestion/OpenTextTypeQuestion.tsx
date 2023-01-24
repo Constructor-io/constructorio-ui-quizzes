@@ -15,7 +15,7 @@ interface OpenTextQuestionProps {
 function OpenTextQuestion(props: OpenTextQuestionProps) {
   const { initialValue = '', onChangeHandler: userDefinedHandler = null } = props;
   const [openTextInput, setOpenTextInput] = useState(initialValue);
-  const { dispatch, questionResponse, quizNextHandler } = useContext(QuizContext);
+  const { questionResponse, quizNextHandler } = useContext(QuizContext);
   let question;
   if (questionResponse) {
     question = questionResponse.next_question;
