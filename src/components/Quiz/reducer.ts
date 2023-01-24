@@ -13,7 +13,7 @@ export type QuizReducerState = {
   answerInputs: {};
 };
 export type AnswerInputState = {
-  [key: string]: CoverQuestionPayload | OpenTextQuestionPayload | SelectQuestionPayload;
+  [key: string]: OpenTextQuestionPayload | SelectQuestionPayload;
 };
 
 export const initialState: QuizReducerState = {
