@@ -73,19 +73,19 @@ export default function Quiz(props: IQuizProps) {
     }
   }, [cioClient, state, showResults, quizId, questionResponse?.is_last_question]);
 
-  if (showResults) {
-    return (
-      <QuizContext.Provider value={contextValue}>
-        <ResultContainer />
-      </QuizContext.Provider>
-    );
-  }
-
   return (
-    <QuizContext.Provider value={contextValue}>
-      {isOpenQuestion && <OpenTextQuestion key={questionResponse?.next_question.id} />}
-      {isCoverQuestion && <CoverTypeQuestion key={questionResponse?.next_question.id} />}
-      {isSelectQuestion && <SelectTypeQuestion key={questionResponse?.next_question.id} />}
-    </QuizContext.Provider>
+    <div className='cio-quiz'>
+      {showResults ? (
+        <QuizContext.Provider value={contextValue}>
+          <ResultContainer />
+        </QuizContext.Provider>
+      ) : (
+        <QuizContext.Provider value={contextValue}>
+          {isOpenQuestion && <OpenTextQuestion key={questionResponse?.next_question.id} />}
+          {isCoverQuestion && <CoverTypeQuestion key={questionResponse?.next_question.id} />}
+          {isSelectQuestion && <SelectTypeQuestion key={questionResponse?.next_question.id} />}
+        </QuizContext.Provider>
+      )}
+    </div>
   );
 }
