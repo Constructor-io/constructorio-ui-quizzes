@@ -57,7 +57,7 @@ export default function reducer(state: QuizReducerState, action: ActionAnswerQue
     case QuestionTypes.Back:
       return {
         ...state,
-        answers: action.payload ? [...state.answers.slice(0, -1)] : [...state.answers]
+        answers: [...state.answers.slice(0, -1)]
       };
     case QuestionTypes.Reset:
       return {

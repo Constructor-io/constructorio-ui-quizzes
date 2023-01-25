@@ -13,7 +13,8 @@ interface Selected {
 }
 
 function SelectTypeQuestion() {
-  const { dispatch, questionResponse, state, setShowResults } = useContext(QuizContext);
+  const { dispatch, questionResponse, state, setShowResults, onBackClick } =
+    useContext(QuizContext);
   let question;
   let type: `${QuestionTypes}`;
 
@@ -117,6 +118,9 @@ function SelectTypeQuestion() {
           ))}
         </div>
         <CTAButton disabled={isDisabled} ctaText={question?.cta_text} onClick={onNextClick} />
+        {state?.answers && state?.answers?.length > 0 && (
+          <CTAButton ctaText='Back' onClick={onBackClick} />
+        )}
       </div>
     );
   }

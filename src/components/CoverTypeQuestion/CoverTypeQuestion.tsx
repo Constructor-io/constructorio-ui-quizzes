@@ -8,7 +8,8 @@ import { QuestionTypes } from '../Quiz/actions';
 import './coverTypeQuestion.css';
 
 export default function CoverTypeQuestion() {
-  const { dispatch, questionResponse, setShowResults } = useContext(QuizContext);
+  const { dispatch, questionResponse, setShowResults, state, onBackClick } =
+    useContext(QuizContext);
   let question;
   if (questionResponse) {
     question = questionResponse.next_question;
@@ -31,6 +32,9 @@ export default function CoverTypeQuestion() {
           <QuestionTitle title={question?.title} />
           <QuestionDescription description={question.description} />
           <CTAButton ctaText={question?.cta_text} onClick={onNextClick} />
+          {state?.answers && state?.answers?.length > 0 && (
+            <CTAButton ctaText='Back' onClick={onBackClick} />
+          )}
         </div>
         <div className='cio-cover-question-img'>
           {question?.images ? renderImages(question.images) : ''}
