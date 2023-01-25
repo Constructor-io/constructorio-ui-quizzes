@@ -13,7 +13,7 @@ interface Selected {
 }
 
 function SelectTypeQuestion() {
-  const { dispatch, questionResponse, state, setShowResults } = useContext(QuizContext);
+  const { questionResponse, state, quizNextHandler } = useContext(QuizContext);
   let question;
   let type: `${QuestionTypes}`;
 
@@ -53,23 +53,19 @@ function SelectTypeQuestion() {
   };
 
   const onNextClick = () => {
-    if (dispatch && !isDisabled && questionResponse) {
+    if (quizNextHandler && !isDisabled && questionResponse) {
       const questionType =
         type === QuestionTypes.SingleSelect
           ? QuestionTypes.SingleSelect
           : QuestionTypes.MultipleSelect;
 
-      dispatch({
+      quizNextHandler({
         type: questionType,
         payload: {
           questionId: questionResponse?.next_question.id,
           input: Object.keys(selected).filter((key) => selected[Number(key)])
         }
       });
-
-      if (questionResponse.is_last_question) {
-        setShowResults!(true);
-      }
     }
   };
 
