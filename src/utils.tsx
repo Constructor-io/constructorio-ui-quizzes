@@ -1,3 +1,5 @@
+import { QuestionTypes } from './components/Quiz/actions';
+import { Answers } from './components/Quiz/reducer';
 import { QuestionImages } from './types';
 
 // eslint-disable-next-line import/prefer-default-export
@@ -59,3 +61,30 @@ ${templateCode}
 };
 
 export const stringify = (obj) => JSON.stringify(obj, null, '  ');
+
+export const getNextQuestion = (cioClient: any, quizId: string, answers: Answers) =>
+  cioClient?.quizzes.getQuizNextQuestion(quizId, { answers });
+
+export const getQuizResults = async (cioClient: any, quizId: string, answers: Answers) => {
+  const quizResults = await cioClient?.quizzes.getQuizResults(quizId, { answers });
+  if (quizResults?.result?.results_url) {
+    return fetch(quizResults?.result.results_url).then((response: Response) => response.json());
+  }
+  return null;
+};
+
+export const getQuestionTypes = (questionType?: `${QuestionTypes}`) => {
+  const isOpenQuestion = questionType === QuestionTypes.OpenText;
+  const isCoverQuestion = questionType === QuestionTypes.Cover;
+  const isSingleQuestion = questionType === QuestionTypes.SingleSelect;
+  const isMultipleQuestion = questionType === QuestionTypes.MultipleSelect;
+  const isSelectQuestion = isSingleQuestion || isMultipleQuestion;
+
+  return {
+    isOpenQuestion,
+    isCoverQuestion,
+    isSingleQuestion,
+    isMultipleQuestion,
+    isSelectQuestion
+  };
+};

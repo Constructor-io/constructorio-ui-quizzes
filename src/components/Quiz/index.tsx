@@ -5,10 +5,10 @@ import QuizContext from './context';
 import CoverTypeQuestion from '../CoverTypeQuestion/CoverTypeQuestion';
 import SelectTypeQuestion from '../SelectTypeQuestion/SelectTypeQuestion';
 import reducer, { initialState } from './reducer';
-import { QuestionTypes } from './actions';
 import { NextQuestionResponse } from '../../types';
 import ResultContainer from '../ResultContainer/ResultContainer';
 import './quiz.css';
+import { getNextQuestion, getQuestionTypes, getQuizResults } from '../../utils';
 
 export interface IQuizProps {
   quizId: string;
@@ -22,12 +22,7 @@ export default function Quiz(props: IQuizProps) {
   const [questionResponse, setQuestionResponse] = useState<NextQuestionResponse>();
   const [resultsResponse, setResultsResponse] = useState<any>();
   const [showResults, setShowResults] = useState<boolean>(false);
-  const questionType = questionResponse?.next_question?.type;
-  const isOpenQuestion = questionType === QuestionTypes.OpenText;
-  const isCoverQuestion = questionType === QuestionTypes.Cover;
-  const isSingleQuestion = questionType === QuestionTypes.SingleSelect;
-  const isMultipleQuestion = questionType === QuestionTypes.MultipleSelect;
-  const isSelectQuestion = isSingleQuestion || isMultipleQuestion;
+  const questionTypes = getQuestionTypes(questionResponse?.next_question?.type);
 
   const contextValue = useMemo(
     () => ({
@@ -46,31 +41,22 @@ export default function Quiz(props: IQuizProps) {
     setShowResults(false);
   }; */
 
+  console.log('i render');
   useEffect(() => {
-    if (showResults) {
-      setResultsResponse(undefined); // set undefined in cases where user redoes quiz, gets no results.
-
-      cioClient?.quizzes
-        ?.getQuizResults(quizId, { answers: state.answers })
-        .then((response: any) => {
-          if (response?.result?.results_url) {
-            return fetch(response?.result.results_url);
-          }
-
-          return null;
-        })
-        .then((response: Response) => response.json())
-        .then((e: any) => {
-          setResultsResponse(e);
-        })
-        .catch(() => {
+    (async () => {
+      if (showResults) {
+        setResultsResponse(undefined); // set undefined in cases where user redoes quiz, gets no results.
+        try {
+          const quizResults = await getQuizResults(cioClient, quizId, state.answers);
+          setResultsResponse(quizResults);
+        } catch (error) {
           setResultsResponse(undefined);
-        });
-    } else if (!questionResponse?.is_last_question) {
-      cioClient?.quizzes
-        .getQuizNextQuestion(quizId, { answers: state.answers })
-        .then((e: any) => setQuestionResponse(e));
-    }
+        }
+      } else if (!questionResponse?.is_last_question) {
+        const questionResult = await getNextQuestion(cioClient, quizId, state.answers);
+        setQuestionResponse(questionResult);
+      }
+    })();
   }, [cioClient, state, showResults, quizId, questionResponse?.is_last_question]);
 
   if (showResults) {
@@ -83,9 +69,15 @@ export default function Quiz(props: IQuizProps) {
 
   return (
     <QuizContext.Provider value={contextValue}>
-      {isOpenQuestion && <OpenTextQuestion key={questionResponse?.next_question.id} />}
-      {isCoverQuestion && <CoverTypeQuestion key={questionResponse?.next_question.id} />}
-      {isSelectQuestion && <SelectTypeQuestion key={questionResponse?.next_question.id} />}
+      {questionTypes.isOpenQuestion && (
+        <OpenTextQuestion key={questionResponse?.next_question.id} />
+      )}
+      {questionTypes.isCoverQuestion && (
+        <CoverTypeQuestion key={questionResponse?.next_question.id} />
+      )}
+      {questionTypes.isSelectQuestion && (
+        <SelectTypeQuestion key={questionResponse?.next_question.id} />
+      )}
     </QuizContext.Provider>
   );
 }
