@@ -6,6 +6,7 @@
   color: white;
   width: 100%;
   cursor: pointer;
+  max-width: 18rem;
 }
 
 .cio-question-cta-button.disabled {

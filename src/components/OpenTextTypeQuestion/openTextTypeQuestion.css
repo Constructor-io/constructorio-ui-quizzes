@@ -4,7 +4,6 @@
   width: 100%;
 }
 
-.cio-open-text-question-form,
 .cio-open-text-question-image {
   box-sizing: border-box;
   min-width: 50%;
@@ -16,6 +15,10 @@
   flex-direction: column;
   padding: 10rem;
   max-width: 700px;
+}
+
+.cio-open-text-question-form .cio-question-cta-button {
+  max-width: unset;
 }
 
 .cio-question-input-text {
