@@ -3,8 +3,8 @@ import QuestionTitle from '../QuestionTitle/QuestionTitle';
 import QuestionDescription from '../QuestionDescription/QuestionDescription';
 import CTAButton from '../CTAButton/CTAButton';
 import { renderImages } from '../../utils';
-import QuizContext from '../Quiz/context';
-import { QuestionTypes } from '../Quiz/actions';
+import QuizContext from '../CioQuiz/context';
+import { QuestionTypes } from '../CioQuiz/actions';
 import './openTextTypeQuestion.css';
 
 interface OpenTextQuestionProps {

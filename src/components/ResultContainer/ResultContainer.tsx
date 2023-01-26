@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import QuizContext from '../Quiz/context';
+import QuizContext from '../CioQuiz/context';
 import ResultCard from '../ResultCard/ResultCard';
 import ResultHeroCard from '../ResultHeroCard/ResultHeroCard';
 import './resultContainer.css';
