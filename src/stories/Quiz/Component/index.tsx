@@ -1,22 +1,22 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import Quiz, { IQuizProps } from '../../../components/Quiz';
+import CioQuiz, { IQuizProps } from '../../../components/CioQuiz';
 import { getStoryParams } from '../../../utils';
 
 export function ComponentTemplate(args: IQuizProps) {
-  return <Quiz {...args} />;
+  return <CioQuiz {...args} />;
 }
 
 const componentTemplateCode = `
 function YourComponent() {
   return (
     <div>
-      <Quiz {...args} />
+      <CioQuiz {...args} />
     </div>
   );
 }
 `;
-const importComponent = `import Quiz from 'cio-quiz';`;
+const importComponent = `import CioQuiz from 'cio-quiz';`;
 
 export const getComponentStoryParams = (storyParams) =>
   getStoryParams(storyParams, componentTemplateCode, importComponent);

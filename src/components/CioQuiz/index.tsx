@@ -15,7 +15,7 @@ export interface IQuizProps {
   apiKey: string;
 }
 
-export default function Quiz(props: IQuizProps) {
+export default function CioQuiz(props: IQuizProps) {
   const { quizId, apiKey } = props;
   const cioClient = useCioClient({ apiKey }) as any;
   const [state, dispatch] = useReducer(reducer, initialState);
