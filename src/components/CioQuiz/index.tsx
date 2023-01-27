@@ -1,5 +1,6 @@
 import { useReducer, useState, useMemo, useEffect, useCallback } from 'react';
-import useCioClient from '../../hooks/useCioClient';
+import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
+import useCioClient, { CioClientOptions } from '../../hooks/useCioClient';
 import OpenTextQuestion from '../OpenTextTypeQuestion/OpenTextTypeQuestion';
 import QuizContext from './context';
 import CoverTypeQuestion from '../CoverTypeQuestion/CoverTypeQuestion';
@@ -12,12 +13,13 @@ import './quiz.css';
 
 export interface IQuizProps {
   quizId: string;
-  apiKey: string;
+  apiKey?: string;
+  cioJsClient?: ConstructorIOClient;
 }
 
 export default function CioQuiz(props: IQuizProps) {
-  const { quizId, apiKey } = props;
-  const cioClient = useCioClient({ apiKey }) as any;
+  const { quizId, apiKey, cioJsClient } = props;
+  const cioClient = useCioClient({ apiKey, cioJsClient }) as CioClientOptions;
   const [state, dispatch] = useReducer(reducer, initialState);
   const [questionResponse, setQuestionResponse] = useState<NextQuestionResponse>();
   const [resultsResponse, setResultsResponse] = useState<any>();
