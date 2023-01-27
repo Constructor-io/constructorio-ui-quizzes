@@ -110,19 +110,23 @@ export default function CioQuiz(props: IQuizProps) {
 
   if (showResults && requestState !== RequestStates.Loading) {
     return (
-      <QuizContext.Provider value={contextValue}>
-        <ResultContainer />
-      </QuizContext.Provider>
+      <div className='cio-quiz'>
+        <QuizContext.Provider value={contextValue}>
+          <ResultContainer />
+        </QuizContext.Provider>
+      </div>
     );
   }
 
   if (requestState !== RequestStates.Loading) {
     return (
-      <QuizContext.Provider value={contextValue}>
-        {isOpenQuestion && <OpenTextQuestion key={questionResponse?.next_question.id} />}
-        {isCoverQuestion && <CoverTypeQuestion key={questionResponse?.next_question.id} />}
-        {isSelectQuestion && <SelectTypeQuestion key={questionResponse?.next_question.id} />}
-      </QuizContext.Provider>
+      <div className='cio-quiz'>
+        <QuizContext.Provider value={contextValue}>
+          {isOpenQuestion && <OpenTextQuestion key={questionResponse?.next_question.id} />}
+          {isCoverQuestion && <CoverTypeQuestion key={questionResponse?.next_question.id} />}
+          {isSelectQuestion && <SelectTypeQuestion key={questionResponse?.next_question.id} />}
+        </QuizContext.Provider>
+      </div>
     );
   }
 

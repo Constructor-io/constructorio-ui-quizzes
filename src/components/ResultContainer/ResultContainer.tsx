@@ -27,7 +27,7 @@ export default function ResultContainer(props: ResultContainerProps) {
   if (resultsResponse) {
     return (
       <div className='cio-result-container'>
-        <div className='cio-result-container-text' />
+        <h1 className='cio-result-container-text'>Here is your results</h1>
         <ResultHeroCard
           resultRequest={resultsResponse?.request}
           heroItem={resultsResponse?.response?.results?.[0]}

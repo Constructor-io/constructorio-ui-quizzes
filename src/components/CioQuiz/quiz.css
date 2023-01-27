@@ -1,1 +1,27 @@
 /* Default styles */
+.cio-quiz,
+.cio-quiz * {
+  box-sizing: border-box;
+  font-family: "Lato",sans-serif;
+}
+
+.cio-quiz {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100vw;
+  background-color: rgb(251 244 238);
+  font-size: 20px;
+}
+
+@media screen and (max-width: 1200px) {
+  .cio-quiz {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .cio-quiz {
+    font-size: 16px;
+  }
+}

@@ -1,12 +1,19 @@
 .cio-hero-card {
   display: flex;
   flex-direction: row;
-  margin: 18px;
+  margin: 1.125rem;
+  width: 100%;
+  margin-bottom: 4rem;
+}
+
+.cio-hero-card-image {
+  width: 50%;
 }
 
 .cio-hero-card-contents {
   display: flex;
   flex-direction: column;
+  margin-left: 1.25rem;
 }
 
 .cio-hero-cta-btn {
@@ -17,11 +24,28 @@
   list-style-type: none;
   display: flex;
   flex-direction: row;
-  margin: 5px 0;
+  margin: .313rem 0;
 }
 
 .cio-hero-card-facet-pill {
   border: solid 1px black;
   margin-right: 1em;
   padding: 2px 4px;
+}
+
+@media screen and (max-width: 600px) {
+
+  .cio-hero-card {
+    flex-direction: column;
+    margin-bottom: 4rem;
+  }
+  
+  .cio-hero-card-image {
+    width: 100%;
+    margin-bottom: 1.25rem;
+  }
+
+  .cio-hero-card-contents {
+    margin: 0;
+  }
 }
