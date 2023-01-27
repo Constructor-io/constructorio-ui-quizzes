@@ -21,11 +21,11 @@ export default function CioQuiz(props: IQuizProps) {
   const { quizId, apiKey } = props;
   const cioClient = useCioClient({ apiKey }) as any;
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [requestState, setRequestState] = useState(RequestStates.Stale);
   const [questionResponse, setQuestionResponse] = useState<NextQuestionResponse>();
   const [resultsResponse, setResultsResponse] = useState<any>();
   const [showResults, setShowResults] = useState<boolean>(false);
   const questionTypes = getQuestionTypes(questionResponse?.next_question?.type);
-  const [requestState, setRequestState] = useState(RequestStates.Stale);
 
   const quizNextHandler = useCallback(
     (action?: ActionAnswerQuestion) => {
@@ -40,31 +40,22 @@ export default function CioQuiz(props: IQuizProps) {
     [dispatch, setShowResults, questionResponse]
   );
 
-  const contextValue = useMemo(
-    () => ({
-      dispatch,
-      questionResponse,
-      state,
-      resultsResponse,
-      setShowResults,
-      quizNextHandler,
-      quizBackHandler: () => {
-        if (dispatch) {
-          dispatch({ type: QuestionTypes.Back });
-        }
-      },
-      requestState
-    }),
-    [
-      state,
-      dispatch,
-      questionResponse,
-      resultsResponse,
-      setShowResults,
-      requestState,
-      quizNextHandler
-    ]
-  );
+  const quizBackHandler = useCallback(() => {
+    if (dispatch) {
+      dispatch({ type: QuestionTypes.Back });
+    }
+  }, [dispatch]);
+
+  const contextValue = {
+    dispatch,
+    questionResponse,
+    state,
+    resultsResponse,
+    setShowResults,
+    quizNextHandler,
+    quizBackHandler,
+    requestState
+  };
 
   useEffect(() => {
     (async () => {

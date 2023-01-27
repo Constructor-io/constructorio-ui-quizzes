@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { RequestStates } from '../../constants';
 import { NextQuestionResponse } from '../../types';
 import { ActionAnswerQuestion } from './actions';
