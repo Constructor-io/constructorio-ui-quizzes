@@ -9,6 +9,7 @@ import { ActionAnswerQuestion, QuestionTypes } from './actions';
 import { NextQuestionResponse } from '../../types';
 import ResultContainer from '../ResultContainer/ResultContainer';
 import './quiz.css';
+import { RequestStates } from '../../constants';
 
 export interface IQuizProps {
   quizId: string;
@@ -22,6 +23,7 @@ export default function CioQuiz(props: IQuizProps) {
   const [questionResponse, setQuestionResponse] = useState<NextQuestionResponse>();
   const [resultsResponse, setResultsResponse] = useState<any>();
   const [showResults, setShowResults] = useState<boolean>(false);
+  const [requestState, setRequestState] = useState(RequestStates.Stale);
   const questionType = questionResponse?.next_question?.type;
   const isOpenQuestion = questionType === QuestionTypes.OpenText;
   const isCoverQuestion = questionType === QuestionTypes.Cover;
@@ -49,9 +51,23 @@ export default function CioQuiz(props: IQuizProps) {
       state,
       resultsResponse,
       setShowResults,
-      quizNextHandler
+      quizNextHandler,
+      onBackClick: () => {
+        if (dispatch) {
+          dispatch({ type: QuestionTypes.Back });
+        }
+      },
+      requestState
     }),
-    [state, dispatch, questionResponse, resultsResponse, setShowResults, quizNextHandler]
+    [
+      state,
+      dispatch,
+      questionResponse,
+      resultsResponse,
+      setShowResults,
+      requestState,
+      quizNextHandler
+    ]
   );
 
   /* const quizBackHandler = (popAnswers: boolean) => {
@@ -61,6 +77,8 @@ export default function CioQuiz(props: IQuizProps) {
   }; */
 
   useEffect(() => {
+    setRequestState(RequestStates.Loading);
+
     if (showResults) {
       setResultsResponse(undefined); // set undefined in cases where user redoes quiz, gets no results.
 
@@ -76,18 +94,21 @@ export default function CioQuiz(props: IQuizProps) {
         .then((response: Response) => response.json())
         .then((e: any) => {
           setResultsResponse(e);
+          setRequestState(RequestStates.Success);
         })
         .catch(() => {
           setResultsResponse(undefined);
+          setRequestState(RequestStates.Error);
         });
-    } else if (!questionResponse?.is_last_question) {
-      cioClient?.quizzes
-        .getQuizNextQuestion(quizId, { answers: state.answers })
-        .then((e: any) => setQuestionResponse(e));
+    } else {
+      cioClient?.quizzes.getQuizNextQuestion(quizId, { answers: state.answers }).then((e: any) => {
+        setQuestionResponse(e);
+        setRequestState(RequestStates.Success);
+      });
     }
   }, [cioClient, state, showResults, quizId, questionResponse?.is_last_question]);
 
-  if (showResults) {
+  if (showResults && requestState !== RequestStates.Loading) {
     return (
       <QuizContext.Provider value={contextValue}>
         <ResultContainer />
@@ -95,11 +116,15 @@ export default function CioQuiz(props: IQuizProps) {
     );
   }
 
-  return (
-    <QuizContext.Provider value={contextValue}>
-      {isOpenQuestion && <OpenTextQuestion key={questionResponse?.next_question.id} />}
-      {isCoverQuestion && <CoverTypeQuestion key={questionResponse?.next_question.id} />}
-      {isSelectQuestion && <SelectTypeQuestion key={questionResponse?.next_question.id} />}
-    </QuizContext.Provider>
-  );
+  if (requestState !== RequestStates.Loading) {
+    return (
+      <QuizContext.Provider value={contextValue}>
+        {isOpenQuestion && <OpenTextQuestion key={questionResponse?.next_question.id} />}
+        {isCoverQuestion && <CoverTypeQuestion key={questionResponse?.next_question.id} />}
+        {isSelectQuestion && <SelectTypeQuestion key={questionResponse?.next_question.id} />}
+      </QuizContext.Provider>
+    );
+  }
+
+  return null;
 }

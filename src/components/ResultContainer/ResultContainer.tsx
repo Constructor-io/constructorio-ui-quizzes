@@ -1,4 +1,6 @@
 import { useContext } from 'react';
+import CTAButton from '../CTAButton/CTAButton';
+import { QuestionTypes } from '../CioQuiz/actions';
 import QuizContext from '../CioQuiz/context';
 import ResultCard from '../ResultCard/ResultCard';
 import ResultHeroCard from '../ResultHeroCard/ResultHeroCard';
@@ -9,8 +11,18 @@ interface ResultContainerProps {
 }
 
 export default function ResultContainer(props: ResultContainerProps) {
-  const { resultsResponse } = useContext(QuizContext);
   const { numResults = 6 } = props;
+  const { resultsResponse, setShowResults } = useContext(QuizContext);
+  const { dispatch } = useContext(QuizContext);
+
+  const onNextClick = () => {
+    if (dispatch && resultsResponse && setShowResults) {
+      dispatch({
+        type: QuestionTypes.Reset
+      });
+      setShowResults(false);
+    }
+  };
 
   if (resultsResponse) {
     return (
@@ -25,6 +37,7 @@ export default function ResultContainer(props: ResultContainerProps) {
             <ResultCard result={result} key={result?.data?.id} />
           ))}
         </div>
+        <CTAButton ctaText='Reset' onClick={onNextClick} />
       </div>
     );
   }
