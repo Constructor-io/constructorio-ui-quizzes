@@ -28,3 +28,10 @@ export const cioJsClientDescription = `If you are already using an instance of t
 // from .storybook/custom-styles-story.css
 // TODO: Fill this out after we figure out how we want to go about styles
 export const customStylesDescription = ``;
+
+export enum RequestStates {
+  Stale,
+  Loading,
+  Success,
+  Error
+}
