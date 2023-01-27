@@ -1,24 +1,31 @@
 import {
   ActionAnswerQuestion,
-  OpenTextQuestionState,
   QuestionTypes,
-  SelectQuestionState
+  OpenTextQuestionPayload,
+  SelectQuestionPayload,
+  ActionAnswerInputQuestion
 } from './actions';
 
 export type Answers = string[][];
 export type QuizReducerState = {
   answers: Answers;
-  openTextInputs: OpenTextQuestionState;
-  singleSelectInputs: SelectQuestionState;
-  multipleSelectInputs: SelectQuestionState;
+  answerInputs: {};
+};
+export type AnswerInputState = {
+  [key: string]: OpenTextQuestionPayload | SelectQuestionPayload;
 };
 
 export const initialState: QuizReducerState = {
   answers: [],
-  openTextInputs: {},
-  singleSelectInputs: {},
-  multipleSelectInputs: {}
+  answerInputs: {}
 };
+
+function answerInputReducer(state: AnswerInputState, action: ActionAnswerInputQuestion) {
+  return {
+    ...state,
+    [String(action.payload!.questionId)]: action.payload!.input
+  };
+}
 
 export default function reducer(state: QuizReducerState, action: ActionAnswerQuestion) {
   switch (action.type) {
@@ -26,10 +33,7 @@ export default function reducer(state: QuizReducerState, action: ActionAnswerQue
       return {
         ...state,
         answers: [...state.answers, ['true']],
-        openTextInputs: {
-          ...state.openTextInputs,
-          ...{ [String(action.payload!.questionId)]: action.payload!.input }
-        }
+        answerInputs: answerInputReducer(state.answerInputs, action)
       };
     case QuestionTypes.Cover:
       return {
@@ -40,24 +44,18 @@ export default function reducer(state: QuizReducerState, action: ActionAnswerQue
       return {
         ...state,
         answers: [...state.answers, action.payload?.input!],
-        singleSelectInputs: {
-          ...state.singleSelectInputs,
-          ...{ [String(action.payload!.questionId)]: action.payload!.input }
-        }
+        answerInputs: answerInputReducer(state.answerInputs, action)
       };
     case QuestionTypes.MultipleSelect:
       return {
         ...state,
         answers: [...state.answers, action.payload?.input!],
-        multipleSelectInputs: {
-          ...state.multipleSelectInputs,
-          ...{ [String(action.payload!.questionId)]: action.payload!.input }
-        }
+        answerInputs: answerInputReducer(state.answerInputs, action)
       };
     case QuestionTypes.Back:
       return {
         ...state,
-        answers: action.payload ? [...state.answers.slice(0, -1)] : [...state.answers]
+        answers: [...state.answers.slice(0, -1)]
       };
     case QuestionTypes.Reset:
       return {

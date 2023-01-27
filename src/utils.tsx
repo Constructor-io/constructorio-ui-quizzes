@@ -1,5 +1,5 @@
-import { QuestionTypes } from './components/Quiz/actions';
-import { Answers } from './components/Quiz/reducer';
+import { QuestionTypes } from './components/CioQuiz/actions';
+import { Answers } from './components/CioQuiz/reducer';
 import { QuestionImages } from './types';
 
 // eslint-disable-next-line import/prefer-default-export

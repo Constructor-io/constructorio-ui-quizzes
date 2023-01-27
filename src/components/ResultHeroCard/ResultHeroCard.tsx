@@ -29,7 +29,7 @@ export default function ResultHeroCard(props: ResultHeroCardProps) {
 
   return (
     <div className='cio-hero-card'>
-      <img src={heroItem?.data?.image_url} alt='product' />
+      <img className='cio-hero-card-image' src={heroItem?.data?.image_url} alt='product' />
       <div className='cio-hero-card-contents'>
         <div className='cio-hero-card-title'>Especially Curated For You!</div>
         {/*

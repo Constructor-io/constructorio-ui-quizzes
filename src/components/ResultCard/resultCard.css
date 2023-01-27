@@ -1,23 +1,32 @@
 .cio-result-card {
-  /* TODO: Remove the important, make sure nothing breaks */
-  background-color: transparent !important;
-  max-width: 300px !important;
-  flex: 1 0 calc(33% - 36px);
+  background-color: transparent;
   height: auto;
-  min-width: 280px;
-  margin: 18px;
   box-sizing: border-box;
   text-decoration: none;
+  margin: 0;
+  flex-basis: 29.9%;
+  margin-bottom: 1rem;
 }
 
 .cio-result-card-text {
   align-items: flex-start;
   justify-content: space-between;
   box-sizing: border-box;
-  padding: 0 6px;
+  padding: 0 .735rem;
   width: 100%;
-  margin-bottom: 16px;
-  margin-top: 16px;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
   display: flex;
   flex-direction: row;
+}
+
+.cio-result-card-image img {
+  width: 100%;
+}
+
+@media screen and (max-width: 600px) {
+  .cio-result-card { 
+    flex-basis: 100%;
+    margin-bottom: 3rem;
+  }
 }

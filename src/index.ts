@@ -1,3 +1,3 @@
-import Quiz from './components/Quiz';
+import CioQuiz from './components/CioQuiz';
 
-export default Quiz;
+export default CioQuiz;
