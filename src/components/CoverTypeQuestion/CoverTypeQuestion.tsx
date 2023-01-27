@@ -1,26 +1,22 @@
 import { useContext } from 'react';
 import QuestionTitle from '../QuestionTitle/QuestionTitle';
-import QuizContext from '../Quiz/context';
+import QuizContext from '../CioQuiz/context';
 import QuestionDescription from '../QuestionDescription/QuestionDescription';
 import CTAButton from '../CTAButton/CTAButton';
 import { renderImages } from '../../utils';
-import { QuestionTypes } from '../Quiz/actions';
+import { QuestionTypes } from '../CioQuiz/actions';
 import './coverTypeQuestion.css';
 
 export default function CoverTypeQuestion() {
-  const { dispatch, questionResponse, setShowResults } = useContext(QuizContext);
+  const { questionResponse, state, onBackClick, quizNextHandler } = useContext(QuizContext);
   let question;
   if (questionResponse) {
     question = questionResponse.next_question;
   }
 
   const onNextClick = () => {
-    if (dispatch) {
-      dispatch({ type: QuestionTypes.Cover });
-
-      if (questionResponse?.is_last_question) {
-        setShowResults!(true);
-      }
+    if (quizNextHandler) {
+      quizNextHandler({ type: QuestionTypes.Cover });
     }
   };
 
@@ -31,6 +27,9 @@ export default function CoverTypeQuestion() {
           <QuestionTitle title={question?.title} />
           <QuestionDescription description={question.description} />
           <CTAButton ctaText={question?.cta_text} onClick={onNextClick} />
+          {state?.answers && state?.answers?.length > 0 && (
+            <CTAButton ctaText='Back' onClick={onBackClick} />
+          )}
         </div>
         <div className='cio-cover-question-img'>
           {question?.images ? renderImages(question.images) : ''}

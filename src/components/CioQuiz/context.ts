@@ -1,14 +1,18 @@
 import React from 'react';
+import { RequestStates } from '../../constants';
 import { NextQuestionResponse } from '../../types';
 import { ActionAnswerQuestion } from './actions';
 import { QuizReducerState } from './reducer';
 
 interface QuizContextValue {
-  questionResponse: NextQuestionResponse;
   state: QuizReducerState;
-  dispatch: React.Dispatch<ActionAnswerQuestion>;
+  requestState: RequestStates;
+  questionResponse: NextQuestionResponse;
   resultsResponse: any;
+  quizNextHandler: (action?: ActionAnswerQuestion) => void;
+  onBackClick: () => void;
   setShowResults: (showResults: boolean) => void;
+  dispatch: React.Dispatch<ActionAnswerQuestion>;
 }
 
 export default React.createContext<Partial<QuizContextValue>>({});

@@ -1,5 +1,7 @@
 import { useContext } from 'react';
-import QuizContext from '../Quiz/context';
+import CTAButton from '../CTAButton/CTAButton';
+import { QuestionTypes } from '../CioQuiz/actions';
+import QuizContext from '../CioQuiz/context';
 import ResultCard from '../ResultCard/ResultCard';
 import ResultHeroCard from '../ResultHeroCard/ResultHeroCard';
 import './resultContainer.css';
@@ -9,13 +11,23 @@ interface ResultContainerProps {
 }
 
 export default function ResultContainer(props: ResultContainerProps) {
-  const { resultsResponse } = useContext(QuizContext);
   const { numResults = 6 } = props;
+  const { resultsResponse, setShowResults } = useContext(QuizContext);
+  const { dispatch } = useContext(QuizContext);
+
+  const onNextClick = () => {
+    if (dispatch && resultsResponse && setShowResults) {
+      dispatch({
+        type: QuestionTypes.Reset
+      });
+      setShowResults(false);
+    }
+  };
 
   if (resultsResponse) {
     return (
       <div className='cio-result-container'>
-        <div className='cio-result-container-text' />
+        <h1 className='cio-result-container-text'>Here is your results</h1>
         <ResultHeroCard
           resultRequest={resultsResponse?.request}
           heroItem={resultsResponse?.response?.results?.[0]}
@@ -25,6 +37,7 @@ export default function ResultContainer(props: ResultContainerProps) {
             <ResultCard result={result} key={result?.data?.id} />
           ))}
         </div>
+        <CTAButton ctaText='Reset' onClick={onNextClick} />
       </div>
     );
   }

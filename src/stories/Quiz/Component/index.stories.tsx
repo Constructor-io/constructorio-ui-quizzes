@@ -1,6 +1,6 @@
 import { within, userEvent, screen } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
-import Quiz from '../../../components/Quiz';
+import CioQuiz from '../../../components/CioQuiz';
 import { argTypes } from '../argTypes';
 import { stringify } from '../../../utils';
 import { ComponentTemplate, addComponentStoryDescription } from '.';
@@ -8,7 +8,7 @@ import { basicDescription, componentDescription, apiKey, quizId } from '../../..
 
 export default {
   title: 'Quiz',
-  component: Quiz,
+  component: CioQuiz,
   argTypes,
   parameters: {
     docs: {

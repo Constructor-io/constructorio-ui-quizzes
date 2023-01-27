@@ -2,10 +2,11 @@
   margin: 1rem auto;
   background: hsl(0, 0%, 25%);
   border: 0;
-  padding: 10px;
+  padding: .625rem;
   color: white;
   width: 100%;
   cursor: pointer;
+  max-width: 18rem;
 }
 
 .cio-question-cta-button.disabled {
