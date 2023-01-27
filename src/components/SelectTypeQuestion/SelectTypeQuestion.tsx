@@ -2,10 +2,10 @@ import { useEffect, useState, useContext, KeyboardEvent } from 'react';
 import CTAButton from '../CTAButton/CTAButton';
 import QuestionTitle from '../QuestionTitle/QuestionTitle';
 import QuestionDescription from '../QuestionDescription/QuestionDescription';
-import QuizContext from '../Quiz/context';
+import QuizContext from '../CioQuiz/context';
 import { QuestionOption } from '../../types';
 import { renderImages } from '../../utils';
-import { QuestionTypes } from '../Quiz/actions';
+import { QuestionTypes } from '../CioQuiz/actions';
 import './selectTypeQuestion.css';
 
 interface Selected {
@@ -13,8 +13,7 @@ interface Selected {
 }
 
 function SelectTypeQuestion() {
-  const { dispatch, questionResponse, state, setShowResults, onBackClick } =
-    useContext(QuizContext);
+  const { questionResponse, state, quizNextHandler, onBackClick } = useContext(QuizContext);
   let question;
   let type: `${QuestionTypes}`;
 
@@ -27,20 +26,8 @@ function SelectTypeQuestion() {
   const isDisabled = Object.keys(selected).length === 0;
 
   useEffect(() => {
-    if (questionResponse && questionResponse.type) {
-      let answers;
-
-      if (
-        questionResponse.type === QuestionTypes.SingleSelect &&
-        state?.singleSelectInputs?.[questionResponse?.next_question.id]
-      ) {
-        answers = state?.singleSelectInputs?.[questionResponse?.next_question.id];
-      } else if (
-        questionResponse.type === QuestionTypes.MultipleSelect &&
-        state?.multipleSelectInputs?.[questionResponse?.next_question.id]
-      ) {
-        answers = state?.multipleSelectInputs?.[questionResponse?.next_question.id];
-      }
+    if (questionResponse?.next_question?.type) {
+      const answers = state?.answerInputs?.[questionResponse.next_question.id] || [];
       const prevSelected: Selected = {};
 
       answers?.forEach((answer) => {
@@ -49,7 +36,7 @@ function SelectTypeQuestion() {
 
       setSelected(prevSelected);
     }
-  }, [questionResponse, state?.multipleSelectInputs, state?.singleSelectInputs]);
+  }, [questionResponse, state?.answerInputs]);
 
   const toggleIdSelected = (id: number) => {
     if (type === QuestionTypes.SingleSelect) {
@@ -58,6 +45,7 @@ function SelectTypeQuestion() {
       setSelected({ ...selected, [id]: !selected[id] });
     }
   };
+
   const onOptionKeyDown = (event: KeyboardEvent<HTMLDivElement>, id: number) => {
     if (event?.key === ' ' || event?.key === 'Enter') {
       toggleIdSelected(id);
@@ -65,32 +53,19 @@ function SelectTypeQuestion() {
   };
 
   const onNextClick = () => {
-    if (dispatch && !isDisabled && questionResponse) {
-      if (type === QuestionTypes.SingleSelect) {
-        dispatch(
-          {
-            type: QuestionTypes.SingleSelect,
-            payload: {
-              questionId: questionResponse?.next_question.id,
-              input: Object.keys(selected).filter((key) => selected[Number(key)])
-            }
-          }!
-        );
-      } else {
-        dispatch(
-          {
-            type: QuestionTypes.MultipleSelect,
-            payload: {
-              questionId: questionResponse?.next_question.id,
-              input: Object.keys(selected).filter((key) => selected[Number(key)])
-            }
-          }!
-        );
-      }
+    if (quizNextHandler && !isDisabled && questionResponse) {
+      const questionType =
+        type === QuestionTypes.SingleSelect
+          ? QuestionTypes.SingleSelect
+          : QuestionTypes.MultipleSelect;
 
-      if (questionResponse.is_last_question) {
-        setShowResults!(true);
-      }
+      quizNextHandler({
+        type: questionType,
+        payload: {
+          questionId: questionResponse?.next_question.id,
+          input: Object.keys(selected).filter((key) => selected[Number(key)])
+        }
+      });
     }
   };
 

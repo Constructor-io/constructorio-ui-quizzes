@@ -3,8 +3,8 @@ import QuestionTitle from '../QuestionTitle/QuestionTitle';
 import QuestionDescription from '../QuestionDescription/QuestionDescription';
 import CTAButton from '../CTAButton/CTAButton';
 import { renderImages } from '../../utils';
-import QuizContext from '../Quiz/context';
-import { QuestionTypes } from '../Quiz/actions';
+import QuizContext from '../CioQuiz/context';
+import { QuestionTypes } from '../CioQuiz/actions';
 import './openTextTypeQuestion.css';
 
 interface OpenTextQuestionProps {
@@ -15,9 +15,10 @@ interface OpenTextQuestionProps {
 function OpenTextQuestion(props: OpenTextQuestionProps) {
   const { initialValue = '', onChangeHandler: userDefinedHandler = null } = props;
   const [openTextInput, setOpenTextInput] = useState(initialValue);
-  const { dispatch, questionResponse, setShowResults, state, onBackClick } =
-    useContext(QuizContext);
+  const { questionResponse, state, onBackClick, quizNextHandler } = useContext(QuizContext);
+
   let question;
+
   if (questionResponse) {
     question = questionResponse.next_question;
   }
@@ -30,18 +31,14 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
   };
 
   const onNextClick = () => {
-    if (dispatch && openTextInput && questionResponse) {
-      dispatch({
+    if (quizNextHandler && openTextInput && questionResponse) {
+      quizNextHandler({
         type: QuestionTypes.OpenText,
         payload: {
           questionId: questionResponse.next_question.id,
           input: openTextInput
         }
       });
-
-      if (questionResponse.is_last_question) {
-        setShowResults!(true);
-      }
     }
   };
 

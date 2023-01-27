@@ -1,27 +1,22 @@
 import { useContext } from 'react';
 import QuestionTitle from '../QuestionTitle/QuestionTitle';
-import QuizContext from '../Quiz/context';
+import QuizContext from '../CioQuiz/context';
 import QuestionDescription from '../QuestionDescription/QuestionDescription';
 import CTAButton from '../CTAButton/CTAButton';
 import { renderImages } from '../../utils';
-import { QuestionTypes } from '../Quiz/actions';
+import { QuestionTypes } from '../CioQuiz/actions';
 import './coverTypeQuestion.css';
 
 export default function CoverTypeQuestion() {
-  const { dispatch, questionResponse, setShowResults, state, onBackClick } =
-    useContext(QuizContext);
+  const { questionResponse, state, onBackClick, quizNextHandler } = useContext(QuizContext);
   let question;
   if (questionResponse) {
     question = questionResponse.next_question;
   }
 
   const onNextClick = () => {
-    if (dispatch) {
-      dispatch({ type: QuestionTypes.Cover });
-
-      if (questionResponse?.is_last_question) {
-        setShowResults!(true);
-      }
+    if (quizNextHandler) {
+      quizNextHandler({ type: QuestionTypes.Cover });
     }
   };
 

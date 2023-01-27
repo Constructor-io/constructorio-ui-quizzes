@@ -5,7 +5,7 @@ import QuizContext from './context';
 import CoverTypeQuestion from '../CoverTypeQuestion/CoverTypeQuestion';
 import SelectTypeQuestion from '../SelectTypeQuestion/SelectTypeQuestion';
 import reducer, { initialState } from './reducer';
-import { QuestionTypes } from './actions';
+import { ActionAnswerQuestion, QuestionTypes } from './actions';
 import { NextQuestionResponse } from '../../types';
 import ResultContainer from '../ResultContainer/ResultContainer';
 import './quiz.css';
@@ -16,7 +16,7 @@ export interface IQuizProps {
   apiKey: string;
 }
 
-export default function Quiz(props: IQuizProps) {
+export default function CioQuiz(props: IQuizProps) {
   const { quizId, apiKey } = props;
   const cioClient = useCioClient({ apiKey }) as any;
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -31,6 +31,19 @@ export default function Quiz(props: IQuizProps) {
   const isMultipleQuestion = questionType === QuestionTypes.MultipleSelect;
   const isSelectQuestion = isSingleQuestion || isMultipleQuestion;
 
+  const quizNextHandler = useCallback(
+    (action?: ActionAnswerQuestion) => {
+      if (action) {
+        dispatch(action);
+      }
+
+      if (questionResponse?.is_last_question) {
+        setShowResults!(true);
+      }
+    },
+    [dispatch, setShowResults, questionResponse]
+  );
+
   const contextValue = useMemo(
     () => ({
       dispatch,
@@ -38,6 +51,7 @@ export default function Quiz(props: IQuizProps) {
       state,
       resultsResponse,
       setShowResults,
+      quizNextHandler,
       onBackClick: () => {
         if (dispatch) {
           dispatch({ type: QuestionTypes.Back });
@@ -45,7 +59,15 @@ export default function Quiz(props: IQuizProps) {
       },
       requestState
     }),
-    [state, dispatch, questionResponse, resultsResponse, setShowResults, requestState]
+    [
+      state,
+      dispatch,
+      questionResponse,
+      resultsResponse,
+      setShowResults,
+      requestState,
+      quizNextHandler
+    ]
   );
 
   /* const quizBackHandler = (popAnswers: boolean) => {
