@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { SyntheticEvent, useContext, useState } from 'react';
 import QuestionTitle from '../QuestionTitle/QuestionTitle';
 import QuestionDescription from '../QuestionDescription/QuestionDescription';
 import CTAButton from '../CTAButton/CTAButton';
@@ -42,6 +42,15 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
     }
   };
 
+  const onBeforeInputHandler = (e: any) => {
+    const { keyCode } = e?.nativeEvent || {};
+
+    console.log(e);
+    if (keyCode === 13) {
+      onNextClick();
+    }
+  };
+
   if (question) {
     return (
       <div className='cio-open-text-question-container'>
@@ -53,6 +62,7 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
             placeholder={question.input_placeholder}
             defaultValue={initialValue}
             onChange={onChangeHandler}
+            onBeforeInput={onBeforeInputHandler}
           />
           <CTAButton disabled={!openTextInput} ctaText={question.cta_text} onClick={onNextClick} />
           {state?.answers && state?.answers?.length > 0 && (
