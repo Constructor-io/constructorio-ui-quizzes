@@ -42,7 +42,7 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
     }
   };
 
-  const onBeforeInputHandler = (e: any) => {
+  const onKeyDownHandler = (e: any) => {
     const { keyCode } = e?.nativeEvent || {};
 
     if (keyCode === 13) {
@@ -61,7 +61,7 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
             placeholder={question.input_placeholder}
             defaultValue={initialValue}
             onChange={onChangeHandler}
-            onBeforeInput={onBeforeInputHandler}
+            onKeyDown={onKeyDownHandler}
           />
           <CTAButton disabled={!openTextInput} ctaText={question.cta_text} onClick={onNextClick} />
           {state?.answers && state?.answers?.length > 0 && (
