@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import QuestionTitle from '../QuestionTitle/QuestionTitle';
 import QuestionDescription from '../QuestionDescription/QuestionDescription';
 import CTAButton from '../CTAButton/CTAButton';
@@ -45,7 +45,6 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
   const onBeforeInputHandler = (e: any) => {
     const { keyCode } = e?.nativeEvent || {};
 
-    console.log(e);
     if (keyCode === 13) {
       onNextClick();
     }
