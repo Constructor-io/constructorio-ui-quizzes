@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { RequestStates } from '../../constants';
 import { NextQuestionResponse } from '../../types';
 import { ActionAnswerQuestion } from './actions';
@@ -9,9 +9,9 @@ interface QuizContextValue {
   requestState: RequestStates;
   questionResponse: NextQuestionResponse;
   resultsResponse: any;
+  isFirstQuestion: boolean;
   quizNextHandler: (action?: ActionAnswerQuestion) => void;
   quizBackHandler: () => void;
-  setShowResults: (showResults: boolean) => void;
   dispatch: React.Dispatch<ActionAnswerQuestion>;
 }
 

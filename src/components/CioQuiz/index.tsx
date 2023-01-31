@@ -1,16 +1,13 @@
-import { useReducer, useState, useMemo, useEffect, useCallback } from 'react';
-import useCioClient from '../../hooks/useCioClient';
-import OpenTextQuestion from '../OpenTextTypeQuestion/OpenTextTypeQuestion';
+import { useReducer, useState, useEffect, useCallback, useMemo } from 'react';
 import QuizContext from './context';
-import CoverTypeQuestion from '../CoverTypeQuestion/CoverTypeQuestion';
-import SelectTypeQuestion from '../SelectTypeQuestion/SelectTypeQuestion';
 import reducer, { initialState } from './reducer';
 import { ActionAnswerQuestion, QuestionTypes } from './actions';
 import { NextQuestionResponse } from '../../types';
+import QuizQuestions from '../QuizQuestions';
 import ResultContainer from '../ResultContainer/ResultContainer';
-import './quiz.css';
 import { RequestStates } from '../../constants';
-import { getNextQuestion, getQuestionTypes, getQuizResults } from '../../utils';
+import { getCioClient, getNextQuestion, getQuizResults } from '../../utils';
+import './quiz.css';
 
 export interface IQuizProps {
   quizId: string;
@@ -19,25 +16,21 @@ export interface IQuizProps {
 
 export default function CioQuiz(props: IQuizProps) {
   const { quizId, apiKey } = props;
-  const cioClient = useCioClient({ apiKey }) as any;
+  const cioClient = useMemo(() => getCioClient(apiKey), [apiKey]);
   const [state, dispatch] = useReducer(reducer, initialState);
   const [requestState, setRequestState] = useState(RequestStates.Stale);
   const [questionResponse, setQuestionResponse] = useState<NextQuestionResponse>();
   const [resultsResponse, setResultsResponse] = useState<any>();
-  const [showResults, setShowResults] = useState<boolean>(false);
-  const questionTypes = getQuestionTypes(questionResponse?.next_question?.type);
+  const [firstQuestion, setFirstQuestion] = useState<NextQuestionResponse>();
+  const isFirstQuestion = firstQuestion?.next_question.id === questionResponse?.next_question.id;
 
   const quizNextHandler = useCallback(
     (action?: ActionAnswerQuestion) => {
       if (action) {
         dispatch(action);
       }
-
-      if (questionResponse?.is_last_question) {
-        setShowResults!(true);
-      }
     },
-    [dispatch, setShowResults, questionResponse]
+    [dispatch]
   );
 
   const quizBackHandler = useCallback(() => {
@@ -51,16 +44,16 @@ export default function CioQuiz(props: IQuizProps) {
     questionResponse,
     state,
     resultsResponse,
-    setShowResults,
+    isFirstQuestion,
     quizNextHandler,
-    quizBackHandler,
-    requestState
+    quizBackHandler
   };
 
   useEffect(() => {
     (async () => {
-      if (showResults) {
-        setResultsResponse(undefined); // set undefined in cases where user redoes quiz, gets no results.
+      setResultsResponse(undefined);
+      setQuestionResponse(undefined);
+      if (state.isLastAnswer) {
         try {
           const quizResults = await getQuizResults(cioClient, quizId, state.answers);
           setResultsResponse(quizResults);
@@ -69,7 +62,7 @@ export default function CioQuiz(props: IQuizProps) {
           setResultsResponse(undefined);
           setRequestState(RequestStates.Error);
         }
-      } else if (!questionResponse?.is_last_question) {
+      } else {
         try {
           const questionResult = await getNextQuestion(cioClient, quizId, state.answers);
           setQuestionResponse(questionResult);
@@ -79,31 +72,23 @@ export default function CioQuiz(props: IQuizProps) {
         }
       }
     })();
-  }, [cioClient, state, showResults, quizId, questionResponse?.is_last_question]);
+  }, [cioClient, state, quizId, state.isLastAnswer]);
 
-  if (showResults && requestState !== RequestStates.Loading) {
+  useEffect(() => {
+    if (!firstQuestion) {
+      setFirstQuestion(questionResponse);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [questionResponse]);
+
+  if (requestState === RequestStates.Success) {
     return (
       <div className='cio-quiz'>
         <QuizContext.Provider value={contextValue}>
-          <ResultContainer />
+          {resultsResponse && <ResultContainer />}
+          {questionResponse && <QuizQuestions questionResponse={questionResponse} />}
         </QuizContext.Provider>
       </div>
-    );
-  }
-
-  if (requestState !== RequestStates.Loading) {
-    return (
-      <QuizContext.Provider value={contextValue}>
-        {questionTypes.isOpenQuestion && (
-          <OpenTextQuestion key={questionResponse?.next_question.id} />
-        )}
-        {questionTypes.isCoverQuestion && (
-          <CoverTypeQuestion key={questionResponse?.next_question.id} />
-        )}
-        {questionTypes.isSelectQuestion && (
-          <SelectTypeQuestion key={questionResponse?.next_question.id} />
-        )}
-      </QuizContext.Provider>
     );
   }
 }

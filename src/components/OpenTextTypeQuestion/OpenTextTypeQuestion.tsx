@@ -15,7 +15,8 @@ interface OpenTextQuestionProps {
 function OpenTextQuestion(props: OpenTextQuestionProps) {
   const { initialValue = '', onChangeHandler: userDefinedHandler = null } = props;
   const [openTextInput, setOpenTextInput] = useState(initialValue);
-  const { questionResponse, state, quizBackHandler, quizNextHandler } = useContext(QuizContext);
+  const { questionResponse, quizBackHandler, quizNextHandler, isFirstQuestion } =
+    useContext(QuizContext);
 
   let question;
 
@@ -36,7 +37,8 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
         type: QuestionTypes.OpenText,
         payload: {
           questionId: questionResponse.next_question.id,
-          input: openTextInput
+          input: openTextInput,
+          isLastQuestion: questionResponse.is_last_question
         }
       });
     }
@@ -55,9 +57,7 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
             onChange={onChangeHandler}
           />
           <CTAButton disabled={!openTextInput} ctaText={question.cta_text} onClick={onNextClick} />
-          {state?.answers && state?.answers?.length > 0 && (
-            <CTAButton ctaText='Back' onClick={quizBackHandler} />
-          )}
+          {!isFirstQuestion && <CTAButton ctaText='Back' onClick={quizBackHandler} />}
         </div>
         {question.images ? renderImages(question.images, 'cio-open-text-question-image') : ''}
       </div>

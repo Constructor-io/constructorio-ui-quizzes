@@ -1,3 +1,4 @@
+import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
 import { QuestionTypes } from './components/CioQuiz/actions';
 import { Answers } from './components/CioQuiz/reducer';
 import { QuestionImages } from './types';
@@ -87,4 +88,14 @@ export const getQuestionTypes = (questionType?: `${QuestionTypes}`) => {
     isMultipleQuestion,
     isSelectQuestion
   };
+};
+
+export const getCioClient = (apiKey?: string) => {
+  if (apiKey) {
+    return new ConstructorIOClient({
+      apiKey
+    });
+  }
+
+  return null;
 };
