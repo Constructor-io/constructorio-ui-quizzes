@@ -42,10 +42,10 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
     }
   };
 
-  const onKeyDownHandler = (e: any) => {
-    const { keyCode } = e?.nativeEvent || {};
+  const onKeyDownHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const { key } = e;
 
-    if (keyCode === 13) {
+    if (key === 'Enter') {
       onNextClick();
     }
   };
