@@ -51,13 +51,13 @@ export default function CioQuiz(props: IQuizProps) {
 
   useEffect(() => {
     (async () => {
-      setResultsResponse(undefined);
-      setQuestionResponse(undefined);
+      setRequestState(RequestStates.Loading);
       if (state.isLastAnswer) {
         try {
           const quizResults = await getQuizResults(cioClient, quizId, state.answers);
           setResultsResponse(quizResults);
           setRequestState(RequestStates.Success);
+          setQuestionResponse(undefined);
         } catch (error) {
           setResultsResponse(undefined);
           setRequestState(RequestStates.Error);
@@ -67,6 +67,7 @@ export default function CioQuiz(props: IQuizProps) {
           const questionResult = await getNextQuestion(cioClient, quizId, state.answers);
           setQuestionResponse(questionResult);
           setRequestState(RequestStates.Success);
+          setResultsResponse(undefined);
         } catch (error) {
           setRequestState(RequestStates.Error);
         }
@@ -80,6 +81,10 @@ export default function CioQuiz(props: IQuizProps) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [questionResponse]);
+
+  if (requestState === RequestStates.Loading) {
+    return <div>Loading....</div>;
+  }
 
   if (requestState === RequestStates.Success) {
     return (
