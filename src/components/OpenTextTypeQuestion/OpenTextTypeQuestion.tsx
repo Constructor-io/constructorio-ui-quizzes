@@ -42,6 +42,14 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
     }
   };
 
+  const onKeyDownHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const { key } = e;
+
+    if (key === 'Enter') {
+      onNextClick();
+    }
+  };
+
   if (question) {
     return (
       <div className='cio-open-text-question-container'>
@@ -53,6 +61,7 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
             placeholder={question.input_placeholder}
             defaultValue={initialValue}
             onChange={onChangeHandler}
+            onKeyDown={onKeyDownHandler}
           />
           <CTAButton disabled={!openTextInput} ctaText={question.cta_text} onClick={onNextClick} />
           {state?.answers && state?.answers?.length > 0 && (
