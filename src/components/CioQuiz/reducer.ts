@@ -66,8 +66,7 @@ export default function reducer(state: QuizReducerState, action: ActionAnswerQue
       };
     case QuestionTypes.Reset:
       return {
-        ...initialState,
-        isLastAnswer: false
+        ...initialState
       };
     default:
       return state;

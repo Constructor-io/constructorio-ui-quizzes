@@ -7,6 +7,7 @@ import QuizQuestions from '../QuizQuestions';
 import ResultContainer from '../ResultContainer/ResultContainer';
 import { RequestStates } from '../../constants';
 import { getCioClient, getNextQuestion, getQuizResults } from '../../utils';
+import Spinner from '../Spinner/Spinner';
 import './quiz.css';
 
 export interface IQuizProps {
@@ -83,7 +84,7 @@ export default function CioQuiz(props: IQuizProps) {
   }, [questionResponse]);
 
   if (requestState === RequestStates.Loading) {
-    return <div>Loading....</div>;
+    return <Spinner />;
   }
 
   if (requestState === RequestStates.Success) {
