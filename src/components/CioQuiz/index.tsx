@@ -1,4 +1,4 @@
-import { useReducer, useState, useEffect, useCallback, useMemo } from 'react';
+import { useReducer, useState, useEffect, useCallback } from 'react';
 import QuizContext from './context';
 import reducer, { initialState } from './reducer';
 import { ActionAnswerQuestion, QuestionTypes } from './actions';
@@ -6,9 +6,10 @@ import { NextQuestionResponse } from '../../types';
 import QuizQuestions from '../QuizQuestions';
 import ResultContainer from '../ResultContainer/ResultContainer';
 import { RequestStates } from '../../constants';
-import { getCioClient, getNextQuestion, getQuizResults } from '../../utils';
+import { getNextQuestion, getQuizResults } from '../../utils';
 import Spinner from '../Spinner/Spinner';
 import './quiz.css';
+import useCioClient from '../../hooks/useCioClient';
 
 export interface IQuizProps {
   quizId: string;
@@ -17,7 +18,7 @@ export interface IQuizProps {
 
 export default function CioQuiz(props: IQuizProps) {
   const { quizId, apiKey } = props;
-  const cioClient = useMemo(() => getCioClient(apiKey), [apiKey]);
+  const cioClient = useCioClient(apiKey);
   const [state, dispatch] = useReducer(reducer, initialState);
   const [requestState, setRequestState] = useState(RequestStates.Stale);
   const [questionResponse, setQuestionResponse] = useState<NextQuestionResponse>();
