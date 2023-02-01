@@ -5,7 +5,7 @@ import { ComponentTemplate, addComponentStoryDescription } from '.';
 import { basicDescription, componentDescription, apiKey, quizId } from '../../../constants';
 
 export default {
-  title: 'Quiz',
+  title: 'Quiz/Component',
   component: CioQuiz,
   argTypes,
   parameters: {
