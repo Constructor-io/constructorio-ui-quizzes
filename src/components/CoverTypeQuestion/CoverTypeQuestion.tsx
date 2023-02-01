@@ -8,7 +8,8 @@ import { QuestionTypes } from '../CioQuiz/actions';
 import './coverTypeQuestion.css';
 
 export default function CoverTypeQuestion() {
-  const { questionResponse, quizNextHandler } = useContext(QuizContext);
+  const { questionResponse, quizBackHandler, quizNextHandler, isFirstQuestion } =
+    useContext(QuizContext);
   let question;
   if (questionResponse) {
     question = questionResponse.next_question;
@@ -16,7 +17,12 @@ export default function CoverTypeQuestion() {
 
   const onNextClick = () => {
     if (quizNextHandler) {
-      quizNextHandler({ type: QuestionTypes.Cover });
+      quizNextHandler({
+        type: QuestionTypes.Cover,
+        payload: {
+          isLastQuestion: questionResponse?.is_last_question
+        }
+      });
     }
   };
 
@@ -27,6 +33,7 @@ export default function CoverTypeQuestion() {
           <QuestionTitle title={question?.title} />
           <QuestionDescription description={question.description} />
           <CTAButton ctaText={question?.cta_text} onClick={onNextClick} />
+          {!isFirstQuestion && <CTAButton ctaText='Back' onClick={quizBackHandler} />}
         </div>
         <div className='cio-cover-question-img'>
           {question?.images ? renderImages(question.images) : ''}

@@ -13,7 +13,8 @@ interface Selected {
 }
 
 function SelectTypeQuestion() {
-  const { questionResponse, state, quizNextHandler } = useContext(QuizContext);
+  const { questionResponse, state, quizNextHandler, quizBackHandler, isFirstQuestion } =
+    useContext(QuizContext);
   let question;
   let type: `${QuestionTypes}`;
 
@@ -63,7 +64,8 @@ function SelectTypeQuestion() {
         type: questionType,
         payload: {
           questionId: questionResponse?.next_question.id,
-          input: Object.keys(selected).filter((key) => selected[Number(key)])
+          input: Object.keys(selected).filter((key) => selected[Number(key)]),
+          isLastQuestion: questionResponse.is_last_question
         }
       });
     }
@@ -93,6 +95,7 @@ function SelectTypeQuestion() {
           ))}
         </div>
         <CTAButton disabled={isDisabled} ctaText={question?.cta_text} onClick={onNextClick} />
+        {!isFirstQuestion && <CTAButton ctaText='Back' onClick={quizBackHandler} />}
       </div>
     );
   }

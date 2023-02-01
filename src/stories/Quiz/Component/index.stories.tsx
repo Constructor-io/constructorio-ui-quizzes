@@ -12,7 +12,7 @@ import {
 } from '../../../constants';
 
 export default {
-  title: 'Quiz',
+  title: 'Quiz/Component',
   component: CioQuiz,
   argTypes,
   parameters: {

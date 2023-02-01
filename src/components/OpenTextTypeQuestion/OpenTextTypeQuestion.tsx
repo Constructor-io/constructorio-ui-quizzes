@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import QuestionTitle from '../QuestionTitle/QuestionTitle';
 import QuestionDescription from '../QuestionDescription/QuestionDescription';
 import CTAButton from '../CTAButton/CTAButton';
@@ -14,9 +14,12 @@ interface OpenTextQuestionProps {
 
 function OpenTextQuestion(props: OpenTextQuestionProps) {
   const { initialValue = '', onChangeHandler: userDefinedHandler = null } = props;
-  const [openTextInput, setOpenTextInput] = useState(initialValue);
-  const { questionResponse, quizNextHandler } = useContext(QuizContext);
+  const { questionResponse, quizBackHandler, quizNextHandler, isFirstQuestion, state } =
+    useContext(QuizContext);
+  const [openTextInput, setOpenTextInput] = useState<string>(initialValue);
+
   let question;
+
   if (questionResponse) {
     question = questionResponse.next_question;
   }
@@ -34,11 +37,28 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
         type: QuestionTypes.OpenText,
         payload: {
           questionId: questionResponse.next_question.id,
-          input: openTextInput
+          input: openTextInput,
+          isLastQuestion: questionResponse.is_last_question
         }
       });
     }
   };
+
+  const onKeyDownHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const { key } = e;
+
+    if (key === 'Enter') {
+      onNextClick();
+    }
+  };
+
+  useEffect(() => {
+    if (questionResponse) {
+      const openTextAnswer =
+        state?.answerInputs?.[questionResponse?.next_question.id] || initialValue;
+      setOpenTextInput(openTextAnswer);
+    }
+  }, [questionResponse, state, initialValue]);
 
   if (question) {
     return (
@@ -49,10 +69,12 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
           <input
             className='cio-question-input-text'
             placeholder={question.input_placeholder}
-            defaultValue={initialValue}
+            value={openTextInput}
             onChange={onChangeHandler}
+            onKeyDown={onKeyDownHandler}
           />
           <CTAButton disabled={!openTextInput} ctaText={question.cta_text} onClick={onNextClick} />
+          {!isFirstQuestion && <CTAButton ctaText='Back' onClick={quizBackHandler} />}
         </div>
         {question.images ? renderImages(question.images, 'cio-open-text-question-image') : ''}
       </div>
