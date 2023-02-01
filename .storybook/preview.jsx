@@ -22,4 +22,13 @@ export const parameters = {
   backgrounds: {
     default: 'light',
   },
+  docs: {
+    page: () => (
+      <>
+        <Title />
+        <Description />
+        <Stories includePrimary />
+      </>
+    )
+  }
 };
