@@ -24,7 +24,7 @@
     "compile": "rm -rf lib && tsc && npm run copy-files"
   },
   "peerDependencies": {
-    "@constructor-io/constructorio-client-javascript": "^2.34.1",
+    "@constructor-io/constructorio-client-javascript": "^2.34.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tslib": "^2.4.0"

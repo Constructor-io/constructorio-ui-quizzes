@@ -1,3 +1,4 @@
+import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
 import { useReducer, useState, useEffect, useCallback } from 'react';
 import QuizContext from './context';
 import reducer, { initialState } from './reducer';
@@ -13,12 +14,13 @@ import useCioClient from '../../hooks/useCioClient';
 
 export interface IQuizProps {
   quizId: string;
-  apiKey: string;
+  apiKey?: string;
+  cioJsClient?: ConstructorIOClient;
 }
 
 export default function CioQuiz(props: IQuizProps) {
-  const { quizId, apiKey } = props;
-  const cioClient = useCioClient(apiKey);
+  const { quizId, apiKey, cioJsClient } = props;
+  const cioClient = useCioClient({ apiKey, cioJsClient });
   const [state, dispatch] = useReducer(reducer, initialState);
   const [requestState, setRequestState] = useState(RequestStates.Stale);
   const [questionResponse, setQuestionResponse] = useState<NextQuestionResponse>();
