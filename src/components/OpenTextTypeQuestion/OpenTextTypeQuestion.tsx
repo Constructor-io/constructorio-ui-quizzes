@@ -44,6 +44,14 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
     }
   };
 
+  const onKeyDownHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const { key } = e;
+
+    if (key === 'Enter') {
+      onNextClick();
+    }
+  };
+
   useEffect(() => {
     if (questionResponse) {
       const openTextAnswer =
@@ -63,6 +71,7 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
             placeholder={question.input_placeholder}
             value={openTextInput}
             onChange={onChangeHandler}
+            onKeyDown={onKeyDownHandler}
           />
           <CTAButton disabled={!openTextInput} ctaText={question.cta_text} onClick={onNextClick} />
           {!isFirstQuestion && <CTAButton ctaText='Back' onClick={quizBackHandler} />}
