@@ -1,9 +1,9 @@
+import { BrowseResultData } from '../../types';
 import ResultCtaButton from '../ResultCtaButton/ResultCtaButton';
 import './resultHeroCard.css';
 
 interface ResultHeroCardProps {
-  heroItem: any;
-  resultRequest: any; // eslint-disable-line
+  heroItem: Partial<BrowseResultData>;
 }
 
 // const flattenRequestFilters: any = (result: any, key: any) => {

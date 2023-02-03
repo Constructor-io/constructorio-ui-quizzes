@@ -6,7 +6,7 @@ import CoverTypeQuestion from '../CoverTypeQuestion/CoverTypeQuestion';
 import SelectTypeQuestion from '../SelectTypeQuestion/SelectTypeQuestion';
 import reducer, { initialState } from './reducer';
 import { ActionAnswerQuestion, QuestionTypes } from './actions';
-import { NextQuestionResponse } from '../../types';
+import { NextQuestionResponse, QuizResultsResponse, ResultsResponse } from '../../types';
 import ResultContainer from '../ResultContainer/ResultContainer';
 import './quiz.css';
 import { RequestStates } from '../../constants';
@@ -18,10 +18,10 @@ export interface IQuizProps {
 
 export default function CioQuiz(props: IQuizProps) {
   const { quizId, apiKey } = props;
-  const cioClient = useCioClient({ apiKey }) as any;
+  const cioClient = useCioClient({ apiKey });
   const [state, dispatch] = useReducer(reducer, initialState);
   const [questionResponse, setQuestionResponse] = useState<NextQuestionResponse>();
-  const [resultsResponse, setResultsResponse] = useState<any>();
+  const [resultsResponse, setResultsResponse] = useState<ResultsResponse>();
   const [showResults, setShowResults] = useState<boolean>(false);
   const [requestState, setRequestState] = useState(RequestStates.Stale);
   const questionType = questionResponse?.next_question?.type;
@@ -81,18 +81,17 @@ export default function CioQuiz(props: IQuizProps) {
 
     if (showResults) {
       setResultsResponse(undefined); // set undefined in cases where user redoes quiz, gets no results.
-
       cioClient?.quizzes
         ?.getQuizResults(quizId, { answers: state.answers })
-        .then((response: any) => {
+        .then((response: QuizResultsResponse) => {
           if (response?.result?.results_url) {
             return fetch(response?.result.results_url);
           }
 
           return null;
         })
-        .then((response: Response) => response.json())
-        .then((e: any) => {
+        .then((response: Response | null) => response?.json())
+        .then((e: ResultsResponse) => {
           setResultsResponse(e);
           setRequestState(RequestStates.Success);
         })
@@ -101,10 +100,12 @@ export default function CioQuiz(props: IQuizProps) {
           setRequestState(RequestStates.Error);
         });
     } else {
-      cioClient?.quizzes.getQuizNextQuestion(quizId, { answers: state.answers }).then((e: any) => {
-        setQuestionResponse(e);
-        setRequestState(RequestStates.Success);
-      });
+      cioClient?.quizzes
+        .getQuizNextQuestion(quizId, { answers: state.answers })
+        .then((e: NextQuestionResponse) => {
+          setQuestionResponse(e);
+          setRequestState(RequestStates.Success);
+        });
     }
   }, [cioClient, state, showResults, quizId, questionResponse?.is_last_question]);
 

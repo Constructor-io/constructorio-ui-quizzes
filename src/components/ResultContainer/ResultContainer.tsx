@@ -5,6 +5,7 @@ import QuizContext from '../CioQuiz/context';
 import ResultCard from '../ResultCard/ResultCard';
 import ResultHeroCard from '../ResultHeroCard/ResultHeroCard';
 import './resultContainer.css';
+import { BrowseResultData } from '../../types';
 
 interface ResultContainerProps {
   numResults?: number;
@@ -28,14 +29,17 @@ export default function ResultContainer(props: ResultContainerProps) {
     return (
       <div className='cio-result-container'>
         <h1 className='cio-result-container-text'>Here is your results</h1>
-        <ResultHeroCard
-          resultRequest={resultsResponse?.request}
-          heroItem={resultsResponse?.response?.results?.[0]}
-        />
+        {resultsResponse.response?.results && resultsResponse.response?.results.length > 0 ? (
+          <ResultHeroCard heroItem={resultsResponse?.response?.results?.[0]} />
+        ) : (
+          ''
+        )}
         <div className='cio-results'>
-          {resultsResponse?.response?.results?.slice(1, numResults).map((result: any) => (
-            <ResultCard result={result} key={result?.data?.id} />
-          ))}
+          {resultsResponse?.response?.results
+            ?.slice(1, numResults)
+            .map((result: Partial<BrowseResultData>) => (
+              <ResultCard result={result} key={result.data?.id} />
+            ))}
         </div>
         <CTAButton ctaText='Reset' onClick={onNextClick} />
       </div>

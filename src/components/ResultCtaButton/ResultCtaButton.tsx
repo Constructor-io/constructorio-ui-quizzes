@@ -1,9 +1,10 @@
+import { BrowseResultData } from '../../types';
 import './resultCtaButton.css';
 
 interface ResultCtaButtonProps {
-  items: any;
+  items: Array<Partial<BrowseResultData>>;
   className?: string;
-  callback?: (items: string[]) => any;
+  callback?: (items: Array<Partial<BrowseResultData>>) => any;
 }
 
 export default function ResultCtaButton(props: ResultCtaButtonProps) {
