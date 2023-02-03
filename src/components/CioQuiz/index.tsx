@@ -20,6 +20,10 @@ export interface IQuizProps {
 
 export default function CioQuiz(props: IQuizProps) {
   const { quizId, apiKey, cioJsClient } = props;
+  if (!quizId) {
+    // eslint-disable-next-line no-console
+    console.error('quizId is a required field of type string');
+  }
   const cioClient = useCioClient({ apiKey, cioJsClient });
   const [state, dispatch] = useReducer(reducer, initialState);
   const [requestState, setRequestState] = useState(RequestStates.Stale);
