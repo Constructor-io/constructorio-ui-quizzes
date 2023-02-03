@@ -3,7 +3,7 @@ import { useReducer, useState, useEffect, useCallback } from 'react';
 import QuizContext from './context';
 import reducer, { initialState } from './reducer';
 import { ActionAnswerQuestion, QuestionTypes } from './actions';
-import { NextQuestionResponse, QuizResultsResponse, ResultsResponse } from '../../types';
+import { NextQuestionResponse, ResultsResponse } from '../../types';
 import QuizQuestions from '../QuizQuestions';
 import ResultContainer from '../ResultContainer/ResultContainer';
 import { RequestStates } from '../../constants';
