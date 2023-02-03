@@ -1,25 +1,17 @@
-import { useEffect, useState } from 'react';
+/* eslint-disable no-console */
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
+import { useMemo } from 'react';
+import { getCioClient } from '../utils';
 
-export type CioClientOptions = { apiKey?: string; cioJsClient?: ConstructorIOClient };
-type UseCioClient = (cioClientOptions: CioClientOptions) => ConstructorIOClient;
+export type CioClientConfig = { apiKey?: string; cioJsClient?: ConstructorIOClient };
+type UseCioClient = (cioClientConfig: CioClientConfig) => ConstructorIOClient | null;
 
 const useCioClient: UseCioClient = ({ apiKey, cioJsClient }) => {
-  const [cioClient, setCioClient] = useState(cioJsClient);
+  if (!apiKey && !cioJsClient) {
+    console.error('Either apiKey or cioJsClient is required');
+  }
 
-  useEffect(() => {
-    if (apiKey && !cioJsClient) {
-      const client = new ConstructorIOClient({
-        apiKey
-      });
-
-      setCioClient(client);
-    } else if (cioJsClient) {
-      setCioClient(cioJsClient);
-    }
-  }, [apiKey, cioJsClient]);
-
-  return cioClient!;
+  return useMemo(() => cioJsClient || getCioClient(apiKey), [apiKey, cioJsClient]);
 };
 
 export default useCioClient;

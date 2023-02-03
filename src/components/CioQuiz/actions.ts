@@ -10,11 +10,12 @@ export enum QuestionTypes {
 export interface QuestionAnswer<Value> {
   questionId: number;
   input: Value;
+  isLastQuestion?: boolean;
 }
 
 export type SelectQuestionPayload = QuestionAnswer<string[]>;
 export type OpenTextQuestionPayload = QuestionAnswer<string>;
-export type ShowResultsPayload = string;
+export type CoverQuestionPayload = { isLastQuestion?: boolean };
 
 interface Action<Type, Payload = {}> {
   type: Type;
@@ -28,6 +29,6 @@ export type ActionAnswerInputQuestion =
 
 export type ActionAnswerQuestion =
   | ActionAnswerInputQuestion
-  | Action<QuestionTypes.Cover>
-  | Action<QuestionTypes.Back, boolean>
+  | Action<QuestionTypes.Cover, CoverQuestionPayload>
+  | Action<QuestionTypes.Back>
   | Action<QuestionTypes.Reset>;

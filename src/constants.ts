@@ -1,6 +1,6 @@
 // Autocomplete key index
 // TODO: We need to change this later
-export const apiKey = 'key_jaqzPcUDnK66puIO';
+export const apiKey = 'key_wJSdZSiesX5hiVLt';
 export const quizId = 'coffee-quiz';
 
 /// //////////////////////////////

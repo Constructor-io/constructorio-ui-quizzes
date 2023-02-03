@@ -13,15 +13,14 @@ interface ResultContainerProps {
 
 export default function ResultContainer(props: ResultContainerProps) {
   const { numResults = 6 } = props;
-  const { resultsResponse, setShowResults } = useContext(QuizContext);
+  const { resultsResponse } = useContext(QuizContext);
   const { dispatch } = useContext(QuizContext);
 
-  const onNextClick = () => {
-    if (dispatch && resultsResponse && setShowResults) {
+  const onResetClick = () => {
+    if (dispatch && resultsResponse) {
       dispatch({
         type: QuestionTypes.Reset
       });
-      setShowResults(false);
     }
   };
 
@@ -41,7 +40,7 @@ export default function ResultContainer(props: ResultContainerProps) {
               <ResultCard result={result} key={result.data?.id} />
             ))}
         </div>
-        <CTAButton ctaText='Reset' onClick={onNextClick} />
+        <CTAButton ctaText='Reset' onClick={onResetClick} />
       </div>
     );
   }

@@ -9,9 +9,9 @@ interface QuizContextValue {
   requestState: RequestStates;
   questionResponse: NextQuestionResponse;
   resultsResponse: ResultsResponse;
+  isFirstQuestion: boolean;
   quizNextHandler: (action?: ActionAnswerQuestion) => void;
-  onBackClick: () => void;
-  setShowResults: (showResults: boolean) => void;
+  quizBackHandler: () => void;
   dispatch: React.Dispatch<ActionAnswerQuestion>;
 }
 
