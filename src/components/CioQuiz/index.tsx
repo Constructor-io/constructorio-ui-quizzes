@@ -1,5 +1,5 @@
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
-import { useReducer, useState, useEffect, useCallback } from 'react';
+import React, { useReducer, useState, useEffect, useCallback } from 'react';
 import QuizContext from './context';
 import reducer, { initialState } from './reducer';
 import { ActionAnswerQuestion, QuestionTypes } from './actions';

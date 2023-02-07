@@ -1,3 +1,4 @@
+import React from 'react';
 import OpenTextQuestion from '../OpenTextTypeQuestion/OpenTextTypeQuestion';
 import CoverTypeQuestion from '../CoverTypeQuestion/CoverTypeQuestion';
 import SelectTypeQuestion from '../SelectTypeQuestion/SelectTypeQuestion';

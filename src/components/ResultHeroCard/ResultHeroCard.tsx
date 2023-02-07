@@ -1,3 +1,4 @@
+import React from 'react';
 import ResultCtaButton from '../ResultCtaButton/ResultCtaButton';
 import './resultHeroCard.css';
 

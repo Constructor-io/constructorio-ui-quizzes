@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import CTAButton from '../CTAButton/CTAButton';
 import { QuestionTypes } from '../CioQuiz/actions';
 import QuizContext from '../CioQuiz/context';
