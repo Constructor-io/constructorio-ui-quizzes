@@ -18,7 +18,7 @@ export default function ResultContainer(props: ResultContainerProps) {
   const onResetClick = () => {
     if (dispatch && resultsResponse) {
       dispatch({
-        type: QuestionTypes.Reset
+        type: QuestionTypes.Reset,
       });
     }
   };

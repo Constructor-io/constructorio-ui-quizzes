@@ -4,7 +4,7 @@ export enum QuestionTypes {
   SingleSelect = 'single',
   MultipleSelect = 'multiple',
   Back = 'back',
-  Reset = 'reset'
+  Reset = 'reset',
 }
 
 export interface QuestionAnswer<Value> {

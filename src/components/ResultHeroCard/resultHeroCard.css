@@ -24,7 +24,7 @@
   list-style-type: none;
   display: flex;
   flex-direction: row;
-  margin: .313rem 0;
+  margin: 0.313rem 0;
 }
 
 .cio-hero-card-facet-pill {
@@ -34,12 +34,11 @@
 }
 
 @media screen and (max-width: 600px) {
-
   .cio-hero-card {
     flex-direction: column;
     margin-bottom: 4rem;
   }
-  
+
   .cio-hero-card-image {
     width: 100%;
     margin-bottom: 1.25rem;

@@ -20,8 +20,8 @@ export default function CoverTypeQuestion() {
       quizNextHandler({
         type: QuestionTypes.Cover,
         payload: {
-          isLastQuestion: questionResponse?.is_last_question
-        }
+          isLastQuestion: questionResponse?.is_last_question,
+        },
       });
     }
   };

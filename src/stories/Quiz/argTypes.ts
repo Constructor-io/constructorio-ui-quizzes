@@ -5,23 +5,23 @@ export const argTypes = {
     description: 'Your Constructor API key',
     table: {
       type: {
-        summary: 'string'
-      }
+        summary: 'string',
+      },
     },
     control: {
-      type: 'text'
-    }
+      type: 'text',
+    },
   },
   quizId: {
     type: { name: 'string' },
     description: 'ID of the quiz',
     table: {
       type: {
-        summary: 'string'
-      }
+        summary: 'string',
+      },
     },
     control: {
-      type: 'text'
-    }
-  }
+      type: 'text',
+    },
+  },
 };

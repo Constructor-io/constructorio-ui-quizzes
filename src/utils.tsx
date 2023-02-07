@@ -9,7 +9,7 @@ export const renderImages = (images: Partial<QuestionImages>, cssClasses?: strin
     primary_url: primaryUrl,
     primary_alt: primaryAlt,
     secondary_url: secondaryUrl,
-    secondary_alt: secondaryAlt
+    secondary_alt: secondaryAlt,
   } = images;
 
   type ImageFocusEvent = React.MouseEvent<HTMLImageElement> | React.FocusEvent<HTMLImageElement>;
@@ -55,9 +55,9 @@ ${templateCode}
         code,
         language: 'jsx',
         format: true,
-        type: 'code'
-      }
-    }
+        type: 'code',
+      },
+    },
   };
 };
 
@@ -86,14 +86,14 @@ export const getQuestionTypes = (questionType?: `${QuestionTypes}`) => {
     isCoverQuestion,
     isSingleQuestion,
     isMultipleQuestion,
-    isSelectQuestion
+    isSelectQuestion,
   };
 };
 
 export const getCioClient = (apiKey?: string) => {
   if (apiKey) {
     return new ConstructorIOClient({
-      apiKey
+      apiKey,
     });
   }
 

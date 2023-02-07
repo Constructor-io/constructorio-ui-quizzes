@@ -13,9 +13,9 @@ export default {
   argTypes,
   parameters: {
     docs: {
-      page: null
-    }
-  }
+      page: null,
+    },
+  },
 };
 
 export const e2eInteractionTest = ComponentTemplate.bind({});

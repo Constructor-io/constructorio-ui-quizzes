@@ -38,8 +38,8 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
         payload: {
           questionId: questionResponse.next_question.id,
           input: openTextInput,
-          isLastQuestion: questionResponse.is_last_question
-        }
+          isLastQuestion: questionResponse.is_last_question,
+        },
       });
     }
   };

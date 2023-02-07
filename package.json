@@ -11,7 +11,8 @@
   ],
   "types": "lib/types/index.d.ts",
   "scripts": {
-    "lint": "eslint src --ext js,ts,jsx,tsx",
+    "prettier": "npx prettier --write .",
+    "lint": "npm run prettier && eslint src --ext js,ts,jsx,tsx",
     "copy-files": "copyfiles -u 1 src/**/*.css lib/src",
     "prepare": "husky install",
     "dev": "storybook dev -p 6006",

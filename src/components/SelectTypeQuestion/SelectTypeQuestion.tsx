@@ -65,8 +65,8 @@ function SelectTypeQuestion() {
         payload: {
           questionId: questionResponse?.next_question.id,
           input: Object.keys(selected).filter((key) => selected[Number(key)]),
-          isLastQuestion: questionResponse.is_last_question
-        }
+          isLastQuestion: questionResponse.is_last_question,
+        },
       });
     }
   };

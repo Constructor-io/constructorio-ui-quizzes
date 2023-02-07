@@ -54,7 +54,7 @@ export default function CioQuiz(props: IQuizProps) {
     resultsResponse,
     isFirstQuestion,
     quizNextHandler,
-    quizBackHandler
+    quizBackHandler,
   };
 
   useEffect(() => {

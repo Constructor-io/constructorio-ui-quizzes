@@ -23,12 +23,14 @@ export const getComponentStoryParams = (storyParams) =>
 
 export const addComponentStoryDescription = (story, code, description = '') => {
   story.parameters = getComponentStoryParams(code); // eslint-disable-line
-  story.parameters.docs.description = { // eslint-disable-line
+  // eslint-disable-next-line no-param-reassign
+  story.parameters.docs.description = {
+    // eslint-disable-line
     story: `
 ${description}
 
 \`\`\`jsx
 ${code}
-\`\`\``
+\`\`\``,
   };
 };
