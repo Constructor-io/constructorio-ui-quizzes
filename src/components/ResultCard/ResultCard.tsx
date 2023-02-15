@@ -1,4 +1,4 @@
-import { KeyboardEvent } from 'react';
+import React, { KeyboardEvent } from 'react';
 import ResultCtaButton from '../ResultCtaButton/ResultCtaButton';
 import './resultCard.css';
 

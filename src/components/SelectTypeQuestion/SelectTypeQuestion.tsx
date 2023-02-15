@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext, KeyboardEvent } from 'react';
+import React, { useEffect, useState, useContext, KeyboardEvent } from 'react';
 import CTAButton from '../CTAButton/CTAButton';
 import QuestionTitle from '../QuestionTitle/QuestionTitle';
 import QuestionDescription from '../QuestionDescription/QuestionDescription';
