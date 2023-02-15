@@ -1,5 +1,5 @@
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
-import { useReducer, useState, useEffect, useCallback } from 'react';
+import React, { useReducer, useState, useEffect, useCallback } from 'react';
 import QuizContext from './context';
 import reducer, { initialState } from './reducer';
 import { ActionAnswerQuestion, QuestionTypes } from './actions';
@@ -20,6 +20,10 @@ export interface IQuizProps {
 
 export default function CioQuiz(props: IQuizProps) {
   const { quizId, apiKey, cioJsClient } = props;
+  if (!quizId) {
+    // eslint-disable-next-line no-console
+    console.error('quizId is a required field of type string');
+  }
   const cioClient = useCioClient({ apiKey, cioJsClient });
   const [state, dispatch] = useReducer(reducer, initialState);
   const [requestState, setRequestState] = useState(RequestStates.Stale);

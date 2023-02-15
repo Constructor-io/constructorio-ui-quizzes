@@ -1,3 +1,4 @@
+import React from 'react';
 import './resultCtaButton.css';
 
 interface ResultCtaButtonProps {

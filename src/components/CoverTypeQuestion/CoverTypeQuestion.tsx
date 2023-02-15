@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import QuestionTitle from '../QuestionTitle/QuestionTitle';
 import QuizContext from '../CioQuiz/context';
 import QuestionDescription from '../QuestionDescription/QuestionDescription';
