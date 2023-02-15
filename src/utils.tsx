@@ -1,3 +1,4 @@
+import React from 'react';
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
 import { QuestionTypes } from './components/CioQuiz/actions';
 import { Answers } from './components/CioQuiz/reducer';
