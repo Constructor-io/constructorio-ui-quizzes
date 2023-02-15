@@ -2,15 +2,8 @@
   "version": "0.2",
   "language": "en",
   "allowCompoundWords": false,
-  "dictionaries": [
-    "en_US",
-    "html",
-    "css"
-  ],
-  "ignorePaths": [
-    "lib",
-    "docs"
-  ],
+  "dictionaries": ["en_US", "html", "css"],
+  "ignorePaths": ["lib", "docs"],
   "flagWords": [],
   "words": [
     "key_jaqzPcUDnK66puIO",

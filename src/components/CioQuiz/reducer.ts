@@ -3,7 +3,7 @@ import {
   QuestionTypes,
   OpenTextQuestionPayload,
   SelectQuestionPayload,
-  ActionAnswerInputQuestion
+  ActionAnswerInputQuestion,
 } from './actions';
 
 export type Answers = string[][];
@@ -19,13 +19,13 @@ export type AnswerInputState = {
 export const initialState: QuizReducerState = {
   answers: [],
   answerInputs: {},
-  isLastAnswer: false
+  isLastAnswer: false,
 };
 
 function answerInputReducer(state: AnswerInputState, action: ActionAnswerInputQuestion) {
   return {
     ...state,
-    [String(action.payload!.questionId)]: action.payload!.input
+    [String(action.payload!.questionId)]: action.payload!.input,
   };
 }
 
@@ -36,37 +36,37 @@ export default function reducer(state: QuizReducerState, action: ActionAnswerQue
         ...state,
         answers: [...state.answers, ['true']],
         answerInputs: answerInputReducer(state.answerInputs, action),
-        isLastAnswer: !!action.payload?.isLastQuestion
+        isLastAnswer: !!action.payload?.isLastQuestion,
       };
     case QuestionTypes.Cover:
       return {
         ...state,
         answers: [...state.answers, ['seen']],
-        isLastAnswer: !!action.payload?.isLastQuestion
+        isLastAnswer: !!action.payload?.isLastQuestion,
       };
     case QuestionTypes.SingleSelect:
       return {
         ...state,
         answers: [...state.answers, action.payload?.input!],
         answerInputs: answerInputReducer(state.answerInputs, action),
-        isLastAnswer: !!action.payload?.isLastQuestion
+        isLastAnswer: !!action.payload?.isLastQuestion,
       };
     case QuestionTypes.MultipleSelect:
       return {
         ...state,
         answers: [...state.answers, action.payload?.input!],
         answerInputs: answerInputReducer(state.answerInputs, action),
-        isLastAnswer: !!action.payload?.isLastQuestion
+        isLastAnswer: !!action.payload?.isLastQuestion,
       };
     case QuestionTypes.Back:
       return {
         ...state,
         answers: [...state.answers.slice(0, -1)],
-        isLastAnswer: false
+        isLastAnswer: false,
       };
     case QuestionTypes.Reset:
       return {
-        ...initialState
+        ...initialState,
       };
     default:
       return state;

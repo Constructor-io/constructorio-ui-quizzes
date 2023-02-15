@@ -12,24 +12,13 @@
     "strict": true,
     "module": "esnext",
     "noEmitOnError": true,
-    "lib": [
-      "esnext",
-      "dom",
-      "dom.iterable"
-    ],
+    "lib": ["esnext", "dom", "dom.iterable"],
     "esModuleInterop": false,
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": false,
     "importHelpers": true
   },
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "lib",
-    "storybook-static",
-    ".storybook"
-  ]
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "lib", "storybook-static", ".storybook"]
 }

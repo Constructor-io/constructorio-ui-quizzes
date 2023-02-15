@@ -1,6 +1,6 @@
 # Constructor.io Quizzes UI Library
 
-A UI Library that provides React components to manage the fetching and rendering logic for [Constructor.io's Quizzes](https://constructor.io/products/quizzes/). 
+A UI Library that provides React components to manage the fetching and rendering logic for [Constructor.io's Quizzes](https://constructor.io/products/quizzes/).
 
 ## Introduction
 
@@ -52,4 +52,3 @@ npm run build-storybook   # generate storybook static bundle for deploy with GH 
 
 - [Storybook 7 Introduction](https://storybook.js.org/docs/7.0/react/get-started/introduction)
 - [Typescript Docs](https://www.typescriptlang.org/docs/)
-
