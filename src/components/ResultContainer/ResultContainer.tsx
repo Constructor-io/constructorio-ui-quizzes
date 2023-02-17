@@ -25,20 +25,16 @@ export default function ResultContainer(props: ResultContainerProps) {
   };
 
   if (resultsResponse) {
+    const results = resultsResponse.response?.results;
     return (
       <div className='cio-result-container'>
         <h1 className='cio-result-container-text'>Here is your results</h1>
-        {resultsResponse.response?.results && resultsResponse.response?.results.length > 0 ? (
-          <ResultHeroCard heroItem={resultsResponse?.response?.results?.[0]} />
-        ) : (
-          ''
-        )}
+
+        {results && results.length > 0 ? <ResultHeroCard heroItem={results[0]} /> : ''}
         <div className='cio-results'>
-          {resultsResponse?.response?.results
-            ?.slice(1, numResults)
-            .map((result: Partial<BrowseResultData>) => (
-              <ResultCard result={result} key={result.data?.id} />
-            ))}
+          {resultsResponse?.response?.results?.slice(1, numResults).map((result) => (
+            <ResultCard result={result} key={result.data?.id} />
+          ))}
         </div>
         <CTAButton ctaText='Reset' onClick={onResetClick} />
       </div>

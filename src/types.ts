@@ -4,7 +4,7 @@ export type {
   Question,
   NextQuestionResponse,
   QuizResultsResponse,
-  GetBrowseResultsResponse as ResultsResponse,
+  GetBrowseResultsResponse,
   BrowseResultData,
   BrowseRequestType
 } from '@constructor-io/constructorio-client-javascript/lib/types';
