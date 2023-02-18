@@ -3,7 +3,7 @@ import React, { useReducer, useState, useEffect, useCallback } from 'react';
 import QuizContext from './context';
 import reducer, { initialState } from './reducer';
 import { ActionAnswerQuestion, QuestionTypes } from './actions';
-import { NextQuestionResponse } from '../../types';
+import { NextQuestionResponse, GetBrowseResultsResponse } from '../../types';
 import QuizQuestions from '../QuizQuestions';
 import ResultContainer from '../ResultContainer/ResultContainer';
 import { RequestStates } from '../../constants';
@@ -28,7 +28,7 @@ export default function CioQuiz(props: IQuizProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [requestState, setRequestState] = useState(RequestStates.Stale);
   const [questionResponse, setQuestionResponse] = useState<NextQuestionResponse>();
-  const [resultsResponse, setResultsResponse] = useState<any>();
+  const [resultsResponse, setResultsResponse] = useState<GetBrowseResultsResponse>();
   const [firstQuestion, setFirstQuestion] = useState<NextQuestionResponse>();
   const isFirstQuestion = firstQuestion?.next_question.id === questionResponse?.next_question.id;
 

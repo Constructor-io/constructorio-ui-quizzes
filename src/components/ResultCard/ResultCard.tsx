@@ -1,10 +1,11 @@
 import React, { KeyboardEvent } from 'react';
+import { BrowseResultData } from '../../types';
 import ResultCtaButton from '../ResultCtaButton/ResultCtaButton';
 import './resultCard.css';
 
 interface ResultCardProps {
-  result: any;
-  callback?: (clickedResult: any) => any;
+  result: Partial<BrowseResultData>;
+  callback?: (clickedResult: Partial<BrowseResultData>) => any;
 }
 
 export default function ResultCard(props: ResultCardProps) {
@@ -27,14 +28,14 @@ export default function ResultCard(props: ResultCardProps) {
   const resultCardContent = () => (
     <>
       <div className='cio-result-card-image'>
-        <img src={result?.data?.image_url} alt='product' />
+        <img src={result.data?.image_url} alt='product' />
       </div>
       <div className='cio-result-card-text'>
         <div className='cio-result-card-title'>
-          <span>{result?.value}</span>
+          <span>{result.value}</span>
         </div>
         <div className='cio-result-card-price'>
-          <span>${result?.data?.price}</span>
+          <span>${result.data?.price}</span>
         </div>
       </div>
       <ResultCtaButton items={[result]} />
@@ -56,7 +57,7 @@ export default function ResultCard(props: ResultCardProps) {
 
   return (
     <div className='cio-result-card'>
-      <a className='cio-result-card-anchor' href={result?.data?.url}>
+      <a className='cio-result-card-anchor' href={result.data?.url}>
         {resultCardContent()}
       </a>
     </div>

@@ -33,7 +33,7 @@
     "compile": "npm run verify-node-version && rm -rf lib && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json && npm run copy-files"
   },
   "peerDependencies": {
-    "@constructor-io/constructorio-client-javascript": "^2.34.5",
+    "@constructor-io/constructorio-client-javascript": "^2.34.6",
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0",
     "tslib": "^2.4.0"
