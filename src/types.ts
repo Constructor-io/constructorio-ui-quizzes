@@ -6,5 +6,5 @@ export type {
   QuizResultsResponse,
   GetBrowseResultsResponse,
   BrowseResultData,
-  BrowseRequestType
+  BrowseRequestType,
 } from '@constructor-io/constructorio-client-javascript/lib/types';
