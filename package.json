@@ -5,14 +5,22 @@
   "author": "constructor.io",
   "license": "MIT",
   "type": "module",
-  "main": "lib/src/index.js",
+  "main": "lib/cjs/index.js",
+  "module": "lib/mjs/index.js",
+  "exports": {
+    ".": {
+      "import": "./lib/mjs/index.js",
+      "require": "./lib/cjs/index.js"
+    }
+  },
   "files": [
-    "lib"
+    "lib/**/*"
   ],
   "types": "lib/types/index.d.ts",
   "scripts": {
-    "lint": "eslint src --ext js,ts,jsx,tsx",
-    "copy-files": "copyfiles -u 1 src/**/*.css lib/src",
+    "prettier": "npx prettier --write .",
+    "lint": "npm run prettier && eslint src --ext js,ts,jsx,tsx",
+    "copy-files": "copyfiles -u 1 src/**/*.css lib/cjs && copyfiles -u 1 src/**/*.css lib/mjs",
     "prepare": "husky install",
     "dev": "storybook dev -p 6006",
     "storybook:ci": "storybook dev --ci --quiet -p 6006",
@@ -21,7 +29,8 @@
     "test-storybook:ci": "start-server-and-test storybook:ci http://localhost:6006 test-storybook",
     "build-storybook": "storybook build -o 'docs'",
     "serve-built-storybook": "npx http-server docs",
-    "compile": "rm -rf lib && tsc && npm run copy-files"
+    "verify-node-version": "chmod +x ./scripts/verify-node-version.sh && ./scripts/verify-node-version.sh",
+    "compile": "npm run verify-node-version && rm -rf lib && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json && npm run copy-files"
   },
   "peerDependencies": {
     "@constructor-io/constructorio-client-javascript": "^2.34.6",
@@ -31,14 +40,14 @@
   },
   "devDependencies": {
     "@cspell/eslint-plugin": "^6.18.1",
-    "@storybook/addon-a11y": "7.0.0-beta.15",
-    "@storybook/addon-actions": "7.0.0-beta.15",
-    "@storybook/addon-essentials": "7.0.0-beta.15",
-    "@storybook/addon-interactions": "^7.0.0-beta.15",
-    "@storybook/addon-links": "7.0.0-beta.15",
+    "@storybook/addon-a11y": "7.0.0-beta.40",
+    "@storybook/addon-actions": "7.0.0-beta.40",
+    "@storybook/addon-essentials": "7.0.0-beta.40",
+    "@storybook/addon-interactions": "^7.0.0-beta.40",
+    "@storybook/addon-links": "7.0.0-beta.40",
     "@storybook/jest": "^0.0.11-next.0",
-    "@storybook/react-webpack5": "7.0.0-beta.15",
-    "@storybook/test-runner": "0.10.0-next.4",
+    "@storybook/react-webpack5": "7.0.0-beta.40",
+    "@storybook/test-runner": "0.10.0-next.8",
     "@storybook/testing-library": "^0.0.14-next.1",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
@@ -59,7 +68,7 @@
     "prettier": "2.8.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "storybook": "7.0.0-beta.15",
+    "storybook": "7.0.0-beta.40",
     "typescript": "^4.9.4",
     "webpack": "^5.75.0"
   }

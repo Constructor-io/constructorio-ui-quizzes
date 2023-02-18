@@ -3,12 +3,12 @@
   width: 100%;
   box-sizing: border-box;
   height: 2.5rem;
-  padding: .5rem 0;
+  padding: 0.5rem 0;
   color: black;
   border-color: black;
   border-style: solid;
   border-width: 1px;
-  font-size: .875rem;
+  font-size: 0.875rem;
   background-color: transparent;
   font-family: 'Roboto', sans-serif;
 }

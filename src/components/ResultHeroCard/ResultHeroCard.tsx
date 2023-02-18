@@ -1,3 +1,4 @@
+import React from 'react';
 import { BrowseResultData } from '../../types';
 import ResultCtaButton from '../ResultCtaButton/ResultCtaButton';
 import './resultHeroCard.css';

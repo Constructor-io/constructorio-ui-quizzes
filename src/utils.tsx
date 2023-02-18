@@ -1,3 +1,4 @@
+import React from 'react';
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
 import { QuestionTypes } from './components/CioQuiz/actions';
 import { Answers } from './components/CioQuiz/reducer';
@@ -9,7 +10,7 @@ export const renderImages = (images: Partial<QuestionImages>, cssClasses?: strin
     primary_url: primaryUrl,
     primary_alt: primaryAlt,
     secondary_url: secondaryUrl,
-    secondary_alt: secondaryAlt
+    secondary_alt: secondaryAlt,
   } = images;
 
   type ImageFocusEvent = React.MouseEvent<HTMLImageElement> | React.FocusEvent<HTMLImageElement>;
@@ -55,9 +56,9 @@ ${templateCode}
         code,
         language: 'jsx',
         format: true,
-        type: 'code'
-      }
-    }
+        type: 'code',
+      },
+    },
   };
 };
 
@@ -86,16 +87,25 @@ export const getQuestionTypes = (questionType?: `${QuestionTypes}`) => {
     isCoverQuestion,
     isSingleQuestion,
     isMultipleQuestion,
-    isSelectQuestion
+    isSelectQuestion,
   };
 };
 
 export const getCioClient = (apiKey?: string) => {
   if (apiKey) {
     return new ConstructorIOClient({
-      apiKey
+      apiKey,
     });
   }
 
   return null;
 };
+
+export function getPreferredColorScheme() {
+  let colorScheme = 'light';
+  // Check if the dark-mode Media-Query matches
+  if (window.matchMedia('(prefers-color-scheme: dark)')?.matches) {
+    colorScheme = 'dark';
+  }
+  return colorScheme;
+}

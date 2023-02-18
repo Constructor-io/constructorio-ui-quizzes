@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import CTAButton from '../CTAButton/CTAButton';
 import { QuestionTypes } from '../CioQuiz/actions';
 import QuizContext from '../CioQuiz/context';
@@ -19,7 +19,7 @@ export default function ResultContainer(props: ResultContainerProps) {
   const onResetClick = () => {
     if (dispatch && resultsResponse) {
       dispatch({
-        type: QuestionTypes.Reset
+        type: QuestionTypes.Reset,
       });
     }
   };

@@ -33,5 +33,5 @@ export enum RequestStates {
   Stale,
   Loading,
   Success,
-  Error
+  Error,
 }

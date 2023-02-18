@@ -1,3 +1,4 @@
+import React from 'react';
 import OpenTextQuestion from '../OpenTextTypeQuestion/OpenTextTypeQuestion';
 import CoverTypeQuestion from '../CoverTypeQuestion/CoverTypeQuestion';
 import SelectTypeQuestion from '../SelectTypeQuestion/SelectTypeQuestion';
@@ -6,7 +7,7 @@ import { NextQuestionResponse } from '../../types';
 
 export default function QuizQuestions(props: { questionResponse: NextQuestionResponse }) {
   const {
-    questionResponse: { next_question: nextQuestion }
+    questionResponse: { next_question: nextQuestion },
   } = props;
   const questionTypes = getQuestionTypes(nextQuestion?.type);
 

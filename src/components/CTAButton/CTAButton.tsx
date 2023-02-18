@@ -1,3 +1,4 @@
+import React from 'react';
 import './ctaButton.css';
 
 interface CTAButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
