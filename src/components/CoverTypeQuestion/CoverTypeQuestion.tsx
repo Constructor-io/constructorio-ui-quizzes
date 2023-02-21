@@ -5,7 +5,6 @@ import QuestionDescription from '../QuestionDescription/QuestionDescription';
 import CTAButton from '../CTAButton/CTAButton';
 import { renderImages } from '../../utils';
 import { QuestionTypes } from '../CioQuiz/actions';
-import './coverTypeQuestion.css';
 
 export default function CoverTypeQuestion() {
   const { questionResponse, quizBackHandler, quizNextHandler, isFirstQuestion } =

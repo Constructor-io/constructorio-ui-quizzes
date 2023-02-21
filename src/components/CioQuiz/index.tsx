@@ -9,7 +9,6 @@ import ResultContainer from '../ResultContainer/ResultContainer';
 import { RequestStates } from '../../constants';
 import { getNextQuestion, getQuizResults } from '../../utils';
 import Spinner from '../Spinner/Spinner';
-import './quiz.css';
 import useCioClient from '../../hooks/useCioClient';
 
 export interface IQuizProps {

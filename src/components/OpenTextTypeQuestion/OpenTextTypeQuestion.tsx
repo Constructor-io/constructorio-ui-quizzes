@@ -5,7 +5,6 @@ import CTAButton from '../CTAButton/CTAButton';
 import { renderImages } from '../../utils';
 import QuizContext from '../CioQuiz/context';
 import { QuestionTypes } from '../CioQuiz/actions';
-import './openTextTypeQuestion.css';
 
 interface OpenTextQuestionProps {
   initialValue?: string;
