@@ -6,7 +6,7 @@ A UI Library that provides React components to manage the fetching and rendering
 
 [Constructor.io's Quizzes](https://constructor.io/products/quizzes/) are interactive experiences that personalizes the shopping journey for each of your customers. This UI library simplifies the integration process by providing React Components that handle the fetching and rendering logic for Quizzes. Typescript support is available.
 
-[Our storybook docs (_PENDING_)]() are the best place to explore the behavior and the available configuration options for this UI Library.
+[Our storybook docs](https://constructor-io.github.io/cio-quiz-temp) are the best place to explore the behavior and the available configuration options for this UI Library.
 
 ![Quizzes-Ui-Example](assets/coffee-quiz.gif)
 
