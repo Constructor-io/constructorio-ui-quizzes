@@ -29,7 +29,20 @@ function YourComponent() {
 
 ### Library defaults
 
-This library provides some default styles. These default styles can be used as a foundation to build on top of or just as a reference for you to replace completely. All default styles in this library are defined as css classes that are scoped with the `.cio-` prefix.
+By default, importing React components from this library does not pull any css into your project.
+
+If you wish to use some starter styles from this library, add an import statement similar to the example import statement below:
+
+```js
+import '@constructor-io/constructorio-ui-quiz/styles.css';
+```
+
+> Note: the path and syntax in this example may change slightly depending on your module bundling strategy
+
+ - These starter styles can be used as a foundation to build on top of, or just as a reference for you to replace completely.
+ - To opt out of all default styling, do not import the `styles.css` stylesheet.
+ - All starter styles in this library are scoped within the `.cio-autocomplete` css selector.
+ - These starter styles are intended to be extended by layering in your own css rules
 
 ## Local Development
 
