@@ -41,7 +41,7 @@ import '@constructor-io/constructorio-ui-quiz/styles.css';
 
  - These starter styles can be used as a foundation to build on top of, or just as a reference for you to replace completely.
  - To opt out of all default styling, do not import the `styles.css` stylesheet.
- - All starter styles in this library are scoped within the `.cio-autocomplete` css selector.
+ - All starter styles in this library are scoped within the `.cio-quiz` css selector.
  - These starter styles are intended to be extended by layering in your own css rules
 
 ## Local Development
