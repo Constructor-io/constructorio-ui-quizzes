@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowseResultData } from '../../types';
-import './resultCtaButton.css';
 
 interface ResultCtaButtonProps {
   items: Array<Partial<BrowseResultData>>;

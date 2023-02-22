@@ -1,7 +1,6 @@
 import React, { KeyboardEvent } from 'react';
 import { BrowseResultData } from '../../types';
 import ResultCtaButton from '../ResultCtaButton/ResultCtaButton';
-import './resultCard.css';
 
 interface ResultCardProps {
   result: Partial<BrowseResultData>;

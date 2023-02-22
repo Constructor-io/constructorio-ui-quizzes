@@ -4,7 +4,6 @@ import { QuestionTypes } from '../CioQuiz/actions';
 import QuizContext from '../CioQuiz/context';
 import ResultCard from '../ResultCard/ResultCard';
 import ResultHeroCard from '../ResultHeroCard/ResultHeroCard';
-import './resultContainer.css';
 
 interface ResultContainerProps {
   numResults?: number;

@@ -8,6 +8,7 @@
   "main": "lib/cjs/index.js",
   "module": "lib/mjs/index.js",
   "exports": {
+    "./styles.css": "./lib/styles.css",
     ".": {
       "import": "./lib/mjs/index.js",
       "require": "./lib/cjs/index.js"
@@ -20,7 +21,7 @@
   "scripts": {
     "prettier": "npx prettier --write .",
     "lint": "npm run prettier && eslint src --ext js,ts,jsx,tsx",
-    "copy-files": "copyfiles -u 1 src/**/*.css lib/cjs && copyfiles -u 1 src/**/*.css lib/mjs",
+    "copy-styles": "cp src/styles.css lib/styles.css",
     "prepare": "husky install",
     "dev": "storybook dev -p 6006",
     "storybook:ci": "storybook dev --ci --quiet -p 6006",
@@ -31,7 +32,7 @@
     "serve-built-storybook": "npx http-server docs",
     "verify-node-version": "chmod +x ./scripts/verify-node-version.sh && ./scripts/verify-node-version.sh",
     "version": "npm run verify-node-version && npm run build-storybook && git add -u ./docs && git add ./docs/* && npm run compile",
-    "compile": "rm -rf lib && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json && npm run copy-files"
+    "compile": "rm -rf lib && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json && npm run copy-styles"
   },
   "peerDependencies": {
     "@constructor-io/constructorio-client-javascript": "^2.34.6",
@@ -54,7 +55,6 @@
     "@types/react-dom": "^18.0.9",
     "@typescript-eslint/eslint-plugin": "^5.47.0",
     "@typescript-eslint/parser": "^5.47.0",
-    "copyfiles": "^2.4.1",
     "eslint": "^8.30.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
