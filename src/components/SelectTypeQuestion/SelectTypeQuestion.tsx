@@ -6,7 +6,6 @@ import QuizContext from '../CioQuiz/context';
 import { QuestionOption } from '../../types';
 import { renderImages } from '../../utils';
 import { QuestionTypes } from '../CioQuiz/actions';
-import './selectTypeQuestion.css';
 
 interface Selected {
   [key: number]: boolean;
