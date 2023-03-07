@@ -79,14 +79,6 @@
   }
 }
 
-.cio-question-title {
-  /* text-align: center; */
-}
-
-/* .cio-question-description { */
-/*   text-align: center; */
-/* } */
-
 .cio-hero-card {
   display: flex;
   flex-direction: row;
@@ -203,20 +195,6 @@
   }
 }
 
-/* .cio-cover-question-img { */
-/*   height: 100%; */
-/*   flex-basis: 50%; */
-/* } */
-
-.cio-cover-question-text {
-  margin: auto;
-  flex-basis: 50%;
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  max-width: 600px;
-}
-
 .cio-select-question-container {
   display: flex;
   flex-direction: column;
@@ -316,11 +294,6 @@
     justify-content: center;
     height: 100vh;
     padding: 2rem;
-  }
-}
-@media screen and (max-width: 768px) {
-  .cio-cover-question-text {
-    max-width: 420px;
   }
 }
 
