@@ -10,9 +10,12 @@ export default function CoverTypeQuestion() {
   const { questionResponse, quizBackHandler, quizNextHandler, isFirstQuestion } =
     useContext(QuizContext);
   let question;
+
   if (questionResponse) {
     question = questionResponse.next_question;
   }
+
+  const hasImage = question?.images?.primary_url;
 
   const onNextClick = () => {
     if (quizNextHandler) {
@@ -27,7 +30,7 @@ export default function CoverTypeQuestion() {
 
   if (question) {
     return (
-      <div className='cio-cover-question-container'>
+      <div className={`cio-cover-question-container ${hasImage ? 'with-image' : ''}`}>
         <div className='cio-cover-question-text-container'>
           <div className='cio-cover-question-text'>
             <QuestionTitle title={question?.title} />
@@ -36,7 +39,7 @@ export default function CoverTypeQuestion() {
             {!true && <CTAButton ctaText='Back' onClick={quizBackHandler} />}
           </div>
         </div>
-        {question?.images ? (
+        {hasImage ? (
           <div className='cio-cover-question-img'>{renderImages(question.images)}</div>
         ) : (
           ''
