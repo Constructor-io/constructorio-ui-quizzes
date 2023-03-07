@@ -65,6 +65,20 @@
   margin-top: 2rem;
 }
 
+/* Back Button Component */
+.cio-question-back-button {
+  position: absolute;
+  color: var(--blue-denim-400);
+  background: #ffffff;
+  border: 1px solid var(--blue-denim-400);
+  border-radius: 4px;
+  height: 3rem;
+  width: 3rem;
+  font-size: 1rem;
+  bottom: 3rem;
+  left: 3rem;
+}
+
 /* Cover Page Component */
 .cio-cover-question-container {
   width: 100%;

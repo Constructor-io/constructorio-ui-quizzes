@@ -3,6 +3,7 @@ import QuestionTitle from '../QuestionTitle/QuestionTitle';
 import QuizContext from '../CioQuiz/context';
 import QuestionDescription from '../QuestionDescription/QuestionDescription';
 import CTAButton from '../CTAButton/CTAButton';
+import BackButton from '../BackButton/BackButton';
 import { renderImages } from '../../utils';
 import { QuestionTypes } from '../CioQuiz/actions';
 
@@ -36,7 +37,6 @@ export default function CoverTypeQuestion() {
             <QuestionTitle title={question?.title} />
             <QuestionDescription description={question.description} />
             <CTAButton ctaText={question?.cta_text} onClick={onNextClick} />
-            {!true && <CTAButton ctaText='Back' onClick={quizBackHandler} />}
           </div>
         </div>
         {hasImage ? (
@@ -44,6 +44,7 @@ export default function CoverTypeQuestion() {
         ) : (
           ''
         )}
+        {!isFirstQuestion && <BackButton onClick={quizBackHandler} />}
       </div>
     );
   }
