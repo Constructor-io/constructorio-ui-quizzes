@@ -28,15 +28,19 @@ export default function CoverTypeQuestion() {
   if (question) {
     return (
       <div className='cio-cover-question-container'>
-        <div className='cio-cover-question-text'>
-          <QuestionTitle title={question?.title} />
-          <QuestionDescription description={question.description} />
-          <CTAButton ctaText={question?.cta_text} onClick={onNextClick} />
-          {!isFirstQuestion && <CTAButton ctaText='Back' onClick={quizBackHandler} />}
+        <div className='cio-cover-question-text-container'>
+          <div className='cio-cover-question-text'>
+            <QuestionTitle title={question?.title} />
+            <QuestionDescription description={question.description} />
+            <CTAButton ctaText={question?.cta_text} onClick={onNextClick} />
+            {!true && <CTAButton ctaText='Back' onClick={quizBackHandler} />}
+          </div>
         </div>
-        <div className='cio-cover-question-img'>
-          {question?.images ? renderImages(question.images) : ''}
-        </div>
+        {question?.images ? (
+          <div className='cio-cover-question-img'>{renderImages(question.images)}</div>
+        ) : (
+          ''
+        )}
       </div>
     );
   }
