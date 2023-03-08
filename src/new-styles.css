@@ -28,6 +28,7 @@
   --white-ice-600: #bdcde0;
   --white-ice-700: #b1bfd0;
   --white-ice-800: #97a2b0;
+  --primary-color: var(--blue-denim-400);
 }
 
 /* Mobile + global styles */
@@ -56,9 +57,9 @@
 
 /* CTA Button Component */
 .cio-question-cta-button {
-  background: var(--blue-denim-400);
+  background: var(--primary-color);
   color: var(--white-ice-100);
-  border: 1px solid var(--blue-denim-400);
+  border: 1px solid var(--primary-color);
   border-radius: 4px;
   height: 3rem;
   font-size: 1rem;
@@ -68,9 +69,9 @@
 /* Back Button Component */
 .cio-question-back-button {
   position: absolute;
-  color: var(--blue-denim-400);
+  color: var(--primary-color);
   background: #ffffff;
-  border: 1px solid var(--blue-denim-400);
+  border: 1px solid var(--primary-color);
   border-radius: 4px;
   height: 3rem;
   width: 3rem;
