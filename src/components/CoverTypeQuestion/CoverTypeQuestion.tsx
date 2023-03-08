@@ -34,9 +34,14 @@ export default function CoverTypeQuestion() {
       <div className={`cio-cover-question-container ${hasImage ? 'with-image' : ''}`}>
         <div className='cio-cover-question-text-container'>
           <div className='cio-cover-question-text'>
-            <QuestionTitle title={question?.title} />
-            <QuestionDescription description={question.description} />
-            <CTAButton ctaText={question?.cta_text} onClick={onNextClick} />
+            <div>
+              <QuestionTitle title={question?.title} />
+              <QuestionDescription description={question.description} />
+            </div>
+            <div className='cio-cover-question-buttons'>
+              {!isFirstQuestion && <BackButton onClick={quizBackHandler} />}
+              <CTAButton ctaText={question?.cta_text} onClick={onNextClick} />
+            </div>
           </div>
         </div>
         {hasImage ? (
@@ -44,7 +49,6 @@ export default function CoverTypeQuestion() {
         ) : (
           ''
         )}
-        {!isFirstQuestion && <BackButton onClick={quizBackHandler} />}
       </div>
     );
   }

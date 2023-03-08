@@ -63,12 +63,12 @@
   border-radius: 4px;
   height: 3rem;
   font-size: 1rem;
-  margin-top: 2rem;
+  max-width: 14rem;
+  flex-grow: 1;
 }
 
 /* Back Button Component */
 .cio-question-back-button {
-  position: absolute;
   color: var(--primary-color);
   background: #ffffff;
   border: 1px solid var(--primary-color);
@@ -76,8 +76,6 @@
   height: 3rem;
   width: 3rem;
   font-size: 1rem;
-  bottom: 3rem;
-  left: 3rem;
 }
 
 /* Cover Page Component */
@@ -93,13 +91,32 @@
   justify-content: start;
 }
 
+.cio-cover-question-text-container {
+  flex-grow: 1;
+  display: flex;
+  margin-top: 7.5rem;
+}
+
+.cio-cover-question-container.with-image .cio-cover-question-text-container {
+  margin-top: 0;
+}
+
 .cio-cover-question-text {
+  flex-grow: 1;
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 1rem 2rem;
+  justify-content: space-between;
+  padding-top: 1rem;
+  padding-right: 2rem;
+  padding-bottom: 3rem;
+  padding-left: 2rem;
   margin: 0;
+}
+
+.cio-cover-question-buttons {
+  display: flex;
+  justify-content: space-between;
 }
 
 .cio-cover-question-img {
@@ -126,6 +143,10 @@
     justify-content: center;
   }
 
+  .cio-cover-question-text-container {
+    margin-top: 0;
+  }
+
   .cio-cover-question-container.with-image .cio-cover-question-text-container {
     flex-grow: 0;
     flex-basis: 50%;
@@ -139,6 +160,10 @@
 
   .cio-cover-question-container.with-image .cio-cover-question-text {
     max-width: 26rem;
+  }
+
+  .cio-cover-question-buttons {
+    margin-top: 2.5rem;
   }
 
   .cio-cover-question-img {
