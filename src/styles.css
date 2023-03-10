@@ -41,11 +41,6 @@
   }
 }
 
-.cio-question-cta-button.disabled {
-  background-color: gray;
-  cursor: auto;
-}
-
 .cio-result-card {
   background-color: transparent;
   height: auto;

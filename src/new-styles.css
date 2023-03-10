@@ -68,6 +68,22 @@
   margin-left: 1rem;
 }
 
+.cio-question-cta-button:hover {
+  background: var(--blue-denim-500);
+  border: 2px solid var(--blue-denim-600);
+}
+
+.cio-question-cta-button:active {
+  background: var(--blue-denim-700);
+  border: 2px solid var(--blue-denim-800);
+}
+
+.cio-question-cta-button:disabled,
+.cio-question-cta-button.disabled {
+  background: var(--blue-denim-200);
+  border: 1px solid var(--blue-denim-100);
+}
+
 /* Back Button Component */
 .cio-question-back-button {
   color: var(--primary-color);
@@ -77,6 +93,14 @@
   height: 3rem;
   width: 3rem;
   font-size: 1rem;
+}
+
+.cio-question-back-button:hover {
+  border: 2px solid var(--blue-denim-600);
+}
+
+.cio-question-back-button:active {
+  border: 2px solid var(--blue-denim-700);
 }
 
 /* Cover Page Component */
