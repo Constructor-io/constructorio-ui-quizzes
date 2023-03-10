@@ -12,6 +12,12 @@ A UI Library that provides React components to manage the fetching and rendering
 
 ## Using the Library
 
+### Install
+
+```bash
+npm i @constructor-io/constructorio-ui-quiz
+```
+
 The `CioQuiz` component handles state management, data fetching, and rendering logic for the entire quiz.
 
 ```jsx
