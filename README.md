@@ -15,7 +15,7 @@ A UI Library that provides React components to manage the fetching and rendering
 The `CioQuiz` component handles state management, data fetching, and rendering logic for the entire quiz.
 
 ```jsx
-import { CioQuiz } from 'cio-quizzes-ts';
+import { CioQuiz } from '@constructor-io/constructorio-ui-quiz';
 
 function YourComponent() {
   return (
