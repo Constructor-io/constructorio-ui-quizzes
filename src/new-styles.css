@@ -81,7 +81,7 @@
 .cio-question-cta-button:disabled,
 .cio-question-cta-button.disabled {
   background: var(--blue-denim-200);
-  border: 1px solid var(--blue-denim-100);
+  border: 2px solid var(--blue-denim-100);
 }
 
 /* Back Button Component */
