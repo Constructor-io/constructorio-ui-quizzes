@@ -155,7 +155,7 @@
   height: 100%;
 }
 
-/* Tablet */
+/* Small Tablet */
 @media screen and (min-width: 640px) {
   /* CTA Button Component */
   .cio-question-cta-button {
@@ -183,10 +183,6 @@
     margin: auto;
   }
 
-  .cio-cover-question-container.with-image .cio-cover-question-text {
-    max-width: 26rem;
-  }
-
   .cio-cover-question-buttons {
     margin-top: 2.5rem;
   }
@@ -197,6 +193,16 @@
   }
 }
 
+/* Big Tablet */
+@media screen and (min-width: 768px) {
+  .cio-cover-question-container.with-image .cio-cover-question-text {
+    max-width: 20rem;
+  }
+}
+
 /* Desktop */
 @media screen and (min-width: 1280px) {
+  .cio-cover-question-container.with-image .cio-cover-question-text {
+    max-width: 26rem;
+  }
 }
