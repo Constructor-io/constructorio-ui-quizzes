@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
 import { QuestionTypes } from './components/CioQuiz/actions';
 import { Answers } from './components/CioQuiz/reducer';
@@ -108,4 +109,12 @@ export function getPreferredColorScheme() {
     colorScheme = 'dark';
   }
   return colorScheme;
+}
+
+export function testA11yOfRenderedReact() {
+  if (process.env.NODE_ENV !== 'production') {
+    // eslint-disable-next-line import/no-extraneous-dependencies
+    const axe = require('@axe-core/react');
+    axe(React, ReactDOM, 10000);
+  }
 }
