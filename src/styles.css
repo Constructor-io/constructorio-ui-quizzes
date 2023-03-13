@@ -1,31 +1,4 @@
 /* Default styles */
-.cio-quiz,
-.cio-quiz * {
-  box-sizing: border-box;
-  font-family: 'Lato', sans-serif;
-}
-
-.cio-quiz {
-  display: flex;
-  justify-content: center;
-  min-height: 100vh;
-  width: 100vw;
-  background-color: rgb(251 244 238);
-  font-size: 20px;
-}
-
-@media screen and (max-width: 1200px) {
-  .cio-quiz {
-    font-size: 18px;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .cio-quiz {
-    font-size: 16px;
-  }
-}
-
 .cio-spinner,
 .cio-spinner:after {
   border-radius: 50%;
@@ -68,22 +41,6 @@
   }
 }
 
-.cio-question-cta-button {
-  margin: 1rem auto;
-  background: hsl(0, 0%, 25%);
-  border: 0;
-  padding: 0.625rem;
-  color: white;
-  width: 100%;
-  cursor: pointer;
-  max-width: 18rem;
-}
-
-.cio-question-cta-button.disabled {
-  background-color: gray;
-  cursor: auto;
-}
-
 .cio-result-card {
   background-color: transparent;
   height: auto;
@@ -115,14 +72,6 @@
     flex-basis: 100%;
     margin-bottom: 3rem;
   }
-}
-
-.cio-question-title {
-  text-align: center;
-}
-
-.cio-question-description {
-  text-align: center;
 }
 
 .cio-hero-card {
@@ -241,58 +190,6 @@
   }
 }
 
-.cio-cover-question-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: start;
-  width: 100%;
-}
-
-.cio-cover-question-img {
-  width: 100%;
-  height: 100%;
-}
-
-.cio-cover-question-img .cio-question-image {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-  background-color: white;
-}
-
-.cio-cover-question-text {
-  position: absolute;
-  margin-left: 1.25rem;
-  max-width: 400px;
-  background-color: rgb(251 244 238);
-  padding: 1.25rem;
-  margin-left: 1.25rem;
-  left: 4rem;
-}
-
-.cio-cover-question-text .cio-question-cta-button {
-  max-width: unset;
-}
-
-@media screen and (max-width: 600px) {
-  .cio-cover-question-img {
-    display: none;
-  }
-  .cio-cover-question-text {
-    position: relative;
-    max-width: unset;
-    width: 100%;
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 4rem;
-    left: unset;
-  }
-}
-
 .cio-select-question-container {
   display: flex;
   flex-direction: column;
@@ -392,9 +289,6 @@
     justify-content: center;
     height: 100vh;
     padding: 2rem;
-  }
-  .cio-open-text-question-image {
-    display: none;
   }
 }
 
