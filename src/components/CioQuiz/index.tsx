@@ -103,4 +103,5 @@ export default function CioQuiz(props: IQuizProps) {
       </div>
     );
   }
+  return null;
 }
