@@ -62,6 +62,8 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
   if (question) {
     return (
       <div className='cio-open-text-question-container'>
+        {question.images ? renderImages(question.images, 'cio-open-text-question-image') : ''}
+
         <div className='cio-open-text-question-form'>
           <QuestionTitle title={question.title} />
           <QuestionDescription description={question.description} />
@@ -72,10 +74,15 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
             onChange={onChangeHandler}
             onKeyDown={onKeyDownHandler}
           />
-          <CTAButton disabled={!openTextInput} ctaText={question.cta_text} onClick={onNextClick} />
-          {!isFirstQuestion && <CTAButton ctaText='Back' onClick={quizBackHandler} />}
+          <div className='cio-question-buttons-container'>
+            {!isFirstQuestion && <CTAButton ctaText='Back' onClick={quizBackHandler} />}
+            <CTAButton
+              disabled={!openTextInput}
+              ctaText={question.cta_text}
+              onClick={onNextClick}
+            />
+          </div>
         </div>
-        {question.images ? renderImages(question.images, 'cio-open-text-question-image') : ''}
       </div>
     );
   }
