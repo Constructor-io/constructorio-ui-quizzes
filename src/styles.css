@@ -190,66 +190,6 @@
   }
 }
 
-.cio-select-question-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 4rem;
-  width: 100%;
-  max-width: 1000px;
-}
-
-.cio-question-options-container {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  column-gap: 1rem;
-  width: 100%;
-}
-
-.cio-question-option-container {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid transparent;
-  cursor: pointer;
-  background-color: white;
-  text-align: center;
-  transition: background-color 250ms;
-  font-size: 1rem;
-  cursor: pointer;
-  position: relative;
-  margin-bottom: 0;
-  flex-basis: 30.3333%;
-  margin-bottom: 1rem;
-}
-
-.cio-question-option-container.selected {
-  border: 1px solid #6b7280;
-}
-
-.cio-question-option-image {
-  width: 100%;
-  height: 20rem;
-  object-fit: cover;
-}
-
-.cio-question-option-value {
-  text-align: center;
-}
-
-@media screen and (max-width: 600px) {
-  .cio-question-options-container {
-    justify-content: center;
-  }
-  .cio-question-option-container {
-    margin-bottom: 1.25rem;
-    flex-basis: 100%;
-  }
-  .cio-select-question-container {
-    padding: 4rem;
-  }
-}
-
 .cio-open-text-question-container {
   display: flex;
   justify-content: center;

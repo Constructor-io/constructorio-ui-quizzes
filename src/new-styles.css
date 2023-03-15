@@ -42,17 +42,17 @@
   display: flex;
   justify-content: center;
   min-height: 100vh;
+  max-height: 100vh;
   background-color: #ffffff;
   color: var(--gray-dust-500);
 }
 
 .cio-question-title {
-  margin-top: 0;
-  margin-bottom: 1rem;
+  margin: 0;
 }
 
 .cio-question-description {
-  margin-top: 0.5rem;
+  margin-top: 1.5rem;
 }
 
 /* CTA Button Component */
@@ -155,6 +155,95 @@
   height: 100%;
 }
 
+/** Select component */
+
+/* .cio-question-option-container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid transparent;
+  cursor: pointer;
+  background-color: white;
+  text-align: center;
+  transition: background-color 250ms;
+  font-size: 1rem;
+  cursor: pointer;
+  position: relative;
+  margin-bottom: 0;
+  flex-basis: 30.3333%;
+  margin-bottom: 1rem;
+}
+
+.cio-question-option-container.selected {
+  border: 1px solid #6b7280;
+} */
+
+.cio-question-option-container {
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid var(--white-ice-700);
+  box-shadow: 0px 4px 10px rgba(93, 124, 232, 0.15);
+  width: 45%;
+}
+
+.cio-question-option-container.selected {
+  outline: 3px solid var(--blue-denim-600);
+  box-shadow: 0px 4px 10px rgba(93, 124, 232, 0.35);
+}
+
+.cio-question-option-container:hover:not(.selected) {
+  outline: 1px solid var(--blue-denim-600);
+  box-shadow: 0px 4px 10px rgba(93, 124, 232, 0.25);
+}
+
+.cio-select-question-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.cio-question-options-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  width: 100%;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.cio-question-option-image {
+  width: 100%;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.cio-question-option-value {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.cio-select-question-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem;
+  margin-top: auto;
+}
+
+.cio-select-question-text {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2rem 1rem;
+  margin: 0;
+}
+
+.cio-select-question-title {
+    margin: 0 0 1rem 0;
+}
+
 /* Small Tablet */
 @media screen and (min-width: 640px) {
   /* CTA Button Component */
@@ -198,11 +287,19 @@
   .cio-cover-question-container.with-image .cio-cover-question-text {
     max-width: 20rem;
   }
+
+  .cio-question-option-container {
+    width: 30%;
+  }
 }
 
 /* Desktop */
 @media screen and (min-width: 1280px) {
   .cio-cover-question-container.with-image .cio-cover-question-text {
     max-width: 26rem;
+  }
+
+  .cio-question-option-container {
+    width: 20%;
   }
 }
