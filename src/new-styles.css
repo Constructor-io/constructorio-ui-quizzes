@@ -63,9 +63,14 @@
   border-radius: 4px;
   height: 3rem;
   font-size: 1rem;
+  width: 100%;
+}
+
+.cio-button-container {
   max-width: 14rem;
   flex-grow: 1;
   margin-left: auto;
+  padding-left: 1rem;
 }
 
 .cio-question-cta-button:hover {
