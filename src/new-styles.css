@@ -65,7 +65,7 @@
   font-size: 1rem;
   max-width: 14rem;
   flex-grow: 1;
-  margin-left: 1rem;
+  margin-left: auto;
 }
 
 .cio-question-cta-button:hover {
@@ -206,6 +206,7 @@
 .cio-select-question-buttons {
   display: flex;
   justify-content: space-between;
+  gap: .5rem;
   width: 100%;
   padding: 1rem;
   margin-top: auto;
