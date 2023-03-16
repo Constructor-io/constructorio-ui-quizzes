@@ -82,8 +82,8 @@ function SelectTypeQuestion() {
       <div className='cio-select-question-container'>
         <div className='cio-select-question-text'>
           <QuestionTitle title={question.title} />
+          {question?.description ? <QuestionDescription description={question.description} /> : ''}
         </div>
-        {question?.description ? <QuestionDescription description={question.description} /> : ''}
         <div className='cio-question-options-container'>
           {question?.options?.map((option: QuestionOption, index: number) => (
             <div

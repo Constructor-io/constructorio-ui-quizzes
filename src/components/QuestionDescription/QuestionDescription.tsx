@@ -7,7 +7,7 @@ interface QuestionDescriptionProps {
 function QuestionDescription(props: QuestionDescriptionProps) {
   const { description } = props;
 
-  return <p className='cio-question-description'>{description}</p>;
+  return <div className='cio-question-description'>{description}</div>;
 }
 
 export default QuestionDescription;
