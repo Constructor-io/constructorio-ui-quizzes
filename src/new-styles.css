@@ -143,8 +143,6 @@
 .cio-question-buttons-container {
   width: 100%;
   display: flex;
-  justify-content: end;
-
 }
 
 .cio-cover-question-img {
