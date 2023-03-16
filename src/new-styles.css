@@ -64,8 +64,8 @@
   border-radius: 4px;
   height: 3rem;
   font-size: 1rem;
-  max-width: 14rem;
   flex-grow: 1;
+  margin-left: auto;
 }
 
 .cio-question-cta-button:hover {
@@ -93,6 +93,7 @@
   height: 3rem;
   width: 3rem;
   font-size: 1rem;
+  margin-right: 4rem;
 }
 
 .cio-question-back-button:hover {
@@ -140,8 +141,10 @@
 }
 
 .cio-question-buttons-container {
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
+
 }
 
 .cio-cover-question-img {
@@ -155,10 +158,14 @@
   height: 100%;
 }
 
-.cio-open-text-question-container {
+.cio-open-text-question-container--with-image {
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+
+.cio-open-text-question-container {
+  margin-top: 7.5rem;
 }
 
 .cio-open-text-question-image {
@@ -166,7 +173,6 @@
   min-width: 50%;
   object-fit: cover;
   max-height: 300px;
-  border-radius: 4px;
 }
 
 .cio-open-text-question-form {
@@ -204,7 +210,7 @@
 @media screen and (min-width: 640px) {
   /* CTA Button Component */
   .cio-question-cta-button {
-    max-width: 14rem;
+    max-width: 10rem;
   }
 
   /* Cover Page Component */
@@ -237,7 +243,7 @@
     height: 100%;
   }
 
-  .cio-open-text-question-container {
+  .cio-open-text-question-container--with-image {
     display: flex;
     flex-direction: row;
     padding: 1rem;
@@ -250,11 +256,13 @@
     max-height: 700px;
     border-radius: 4px;
     margin-right: 4rem;
+    border-radius: 4px;
   }
 
   .cio-open-text-question-form {
     justify-content: center;
     height: fit-content;
+    padding-left: 0;
   }
 }
 

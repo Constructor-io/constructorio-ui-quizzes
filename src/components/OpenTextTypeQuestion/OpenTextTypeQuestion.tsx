@@ -5,6 +5,7 @@ import CTAButton from '../CTAButton/CTAButton';
 import { renderImages } from '../../utils';
 import QuizContext from '../CioQuiz/context';
 import { QuestionTypes } from '../CioQuiz/actions';
+import BackButton from '../BackButton/BackButton';
 
 interface OpenTextQuestionProps {
   initialValue?: string;
@@ -60,8 +61,10 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
   }, [questionResponse, state, initialValue]);
 
   if (question) {
+    const hasImage = question?.images?.primary_url;
+
     return (
-      <div className='cio-open-text-question-container'>
+      <div className={`cio-open-text-question-container${hasImage ? '--with-image' : ''}`}>
         {question.images ? renderImages(question.images, 'cio-open-text-question-image') : ''}
 
         <div className='cio-open-text-question-form'>
@@ -75,7 +78,7 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
             onKeyDown={onKeyDownHandler}
           />
           <div className='cio-question-buttons-container'>
-            {!isFirstQuestion && <CTAButton ctaText='Back' onClick={quizBackHandler} />}
+            {!isFirstQuestion && <BackButton onClick={quizBackHandler} />}
             <CTAButton
               disabled={!openTextInput}
               ctaText={question.cta_text}
