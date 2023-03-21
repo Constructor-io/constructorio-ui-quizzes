@@ -7,7 +7,7 @@ import { NextQuestionResponse, GetBrowseResultsResponse } from '../../types';
 import QuizQuestions from '../QuizQuestions';
 import ResultContainer from '../ResultContainer/ResultContainer';
 import { RequestStates } from '../../constants';
-import { getNextQuestion, getQuizResults, testA11yOfRenderedReact } from '../../utils';
+import { getNextQuestion, getQuizResults } from '../../utils';
 import Spinner from '../Spinner/Spinner';
 import useCioClient from '../../hooks/useCioClient';
 
@@ -19,7 +19,6 @@ export interface IQuizProps {
 
 export default function CioQuiz(props: IQuizProps) {
   const { quizId, apiKey, cioJsClient } = props;
-  testA11yOfRenderedReact();
   if (!quizId) {
     // eslint-disable-next-line no-console
     console.error('quizId is a required field of type string');
