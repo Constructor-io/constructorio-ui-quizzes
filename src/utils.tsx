@@ -31,7 +31,7 @@ export const renderImages = (images: Partial<QuestionImages>, cssClasses?: strin
       <img
         className={`cio-question-image ${cssClasses || ''}`.trim()}
         src={primaryUrl}
-        alt={secondaryAlt || undefined}
+        alt={secondaryAlt || 'Quiz image'}
         onMouseOver={replaceImage}
         onMouseOut={restoreImage}
         onFocus={replaceImage}
