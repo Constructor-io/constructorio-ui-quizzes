@@ -1,0 +1,208 @@
+/* Theme colors */
+.cio-quiz {
+  --blue-denim-100: #7590ee;
+  --blue-denim-1000: #061d6e;
+  --blue-denim-200: #5d7ce8;
+  --blue-denim-300: #395ddb;
+  --blue-denim-400: #2348ca;
+  --blue-denim-500: #163ab5;
+  --blue-denim-600: #0e2fa0;
+  --blue-denim-700: #0b2a93;
+  --blue-denim-800: #092587;
+  --blue-denim-900: #07217b;
+  --gray-dust-100: #92959c;
+  --gray-dust-1000: #272729;
+  --gray-dust-200: #74757b;
+  --gray-dust-300: #606166;
+  --gray-dust-400: #515356;
+  --gray-dust-500: #46474a;
+  --gray-dust-600: #3c3d3f;
+  --gray-dust-700: #37373a;
+  --gray-dust-800: #313134;
+  --gray-dust-900: #2c2c2f;
+  --white-ice-100: #f9fbfe;
+  --white-ice-200: #ecf4fd;
+  --white-ice-300: #e1eefd;
+  --white-ice-400: #d3e5fb;
+  --white-ice-500: #c8daee;
+  --white-ice-600: #bdcde0;
+  --white-ice-700: #b1bfd0;
+  --white-ice-800: #97a2b0;
+  --primary-color: var(--blue-denim-400);
+}
+
+/* Mobile + global styles */
+.cio-quiz,
+.cio-quiz * {
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+.cio-quiz {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #ffffff;
+  color: var(--gray-dust-500);
+}
+
+.cio-question-title {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.cio-question-description {
+  margin-top: 0.5rem;
+}
+
+/* CTA Button Component */
+.cio-question-cta-button {
+  background: var(--primary-color);
+  color: var(--white-ice-100);
+  border: 1px solid var(--primary-color);
+  border-radius: 4px;
+  height: 3rem;
+  font-size: 1rem;
+  max-width: 14rem;
+  flex-grow: 1;
+  margin-left: 1rem;
+}
+
+.cio-question-cta-button:hover {
+  background: var(--blue-denim-500);
+  border: 2px solid var(--blue-denim-600);
+}
+
+.cio-question-cta-button:active {
+  background: var(--blue-denim-700);
+  border: 2px solid var(--blue-denim-800);
+}
+
+.cio-question-cta-button:disabled,
+.cio-question-cta-button.disabled {
+  background: var(--blue-denim-200);
+  border: 2px solid var(--blue-denim-100);
+}
+
+/* Back Button Component */
+.cio-question-back-button {
+  color: var(--primary-color);
+  background: #ffffff;
+  border: 1px solid var(--primary-color);
+  border-radius: 4px;
+  height: 3rem;
+  width: 3rem;
+  font-size: 1rem;
+}
+
+.cio-question-back-button:hover {
+  border: 2px solid var(--blue-denim-600);
+}
+
+.cio-question-back-button:active {
+  border: 2px solid var(--blue-denim-700);
+}
+
+/* Cover Page Component */
+.cio-cover-question-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: center;
+}
+
+.cio-cover-question-container.with-image {
+  justify-content: start;
+}
+
+.cio-cover-question-text-container {
+  flex-grow: 1;
+  display: flex;
+  margin-top: 7.5rem;
+}
+
+.cio-cover-question-container.with-image .cio-cover-question-text-container {
+  margin-top: 0;
+}
+
+.cio-cover-question-text {
+  flex-grow: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 1rem;
+  padding-right: 2rem;
+  padding-bottom: 3rem;
+  padding-left: 2rem;
+  margin: 0;
+}
+
+.cio-cover-question-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cio-cover-question-img {
+  height: auto;
+  width: 100%;
+}
+
+.cio-cover-question-img .cio-question-image {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/* Small Tablet */
+@media screen and (min-width: 640px) {
+  /* CTA Button Component */
+  .cio-question-cta-button {
+    max-width: 14rem;
+  }
+
+  /* Cover Page Component */
+  .cio-cover-question-container {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .cio-cover-question-text-container {
+    margin-top: 0;
+  }
+
+  .cio-cover-question-container.with-image .cio-cover-question-text-container {
+    flex-grow: 0;
+    flex-basis: 50%;
+  }
+
+  .cio-cover-question-text {
+    max-width: 45rem;
+    padding: 0;
+    margin: auto;
+  }
+
+  .cio-cover-question-buttons {
+    margin-top: 2.5rem;
+  }
+
+  .cio-cover-question-img {
+    flex-basis: 50%;
+    height: 100%;
+  }
+}
+
+/* Big Tablet */
+@media screen and (min-width: 768px) {
+  .cio-cover-question-container.with-image .cio-cover-question-text {
+    max-width: 20rem;
+  }
+}
+
+/* Desktop */
+@media screen and (min-width: 1280px) {
+  .cio-cover-question-container.with-image .cio-cover-question-text {
+    max-width: 26rem;
+  }
+}

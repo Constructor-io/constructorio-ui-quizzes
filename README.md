@@ -12,10 +12,16 @@ A UI Library that provides React components to manage the fetching and rendering
 
 ## Using the Library
 
+### Install
+
+```bash
+npm i @constructor-io/constructorio-ui-quiz
+```
+
 The `CioQuiz` component handles state management, data fetching, and rendering logic for the entire quiz.
 
 ```jsx
-import { CioQuiz } from 'cio-quizzes-ts';
+import { CioQuiz } from '@constructor-io/constructorio-ui-quiz';
 
 function YourComponent() {
   return (
@@ -43,6 +49,22 @@ import '@constructor-io/constructorio-ui-quiz/styles.css';
  - To opt out of all default styling, do not import the `styles.css` stylesheet.
  - All starter styles in this library are scoped within the `.cio-quiz` css selector.
  - These starter styles are intended to be extended by layering in your own css rules
+
+## Troubleshooting
+
+### Known Issues
+
+**ESLint**
+
+There is a known issue with ESLint where it fails to resolve the paths exposed in the `exports` statement of NPM packages. If you are receiving the following error, you can safely disable ESLint using `// eslint-disable-line` for that line.
+
+`Unable to resolve path to module '@constructor-io/constructorio-ui-quiz/styles.css'`
+
+Relevant open issues:
+
+[Issue 1868](https://github.com/import-js/eslint-plugin-import/issues/1868)
+
+[Issue 1810](https://github.com/import-js/eslint-plugin-import/issues/1810)
 
 ## Local Development
 
