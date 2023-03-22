@@ -22,7 +22,7 @@ function SelectTypeQuestion() {
   if (questionResponse) {
     question = questionResponse.next_question;
     type = question.type;
-    hasImages = questionResponse.next_question.options.every(
+    hasImages = questionResponse.next_question.options.some(
       (option: QuestionOption) => option.images
     );
   }
