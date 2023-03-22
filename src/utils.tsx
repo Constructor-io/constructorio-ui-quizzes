@@ -15,7 +15,7 @@ export const renderImages = (images: Partial<QuestionImages>, cssClasses?: strin
   if (primaryUrl) {
     const windowWidth = window.innerWidth;
     let src = primaryUrl;
-    let alt = primaryAlt || undefined;
+    let alt = primaryAlt || 'Quiz Image';
 
     if (windowWidth > 768 && secondaryUrl) {
       src = secondaryUrl;

@@ -76,7 +76,7 @@ function SelectTypeQuestion() {
         <QuestionTitle title={question.title} />
         {question?.description ? <QuestionDescription description={question.description} /> : ''}
         <div className='cio-question-options-container'>
-          {question?.options?.map((option: QuestionOption, index: number) => (
+          {question?.options?.map((option: QuestionOption) => (
             <div
               className={`cio-question-option-container ${selected[option.id] ? 'selected' : ''}`}
               onClick={() => {
@@ -86,7 +86,7 @@ function SelectTypeQuestion() {
                 onOptionKeyDown(event, option.id);
               }}
               role='button'
-              tabIndex={index + 1}
+              tabIndex={0}
               key={option.id}>
               {option.images ? renderImages(option.images, 'cio-question-option-image') : ''}
               <p className='cio-question-option-value'>{option?.value}</p>
