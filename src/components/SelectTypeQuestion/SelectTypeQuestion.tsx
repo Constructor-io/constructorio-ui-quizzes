@@ -90,14 +90,14 @@ function SelectTypeQuestion() {
         </div>
         <div
           className={`${
-            hasImages
+            !hasImages
               ? 'cio-question-options-container-text-only'
               : 'cio-question-options-container'
           }`}>
           {question?.options?.map((option: QuestionOption, index: number) => (
             <div
               className={`${
-                hasImages
+                !hasImages
                   ? 'cio-question-option-container-text-only'
                   : 'cio-question-option-container'
               } ${selected[option.id] ? 'selected' : ''}`}
