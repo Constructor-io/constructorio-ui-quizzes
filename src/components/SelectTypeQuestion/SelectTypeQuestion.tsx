@@ -17,10 +17,14 @@ function SelectTypeQuestion() {
     useContext(QuizContext);
   let question;
   let type: `${QuestionTypes}`;
+  let hasImages = false;
 
   if (questionResponse) {
     question = questionResponse.next_question;
     type = question.type;
+    hasImages = questionResponse.next_question.options.every(
+      (option: QuestionOption) => option.images
+    );
   }
 
   const [selected, setSelected] = useState<Selected>({});
@@ -84,10 +88,19 @@ function SelectTypeQuestion() {
           <QuestionTitle title={question.title} />
           {question?.description ? <QuestionDescription description={question.description} /> : ''}
         </div>
-        <div className='cio-question-options-container'>
+        <div
+          className={`${
+            hasImages
+              ? 'cio-question-options-container-text-only'
+              : 'cio-question-options-container'
+          }`}>
           {question?.options?.map((option: QuestionOption, index: number) => (
             <div
-              className={`cio-question-option-container ${selected[option.id] ? 'selected' : ''}`}
+              className={`${
+                hasImages
+                  ? 'cio-question-option-container-text-only'
+                  : 'cio-question-option-container'
+              } ${selected[option.id] ? 'selected' : ''}`}
               onClick={() => {
                 toggleIdSelected(option.id);
               }}

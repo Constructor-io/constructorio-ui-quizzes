@@ -168,6 +168,8 @@
   border: 1px solid var(--white-ice-700);
   box-shadow: 0px 4px 10px rgba(93, 124, 232, 0.15);
   width: 45%;
+  display: flex;
+  flex-direction: column;
 }
 
 .cio-question-option-container.selected {
@@ -175,7 +177,17 @@
   box-shadow: 0px 4px 10px rgba(93, 124, 232, 0.35);
 }
 
+.cio-question-option-container-text-only.selected {
+  outline: 3px solid var(--blue-denim-600);
+  box-shadow: 0px 4px 10px rgba(93, 124, 232, 0.35);
+}
+
 .cio-question-option-container:hover:not(.selected) {
+  outline: 1px solid var(--blue-denim-600);
+  box-shadow: 0px 4px 10px rgba(93, 124, 232, 0.25);
+}
+
+.cio-question-option-container-text-only:hover:not(.selected) {
   outline: 1px solid var(--blue-denim-600);
   box-shadow: 0px 4px 10px rgba(93, 124, 232, 0.25);
 }
@@ -197,6 +209,26 @@
   overflow-y: auto;
 }
 
+.cio-question-options-container-text-only {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.cio-question-option-container-text-only {
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--white-ice-700);
+  box-shadow: 0px 4px 10px rgba(93, 124, 232, 0.15);
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: auto;
+}
+
 .cio-question-option-image {
   width: 100%;
   border-radius: 4px;
@@ -206,6 +238,7 @@
 
 .cio-question-option-value {
   text-align: center;
+  margin: auto 0;
 }
 
 .cio-select-question-buttons {
@@ -287,8 +320,6 @@
     max-width: 20rem;
   }
 
-
-
   .cio-select-question-text {
     padding: 2rem 5rem;
   }
@@ -298,6 +329,17 @@
   }
 
   .cio-question-option-container {
+    width: 30%;
+  }
+
+  .cio-question-options-container-text-only {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .cio-question-option-container-text-only {
+    margin: 0;
     width: 30%;
   }
 }
@@ -310,6 +352,10 @@
   
   /* Select component */
   .cio-question-option-container {
+    width: 20%;
+  }
+
+  .cio-question-option-container-text-only {
     width: 20%;
   }
 }
