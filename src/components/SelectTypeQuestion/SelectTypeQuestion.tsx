@@ -108,7 +108,7 @@ function SelectTypeQuestion() {
                 onOptionKeyDown(event, option.id);
               }}
               role='button'
-              tabIndex={index + 1}
+              tabIndex={0}
               key={option.id}>
               {option.images ? renderImages(option.images, 'cio-question-option-image') : ''}
               <div className='cio-question-option-value'>{option?.value}</div>
