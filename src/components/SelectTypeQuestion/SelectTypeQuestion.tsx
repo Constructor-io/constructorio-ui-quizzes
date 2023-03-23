@@ -94,7 +94,7 @@ function SelectTypeQuestion() {
               ? 'cio-question-options-container-text-only'
               : 'cio-question-options-container'
           }`}>
-          {question?.options?.map((option: QuestionOption, index: number) => (
+          {question?.options?.map((option: QuestionOption) => (
             <div
               className={`${
                 !hasImages

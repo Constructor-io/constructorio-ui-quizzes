@@ -262,6 +262,10 @@
     margin: 0 0 1rem 0;
 }
 
+.cio-select-question-text .cio-question-description {
+  margin-bottom: 0;
+}
+
 /* Small Tablet */
 @media screen and (min-width: 640px) {
   /* CTA Button Component */
