@@ -6,6 +6,7 @@ import QuizContext from '../CioQuiz/context';
 import { QuestionOption } from '../../types';
 import { renderImages } from '../../utils';
 import { QuestionTypes } from '../CioQuiz/actions';
+import BackButton from '../BackButton/BackButton';
 
 interface Selected {
   [key: number]: boolean;
@@ -16,10 +17,14 @@ function SelectTypeQuestion() {
     useContext(QuizContext);
   let question;
   let type: `${QuestionTypes}`;
+  let hasImages = false;
 
   if (questionResponse) {
     question = questionResponse.next_question;
     type = question.type;
+    hasImages = questionResponse.next_question.options.some(
+      (option: QuestionOption) => option.images
+    );
   }
 
   const [selected, setSelected] = useState<Selected>({});
@@ -42,7 +47,13 @@ function SelectTypeQuestion() {
     if (type === QuestionTypes.SingleSelect) {
       setSelected({ [id]: true });
     } else if (type === QuestionTypes.MultipleSelect) {
-      setSelected({ ...selected, [id]: !selected[id] });
+      if (selected[id]) {
+        const newState = { ...selected };
+        delete newState[id];
+        setSelected(newState);
+      } else {
+        setSelected({ ...selected, [id]: true });
+      }
     }
   };
 
@@ -73,12 +84,23 @@ function SelectTypeQuestion() {
   if (question) {
     return (
       <div className='cio-select-question-container'>
-        <QuestionTitle title={question.title} />
-        {question?.description ? <QuestionDescription description={question.description} /> : ''}
-        <div className='cio-question-options-container'>
+        <div className='cio-select-question-text'>
+          <QuestionTitle title={question.title} />
+          {question?.description ? <QuestionDescription description={question.description} /> : ''}
+        </div>
+        <div
+          className={`${
+            !hasImages
+              ? 'cio-question-options-container-text-only'
+              : 'cio-question-options-container'
+          }`}>
           {question?.options?.map((option: QuestionOption) => (
             <div
-              className={`cio-question-option-container ${selected[option.id] ? 'selected' : ''}`}
+              className={`${
+                !hasImages
+                  ? 'cio-question-option-container-text-only'
+                  : 'cio-question-option-container'
+              } ${selected[option.id] ? 'selected' : ''}`}
               onClick={() => {
                 toggleIdSelected(option.id);
               }}
@@ -89,12 +111,14 @@ function SelectTypeQuestion() {
               tabIndex={0}
               key={option.id}>
               {option.images ? renderImages(option.images, 'cio-question-option-image') : ''}
-              <p className='cio-question-option-value'>{option?.value}</p>
+              <div className='cio-question-option-value'>{option?.value}</div>
             </div>
           ))}
         </div>
-        <CTAButton disabled={isDisabled} ctaText={question?.cta_text} onClick={onNextClick} />
-        {!isFirstQuestion && <CTAButton ctaText='Back' onClick={quizBackHandler} />}
+        <div className='cio-select-question-buttons'>
+          {!isFirstQuestion && <BackButton onClick={quizBackHandler} />}
+          <CTAButton disabled={isDisabled} ctaText={question?.cta_text} onClick={onNextClick} />
+        </div>
       </div>
     );
   }

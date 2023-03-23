@@ -5,16 +5,18 @@ interface CTAButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 function CTAButton(props: CTAButtonProps) {
-  const { ctaText = 'Continue', disabled, ...rest } = props;
+  const { ctaText = 'Continue', disabled, className = 'cio-button-container', ...rest } = props;
 
   return (
-    <button
-      type='button'
-      className={`${disabled ? 'cio-question-cta-button disabled' : 'cio-question-cta-button'}`}
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      {...rest}>
-      {ctaText || 'Continue'}
-    </button>
+    <div className={`${className}`}>
+      <button
+        type='button'
+        className={`${disabled ? 'cio-question-cta-button disabled' : 'cio-question-cta-button'}`}
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...rest}>
+        {ctaText || 'Continue'}
+      </button>
+    </div>
   );
 }
 
