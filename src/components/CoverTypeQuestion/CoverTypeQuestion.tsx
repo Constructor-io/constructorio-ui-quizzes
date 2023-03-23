@@ -31,7 +31,7 @@ export default function CoverTypeQuestion() {
 
   if (question) {
     return (
-      <div className={`cio-cover-question-container ${hasImage ? 'with-image' : ''}`}>
+      <div className={`cio-cover-question-container${hasImage ? '--with-image' : ''}`}>
         <div className='cio-cover-question-text-container'>
           <div className='cio-cover-question-text'>
             <div>
