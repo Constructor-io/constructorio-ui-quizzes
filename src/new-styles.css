@@ -170,6 +170,7 @@
   width: 45%;
   display: flex;
   flex-direction: column;
+  height: 175px;
 }
 
 .cio-question-option-container.selected {
@@ -234,11 +235,17 @@
   border-radius: 4px;
   object-fit: cover;
   margin-bottom: 16px;
+  height: 80px;
 }
 
 .cio-question-option-value {
   text-align: center;
   margin: auto 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+          line-clamp: 2; 
+  -webkit-box-orient: vertical;
 }
 
 .cio-select-question-buttons {
@@ -315,6 +322,14 @@
 
   .cio-select-question-buttons {
     padding: 1rem 3rem;
+  }
+
+  .cio-question-option-container {
+    height: 250px;
+  }
+
+  .cio-question-option-image {
+    height: 155px;
   }
 }
 
