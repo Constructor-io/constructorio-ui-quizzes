@@ -289,6 +289,8 @@
 
 .cio-results-filter-options {
   display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .cio-results-filter-option {

@@ -3,6 +3,7 @@ import RedoButton from '../RedoButton/RedoButton';
 import { QuestionTypes } from '../CioQuiz/actions';
 import QuizContext from '../CioQuiz/context';
 import ResultCard from '../ResultCard/ResultCard';
+import ResultFilters from '../ResultFilters/ResultFilters';
 
 interface ResultContainerProps {
   numResults?: number;
@@ -14,6 +15,7 @@ export default function ResultContainer(props: ResultContainerProps) {
   const { numResults = 10 } = props;
   const { resultsResponse } = useContext(QuizContext);
   const { dispatch } = useContext(QuizContext);
+  const filterExpression = resultsResponse?.request?.collection_filter_expression;
 
   const onResetClick = () => {
     if (dispatch && resultsResponse) {
@@ -27,14 +29,7 @@ export default function ResultContainer(props: ResultContainerProps) {
     return (
       <div className='cio-results-container'>
         <h1 className='cio-results-title'>Here are your results</h1>
-        <div className='cio-results-filter-container'>
-          <p>Because you answered</p>
-          <div className='cio-results-filter-options'>
-            <div className='cio-results-filter-option'>Option</div>
-            <div className='cio-results-filter-option'>Option</div>
-            <div className='cio-results-filter-option'>Option</div>
-          </div>
-        </div>
+        <ResultFilters filters={filterExpression} />
         <RedoButton onClick={onResetClick} />
         <div className='cio-results'>
           {resultsResponse?.response?.results?.slice(0, numResults).map((result) => (
