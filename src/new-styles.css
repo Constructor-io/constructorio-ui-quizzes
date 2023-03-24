@@ -126,7 +126,7 @@
   justify-content: center;
 }
 
-.cio-cover-question-container {
+.cio-cover-question-text-container {
   flex-grow: 1;
   display: flex;
   margin-top: 7.5rem;
@@ -319,11 +319,6 @@
 
 /* Small Tablet */
 @media screen and (min-width: 640px) {
-  /* CTA Button Component */
-  .cio-question-cta-button {
-    max-width: 10rem;
-  }
-
   /* Cover Page Component */
   .cio-cover-question-container--with-image {
     flex-direction: row;
@@ -352,6 +347,10 @@
   .cio-cover-question-img {
     flex-basis: 50%;
     height: 100%;
+  }
+
+  .cio-cover-question-img .cio-question-image {
+    height: 100vh;
   }
 
   .cio-open-text-question-container--with-image {
