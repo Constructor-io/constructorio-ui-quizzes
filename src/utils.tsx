@@ -4,7 +4,6 @@ import { QuestionTypes } from './components/CioQuiz/actions';
 import { Answers } from './components/CioQuiz/reducer';
 import { QuestionImages } from './types';
 
-// eslint-disable-next-line import/prefer-default-export
 export const renderImages = (images: Partial<QuestionImages>, cssClasses?: string) => {
   const {
     primary_url: primaryUrl,
@@ -13,32 +12,21 @@ export const renderImages = (images: Partial<QuestionImages>, cssClasses?: strin
     secondary_alt: secondaryAlt,
   } = images;
 
-  type ImageFocusEvent = React.MouseEvent<HTMLImageElement> | React.FocusEvent<HTMLImageElement>;
-
   if (primaryUrl) {
-    const replaceImage = (e: ImageFocusEvent) => {
-      if (secondaryUrl) {
-        e.currentTarget.src = secondaryUrl;
-        e.currentTarget.alt = secondaryAlt || '';
-      }
-    };
-    const restoreImage = (e: ImageFocusEvent) => {
-      e.currentTarget.src = primaryUrl;
-      e.currentTarget.alt = primaryAlt || '';
-    };
+    const windowWidth = window.innerWidth;
+    let src = primaryUrl;
+    let alt = primaryAlt || 'Quiz Image';
 
-    return (
-      <img
-        className={`cio-question-image ${cssClasses || ''}`.trim()}
-        src={primaryUrl}
-        alt={secondaryAlt || undefined}
-        onMouseOver={replaceImage}
-        onMouseOut={restoreImage}
-        onFocus={replaceImage}
-        onBlur={restoreImage}
-      />
-    );
+    if (windowWidth > 768 && secondaryUrl) {
+      src = secondaryUrl;
+
+      if (secondaryAlt) {
+        alt = secondaryAlt;
+      }
+    }
+    return <img className={`cio-question-image ${cssClasses || ''}`.trim()} src={src} alt={alt} />;
   }
+
   return '';
 };
 
