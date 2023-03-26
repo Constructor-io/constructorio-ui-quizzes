@@ -19,8 +19,11 @@ export default function ResultCtaButton(props: ResultCtaButtonProps) {
   };
 
   return (
-    <button type='button' className={`cio-result-card-cta-btn ${className}`} onClick={clickHandler}>
-      Add To Cart
+    <button
+      type='button'
+      className={`cio-result-card-cta-button ${className}`}
+      onClick={clickHandler}>
+      Add to Cart
     </button>
   );
 }

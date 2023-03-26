@@ -41,39 +41,6 @@
   }
 }
 
-.cio-result-card {
-  background-color: transparent;
-  height: auto;
-  box-sizing: border-box;
-  text-decoration: none;
-  margin: 0;
-  flex-basis: 29.9%;
-  margin-bottom: 1rem;
-}
-
-.cio-result-card-text {
-  align-items: flex-start;
-  justify-content: space-between;
-  box-sizing: border-box;
-  padding: 0 0.735rem;
-  width: 100%;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
-  display: flex;
-  flex-direction: row;
-}
-
-.cio-result-card-image img {
-  width: 100%;
-}
-
-@media screen and (max-width: 600px) {
-  .cio-result-card {
-    flex-basis: 100%;
-    margin-bottom: 3rem;
-  }
-}
-
 .cio-hero-card {
   display: flex;
   flex-direction: row;
@@ -123,21 +90,6 @@
   .cio-hero-card-contents {
     margin: 0;
   }
-}
-
-.cio-result-card-cta-btn {
-  position: relative;
-  width: 100%;
-  box-sizing: border-box;
-  height: 2.5rem;
-  padding: 0.5rem 0;
-  color: black;
-  border-color: black;
-  border-style: solid;
-  border-width: 1px;
-  font-size: 0.875rem;
-  background-color: transparent;
-  font-family: 'Roboto', sans-serif;
 }
 
 .cio-result-card-anchor {

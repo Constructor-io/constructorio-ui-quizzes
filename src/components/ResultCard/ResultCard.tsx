@@ -5,10 +5,14 @@ import ResultCtaButton from '../ResultCtaButton/ResultCtaButton';
 interface ResultCardProps {
   result: Partial<BrowseResultData>;
   callback?: (clickedResult: Partial<BrowseResultData>) => any;
+  salePriceKey?: string;
+  regularPriceKey?: string;
 }
 
 export default function ResultCard(props: ResultCardProps) {
-  const { result, callback } = props;
+  const { result, callback, salePriceKey, regularPriceKey } = props;
+  const salePrice = salePriceKey && result?.data?.[salePriceKey];
+  const regularPrice = regularPriceKey && result?.data?.[regularPriceKey];
 
   const clickHandler = () => {
     if (callback && typeof callback === 'function') {
@@ -30,11 +34,14 @@ export default function ResultCard(props: ResultCardProps) {
         <img src={result.data?.image_url} alt='product' />
       </div>
       <div className='cio-result-card-text'>
-        <div className='cio-result-card-title'>
-          <span>{result.value}</span>
-        </div>
-        <div className='cio-result-card-price'>
-          <span>${result.data?.price}</span>
+        <p className='cio-result-card-title'>{result.value}</p>
+        <div className='cio-result-card-prices'>
+          {salePrice && <span className='cio-result-card-sale-price'>${salePrice}</span>}
+          {regularPrice && (
+            <span className={`cio-result-card-regular-price${salePrice ? '--strike-through' : ''}`}>
+              ${regularPrice}
+            </span>
+          )}
         </div>
       </div>
       <ResultCtaButton items={[result]} />

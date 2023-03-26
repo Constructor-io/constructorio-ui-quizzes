@@ -12,10 +12,15 @@ interface ResultContainerProps {
 export default function ResultContainer(props: ResultContainerProps) {
   // Params:
   // Results to display
+  // Result card callback
+  // Result card sale price
+  // Result card price
   const { numResults = 10 } = props;
   const { resultsResponse } = useContext(QuizContext);
   const { dispatch } = useContext(QuizContext);
   const filterExpression = resultsResponse?.request?.collection_filter_expression;
+  const regularPriceKey = 'price';
+  const salePriceKey = 'price';
 
   const onResetClick = () => {
     if (dispatch && resultsResponse) {
@@ -33,7 +38,12 @@ export default function ResultContainer(props: ResultContainerProps) {
         <RedoButton onClick={onResetClick} />
         <div className='cio-results'>
           {resultsResponse?.response?.results?.slice(0, numResults).map((result) => (
-            <ResultCard result={result} key={result.data?.id} />
+            <ResultCard
+              result={result}
+              key={result.data?.id}
+              salePriceKey={salePriceKey}
+              regularPriceKey={regularPriceKey}
+            />
           ))}
         </div>
       </div>
