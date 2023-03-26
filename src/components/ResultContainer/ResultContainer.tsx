@@ -34,8 +34,10 @@ export default function ResultContainer(props: ResultContainerProps) {
     return (
       <div className='cio-results-container'>
         <h1 className='cio-results-title'>Here are your results</h1>
-        <ResultFilters filters={filterExpression} />
-        <RedoButton onClick={onResetClick} />
+        <div className='cio-results-filter-and-redo-container'>
+          <ResultFilters filters={filterExpression} />
+          <RedoButton onClick={onResetClick} />
+        </div>
         <div className='cio-results'>
           {resultsResponse?.response?.results?.slice(0, numResults).map((result) => (
             <ResultCard

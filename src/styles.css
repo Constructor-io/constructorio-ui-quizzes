@@ -102,24 +102,6 @@
   justify-content: space-between;
 }
 
-.cio-result-card-cta-btn:hover {
-  box-shadow: 0 0 10px lightgray;
-  cursor: pointer;
-}
-
-.cio-results {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  column-gap: 2rem;
-}
-
-@media screen and (max-width: 600px) {
-  .cio-results {
-    justify-content: center;
-  }
-}
-
 .cio-open-text-question-container {
   display: flex;
   justify-content: center;

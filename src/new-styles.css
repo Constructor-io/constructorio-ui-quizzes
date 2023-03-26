@@ -291,6 +291,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  cursor: default;
 }
 
 .cio-results-filter-option {
@@ -305,6 +306,12 @@
   font-size: 0.75rem;
 }
 
+.cio-results {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
 /* Result Card component */
 .cio-result-card {
   background-color: transparent;
@@ -313,6 +320,7 @@
   text-decoration: none;
   margin: 0;
   margin-bottom: 1.5rem;
+  flex-basis: 100%;
 }
 
 .cio-result-card-image {
@@ -361,6 +369,22 @@
   border-radius: 4px;
   color: var(--white-ice-100);
   font-size: 1rem;
+}
+
+.cio-result-card-cta-button:hover {
+  background: var(--blue-denim-500);
+  border: 2px solid var(--blue-denim-600);
+}
+
+.cio-result-card-cta-button:active {
+  background: var(--blue-denim-700);
+  border: 2px solid var(--blue-denim-800);
+}
+
+.cio-result-card-cta-button:disabled,
+.cio-result-card-cta-button.disabled {
+  background: var(--blue-denim-200);
+  border: 2px solid var(--blue-denim-100);
 }
 
 /* Redo Button Component */
@@ -425,6 +449,31 @@
 
   .cio-select-question-buttons {
     padding: 1rem 3rem;
+  }
+
+  /* Results component */
+  .cio-results-container {
+    padding: 3rem 4rem;
+  }
+
+  .cio-results-filter-and-redo-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-bottom: 1.5rem;
+  }
+
+  .cio-results-filter-container {
+    margin-bottom: 0;
+  }
+
+  .cio-results {
+    justify-content: space-between;
+  }
+
+  /* Result Card component */
+  .cio-result-card {
+    flex-basis: 30%;
   }
 }
 
