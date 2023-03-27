@@ -44,7 +44,7 @@ export default function ResultCard(props: ResultCardProps) {
           )}
         </div>
       </div>
-      <ResultCtaButton items={[result]} />
+      <ResultCtaButton item={result} />
     </>
   );
 

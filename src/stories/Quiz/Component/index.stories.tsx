@@ -24,8 +24,17 @@ export default {
   },
 };
 
+const resultsPageOptions = {
+  addToCartCallback: (item) => {
+    console.log('Add to cart');
+    console.log(item);
+  },
+  resultCardRegularPriceKey: 'price',
+  resultCardSalePriceKey: 'price',
+};
+
 export const BasicUsage = ComponentTemplate.bind({});
-BasicUsage.args = { apiKey, quizId };
+BasicUsage.args = { apiKey, quizId, resultsPageOptions };
 addComponentStoryDescription(
   BasicUsage,
   `const args = ${stringify(BasicUsage.args)}`,
@@ -35,7 +44,7 @@ addComponentStoryDescription(
 const cioJsClient = new ConstructorIOClient({ apiKey });
 
 export const ProvideCIOClientInstance = ComponentTemplate.bind({});
-ProvideCIOClientInstance.args = { quizId, cioJsClient };
+ProvideCIOClientInstance.args = { quizId, cioJsClient, resultsPageOptions };
 addComponentStoryDescription(
   ProvideCIOClientInstance,
   `

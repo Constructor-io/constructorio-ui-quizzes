@@ -5,20 +5,25 @@ import QuizContext from '../CioQuiz/context';
 import ResultCard from '../ResultCard/ResultCard';
 import ResultFilters from '../ResultFilters/ResultFilters';
 import CTAButton from '../CTAButton/CTAButton';
+import { BrowseResultData } from '../../types';
 
-export default function ResultContainer() {
-  // Params:
-  // Results to display
-  // Result card callback
-  // Result card sale price
-  // Result card price
-  // Should results title be configurable?
-  // TODO: Num results should come from the request
+export interface ResultsPageOptions {
+  addToCartCallback: (item: Partial<BrowseResultData>) => any;
+  resultCardSalePriceKey: string;
+  resultCardRegularPriceKey: string;
+  numResultsToDisplay?: number;
+}
+
+export interface IResultContainerProps {
+  options: ResultsPageOptions;
+}
+
+export default function ResultContainer(props: IResultContainerProps) {
+  const { options } = props;
+  const { addToCartCallback, resultCardSalePriceKey, resultCardRegularPriceKey } = options;
   const { resultsResponse } = useContext(QuizContext);
   const { dispatch } = useContext(QuizContext);
   const filterExpression = resultsResponse?.request?.collection_filter_expression;
-  const regularPriceKey = 'price';
-  const salePriceKey = 'price';
   const zeroResults = !resultsResponse?.response?.results?.length;
   const resultsTitle = zeroResults ? 'Oops, there are no results' : 'Here are your results';
 
@@ -44,8 +49,9 @@ export default function ResultContainer() {
               <ResultCard
                 result={result}
                 key={result.data?.id}
-                salePriceKey={salePriceKey}
-                regularPriceKey={regularPriceKey}
+                salePriceKey={resultCardSalePriceKey}
+                regularPriceKey={resultCardRegularPriceKey}
+                callback={addToCartCallback}
               />
             ))}
           </div>

@@ -5,7 +5,7 @@ import reducer, { initialState } from './reducer';
 import { ActionAnswerQuestion, QuestionTypes } from './actions';
 import { NextQuestionResponse, GetBrowseResultsResponse } from '../../types';
 import QuizQuestions from '../QuizQuestions';
-import ResultContainer from '../ResultContainer/ResultContainer';
+import ResultContainer, { ResultsPageOptions } from '../ResultContainer/ResultContainer';
 import { RequestStates } from '../../constants';
 import { getNextQuestion, getQuizResults } from '../../utils';
 import Spinner from '../Spinner/Spinner';
@@ -15,14 +15,17 @@ export interface IQuizProps {
   quizId: string;
   apiKey?: string;
   cioJsClient?: ConstructorIOClient;
+  resultsPageOptions: ResultsPageOptions;
 }
 
 export default function CioQuiz(props: IQuizProps) {
-  const { quizId, apiKey, cioJsClient } = props;
+  const { quizId, apiKey, cioJsClient, resultsPageOptions } = props;
+
   if (!quizId) {
     // eslint-disable-next-line no-console
     console.error('quizId is a required field of type string');
   }
+
   const cioClient = useCioClient({ apiKey, cioJsClient });
   const [state, dispatch] = useReducer(reducer, initialState);
   const [requestState, setRequestState] = useState(RequestStates.Stale);
@@ -97,7 +100,7 @@ export default function CioQuiz(props: IQuizProps) {
     return (
       <div className='cio-quiz'>
         <QuizContext.Provider value={contextValue}>
-          {resultsResponse && <ResultContainer />}
+          {resultsResponse && <ResultContainer options={resultsPageOptions} />}
           {questionResponse && <QuizQuestions questionResponse={questionResponse} />}
         </QuizContext.Provider>
       </div>
