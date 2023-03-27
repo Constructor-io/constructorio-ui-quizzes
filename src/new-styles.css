@@ -273,7 +273,7 @@
 }
 
 .cio-results-title {
-  margin-top: 1rem;
+  margin-top: 0;
   margin-bottom: 1rem;
   color: var(--gray-dust-500);
 }
@@ -310,6 +310,31 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+}
+
+.cio-zero-results {
+  margin-top: 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cio-zero-results-subtitle {
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+  color: var(--gray-dust-500);
+  margin-top: 0;
+}
+
+.cio-zero-results-description {
+  color: var(--gray-dust-100);
+  line-height: 1.25rem;
+  margin-top: 0;
 }
 
 /* Result Card component */
@@ -520,5 +545,10 @@
 
   .cio-question-option-container-text-only {
     width: 20%;
+  }
+
+  /* Results component */
+  .cio-zero-results {
+    margin-top: 7rem;
   }
 }
