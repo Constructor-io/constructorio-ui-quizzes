@@ -55,13 +55,11 @@ export const stringify = (obj) => JSON.stringify(obj, null, '  ');
 export const getNextQuestion = (cioClient: any, quizId: string, answers: Answers) =>
   cioClient?.quizzes.getQuizNextQuestion(quizId, { answers });
 
-export const getQuizResults = async (cioClient: any, quizId: string, answers: Answers) => {
-  const quizResults = await cioClient?.quizzes.getQuizResults(quizId, { answers });
-  if (quizResults?.result?.results_url) {
-    return fetch(quizResults?.result.results_url).then((response: Response) => response.json());
-  }
-  return null;
-};
+export const getQuizResults = async (
+  cioClient: any,
+  quizId: string,
+  parameters: { answers: Answers; resultsPerPage?: number }
+) => cioClient?.quizzes.getQuizResults(quizId, parameters);
 
 export const getQuestionTypes = (questionType?: `${QuestionTypes}`) => {
   const isOpenQuestion = questionType === QuestionTypes.OpenText;

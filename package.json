@@ -41,7 +41,7 @@
     "compile": "rm -rf lib && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json && npm run copy-styles"
   },
   "peerDependencies": {
-    "@constructor-io/constructorio-client-javascript": "^2.34.6",
+    "@constructor-io/constructorio-client-javascript": "git@github.com:Constructor-io/constructorio-client-javascript.git#csl-2208-js-client-sdk-migrate-quizzes-finalize",
     "react": ">=16.12.0",
     "react-dom": ">=16.12.0",
     "tslib": "^2.4.0"

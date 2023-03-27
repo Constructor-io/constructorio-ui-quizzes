@@ -3,7 +3,7 @@ import React, { useReducer, useState, useEffect, useCallback } from 'react';
 import QuizContext from './context';
 import reducer, { initialState } from './reducer';
 import { ActionAnswerQuestion, QuestionTypes } from './actions';
-import { NextQuestionResponse, GetBrowseResultsResponse } from '../../types';
+import { NextQuestionResponse, QuizResultsResponse } from '../../types';
 import QuizQuestions from '../QuizQuestions';
 import ResultContainer, { ResultsPageOptions } from '../ResultContainer/ResultContainer';
 import { RequestStates } from '../../constants';
@@ -30,7 +30,7 @@ export default function CioQuiz(props: IQuizProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [requestState, setRequestState] = useState(RequestStates.Stale);
   const [questionResponse, setQuestionResponse] = useState<NextQuestionResponse>();
-  const [resultsResponse, setResultsResponse] = useState<GetBrowseResultsResponse>();
+  const [resultsResponse, setResultsResponse] = useState<QuizResultsResponse>();
   const [firstQuestion, setFirstQuestion] = useState<NextQuestionResponse>();
   const isFirstQuestion = firstQuestion?.next_question.id === questionResponse?.next_question.id;
 
@@ -64,7 +64,10 @@ export default function CioQuiz(props: IQuizProps) {
       setRequestState(RequestStates.Loading);
       if (state.isLastAnswer) {
         try {
-          const quizResults = await getQuizResults(cioClient, quizId, state.answers);
+          const quizResults = await getQuizResults(cioClient, quizId, {
+            answers: state.answers,
+            resultsPerPage: resultsPageOptions?.numResultsToDisplay,
+          });
           setResultsResponse(quizResults);
           setRequestState(RequestStates.Success);
           setQuestionResponse(undefined);
@@ -83,7 +86,7 @@ export default function CioQuiz(props: IQuizProps) {
         }
       }
     })();
-  }, [cioClient, state, quizId, state.isLastAnswer]);
+  }, [cioClient, state, quizId, state.isLastAnswer, resultsPageOptions?.numResultsToDisplay]);
 
   useEffect(() => {
     if (!firstQuestion) {
