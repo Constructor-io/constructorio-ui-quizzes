@@ -45,7 +45,9 @@ function ResultFilters(props: ResultFiltersProps) {
       <p>Because you answered</p>
       <div className='cio-results-filter-options'>
         {filterValues?.map((filter) => (
-          <div className='cio-results-filter-option'>{filter}</div>
+          <div className='cio-results-filter-option' key={filter}>
+            {filter}
+          </div>
         ))}
       </div>
     </div>
