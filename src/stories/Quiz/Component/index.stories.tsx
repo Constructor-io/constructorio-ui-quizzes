@@ -1,7 +1,7 @@
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
 import CioQuiz from '../../../components/CioQuiz';
 import { argTypes } from '../argTypes';
-import { stringify } from '../../../utils';
+import { stringifyWithDefaults } from '../../../utils';
 import { ComponentTemplate, addComponentStoryDescription } from '.';
 import {
   basicDescription,
@@ -27,11 +27,11 @@ export default {
 const resultsPageOptions = {
   clickItemCallback: (item) => {
     console.log('Click item');
-    console.log(item);
+    console.dir(item);
   },
   addToCartCallback: (item) => {
     console.log('Add to cart');
-    console.log(item);
+    console.dir(item);
   },
   resultCardRegularPriceKey: 'price',
   resultCardSalePriceKey: 'price',
@@ -41,7 +41,7 @@ export const BasicUsage = ComponentTemplate.bind({});
 BasicUsage.args = { apiKey, quizId, resultsPageOptions };
 addComponentStoryDescription(
   BasicUsage,
-  `const args = ${stringify(BasicUsage.args)}`,
+  `const args = ${stringifyWithDefaults(BasicUsage.args)}`,
   basicDescription
 );
 
@@ -55,6 +55,6 @@ addComponentStoryDescription(
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
 
 const cioJsClient = new ConstructorIOClient({ apiKey: '${apiKey}' });
-const args = { quizId, cioJsClient };`,
+const args = { quizId, cioJsClient, resultsPageOptions };`,
   cioJsClientDescription
 );

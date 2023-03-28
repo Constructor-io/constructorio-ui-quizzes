@@ -50,6 +50,21 @@ ${templateCode}
   };
 };
 
+export const defaultAddToCartCallbackCode = `"addToCartCallback": (item) => console.dir(item)`;
+
+export const stringifyWithDefaults = (obj: { apiKey: string; addToCartCallback: any }) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { addToCartCallback, ...rest } = obj;
+  let res = JSON.stringify(rest, null, '  ');
+
+  res = res.replace(
+    '"resultsPageOptions": {',
+    `"resultsPageOptions": {
+    ${defaultAddToCartCallbackCode},`
+  );
+  return res;
+};
+
 export const stringify = (obj) => JSON.stringify(obj, null, '  ');
 
 export const getNextQuestion = (cioClient: any, quizId: string, answers: Answers) =>
