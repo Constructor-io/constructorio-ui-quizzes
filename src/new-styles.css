@@ -394,6 +394,7 @@
   border-radius: 4px;
   color: var(--white-ice-100);
   font-size: 1rem;
+  width: 100%;
 }
 
 .cio-result-card-cta-button:hover {

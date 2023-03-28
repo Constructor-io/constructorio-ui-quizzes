@@ -8,7 +8,7 @@ function CTAButton(props: CTAButtonProps) {
   const { ctaText = 'Continue', disabled, className = 'cio-button-container', ...rest } = props;
 
   return (
-    <div className={`${className}`}>
+    <div className={`${className || ''}`}>
       <button
         type='button'
         className={`${disabled ? 'cio-question-cta-button disabled' : 'cio-question-cta-button'}`}
