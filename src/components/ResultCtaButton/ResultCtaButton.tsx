@@ -14,6 +14,7 @@ export default function ResultCtaButton(props: ResultCtaButtonProps) {
     e.preventDefault();
 
     if (callback && typeof callback === 'function') {
+      e.stopPropagation();
       callback(item);
     }
   };
