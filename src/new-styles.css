@@ -266,6 +266,7 @@
 /* Results component */
 .cio-results-container {
   width: 100%;
+  max-width: 1200px;
   padding: 2rem 1rem;
   display: flex;
   flex-direction: column;
@@ -555,6 +556,10 @@
   }
 
   /* Results component */
+  .cio-results-container {
+    margin-top: 3rem;
+  }
+
   .cio-zero-results {
     margin-top: 7rem;
   }
