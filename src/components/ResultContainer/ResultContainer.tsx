@@ -9,6 +9,7 @@ import { BrowseResultData } from '../../types';
 
 export interface ResultsPageOptions {
   addToCartCallback: (item: Partial<BrowseResultData>) => any;
+  clickItemCallback?: (item: Partial<BrowseResultData>) => any;
   resultCardSalePriceKey: string;
   resultCardRegularPriceKey: string;
   numResultsToDisplay?: number;
@@ -20,7 +21,12 @@ export interface IResultContainerProps {
 
 export default function ResultContainer(props: IResultContainerProps) {
   const { options } = props;
-  const { addToCartCallback, resultCardSalePriceKey, resultCardRegularPriceKey } = options;
+  const {
+    addToCartCallback,
+    clickItemCallback,
+    resultCardSalePriceKey,
+    resultCardRegularPriceKey,
+  } = options;
   const { resultsResponse } = useContext(QuizContext);
   const { dispatch } = useContext(QuizContext);
   const filterExpression = resultsResponse?.request?.collection_filter_expression;
@@ -51,7 +57,8 @@ export default function ResultContainer(props: IResultContainerProps) {
                 key={result.data?.id}
                 salePriceKey={resultCardSalePriceKey}
                 regularPriceKey={resultCardRegularPriceKey}
-                callback={addToCartCallback}
+                addToCartCallback={addToCartCallback}
+                clickItemCallback={clickItemCallback}
               />
             ))}
           </div>

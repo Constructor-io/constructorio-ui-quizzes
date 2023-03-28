@@ -25,6 +25,10 @@ export default {
 };
 
 const resultsPageOptions = {
+  clickItemCallback: (item) => {
+    console.log('Click item');
+    console.log(item);
+  },
   addToCartCallback: (item) => {
     console.log('Add to cart');
     console.log(item);

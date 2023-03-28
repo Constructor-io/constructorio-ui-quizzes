@@ -4,26 +4,27 @@ import ResultCtaButton from '../ResultCtaButton/ResultCtaButton';
 
 interface ResultCardProps {
   result: Partial<BrowseResultData>;
-  callback?: (clickedResult: Partial<BrowseResultData>) => any;
+  addToCartCallback: (clickedResult: Partial<BrowseResultData>) => any;
+  clickItemCallback?: (clickedResult: Partial<BrowseResultData>) => any;
   salePriceKey?: string;
   regularPriceKey?: string;
 }
 
 export default function ResultCard(props: ResultCardProps) {
-  const { result, callback, salePriceKey, regularPriceKey } = props;
+  const { result, addToCartCallback, clickItemCallback, salePriceKey, regularPriceKey } = props;
   const salePrice = salePriceKey && result?.data?.[salePriceKey];
   const regularPrice = regularPriceKey && result?.data?.[regularPriceKey];
 
   const clickHandler = () => {
-    if (callback && typeof callback === 'function') {
-      callback(result);
+    if (clickItemCallback && typeof clickItemCallback === 'function') {
+      clickItemCallback(result);
     }
   };
 
   const keyDownHandler = (event: KeyboardEvent<HTMLDivElement>) => {
     if (event?.key === ' ' || event?.key === 'Enter') {
-      if (callback && typeof callback === 'function') {
-        callback(result);
+      if (clickItemCallback && typeof clickItemCallback === 'function') {
+        clickItemCallback(result);
       }
     }
   };
@@ -44,11 +45,11 @@ export default function ResultCard(props: ResultCardProps) {
           )}
         </div>
       </div>
-      <ResultCtaButton item={result} />
+      <ResultCtaButton item={result} callback={addToCartCallback} />
     </>
   );
 
-  if (callback) {
+  if (clickItemCallback) {
     return (
       <div
         onClick={clickHandler}
