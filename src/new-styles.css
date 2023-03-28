@@ -41,7 +41,6 @@
 .cio-quiz {
   display: flex;
   justify-content: center;
-  min-height: 100vh;
   background-color: #ffffff;
   color: var(--gray-dust-500);
 }
@@ -346,18 +345,25 @@
   margin: 0;
   margin-bottom: 1.5rem;
   flex-basis: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .cio-result-card-image {
   width: auto;
   height: 240px;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .cio-result-card-image img {
   height: 100%;
   width: 100%;
   object-fit: contain;
+}
+
+.cio-result-card-text {
+  flex-grow: 1;
 }
 
 .cio-result-card-title {
@@ -494,7 +500,7 @@
   }
 
   .cio-results {
-    justify-content: space-between;
+    column-gap: 5%;
   }
 
   /* Result Card component */
