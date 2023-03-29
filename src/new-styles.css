@@ -241,8 +241,6 @@
 .cio-question-option-value {
   text-align: center;
   margin: auto 0;
-  overflow: hidden;
-  display: -webkit-box;
 }
 
 .cio-select-question-buttons {
