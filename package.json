@@ -27,7 +27,7 @@
   "scripts": {
     "prettier": "npx prettier --write .",
     "lint": "npm run prettier && eslint src --ext js,ts,jsx,tsx",
-    "copy-styles": "cp src/styles.css lib/styles.css",
+    "copy-styles": "cp src/styles.css lib/styles.css && cp src/new-styles.css lib/new-styles.css",
     "prepare": "husky install",
     "dev": "storybook dev -p 6006",
     "storybook:ci": "storybook dev --ci --quiet -p 6006",
