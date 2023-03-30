@@ -409,6 +409,16 @@
   flex-direction: column;
 }
 
+.cio-result-card-anchor {
+  text-decoration: none;
+  background-color: transparent;
+  color: inherit;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .cio-result-card-image {
   width: auto;
   height: 240px;

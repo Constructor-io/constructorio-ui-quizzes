@@ -91,13 +91,3 @@
     margin: 0;
   }
 }
-
-.cio-result-card-anchor {
-  text-decoration: none;
-  background-color: transparent;
-  color: inherit;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
