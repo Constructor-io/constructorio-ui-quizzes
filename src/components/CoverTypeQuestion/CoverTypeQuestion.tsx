@@ -31,14 +31,14 @@ export default function CoverTypeQuestion() {
 
   if (question) {
     return (
-      <div className={`cio-cover-question-container ${hasImage ? 'with-image' : ''}`}>
+      <div className={`cio-cover-question-container${hasImage ? '--with-image' : ''}`}>
         <div className='cio-cover-question-text-container'>
           <div className='cio-cover-question-text'>
             <div>
               <QuestionTitle title={question?.title} />
               <QuestionDescription description={question.description} />
             </div>
-            <div className='cio-cover-question-buttons'>
+            <div className='cio-question-buttons-container'>
               {!isFirstQuestion && <BackButton onClick={quizBackHandler} />}
               <CTAButton ctaText={question?.cta_text} onClick={onNextClick} />
             </div>

@@ -5,6 +5,7 @@ import CTAButton from '../CTAButton/CTAButton';
 import { renderImages } from '../../utils';
 import QuizContext from '../CioQuiz/context';
 import { QuestionTypes } from '../CioQuiz/actions';
+import BackButton from '../BackButton/BackButton';
 
 interface OpenTextQuestionProps {
   initialValue?: string;
@@ -60,8 +61,12 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
   }, [questionResponse, state, initialValue]);
 
   if (question) {
+    const hasImage = question?.images?.primary_url;
+
     return (
-      <div className='cio-open-text-question-container'>
+      <div className={`cio-open-text-question-container${hasImage ? '--with-image' : ''}`}>
+        {question.images ? renderImages(question.images, 'cio-open-text-question-image') : ''}
+
         <div className='cio-open-text-question-form'>
           <QuestionTitle title={question.title} />
           <QuestionDescription description={question.description} />
@@ -72,10 +77,15 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
             onChange={onChangeHandler}
             onKeyDown={onKeyDownHandler}
           />
-          <CTAButton disabled={!openTextInput} ctaText={question.cta_text} onClick={onNextClick} />
-          {!isFirstQuestion && <CTAButton ctaText='Back' onClick={quizBackHandler} />}
+          <div className='cio-question-buttons-container'>
+            {!isFirstQuestion && <BackButton onClick={quizBackHandler} />}
+            <CTAButton
+              disabled={!openTextInput}
+              ctaText={question.cta_text}
+              onClick={onNextClick}
+            />
+          </div>
         </div>
-        {question.images ? renderImages(question.images, 'cio-open-text-question-image') : ''}
       </div>
     );
   }
