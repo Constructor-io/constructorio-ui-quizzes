@@ -123,7 +123,8 @@
 }
 
 .cio-cover-question-container {
-  justify-content: center;
+  display: flex;
+  align-items: center;
 }
 
 .cio-cover-question-text-container {
@@ -172,6 +173,8 @@
 }
 
 .cio-open-text-question-container {
+  display: flex;
+  align-items: center;
   margin-top: 7.5rem;
 }
 
@@ -401,10 +404,6 @@
 
 /* Big Tablet */
 @media screen and (min-width: 768px) {
-  .cio-quiz {
-    align-items: center;
-  }
-
   .cio-cover-question-container--with-image .cio-cover-question-text {
     max-width: 20rem;
   }
