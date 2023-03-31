@@ -6,7 +6,6 @@ export default defineConfig({
   build: {
     rollupOptions: {
       preserveEntrySignatures: 'strict',
-      external: ["react"],
       input: {
         app: "./src/bundled.jsx",
       },
