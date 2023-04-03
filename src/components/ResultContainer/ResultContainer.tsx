@@ -2,21 +2,12 @@ import React, { useContext } from 'react';
 import RedoButton from '../RedoButton/RedoButton';
 import { QuestionTypes } from '../CioQuiz/actions';
 import QuizContext from '../CioQuiz/context';
-import ResultCard from '../ResultCard/ResultCard';
 import ResultFilters from '../ResultFilters/ResultFilters';
-import CTAButton from '../CTAButton/CTAButton';
-import { BrowseResultData } from '../../types';
-
-export interface ResultsPageOptions {
-  addToCartCallback: (item: Partial<BrowseResultData>) => any;
-  clickItemCallback?: (item: Partial<BrowseResultData>) => any;
-  resultCardSalePriceKey: string;
-  resultCardRegularPriceKey: string;
-  numResultsToDisplay?: number;
-}
+import ZeroResults from '../ZeroResults/ZeroResults';
+import Results, { ResultsProps } from '../Results/Results';
 
 export interface IResultContainerProps {
-  options: ResultsPageOptions;
+  options: ResultsProps;
 }
 
 export default function ResultContainer(props: IResultContainerProps) {
@@ -50,31 +41,14 @@ export default function ResultContainer(props: IResultContainerProps) {
           <RedoButton onClick={onResetClick} />
         </div>
         {!zeroResults && (
-          <div className='cio-results'>
-            {resultsResponse?.response?.results?.map((result) => (
-              <ResultCard
-                result={result}
-                key={result.data?.id}
-                salePriceKey={resultCardSalePriceKey}
-                regularPriceKey={resultCardRegularPriceKey}
-                addToCartCallback={addToCartCallback}
-                clickItemCallback={clickItemCallback}
-              />
-            ))}
-          </div>
+          <Results
+            addToCartCallback={addToCartCallback}
+            clickItemCallback={clickItemCallback}
+            resultCardSalePriceKey={resultCardSalePriceKey}
+            resultCardRegularPriceKey={resultCardRegularPriceKey}
+          />
         )}
-        {zeroResults && (
-          <div className='cio-zero-results'>
-            <h3 className='cio-zero-results-subtitle'>
-              Sorry, it seems like we couldn’t find results based on your answers.
-            </h3>
-            <p className='cio-zero-results-description'>
-              This is embarrassing 😢. It might be that some of the questions are not properly set
-              up from our end. Would you give us another try?
-            </p>
-            <CTAButton ctaText='Try Again' onClick={onResetClick} />
-          </div>
-        )}
+        {zeroResults && <ZeroResults />}
       </div>
     );
   }

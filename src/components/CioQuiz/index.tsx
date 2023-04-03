@@ -5,11 +5,16 @@ import reducer, { initialState } from './reducer';
 import { ActionAnswerQuestion, QuestionTypes } from './actions';
 import { NextQuestionResponse, QuizResultsResponse } from '../../types';
 import QuizQuestions from '../QuizQuestions';
-import ResultContainer, { ResultsPageOptions } from '../ResultContainer/ResultContainer';
+import ResultContainer from '../ResultContainer/ResultContainer';
+import { ResultsProps } from '../Results/Results';
 import { RequestStates } from '../../constants';
 import { getNextQuestion, getQuizResults } from '../../utils';
 import Spinner from '../Spinner/Spinner';
 import useCioClient from '../../hooks/useCioClient';
+
+export interface ResultsPageOptions extends ResultsProps {
+  numResultsToDisplay?: number;
+}
 
 export interface IQuizProps {
   quizId: string;
