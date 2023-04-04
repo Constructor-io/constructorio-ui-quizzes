@@ -659,10 +659,15 @@
   }
   
   .cio-question-buttons-container {
+    height: auto;
     position: static;
     padding: 0px;
     bottom: auto;
     left: auto;
+  }
+  
+  .cio-select-question-container {
+    margin-bottom: 6rem;
   }
 
   .cio-select-question-container .cio-question-buttons-container {
