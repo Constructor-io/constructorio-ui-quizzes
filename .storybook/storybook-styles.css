@@ -2,3 +2,8 @@
   min-height: 500px;
   background-color: #212425;
 }
+
+#storybook-root {
+  min-height: 100dvh;
+  height: 100dvh;
+}

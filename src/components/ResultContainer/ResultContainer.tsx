@@ -1,18 +1,28 @@
 import React, { useContext } from 'react';
-import CTAButton from '../CTAButton/CTAButton';
+import RedoButton from '../RedoButton/RedoButton';
 import { QuestionTypes } from '../CioQuiz/actions';
 import QuizContext from '../CioQuiz/context';
-import ResultCard from '../ResultCard/ResultCard';
-import ResultHeroCard from '../ResultHeroCard/ResultHeroCard';
+import ResultFilters from '../ResultFilters/ResultFilters';
+import ZeroResults from '../ZeroResults/ZeroResults';
+import Results, { ResultsProps } from '../Results/Results';
 
-interface ResultContainerProps {
-  numResults?: number;
+export interface IResultContainerProps {
+  options: ResultsProps;
 }
 
-export default function ResultContainer(props: ResultContainerProps) {
-  const { numResults = 6 } = props;
+export default function ResultContainer(props: IResultContainerProps) {
+  const { options } = props;
+  const {
+    addToCartCallback,
+    clickItemCallback,
+    resultCardSalePriceKey,
+    resultCardRegularPriceKey,
+  } = options;
   const { resultsResponse } = useContext(QuizContext);
   const { dispatch } = useContext(QuizContext);
+  const filterExpression = resultsResponse?.request?.collection_filter_expression;
+  const zeroResults = !resultsResponse?.response?.results?.length;
+  const resultsTitle = zeroResults ? 'Oops, there are no results' : 'Here are your results';
 
   const onResetClick = () => {
     if (dispatch && resultsResponse) {
@@ -23,18 +33,22 @@ export default function ResultContainer(props: ResultContainerProps) {
   };
 
   if (resultsResponse) {
-    const results = resultsResponse.response?.results;
     return (
-      <div className='cio-result-container'>
-        <h1 className='cio-result-container-text'>Here is your results</h1>
-
-        {results && results.length > 0 ? <ResultHeroCard heroItem={results[0]} /> : ''}
-        <div className='cio-results'>
-          {resultsResponse?.response?.results?.slice(1, numResults).map((result) => (
-            <ResultCard result={result} key={result.data?.id} />
-          ))}
+      <div className='cio-results-container'>
+        <h1 className='cio-results-title'>{resultsTitle}</h1>
+        <div className='cio-results-filter-and-redo-container'>
+          <ResultFilters filters={filterExpression} />
+          <RedoButton onClick={onResetClick} />
         </div>
-        <CTAButton ctaText='Reset' onClick={onResetClick} />
+        {!zeroResults && (
+          <Results
+            addToCartCallback={addToCartCallback}
+            clickItemCallback={clickItemCallback}
+            resultCardSalePriceKey={resultCardSalePriceKey}
+            resultCardRegularPriceKey={resultCardRegularPriceKey}
+          />
+        )}
+        {zeroResults && <ZeroResults />}
       </div>
     );
   }

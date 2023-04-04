@@ -3,31 +3,39 @@ import React, { useReducer, useState, useEffect, useCallback } from 'react';
 import QuizContext from './context';
 import reducer, { initialState } from './reducer';
 import { ActionAnswerQuestion, QuestionTypes } from './actions';
-import { NextQuestionResponse, GetBrowseResultsResponse } from '../../types';
+import { NextQuestionResponse, QuizResultsResponse } from '../../types';
 import QuizQuestions from '../QuizQuestions';
 import ResultContainer from '../ResultContainer/ResultContainer';
+import { ResultsProps } from '../Results/Results';
 import { RequestStates } from '../../constants';
 import { getNextQuestion, getQuizResults } from '../../utils';
 import Spinner from '../Spinner/Spinner';
 import useCioClient from '../../hooks/useCioClient';
 
+export interface ResultsPageOptions extends ResultsProps {
+  numResultsToDisplay?: number;
+}
+
 export interface IQuizProps {
   quizId: string;
   apiKey?: string;
   cioJsClient?: ConstructorIOClient;
+  resultsPageOptions: ResultsPageOptions;
 }
 
 export default function CioQuiz(props: IQuizProps) {
-  const { quizId, apiKey, cioJsClient } = props;
+  const { quizId, apiKey, cioJsClient, resultsPageOptions } = props;
+
   if (!quizId) {
     // eslint-disable-next-line no-console
     console.error('quizId is a required field of type string');
   }
+
   const cioClient = useCioClient({ apiKey, cioJsClient });
   const [state, dispatch] = useReducer(reducer, initialState);
   const [requestState, setRequestState] = useState(RequestStates.Stale);
   const [questionResponse, setQuestionResponse] = useState<NextQuestionResponse>();
-  const [resultsResponse, setResultsResponse] = useState<GetBrowseResultsResponse>();
+  const [resultsResponse, setResultsResponse] = useState<QuizResultsResponse>();
   const [firstQuestion, setFirstQuestion] = useState<NextQuestionResponse>();
   const isFirstQuestion = firstQuestion?.next_question.id === questionResponse?.next_question.id;
 
@@ -61,7 +69,10 @@ export default function CioQuiz(props: IQuizProps) {
       setRequestState(RequestStates.Loading);
       if (state.isLastAnswer) {
         try {
-          const quizResults = await getQuizResults(cioClient, quizId, state.answers);
+          const quizResults = await getQuizResults(cioClient, quizId, {
+            answers: state.answers,
+            resultsPerPage: resultsPageOptions?.numResultsToDisplay,
+          });
           setResultsResponse(quizResults);
           setRequestState(RequestStates.Success);
           setQuestionResponse(undefined);
@@ -80,7 +91,7 @@ export default function CioQuiz(props: IQuizProps) {
         }
       }
     })();
-  }, [cioClient, state, quizId, state.isLastAnswer]);
+  }, [cioClient, state, quizId, state.isLastAnswer, resultsPageOptions?.numResultsToDisplay]);
 
   useEffect(() => {
     if (!firstQuestion) {
@@ -97,7 +108,7 @@ export default function CioQuiz(props: IQuizProps) {
     return (
       <div className='cio-quiz'>
         <QuizContext.Provider value={contextValue}>
-          {resultsResponse && <ResultContainer />}
+          {resultsResponse && <ResultContainer options={resultsPageOptions} />}
           {questionResponse && <QuizQuestions questionResponse={questionResponse} />}
         </QuizContext.Provider>
       </div>

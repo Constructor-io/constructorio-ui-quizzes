@@ -3,7 +3,7 @@ import { within, userEvent } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 import CioQuiz from '../../../components/CioQuiz';
 import { argTypes } from '../argTypes';
-import { stringify } from '../../../utils';
+import { stringifyWithDefaults } from '../../../utils';
 import { ComponentTemplate, addComponentStoryDescription } from '../Component';
 import { basicDescription, apiKey, quizId } from '../../../constants';
 
@@ -22,7 +22,7 @@ export const e2eInteractionTest = ComponentTemplate.bind({});
 e2eInteractionTest.args = { apiKey, quizId };
 addComponentStoryDescription(
   e2eInteractionTest,
-  `const args = ${stringify(e2eInteractionTest.args)}`,
+  `const args = ${stringifyWithDefaults(e2eInteractionTest.args)}`,
   basicDescription
 );
 
