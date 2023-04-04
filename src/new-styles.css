@@ -501,6 +501,10 @@
   align-items: center;
 }
 
+.cio-question-redo-button:hover {
+  text-decoration: underline;
+}
+
 .cio-question-redo-button span {
   margin-top: 1px;
 }
