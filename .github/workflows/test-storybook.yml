@@ -1,0 +1,25 @@
+name: Test Storybook
+
+on:
+  push:
+    branches:
+      - '*'
+      - '!main'
+concurrency:
+  group: run-sorybook-tests-${{ github.head_ref }}
+  cancel-in-progress: true     
+jobs:
+  test-storybook:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Set up node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.13.0'
+      - name: Install dependencies
+        run: npm ci
+      - name: Run Tests
+        run: npm run test-storybook:ci
