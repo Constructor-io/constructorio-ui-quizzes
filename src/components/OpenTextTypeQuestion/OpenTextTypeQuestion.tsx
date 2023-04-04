@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import QuestionTitle from '../QuestionTitle/QuestionTitle';
 import QuestionDescription from '../QuestionDescription/QuestionDescription';
-import CTAButton from '../CTAButton/CTAButton';
 import { renderImages } from '../../utils';
 import QuizContext from '../CioQuiz/context';
 import { QuestionTypes } from '../CioQuiz/actions';
-import BackButton from '../BackButton/BackButton';
+import ControlBar from '../ControlBar/ControlBar';
 
 interface OpenTextQuestionProps {
   initialValue?: string;
@@ -77,14 +76,13 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
             onChange={onChangeHandler}
             onKeyDown={onKeyDownHandler}
           />
-          <div className='cio-question-buttons-container'>
-            {!isFirstQuestion && <BackButton onClick={quizBackHandler} />}
-            <CTAButton
-              disabled={!openTextInput}
-              ctaText={question.cta_text}
-              onClick={onNextClick}
-            />
-          </div>
+          <ControlBar
+            nextButtonHandler={onNextClick}
+            isNextButtonDisabled={!openTextInput}
+            backButtonHandler={quizBackHandler}
+            showBackButton={!isFirstQuestion}
+            ctaButtonText={question?.cta_text}
+          />
         </div>
       </div>
     );

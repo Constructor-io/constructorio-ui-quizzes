@@ -2,10 +2,9 @@ import React, { useContext } from 'react';
 import QuestionTitle from '../QuestionTitle/QuestionTitle';
 import QuizContext from '../CioQuiz/context';
 import QuestionDescription from '../QuestionDescription/QuestionDescription';
-import CTAButton from '../CTAButton/CTAButton';
-import BackButton from '../BackButton/BackButton';
 import { renderImages } from '../../utils';
 import { QuestionTypes } from '../CioQuiz/actions';
+import ControlBar from '../ControlBar/ControlBar';
 
 export default function CoverTypeQuestion() {
   const { questionResponse, quizBackHandler, quizNextHandler, isFirstQuestion } =
@@ -38,10 +37,12 @@ export default function CoverTypeQuestion() {
               <QuestionTitle title={question?.title} />
               <QuestionDescription description={question.description} />
             </div>
-            <div className='cio-question-buttons-container'>
-              {!isFirstQuestion && <BackButton onClick={quizBackHandler} />}
-              <CTAButton ctaText={question?.cta_text} onClick={onNextClick} />
-            </div>
+            <ControlBar
+              nextButtonHandler={onNextClick}
+              backButtonHandler={quizBackHandler}
+              showBackButton={!isFirstQuestion}
+              ctaButtonText={question?.cta_text}
+            />
           </div>
         </div>
         {hasImage ? (

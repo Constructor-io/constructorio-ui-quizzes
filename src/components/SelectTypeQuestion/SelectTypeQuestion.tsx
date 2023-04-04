@@ -1,12 +1,11 @@
 import React, { useEffect, useState, useContext, KeyboardEvent } from 'react';
-import CTAButton from '../CTAButton/CTAButton';
 import QuestionTitle from '../QuestionTitle/QuestionTitle';
 import QuestionDescription from '../QuestionDescription/QuestionDescription';
 import QuizContext from '../CioQuiz/context';
 import { QuestionOption } from '../../types';
 import { renderImages } from '../../utils';
 import { QuestionTypes } from '../CioQuiz/actions';
-import BackButton from '../BackButton/BackButton';
+import ControlBar from '../ControlBar/ControlBar';
 
 interface Selected {
   [key: number]: boolean;
@@ -115,10 +114,13 @@ function SelectTypeQuestion() {
             </div>
           ))}
         </div>
-        <div className='cio-select-question-buttons'>
-          {!isFirstQuestion && <BackButton onClick={quizBackHandler} />}
-          <CTAButton disabled={isDisabled} ctaText={question?.cta_text} onClick={onNextClick} />
-        </div>
+        <ControlBar
+          nextButtonHandler={onNextClick}
+          isNextButtonDisabled={isDisabled}
+          backButtonHandler={quizBackHandler}
+          showBackButton={!isFirstQuestion}
+          ctaButtonText={question?.cta_text}
+        />
       </div>
     );
   }
