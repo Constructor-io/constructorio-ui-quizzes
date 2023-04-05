@@ -37,6 +37,7 @@ export default function CioQuiz(props: IQuizProps) {
   const [questionResponse, setQuestionResponse] = useState<NextQuestionResponse>();
   const [resultsResponse, setResultsResponse] = useState<QuizResultsResponse>();
   const [firstQuestion, setFirstQuestion] = useState<NextQuestionResponse>();
+  const [quizVersionId, setQuizVersionId] = useState('');
   const isFirstQuestion = firstQuestion?.next_question.id === questionResponse?.next_question.id;
 
   const quizNextHandler = useCallback(
@@ -72,6 +73,7 @@ export default function CioQuiz(props: IQuizProps) {
           const quizResults = await getQuizResults(cioClient, quizId, {
             answers: state.answers,
             resultsPerPage: resultsPageOptions?.numResultsToDisplay,
+            quizVersionId,
           });
           setResultsResponse(quizResults);
           setRequestState(RequestStates.Success);
@@ -82,15 +84,23 @@ export default function CioQuiz(props: IQuizProps) {
         }
       } else {
         try {
-          const questionResult = await getNextQuestion(cioClient, quizId, state.answers);
+          const questionResult = await getNextQuestion(cioClient, quizId, {
+            answers: state.answers,
+            quizVersionId,
+          });
           setQuestionResponse(questionResult);
           setRequestState(RequestStates.Success);
           setResultsResponse(undefined);
+
+          if (!quizVersionId) {
+            setQuizVersionId(questionResult.quiz_version_id);
+          }
         } catch (error) {
           setRequestState(RequestStates.Error);
         }
       }
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cioClient, state, quizId, state.isLastAnswer, resultsPageOptions?.numResultsToDisplay]);
 
   useEffect(() => {
