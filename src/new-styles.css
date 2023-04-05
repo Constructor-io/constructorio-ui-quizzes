@@ -114,6 +114,10 @@
   border: 2px solid var(--blue-denim-700);
 }
 
+.cio-question-back-button svg {
+  display: inline;
+}
+
 /* Cover Page Component */
 .cio-cover-question-container--with-image {
   width: 100%;
