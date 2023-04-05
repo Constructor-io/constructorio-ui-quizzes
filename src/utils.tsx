@@ -24,7 +24,11 @@ export const renderImages = (images: Partial<QuestionImages>, cssClasses?: strin
         alt = secondaryAlt;
       }
     }
-    return <img className={`cio-question-image ${cssClasses || ''}`.trim()} src={src} alt={alt} />;
+    return (
+      <span className={`${cssClasses || ''}`.trim()}>
+        <img className='cio-question-image' src={src} alt={alt} />
+      </span>
+    );
   }
 
   return '';
