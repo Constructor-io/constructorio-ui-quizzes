@@ -38,6 +38,7 @@ export default function CioQuiz(props: IQuizProps) {
   const [resultsResponse, setResultsResponse] = useState<QuizResultsResponse>();
   const [firstQuestion, setFirstQuestion] = useState<NextQuestionResponse>();
   const [quizVersionId, setQuizVersionId] = useState('');
+  const [quizSessionId, setQuizSessionId] = useState('');
   const isFirstQuestion = firstQuestion?.next_question.id === questionResponse?.next_question.id;
 
   const quizNextHandler = useCallback(
@@ -74,6 +75,7 @@ export default function CioQuiz(props: IQuizProps) {
             answers: state.answers,
             resultsPerPage: resultsPageOptions?.numResultsToDisplay,
             quizVersionId,
+            quizSessionId,
           });
           setResultsResponse(quizResults);
           setRequestState(RequestStates.Success);
@@ -87,13 +89,18 @@ export default function CioQuiz(props: IQuizProps) {
           const questionResult = await getNextQuestion(cioClient, quizId, {
             answers: state.answers,
             quizVersionId,
+            quizSessionId,
           });
           setQuestionResponse(questionResult);
           setRequestState(RequestStates.Success);
           setResultsResponse(undefined);
 
-          if (!quizVersionId) {
+          if (!quizVersionId && questionResult?.quiz_version_id) {
             setQuizVersionId(questionResult.quiz_version_id);
+          }
+
+          if (!quizSessionId && questionResult?.quiz_session_id) {
+            setQuizSessionId(questionResult.quiz_session_id);
           }
         } catch (error) {
           setRequestState(RequestStates.Error);
