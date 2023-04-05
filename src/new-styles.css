@@ -40,8 +40,8 @@
 }
 
 .cio-quiz {
-  min-height: 100%;
   min-width: 100%;
+  min-height: 100%;
   display: flex;
   justify-content: center;
   background-color: #ffffff;
@@ -198,7 +198,8 @@
   box-sizing: border-box;
   width: 100%;
   object-fit: cover;
-  max-height: 40vh;
+  max-height: 300px;
+  display: flex;
 }
 
 .cio-open-text-question-form {
@@ -567,22 +568,22 @@
   }
 
   .cio-cover-question-img .cio-question-image {
-    height: 100vh;
+    height: 100%;
+    margin: auto;
   }
 
   .cio-open-text-question-container--with-image {
     display: flex;
     flex-direction: row;
     padding: 1rem;
-    height: fit-content;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     margin-bottom: 0;
   }
 
   .cio-open-text-question-image {
     height: 100%;
+    max-height: 1000px;
     flex-basis: 50%;
     flex-shrink: 0;
     max-height: unset;
@@ -614,6 +615,16 @@
 
   .cio-select-question-buttons {
     padding: 1rem 3rem;
+  }
+
+  .cio-select-question-container .cio-question-buttons-container {
+    height: auto;
+    display: flex;
+    padding: 1rem 5rem;
+    margin-top: auto;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
   }
 
   /* Results component */
@@ -680,15 +691,6 @@
     margin-bottom: 6rem;
   }
 
-  .cio-select-question-container .cio-question-buttons-container {
-    height: auto;
-    display: flex;
-    padding: 1rem 5rem;
-    margin-top: auto;
-    position: fixed;
-    bottom: 0px;
-    left: 0px;
-  }
 }
 
 /* Desktop */
