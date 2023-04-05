@@ -117,6 +117,10 @@ export default function CioQuiz(props: IQuizProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [questionResponse]);
 
+  const resetQuizSessionId = () => {
+    setQuizSessionId('');
+  };
+
   if (requestState === RequestStates.Loading) {
     return <Spinner />;
   }
@@ -125,7 +129,9 @@ export default function CioQuiz(props: IQuizProps) {
     return (
       <div className='cio-quiz'>
         <QuizContext.Provider value={contextValue}>
-          {resultsResponse && <ResultContainer options={resultsPageOptions} />}
+          {resultsResponse && (
+            <ResultContainer options={resultsPageOptions} resetQuizSessionId={resetQuizSessionId} />
+          )}
           {questionResponse && <QuizQuestions questionResponse={questionResponse} />}
         </QuizContext.Provider>
       </div>
