@@ -520,6 +520,15 @@
 
 /* Small Tablet */
 @media screen and (min-width: 640px) {
+  /* Button bar */
+  .cio-question-buttons-container {
+    height: auto;
+    position: static;
+    padding: 0px;
+    bottom: auto;
+    left: auto;
+  }
+
   /* Cover Page Component */
   .cio-cover-question-container--with-image {
     flex-direction: row;
@@ -658,13 +667,6 @@
     width: 30%;
   }
   
-  .cio-question-buttons-container {
-    height: auto;
-    position: static;
-    padding: 0px;
-    bottom: auto;
-    left: auto;
-  }
   
   .cio-select-question-container {
     margin-bottom: 6rem;
