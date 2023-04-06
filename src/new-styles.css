@@ -546,18 +546,17 @@
     margin-bottom: 0;
   }
 
-  .cio-cover-question-text-container {
-    margin-top: 0;
-  }
-
   .cio-cover-question-container--with-image .cio-cover-question-text-container {
     flex-grow: 0;
     flex-basis: 50%;
   }
 
   .cio-cover-question-text {
-    max-width: 45rem;
-    padding: 0;
+    max-width: 49rem;
+    padding-top: 0;
+    padding-right: 2rem;
+    padding-bottom: 0;
+    padding-left: 2rem;
     margin-left: auto;
     margin-right: auto;
   }
@@ -663,7 +662,11 @@
   }
 
   .cio-cover-question-container--with-image .cio-cover-question-text {
-    max-width: 20rem;
+    max-width: 24rem;
+  }
+
+  .cio-cover-question-text-container {
+    margin-top: 0;
   }
 
   .cio-open-text-question-container--with-image {
@@ -709,7 +712,7 @@
 /* Desktop */
 @media screen and (min-width: 1280px) {
   .cio-cover-question-container--with-image .cio-cover-question-text {
-    max-width: 26rem;
+    max-width: 30rem;
   }
 
   .cio-open-text-question-container--with-image {
