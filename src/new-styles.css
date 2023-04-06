@@ -586,7 +586,6 @@
     max-height: 1000px;
     flex-basis: 50%;
     flex-shrink: 0;
-    max-height: unset;
     border-radius: 4px;
   }
 
