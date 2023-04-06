@@ -21,10 +21,17 @@ export interface IQuizProps {
   apiKey?: string;
   cioJsClient?: ConstructorIOClient;
   resultsPageOptions: ResultsPageOptions;
+  quizVersionId?: string;
 }
 
 export default function CioQuiz(props: IQuizProps) {
-  const { quizId, apiKey, cioJsClient, resultsPageOptions } = props;
+  const {
+    quizId,
+    apiKey,
+    cioJsClient,
+    resultsPageOptions,
+    quizVersionId: quizVersionIdProp,
+  } = props;
 
   if (!quizId) {
     // eslint-disable-next-line no-console
@@ -37,7 +44,7 @@ export default function CioQuiz(props: IQuizProps) {
   const [questionResponse, setQuestionResponse] = useState<NextQuestionResponse>();
   const [resultsResponse, setResultsResponse] = useState<QuizResultsResponse>();
   const [firstQuestion, setFirstQuestion] = useState<NextQuestionResponse>();
-  const [quizVersionId, setQuizVersionId] = useState('');
+  const [quizVersionId, setQuizVersionId] = useState(quizVersionIdProp || '');
   const [quizSessionId, setQuizSessionId] = useState('');
   const isFirstQuestion = firstQuestion?.next_question.id === questionResponse?.next_question.id;
 
@@ -68,42 +75,44 @@ export default function CioQuiz(props: IQuizProps) {
 
   useEffect(() => {
     (async () => {
-      setRequestState(RequestStates.Loading);
-      if (state.isLastAnswer) {
-        try {
-          const quizResults = await getQuizResults(cioClient, quizId, {
-            answers: state.answers,
-            resultsPerPage: resultsPageOptions?.numResultsToDisplay,
-            quizVersionId,
-            quizSessionId,
-          });
-          setResultsResponse(quizResults);
-          setRequestState(RequestStates.Success);
-          setQuestionResponse(undefined);
-        } catch (error) {
-          setResultsResponse(undefined);
-          setRequestState(RequestStates.Error);
-        }
-      } else {
-        try {
-          const questionResult = await getNextQuestion(cioClient, quizId, {
-            answers: state.answers,
-            quizVersionId,
-            quizSessionId,
-          });
-          setQuestionResponse(questionResult);
-          setRequestState(RequestStates.Success);
-          setResultsResponse(undefined);
-
-          if (!quizVersionId && questionResult?.quiz_version_id) {
-            setQuizVersionId(questionResult.quiz_version_id);
+      if (cioClient) {
+        setRequestState(RequestStates.Loading);
+        if (state.isLastAnswer) {
+          try {
+            const quizResults = await getQuizResults(cioClient, quizId, {
+              answers: state.answers,
+              resultsPerPage: resultsPageOptions?.numResultsToDisplay,
+              quizVersionId,
+              quizSessionId,
+            });
+            setResultsResponse(quizResults);
+            setRequestState(RequestStates.Success);
+            setQuestionResponse(undefined);
+          } catch (error) {
+            setResultsResponse(undefined);
+            setRequestState(RequestStates.Error);
           }
+        } else {
+          try {
+            const questionResult = await getNextQuestion(cioClient, quizId, {
+              answers: state.answers,
+              quizVersionId,
+              quizSessionId,
+            });
+            setQuestionResponse(questionResult);
+            setRequestState(RequestStates.Success);
+            setResultsResponse(undefined);
 
-          if (!quizSessionId && questionResult?.quiz_session_id) {
-            setQuizSessionId(questionResult.quiz_session_id);
+            if (!quizVersionId && questionResult?.quiz_version_id) {
+              setQuizVersionId(questionResult.quiz_version_id);
+            }
+
+            if (!quizSessionId && questionResult?.quiz_session_id) {
+              setQuizSessionId(questionResult.quiz_session_id);
+            }
+          } catch (error) {
+            setRequestState(RequestStates.Error);
           }
-        } catch (error) {
-          setRequestState(RequestStates.Error);
         }
       }
     })();

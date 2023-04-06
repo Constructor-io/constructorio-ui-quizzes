@@ -73,13 +73,13 @@ export const stringifyWithDefaults = (obj: { apiKey: string; addToCartCallback: 
 export const stringify = (obj: any) => JSON.stringify(obj, null, '  ');
 
 export const getNextQuestion = (
-  cioClient: any,
+  cioClient: ConstructorIOClient,
   quizId: string,
   parameters: QuizzesParameters
 ): Promise<NextQuestionResponse> => cioClient?.quizzes.getQuizNextQuestion(quizId, parameters);
 
 export const getQuizResults = async (
-  cioClient: any,
+  cioClient: ConstructorIOClient,
   quizId: string,
   parameters: QuizzesResultsParameters
 ): Promise<QuizResultsResponse> => cioClient?.quizzes.getQuizResults(quizId, parameters);
