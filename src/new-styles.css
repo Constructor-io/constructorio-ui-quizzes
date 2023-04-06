@@ -208,7 +208,6 @@
 .cio-open-text-question-form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   height: 100%;
   padding: 1rem;
 }
@@ -701,12 +700,10 @@
     margin: 0;
     width: 30%;
   }
-  
-  
+
   .cio-select-question-container {
     margin-bottom: 6rem;
   }
-
 }
 
 /* Desktop */
