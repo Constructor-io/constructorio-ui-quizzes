@@ -28,6 +28,7 @@
   --white-ice-600: #bdcde0;
   --white-ice-700: #b1bfd0;
   --white-ice-800: #97a2b0;
+  --bottom-bar-height: 64px;
   --primary-color: var(--blue-denim-400);
 }
 
@@ -39,8 +40,8 @@
 }
 
 .cio-quiz {
-  min-height: 100%;
   min-width: 100%;
+  min-height: 100%;
   display: flex;
   justify-content: center;
   background-color: #ffffff;
@@ -71,7 +72,7 @@
 }
 
 .cio-button-container {
-  max-width: 14rem;
+  max-width: 10rem;
   flex-grow: 1;
   margin-left: auto;
   padding-left: 1rem;
@@ -152,7 +153,14 @@
 
 .cio-question-buttons-container {
   width: 100%;
+  height: var(--bottom-bar-height);
+  padding: 8px 16px;
   display: flex;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  background: white;
+  background-color: rgba(255, 255, 255, 0.87);
 }
 
 .cio-cover-question-img {
@@ -166,29 +174,37 @@
   height: 100%;
 }
 
+.cio-question-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .cio-open-text-question-container--with-image {
   display: flex;
   flex-direction: column;
   width: 100%;
+  margin-bottom: var(--bottom-bar-height);
 }
 
 .cio-open-text-question-container {
   display: flex;
   align-items: center;
   margin-top: 7.5rem;
+  margin-bottom: var(--bottom-bar-height);
 }
 
 .cio-open-text-question-image {
   box-sizing: border-box;
-  min-width: 40%;
+  width: 100%;
   object-fit: cover;
   max-height: 300px;
+  display: flex;
 }
 
 .cio-open-text-question-form {
   display: flex;
   flex-direction: column;
-  max-width: 700px;
   justify-content: center;
   height: 100%;
   padding: 1rem;
@@ -204,7 +220,6 @@
   outline: none;
   font-size: 1rem;
   margin-bottom: 1rem;
-  margin-top: auto;
 }
 
 .cio-question-input-text:focus {
@@ -251,6 +266,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+  margin-bottom: var(--bottom-bar-height);
 }
 
 .cio-question-options-container {
@@ -260,7 +276,7 @@
   gap: 1rem;
   width: 100%;
   padding: 10px;
-  overflow-y: auto;
+  margin-bottom: auto;
 }
 
 .cio-question-options-container-text-only {
@@ -269,7 +285,7 @@
   gap: 1rem;
   width: 100%;
   padding: 10px;
-  overflow-y: auto;
+  margin-bottom: auto;
 }
 
 .cio-question-option-container-text-only {
@@ -511,10 +527,20 @@
 
 /* Small Tablet */
 @media screen and (min-width: 640px) {
+  /* Button bar */
+  .cio-question-buttons-container {
+    height: auto;
+    position: static;
+    padding: 0px;
+    bottom: auto;
+    left: auto;
+  }
+
   /* Cover Page Component */
   .cio-cover-question-container--with-image {
     flex-direction: row;
     justify-content: center;
+    margin-bottom: 0;
   }
 
   .cio-cover-question-text-container {
@@ -542,32 +568,34 @@
   }
 
   .cio-cover-question-img .cio-question-image {
-    height: 100vh;
+    height: 100%;
+    margin: auto;
   }
 
   .cio-open-text-question-container--with-image {
     display: flex;
     flex-direction: row;
     padding: 1rem;
-    height: fit-content;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    margin-bottom: 0;
   }
 
   .cio-open-text-question-image {
     height: 100%;
-    max-height: unset;
-    border-radius: 4px;
-    margin-right: 2rem;
+    max-height: 1000px;
+    flex-basis: 50%;
+    flex-shrink: 0;
     border-radius: 4px;
   }
 
   .cio-open-text-question-form {
     justify-content: center;
     height: fit-content;
-    padding-left: 0;
-    padding: 0;
+    padding: 5rem;
+    flex-basis: 70%;
+    flex-shrink: 1;
+    margin: 0 auto;
   }
 
   .cio-open-text-question-container {
@@ -586,6 +614,16 @@
 
   .cio-select-question-buttons {
     padding: 1rem 3rem;
+  }
+
+  .cio-select-question-container .cio-question-buttons-container {
+    height: auto;
+    display: flex;
+    padding: 1rem 5rem;
+    margin-top: auto;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
   }
 
   /* Results component */
@@ -646,6 +684,12 @@
     margin: 0;
     width: 30%;
   }
+  
+  
+  .cio-select-question-container {
+    margin-bottom: 6rem;
+  }
+
 }
 
 /* Desktop */
@@ -656,10 +700,6 @@
 
   .cio-open-text-question-container--with-image {
     padding: 2rem;
-  }
-
-  .cio-open-text-question-image {
-    margin-right: 8rem;
   }
 
   /* Select component */
