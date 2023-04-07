@@ -101,7 +101,11 @@ export default function CioQuiz(props: IQuizProps) {
   }, [questionResponse]);
 
   if (requestState === RequestStates.Loading) {
-    return <Spinner />;
+    return (
+      <div className='cio-quiz'>
+        <Spinner />
+      </div>
+    );
   }
 
   if (requestState === RequestStates.Success) {
