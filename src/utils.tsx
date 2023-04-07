@@ -1,8 +1,13 @@
 import React from 'react';
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
 import { QuestionTypes } from './components/CioQuiz/actions';
-import { Answers } from './components/CioQuiz/reducer';
-import { QuestionImages } from './types';
+import {
+  QuestionImages,
+  QuizzesParameters,
+  QuizzesResultsParameters,
+  NextQuestionResponse,
+  QuizResultsResponse,
+} from './types';
 
 export const renderImages = (images: Partial<QuestionImages>, cssClasses?: string) => {
   const {
@@ -69,16 +74,19 @@ export const stringifyWithDefaults = (obj: { apiKey: string; addToCartCallback: 
   return res;
 };
 
-export const stringify = (obj) => JSON.stringify(obj, null, '  ');
+export const stringify = (obj: any) => JSON.stringify(obj, null, '  ');
 
-export const getNextQuestion = (cioClient: any, quizId: string, answers: Answers) =>
-  cioClient?.quizzes.getQuizNextQuestion(quizId, { answers });
+export const getNextQuestion = (
+  cioClient: ConstructorIOClient,
+  quizId: string,
+  parameters: QuizzesParameters
+): Promise<NextQuestionResponse> => cioClient?.quizzes.getQuizNextQuestion(quizId, parameters);
 
 export const getQuizResults = async (
-  cioClient: any,
+  cioClient: ConstructorIOClient,
   quizId: string,
-  parameters: { answers: Answers; resultsPerPage?: number }
-) => cioClient?.quizzes.getQuizResults(quizId, parameters);
+  parameters: QuizzesResultsParameters
+): Promise<QuizResultsResponse> => cioClient?.quizzes.getQuizResults(quizId, parameters);
 
 export const getQuestionTypes = (questionType?: `${QuestionTypes}`) => {
   const isOpenQuestion = questionType === QuestionTypes.OpenText;
