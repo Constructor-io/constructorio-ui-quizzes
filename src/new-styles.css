@@ -355,6 +355,13 @@
   margin-top: 0;
 }
 
+.cio-zero-results .cio-button-container {
+  width: 14rem;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 0;
+}
+
 /* Result Card component */
 .cio-result-card {
   background-color: transparent;
