@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
 import CioQuiz from '../../../components/CioQuiz';
 import { argTypes } from '../argTypes';
