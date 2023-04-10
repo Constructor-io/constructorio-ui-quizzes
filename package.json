@@ -5,6 +5,14 @@
   "author": "constructor.io",
   "license": "MIT",
   "type": "module",
+  "homepage": "https://github.com/Constructor-io/constructorio-ui-quizzes#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Constructor-io/constructorio-ui-quizzes.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Constructor-io/constructorio-ui-quizzes/issues"
+  },
   "main": "lib/cjs/index.js",
   "module": "lib/mjs/index.js",
   "exports": {
@@ -25,9 +33,9 @@
   },
   "types": "lib/types/index.d.ts",
   "scripts": {
-    "prettier": "npx prettier --write .",
-    "lint": "npm run prettier && eslint src --ext js,ts,jsx,tsx",
-    "copy-styles": "cp src/styles.css lib/styles.css && cp src/new-styles.css lib/new-styles.css",
+    "lint": "eslint src --ext js,ts,jsx,tsx",
+    "check-types": "npx tsc --noEmit",
+    "copy-styles": "cp src/styles.css lib/styles.css",
     "prepare": "husky install",
     "dev": "storybook dev -p 6006",
     "storybook:ci": "storybook dev --ci --quiet -p 6006",
@@ -74,7 +82,6 @@
     "eslint-plugin-storybook": "^0.6.8",
     "husky": "^8.0.1",
     "license-checker": "^25.0.1",
-    "prettier": "2.8.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "start-server-and-test": "^2.0.0",
