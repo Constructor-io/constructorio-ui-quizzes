@@ -6,7 +6,7 @@ import { BrowseResultData } from '../../types';
 export interface ResultsProps {
   addToCartCallback: (item: Partial<BrowseResultData>) => any;
   clickItemCallback?: (item: Partial<BrowseResultData>) => any;
-  resultCardSalePriceKey: string;
+  resultCardSalePriceKey?: string;
   resultCardRegularPriceKey: string;
 }
 
