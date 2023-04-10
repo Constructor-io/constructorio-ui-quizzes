@@ -1,4 +1,5 @@
-/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable import/no-extraneous-dependencies, no-console */
+
 import { within, userEvent } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 import CioQuiz from '../../../components/CioQuiz';
@@ -18,8 +19,21 @@ export default {
   },
 };
 
+const resultsPageOptions = {
+  clickItemCallback: (item) => {
+    console.log('Click item');
+    console.dir(item);
+  },
+  addToCartCallback: (item) => {
+    console.log('Add to cart');
+    console.dir(item);
+  },
+  resultCardRegularPriceKey: 'price',
+  resultCardSalePriceKey: 'price',
+};
+
 export const e2eInteractionTest = ComponentTemplate.bind({});
-e2eInteractionTest.args = { apiKey, quizId };
+e2eInteractionTest.args = { apiKey, quizId, resultsPageOptions };
 addComponentStoryDescription(
   e2eInteractionTest,
   `const args = ${stringifyWithDefaults(e2eInteractionTest.args)}`,
@@ -112,4 +126,12 @@ e2eInteractionTest.play = async ({ canvasElement }) => {
   expect(await canvas.findByText('Are you into latte-art?')).toBeInTheDocument();
   await userEvent.click(canvas.getByRole('button', { name: /I have no idea/ }));
   await userEvent.click(canvas.getByRole('button', { name: 'Continue' }));
+
+  // Results page
+  expect(await canvas.findByText('Here are your results')).toBeInTheDocument();
+  expect(await canvas.findByText('Because you answered')).toBeInTheDocument();
+
+  // Reset button test
+  await userEvent.click(await canvas.findByText('Redo Quiz'));
+  expect(await canvas.findByText('Oh, hi there!')).toBeInTheDocument();
 };
