@@ -21,10 +21,17 @@ export interface IQuizProps {
   apiKey?: string;
   cioJsClient?: ConstructorIOClient;
   resultsPageOptions: ResultsPageOptions;
+  quizVersionId?: string;
 }
 
 export default function CioQuiz(props: IQuizProps) {
-  const { quizId, apiKey, cioJsClient, resultsPageOptions } = props;
+  const {
+    quizId,
+    apiKey,
+    cioJsClient,
+    resultsPageOptions,
+    quizVersionId: quizVersionIdProp,
+  } = props;
 
   if (!quizId) {
     // eslint-disable-next-line no-console
@@ -37,6 +44,8 @@ export default function CioQuiz(props: IQuizProps) {
   const [questionResponse, setQuestionResponse] = useState<NextQuestionResponse>();
   const [resultsResponse, setResultsResponse] = useState<QuizResultsResponse>();
   const [firstQuestion, setFirstQuestion] = useState<NextQuestionResponse>();
+  const [quizVersionId, setQuizVersionId] = useState(quizVersionIdProp || '');
+  const [quizSessionId, setQuizSessionId] = useState('');
   const isFirstQuestion = firstQuestion?.next_question.id === questionResponse?.next_question.id;
 
   const quizNextHandler = useCallback(
@@ -66,31 +75,48 @@ export default function CioQuiz(props: IQuizProps) {
 
   useEffect(() => {
     (async () => {
-      setRequestState(RequestStates.Loading);
-      if (state.isLastAnswer) {
-        try {
-          const quizResults = await getQuizResults(cioClient, quizId, {
-            answers: state.answers,
-            resultsPerPage: resultsPageOptions?.numResultsToDisplay,
-          });
-          setResultsResponse(quizResults);
-          setRequestState(RequestStates.Success);
-          setQuestionResponse(undefined);
-        } catch (error) {
-          setResultsResponse(undefined);
-          setRequestState(RequestStates.Error);
-        }
-      } else {
-        try {
-          const questionResult = await getNextQuestion(cioClient, quizId, state.answers);
-          setQuestionResponse(questionResult);
-          setRequestState(RequestStates.Success);
-          setResultsResponse(undefined);
-        } catch (error) {
-          setRequestState(RequestStates.Error);
+      if (cioClient) {
+        setRequestState(RequestStates.Loading);
+        if (state.isLastAnswer) {
+          try {
+            const quizResults = await getQuizResults(cioClient, quizId, {
+              answers: state.answers,
+              resultsPerPage: resultsPageOptions?.numResultsToDisplay,
+              quizVersionId,
+              quizSessionId,
+            });
+            setResultsResponse(quizResults);
+            setRequestState(RequestStates.Success);
+            setQuestionResponse(undefined);
+          } catch (error) {
+            setResultsResponse(undefined);
+            setRequestState(RequestStates.Error);
+          }
+        } else {
+          try {
+            const questionResult = await getNextQuestion(cioClient, quizId, {
+              answers: state.answers,
+              quizVersionId,
+              quizSessionId,
+            });
+            setQuestionResponse(questionResult);
+            setRequestState(RequestStates.Success);
+            setResultsResponse(undefined);
+
+            if (!quizVersionId && questionResult?.quiz_version_id) {
+              setQuizVersionId(questionResult.quiz_version_id);
+            }
+
+            if (!quizSessionId && questionResult?.quiz_session_id) {
+              setQuizSessionId(questionResult.quiz_session_id);
+            }
+          } catch (error) {
+            setRequestState(RequestStates.Error);
+          }
         }
       }
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cioClient, state, quizId, state.isLastAnswer, resultsPageOptions?.numResultsToDisplay]);
 
   useEffect(() => {
@@ -100,15 +126,25 @@ export default function CioQuiz(props: IQuizProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [questionResponse]);
 
+  const resetQuizSessionId = () => {
+    setQuizSessionId('');
+  };
+
   if (requestState === RequestStates.Loading) {
-    return <Spinner />;
+    return (
+      <div className='cio-quiz'>
+        <Spinner />
+      </div>
+    );
   }
 
   if (requestState === RequestStates.Success) {
     return (
       <div className='cio-quiz'>
         <QuizContext.Provider value={contextValue}>
-          {resultsResponse && <ResultContainer options={resultsPageOptions} />}
+          {resultsResponse && (
+            <ResultContainer options={resultsPageOptions} resetQuizSessionId={resetQuizSessionId} />
+          )}
           {questionResponse && <QuizQuestions questionResponse={questionResponse} />}
         </QuizContext.Provider>
       </div>

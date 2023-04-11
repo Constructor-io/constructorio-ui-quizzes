@@ -8,10 +8,11 @@ import Results, { ResultsProps } from '../Results/Results';
 
 export interface IResultContainerProps {
   options: ResultsProps;
+  resetQuizSessionId: () => void;
 }
 
 export default function ResultContainer(props: IResultContainerProps) {
-  const { options } = props;
+  const { options, resetQuizSessionId } = props;
   const {
     addToCartCallback,
     clickItemCallback,
@@ -26,6 +27,7 @@ export default function ResultContainer(props: IResultContainerProps) {
 
   const onResetClick = () => {
     if (dispatch && resultsResponse) {
+      resetQuizSessionId();
       dispatch({
         type: QuestionTypes.Reset,
       });
