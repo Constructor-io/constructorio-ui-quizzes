@@ -26,7 +26,7 @@ import CioQuiz from '@constructor-io/constructorio-ui-quizzes';
 function YourComponent() {
   return (
     <div>
-      <CioQuiz quizId="coffee-quiz" apiKey="key_jaqzPcUDnK66puIO" />
+      <CioQuiz quizId="coffee-quiz" apiKey="key_wJSdZSiesX5hiVLt" />
     </div>
   );
 ```
