@@ -6,6 +6,7 @@ import { argTypes } from '../argTypes';
 import { stringifyWithDefaults } from '../../../utils';
 import { ComponentTemplate, addComponentStoryDescription } from '../Component';
 import { basicDescription, apiKey, quizId } from '../../../constants';
+import { resultsPageOptions } from '../Component/index.stories';
 
 export default {
   title: 'Quiz/Interaction Tests',
@@ -19,7 +20,7 @@ export default {
 };
 
 export const e2eInteractionTest = ComponentTemplate.bind({});
-e2eInteractionTest.args = { apiKey, quizId };
+e2eInteractionTest.args = { apiKey, quizId, resultsPageOptions };
 addComponentStoryDescription(
   e2eInteractionTest,
   `const args = ${stringifyWithDefaults(e2eInteractionTest.args)}`,

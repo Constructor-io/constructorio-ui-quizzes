@@ -24,7 +24,7 @@ export default {
   },
 };
 
-const resultsPageOptions = {
+export const resultsPageOptions = {
   clickItemCallback: (item) => {
     console.log('Click item');
     console.dir(item);
