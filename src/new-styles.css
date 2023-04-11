@@ -28,7 +28,7 @@
   --white-ice-600: #bdcde0;
   --white-ice-700: #b1bfd0;
   --white-ice-800: #97a2b0;
-  --bottom-bar-height: 64px;
+  --bottom-bar-height: 70px;
   --primary-color: var(--blue-denim-400);
   --container-image-small-height: 300px;
 }
@@ -130,7 +130,6 @@
   left: 0px;
   background: white;
   background-color: rgba(255, 255, 255, 0.87);
-  margin-bottom: .5rem;
 }
 .cio-question-cta-button {
   background: var(--primary-color);
@@ -219,7 +218,6 @@
   box-shadow: 0px 4px 10px rgba(93, 124, 232, 0.25);
 }
 .cio-select-question-container {
-  max-width: 1200px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -283,7 +281,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 2rem 1rem;
+  padding: 2.5rem 1rem;
 }
 
 .cio-select-question-title {
@@ -495,7 +493,7 @@
   }
   .cio-select-question-text {
     padding: 2rem 3rem;
-    margin-top: auto;
+    margin-top: 2rem;
   }
   .cio-select-question-buttons {
     padding: 1rem 3rem;
