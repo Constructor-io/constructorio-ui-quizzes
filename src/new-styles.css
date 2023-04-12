@@ -30,7 +30,7 @@
   --white-ice-800: #97a2b0;
   --bottom-bar-height: 80px;
   --primary-color: var(--blue-denim-400);
-  --container-image-small-height: 300px;
+  --container-image-small-height: 250px;
 }
 
 /* Mobile + global styles */
@@ -114,7 +114,6 @@
   padding: 0.8rem;
   outline: none;
   font-size: 1rem;
-  margin-top: auto;
 }
 .cio-question-input-text:focus {
   border-bottom: 1px solid var(--blue-denim-500);
@@ -551,7 +550,7 @@
 
   /* Description */
   .cio-question-description {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
   }
 
   /* CTA Button Component */
