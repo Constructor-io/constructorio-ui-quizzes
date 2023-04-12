@@ -49,6 +49,10 @@
   font-size: 13px;
 }
 
+.cio-quiz button {
+  cursor: pointer;
+}
+
 /* Container */
 .cio-container {
   display: flex;
@@ -200,6 +204,7 @@
   width: calc(50% - 10px);
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 }
 .cio-question-option-container.selected {
   outline: 3px solid var(--blue-denim-600);
@@ -255,6 +260,7 @@
   flex-direction: column;
   width: 100%;
   margin: auto;
+  cursor: pointer;
 }
 
 /* Option Image */

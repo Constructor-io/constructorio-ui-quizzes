@@ -75,7 +75,7 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
           <QuestionDescription description={question.description} />
           <input
             className='cio-question-input-text'
-            placeholder={question.input_placeholder}
+            placeholder={question.input_placeholder || 'Answer here...'}
             value={openTextInput}
             onChange={onChangeHandler}
             onKeyDown={onKeyDownHandler}
