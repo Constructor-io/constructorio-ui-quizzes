@@ -267,32 +267,19 @@
   aspect-ratio: 1/1;
 }
 
+/* Select Option Value */
 .cio-question-option-value {
   text-align: center;
   margin: auto 0;
 }
 
-.cio-select-question-buttons {
-  display: flex;
-  justify-content: space-between;
-  gap: 0.5rem;
-  width: 100%;
-  padding: 1rem;
-  margin-top: auto;
-}
-
+/* Select Text and Description */
 .cio-select-question-text {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  /* padding: 2.5rem 1rem; */
 }
-
-.cio-select-question-title {
-  margin: 0 0 1rem 0;
-}
-
 .cio-select-question-text .cio-question-description {
   margin-bottom: 0;
 }
@@ -493,9 +480,6 @@
   }
 
   /* Select Component */
-  .cio-question-options-container {
-    /* padding: 10px 3rem; */
-  }
   .cio-select-question-text {
     margin-top: 2rem;
   }
@@ -626,7 +610,6 @@
   }
   .cio-select-question-container {
     margin-bottom: 0;
-    /* padding-top: 4rem; */
   }
   .cio-select-question-text {
     padding: 2.5rem 0rem;
