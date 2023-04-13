@@ -46,7 +46,7 @@
   justify-content: center;
   background-color: #ffffff;
   color: var(--gray-dust-500);
-  font-size: 13px;
+  font-size: 16px;
 }
 
 .cio-quiz button {
@@ -79,13 +79,13 @@
 
 /* Title */
 .cio-question-title {
-  font-size: 2.5em;
+  font-size: 2.125em;
   margin: 0;
 }
 
 /* Description */
 .cio-question-description {
-  font-size: 1.125em;
+  font-size: 1em;
   line-height: 1.5;
   margin-top: 1.5rem;
 }
@@ -456,11 +456,6 @@
 
 /* Small Tablet */
 @media screen and (min-width: 640px) {
-  /* Qiuz */
-  .cio-quiz {
-    font-size: 16px;
-  }
-
    /* Container */
   .cio-container--with-image {
     display: flex;
@@ -516,6 +511,11 @@
 
 /* Big Tablet */
 @media screen and (min-width: 768px) {
+  /* Quiz */
+  .cio-quiz {
+    font-size: 18px;
+  }
+
   /* Container */
   .cio-container {
     align-items: center;
