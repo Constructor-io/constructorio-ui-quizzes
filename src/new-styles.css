@@ -537,6 +537,9 @@
     max-height: 1000px;
   }
 
+  .cio-cover-question-container--with-image .cio-question-image-container {
+    max-height: unset;
+  }
   /* Content */
   .cio-question-content {
     justify-content: center;
