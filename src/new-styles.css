@@ -133,6 +133,7 @@
   left: 0px;
   background: white;
   background-color: rgba(255, 255, 255, 0.87);
+  align-items: center;
 }
 .cio-question-cta-button {
   background: var(--primary-color);
@@ -580,7 +581,7 @@
   }
   .cio-select-question-container {
     margin: 0;
-    padding: 0 2rem;
+    padding: 2rem;
   }
   .cio-question-option-container {
     width: calc(25% - 13px);
