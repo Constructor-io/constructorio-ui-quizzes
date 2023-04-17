@@ -264,7 +264,7 @@
 /* Option Image */
 .cio-question-option-image {
   width: 100%;
-  height: auto;
+  height: 80%;
   border-radius: 4px;
   object-fit: cover;
   margin-bottom: 16px;
@@ -583,6 +583,7 @@
   }
   .cio-question-option-container {
     flex-basis: calc(25% - 13px);
+    height: 300px;
   }
   .cio-question-options-container {
     padding: 0;
