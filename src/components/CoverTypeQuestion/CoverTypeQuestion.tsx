@@ -30,26 +30,22 @@ export default function CoverTypeQuestion() {
 
   if (question) {
     return (
-      <div className={`cio-cover-question-container${hasImage ? '--with-image' : ''}`}>
-        <div className='cio-cover-question-text-container'>
-          <div className='cio-cover-question-text'>
-            <div>
-              <QuestionTitle title={question?.title} />
-              <QuestionDescription description={question.description} />
-            </div>
-            <ControlBar
-              nextButtonHandler={onNextClick}
-              backButtonHandler={quizBackHandler}
-              showBackButton={!isFirstQuestion}
-              ctaButtonText={question?.cta_text}
-            />
-          </div>
+      <div
+        className={`
+        cio-container${hasImage ? '--with-image' : ''}
+        cio-cover-question-container${hasImage ? '--with-image' : ''}
+      `}>
+        <div className='cio-question-content'>
+          <QuestionTitle title={question?.title} />
+          <QuestionDescription description={question.description} />
+          <ControlBar
+            nextButtonHandler={onNextClick}
+            backButtonHandler={quizBackHandler}
+            showBackButton={!isFirstQuestion}
+            ctaButtonText={question?.cta_text}
+          />
         </div>
-        {hasImage ? (
-          <div className='cio-cover-question-img'>{renderImages(question.images)}</div>
-        ) : (
-          ''
-        )}
+        {hasImage ? renderImages(question.images, 'cio-question-image-container') : ''}
       </div>
     );
   }

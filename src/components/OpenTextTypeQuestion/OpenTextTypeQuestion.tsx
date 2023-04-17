@@ -63,15 +63,19 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
     const hasImage = question?.images?.primary_url;
 
     return (
-      <div className={`cio-open-text-question-container${hasImage ? '--with-image' : ''}`}>
-        {question.images ? renderImages(question.images, 'cio-open-text-question-image') : ''}
+      <div
+        className={`
+          cio-container${hasImage ? '--with-image' : ''}
+          cio-open-text-question-container${hasImage ? '--with-image' : ''}
+        `}>
+        {hasImage ? renderImages(question.images, 'cio-question-image-container') : ''}
 
-        <div className='cio-open-text-question-form'>
+        <div className='cio-question-content'>
           <QuestionTitle title={question.title} />
           <QuestionDescription description={question.description} />
           <input
             className='cio-question-input-text'
-            placeholder={question.input_placeholder}
+            placeholder={question.input_placeholder || 'Answer here...'}
             value={openTextInput}
             onChange={onChangeHandler}
             onKeyDown={onKeyDownHandler}
