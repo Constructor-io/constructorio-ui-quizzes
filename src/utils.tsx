@@ -61,10 +61,17 @@ ${templateCode}
 
 export const defaultAddToCartCallbackCode = `"addToCartCallback": (item) => console.dir(item)`;
 
-export const stringifyWithDefaults = (obj: { apiKey: string; addToCartCallback: any }) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { addToCartCallback, ...rest } = obj;
+export const stringifyWithDefaults = (obj: { cioJsClient?: any; addToCartCallback: any }) => {
+  const { addToCartCallback, cioJsClient, ...rest } = obj;
   let res = JSON.stringify(rest, null, '  ');
+
+  if (cioJsClient) {
+    res = res.replace(
+      '"resultsPageOptions": {',
+      `"cioJsClient": cioJsClient,
+  "resultsPageOptions": {`
+    );
+  }
 
   res = res.replace(
     '"resultsPageOptions": {',

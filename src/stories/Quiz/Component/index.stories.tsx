@@ -56,6 +56,6 @@ addComponentStoryDescription(
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
 
 const cioJsClient = new ConstructorIOClient({ apiKey: '${apiKey}' });
-const args = { quizId, cioJsClient, resultsPageOptions };`,
+const args = ${stringifyWithDefaults(ProvideCIOClientInstance.args)};`,
   cioJsClientDescription
 );
