@@ -582,6 +582,7 @@
   .cio-select-question-container {
     margin: 0;
     padding: 2rem;
+    padding-bottom: 0;
   }
   .cio-question-option-container {
     width: calc(25% - 13px);
