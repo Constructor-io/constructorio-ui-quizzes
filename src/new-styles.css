@@ -582,8 +582,8 @@
     padding: 0 2rem;
   }
   .cio-question-option-container {
-    flex-basis: calc(25% - 13px);
-    height: 300px;
+    width: calc(25% - 13px);
+    max-height: 300px;
   }
   .cio-question-options-container {
     padding: 0;
