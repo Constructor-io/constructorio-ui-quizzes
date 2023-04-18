@@ -10,7 +10,8 @@
     "airbnb-typescript",
     "prettier",
     "plugin:@cspell/recommended",
-    "plugin:jsx-a11y/recommended"
+    "plugin:jsx-a11y/recommended",
+    "plugin:storybook/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {

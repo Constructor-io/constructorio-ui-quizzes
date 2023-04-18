@@ -6,27 +6,27 @@ A UI Library that provides React components to manage the fetching and rendering
 
 [Constructor.io's Quizzes](https://constructor.io/products/quizzes/) are interactive experiences that personalizes the shopping journey for each of your customers. This UI library simplifies the integration process by providing React Components that handle the fetching and rendering logic for Quizzes. Typescript support is available.
 
-[Our storybook docs](https://constructor-io.github.io/cio-quiz-temp) are the best place to explore the behavior and the available configuration options for this UI Library.
+[Our storybook docs](https://constructor-io.github.io/constructorio-ui-quizzes) are the best place to explore the behavior and the available configuration options for this UI Library.
 
-![Quizzes-Ui-Example](assets/coffee-quiz.gif)
+![Quizzes-UI-Example](assets/coffee-quiz.gif)
 
-## Using the Library
+## How to use this UI Library
 
 ### Install
 
 ```bash
-npm i @constructor-io/constructorio-ui-quiz
+npm i @constructor-io/constructorio-ui-quizzes
 ```
 
 The `CioQuiz` component handles state management, data fetching, and rendering logic for the entire quiz.
 
 ```jsx
-import { CioQuiz } from '@constructor-io/constructorio-ui-quiz';
+import CioQuiz from '@constructor-io/constructorio-ui-quizzes';
 
 function YourComponent() {
   return (
     <div>
-      <CioQuiz quizId="coffee-quiz" apiKey="key_jaqzPcUDnK66puIO" />
+      <CioQuiz quizId="coffee-quiz" apiKey="key_wJSdZSiesX5hiVLt" />
     </div>
   );
 ```
@@ -40,15 +40,14 @@ By default, importing React components from this library does not pull any css i
 If you wish to use some starter styles from this library, add an import statement similar to the example import statement below:
 
 ```js
-import '@constructor-io/constructorio-ui-quiz/styles.css';
+import '@constructor-io/constructorio-ui-quizzes/styles.css';
 ```
-
-> Note: the path and syntax in this example may change slightly depending on your module bundling strategy
 
  - These starter styles can be used as a foundation to build on top of, or just as a reference for you to replace completely.
  - To opt out of all default styling, do not import the `styles.css` stylesheet.
  - All starter styles in this library are scoped within the `.cio-quiz` css selector.
  - These starter styles are intended to be extended by layering in your own css rules
+ - If you import the starter styles, `CioQuiz` component will take up the full width and height of its parent container
 
 ## Troubleshooting
 
@@ -58,7 +57,7 @@ import '@constructor-io/constructorio-ui-quiz/styles.css';
 
 There is a known issue with ESLint where it fails to resolve the paths exposed in the `exports` statement of NPM packages. If you are receiving the following error, you can safely disable ESLint using `// eslint-disable-line` for that line.
 
-`Unable to resolve path to module '@constructor-io/constructorio-ui-quiz/styles.css'`
+`Unable to resolve path to module '@constructor-io/constructorio-ui-quizzes/styles.css'`
 
 Relevant open issues:
 

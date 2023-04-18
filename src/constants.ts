@@ -1,5 +1,4 @@
 // Autocomplete key index
-// TODO: We need to change this later
 export const apiKey = 'key_wJSdZSiesX5hiVLt';
 export const quizId = 'coffee-quiz';
 
@@ -9,7 +8,12 @@ export const quizId = 'coffee-quiz';
 
 export const componentDescription = `- import \`CioQuiz\` to render in your JSX.
 - This component handles state management, data fetching, and rendering logic.
-- To use this component, an \`apiKey\` or \`cioJsClient\` are required, all other values are optional.
+- To use this component, \`quizId\`, \`resultsPageOptions\`, and one of \`apiKey\` or \`cioJsClient\` are required.
+- \`resultsPageOptions\` lets you configure the results page
+  - \`addToCartCallback\` is a callback function that will be called when the "Add to cart" button is clicked
+  - \`clickItemCallback\` is an optional callback function that will be called when the result card is clicked. The default behavior is redirecting the user to the item's URL
+  - \`resultCardRegularPriceKey\` is a parameter that specifies the metadata field name for the regular price
+  - \`resultCardSalePriceKey\` is an optional parameter that specifies the metadata field name for the sale price
 - Use different props to configure the behavior of this component.
 - The following stories show how different props affect the component's behavior
 
