@@ -29,7 +29,7 @@ const resultsPageOptions = {
     console.dir(item);
   },
   resultCardRegularPriceKey: 'price',
-  resultCardSalePriceKey: 'price',
+  resultCardSalePriceKey: 'salePrice',
 };
 
 export const e2eInteractionTest = ComponentTemplate.bind({});

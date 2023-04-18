@@ -7,7 +7,7 @@ export interface ResultsProps {
   addToCartCallback: (item: Partial<BrowseResultData>) => any;
   clickItemCallback?: (item: Partial<BrowseResultData>) => any;
   resultCardSalePriceKey?: string;
-  resultCardRegularPriceKey: string;
+  resultCardRegularPriceKey?: string;
 }
 
 function Results(props: ResultsProps) {

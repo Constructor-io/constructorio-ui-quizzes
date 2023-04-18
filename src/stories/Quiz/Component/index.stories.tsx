@@ -35,7 +35,7 @@ const resultsPageOptions = {
     console.dir(item);
   },
   resultCardRegularPriceKey: 'price',
-  resultCardSalePriceKey: 'price',
+  resultCardSalePriceKey: 'salePrice',
 };
 
 export const BasicUsage = ComponentTemplate.bind({});
