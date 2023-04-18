@@ -38,6 +38,16 @@ export default function CioQuiz(props: IQuizProps) {
     console.error('quizId is a required field of type string');
   }
 
+  if (!resultsPageOptions || Object.keys(resultsPageOptions).length === 0) {
+    // eslint-disable-next-line no-console
+    console.error('resultsPageOptions is a required field of type object');
+  }
+
+  if (resultsPageOptions && !resultsPageOptions?.addToCartCallback) {
+    // eslint-disable-next-line no-console
+    console.error('resultsPageOptions.addToCartCallback is a required field of type function');
+  }
+
   const cioClient = useCioClient({ apiKey, cioJsClient });
   const [state, dispatch] = useReducer(reducer, initialState);
   const [requestState, setRequestState] = useState(RequestStates.Stale);
