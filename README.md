@@ -1,5 +1,8 @@
 # Constructor.io Quizzes UI Library
 
+[![npm](https://img.shields.io/npm/v/@constructor-io/constructorio-ui-quizzes)](https://www.npmjs.com/package/@constructor-io/constructorio-ui-quizzes)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Constructor-io/constructorio-ui-quizzes/blob/main/LICENSE)
+
 A UI Library that provides React components to manage the fetching and rendering logic for [Constructor.io's Quizzes](https://constructor.io/products/quizzes/).
 
 ## Introduction
