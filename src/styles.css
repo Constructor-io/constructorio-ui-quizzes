@@ -104,11 +104,6 @@
   display: flex;
 }
 
-/* Question */
-[class^='cio-question-id'] {
-  display: flex;
-}
-
 /* Input */
 .cio-question-input-text {
   width: 100%;

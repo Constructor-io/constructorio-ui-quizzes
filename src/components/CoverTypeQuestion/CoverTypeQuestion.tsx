@@ -34,6 +34,7 @@ export default function CoverTypeQuestion() {
         className={`
         cio-container${hasImage ? '--with-image' : ''}
         cio-cover-question-container${hasImage ? '--with-image' : ''}
+        cio-question-${question.id}
       `}>
         <div className='cio-question-content'>
           <QuestionTitle title={question?.title} />

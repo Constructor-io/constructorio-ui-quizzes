@@ -12,10 +12,10 @@ export default function QuizQuestions(props: { questionResponse: NextQuestionRes
   const questionTypes = getQuestionTypes(nextQuestion?.type);
 
   return (
-    <div className={nextQuestion?.id ? `cio-question-id-${nextQuestion?.id}` : ''}>
+    <>
       {questionTypes.isOpenQuestion && <OpenTextQuestion key={nextQuestion?.id} />}
       {questionTypes.isCoverQuestion && <CoverTypeQuestion key={nextQuestion?.id} />}
       {questionTypes.isSelectQuestion && <SelectTypeQuestion key={nextQuestion?.id} />}
-    </div>
+    </>
   );
 }
