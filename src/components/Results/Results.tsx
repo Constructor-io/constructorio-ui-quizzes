@@ -21,7 +21,7 @@ function Results(props: ResultsProps) {
 
   return (
     <div className='cio-results'>
-      {resultsResponse?.response?.results?.map((result) => (
+      {resultsResponse?.response?.results?.map((result, index) => (
         <ResultCard
           result={result}
           key={result.data?.id}
@@ -29,6 +29,7 @@ function Results(props: ResultsProps) {
           regularPriceKey={resultCardRegularPriceKey}
           addToCartCallback={addToCartCallback}
           clickItemCallback={clickItemCallback}
+          resultPosition={index + 1}
         />
       ))}
     </div>

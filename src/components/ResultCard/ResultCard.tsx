@@ -1,6 +1,7 @@
-import React, { KeyboardEvent } from 'react';
+import React, { KeyboardEvent, useContext } from 'react';
 import { BrowseResultData } from '../../types';
 import ResultCtaButton from '../ResultCtaButton/ResultCtaButton';
+import QuizContext from '../CioQuiz/context';
 
 interface ResultCardProps {
   result: Partial<BrowseResultData>;
@@ -8,64 +9,90 @@ interface ResultCardProps {
   clickItemCallback?: (clickedResult: Partial<BrowseResultData>) => any;
   salePriceKey?: string;
   regularPriceKey?: string;
+  resultPosition: number;
 }
 
 export default function ResultCard(props: ResultCardProps) {
-  const { result, addToCartCallback, clickItemCallback, salePriceKey, regularPriceKey } = props;
+  const {
+    result,
+    addToCartCallback,
+    clickItemCallback: customClickItemCallback,
+    salePriceKey,
+    regularPriceKey,
+    resultPosition,
+  } = props;
+  const { resultsResponse } = useContext(QuizContext);
+  const { cioClient } = useContext(QuizContext);
   const salePrice = salePriceKey && result?.data?.[salePriceKey];
   const regularPrice = regularPriceKey && result?.data?.[regularPriceKey];
 
-  const clickHandler = () => {
-    if (clickItemCallback && typeof clickItemCallback === 'function') {
-      clickItemCallback(result);
+  const clickItemCallback = () => {
+    /* eslint-disable @typescript-eslint/naming-convention */
+    if (resultsResponse && resultsResponse.request && resultsResponse.response) {
+      const {
+        quiz_id,
+        quiz_session_id,
+        quiz_version_id,
+        result_id,
+        request: { section, page, num_results_per_page },
+        response: { total_num_results },
+      } = resultsResponse;
+      /* eslint-enable @typescript-eslint/naming-convention */
+
+      cioClient?.tracker.trackQuizResultClick({
+        quiz_id,
+        quiz_version_id,
+        quiz_session_id,
+        item_id: result.data?.id,
+        item_name: result?.value,
+        section,
+        result_count: total_num_results,
+        result_page: page,
+        result_id,
+        result_position_on_page: resultPosition,
+        num_results_per_page,
+      });
     }
+
+    if (customClickItemCallback && typeof customClickItemCallback === 'function') {
+      customClickItemCallback(result);
+    }
+  };
+
+  const clickHandler = () => {
+    clickItemCallback();
   };
 
   const keyDownHandler = (event: KeyboardEvent<HTMLDivElement>) => {
     if (event?.key === ' ' || event?.key === 'Enter') {
-      if (clickItemCallback && typeof clickItemCallback === 'function') {
-        clickItemCallback(result);
-      }
+      clickItemCallback();
     }
   };
 
-  const resultCardContent = () => (
-    <>
-      <div className='cio-result-card-image'>
-        <img src={result.data?.image_url} alt='product' />
-      </div>
-      <div className='cio-result-card-text'>
-        <p className='cio-result-card-title'>{result.value}</p>
-        <div className='cio-result-card-prices'>
-          {salePrice && <span className='cio-result-card-sale-price'>${salePrice}</span>}
-          {regularPrice && (
-            <span className={`cio-result-card-regular-price${salePrice ? '--strike-through' : ''}`}>
-              ${regularPrice}
-            </span>
-          )}
-        </div>
-      </div>
-      <ResultCtaButton item={result} callback={addToCartCallback} />
-    </>
-  );
-
-  if (clickItemCallback) {
-    return (
-      <div
-        onClick={clickHandler}
-        onKeyDown={keyDownHandler}
-        className='cio-result-card'
-        role='button'
-        tabIndex={0}>
-        {resultCardContent()}
-      </div>
-    );
-  }
-
   return (
-    <div className='cio-result-card'>
+    <div
+      onClick={clickHandler}
+      onKeyDown={keyDownHandler}
+      className='cio-result-card'
+      role='button'
+      tabIndex={0}>
       <a className='cio-result-card-anchor' href={result.data?.url}>
-        {resultCardContent()}
+        <div className='cio-result-card-image'>
+          <img src={result.data?.image_url} alt='product' />
+        </div>
+        <div className='cio-result-card-text'>
+          <p className='cio-result-card-title'>{result.value}</p>
+          <div className='cio-result-card-prices'>
+            {salePrice && <span className='cio-result-card-sale-price'>${salePrice}</span>}
+            {regularPrice && (
+              <span
+                className={`cio-result-card-regular-price${salePrice ? '--strike-through' : ''}`}>
+                ${regularPrice}
+              </span>
+            )}
+          </div>
+        </div>
+        <ResultCtaButton item={result} callback={addToCartCallback} />
       </a>
     </div>
   );
