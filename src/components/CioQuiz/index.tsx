@@ -81,6 +81,7 @@ export default function CioQuiz(props: IQuizProps) {
     isFirstQuestion,
     quizNextHandler,
     quizBackHandler,
+    cioClient,
   };
 
   useEffect(() => {
