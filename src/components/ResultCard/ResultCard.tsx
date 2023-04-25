@@ -92,7 +92,11 @@ export default function ResultCard(props: ResultCardProps) {
             )}
           </div>
         </div>
-        <ResultCtaButton item={result} callback={addToCartCallback} />
+        <ResultCtaButton
+          item={result}
+          callback={addToCartCallback}
+          price={salePrice || regularPrice}
+        />
       </a>
     </div>
   );
