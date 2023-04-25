@@ -69,6 +69,32 @@ export default function ResultCard(props: ResultCardProps) {
     }
   };
 
+  const resultCardContent = () => (
+    <>
+      <div className='cio-result-card-image'>
+        <img src={result.data?.image_url} alt='product' />
+      </div>
+      <div className='cio-result-card-text'>
+        <p className='cio-result-card-title'>{result.value}</p>
+        <div className='cio-result-card-prices'>
+          {salePrice && <span className='cio-result-card-sale-price'>${salePrice}</span>}
+          {regularPrice && (
+            <span className={`cio-result-card-regular-price${salePrice ? '--strike-through' : ''}`}>
+              ${regularPrice}
+            </span>
+          )}
+        </div>
+      </div>
+      <ResultCtaButton item={result} callback={addToCartCallback} />
+    </>
+  );
+
+  const resultCardContentWithLink = () => (
+    <a className='cio-result-card-anchor' href={result.data?.url}>
+      {resultCardContent()}
+    </a>
+  );
+
   return (
     <div
       onClick={clickHandler}
@@ -76,28 +102,7 @@ export default function ResultCard(props: ResultCardProps) {
       className='cio-result-card'
       role='button'
       tabIndex={0}>
-      <a className='cio-result-card-anchor' href={result.data?.url}>
-        <div className='cio-result-card-image'>
-          <img src={result.data?.image_url} alt='product' />
-        </div>
-        <div className='cio-result-card-text'>
-          <p className='cio-result-card-title'>{result.value}</p>
-          <div className='cio-result-card-prices'>
-            {salePrice && <span className='cio-result-card-sale-price'>${salePrice}</span>}
-            {regularPrice && (
-              <span
-                className={`cio-result-card-regular-price${salePrice ? '--strike-through' : ''}`}>
-                ${regularPrice}
-              </span>
-            )}
-          </div>
-        </div>
-        <ResultCtaButton
-          item={result}
-          callback={addToCartCallback}
-          price={salePrice || regularPrice}
-        />
-      </a>
+      {!customClickItemCallback ? resultCardContentWithLink() : resultCardContent()}
     </div>
   );
 }
