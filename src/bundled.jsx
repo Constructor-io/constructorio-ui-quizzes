@@ -26,17 +26,19 @@ const ConstructorioQuizzes = ({
     }
     const containerElement = document.querySelector(selector);
 
-    ReactDOM.createRoot(containerElement).render(
-      <React.StrictMode>
-        <CioQuiz
-          quizId={quizId}
-          apiKey={apiKey}
-          cioJsClient={cioJsClient}
-          resultsPageOptions={resultsPageOptions}
-          quizVersionId={quizVersionId}
-        />
-      </React.StrictMode>
-    );
+    if (containerElement) {
+      ReactDOM.createRoot(containerElement).render(
+        <React.StrictMode>
+          <CioQuiz
+            quizId={quizId}
+            apiKey={apiKey}
+            cioJsClient={cioJsClient}
+            resultsPageOptions={resultsPageOptions}
+            quizVersionId={quizVersionId}
+          />
+        </React.StrictMode>
+      );
+    }
   }
 };
 
