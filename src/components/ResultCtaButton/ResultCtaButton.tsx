@@ -11,8 +11,7 @@ interface ResultCtaButtonProps {
 
 export default function ResultCtaButton(props: ResultCtaButtonProps) {
   const { item, callback, className, price } = props;
-  const { resultsResponse } = useContext(QuizContext);
-  const { cioClient } = useContext(QuizContext);
+  const { resultsResponse, cioClient } = useContext(QuizContext);
 
   const clickHandler = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();

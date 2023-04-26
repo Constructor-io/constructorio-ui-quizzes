@@ -21,8 +21,7 @@ export default function ResultCard(props: ResultCardProps) {
     regularPriceKey,
     resultPosition,
   } = props;
-  const { resultsResponse } = useContext(QuizContext);
-  const { cioClient } = useContext(QuizContext);
+  const { resultsResponse, cioClient } = useContext(QuizContext);
   const salePrice = salePriceKey && result?.data?.[salePriceKey];
   const regularPrice = regularPriceKey && result?.data?.[regularPriceKey];
 
@@ -85,7 +84,11 @@ export default function ResultCard(props: ResultCardProps) {
           )}
         </div>
       </div>
-      <ResultCtaButton item={result} callback={addToCartCallback} />
+      <ResultCtaButton
+        item={result}
+        callback={addToCartCallback}
+        price={salePrice || regularPrice}
+      />
     </>
   );
 

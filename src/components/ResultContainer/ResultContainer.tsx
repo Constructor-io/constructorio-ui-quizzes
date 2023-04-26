@@ -19,9 +19,7 @@ export default function ResultContainer(props: IResultContainerProps) {
     resultCardSalePriceKey,
     resultCardRegularPriceKey,
   } = options;
-  const { resultsResponse } = useContext(QuizContext);
-  const { cioClient } = useContext(QuizContext);
-  const { dispatch } = useContext(QuizContext);
+  const { resultsResponse, cioClient, dispatch } = useContext(QuizContext);
   const filterExpression = resultsResponse?.request?.collection_filter_expression;
   const zeroResults = !resultsResponse?.response?.results?.length;
   const resultsTitle = zeroResults ? 'Oops, there are no results' : 'Here are your results';
