@@ -19,9 +19,9 @@
       "import": "./lib/styles.css",
       "require": "./lib/styles.css"
     },
-    "./quiz-ui-bundled": {
-      "import": "./dist/quiz-ui-bundled.js",
-      "require": "./dist/quiz-ui-bundled.js"
+    "./quizzes-ui-bundled": {
+      "import": "./dist/quizzes-ui-bundled.js",
+      "require": "./dist/quizzes-ui-bundled.js"
     },
     ".": {
       "import": "./lib/mjs/index.js",
@@ -30,7 +30,7 @@
   },
   "files": [
     "lib/**/*",
-    "dist/constructorio-ui-quiz-bundled.js"
+    "dist/constructorio-ui-quizzes-bundled.js"
   ],
   "engines": {
     "node": ">=14"
