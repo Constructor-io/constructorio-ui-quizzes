@@ -10,8 +10,20 @@ const ConstructorioQuizzes = ({
   cioJsClient,
   resultsPageOptions,
   quizVersionId,
+  includeCSS = true,
 }) => {
   if (document) {
+    if (!includeCSS) {
+      try {
+        const stylesheet = document.getElementById('cio-quizzes-styles');
+
+        if (stylesheet) {
+          stylesheet.remove();
+        }
+      } catch (e) {
+        // Stop error from breaking
+      }
+    }
     const containerElement = document.querySelector(selector);
 
     ReactDOM.createRoot(containerElement).render(
@@ -23,7 +35,6 @@ const ConstructorioQuizzes = ({
           resultsPageOptions={resultsPageOptions}
           quizVersionId={quizVersionId}
         />
-        ;
       </React.StrictMode>
     );
   }

@@ -2,7 +2,9 @@ import { defineConfig } from "vite";
 import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
 
 export default defineConfig({
-  plugins: [cssInjectedByJsPlugin()],
+  plugins: [cssInjectedByJsPlugin({
+    styleId: 'cio-quizzes-styles'
+  })],
   build: {
     rollupOptions: {
       preserveEntrySignatures: 'strict',
@@ -11,7 +13,7 @@ export default defineConfig({
       },
       output: {
         sourcemap: false,
-        entryFileNames: `constructorio-ui-quiz-bundled.js`,
+        entryFileNames: `constructorio-ui-quizzes-bundled.js`,
       },
     },
   },
