@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 import { getCioClient } from '../utils';
 
 export type CioClientConfig = { apiKey?: string; cioJsClient?: ConstructorIOClient };
-type UseCioClient = (cioClientConfig: CioClientConfig) => ConstructorIOClient | null;
+type UseCioClient = (cioClientConfig: CioClientConfig) => ConstructorIOClient | undefined;
 
 const useCioClient: UseCioClient = ({ apiKey, cioJsClient }) => {
   if (!apiKey && !cioJsClient) {
