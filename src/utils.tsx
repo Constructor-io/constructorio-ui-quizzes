@@ -119,7 +119,7 @@ export const getCioClient = (apiKey?: string) => {
     });
   }
 
-  return null;
+  return undefined;
 };
 
 export function getPreferredColorScheme() {
