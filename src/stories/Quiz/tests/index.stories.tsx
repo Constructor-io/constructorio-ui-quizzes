@@ -13,8 +13,13 @@ export default {
   component: CioQuiz,
   argTypes,
   parameters: {
+    layout: 'fullscreen',
     docs: {
-      page: null,
+      source: {
+        language: 'jsx',
+        format: true,
+        type: 'code',
+      },
     },
   },
 };
