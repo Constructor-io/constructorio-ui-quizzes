@@ -12,7 +12,6 @@ export default defineConfig({
         app: "./src/bundled.jsx",
       },
       output: {
-        sourcemap: false,
         entryFileNames: `constructorio-ui-quizzes-bundled.js`,
       },
     },
