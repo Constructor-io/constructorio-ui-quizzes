@@ -51,7 +51,7 @@
     "verify-node-version": "chmod +x ./scripts/verify-node-version.sh && ./scripts/verify-node-version.sh",
     "version": "npm run verify-node-version && npm run build-storybook && git add -u ./docs && git add ./docs/* && npm run compile",
     "compile": "rm -rf lib && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json && npm run copy-styles && vite build",
-    "check-license": "license-checker --production --onlyAllow 'Apache-2.0;BSD-3-Clause;MIT;0BSD;BSD-2-Clause'"
+    "check-license": "license-checker --production --onlyAllow 'Apache-2.0;BSD-3-Clause;MIT;0BSD;BSD-2-Clause' --excludePackages 'picocolors@1.0.0'"
   },
   "peerDependencies": {
     "@constructor-io/constructorio-client-javascript": "^2.35.2",
