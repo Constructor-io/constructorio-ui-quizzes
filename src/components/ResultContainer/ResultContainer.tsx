@@ -19,8 +19,7 @@ export default function ResultContainer(props: IResultContainerProps) {
     resultCardSalePriceKey,
     resultCardRegularPriceKey,
   } = options;
-  const { resultsResponse } = useContext(QuizContext);
-  const { dispatch } = useContext(QuizContext);
+  const { resultsResponse, cioClient, dispatch } = useContext(QuizContext);
   const filterExpression = resultsResponse?.request?.collection_filter_expression;
   const zeroResults = !resultsResponse?.response?.results?.length;
   const resultsTitle = zeroResults ? 'Oops, there are no results' : 'Here are your results';
@@ -34,7 +33,29 @@ export default function ResultContainer(props: IResultContainerProps) {
     }
   };
 
-  if (resultsResponse) {
+  if (resultsResponse && resultsResponse.request && resultsResponse.response) {
+    /* eslint-disable @typescript-eslint/naming-convention */
+    const {
+      quiz_id,
+      quiz_session_id,
+      quiz_version_id,
+      result_id,
+      request: { section, page },
+      response: { total_num_results },
+    } = resultsResponse;
+    /* eslint-enable @typescript-eslint/naming-convention */
+
+    cioClient?.tracker.trackQuizResultsLoaded({
+      quiz_id,
+      quiz_version_id,
+      quiz_session_id,
+      url: window.location.href,
+      section,
+      result_count: total_num_results,
+      result_page: page,
+      result_id,
+    });
+
     return (
       <div className='cio-results-container'>
         <h1 className='cio-results-title'>{resultsTitle}</h1>
