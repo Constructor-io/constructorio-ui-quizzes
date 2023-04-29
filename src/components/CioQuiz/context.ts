@@ -5,11 +5,11 @@ import { NextQuestionResponse, QuizResultsResponse } from '../../types';
 import { ActionAnswerQuestion } from './actions';
 import { QuizReducerState } from './reducer';
 
-interface QuizContextValue {
-  state: QuizReducerState;
+export interface QuizContextValue {
+  quizState: QuizReducerState;
   requestState: RequestStates;
-  questionResponse: NextQuestionResponse;
-  resultsResponse: QuizResultsResponse;
+  questionResponse?: NextQuestionResponse;
+  resultsResponse?: QuizResultsResponse;
   isFirstQuestion: boolean;
   quizNextHandler: (action?: ActionAnswerQuestion) => void;
   quizBackHandler: () => void;

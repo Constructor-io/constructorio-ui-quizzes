@@ -13,7 +13,7 @@ interface OpenTextQuestionProps {
 
 function OpenTextQuestion(props: OpenTextQuestionProps) {
   const { initialValue = '', onChangeHandler: userDefinedHandler = null } = props;
-  const { questionResponse, quizBackHandler, quizNextHandler, isFirstQuestion, state } =
+  const { questionResponse, quizBackHandler, quizNextHandler, isFirstQuestion, quizState } =
     useContext(QuizContext);
   const [openTextInput, setOpenTextInput] = useState<string>(initialValue);
 
@@ -54,10 +54,10 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
   useEffect(() => {
     if (questionResponse) {
       const openTextAnswer =
-        state?.answerInputs?.[questionResponse?.next_question.id] || initialValue;
+        quizState?.answerInputs?.[questionResponse?.next_question.id] || initialValue;
       setOpenTextInput(openTextAnswer);
     }
-  }, [questionResponse, state, initialValue]);
+  }, [questionResponse, quizState, initialValue]);
 
   if (question) {
     const hasImage = question?.images?.primary_url;

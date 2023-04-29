@@ -10,6 +10,10 @@ export interface ResultsProps {
   resultCardRegularPriceKey?: string;
 }
 
+export interface ResultsPageOptions extends ResultsProps {
+  numResultsToDisplay?: number;
+}
+
 function Results(props: ResultsProps) {
   const {
     addToCartCallback,
