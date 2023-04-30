@@ -59,7 +59,7 @@ const useQuiz: UseQuiz = ({ quizId, apiKey, cioJsClient, quizVersionId, resultsP
     cioClient
   );
 
-  // Quiz results loaded tracking event
+  // Quiz tracking and custom callback event
   const { addToCartClickHandler, resultClickHandler, quizNextHandler, quizBackHandler } =
     useQuizTrackingAndCbEvents(cioClient, quizApiState, resultsPageOptions, dispatchLocalState);
 
