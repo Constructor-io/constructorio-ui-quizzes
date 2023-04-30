@@ -12,9 +12,7 @@ export default function QuizQuestions() {
 
   return (
     <>
-      {questionTypes.isOpenQuestion && (
-        <OpenTextQuestion key={quizApiState?.quizCurrentQuestion?.next_question?.id} />
-      )}
+      {questionTypes.isOpenQuestion && <OpenTextQuestion key={nextQuestion?.id} />}
       {questionTypes.isCoverQuestion && <CoverTypeQuestion key={nextQuestion?.id} />}
       {questionTypes.isSelectQuestion && <SelectTypeQuestion key={nextQuestion?.id} />}
     </>
