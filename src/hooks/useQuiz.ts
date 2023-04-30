@@ -1,10 +1,10 @@
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
-import { QuestionTypes } from '../components/CioQuiz/actions';
-import { QuizContextValue } from '../components/CioQuiz/context';
+import { QuizAPIReducerState } from '../components/CioQuiz/quizApiReducer';
+import { QuizLocalReducerState } from '../components/CioQuiz/quizLocalReducer';
 import { ResultsPageOptions } from '../components/Results/Results';
 import useConsoleErrors from './useConsoleErrors';
-import useFetchQuiz from './useFetchQuiz';
-import useQuizState from './useQuizState';
+import useQuizApiState from './useQuizApiState';
+import useQuizLocalState from './useQuizLocalState';
 
 export interface IQuizProps {
   quizId: string;
@@ -14,48 +14,53 @@ export interface IQuizProps {
   quizVersionId?: string;
 }
 
-type UseQuiz = (quizProps: IQuizProps) => any;
+type UseQuiz = (quizProps: IQuizProps) => {
+  cioClient?: ConstructorIOClient;
+  quizLocalState?: QuizLocalReducerState;
+  quizApiState?: QuizAPIReducerState;
+  isFirstQuestion?: boolean;
+  events: {
+    quizNextHandler: () => void;
+    quizBackHandler: () => void;
+    onResetClick: () => void;
+  };
+};
 
 const useQuiz: UseQuiz = ({ quizId, apiKey, cioJsClient, resultsPageOptions, quizVersionId }) => {
   // Log console errors for required parameters quizId and resultsPageOptions
   useConsoleErrors(quizId, resultsPageOptions);
 
   // Quiz Local state
-  const { dispatch, quizState, quizNextHandler, quizBackHandler } = useQuizState();
+  const { quizLocalState, quizNextHandler, quizBackHandler, resetQuizLocalState } =
+    useQuizLocalState();
 
   // Quiz API state
-  const {
-    cioClient,
-    requestState,
-    isFirstQuestion,
-    resultsResponse,
-    questionResponse,
-    resetQuizSessionId,
-  } = useFetchQuiz(quizId, quizState, resultsPageOptions, quizVersionId, apiKey, cioJsClient);
+  const { cioClient, isFirstQuestion, quizApiState, resetQuizApiState } = useQuizApiState(
+    quizId,
+    quizLocalState,
+    resultsPageOptions,
+    quizVersionId,
+    apiKey,
+    cioJsClient
+  );
 
   const onResetClick = () => {
-    if (dispatch && resultsResponse) {
-      resetQuizSessionId();
-      dispatch({
-        type: QuestionTypes.Reset,
-      });
+    if (quizApiState.quizResults) {
+      resetQuizApiState();
+      resetQuizLocalState();
     }
   };
 
   return {
+    cioClient,
+    quizLocalState,
+    quizApiState,
+    isFirstQuestion,
     events: {
       quizNextHandler,
       quizBackHandler,
       onResetClick,
     },
-    cioClient,
-    dispatch,
-    quizState,
-    questionResponse,
-    resultsResponse,
-    isFirstQuestion,
-    requestState,
-    resetQuizSessionId,
   };
 };
 

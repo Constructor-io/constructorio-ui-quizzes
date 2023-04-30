@@ -19,21 +19,16 @@ export default function ResultContainer(props: IResultContainerProps) {
     resultCardSalePriceKey,
     resultCardRegularPriceKey,
   } = options;
-  const { resultsResponse, cioClient, dispatch } = useContext(QuizContext);
-  const filterExpression = resultsResponse?.request?.collection_filter_expression;
-  const zeroResults = !resultsResponse?.response?.results?.length;
+  const { quizApiState, cioClient } = useContext(QuizContext);
+  const filterExpression = quizApiState?.quizResults?.request?.collection_filter_expression;
+  const zeroResults = !quizApiState?.quizResults?.response?.results?.length;
   const resultsTitle = zeroResults ? 'Oops, there are no results' : 'Here are your results';
 
-  const onResetClick = () => {
-    if (dispatch && resultsResponse) {
-      resetQuizSessionId();
-      dispatch({
-        type: QuestionTypes.Reset,
-      });
-    }
-  };
-
-  if (resultsResponse && resultsResponse.request && resultsResponse.response) {
+  if (
+    quizApiState?.quizResults &&
+    quizApiState?.quizResults.request &&
+    quizApiState?.quizResults.response
+  ) {
     /* eslint-disable @typescript-eslint/naming-convention */
     const {
       quiz_id,
@@ -42,7 +37,7 @@ export default function ResultContainer(props: IResultContainerProps) {
       result_id,
       request: { section, page },
       response: { total_num_results },
-    } = resultsResponse;
+    } = quizApiState?.quizResults;
     /* eslint-enable @typescript-eslint/naming-convention */
 
     cioClient?.tracker.trackQuizResultsLoaded({
@@ -61,7 +56,7 @@ export default function ResultContainer(props: IResultContainerProps) {
         <h1 className='cio-results-title'>{resultsTitle}</h1>
         <div className='cio-results-filter-and-redo-container'>
           <ResultFilters filters={filterExpression} />
-          <RedoButton onClick={onResetClick} />
+          <RedoButton onClick={resetQuizSessionId} />
         </div>
         {!zeroResults && (
           <Results

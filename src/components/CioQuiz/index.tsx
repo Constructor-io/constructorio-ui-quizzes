@@ -1,5 +1,5 @@
 import React from 'react';
-import QuizContext from './context';
+import QuizContext, { QuizContextValue } from './context';
 import QuizQuestions from '../QuizQuestions';
 import ResultContainer from '../ResultContainer/ResultContainer';
 import { RequestStates } from '../../constants';
@@ -9,22 +9,16 @@ import useQuiz, { IQuizProps } from '../../hooks/useQuiz';
 export default function CioQuiz(props: IQuizProps) {
   const {
     cioClient,
-    dispatch,
-    quizState,
-    questionResponse,
-    resultsResponse,
     isFirstQuestion,
-    requestState,
-    resetQuizSessionId,
-    events: { quizNextHandler, quizBackHandler },
+    quizApiState,
+    quizLocalState,
+    events: { quizNextHandler, quizBackHandler, onResetClick },
   } = useQuiz(props);
 
-  const contextValue = {
+  const contextValue: QuizContextValue = {
     cioClient,
-    dispatch,
-    quizState,
-    questionResponse,
-    resultsResponse,
+    quizLocalState,
+    quizApiState,
     isFirstQuestion,
     quizNextHandler,
     quizBackHandler,
@@ -32,7 +26,7 @@ export default function CioQuiz(props: IQuizProps) {
 
   const { resultsPageOptions } = props;
 
-  if (requestState === RequestStates.Loading) {
+  if (quizApiState?.quizRequestState === RequestStates.Loading) {
     return (
       <div className='cio-quiz'>
         <Spinner />
@@ -40,14 +34,16 @@ export default function CioQuiz(props: IQuizProps) {
     );
   }
 
-  if (requestState === RequestStates.Success) {
+  if (quizApiState?.quizRequestState === RequestStates.Success) {
     return (
       <div className='cio-quiz'>
         <QuizContext.Provider value={contextValue}>
-          {resultsResponse && (
-            <ResultContainer options={resultsPageOptions} resetQuizSessionId={resetQuizSessionId} />
+          {quizApiState.quizResults && (
+            <ResultContainer options={resultsPageOptions} resetQuizSessionId={onResetClick} />
           )}
-          {questionResponse && <QuizQuestions questionResponse={questionResponse} />}
+          {quizApiState.quizCurrentQuestion && (
+            <QuizQuestions questionResponse={quizApiState.quizCurrentQuestion} />
+          )}
         </QuizContext.Provider>
       </div>
     );

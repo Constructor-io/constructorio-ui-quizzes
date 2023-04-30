@@ -13,14 +13,14 @@ interface OpenTextQuestionProps {
 
 function OpenTextQuestion(props: OpenTextQuestionProps) {
   const { initialValue = '', onChangeHandler: userDefinedHandler = null } = props;
-  const { questionResponse, quizBackHandler, quizNextHandler, isFirstQuestion, quizState } =
+  const { quizApiState, quizLocalState, quizBackHandler, quizNextHandler, isFirstQuestion } =
     useContext(QuizContext);
   const [openTextInput, setOpenTextInput] = useState<string>(initialValue);
 
   let question;
 
-  if (questionResponse) {
-    question = questionResponse.next_question;
+  if (quizApiState?.quizCurrentQuestion) {
+    question = quizApiState?.quizCurrentQuestion.next_question;
   }
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,13 +31,13 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
   };
 
   const onNextClick = () => {
-    if (quizNextHandler && openTextInput && questionResponse) {
+    if (quizNextHandler && openTextInput && quizApiState?.quizCurrentQuestion) {
       quizNextHandler({
         type: QuestionTypes.OpenText,
         payload: {
-          questionId: questionResponse.next_question.id,
+          questionId: quizApiState?.quizCurrentQuestion.next_question.id,
           input: openTextInput,
-          isLastQuestion: questionResponse.is_last_question,
+          isLastQuestion: quizApiState?.quizCurrentQuestion.is_last_question,
         },
       });
     }
@@ -52,12 +52,13 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
   };
 
   useEffect(() => {
-    if (questionResponse) {
+    if (quizApiState?.quizCurrentQuestion) {
       const openTextAnswer =
-        quizState?.answerInputs?.[questionResponse?.next_question.id] || initialValue;
+        quizLocalState?.answerInputs?.[quizApiState?.quizCurrentQuestion?.next_question.id] ||
+        initialValue;
       setOpenTextInput(openTextAnswer);
     }
-  }, [questionResponse, quizState, initialValue]);
+  }, [quizApiState?.quizCurrentQuestion, quizLocalState, initialValue]);
 
   if (question) {
     const hasImage = question?.images?.primary_url;

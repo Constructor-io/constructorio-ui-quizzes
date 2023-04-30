@@ -1,9 +1,9 @@
 import { useCallback, useReducer } from 'react';
 import { ActionAnswerQuestion, QuestionTypes } from '../components/CioQuiz/actions';
-import reducer, { initialState } from '../components/CioQuiz/quizLocalReducer';
+import quizLocalReducer, { initialState } from '../components/CioQuiz/quizLocalReducer';
 
-const useQuizState = () => {
-  const [quizState, dispatch] = useReducer(reducer, initialState);
+const useQuizLocalState = () => {
+  const [quizLocalState, dispatch] = useReducer(quizLocalReducer, initialState);
 
   const quizNextHandler = useCallback(
     (action?: ActionAnswerQuestion) => {
@@ -20,12 +20,18 @@ const useQuizState = () => {
     }
   }, [dispatch]);
 
+  const resetQuizLocalState = () => {
+    dispatch({
+      type: QuestionTypes.Reset,
+    });
+  };
   return {
     dispatch,
-    quizState,
+    quizLocalState,
     quizNextHandler,
     quizBackHandler,
+    resetQuizLocalState,
   };
 };
 
-export default useQuizState;
+export default useQuizLocalState;

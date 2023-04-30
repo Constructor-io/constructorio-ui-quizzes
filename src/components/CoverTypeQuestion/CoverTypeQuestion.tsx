@@ -7,12 +7,12 @@ import { QuestionTypes } from '../CioQuiz/actions';
 import ControlBar from '../ControlBar/ControlBar';
 
 export default function CoverTypeQuestion() {
-  const { questionResponse, quizBackHandler, quizNextHandler, isFirstQuestion } =
+  const { quizApiState, quizBackHandler, quizNextHandler, isFirstQuestion } =
     useContext(QuizContext);
   let question;
 
-  if (questionResponse) {
-    question = questionResponse.next_question;
+  if (quizApiState?.quizCurrentQuestion) {
+    question = quizApiState?.quizCurrentQuestion.next_question;
   }
 
   const hasImage = question?.images?.primary_url;
@@ -22,7 +22,7 @@ export default function CoverTypeQuestion() {
       quizNextHandler({
         type: QuestionTypes.Cover,
         payload: {
-          isLastQuestion: questionResponse?.is_last_question,
+          isLastQuestion: quizApiState?.quizCurrentQuestion?.is_last_question,
         },
       });
     }

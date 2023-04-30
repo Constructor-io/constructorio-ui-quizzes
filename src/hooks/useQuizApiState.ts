@@ -3,14 +3,14 @@ import ConstructorIOClient from '@constructor-io/constructorio-client-javascript
 import { useEffect, useReducer } from 'react';
 import { QuizAPIActionTypes } from '../components/CioQuiz/actions';
 import apiReducer, { initialState } from '../components/CioQuiz/quizApiReducer';
-import { QuizReducerState } from '../components/CioQuiz/quizLocalReducer';
+import { QuizLocalReducerState } from '../components/CioQuiz/quizLocalReducer';
 import { ResultsPageOptions } from '../components/Results/Results';
 import { getNextQuestion, getQuizResults } from '../utils';
 import useCioClient from './useCioClient';
 
 const useFetchQuiz = (
   quizId: string,
-  quizLocalState: QuizReducerState,
+  quizLocalState: QuizLocalReducerState,
   resultsPageOptions: ResultsPageOptions,
   quizVersionIdProp: string | undefined,
   apiKey?: string,
@@ -18,7 +18,6 @@ const useFetchQuiz = (
 ) => {
   const cioClient = useCioClient({ apiKey, cioJsClient });
   const [quizApiState, dispatch] = useReducer(apiReducer, initialState);
-
   const isFirstQuestion =
     quizApiState.quizFirstQuestion?.next_question.id ===
     quizApiState.quizCurrentQuestion?.next_question.id;
@@ -91,17 +90,15 @@ const useFetchQuiz = (
     resultsPageOptions?.numResultsToDisplay,
   ]);
 
-  const resetQuizSessionId = () => {
+  const resetQuizApiState = () => {
     dispatch({ type: QuizAPIActionTypes.RESET_QUIZ });
   };
 
   return {
-    resetQuizSessionId,
-    questionResponse: quizApiState.quizCurrentQuestion,
-    resultsResponse: quizApiState.quizResults,
-    isFirstQuestion,
-    requestState: quizApiState.quizRequestState,
     cioClient,
+    quizApiState,
+    isFirstQuestion,
+    resetQuizApiState,
   };
 };
 

@@ -37,7 +37,9 @@ export default function apiReducer(state: QuizAPIReducerState, action: ActionQui
         quizCurrentQuestion: action.payload?.quizCurrentQuestion,
         quizResults: undefined,
         // If no current question set first question value
-        ...(!state.quizCurrentQuestion && { quizFirstQuestion: state.quizCurrentQuestion }),
+        ...(!state.quizCurrentQuestion && {
+          quizFirstQuestion: action.payload?.quizCurrentQuestion,
+        }),
       };
     case QuizAPIActionTypes.SET_QUIZ_RESULTS:
       return {

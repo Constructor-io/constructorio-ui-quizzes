@@ -12,16 +12,16 @@ interface Selected {
 }
 
 function SelectTypeQuestion() {
-  const { questionResponse, state, quizNextHandler, quizBackHandler, isFirstQuestion } =
+  const { quizApiState, quizLocalState, quizNextHandler, quizBackHandler, isFirstQuestion } =
     useContext(QuizContext);
   let question;
   let type: `${QuestionTypes}`;
   let hasImages = false;
 
-  if (questionResponse) {
-    question = questionResponse.next_question;
+  if (quizApiState?.quizCurrentQuestion) {
+    question = quizApiState?.quizCurrentQuestion.next_question;
     type = question.type;
-    hasImages = questionResponse.next_question.options.some(
+    hasImages = quizApiState?.quizCurrentQuestion.next_question.options.some(
       (option: QuestionOption) => option.images
     );
   }
@@ -30,8 +30,9 @@ function SelectTypeQuestion() {
   const isDisabled = Object.keys(selected).length === 0;
 
   useEffect(() => {
-    if (questionResponse?.next_question?.type) {
-      const answers = state?.answerInputs?.[questionResponse.next_question.id] || [];
+    if (quizApiState?.quizCurrentQuestion?.next_question?.type) {
+      const answers =
+        quizLocalState?.answerInputs?.[quizApiState?.quizCurrentQuestion.next_question.id] || [];
       const prevSelected: Selected = {};
 
       answers?.forEach((answer) => {
@@ -40,7 +41,7 @@ function SelectTypeQuestion() {
 
       setSelected(prevSelected);
     }
-  }, [questionResponse, state?.answerInputs]);
+  }, [quizApiState?.quizCurrentQuestion, quizLocalState?.answerInputs]);
 
   const toggleIdSelected = (id: number) => {
     if (type === QuestionTypes.SingleSelect) {
@@ -63,7 +64,7 @@ function SelectTypeQuestion() {
   };
 
   const onNextClick = () => {
-    if (quizNextHandler && !isDisabled && questionResponse) {
+    if (quizNextHandler && !isDisabled && quizApiState?.quizCurrentQuestion) {
       const questionType =
         type === QuestionTypes.SingleSelect
           ? QuestionTypes.SingleSelect
@@ -72,9 +73,9 @@ function SelectTypeQuestion() {
       quizNextHandler({
         type: questionType,
         payload: {
-          questionId: questionResponse?.next_question.id,
+          questionId: quizApiState?.quizCurrentQuestion?.next_question.id,
           input: Object.keys(selected).filter((key) => selected[Number(key)]),
-          isLastQuestion: questionResponse.is_last_question,
+          isLastQuestion: quizApiState?.quizCurrentQuestion.is_last_question,
         },
       });
     }
