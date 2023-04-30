@@ -5,17 +5,16 @@ import { GetBrowseResultsResponseData } from '@constructor-io/constructorio-clie
 import { useCallback, useEffect } from 'react';
 import { ActionAnswerQuestion, QuestionTypes } from '../components/CioQuiz/actions';
 import { QuizAPIReducerState } from '../components/CioQuiz/quizApiReducer';
-import { QuizResultsResponse } from '../types';
+import { ResultsPageOptions } from '../components/Results/Results';
 import { isFunction } from '../utils';
 
 const useQuizTrackingAndCbEvents = (
   cioClient: ConstructorIOClient,
   quizApiState: QuizAPIReducerState,
-  onQuizResultsLoaded: (results: QuizResultsResponse) => void,
-  onQuizResultClick: (result: Partial<GetBrowseResultsResponseData>) => void,
-  onAddToCartClick: (result: Partial<GetBrowseResultsResponseData>) => void,
+  resultsPageOptions: ResultsPageOptions,
   dispatchLocalState: React.Dispatch<ActionAnswerQuestion>
 ) => {
+  const { onAddToCartClick, onQuizResultClick, onQuizResultsLoaded } = resultsPageOptions;
   // Quiz Next button click
   const quizNextHandler = useCallback(
     (payload?: any) => {
@@ -68,7 +67,11 @@ const useQuizTrackingAndCbEvents = (
 
   // Quiz result add to cart tracking event
   const addToCartClickHandler = useCallback(
-    (e: React.MouseEvent<HTMLElement>, result: Partial<GetBrowseResultsResponseData>) => {
+    (
+      e: React.MouseEvent<HTMLElement>,
+      result: Partial<GetBrowseResultsResponseData>,
+      price: any
+    ) => {
       e.preventDefault();
 
       if (
@@ -91,7 +94,7 @@ const useQuizTrackingAndCbEvents = (
           item_name: result.value,
           section,
           variation_id: result.data?.variation_id,
-          revenue: (result.price && String(result.price)) || undefined,
+          revenue: (price && String(price)) || undefined,
         });
       }
 
@@ -106,7 +109,7 @@ const useQuizTrackingAndCbEvents = (
 
   // Quiz result click tracking event
   const resultClickHandler = useCallback(
-    (result: Partial<GetBrowseResultsResponseData>) => {
+    (result: Partial<GetBrowseResultsResponseData>, position: number) => {
       if (
         quizApiState?.quizResults &&
         quizApiState?.quizResults.request &&
@@ -131,14 +134,14 @@ const useQuizTrackingAndCbEvents = (
           result_count: total_num_results,
           result_page: page,
           result_id,
-          result_position_on_page: result.resultPosition,
+          result_position_on_page: position,
           num_results_per_page,
         });
       }
 
       // User custom callback function
-      if (isFunction(onQuizResultClick)) {
-        onQuizResultClick(result);
+      if (onQuizResultClick && isFunction(onQuizResultClick)) {
+        onQuizResultClick(result, position);
       }
     },
     [quizApiState, cioClient, onQuizResultClick]
@@ -148,7 +151,7 @@ const useQuizTrackingAndCbEvents = (
   useEffect(() => {
     if (quizApiState.quizResults) {
       // User custom callback function
-      if (isFunction(onQuizResultsLoaded)) {
+      if (onQuizResultsLoaded && isFunction(onQuizResultsLoaded)) {
         onQuizResultsLoaded(quizApiState.quizResults);
       }
 

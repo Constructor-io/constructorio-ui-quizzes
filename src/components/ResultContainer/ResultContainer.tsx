@@ -13,7 +13,6 @@ export default function ResultContainer(props: IResultContainerProps) {
   const { options } = props;
   const { resultCardSalePriceKey, resultCardRegularPriceKey } = options;
   const { quizApiState, resetQuizClickHandler } = useContext(QuizContext);
-  const filterExpression = quizApiState?.quizResults?.request?.collection_filter_expression;
   const zeroResults = !quizApiState?.quizResults?.response?.results?.length;
   const resultsTitle = zeroResults ? 'Oops, there are no results' : 'Here are your results';
 
@@ -22,7 +21,7 @@ export default function ResultContainer(props: IResultContainerProps) {
       <div className='cio-results-container'>
         <h1 className='cio-results-title'>{resultsTitle}</h1>
         <div className='cio-results-filter-and-redo-container'>
-          <ResultFilters filters={filterExpression} />
+          <ResultFilters />
           <RedoButton onClick={resetQuizClickHandler} />
         </div>
         {!zeroResults && (

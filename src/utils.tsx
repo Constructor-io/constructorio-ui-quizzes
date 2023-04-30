@@ -1,5 +1,11 @@
 import React from 'react';
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
+import {
+  FilterExpression,
+  FilterExpressionGroupOr,
+  FilterExpressionGroupAnd,
+  FilterExpressionValue,
+} from '@constructor-io/constructorio-client-javascript/lib/types';
 import { QuestionTypes } from './components/CioQuiz/actions';
 import {
   QuestionImages,
@@ -134,3 +140,29 @@ export function getPreferredColorScheme() {
 export function isFunction(fn) {
   return fn && typeof fn === 'function';
 }
+
+const isValueExpression = (exp: FilterExpression): exp is FilterExpressionValue =>
+  'name' in exp && 'value' in exp;
+const isAndFilter = (exp: FilterExpression): exp is FilterExpressionGroupAnd => 'and' in exp;
+const isOrFilter = (exp: FilterExpression): exp is FilterExpressionGroupOr => 'or' in exp;
+
+export const getFilterValuesFromExpression = (exp: FilterExpression | null): string[] => {
+  if (!exp) {
+    return [];
+  }
+  if (isAndFilter(exp)) {
+    return exp.and.flatMap((innerExpression: FilterExpression) =>
+      getFilterValuesFromExpression(innerExpression)
+    );
+  }
+  if (isOrFilter(exp)) {
+    return exp.or.flatMap((innerExpression: FilterExpression) =>
+      getFilterValuesFromExpression(innerExpression)
+    );
+  }
+  if (isValueExpression(exp)) {
+    return [exp.value];
+  }
+
+  return [];
+};

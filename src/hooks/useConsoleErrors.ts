@@ -13,11 +13,11 @@ const useConsoleErrors = (quizId: string, resultsPageOptions: ResultsPageOptions
       console.error('resultsPageOptions is a required field of type object');
     }
 
-    if (resultsPageOptions && !resultsPageOptions?.addToCartCallback) {
+    if (resultsPageOptions && !resultsPageOptions?.onAddToCartClick) {
       // eslint-disable-next-line no-console
-      console.error('resultsPageOptions.addToCartCallback is a required field of type function');
+      console.error('resultsPageOptions.onAddToCartClick is a required field of type function');
     }
-  }, [quizId, resultsPageOptions, resultsPageOptions?.addToCartCallback]);
+  }, [quizId, resultsPageOptions, resultsPageOptions?.onAddToCartClick]);
 };
 
 export default useConsoleErrors;

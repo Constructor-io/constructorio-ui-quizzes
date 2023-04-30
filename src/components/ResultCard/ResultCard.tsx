@@ -18,9 +18,7 @@ export default function ResultCard(props: ResultCardProps) {
 
   const clickHandler = (item: Partial<BrowseResultData>) => {
     if (resultClickHandler) {
-      // eslint-disable-next-line no-param-reassign
-      item.resultPosition = resultPosition;
-      resultClickHandler(item);
+      resultClickHandler(item, resultPosition);
     }
   };
 
@@ -30,9 +28,7 @@ export default function ResultCard(props: ResultCardProps) {
   ) => {
     if (event?.key === ' ' || event?.key === 'Enter') {
       if (resultClickHandler) {
-        // eslint-disable-next-line no-param-reassign
-        item.resultPosition = resultPosition;
-        resultClickHandler(item);
+        resultClickHandler(item, resultPosition);
       }
     }
   };

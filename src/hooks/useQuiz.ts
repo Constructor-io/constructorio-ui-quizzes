@@ -9,7 +9,6 @@ import useConsoleErrors from './useConsoleErrors';
 import useQuizApiState from './useQuizApiState';
 import useQuizLocalState from './useQuizLocalState';
 import useQuizTrackingAndCbEvents from './useQuizTrackingAndCbEvents';
-import { QuizResultsResponse } from '../types';
 
 export interface IQuizProps {
   apiKey?: string;
@@ -17,19 +16,17 @@ export interface IQuizProps {
   quizId: string;
   quizVersionId?: string;
   resultsPageOptions: ResultsPageOptions;
-  onQuizResultsLoaded: (results: QuizResultsResponse) => void;
-  onQuizResultClick: (result: Partial<GetBrowseResultsResponseData>) => void;
-  onAddToCartClick: (result: Partial<GetBrowseResultsResponseData>) => void;
 }
 
 export interface UseQuizReturnEvents {
   quizNextHandler: () => void;
   quizBackHandler: () => void;
   resetQuizClickHandler: () => void;
-  resultClickHandler: (result: Partial<GetBrowseResultsResponseData>) => void;
+  resultClickHandler: (result: Partial<GetBrowseResultsResponseData>, position: number) => void;
   addToCartClickHandler: (
     e: React.MouseEvent<HTMLElement>,
-    result: Partial<GetBrowseResultsResponseData>
+    result: Partial<GetBrowseResultsResponseData>,
+    price: any
   ) => void;
 }
 
@@ -43,16 +40,7 @@ export interface UseQuizReturn {
 
 type UseQuiz = (quizProps: IQuizProps) => UseQuizReturn;
 
-const useQuiz: UseQuiz = ({
-  quizId,
-  apiKey,
-  cioJsClient,
-  quizVersionId,
-  resultsPageOptions,
-  onQuizResultsLoaded,
-  onQuizResultClick,
-  onAddToCartClick,
-}) => {
+const useQuiz: UseQuiz = ({ quizId, apiKey, cioJsClient, quizVersionId, resultsPageOptions }) => {
   // Log console errors for required parameters quizId and resultsPageOptions
   useConsoleErrors(quizId, resultsPageOptions);
 
@@ -73,14 +61,7 @@ const useQuiz: UseQuiz = ({
 
   // Quiz results loaded tracking event
   const { addToCartClickHandler, resultClickHandler, quizNextHandler, quizBackHandler } =
-    useQuizTrackingAndCbEvents(
-      cioClient,
-      quizApiState,
-      onQuizResultsLoaded,
-      onQuizResultClick,
-      onAddToCartClick,
-      dispatchLocalState
-    );
+    useQuizTrackingAndCbEvents(cioClient, quizApiState, resultsPageOptions, dispatchLocalState);
 
   const resetQuizClickHandler = () => {
     if (quizApiState.quizResults) {
@@ -98,8 +79,8 @@ const useQuiz: UseQuiz = ({
       quizNextHandler,
       quizBackHandler,
       resetQuizClickHandler,
-      addToCartClickHandler,
       resultClickHandler,
+      addToCartClickHandler,
     },
   };
 };

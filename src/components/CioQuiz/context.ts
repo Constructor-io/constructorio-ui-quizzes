@@ -13,9 +13,10 @@ export interface QuizContextValue {
   quizBackHandler?: () => void;
   addToCartClickHandler: (
     e: React.MouseEvent<HTMLElement, MouseEvent>,
-    result: Partial<GetBrowseResultsResponseData>
+    result: Partial<GetBrowseResultsResponseData>,
+    price: any
   ) => void;
-  resultClickHandler: (result: Partial<GetBrowseResultsResponseData>) => void;
+  resultClickHandler: (result: Partial<GetBrowseResultsResponseData>, position: number) => void;
   resetQuizClickHandler: () => void;
   customClickItemCallback: boolean;
 }

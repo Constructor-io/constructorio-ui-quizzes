@@ -31,7 +31,7 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
   };
 
   const onNextClick = () => {
-    if (quizNextHandler && openTextInput && quizApiState?.quizCurrentQuestion) {
+    if (quizNextHandler && openTextInput) {
       quizNextHandler(openTextInput);
     }
   };

@@ -21,7 +21,7 @@ export default function CioQuiz(props: IQuizProps) {
     },
   } = useQuiz(props);
 
-  const { resultsPageOptions, onQuizResultClick } = props;
+  const { resultsPageOptions } = props;
 
   const contextValue: QuizContextValue = {
     cioClient,
@@ -33,7 +33,7 @@ export default function CioQuiz(props: IQuizProps) {
     addToCartClickHandler,
     resultClickHandler,
     resetQuizClickHandler,
-    customClickItemCallback: !!onQuizResultClick,
+    customClickItemCallback: !!resultsPageOptions?.onQuizResultClick,
   };
 
   if (quizApiState?.quizRequestState === RequestStates.Loading) {

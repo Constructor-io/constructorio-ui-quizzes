@@ -1,5 +1,6 @@
 import { RequestStates } from '../../constants';
 import { NextQuestionResponse, QuizResultsResponse } from '../../types';
+import { getFilterValuesFromExpression } from '../../utils';
 import { QuizAPIActionTypes, ActionQuizAPI } from './actions';
 
 export type QuizAPIReducerState = {
@@ -9,6 +10,7 @@ export type QuizAPIReducerState = {
   quizFirstQuestion?: NextQuestionResponse;
   quizCurrentQuestion?: NextQuestionResponse;
   quizResults?: QuizResultsResponse;
+  quizResultsFilters?: string[];
 };
 
 export const initialState: QuizAPIReducerState = {
@@ -41,13 +43,18 @@ export default function apiReducer(state: QuizAPIReducerState, action: ActionQui
           quizFirstQuestion: action.payload?.quizCurrentQuestion,
         }),
       };
-    case QuizAPIActionTypes.SET_QUIZ_RESULTS:
+    case QuizAPIActionTypes.SET_QUIZ_RESULTS: {
+      const filterExpression = state?.quizResults?.request?.collection_filter_expression || null;
+      const quizResultsFilters = [...new Set(getFilterValuesFromExpression(filterExpression))];
       return {
         ...state,
         quizRequestState: RequestStates.Success,
         quizResults: action.payload?.quizResults,
+        quizResultsFilters,
         quizCurrentQuestion: undefined,
       };
+    }
+
     case QuizAPIActionTypes.RESET_QUIZ:
       return initialState;
     default:

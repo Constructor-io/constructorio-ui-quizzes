@@ -18,7 +18,7 @@ export default function ResultCtaButton(props: ResultCtaButtonProps) {
       className={`cio-result-card-cta-button ${className || ''}`}
       onClick={(e) => {
         if (addToCartClickHandler) {
-          addToCartClickHandler(e, item);
+          addToCartClickHandler(e, item, price);
         }
       }}>
       Add to Cart
