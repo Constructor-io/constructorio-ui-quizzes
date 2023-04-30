@@ -1,6 +1,6 @@
 import { useCallback, useReducer } from 'react';
 import { ActionAnswerQuestion, QuestionTypes } from '../components/CioQuiz/actions';
-import reducer, { initialState } from '../components/CioQuiz/reducer';
+import reducer, { initialState } from '../components/CioQuiz/quizLocalReducer';
 
 const useQuizState = () => {
   const [quizState, dispatch] = useReducer(reducer, initialState);

@@ -1,4 +1,3 @@
-import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
 import React from 'react';
 import QuizContext from './context';
 import QuizQuestions from '../QuizQuestions';
@@ -15,10 +14,9 @@ export default function CioQuiz(props: IQuizProps) {
     questionResponse,
     resultsResponse,
     isFirstQuestion,
-    quizNextHandler,
-    quizBackHandler,
     requestState,
     resetQuizSessionId,
+    events: { quizNextHandler, quizBackHandler },
   } = useQuiz(props);
 
   const contextValue = {

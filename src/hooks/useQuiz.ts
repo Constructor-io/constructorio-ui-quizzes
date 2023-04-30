@@ -1,4 +1,5 @@
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
+import { QuestionTypes } from '../components/CioQuiz/actions';
 import { QuizContextValue } from '../components/CioQuiz/context';
 import { ResultsPageOptions } from '../components/Results/Results';
 import useConsoleErrors from './useConsoleErrors';
@@ -13,7 +14,7 @@ export interface IQuizProps {
   quizVersionId?: string;
 }
 
-type UseQuiz = (quizProps: IQuizProps) => QuizContextValue & { resetQuizSessionId: () => void };
+type UseQuiz = (quizProps: IQuizProps) => any;
 
 const useQuiz: UseQuiz = ({ quizId, apiKey, cioJsClient, resultsPageOptions, quizVersionId }) => {
   // Log console errors for required parameters quizId and resultsPageOptions
@@ -32,15 +33,27 @@ const useQuiz: UseQuiz = ({ quizId, apiKey, cioJsClient, resultsPageOptions, qui
     resetQuizSessionId,
   } = useFetchQuiz(quizId, quizState, resultsPageOptions, quizVersionId, apiKey, cioJsClient);
 
+  const onResetClick = () => {
+    if (dispatch && resultsResponse) {
+      resetQuizSessionId();
+      dispatch({
+        type: QuestionTypes.Reset,
+      });
+    }
+  };
+
   return {
+    events: {
+      quizNextHandler,
+      quizBackHandler,
+      onResetClick,
+    },
     cioClient,
     dispatch,
     quizState,
     questionResponse,
     resultsResponse,
     isFirstQuestion,
-    quizNextHandler,
-    quizBackHandler,
     requestState,
     resetQuizSessionId,
   };

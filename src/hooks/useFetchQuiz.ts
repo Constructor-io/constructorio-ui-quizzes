@@ -1,91 +1,106 @@
 /* eslint-disable max-params */
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
-import { useEffect, useState } from 'react';
-import { QuizReducerState } from '../components/CioQuiz/reducer';
+import { useEffect, useReducer } from 'react';
+import { QuizAPIActionTypes } from '../components/CioQuiz/actions';
+import apiReducer, { initialState } from '../components/CioQuiz/quizApiReducer';
+import { QuizReducerState } from '../components/CioQuiz/quizLocalReducer';
 import { ResultsPageOptions } from '../components/Results/Results';
-import { RequestStates } from '../constants';
-import { NextQuestionResponse, QuizResultsResponse } from '../types';
 import { getNextQuestion, getQuizResults } from '../utils';
 import useCioClient from './useCioClient';
 
 const useFetchQuiz = (
   quizId: string,
-  state: QuizReducerState,
+  quizLocalState: QuizReducerState,
   resultsPageOptions: ResultsPageOptions,
   quizVersionIdProp: string | undefined,
   apiKey?: string,
   cioJsClient?: ConstructorIOClient
 ) => {
   const cioClient = useCioClient({ apiKey, cioJsClient });
-  const [requestState, setRequestState] = useState(RequestStates.Stale);
-  const [questionResponse, setQuestionResponse] = useState<NextQuestionResponse>();
-  const [resultsResponse, setResultsResponse] = useState<QuizResultsResponse>();
-  const [firstQuestion, setFirstQuestion] = useState<NextQuestionResponse>();
-  const [quizVersionId, setQuizVersionId] = useState(quizVersionIdProp || '');
-  const [quizSessionId, setQuizSessionId] = useState('');
-  const isFirstQuestion = firstQuestion?.next_question.id === questionResponse?.next_question.id;
+  const [quizApiState, dispatch] = useReducer(apiReducer, initialState);
+
+  const isFirstQuestion =
+    quizApiState.quizFirstQuestion?.next_question.id ===
+    quizApiState.quizCurrentQuestion?.next_question.id;
 
   useEffect(() => {
     (async () => {
-      setRequestState(RequestStates.Loading);
-      if (state.isLastAnswer) {
+      dispatch({
+        type: QuizAPIActionTypes.SET_IS_LOADING,
+      });
+      if (quizLocalState.isLastAnswer) {
         try {
           const quizResults = await getQuizResults(cioClient, quizId, {
-            answers: state.answers,
+            answers: quizLocalState.answers,
             resultsPerPage: resultsPageOptions?.numResultsToDisplay,
-            quizVersionId,
-            quizSessionId,
+            quizVersionId: quizApiState.quizVersionId,
+            quizSessionId: quizApiState.quizSessionId,
           });
-          setResultsResponse(quizResults);
-          setRequestState(RequestStates.Success);
-          setQuestionResponse(undefined);
+          // Set quiz results state
+          dispatch({
+            type: QuizAPIActionTypes.SET_QUIZ_RESULTS,
+            payload: {
+              quizResults,
+            },
+          });
         } catch (error) {
-          setResultsResponse(undefined);
-          setRequestState(RequestStates.Error);
+          dispatch({
+            type: QuizAPIActionTypes.SET_IS_ERROR,
+          });
         }
       } else {
         try {
+          let quizVersionId = quizApiState.quizVersionId || quizVersionIdProp;
+          let { quizSessionId } = quizApiState;
+
           const questionResult = await getNextQuestion(cioClient, quizId, {
-            answers: state.answers,
+            answers: quizLocalState.answers,
             quizVersionId,
             quizSessionId,
           });
-          setQuestionResponse(questionResult);
-          setRequestState(RequestStates.Success);
-          setResultsResponse(undefined);
 
           if (!quizVersionId && questionResult?.quiz_version_id) {
-            setQuizVersionId(questionResult.quiz_version_id);
+            quizVersionId = questionResult.quiz_version_id;
           }
 
           if (!quizSessionId && questionResult?.quiz_session_id) {
-            setQuizSessionId(questionResult.quiz_session_id);
+            quizSessionId = questionResult.quiz_session_id;
           }
+          // Set current question state
+          dispatch({
+            type: QuizAPIActionTypes.SET_CURRENT_QUESTION,
+            payload: {
+              quizSessionId,
+              quizVersionId,
+              quizCurrentQuestion: questionResult,
+            },
+          });
         } catch (error) {
-          setRequestState(RequestStates.Error);
+          dispatch({
+            type: QuizAPIActionTypes.SET_IS_ERROR,
+          });
         }
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cioClient, state, quizId, state.isLastAnswer, resultsPageOptions?.numResultsToDisplay]);
-
-  useEffect(() => {
-    if (!firstQuestion) {
-      setFirstQuestion(questionResponse);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [questionResponse]);
+  }, [
+    cioClient,
+    quizId,
+    quizLocalState,
+    quizLocalState.isLastAnswer,
+    resultsPageOptions?.numResultsToDisplay,
+  ]);
 
   const resetQuizSessionId = () => {
-    setQuizSessionId('');
+    dispatch({ type: QuizAPIActionTypes.RESET_QUIZ });
   };
 
   return {
     resetQuizSessionId,
-    questionResponse,
-    resultsResponse,
+    questionResponse: quizApiState.quizCurrentQuestion,
+    resultsResponse: quizApiState.quizResults,
     isFirstQuestion,
-    requestState,
+    requestState: quizApiState.quizRequestState,
     cioClient,
   };
 };

@@ -3,7 +3,7 @@ import ConstructorIOClient from '@constructor-io/constructorio-client-javascript
 import { RequestStates } from '../../constants';
 import { NextQuestionResponse, QuizResultsResponse } from '../../types';
 import { ActionAnswerQuestion } from './actions';
-import { QuizReducerState } from './reducer';
+import { QuizReducerState } from './quizLocalReducer';
 
 export interface QuizContextValue {
   quizState: QuizReducerState;

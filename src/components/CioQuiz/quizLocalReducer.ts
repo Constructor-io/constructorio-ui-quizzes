@@ -29,7 +29,7 @@ function answerInputReducer(state: AnswerInputState, action: ActionAnswerInputQu
   };
 }
 
-export default function reducer(state: QuizReducerState, action: ActionAnswerQuestion) {
+export default function quizLocalReducer(state: QuizReducerState, action: ActionAnswerQuestion) {
   switch (action.type) {
     case QuestionTypes.OpenText:
       return {
