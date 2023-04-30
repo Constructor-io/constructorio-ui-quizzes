@@ -1,6 +1,6 @@
 import React from 'react';
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
-import { ActionAnswerQuestion } from './actions';
+import { GetBrowseResultsResponseData } from '@constructor-io/constructorio-client-javascript/lib/types';
 import { QuizLocalReducerState } from './quizLocalReducer';
 import { QuizAPIReducerState } from './quizApiReducer';
 
@@ -9,8 +9,15 @@ export interface QuizContextValue {
   quizLocalState?: QuizLocalReducerState;
   quizApiState?: QuizAPIReducerState;
   isFirstQuestion?: boolean;
-  quizNextHandler?: (action?: ActionAnswerQuestion) => void;
+  quizNextHandler?: (payload?: any) => void;
   quizBackHandler?: () => void;
+  addToCartClickHandler: (
+    e: React.MouseEvent<HTMLElement, MouseEvent>,
+    result: Partial<GetBrowseResultsResponseData>
+  ) => void;
+  resultClickHandler: (result: Partial<GetBrowseResultsResponseData>) => void;
+  resetQuizClickHandler: () => void;
+  customClickItemCallback: boolean;
 }
 
 export default React.createContext<Partial<QuizContextValue>>({});

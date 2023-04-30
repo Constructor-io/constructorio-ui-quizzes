@@ -32,14 +32,7 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
 
   const onNextClick = () => {
     if (quizNextHandler && openTextInput && quizApiState?.quizCurrentQuestion) {
-      quizNextHandler({
-        type: QuestionTypes.OpenText,
-        payload: {
-          questionId: quizApiState?.quizCurrentQuestion.next_question.id,
-          input: openTextInput,
-          isLastQuestion: quizApiState?.quizCurrentQuestion.is_last_question,
-        },
-      });
+      quizNextHandler(openTextInput);
     }
   };
 

@@ -12,8 +12,16 @@ export default function CioQuiz(props: IQuizProps) {
     isFirstQuestion,
     quizApiState,
     quizLocalState,
-    events: { quizNextHandler, quizBackHandler, onResetClick },
+    events: {
+      quizNextHandler,
+      quizBackHandler,
+      resetQuizClickHandler,
+      addToCartClickHandler,
+      resultClickHandler,
+    },
   } = useQuiz(props);
+
+  const { resultsPageOptions, onQuizResultClick } = props;
 
   const contextValue: QuizContextValue = {
     cioClient,
@@ -22,9 +30,11 @@ export default function CioQuiz(props: IQuizProps) {
     isFirstQuestion,
     quizNextHandler,
     quizBackHandler,
+    addToCartClickHandler,
+    resultClickHandler,
+    resetQuizClickHandler,
+    customClickItemCallback: !!onQuizResultClick,
   };
-
-  const { resultsPageOptions } = props;
 
   if (quizApiState?.quizRequestState === RequestStates.Loading) {
     return (
@@ -38,12 +48,8 @@ export default function CioQuiz(props: IQuizProps) {
     return (
       <div className='cio-quiz'>
         <QuizContext.Provider value={contextValue}>
-          {quizApiState.quizResults && (
-            <ResultContainer options={resultsPageOptions} resetQuizSessionId={onResetClick} />
-          )}
-          {quizApiState.quizCurrentQuestion && (
-            <QuizQuestions questionResponse={quizApiState.quizCurrentQuestion} />
-          )}
+          {quizApiState.quizResults && <ResultContainer options={resultsPageOptions} />}
+          {quizApiState.quizCurrentQuestion && <QuizQuestions />}
         </QuizContext.Provider>
       </div>
     );

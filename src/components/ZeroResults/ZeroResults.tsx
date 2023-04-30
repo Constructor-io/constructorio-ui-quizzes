@@ -2,11 +2,11 @@ import React from 'react';
 import CTAButton from '../CTAButton/CTAButton';
 
 interface ZeroResultsProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  onResetClick?: () => {};
+  resetQuizClickHandler?: () => {};
 }
 
 function ZeroResults(props: ZeroResultsProps) {
-  const { onResetClick } = props;
+  const { resetQuizClickHandler } = props;
 
   return (
     <div className='cio-zero-results'>
@@ -17,7 +17,7 @@ function ZeroResults(props: ZeroResultsProps) {
         This is embarrassing 😢. It might be that some of the questions are not properly set up from
         our end. Would you give us another try?
       </p>
-      <CTAButton ctaText='Try Again' onClick={onResetClick} />
+      <CTAButton ctaText='Try Again' onClick={resetQuizClickHandler} />
     </div>
   );
 }

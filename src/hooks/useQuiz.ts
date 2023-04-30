@@ -1,50 +1,88 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
+import { GetBrowseResultsResponseData } from '@constructor-io/constructorio-client-javascript/lib/types';
 import { QuizAPIReducerState } from '../components/CioQuiz/quizApiReducer';
 import { QuizLocalReducerState } from '../components/CioQuiz/quizLocalReducer';
 import { ResultsPageOptions } from '../components/Results/Results';
+import useCioClient from './useCioClient';
 import useConsoleErrors from './useConsoleErrors';
 import useQuizApiState from './useQuizApiState';
 import useQuizLocalState from './useQuizLocalState';
+import useQuizTrackingAndCbEvents from './useQuizTrackingAndCbEvents';
+import { QuizResultsResponse } from '../types';
 
 export interface IQuizProps {
-  quizId: string;
-  resultsPageOptions: ResultsPageOptions;
   apiKey?: string;
   cioJsClient?: ConstructorIOClient;
+  quizId: string;
   quizVersionId?: string;
+  resultsPageOptions: ResultsPageOptions;
+  onQuizResultsLoaded: (results: QuizResultsResponse) => void;
+  onQuizResultClick: (result: Partial<GetBrowseResultsResponseData>) => void;
+  onAddToCartClick: (result: Partial<GetBrowseResultsResponseData>) => void;
 }
 
-type UseQuiz = (quizProps: IQuizProps) => {
+export interface UseQuizReturnEvents {
+  quizNextHandler: () => void;
+  quizBackHandler: () => void;
+  resetQuizClickHandler: () => void;
+  resultClickHandler: (result: Partial<GetBrowseResultsResponseData>) => void;
+  addToCartClickHandler: (
+    e: React.MouseEvent<HTMLElement>,
+    result: Partial<GetBrowseResultsResponseData>
+  ) => void;
+}
+
+export interface UseQuizReturn {
   cioClient?: ConstructorIOClient;
   quizLocalState?: QuizLocalReducerState;
   quizApiState?: QuizAPIReducerState;
   isFirstQuestion?: boolean;
-  events: {
-    quizNextHandler: () => void;
-    quizBackHandler: () => void;
-    onResetClick: () => void;
-  };
-};
+  events: UseQuizReturnEvents;
+}
 
-const useQuiz: UseQuiz = ({ quizId, apiKey, cioJsClient, resultsPageOptions, quizVersionId }) => {
+type UseQuiz = (quizProps: IQuizProps) => UseQuizReturn;
+
+const useQuiz: UseQuiz = ({
+  quizId,
+  apiKey,
+  cioJsClient,
+  quizVersionId,
+  resultsPageOptions,
+  onQuizResultsLoaded,
+  onQuizResultClick,
+  onAddToCartClick,
+}) => {
   // Log console errors for required parameters quizId and resultsPageOptions
   useConsoleErrors(quizId, resultsPageOptions);
 
   // Quiz Local state
-  const { quizLocalState, quizNextHandler, quizBackHandler, resetQuizLocalState } =
-    useQuizLocalState();
+  const { quizLocalState, resetQuizLocalState, dispatchLocalState } = useQuizLocalState();
+
+  // Quiz Cio Client
+  const cioClient = useCioClient({ apiKey, cioJsClient });
 
   // Quiz API state
-  const { cioClient, isFirstQuestion, quizApiState, resetQuizApiState } = useQuizApiState(
+  const { isFirstQuestion, quizApiState, resetQuizApiState } = useQuizApiState(
     quizId,
     quizLocalState,
     resultsPageOptions,
     quizVersionId,
-    apiKey,
-    cioJsClient
+    cioClient
   );
 
-  const onResetClick = () => {
+  // Quiz results loaded tracking event
+  const { addToCartClickHandler, resultClickHandler, quizNextHandler, quizBackHandler } =
+    useQuizTrackingAndCbEvents(
+      cioClient,
+      quizApiState,
+      onQuizResultsLoaded,
+      onQuizResultClick,
+      onAddToCartClick,
+      dispatchLocalState
+    );
+
+  const resetQuizClickHandler = () => {
     if (quizApiState.quizResults) {
       resetQuizApiState();
       resetQuizLocalState();
@@ -59,7 +97,9 @@ const useQuiz: UseQuiz = ({ quizId, apiKey, cioJsClient, resultsPageOptions, qui
     events: {
       quizNextHandler,
       quizBackHandler,
-      onResetClick,
+      resetQuizClickHandler,
+      addToCartClickHandler,
+      resultClickHandler,
     },
   };
 };

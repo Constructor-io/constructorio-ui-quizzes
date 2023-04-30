@@ -130,3 +130,7 @@ export function getPreferredColorScheme() {
   }
   return colorScheme;
 }
+
+export function isFunction(fn) {
+  return fn && typeof fn === 'function';
+}

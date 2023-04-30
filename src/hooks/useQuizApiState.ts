@@ -6,17 +6,14 @@ import apiReducer, { initialState } from '../components/CioQuiz/quizApiReducer';
 import { QuizLocalReducerState } from '../components/CioQuiz/quizLocalReducer';
 import { ResultsPageOptions } from '../components/Results/Results';
 import { getNextQuestion, getQuizResults } from '../utils';
-import useCioClient from './useCioClient';
 
 const useFetchQuiz = (
   quizId: string,
   quizLocalState: QuizLocalReducerState,
   resultsPageOptions: ResultsPageOptions,
   quizVersionIdProp: string | undefined,
-  apiKey?: string,
-  cioJsClient?: ConstructorIOClient
+  cioClient: ConstructorIOClient
 ) => {
-  const cioClient = useCioClient({ apiKey, cioJsClient });
   const [quizApiState, dispatch] = useReducer(apiReducer, initialState);
   const isFirstQuestion =
     quizApiState.quizFirstQuestion?.next_question.id ===

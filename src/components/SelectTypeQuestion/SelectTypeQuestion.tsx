@@ -65,19 +65,7 @@ function SelectTypeQuestion() {
 
   const onNextClick = () => {
     if (quizNextHandler && !isDisabled && quizApiState?.quizCurrentQuestion) {
-      const questionType =
-        type === QuestionTypes.SingleSelect
-          ? QuestionTypes.SingleSelect
-          : QuestionTypes.MultipleSelect;
-
-      quizNextHandler({
-        type: questionType,
-        payload: {
-          questionId: quizApiState?.quizCurrentQuestion?.next_question.id,
-          input: Object.keys(selected).filter((key) => selected[Number(key)]),
-          isLastQuestion: quizApiState?.quizCurrentQuestion.is_last_question,
-        },
-      });
+      quizNextHandler(Object.keys(selected).filter((key) => selected[Number(key)]));
     }
   };
 

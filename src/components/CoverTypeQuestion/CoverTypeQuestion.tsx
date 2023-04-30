@@ -3,7 +3,6 @@ import QuestionTitle from '../QuestionTitle/QuestionTitle';
 import QuizContext from '../CioQuiz/context';
 import QuestionDescription from '../QuestionDescription/QuestionDescription';
 import { renderImages } from '../../utils';
-import { QuestionTypes } from '../CioQuiz/actions';
 import ControlBar from '../ControlBar/ControlBar';
 
 export default function CoverTypeQuestion() {
@@ -19,12 +18,7 @@ export default function CoverTypeQuestion() {
 
   const onNextClick = () => {
     if (quizNextHandler) {
-      quizNextHandler({
-        type: QuestionTypes.Cover,
-        payload: {
-          isLastQuestion: quizApiState?.quizCurrentQuestion?.is_last_question,
-        },
-      });
+      quizNextHandler();
     }
   };
 
