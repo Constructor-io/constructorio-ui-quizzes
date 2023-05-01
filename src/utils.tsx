@@ -115,10 +115,11 @@ export const getCioClient = (apiKey?: string) => {
   if (apiKey) {
     return new ConstructorIOClient({
       apiKey,
+      sendTrackingEvents: true,
     });
   }
 
-  return null;
+  return undefined;
 };
 
 export function getPreferredColorScheme() {

@@ -1,6 +1,6 @@
 {
   "name": "@constructor-io/constructorio-ui-quizzes",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Constructor.io Quizzes UI library for web applications",
   "author": "constructor.io",
   "license": "MIT",
@@ -49,7 +49,7 @@
     "check-license": "license-checker --production --onlyAllow 'Apache-2.0;BSD-3-Clause;MIT;0BSD;BSD-2-Clause'"
   },
   "peerDependencies": {
-    "@constructor-io/constructorio-client-javascript": "^2.35.2",
+    "@constructor-io/constructorio-client-javascript": "^2.35.6",
     "react": ">=16.12.0",
     "react-dom": ">=16.12.0",
     "tslib": "^2.4.0"

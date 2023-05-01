@@ -4,7 +4,6 @@ export type {
   Question,
   NextQuestionResponse,
   QuizResultsResponse,
-  GetBrowseResultsResponse,
   BrowseResultData,
   BrowseRequestType,
   QuizzesParameters,
