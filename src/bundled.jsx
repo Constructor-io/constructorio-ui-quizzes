@@ -13,19 +13,21 @@ const ConstructorioQuizzes = ({
   includeCSS = true,
 }) => {
   if (document) {
-    if (!includeCSS) {
-      const stylesheet = document.getElementById('cio-quizzes-styles');
-
-      if (stylesheet) {
-        stylesheet.disabled = true;
-      }
-    }
+    const stylesheet = document.getElementById('cio-quizzes-styles');
     const containerElement = document.querySelector(selector);
 
     if (!containerElement) {
-      console.error(`The selector provided to CioQuizzes doesn't exist`);
+      console.error(`ConstructorioQuizzes: There were no elements found for the provided selector`);
 
       return;
+    }
+
+    if (stylesheet) {
+      if (!includeCSS) {
+        stylesheet.disabled = true;
+      } else {
+        stylesheet.disabled = false;
+      }
     }
 
     ReactDOM.createRoot(containerElement).render(
