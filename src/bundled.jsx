@@ -1,17 +1,10 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import CioQuiz from './components/CioQuiz';
+import CioQuizComponent from './components/CioQuiz';
 import './styles.css';
 
-const ConstructorioQuizzes = ({
-  selector,
-  apiKey,
-  quizId,
-  cioJsClient,
-  resultsPageOptions,
-  quizVersionId,
-  includeCSS = true,
-}) => {
+const CioQuiz = ({ selector, includeCSS = true, ...rest }) => {
   if (document) {
     const stylesheet = document.getElementById('cio-quizzes-styles');
     const containerElement = document.querySelector(selector);
@@ -32,20 +25,14 @@ const ConstructorioQuizzes = ({
 
     ReactDOM.createRoot(containerElement).render(
       <React.StrictMode>
-        <CioQuiz
-          quizId={quizId}
-          apiKey={apiKey}
-          cioJsClient={cioJsClient}
-          resultsPageOptions={resultsPageOptions}
-          quizVersionId={quizVersionId}
-        />
+        <CioQuizComponent {...rest} />
       </React.StrictMode>
     );
   }
 };
 
 if (window) {
-  window.ConstructorioQuizzes = ConstructorioQuizzes;
+  window.CioQuiz = CioQuiz;
 }
 
-export default ConstructorioQuizzes;
+export default CioQuiz;
