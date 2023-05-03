@@ -13,15 +13,15 @@ A UI Library that provides React components to manage the fetching and rendering
 
 ![Quizzes-UI-Example](assets/coffee-quiz.gif)
 
-## Install
+## Installation
 
 ```bash
 npm i @constructor-io/constructorio-ui-quizzes
 ```
 
-## How to use this UI Library
+## Usage
 
-### Import as a React Component
+### Using the React Component
 
 The `CioQuiz` component handles state management, data fetching, and rendering logic for the entire quiz.
 
@@ -35,7 +35,7 @@ function YourComponent() {
     </div>
   );
 ```
-### Import Javascript Bundle
+### Using the Javascript Bundle
 
 This is a framework agnostic method that can be used in any JavaScript project. The `CioQuiz` function provides a simple interface to inject an entire Quizzes UI into the provided `selector`.
 In addition to [Quiz component props](https://constructor-io.github.io/constructorio-ui-quizzes/?path=/docs/quiz-component--docs), this function also accepts `selector` and `includeCSS`.
