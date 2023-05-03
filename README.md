@@ -13,13 +13,15 @@ A UI Library that provides React components to manage the fetching and rendering
 
 ![Quizzes-UI-Example](assets/coffee-quiz.gif)
 
-## How to use this UI Library
-
-### Install
+## Installation
 
 ```bash
 npm i @constructor-io/constructorio-ui-quizzes
 ```
+
+## Usage
+
+### Using the React Component
 
 The `CioQuiz` component handles state management, data fetching, and rendering logic for the entire quiz.
 
@@ -32,6 +34,26 @@ function YourComponent() {
       <CioQuiz quizId="coffee-quiz" apiKey="key_wJSdZSiesX5hiVLt" />
     </div>
   );
+```
+### Using the Javascript Bundle
+
+This is a framework agnostic method that can be used in any JavaScript project. The `CioQuiz` function provides a simple interface to inject an entire Quizzes UI into the provided `selector`.
+In addition to [Quiz component props](https://constructor-io.github.io/constructorio-ui-quizzes/?path=/docs/quiz-component--docs), this function also accepts `selector` and `includeCSS`.
+
+```js
+import CioQuiz from "@constructor-io/constructorio-ui-quizzes/constructorio-ui-quizzes-bundled";
+
+CioQuiz({
+  selector: "#quiz-container",
+  quizId: "coffee-quiz",
+  apiKey: "key_wJSdZSiesX5hiVLt",
+  includeCSS: true, // Include the default CSS styles. Defaults to true.
+  resultsPageOptions: {
+    addToCartCallback: (item) => console.dir(item),
+    resultCardRegularPriceKey: "price",
+  }
+  // ... additional arguments
+});
 ```
 
 ## Custom Styling

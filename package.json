@@ -19,13 +19,18 @@
       "import": "./lib/styles.css",
       "require": "./lib/styles.css"
     },
+    "./quizzes-ui-bundled": {
+      "import": "./dist/quizzes-ui-bundled.js",
+      "require": "./dist/quizzes-ui-bundled.js"
+    },
     ".": {
       "import": "./lib/mjs/index.js",
       "require": "./lib/cjs/index.js"
     }
   },
   "files": [
-    "lib/**/*"
+    "lib/**/*",
+    "dist/constructorio-ui-quizzes-bundled.js"
   ],
   "engines": {
     "node": ">=14"
@@ -45,8 +50,8 @@
     "serve-built-storybook": "npx http-server docs",
     "verify-node-version": "chmod +x ./scripts/verify-node-version.sh && ./scripts/verify-node-version.sh",
     "version": "npm run verify-node-version && npm run build-storybook && git add -u ./docs && git add ./docs/* && npm run compile",
-    "compile": "rm -rf lib && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json && npm run copy-styles",
-    "check-license": "license-checker --production --onlyAllow 'Apache-2.0;BSD-3-Clause;MIT;0BSD;BSD-2-Clause'"
+    "compile": "rm -rf lib && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json && npm run copy-styles && vite build",
+    "check-license": "license-checker --production --onlyAllow 'Apache-2.0;BSD-3-Clause;MIT;0BSD;BSD-2-Clause' --excludePackages 'picocolors@1.0.0'"
   },
   "peerDependencies": {
     "@constructor-io/constructorio-client-javascript": "^2.35.6",
@@ -87,5 +92,9 @@
     "storybook": "7.0.0-beta.40",
     "typescript": "^4.9.4",
     "webpack": "^5.75.0"
+  },
+  "dependencies": {
+    "vite": "^4.2.1",
+    "vite-plugin-css-injected-by-js": "^3.1.0"
   }
 }
