@@ -37,7 +37,7 @@ function YourComponent() {
 ```
 ### Import Javascript Bundle
 
-This is a framework agnostic method that can be used in any JavaScript project. The CioQuiz function provides a simple interface to inject an entire Quizzes UI into the provided `selector`.
+This is a framework agnostic method that can be used in any JavaScript project. The `CioQuiz` function provides a simple interface to inject an entire Quizzes UI into the provided `selector`.
 In addition to [Quiz component props](https://constructor-io.github.io/constructorio-ui-quizzes/?path=/docs/quiz-component--docs), this function also accepts `selector` and `includeCSS`.
 
 ```js
