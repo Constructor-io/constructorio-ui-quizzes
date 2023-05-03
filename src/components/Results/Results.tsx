@@ -1,6 +1,5 @@
-import { GetBrowseResultsResponseData } from '@constructor-io/constructorio-client-javascript/lib/types';
+import { QuizResultData } from '@constructor-io/constructorio-client-javascript/lib/types';
 import React, { useContext } from 'react';
-import { QuizResultsResponse } from '../../types';
 import QuizContext from '../CioQuiz/context';
 import ResultCard from '../ResultCard/ResultCard';
 
@@ -9,11 +8,17 @@ export interface ResultsProps {
   resultCardRegularPriceKey?: string;
 }
 
+export namespace QuizResultsEventsProps {
+  export type OnQuizResultsLoaded = (results: Partial<QuizResultData>) => void;
+  export type OnQuizResultClick = (result: Partial<QuizResultData>, position: number) => void;
+  export type OnAddToCartClick = (result: Partial<QuizResultData>) => void;
+}
+
 export interface ResultsPageOptions extends ResultsProps {
   numResultsToDisplay?: number;
-  onQuizResultsLoaded?: (results: QuizResultsResponse) => void;
-  onQuizResultClick?: (result: Partial<GetBrowseResultsResponseData>, position: number) => void;
-  onAddToCartClick: (result: Partial<GetBrowseResultsResponseData>) => void;
+  onQuizResultsLoaded?: QuizResultsEventsProps.OnQuizResultsLoaded;
+  onQuizResultClick?: QuizResultsEventsProps.OnQuizResultClick;
+  onAddToCartClick: QuizResultsEventsProps.OnAddToCartClick;
 }
 
 function Results(props: ResultsProps) {

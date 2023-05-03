@@ -1,5 +1,4 @@
 import React from 'react';
-import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
 import {
   FilterExpression,
   FilterExpressionGroupOr,
@@ -7,13 +6,7 @@ import {
   FilterExpressionValue,
 } from '@constructor-io/constructorio-client-javascript/lib/types';
 import { QuestionTypes } from './components/CioQuiz/actions';
-import {
-  QuestionImages,
-  QuizzesParameters,
-  QuizzesResultsParameters,
-  NextQuestionResponse,
-  QuizResultsResponse,
-} from './types';
+import { QuestionImages } from './types';
 
 export const renderImages = (images: Partial<QuestionImages>, cssClasses?: string) => {
   const {
@@ -89,18 +82,6 @@ export const stringifyWithDefaults = (obj: { cioJsClient?: any; addToCartCallbac
 
 export const stringify = (obj: any) => JSON.stringify(obj, null, '  ');
 
-export const getNextQuestion = (
-  cioClient: ConstructorIOClient,
-  quizId: string,
-  parameters: QuizzesParameters
-): Promise<NextQuestionResponse> => cioClient?.quizzes.getQuizNextQuestion(quizId, parameters);
-
-export const getQuizResults = async (
-  cioClient: ConstructorIOClient,
-  quizId: string,
-  parameters: QuizzesResultsParameters
-): Promise<QuizResultsResponse> => cioClient?.quizzes.getQuizResults(quizId, parameters);
-
 export const getQuestionTypes = (questionType?: `${QuestionTypes}`) => {
   const isOpenQuestion = questionType === QuestionTypes.OpenText;
   const isCoverQuestion = questionType === QuestionTypes.Cover;
@@ -115,17 +96,6 @@ export const getQuestionTypes = (questionType?: `${QuestionTypes}`) => {
     isMultipleQuestion,
     isSelectQuestion,
   };
-};
-
-export const getCioClient = (apiKey?: string) => {
-  if (apiKey) {
-    return new ConstructorIOClient({
-      apiKey,
-      sendTrackingEvents: true,
-    });
-  }
-
-  return undefined;
 };
 
 export function getPreferredColorScheme() {

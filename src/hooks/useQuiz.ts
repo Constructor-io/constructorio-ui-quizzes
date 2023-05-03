@@ -1,14 +1,12 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
-import { GetBrowseResultsResponseData } from '@constructor-io/constructorio-client-javascript/lib/types';
-import { QuizAPIReducerState } from '../components/CioQuiz/quizApiReducer';
-import { QuizLocalReducerState } from '../components/CioQuiz/quizLocalReducer';
 import { ResultsPageOptions } from '../components/Results/Results';
 import useCioClient from './useCioClient';
 import useConsoleErrors from './useConsoleErrors';
 import useQuizApiState from './useQuizApiState';
 import useQuizLocalState from './useQuizLocalState';
-import useQuizTrackingAndCbEvents from './useQuizTrackingAndCbEvents';
+import useQuizEvents, { QuizEvents } from './useQuizEvents';
+import { RequestStates } from '../constants';
+import { NextQuestionResponse, QuizResultsResponse } from '../types';
 
 export interface IQuizProps {
   apiKey?: string;
@@ -18,24 +16,25 @@ export interface IQuizProps {
   resultsPageOptions: ResultsPageOptions;
 }
 
-export interface UseQuizReturnEvents {
-  quizNextHandler: () => void;
-  quizBackHandler: () => void;
-  resetQuizClickHandler: () => void;
-  resultClickHandler: (result: Partial<GetBrowseResultsResponseData>, position: number) => void;
-  addToCartClickHandler: (
-    e: React.MouseEvent<HTMLElement>,
-    result: Partial<GetBrowseResultsResponseData>,
-    price: any
-  ) => void;
-}
-
 export interface UseQuizReturn {
   cioClient?: ConstructorIOClient;
-  quizLocalState?: QuizLocalReducerState;
-  quizApiState?: QuizAPIReducerState;
-  isFirstQuestion?: boolean;
-  events: UseQuizReturnEvents;
+  state: {
+    answers: {
+      inputs: Record<string, string | string[]>; // Key is the question Id and value is the answer input
+      isLastAnswer: boolean;
+    };
+    quiz: {
+      requestState: RequestStates;
+      versionId?: string;
+      sessionId?: string;
+      firstQuestion?: NextQuestionResponse;
+      currentQuestion?: NextQuestionResponse;
+      results?: QuizResultsResponse;
+      resultsFilters?: string[];
+      isFirstQuestion?: boolean;
+    };
+  };
+  events: QuizEvents;
 }
 
 type UseQuiz = (quizProps: IQuizProps) => UseQuizReturn;
@@ -59,28 +58,36 @@ const useQuiz: UseQuiz = ({ quizId, apiKey, cioJsClient, quizVersionId, resultsP
     cioClient
   );
 
-  // Quiz tracking and custom callback event
-  const { addToCartClickHandler, resultClickHandler, quizNextHandler, quizBackHandler } =
-    useQuizTrackingAndCbEvents(cioClient, quizApiState, resultsPageOptions, dispatchLocalState);
-
-  const resetQuizClickHandler = () => {
-    if (quizApiState.quizResults) {
-      resetQuizApiState();
-      resetQuizLocalState();
-    }
-  };
+  // Quiz callback events
+  const quizEvents = useQuizEvents({
+    cioClient,
+    quizApiState,
+    resultsPageOptions,
+    dispatchLocalState,
+    resetQuizApiState,
+    resetQuizLocalState,
+  });
 
   return {
     cioClient,
-    quizLocalState,
-    quizApiState,
-    isFirstQuestion,
+    state: {
+      answers: {
+        inputs: quizLocalState.answerInputs,
+        isLastAnswer: quizLocalState.isLastAnswer,
+      },
+      quiz: {
+        requestState: quizApiState.quizRequestState,
+        versionId: quizApiState.quizVersionId,
+        sessionId: quizApiState.quizSessionId,
+        firstQuestion: quizApiState.quizFirstQuestion,
+        currentQuestion: quizApiState.quizCurrentQuestion,
+        results: quizApiState.quizResults,
+        resultsFilters: quizApiState.quizResultsFilters,
+        isFirstQuestion,
+      },
+    },
     events: {
-      quizNextHandler,
-      quizBackHandler,
-      resetQuizClickHandler,
-      resultClickHandler,
-      addToCartClickHandler,
+      ...quizEvents,
     },
   };
 };

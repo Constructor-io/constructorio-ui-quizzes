@@ -1,7 +1,6 @@
-/* eslint-disable no-console */
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
 import { useMemo } from 'react';
-import { getCioClient } from '../utils';
+import { getCioClient } from '../services';
 
 export type CioClientConfig = { apiKey?: string; cioJsClient?: ConstructorIOClient };
 type UseCioClient = (cioClientConfig: CioClientConfig) => ConstructorIOClient | never;
