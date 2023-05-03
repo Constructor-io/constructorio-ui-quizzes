@@ -10,7 +10,7 @@ const CioQuiz = ({ selector, includeCSS = true, ...rest }) => {
     const containerElement = document.querySelector(selector);
 
     if (!containerElement) {
-      console.error(`ConstructorioQuizzes: There were no elements found for the provided selector`);
+      console.error(`CioQuiz: There were no elements found for the provided selector`);
 
       return;
     }

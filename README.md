@@ -37,7 +37,7 @@ function YourComponent() {
 ```
 ### Import Javascript Bundle
 
-This is a framework agnostic method that can be used in any JavaScript project. The `CioQuiz` function will mount a Quiz to the element for the given selector and it will handle state management, data fetching, and rendering logic for the entire quiz.
+This is a framework agnostic method that can be used in any JavaScript project. The CioQuiz function provides a simple interface to inject an entire Quizzes UI into the provided `selector`.
 In addition to [Quiz component props](https://constructor-io.github.io/constructorio-ui-quizzes/?path=/docs/quiz-component--docs), this function also accepts `selector` and `includeCSS`.
 
 ```js
@@ -47,7 +47,7 @@ CioQuiz({
   selector: "#quiz-container",
   quizId: "coffee-quiz",
   apiKey: "key_wJSdZSiesX5hiVLt",
-  includeCSS: true,
+  includeCSS: true, // Include the default CSS styles. Defaults to true.
   resultsPageOptions: {
     addToCartCallback: (item) => console.dir(item),
     resultCardRegularPriceKey: "price",
