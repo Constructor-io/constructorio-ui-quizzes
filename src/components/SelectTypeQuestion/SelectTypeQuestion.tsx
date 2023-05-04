@@ -13,14 +13,14 @@ interface Selected {
 
 function SelectTypeQuestion() {
   const { state, getNextQuestion, getPreviousQuestion } = useContext(QuizContext);
-  let nextQuestion;
+  let question;
   let type: `${QuestionTypes}`;
   let hasImages = false;
 
   if (state?.quiz.currentQuestion) {
-    nextQuestion = state.quiz.currentQuestion.next_question;
-    type = nextQuestion.type;
-    hasImages = nextQuestion.options.some((option: QuestionOption) => option.images);
+    question = state.quiz.currentQuestion.next_question;
+    type = question.type;
+    hasImages = question.options.some((option: QuestionOption) => option.images);
   }
 
   const [selected, setSelected] = useState<Selected>({});
