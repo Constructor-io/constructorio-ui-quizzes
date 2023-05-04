@@ -1,11 +1,12 @@
 import { useCallback } from 'react';
 import { ActionAnswerQuestion, QuestionTypes } from '../../components/CioQuiz/actions';
 import { QuizAPIReducerState } from '../../components/CioQuiz/quizApiReducer';
+import { QuizEventsReturn } from '../../types';
 
 const useQuizNextClick = (
   quizApiState: QuizAPIReducerState,
   dispatchLocalState: React.Dispatch<ActionAnswerQuestion>
-) => {
+): QuizEventsReturn.GetNextQuestion => {
   const quizNextHandler = useCallback(
     (payload?: string | string[]) => {
       switch (quizApiState.quizCurrentQuestion?.next_question.type) {

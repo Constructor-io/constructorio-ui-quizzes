@@ -3,7 +3,8 @@ import RedoButton from '../RedoButton/RedoButton';
 import QuizContext from '../CioQuiz/context';
 import ResultFilters from '../ResultFilters/ResultFilters';
 import ZeroResults from '../ZeroResults/ZeroResults';
-import Results, { ResultsProps } from '../Results/Results';
+import { ResultsProps } from '../../types';
+import Results from '../Results/Results';
 
 export interface IResultContainerProps {
   options: ResultsProps;
@@ -12,17 +13,17 @@ export interface IResultContainerProps {
 export default function ResultContainer(props: IResultContainerProps) {
   const { options } = props;
   const { resultCardSalePriceKey, resultCardRegularPriceKey } = options;
-  const { quizApiState, resetQuizClickHandler } = useContext(QuizContext);
-  const zeroResults = !quizApiState?.quizResults?.response?.results?.length;
+  const { state, getResetQuiz } = useContext(QuizContext);
+  const zeroResults = !state?.quiz.results?.response?.results?.length;
   const resultsTitle = zeroResults ? 'Oops, there are no results' : 'Here are your results';
 
-  if (quizApiState?.quizResults) {
+  if (state?.quiz.results) {
     return (
       <div className='cio-results-container'>
         <h1 className='cio-results-title'>{resultsTitle}</h1>
         <div className='cio-results-filter-and-redo-container'>
           <ResultFilters />
-          <RedoButton onClick={resetQuizClickHandler} />
+          <RedoButton onClick={getResetQuiz} />
         </div>
         {!zeroResults && (
           <Results

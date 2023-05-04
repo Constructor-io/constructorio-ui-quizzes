@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { ResultsPageOptions } from '../components/Results/Results';
+import { ResultsPageOptions } from '../types';
 
 const useConsoleErrors = (quizId: string, resultsPageOptions: ResultsPageOptions) => {
   useEffect(() => {

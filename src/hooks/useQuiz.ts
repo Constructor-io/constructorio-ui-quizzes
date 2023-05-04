@@ -1,43 +1,9 @@
-import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
-import { ResultsPageOptions } from '../components/Results/Results';
+import { UseQuiz } from '../types';
 import useCioClient from './useCioClient';
 import useConsoleErrors from './useConsoleErrors';
 import useQuizApiState from './useQuizApiState';
+import useQuizEvents from './useQuizEvents';
 import useQuizLocalState from './useQuizLocalState';
-import useQuizEvents, { QuizEvents } from './useQuizEvents';
-import { RequestStates } from '../constants';
-import { NextQuestionResponse, QuizResultsResponse } from '../types';
-
-export interface IQuizProps {
-  apiKey?: string;
-  cioJsClient?: ConstructorIOClient;
-  quizId: string;
-  quizVersionId?: string;
-  resultsPageOptions: ResultsPageOptions;
-}
-
-export interface UseQuizReturn {
-  cioClient?: ConstructorIOClient;
-  state: {
-    answers: {
-      inputs: Record<string, string | string[]>; // Key is the question Id and value is the answer input
-      isLastAnswer: boolean;
-    };
-    quiz: {
-      requestState: RequestStates;
-      versionId?: string;
-      sessionId?: string;
-      firstQuestion?: NextQuestionResponse;
-      currentQuestion?: NextQuestionResponse;
-      results?: QuizResultsResponse;
-      resultsFilters?: string[];
-      isFirstQuestion?: boolean;
-    };
-  };
-  events: QuizEvents;
-}
-
-type UseQuiz = (quizProps: IQuizProps) => UseQuizReturn;
 
 const useQuiz: UseQuiz = ({ quizId, apiKey, cioJsClient, quizVersionId, resultsPageOptions }) => {
   // Log console errors for required parameters quizId and resultsPageOptions

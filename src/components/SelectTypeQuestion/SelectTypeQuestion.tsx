@@ -12,16 +12,15 @@ interface Selected {
 }
 
 function SelectTypeQuestion() {
-  const { quizApiState, quizLocalState, quizNextHandler, quizBackHandler, isFirstQuestion } =
-    useContext(QuizContext);
+  const { state, getNextQuestion, getPreviousQuestion } = useContext(QuizContext);
   let question;
   let type: `${QuestionTypes}`;
   let hasImages = false;
 
-  if (quizApiState?.quizCurrentQuestion) {
-    question = quizApiState?.quizCurrentQuestion.next_question;
+  if (state?.quiz.currentQuestion) {
+    question = state.quiz.currentQuestion.next_question;
     type = question.type;
-    hasImages = quizApiState?.quizCurrentQuestion.next_question.options.some(
+    hasImages = state.quiz.currentQuestion.next_question.options.some(
       (option: QuestionOption) => option.images
     );
   }
@@ -30,18 +29,17 @@ function SelectTypeQuestion() {
   const isDisabled = Object.keys(selected).length === 0;
 
   useEffect(() => {
-    if (quizApiState?.quizCurrentQuestion?.next_question?.type) {
-      const answers =
-        quizLocalState?.answerInputs?.[quizApiState?.quizCurrentQuestion.next_question.id] || [];
+    if (state?.quiz.currentQuestion?.next_question?.type) {
+      const answers = state.answers?.inputs?.[state.quiz.currentQuestion.next_question.id] || [];
       const prevSelected: Selected = {};
 
-      answers?.forEach((answer) => {
+      (answers as string[])?.forEach((answer) => {
         prevSelected[Number(answer)] = true;
       });
 
       setSelected(prevSelected);
     }
-  }, [quizApiState?.quizCurrentQuestion, quizLocalState?.answerInputs]);
+  }, [state]);
 
   const toggleIdSelected = (id: number) => {
     if (type === QuestionTypes.SingleSelect) {
@@ -64,8 +62,8 @@ function SelectTypeQuestion() {
   };
 
   const onNextClick = () => {
-    if (quizNextHandler && !isDisabled && quizApiState?.quizCurrentQuestion) {
-      quizNextHandler(Object.keys(selected).filter((key) => selected[Number(key)]));
+    if (getNextQuestion && !isDisabled && state?.quiz.currentQuestion) {
+      getNextQuestion(Object.keys(selected).filter((key) => selected[Number(key)]));
     }
   };
 
@@ -106,8 +104,8 @@ function SelectTypeQuestion() {
         <ControlBar
           nextButtonHandler={onNextClick}
           isNextButtonDisabled={isDisabled}
-          backButtonHandler={quizBackHandler}
-          showBackButton={!isFirstQuestion}
+          backButtonHandler={getPreviousQuestion}
+          showBackButton={!state?.quiz.isFirstQuestion}
           ctaButtonText={question?.cta_text}
         />
       </div>

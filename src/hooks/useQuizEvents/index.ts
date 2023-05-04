@@ -1,23 +1,14 @@
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
-import { QuizResultData } from '@constructor-io/constructorio-client-javascript/lib/types';
 import { ActionAnswerQuestion } from '../../components/CioQuiz/actions';
 import { QuizAPIReducerState } from '../../components/CioQuiz/quizApiReducer';
-import { ResultsPageOptions } from '../../components/Results/Results';
 import useQuizResultsLoaded from './useQuizResultsLoaded';
 import useQuizResultClick from './useQuizResultClick';
 import useQuizAddToCart from './useQuizAddToCart';
 import useQuizNextClick from './useQuizNextClick';
 import useQuizBackClick from './useQuizBackClick';
+import { QuizEventsReturn, ResultsPageOptions } from '../../types';
 
-export interface QuizEvents {
-  getNextQuestion: (payload?: string | string[] | undefined) => void;
-  getPreviousQuestion: () => void;
-  getResetQuiz: () => void;
-  getResultClick: (result: QuizResultData, position: number) => void;
-  getAddToCart: (e: React.MouseEvent<HTMLElement>, result: QuizResultData, price: number) => void;
-}
-
-type UseQuizEventOptions = {
+export type UseQuizEventOptions = {
   cioClient: ConstructorIOClient;
   quizApiState: QuizAPIReducerState;
   resultsPageOptions: ResultsPageOptions;
@@ -26,7 +17,7 @@ type UseQuizEventOptions = {
   resetQuizLocalState: () => void;
 };
 
-const useQuizEvents = (options: UseQuizEventOptions): QuizEvents => {
+const useQuizEvents = (options: UseQuizEventOptions): QuizEventsReturn => {
   const {
     cioClient,
     quizApiState,

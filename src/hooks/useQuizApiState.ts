@@ -4,8 +4,8 @@ import { useEffect, useReducer } from 'react';
 import { QuizAPIActionTypes } from '../components/CioQuiz/actions';
 import apiReducer, { initialState } from '../components/CioQuiz/quizApiReducer';
 import { QuizLocalReducerState } from '../components/CioQuiz/quizLocalReducer';
-import { ResultsPageOptions } from '../components/Results/Results';
-import { getNextQuestion, getQuizResults } from '../utils';
+import { getNextQuestion, getQuizResults } from '../services';
+import { ResultsPageOptions } from '../types';
 
 const useFetchQuiz = (
   quizId: string,

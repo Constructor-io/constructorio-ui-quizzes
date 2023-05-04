@@ -3,7 +3,6 @@ import QuestionTitle from '../QuestionTitle/QuestionTitle';
 import QuestionDescription from '../QuestionDescription/QuestionDescription';
 import { renderImages } from '../../utils';
 import QuizContext from '../CioQuiz/context';
-import { QuestionTypes } from '../CioQuiz/actions';
 import ControlBar from '../ControlBar/ControlBar';
 
 interface OpenTextQuestionProps {
@@ -13,14 +12,13 @@ interface OpenTextQuestionProps {
 
 function OpenTextQuestion(props: OpenTextQuestionProps) {
   const { initialValue = '', onChangeHandler: userDefinedHandler = null } = props;
-  const { quizApiState, quizLocalState, quizBackHandler, quizNextHandler, isFirstQuestion } =
-    useContext(QuizContext);
+  const { state, getPreviousQuestion, getNextQuestion } = useContext(QuizContext);
   const [openTextInput, setOpenTextInput] = useState<string>(initialValue);
 
   let question;
 
-  if (quizApiState?.quizCurrentQuestion) {
-    question = quizApiState?.quizCurrentQuestion.next_question;
+  if (state?.quiz.currentQuestion) {
+    question = state?.quiz.currentQuestion.next_question;
   }
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,8 +29,8 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
   };
 
   const onNextClick = () => {
-    if (quizNextHandler && openTextInput) {
-      quizNextHandler(openTextInput);
+    if (getNextQuestion && openTextInput) {
+      getNextQuestion(openTextInput);
     }
   };
 
@@ -45,13 +43,12 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
   };
 
   useEffect(() => {
-    if (quizApiState?.quizCurrentQuestion) {
+    if (state?.quiz.currentQuestion) {
       const openTextAnswer =
-        quizLocalState?.answerInputs?.[quizApiState?.quizCurrentQuestion?.next_question.id] ||
-        initialValue;
-      setOpenTextInput(openTextAnswer);
+        state.answers.inputs?.[state?.quiz.currentQuestion?.next_question.id] || initialValue;
+      setOpenTextInput(openTextAnswer as string);
     }
-  }, [quizApiState?.quizCurrentQuestion, quizLocalState, initialValue]);
+  }, [state, initialValue]);
 
   if (question) {
     const hasImage = question?.images?.primary_url;
@@ -77,8 +74,8 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
           <ControlBar
             nextButtonHandler={onNextClick}
             isNextButtonDisabled={!openTextInput}
-            backButtonHandler={quizBackHandler}
-            showBackButton={!isFirstQuestion}
+            backButtonHandler={getPreviousQuestion}
+            showBackButton={!state?.quiz.isFirstQuestion}
             ctaButtonText={question?.cta_text}
           />
         </div>

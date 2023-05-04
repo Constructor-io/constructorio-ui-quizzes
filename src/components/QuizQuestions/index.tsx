@@ -6,8 +6,8 @@ import { getQuestionTypes } from '../../utils';
 import QuizContext from '../CioQuiz/context';
 
 export default function QuizQuestions() {
-  const { quizApiState } = useContext(QuizContext);
-  const nextQuestion = quizApiState?.quizCurrentQuestion?.next_question;
+  const { state } = useContext(QuizContext);
+  const nextQuestion = state?.quiz.currentQuestion?.next_question;
   const questionTypes = getQuestionTypes(nextQuestion?.type);
 
   return (

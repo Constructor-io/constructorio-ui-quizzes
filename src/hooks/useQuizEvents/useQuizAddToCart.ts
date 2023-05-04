@@ -1,18 +1,17 @@
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
-import { QuizResultData } from '@constructor-io/constructorio-client-javascript/lib/types';
 import { useCallback } from 'react';
 import { QuizAPIReducerState } from '../../components/CioQuiz/quizApiReducer';
-import { QuizResultsEventsProps } from '../../components/Results/Results';
 import { trackQuizConversion } from '../../services';
+import { QuizEventsReturn, QuizResultDataPartial, QuizResultsEventsProps } from '../../types';
 import { isFunction } from '../../utils';
 
 const useQuizAddToCart = (
   cioClient: ConstructorIOClient,
   quizApiState: QuizAPIReducerState,
   onAddToCartClick?: QuizResultsEventsProps.OnAddToCartClick
-) => {
+): QuizEventsReturn.GetAddToCart => {
   const addToCartClickHandler = useCallback(
-    (e: React.MouseEvent<HTMLElement>, result: QuizResultData, price: number) => {
+    (e: React.MouseEvent<HTMLElement>, result: QuizResultDataPartial, price?: number) => {
       e.preventDefault();
 
       if (quizApiState.quizResults) {

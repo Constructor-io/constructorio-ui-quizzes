@@ -1,23 +1,15 @@
 import React from 'react';
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
-import { QuizResultData } from '@constructor-io/constructorio-client-javascript/lib/types';
-import { QuizLocalReducerState } from './quizLocalReducer';
-import { QuizAPIReducerState } from './quizApiReducer';
+import { QuizEventsReturn, QuizReturnState } from '../../types';
 
 export interface QuizContextValue {
   cioClient?: ConstructorIOClient;
-  quizLocalState?: QuizLocalReducerState;
-  quizApiState?: QuizAPIReducerState;
-  isFirstQuestion?: boolean;
-  quizNextHandler?: (payload?: any) => void;
-  quizBackHandler?: () => void;
-  addToCartClickHandler: (
-    e: React.MouseEvent<HTMLElement, MouseEvent>,
-    result: QuizResultData,
-    price: any
-  ) => void;
-  resultClickHandler: (result: QuizResultData, position: number) => void;
-  resetQuizClickHandler: () => void;
+  state?: QuizReturnState;
+  getResetQuiz: QuizEventsReturn.GetResetQuiz;
+  getNextQuestion?: QuizEventsReturn.GetNextQuestion;
+  getPreviousQuestion?: QuizEventsReturn.GetPreviousQuestion;
+  getAddToCart: QuizEventsReturn.GetAddToCart;
+  getResultClick: QuizEventsReturn.GetResultClick;
   customClickItemCallback: boolean;
 }
 

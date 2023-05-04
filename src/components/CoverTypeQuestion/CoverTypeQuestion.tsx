@@ -6,19 +6,18 @@ import { renderImages } from '../../utils';
 import ControlBar from '../ControlBar/ControlBar';
 
 export default function CoverTypeQuestion() {
-  const { quizApiState, quizBackHandler, quizNextHandler, isFirstQuestion } =
-    useContext(QuizContext);
+  const { state, getPreviousQuestion, getNextQuestion } = useContext(QuizContext);
   let question;
 
-  if (quizApiState?.quizCurrentQuestion) {
-    question = quizApiState?.quizCurrentQuestion.next_question;
+  if (state?.quiz.currentQuestion) {
+    question = state?.quiz.currentQuestion.next_question;
   }
 
   const hasImage = question?.images?.primary_url;
 
   const onNextClick = () => {
-    if (quizNextHandler) {
-      quizNextHandler();
+    if (getNextQuestion) {
+      getNextQuestion();
     }
   };
 
@@ -34,8 +33,8 @@ export default function CoverTypeQuestion() {
           <QuestionDescription description={question.description} />
           <ControlBar
             nextButtonHandler={onNextClick}
-            backButtonHandler={quizBackHandler}
-            showBackButton={!isFirstQuestion}
+            backButtonHandler={getPreviousQuestion}
+            showBackButton={!state?.quiz.isFirstQuestion}
             ctaButtonText={question?.cta_text}
           />
         </div>

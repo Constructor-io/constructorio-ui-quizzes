@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
-import { QuizResultData } from '@constructor-io/constructorio-client-javascript/lib/types';
 import {
   QuizzesParameters,
   QuizzesResultsParameters,
   NextQuestionResponse,
   QuizResultsResponse,
+  QuizResultDataPartial,
 } from '../types';
 
 export const getCioClient = (apiKey?: string) => {
@@ -53,7 +53,7 @@ export const trackQuizResultsLoaded = (
 export const trackQuizResultClick = (
   cioClient: ConstructorIOClient,
   quizResults: QuizResultsResponse,
-  result: QuizResultData,
+  result: QuizResultDataPartial,
   position: number
 ) => {
   if (quizResults && quizResults.request && quizResults.response) {
@@ -85,8 +85,8 @@ export const trackQuizResultClick = (
 export const trackQuizConversion = (
   cioClient: ConstructorIOClient,
   quizResults: QuizResultsResponse,
-  result: QuizResultData,
-  price: number
+  result: QuizResultDataPartial,
+  price?: number
 ) => {
   if (quizResults && quizResults.request && quizResults.response) {
     const {

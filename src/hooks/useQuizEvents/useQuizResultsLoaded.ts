@@ -1,8 +1,8 @@
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
 import { useEffect } from 'react';
 import { QuizAPIReducerState } from '../../components/CioQuiz/quizApiReducer';
-import { QuizResultsEventsProps } from '../../components/Results/Results';
 import { trackQuizResultsLoaded } from '../../services';
+import { QuizResultsEventsProps } from '../../types';
 import { isFunction } from '../../utils';
 
 const useQuizResultsLoaded = (

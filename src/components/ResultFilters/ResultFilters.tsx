@@ -2,13 +2,13 @@ import React, { useContext } from 'react';
 import QuizContext from '../CioQuiz/context';
 
 function ResultFilters() {
-  const { quizApiState } = useContext(QuizContext);
+  const { state } = useContext(QuizContext);
 
   return (
     <div className='cio-results-filter-container'>
       <p>Because you answered</p>
       <div className='cio-results-filter-options'>
-        {quizApiState?.quizResultsFilters?.map((filter) => (
+        {state?.quiz.resultsFilters?.map((filter) => (
           <div className='cio-results-filter-option' key={filter}>
             {filter}
           </div>

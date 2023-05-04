@@ -1,10 +1,10 @@
 import React, { KeyboardEvent, useContext } from 'react';
-import { BrowseResultData } from '../../types';
 import ResultCtaButton from '../ResultCtaButton/ResultCtaButton';
 import QuizContext from '../CioQuiz/context';
+import { QuizResultDataPartial } from '../../types';
 
 interface ResultCardProps {
-  result: Partial<BrowseResultData>;
+  result: QuizResultDataPartial;
   salePriceKey?: string;
   regularPriceKey?: string;
   resultPosition: number;
@@ -12,23 +12,20 @@ interface ResultCardProps {
 
 export default function ResultCard(props: ResultCardProps) {
   const { result, salePriceKey, regularPriceKey, resultPosition } = props;
-  const { resultClickHandler, customClickItemCallback } = useContext(QuizContext);
+  const { getResultClick, customClickItemCallback } = useContext(QuizContext);
   const salePrice = salePriceKey && result?.data?.[salePriceKey];
   const regularPrice = regularPriceKey && result?.data?.[regularPriceKey];
 
-  const clickHandler = (item: Partial<BrowseResultData>) => {
-    if (resultClickHandler) {
-      resultClickHandler(item, resultPosition);
+  const clickHandler = (item: QuizResultDataPartial) => {
+    if (getResultClick) {
+      getResultClick(item, resultPosition);
     }
   };
 
-  const keyDownHandler = (
-    event: KeyboardEvent<HTMLDivElement>,
-    item: Partial<BrowseResultData>
-  ) => {
+  const keyDownHandler = (event: KeyboardEvent<HTMLDivElement>, item: QuizResultDataPartial) => {
     if (event?.key === ' ' || event?.key === 'Enter') {
-      if (resultClickHandler) {
-        resultClickHandler(item, resultPosition);
+      if (getResultClick) {
+        getResultClick(item, resultPosition);
       }
     }
   };

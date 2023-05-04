@@ -4,39 +4,29 @@ import QuizQuestions from '../QuizQuestions';
 import ResultContainer from '../ResultContainer/ResultContainer';
 import { RequestStates } from '../../constants';
 import Spinner from '../Spinner/Spinner';
-import useQuiz, { IQuizProps } from '../../hooks/useQuiz';
+import useQuiz from '../../hooks/useQuiz';
+import { IQuizProps } from '../../types';
 
 export default function CioQuiz(props: IQuizProps) {
   const {
     cioClient,
-    isFirstQuestion,
-    quizApiState,
-    quizLocalState,
-    events: {
-      quizNextHandler,
-      quizBackHandler,
-      resetQuizClickHandler,
-      addToCartClickHandler,
-      resultClickHandler,
-    },
+    state,
+    events: { getNextQuestion, getPreviousQuestion, getResetQuiz, getAddToCart, getResultClick },
   } = useQuiz(props);
 
   const { resultsPageOptions } = props;
 
   const contextValue: QuizContextValue = {
     cioClient,
-    quizLocalState,
-    quizApiState,
-    isFirstQuestion,
-    quizNextHandler,
-    quizBackHandler,
-    addToCartClickHandler,
-    resultClickHandler,
-    resetQuizClickHandler,
+    state,
+    getNextQuestion,
+    getPreviousQuestion,
+    getResetQuiz,
+    getAddToCart,
+    getResultClick,
     customClickItemCallback: !!resultsPageOptions?.onQuizResultClick,
   };
-
-  if (quizApiState?.quizRequestState === RequestStates.Loading) {
+  if (state.quiz.requestState === RequestStates.Loading) {
     return (
       <div className='cio-quiz'>
         <Spinner />
@@ -44,12 +34,12 @@ export default function CioQuiz(props: IQuizProps) {
     );
   }
 
-  if (quizApiState?.quizRequestState === RequestStates.Success) {
+  if (state.quiz.requestState === RequestStates.Success) {
     return (
       <div className='cio-quiz'>
         <QuizContext.Provider value={contextValue}>
-          {quizApiState.quizResults && <ResultContainer options={resultsPageOptions} />}
-          {quizApiState.quizCurrentQuestion && <QuizQuestions />}
+          {state.quiz.results && <ResultContainer options={resultsPageOptions} />}
+          {state.quiz.currentQuestion && <QuizQuestions />}
         </QuizContext.Provider>
       </div>
     );

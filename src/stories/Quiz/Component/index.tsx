@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import CioQuiz from '../../../components/CioQuiz';
-import { IQuizProps } from '../../../hooks/useQuiz';
+import { IQuizProps } from '../../../types';
 import { getStoryParams } from '../../../utils';
 
 export function ComponentTemplate(args: IQuizProps) {
