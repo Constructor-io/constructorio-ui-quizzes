@@ -13,16 +13,14 @@ interface Selected {
 
 function SelectTypeQuestion() {
   const { state, getNextQuestion, getPreviousQuestion } = useContext(QuizContext);
-  let question;
+  let nextQuestion;
   let type: `${QuestionTypes}`;
   let hasImages = false;
 
   if (state?.quiz.currentQuestion) {
-    question = state.quiz.currentQuestion.next_question;
-    type = question.type;
-    hasImages = state.quiz.currentQuestion.next_question.options.some(
-      (option: QuestionOption) => option.images
-    );
+    nextQuestion = state.quiz.currentQuestion.next_question;
+    type = nextQuestion.type;
+    hasImages = nextQuestion.options.some((option: QuestionOption) => option.images);
   }
 
   const [selected, setSelected] = useState<Selected>({});
@@ -30,7 +28,8 @@ function SelectTypeQuestion() {
 
   useEffect(() => {
     if (state?.quiz.currentQuestion?.next_question?.type) {
-      const answers = state.answers?.inputs?.[state.quiz.currentQuestion.next_question.id] || [];
+      const nextQuestionId = state.quiz.currentQuestion.next_question.id;
+      const answers = state.answers?.inputs?.[nextQuestionId] || [];
       const prevSelected: Selected = {};
 
       (answers as string[])?.forEach((answer) => {
@@ -63,7 +62,8 @@ function SelectTypeQuestion() {
 
   const onNextClick = () => {
     if (getNextQuestion && !isDisabled && state?.quiz.currentQuestion) {
-      getNextQuestion(Object.keys(selected).filter((key) => selected[Number(key)]));
+      const selectedAnswers = Object.keys(selected).filter((key) => selected[Number(key)]);
+      getNextQuestion(selectedAnswers);
     }
   };
 

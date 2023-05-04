@@ -16,9 +16,9 @@ export default function ResultCard(props: ResultCardProps) {
   const salePrice = salePriceKey && result?.data?.[salePriceKey];
   const regularPrice = regularPriceKey && result?.data?.[regularPriceKey];
 
-  const clickHandler = (item: QuizResultDataPartial) => {
+  const clickHandler = () => {
     if (getResultClick) {
-      getResultClick(item, resultPosition);
+      getResultClick(result, resultPosition);
     }
   };
 
@@ -58,7 +58,7 @@ export default function ResultCard(props: ResultCardProps) {
 
   return (
     <div
-      onClick={() => clickHandler(result)}
+      onClick={() => clickHandler()}
       onKeyDown={(e) => keyDownHandler(e, result)}
       className='cio-result-card'
       role='button'
