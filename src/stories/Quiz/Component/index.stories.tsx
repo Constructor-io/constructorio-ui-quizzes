@@ -48,8 +48,19 @@ addComponentStoryDescription(
 
 const cioJsClient = new ConstructorIOClient({ apiKey });
 
+// The following block is to remove unrelated modules from Storybook's "Controls" panel
+// This should not be done in an actual application
+// @ts-ignore
+delete cioJsClient.autocomplete;
+// @ts-ignore
+delete cioJsClient.search;
+// @ts-ignore
+delete cioJsClient.browse;
+// @ts-ignore
+delete cioJsClient.recommendations;
+
 export const ProvideCIOClientInstance = ComponentTemplate.bind({});
-ProvideCIOClientInstance.args = { quizId, cioJsClient, resultsPageOptions };
+ProvideCIOClientInstance.args = { quizId, resultsPageOptions, cioJsClient };
 addComponentStoryDescription(
   ProvideCIOClientInstance,
   `
