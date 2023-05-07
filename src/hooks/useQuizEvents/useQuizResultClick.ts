@@ -9,7 +9,7 @@ const useQuizResultClick = (
   cioClient: ConstructorIOClient,
   quizApiState: QuizAPIReducerState,
   onQuizResultClick?: QuizResultsEventsProps.OnQuizResultClick
-): QuizEventsReturn.GetResultClick => {
+): QuizEventsReturn.ResultClick => {
   const resultClickHandler = useCallback(
     (result: QuizResultDataPartial, position: number) => {
       if (quizApiState.quizResults) {
@@ -17,8 +17,8 @@ const useQuizResultClick = (
         trackQuizResultClick(cioClient, quizApiState.quizResults, result, position);
 
         // User custom callback function
-        if (onQuizResultClick && isFunction(onQuizResultClick)) {
-          onQuizResultClick(result, position);
+        if (isFunction(onQuizResultClick)) {
+          onQuizResultClick!(result, position);
         }
       }
     },

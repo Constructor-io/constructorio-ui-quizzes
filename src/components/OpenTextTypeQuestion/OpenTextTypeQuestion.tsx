@@ -12,7 +12,7 @@ interface OpenTextQuestionProps {
 
 function OpenTextQuestion(props: OpenTextQuestionProps) {
   const { initialValue = '', onChangeHandler: userDefinedHandler = null } = props;
-  const { state, getPreviousQuestion, getNextQuestion } = useContext(QuizContext);
+  const { state, previousQuestion, nextQuestion } = useContext(QuizContext);
   const [openTextInput, setOpenTextInput] = useState<string>(initialValue);
 
   let question;
@@ -29,8 +29,8 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
   };
 
   const onNextClick = () => {
-    if (getNextQuestion && openTextInput) {
-      getNextQuestion(openTextInput);
+    if (nextQuestion && openTextInput) {
+      nextQuestion(openTextInput);
     }
   };
 
@@ -44,8 +44,9 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
 
   useEffect(() => {
     if (state?.quiz.currentQuestion) {
-      const openTextAnswer =
-        state.answers.inputs?.[state?.quiz.currentQuestion?.next_question.id] || initialValue;
+      const questionId = state?.quiz.currentQuestion?.next_question.id;
+      const currentAnswer = state.answers.inputs?.[questionId];
+      const openTextAnswer = currentAnswer || initialValue;
       setOpenTextInput(openTextAnswer as string);
     }
   }, [state, initialValue]);
@@ -74,7 +75,7 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
           <ControlBar
             nextButtonHandler={onNextClick}
             isNextButtonDisabled={!openTextInput}
-            backButtonHandler={getPreviousQuestion}
+            backButtonHandler={previousQuestion}
             showBackButton={!state?.quiz.isFirstQuestion}
             ctaButtonText={question?.cta_text}
           />

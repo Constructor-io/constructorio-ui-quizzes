@@ -30,21 +30,21 @@ const useQuizEvents = (options: UseQuizEventOptions): QuizEventsReturn => {
   const { onAddToCartClick, onQuizResultClick, onQuizResultsLoaded } = resultsPageOptions;
 
   // Quiz Next button click
-  const getNextQuestion = useQuizNextClick(quizApiState, dispatchLocalState);
+  const nextQuestion = useQuizNextClick(quizApiState, dispatchLocalState);
 
   // Quiz Back button click callback
-  const getPreviousQuestion = useQuizBackClick(dispatchLocalState);
+  const previousQuestion = useQuizBackClick(dispatchLocalState);
 
   // Quiz result add to cart callback
-  const getAddToCart = useQuizAddToCart(cioClient, quizApiState, onAddToCartClick);
+  const addToCart = useQuizAddToCart(cioClient, quizApiState, onAddToCartClick);
 
   // Quiz result click callback
-  const getResultClick = useQuizResultClick(cioClient, quizApiState, onQuizResultClick);
+  const resultClick = useQuizResultClick(cioClient, quizApiState, onQuizResultClick);
 
   // Quiz results loaded event
   useQuizResultsLoaded(cioClient, quizApiState, onQuizResultsLoaded);
 
-  const getResetQuiz = () => {
+  const resetQuiz = () => {
     if (quizApiState.quizResults) {
       resetQuizApiState();
       resetQuizLocalState();
@@ -52,11 +52,11 @@ const useQuizEvents = (options: UseQuizEventOptions): QuizEventsReturn => {
   };
 
   return {
-    getAddToCart,
-    getResultClick,
-    getNextQuestion,
-    getPreviousQuestion,
-    getResetQuiz,
+    addToCart,
+    resultClick,
+    nextQuestion,
+    previousQuestion,
+    resetQuiz,
   };
 };
 

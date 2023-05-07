@@ -107,7 +107,7 @@ export function getPreferredColorScheme() {
   return colorScheme;
 }
 
-export function isFunction(fn) {
+export function isFunction(fn): boolean {
   return fn && typeof fn === 'function';
 }
 

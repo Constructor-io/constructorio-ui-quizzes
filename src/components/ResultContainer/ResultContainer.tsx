@@ -13,7 +13,7 @@ export interface IResultContainerProps {
 export default function ResultContainer(props: IResultContainerProps) {
   const { options } = props;
   const { resultCardSalePriceKey, resultCardRegularPriceKey } = options;
-  const { state, getResetQuiz } = useContext(QuizContext);
+  const { state, resetQuiz } = useContext(QuizContext);
   const zeroResults = !state?.quiz.results?.response?.results?.length;
   const resultsTitle = zeroResults ? 'Oops, there are no results' : 'Here are your results';
 
@@ -23,7 +23,7 @@ export default function ResultContainer(props: IResultContainerProps) {
         <h1 className='cio-results-title'>{resultsTitle}</h1>
         <div className='cio-results-filter-and-redo-container'>
           <ResultFilters />
-          <RedoButton onClick={getResetQuiz} />
+          <RedoButton onClick={resetQuiz} />
         </div>
         {!zeroResults && (
           <Results

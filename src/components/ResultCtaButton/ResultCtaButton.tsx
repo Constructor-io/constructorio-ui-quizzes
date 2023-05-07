@@ -10,15 +10,15 @@ interface ResultCtaButtonProps {
 
 export default function ResultCtaButton(props: ResultCtaButtonProps) {
   const { item, className, price } = props;
-  const { getAddToCart } = useContext(QuizContext);
+  const { addToCart } = useContext(QuizContext);
 
   return (
     <button
       type='button'
       className={`cio-result-card-cta-button ${className || ''}`}
       onClick={(e) => {
-        if (getAddToCart) {
-          getAddToCart(e, item, price);
+        if (addToCart) {
+          addToCart(e, item, price);
         }
       }}>
       Add to Cart

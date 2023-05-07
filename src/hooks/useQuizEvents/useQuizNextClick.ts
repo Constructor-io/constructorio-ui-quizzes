@@ -6,15 +6,17 @@ import { QuizEventsReturn } from '../../types';
 const useQuizNextClick = (
   quizApiState: QuizAPIReducerState,
   dispatchLocalState: React.Dispatch<ActionAnswerQuestion>
-): QuizEventsReturn.GetNextQuestion => {
+): QuizEventsReturn.NextQuestion => {
   const quizNextHandler = useCallback(
     (payload?: string | string[]) => {
-      switch (quizApiState.quizCurrentQuestion?.next_question.type) {
+      const questionType = quizApiState.quizCurrentQuestion?.next_question.type;
+      const currentQuestion = quizApiState.quizCurrentQuestion;
+      switch (questionType) {
         case QuestionTypes.Cover:
           dispatchLocalState({
             type: QuestionTypes.Cover,
             payload: {
-              isLastQuestion: quizApiState?.quizCurrentQuestion?.is_last_question,
+              isLastQuestion: currentQuestion!.is_last_question,
             },
           });
           break;
@@ -22,9 +24,9 @@ const useQuizNextClick = (
           dispatchLocalState({
             type: QuestionTypes.OpenText,
             payload: {
-              questionId: quizApiState?.quizCurrentQuestion.next_question.id,
+              questionId: currentQuestion!.next_question.id,
               input: payload as string,
-              isLastQuestion: quizApiState?.quizCurrentQuestion.is_last_question,
+              isLastQuestion: currentQuestion!.is_last_question,
             },
           });
           break;
@@ -32,13 +34,13 @@ const useQuizNextClick = (
         case QuestionTypes.MultipleSelect:
           dispatchLocalState({
             type:
-              quizApiState?.quizCurrentQuestion.next_question.type === QuestionTypes.SingleSelect
+              currentQuestion!.next_question.type === QuestionTypes.SingleSelect
                 ? QuestionTypes.SingleSelect
                 : QuestionTypes.MultipleSelect,
             payload: {
-              questionId: quizApiState?.quizCurrentQuestion.next_question.id,
+              questionId: currentQuestion!.next_question.id,
               input: payload as string[],
-              isLastQuestion: quizApiState?.quizCurrentQuestion.is_last_question,
+              isLastQuestion: currentQuestion!.is_last_question,
             },
           });
           break;

@@ -5,11 +5,11 @@ import { QuizEventsReturn, QuizReturnState } from '../../types';
 export interface QuizContextValue {
   cioClient?: ConstructorIOClient;
   state?: QuizReturnState;
-  getResetQuiz: QuizEventsReturn.GetResetQuiz;
-  getNextQuestion?: QuizEventsReturn.GetNextQuestion;
-  getPreviousQuestion?: QuizEventsReturn.GetPreviousQuestion;
-  getAddToCart: QuizEventsReturn.GetAddToCart;
-  getResultClick: QuizEventsReturn.GetResultClick;
+  resetQuiz: QuizEventsReturn.ResetQuiz;
+  nextQuestion?: QuizEventsReturn.NextQuestion;
+  previousQuestion?: QuizEventsReturn.PreviousQuestion;
+  addToCart: QuizEventsReturn.AddToCart;
+  resultClick: QuizEventsReturn.ResultClick;
   customClickItemCallback: boolean;
 }
 

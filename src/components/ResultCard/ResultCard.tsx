@@ -12,20 +12,20 @@ interface ResultCardProps {
 
 export default function ResultCard(props: ResultCardProps) {
   const { result, salePriceKey, regularPriceKey, resultPosition } = props;
-  const { getResultClick, customClickItemCallback } = useContext(QuizContext);
+  const { resultClick, customClickItemCallback } = useContext(QuizContext);
   const salePrice = salePriceKey && result?.data?.[salePriceKey];
   const regularPrice = regularPriceKey && result?.data?.[regularPriceKey];
 
   const clickHandler = () => {
-    if (getResultClick) {
-      getResultClick(result, resultPosition);
+    if (resultClick) {
+      resultClick(result, resultPosition);
     }
   };
 
-  const keyDownHandler = (event: KeyboardEvent<HTMLDivElement>, item: QuizResultDataPartial) => {
+  const keyDownHandler = (event: KeyboardEvent<HTMLDivElement>) => {
     if (event?.key === ' ' || event?.key === 'Enter') {
-      if (getResultClick) {
-        getResultClick(item, resultPosition);
+      if (resultClick) {
+        resultClick(result, resultPosition);
       }
     }
   };
@@ -59,7 +59,7 @@ export default function ResultCard(props: ResultCardProps) {
   return (
     <div
       onClick={() => clickHandler()}
-      onKeyDown={(e) => keyDownHandler(e, result)}
+      onKeyDown={(e) => keyDownHandler(e)}
       className='cio-result-card'
       role='button'
       tabIndex={0}>

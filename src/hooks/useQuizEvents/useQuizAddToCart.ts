@@ -9,7 +9,7 @@ const useQuizAddToCart = (
   cioClient: ConstructorIOClient,
   quizApiState: QuizAPIReducerState,
   onAddToCartClick?: QuizResultsEventsProps.OnAddToCartClick
-): QuizEventsReturn.GetAddToCart => {
+): QuizEventsReturn.AddToCart => {
   const addToCartClickHandler = useCallback(
     (e: React.MouseEvent<HTMLElement>, result: QuizResultDataPartial, price?: number) => {
       e.preventDefault();
@@ -19,8 +19,8 @@ const useQuizAddToCart = (
         trackQuizConversion(cioClient, quizApiState.quizResults, result, price);
 
         // User custom callback function
-        if (onAddToCartClick && isFunction(onAddToCartClick)) {
-          onAddToCartClick(result);
+        if (isFunction(onAddToCartClick)) {
+          onAddToCartClick!(result);
         }
       }
     },

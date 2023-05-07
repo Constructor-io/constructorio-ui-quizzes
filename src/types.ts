@@ -66,11 +66,11 @@ export interface QuizReturnState {
 }
 
 export namespace QuizEventsReturn {
-  export type GetNextQuestion = (payload?: string | string[]) => void;
-  export type GetPreviousQuestion = () => void;
-  export type GetResetQuiz = () => void;
-  export type GetResultClick = (result: QuizResultDataPartial, position: number) => void;
-  export type GetAddToCart = (
+  export type NextQuestion = (payload?: string | string[]) => void;
+  export type PreviousQuestion = () => void;
+  export type ResetQuiz = () => void;
+  export type ResultClick = (result: QuizResultDataPartial, position: number) => void;
+  export type AddToCart = (
     e: React.MouseEvent<HTMLElement>,
     result: QuizResultDataPartial,
     price?: number
@@ -78,11 +78,11 @@ export namespace QuizEventsReturn {
 }
 
 export interface QuizEventsReturn {
-  getNextQuestion: QuizEventsReturn.GetNextQuestion;
-  getPreviousQuestion: QuizEventsReturn.GetPreviousQuestion;
-  getResetQuiz: QuizEventsReturn.GetResetQuiz;
-  getResultClick: QuizEventsReturn.GetResultClick;
-  getAddToCart: QuizEventsReturn.GetAddToCart;
+  nextQuestion: QuizEventsReturn.NextQuestion;
+  previousQuestion: QuizEventsReturn.PreviousQuestion;
+  resetQuiz: QuizEventsReturn.ResetQuiz;
+  resultClick: QuizEventsReturn.ResultClick;
+  addToCart: QuizEventsReturn.AddToCart;
 }
 
 export interface UseQuizReturn {

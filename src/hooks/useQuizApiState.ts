@@ -4,7 +4,7 @@ import { useEffect, useReducer } from 'react';
 import { QuizAPIActionTypes } from '../components/CioQuiz/actions';
 import apiReducer, { initialState } from '../components/CioQuiz/quizApiReducer';
 import { QuizLocalReducerState } from '../components/CioQuiz/quizLocalReducer';
-import { getNextQuestion, getQuizResults } from '../services';
+import { nextQuestion, getQuizResults } from '../services';
 import { ResultsPageOptions } from '../types';
 
 const useFetchQuiz = (
@@ -15,9 +15,9 @@ const useFetchQuiz = (
   cioClient: ConstructorIOClient
 ) => {
   const [quizApiState, dispatch] = useReducer(apiReducer, initialState);
-  const isFirstQuestion =
-    quizApiState.quizFirstQuestion?.next_question.id ===
-    quizApiState.quizCurrentQuestion?.next_question.id;
+  const firstQuestionId = quizApiState.quizFirstQuestion?.next_question.id;
+  const currentQuestionId = quizApiState.quizCurrentQuestion?.next_question.id;
+  const isFirstQuestion = firstQuestionId === currentQuestionId;
 
   useEffect(() => {
     (async () => {
@@ -49,7 +49,7 @@ const useFetchQuiz = (
           let quizVersionId = quizApiState.quizVersionId || quizVersionIdProp;
           let { quizSessionId } = quizApiState;
 
-          const questionResult = await getNextQuestion(cioClient, quizId, {
+          const questionResult = await nextQuestion(cioClient, quizId, {
             answers: quizLocalState.answers,
             quizVersionId,
             quizSessionId,

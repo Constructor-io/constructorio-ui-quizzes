@@ -19,7 +19,7 @@ export const getCioClient = (apiKey?: string) => {
   return undefined;
 };
 
-export const getNextQuestion = (
+export const nextQuestion = (
   cioClient: ConstructorIOClient,
   quizId: string,
   parameters: QuizzesParameters
@@ -56,7 +56,7 @@ export const trackQuizResultClick = (
   result: QuizResultDataPartial,
   position: number
 ) => {
-  if (quizResults && quizResults.request && quizResults.response) {
+  if (quizResults.request && quizResults.response) {
     const {
       quiz_id,
       quiz_session_id,
@@ -88,7 +88,7 @@ export const trackQuizConversion = (
   result: QuizResultDataPartial,
   price?: number
 ) => {
-  if (quizResults && quizResults.request && quizResults.response) {
+  if (quizResults.request) {
     const {
       quiz_id,
       quiz_session_id,

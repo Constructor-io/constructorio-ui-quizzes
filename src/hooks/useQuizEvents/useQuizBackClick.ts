@@ -4,7 +4,7 @@ import { QuizEventsReturn } from '../../types';
 
 const useQuizBackClick = (
   dispatchLocalState: React.Dispatch<ActionAnswerQuestion>
-): QuizEventsReturn.GetPreviousQuestion => {
+): QuizEventsReturn.PreviousQuestion => {
   const quizBackHandler = useCallback(() => {
     if (dispatchLocalState) {
       dispatchLocalState({ type: QuestionTypes.Back });

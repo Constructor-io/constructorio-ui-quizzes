@@ -12,7 +12,7 @@ interface Selected {
 }
 
 function SelectTypeQuestion() {
-  const { state, getNextQuestion, getPreviousQuestion } = useContext(QuizContext);
+  const { state, nextQuestion, previousQuestion } = useContext(QuizContext);
   let question;
   let type: `${QuestionTypes}`;
   let hasImages = false;
@@ -38,7 +38,8 @@ function SelectTypeQuestion() {
 
       setSelected(prevSelected);
     }
-  }, [state]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state?.quiz.currentQuestion?.next_question.id]);
 
   const toggleIdSelected = (id: number) => {
     if (type === QuestionTypes.SingleSelect) {
@@ -61,9 +62,9 @@ function SelectTypeQuestion() {
   };
 
   const onNextClick = () => {
-    if (getNextQuestion && !isDisabled && state?.quiz.currentQuestion) {
+    if (nextQuestion && !isDisabled && state?.quiz.currentQuestion) {
       const selectedAnswers = Object.keys(selected).filter((key) => selected[Number(key)]);
-      getNextQuestion(selectedAnswers);
+      nextQuestion(selectedAnswers);
     }
   };
 
@@ -104,7 +105,7 @@ function SelectTypeQuestion() {
         <ControlBar
           nextButtonHandler={onNextClick}
           isNextButtonDisabled={isDisabled}
-          backButtonHandler={getPreviousQuestion}
+          backButtonHandler={previousQuestion}
           showBackButton={!state?.quiz.isFirstQuestion}
           ctaButtonText={question?.cta_text}
         />
