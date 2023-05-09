@@ -31,6 +31,7 @@
   --bottom-bar-height: 80px;
   --primary-color: var(--blue-denim-400);
   --container-image-small-height: 250px;
+  container: quiz / inline-size;
 }
 
 /* Mobile + global styles */
@@ -467,7 +468,7 @@
 /* Media Queries */
 
 /* Small Tablet */
-@media screen and (min-width: 640px) {
+@container (min-width: 640px) {
   /* Container */
   .cio-container--with-image {
     display: flex;
@@ -522,12 +523,7 @@
 }
 
 /* Big Tablet */
-@media screen and (min-width: 768px) {
-  /* Quiz */
-  .cio-quiz {
-    font-size: 18px;
-  }
-
+@container (min-width: 768px) {
   /* Container */
   .cio-container {
     align-items: center;
@@ -615,7 +611,7 @@
 }
 
 /* Desktop */
-@media screen and (min-width: 1280px) {
+@container (min-width: 1280px) {
   /* Container */
   .cio-container--with-image {
     padding: 6rem 2rem;
