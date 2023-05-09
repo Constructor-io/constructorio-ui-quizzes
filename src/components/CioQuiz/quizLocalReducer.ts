@@ -7,7 +7,7 @@ import {
 } from './actions';
 
 export type Answers = string[][];
-export type QuizReducerState = {
+export type QuizLocalReducerState = {
   answers: Answers;
   answerInputs: {};
   isLastAnswer: boolean;
@@ -16,7 +16,7 @@ export type AnswerInputState = {
   [key: string]: OpenTextQuestionPayload | SelectQuestionPayload;
 };
 
-export const initialState: QuizReducerState = {
+export const initialState: QuizLocalReducerState = {
   answers: [],
   answerInputs: {},
   isLastAnswer: false,
@@ -29,7 +29,10 @@ function answerInputReducer(state: AnswerInputState, action: ActionAnswerInputQu
   };
 }
 
-export default function reducer(state: QuizReducerState, action: ActionAnswerQuestion) {
+export default function quizLocalReducer(
+  state: QuizLocalReducerState,
+  action: ActionAnswerQuestion
+) {
   switch (action.type) {
     case QuestionTypes.OpenText:
       return {

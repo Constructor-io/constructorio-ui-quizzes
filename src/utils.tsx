@@ -1,13 +1,12 @@
 import React from 'react';
-import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
-import { QuestionTypes } from './components/CioQuiz/actions';
 import {
-  QuestionImages,
-  QuizzesParameters,
-  QuizzesResultsParameters,
-  NextQuestionResponse,
-  QuizResultsResponse,
-} from './types';
+  FilterExpression,
+  FilterExpressionGroupOr,
+  FilterExpressionGroupAnd,
+  FilterExpressionValue,
+} from '@constructor-io/constructorio-client-javascript/lib/types';
+import { QuestionTypes } from './components/CioQuiz/actions';
+import { QuestionImages } from './types';
 
 export const renderImages = (images: Partial<QuestionImages>, cssClasses?: string) => {
   const {
@@ -83,18 +82,6 @@ export const stringifyWithDefaults = (obj: { cioJsClient?: any; addToCartCallbac
 
 export const stringify = (obj: any) => JSON.stringify(obj, null, '  ');
 
-export const getNextQuestion = (
-  cioClient: ConstructorIOClient,
-  quizId: string,
-  parameters: QuizzesParameters
-): Promise<NextQuestionResponse> => cioClient?.quizzes.getQuizNextQuestion(quizId, parameters);
-
-export const getQuizResults = async (
-  cioClient: ConstructorIOClient,
-  quizId: string,
-  parameters: QuizzesResultsParameters
-): Promise<QuizResultsResponse> => cioClient?.quizzes.getQuizResults(quizId, parameters);
-
 export const getQuestionTypes = (questionType?: `${QuestionTypes}`) => {
   const isOpenQuestion = questionType === QuestionTypes.OpenText;
   const isCoverQuestion = questionType === QuestionTypes.Cover;
@@ -111,17 +98,6 @@ export const getQuestionTypes = (questionType?: `${QuestionTypes}`) => {
   };
 };
 
-export const getCioClient = (apiKey?: string) => {
-  if (apiKey) {
-    return new ConstructorIOClient({
-      apiKey,
-      sendTrackingEvents: true,
-    });
-  }
-
-  return undefined;
-};
-
 export function getPreferredColorScheme() {
   let colorScheme = 'light';
   // Check if the dark-mode Media-Query matches
@@ -130,3 +106,33 @@ export function getPreferredColorScheme() {
   }
   return colorScheme;
 }
+
+export function isFunction(fn): boolean {
+  return fn && typeof fn === 'function';
+}
+
+const isValueExpression = (exp: FilterExpression): exp is FilterExpressionValue =>
+  'name' in exp && 'value' in exp;
+const isAndFilter = (exp: FilterExpression): exp is FilterExpressionGroupAnd => 'and' in exp;
+const isOrFilter = (exp: FilterExpression): exp is FilterExpressionGroupOr => 'or' in exp;
+
+export const getFilterValuesFromExpression = (exp: FilterExpression | null): string[] => {
+  if (!exp) {
+    return [];
+  }
+  if (isAndFilter(exp)) {
+    return exp.and.flatMap((innerExpression: FilterExpression) =>
+      getFilterValuesFromExpression(innerExpression)
+    );
+  }
+  if (isOrFilter(exp)) {
+    return exp.or.flatMap((innerExpression: FilterExpression) =>
+      getFilterValuesFromExpression(innerExpression)
+    );
+  }
+  if (isValueExpression(exp)) {
+    return [exp.value];
+  }
+
+  return [];
+};

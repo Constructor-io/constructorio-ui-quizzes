@@ -12,35 +12,34 @@ interface Selected {
 }
 
 function SelectTypeQuestion() {
-  const { questionResponse, state, quizNextHandler, quizBackHandler, isFirstQuestion } =
-    useContext(QuizContext);
+  const { state, nextQuestion, previousQuestion } = useContext(QuizContext);
   let question;
   let type: `${QuestionTypes}`;
   let hasImages = false;
 
-  if (questionResponse) {
-    question = questionResponse.next_question;
+  if (state?.quiz.currentQuestion) {
+    question = state.quiz.currentQuestion.next_question;
     type = question.type;
-    hasImages = questionResponse.next_question.options.some(
-      (option: QuestionOption) => option.images
-    );
+    hasImages = question.options.some((option: QuestionOption) => option.images);
   }
 
   const [selected, setSelected] = useState<Selected>({});
   const isDisabled = Object.keys(selected).length === 0;
 
   useEffect(() => {
-    if (questionResponse?.next_question?.type) {
-      const answers = state?.answerInputs?.[questionResponse.next_question.id] || [];
+    if (state?.quiz.currentQuestion?.next_question?.type) {
+      const nextQuestionId = state.quiz.currentQuestion.next_question.id;
+      const answers = state.answers?.inputs?.[nextQuestionId] || [];
       const prevSelected: Selected = {};
 
-      answers?.forEach((answer) => {
+      (answers as string[])?.forEach((answer) => {
         prevSelected[Number(answer)] = true;
       });
 
       setSelected(prevSelected);
     }
-  }, [questionResponse, state?.answerInputs]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state?.quiz.currentQuestion?.next_question.id]);
 
   const toggleIdSelected = (id: number) => {
     if (type === QuestionTypes.SingleSelect) {
@@ -63,20 +62,9 @@ function SelectTypeQuestion() {
   };
 
   const onNextClick = () => {
-    if (quizNextHandler && !isDisabled && questionResponse) {
-      const questionType =
-        type === QuestionTypes.SingleSelect
-          ? QuestionTypes.SingleSelect
-          : QuestionTypes.MultipleSelect;
-
-      quizNextHandler({
-        type: questionType,
-        payload: {
-          questionId: questionResponse?.next_question.id,
-          input: Object.keys(selected).filter((key) => selected[Number(key)]),
-          isLastQuestion: questionResponse.is_last_question,
-        },
-      });
+    if (nextQuestion && !isDisabled && state?.quiz.currentQuestion) {
+      const selectedAnswers = Object.keys(selected).filter((key) => selected[Number(key)]);
+      nextQuestion(selectedAnswers);
     }
   };
 
@@ -117,8 +105,8 @@ function SelectTypeQuestion() {
         <ControlBar
           nextButtonHandler={onNextClick}
           isNextButtonDisabled={isDisabled}
-          backButtonHandler={quizBackHandler}
-          showBackButton={!isFirstQuestion}
+          backButtonHandler={previousQuestion}
+          showBackButton={!state?.quiz.isFirstQuestion}
           ctaButtonText={question?.cta_text}
         />
       </div>

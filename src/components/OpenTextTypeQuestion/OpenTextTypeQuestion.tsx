@@ -3,7 +3,6 @@ import QuestionTitle from '../QuestionTitle/QuestionTitle';
 import QuestionDescription from '../QuestionDescription/QuestionDescription';
 import { renderImages } from '../../utils';
 import QuizContext from '../CioQuiz/context';
-import { QuestionTypes } from '../CioQuiz/actions';
 import ControlBar from '../ControlBar/ControlBar';
 
 interface OpenTextQuestionProps {
@@ -13,14 +12,13 @@ interface OpenTextQuestionProps {
 
 function OpenTextQuestion(props: OpenTextQuestionProps) {
   const { initialValue = '', onChangeHandler: userDefinedHandler = null } = props;
-  const { questionResponse, quizBackHandler, quizNextHandler, isFirstQuestion, state } =
-    useContext(QuizContext);
+  const { state, previousQuestion, nextQuestion } = useContext(QuizContext);
   const [openTextInput, setOpenTextInput] = useState<string>(initialValue);
 
   let question;
 
-  if (questionResponse) {
-    question = questionResponse.next_question;
+  if (state?.quiz.currentQuestion) {
+    question = state?.quiz.currentQuestion.next_question;
   }
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,15 +29,8 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
   };
 
   const onNextClick = () => {
-    if (quizNextHandler && openTextInput && questionResponse) {
-      quizNextHandler({
-        type: QuestionTypes.OpenText,
-        payload: {
-          questionId: questionResponse.next_question.id,
-          input: openTextInput,
-          isLastQuestion: questionResponse.is_last_question,
-        },
-      });
+    if (nextQuestion && openTextInput) {
+      nextQuestion(openTextInput);
     }
   };
 
@@ -52,12 +43,13 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
   };
 
   useEffect(() => {
-    if (questionResponse) {
-      const openTextAnswer =
-        state?.answerInputs?.[questionResponse?.next_question.id] || initialValue;
-      setOpenTextInput(openTextAnswer);
+    if (state?.quiz.currentQuestion) {
+      const questionId = state?.quiz.currentQuestion?.next_question.id;
+      const currentAnswer = state.answers.inputs?.[questionId];
+      const openTextAnswer = currentAnswer || initialValue;
+      setOpenTextInput(openTextAnswer as string);
     }
-  }, [questionResponse, state, initialValue]);
+  }, [state, initialValue]);
 
   if (question) {
     const hasImage = question?.images?.primary_url;
@@ -83,8 +75,8 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
           <ControlBar
             nextButtonHandler={onNextClick}
             isNextButtonDisabled={!openTextInput}
-            backButtonHandler={quizBackHandler}
-            showBackButton={!isFirstQuestion}
+            backButtonHandler={previousQuestion}
+            showBackButton={!state?.quiz.isFirstQuestion}
             ctaButtonText={question?.cta_text}
           />
         </div>

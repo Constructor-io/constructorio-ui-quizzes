@@ -3,28 +3,21 @@ import QuestionTitle from '../QuestionTitle/QuestionTitle';
 import QuizContext from '../CioQuiz/context';
 import QuestionDescription from '../QuestionDescription/QuestionDescription';
 import { renderImages } from '../../utils';
-import { QuestionTypes } from '../CioQuiz/actions';
 import ControlBar from '../ControlBar/ControlBar';
 
 export default function CoverTypeQuestion() {
-  const { questionResponse, quizBackHandler, quizNextHandler, isFirstQuestion } =
-    useContext(QuizContext);
+  const { state, previousQuestion, nextQuestion } = useContext(QuizContext);
   let question;
 
-  if (questionResponse) {
-    question = questionResponse.next_question;
+  if (state?.quiz.currentQuestion) {
+    question = state?.quiz.currentQuestion.next_question;
   }
 
   const hasImage = question?.images?.primary_url;
 
   const onNextClick = () => {
-    if (quizNextHandler) {
-      quizNextHandler({
-        type: QuestionTypes.Cover,
-        payload: {
-          isLastQuestion: questionResponse?.is_last_question,
-        },
-      });
+    if (nextQuestion) {
+      nextQuestion();
     }
   };
 
@@ -40,8 +33,8 @@ export default function CoverTypeQuestion() {
           <QuestionDescription description={question.description} />
           <ControlBar
             nextButtonHandler={onNextClick}
-            backButtonHandler={quizBackHandler}
-            showBackButton={!isFirstQuestion}
+            backButtonHandler={previousQuestion}
+            showBackButton={!state?.quiz.isFirstQuestion}
             ctaButtonText={question?.cta_text}
           />
         </div>

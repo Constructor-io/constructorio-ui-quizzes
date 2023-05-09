@@ -1,34 +1,19 @@
 import React, { useContext } from 'react';
+import { ResultsProps } from '../../types';
 import QuizContext from '../CioQuiz/context';
 import ResultCard from '../ResultCard/ResultCard';
-import { BrowseResultData } from '../../types';
-
-export interface ResultsProps {
-  addToCartCallback: (item: Partial<BrowseResultData>) => any;
-  clickItemCallback?: (item: Partial<BrowseResultData>) => any;
-  resultCardSalePriceKey?: string;
-  resultCardRegularPriceKey?: string;
-}
 
 function Results(props: ResultsProps) {
-  const {
-    addToCartCallback,
-    clickItemCallback,
-    resultCardSalePriceKey,
-    resultCardRegularPriceKey,
-  } = props;
-  const { resultsResponse } = useContext(QuizContext);
-
+  const { resultCardSalePriceKey, resultCardRegularPriceKey } = props;
+  const { state } = useContext(QuizContext);
   return (
     <div className='cio-results'>
-      {resultsResponse?.response?.results?.map((result, index) => (
+      {state?.quiz?.results?.response?.results?.map((result, index) => (
         <ResultCard
           result={result}
           key={result.data?.id}
           salePriceKey={resultCardSalePriceKey}
           regularPriceKey={resultCardRegularPriceKey}
-          addToCartCallback={addToCartCallback}
-          clickItemCallback={clickItemCallback}
           resultPosition={index + 1}
         />
       ))}

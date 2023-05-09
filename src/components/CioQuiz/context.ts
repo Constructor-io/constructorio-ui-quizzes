@@ -1,20 +1,16 @@
 import React from 'react';
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
-import { RequestStates } from '../../constants';
-import { NextQuestionResponse, QuizResultsResponse } from '../../types';
-import { ActionAnswerQuestion } from './actions';
-import { QuizReducerState } from './reducer';
+import { QuizEventsReturn, QuizReturnState } from '../../types';
 
-interface QuizContextValue {
-  state: QuizReducerState;
-  requestState: RequestStates;
-  questionResponse: NextQuestionResponse;
-  resultsResponse: QuizResultsResponse;
-  isFirstQuestion: boolean;
-  quizNextHandler: (action?: ActionAnswerQuestion) => void;
-  quizBackHandler: () => void;
-  dispatch: React.Dispatch<ActionAnswerQuestion>;
-  cioClient: ConstructorIOClient;
+export interface QuizContextValue {
+  cioClient?: ConstructorIOClient;
+  state?: QuizReturnState;
+  resetQuiz: QuizEventsReturn.ResetQuiz;
+  nextQuestion?: QuizEventsReturn.NextQuestion;
+  previousQuestion?: QuizEventsReturn.PreviousQuestion;
+  addToCart: QuizEventsReturn.AddToCart;
+  resultClick: QuizEventsReturn.ResultClick;
+  customClickItemCallback: boolean;
 }
 
 export default React.createContext<Partial<QuizContextValue>>({});

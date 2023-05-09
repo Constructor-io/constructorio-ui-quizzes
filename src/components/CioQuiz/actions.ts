@@ -1,3 +1,6 @@
+import { NextQuestionResponse, QuizResultsResponse } from '../../types';
+
+// Local Actions
 export enum QuestionTypes {
   OpenText = 'open',
   Cover = 'cover',
@@ -32,3 +35,33 @@ export type ActionAnswerQuestion =
   | Action<QuestionTypes.Cover, CoverQuestionPayload>
   | Action<QuestionTypes.Back>
   | Action<QuestionTypes.Reset>;
+
+// API actions
+export enum QuizAPIActionTypes {
+  SET_IS_LOADING,
+  SET_IS_ERROR,
+  SET_QUIZ_RESULTS,
+  SET_CURRENT_QUESTION,
+  RESET_QUIZ,
+}
+
+export type ActionSetIsLoading = Action<QuizAPIActionTypes.SET_IS_LOADING>;
+export type ActionSetIsError = Action<QuizAPIActionTypes.SET_IS_ERROR>;
+
+export type ActionSetQuizResults = Action<
+  QuizAPIActionTypes.SET_QUIZ_RESULTS,
+  { quizResults: QuizResultsResponse }
+>;
+export type ActionSetCurrentQuestion = Action<
+  QuizAPIActionTypes.SET_CURRENT_QUESTION,
+  { quizCurrentQuestion: NextQuestionResponse; quizSessionId?: string; quizVersionId?: string }
+>;
+
+export type ActionResetQuiz = Action<QuizAPIActionTypes.RESET_QUIZ>;
+
+export type ActionQuizAPI =
+  | ActionSetIsLoading
+  | ActionSetIsError
+  | ActionSetQuizResults
+  | ActionSetCurrentQuestion
+  | ActionResetQuiz;
