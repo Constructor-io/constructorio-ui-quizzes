@@ -58,10 +58,10 @@ ${templateCode}
   };
 };
 
-export const defaultAddToCartCallbackCode = `"addToCartCallback": (item) => console.dir(item)`;
+export const defaultAddToCartCallbackCode = `"onAddToCartClick": (item) => console.dir(item)`;
 
-export const stringifyWithDefaults = (obj: { cioJsClient?: any; addToCartCallback: any }) => {
-  const { addToCartCallback, cioJsClient, ...rest } = obj;
+export const stringifyWithDefaults = (obj: { cioJsClient?: any; onAddToCartClick: any }) => {
+  const { onAddToCartClick, cioJsClient, ...rest } = obj;
   let res = JSON.stringify(rest, null, '  ');
 
   if (cioJsClient) {

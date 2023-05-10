@@ -29,7 +29,7 @@ const resultsPageOptions = {
     console.log('Click item');
     console.dir(item);
   },
-  addToCartCallback: (item) => {
+  onAddToCartClick: (item) => {
     console.log('Add to cart');
     console.dir(item);
   },
