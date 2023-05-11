@@ -135,6 +135,7 @@ e2eInteractionTest.play = async ({ canvasElement }) => {
   // Results page
   expect(await canvas.findByText('Here are your results')).toBeInTheDocument();
   expect(await canvas.findByText('Because you answered')).toBeInTheDocument();
+  expect(document.querySelectorAll('.cio-results-filter-option')?.length).toBeGreaterThan(0);
 
   // Reset button test
   await userEvent.click(await canvas.findByText('Redo Quiz'));
