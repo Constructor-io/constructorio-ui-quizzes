@@ -49,7 +49,7 @@ CioQuiz({
   apiKey: "key_wJSdZSiesX5hiVLt",
   includeCSS: true, // Include the default CSS styles. Defaults to true.
   resultsPageOptions: {
-    addToCartCallback: (item) => console.dir(item),
+    onAddToCartClick: (item) => console.dir(item),
     resultCardRegularPriceKey: "price",
   }
   // ... additional arguments

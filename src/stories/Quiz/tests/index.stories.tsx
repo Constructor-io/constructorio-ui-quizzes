@@ -25,11 +25,15 @@ export default {
 };
 
 const resultsPageOptions = {
-  clickItemCallback: (item) => {
-    console.log('Click item');
-    console.dir(item);
+  onQuizResultClick: (result, position) => {
+    console.log('Click result');
+    console.dir(result, position);
   },
-  addToCartCallback: (item) => {
+  onQuizResultsLoaded: (results) => {
+    console.log('Loaded results');
+    console.dir(results);
+  },
+  onAddToCartClick: (item) => {
     console.log('Add to cart');
     console.dir(item);
   },
