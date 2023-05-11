@@ -408,7 +408,7 @@
   margin-bottom: 1rem;
   font-weight: 700;
 }
-.cio-result-card-title:hover {
+a .cio-result-card-title:hover {
   color: var(--blue-denim-500);
   text-decoration: underline;
 }
@@ -420,14 +420,14 @@
   color: #bf1728;
   margin-right: 0.75rem;
 }
-.cio-result-card-sale-price:hover {
+a .cio-result-card-sale-price:hover {
   color: var(--blue-denim-500);
   text-decoration: underline;
 }
 .cio-result-card-regular-price {
   color: var(--gray-dust-900);
 }
-.cio-result-card-regular-price:hover {
+a .cio-result-card-regular-price:hover {
   color: var(--blue-denim-500);
   text-decoration: underline;
 }
