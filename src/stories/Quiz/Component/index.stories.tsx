@@ -62,9 +62,17 @@ delete cioJsClient.search;
 delete cioJsClient.browse;
 // @ts-ignore
 delete cioJsClient.recommendations;
+// @ts-ignore
+delete resultsPageOptions.onQuizResultClick;
+// @ts-ignore
+delete resultsPageOptions.onQuizResultsLoaded;
 
 export const ProvideCIOClientInstance = ComponentTemplate.bind({});
-ProvideCIOClientInstance.args = { quizId, resultsPageOptions, cioJsClient };
+ProvideCIOClientInstance.args = {
+  quizId,
+  resultsPageOptions,
+  cioJsClient,
+};
 addComponentStoryDescription(
   ProvideCIOClientInstance,
   `

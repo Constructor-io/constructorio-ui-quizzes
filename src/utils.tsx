@@ -58,11 +58,21 @@ ${templateCode}
   };
 };
 
-export const defaultAddToCartCallbackCode = `"onAddToCartClick": (item) => console.dir(item)`;
+export const defaultOnAddToCartClickCode = `"onAddToCartClick": (item) => console.dir(item)`;
+export const defaultOnQuizResultClickCode = `"onQuizResultClick": (result, position) => console.dir(result, position)`;
+export const defaultOnQuizResultsLoadedCode = `"onQuizResultsLoaded": (results) => console.dir(results)`;
 
-export const stringifyWithDefaults = (obj: { cioJsClient?: any; onAddToCartClick: any }) => {
-  const { onAddToCartClick, cioJsClient, ...rest } = obj;
-  let res = JSON.stringify(rest, null, '  ');
+export const stringifyWithDefaults = (obj: {
+  cioJsClient?: any;
+  resultsPageOptions: {
+    onAddToCartClick: any;
+    onQuizResultClick: any;
+    onQuizResultsLoaded: any;
+  };
+}) => {
+  const { resultsPageOptions, cioJsClient, ...rest } = obj;
+  const { onAddToCartClick, onQuizResultsLoaded, onQuizResultClick } = resultsPageOptions;
+  let res = JSON.stringify({ ...rest, resultsPageOptions }, null, '  ');
 
   if (cioJsClient) {
     res = res.replace(
@@ -72,11 +82,30 @@ export const stringifyWithDefaults = (obj: { cioJsClient?: any; onAddToCartClick
     );
   }
 
-  res = res.replace(
-    '"resultsPageOptions": {',
-    `"resultsPageOptions": {
-    ${defaultAddToCartCallbackCode},`
-  );
+  if (onQuizResultsLoaded) {
+    res = res.replace(
+      '"resultsPageOptions": {',
+      `"resultsPageOptions": {
+    ${defaultOnQuizResultsLoadedCode},`
+    );
+  }
+
+  if (onQuizResultClick) {
+    res = res.replace(
+      '"resultsPageOptions": {',
+      `"resultsPageOptions": {
+    ${defaultOnQuizResultClickCode},`
+    );
+  }
+
+  if (onAddToCartClick) {
+    res = res.replace(
+      '"resultsPageOptions": {',
+      `"resultsPageOptions": {
+    ${defaultOnAddToCartClickCode},`
+    );
+  }
+
   return res;
 };
 
