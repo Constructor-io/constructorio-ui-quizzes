@@ -109,7 +109,7 @@
   width: 100%;
   padding: 0.5rem;
   border: 0;
-  border-bottom: 1px solid var(--blue-denim-100);
+  border-bottom: 1px solid var(--gray-dust-100);
   color: var(--blue-denim-500);
   padding: 0.8rem;
   outline: none;
@@ -119,7 +119,7 @@
   border-bottom: 1px solid var(--blue-denim-500);
 }
 .cio-question-input-text::placeholder {
-  color: var(--blue-denim-100);
+  color: var(--gray-dust-100);
 }
 
 /* CTA Button Component */
@@ -162,8 +162,9 @@
 }
 .cio-question-cta-button:disabled,
 .cio-question-cta-button.disabled {
-  background: var(--blue-denim-200);
-  border: 2px solid var(--blue-denim-100);
+  background: var(--gray-dust-200);
+  border: 2px solid var(--gray-dust-200);
+  cursor: auto;
 }
 
 /* Back Button Component */
