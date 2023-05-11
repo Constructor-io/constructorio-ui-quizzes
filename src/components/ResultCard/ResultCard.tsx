@@ -22,7 +22,7 @@ export default function ResultCard(props: ResultCardProps) {
     }
   };
 
-  const keyDownHandler = (event: KeyboardEvent<HTMLDivElement>) => {
+  const keyDownHandler = (event: KeyboardEvent<HTMLAnchorElement>) => {
     if (event?.key === ' ' || event?.key === 'Enter') {
       if (resultClick) {
         resultClick(result, resultPosition);
@@ -51,18 +51,35 @@ export default function ResultCard(props: ResultCardProps) {
   );
 
   const resultCardContentWithLink = () => (
-    <a className='cio-result-card-anchor' href={result.data?.url}>
-      {resultCardContent()}
-    </a>
+    <>
+      <a
+        onClick={() => clickHandler()}
+        onKeyDown={(e) => keyDownHandler(e)}
+        className='cio-result-card-image'
+        href={result.data?.url}>
+        <img src={result.data?.image_url} alt='product' />
+      </a>
+      <a
+        onClick={() => clickHandler()}
+        onKeyDown={(e) => keyDownHandler(e)}
+        className='cio-result-card-text'
+        href={result.data?.url}>
+        <p className='cio-result-card-title'>{result.value}</p>
+        <div className='cio-result-card-prices'>
+          {salePrice && <span className='cio-result-card-sale-price'>${salePrice}</span>}
+          {regularPrice && (
+            <span className={`cio-result-card-regular-price${salePrice ? '--strike-through' : ''}`}>
+              ${regularPrice}
+            </span>
+          )}
+        </div>
+      </a>
+      <ResultCtaButton item={result} price={salePrice || regularPrice} />
+    </>
   );
 
   return (
-    <div
-      onClick={() => clickHandler()}
-      onKeyDown={(e) => keyDownHandler(e)}
-      className='cio-result-card'
-      role='button'
-      tabIndex={0}>
+    <div className='cio-result-card'>
       {!customClickItemCallback ? resultCardContentWithLink() : resultCardContent()}
     </div>
   );
