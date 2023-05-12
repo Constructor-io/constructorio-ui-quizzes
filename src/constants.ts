@@ -10,8 +10,9 @@ export const componentDescription = `- import \`CioQuiz\` to render in your JSX.
 - This component handles state management, data fetching, and rendering logic.
 - To use this component, \`quizId\`, \`resultsPageOptions\`, and one of \`apiKey\` or \`cioJsClient\` are required.
 - \`resultsPageOptions\` lets you configure the results page
-  - \`addToCartCallback\` is a callback function that will be called when the "Add to cart" button is clicked
-  - \`clickItemCallback\` is an optional callback function that will be called when the result card is clicked. The default behavior is redirecting the user to the item's URL
+  - \`onAddToCartClick\` is a callback function that will be called when the "Add to cart" button is clicked
+  - \`onQuizResultClick\` is an optional callback function that will be called when the result card is clicked. The default behavior is redirecting the user to the item's URL
+  - \`onQuizResultsLoaded\` is an optional callback function that will be called when the quiz results are loaded
   - \`resultCardRegularPriceKey\` is a parameter that specifies the metadata field name for the regular price
   - \`resultCardSalePriceKey\` is an optional parameter that specifies the metadata field name for the sale price
 - Use different props to configure the behavior of this component.

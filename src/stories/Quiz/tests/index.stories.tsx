@@ -25,11 +25,15 @@ export default {
 };
 
 const resultsPageOptions = {
-  clickItemCallback: (item) => {
-    console.log('Click item');
-    console.dir(item);
+  onQuizResultClick: (result, position) => {
+    console.log('Click result');
+    console.dir(result, position);
   },
-  addToCartCallback: (item) => {
+  onQuizResultsLoaded: (results) => {
+    console.log('Loaded results');
+    console.dir(results);
+  },
+  onAddToCartClick: (item) => {
     console.log('Add to cart');
     console.dir(item);
   },
@@ -135,6 +139,7 @@ e2eInteractionTest.play = async ({ canvasElement }) => {
   // Results page
   expect(await canvas.findByText('Here are your results')).toBeInTheDocument();
   expect(await canvas.findByText('Because you answered')).toBeInTheDocument();
+  expect(document.querySelectorAll('.cio-results-filter-option')?.length).toBeGreaterThan(0);
 
   // Reset button test
   await userEvent.click(await canvas.findByText('Redo Quiz'));
