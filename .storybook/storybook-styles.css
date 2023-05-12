@@ -7,3 +7,15 @@
   min-height: 100dvh;
   height: 100dvh;
 }
+
+.small-container-example-wrapper {
+  height: 100%;
+  display: grid;
+  align-content: center;
+}
+
+.small-container-example {
+  height: 600px;
+  width: 70%;
+  margin: auto auto;
+}

@@ -1,6 +1,7 @@
-/* eslint-disable no-console */
+/* eslint-disable no-console, react/jsx-props-no-spreading */
+import React from 'react';
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
-import CioQuiz from '../../../components/CioQuiz';
+import CioQuiz, { IQuizProps } from '../../../components/CioQuiz';
 import { argTypes } from '../argTypes';
 import { stringifyWithDefaults } from '../../../utils';
 import { ComponentTemplate, addComponentStoryDescription } from '.';
@@ -83,3 +84,15 @@ const cioJsClient = new ConstructorIOClient({ apiKey: '${apiKey}' });
 const args = ${stringifyWithDefaults(ProvideCIOClientInstance.args)};`,
   cioJsClientDescription
 );
+
+function RenderInASmallContainerTemplate(args: IQuizProps) {
+  return (
+    <div className='small-container-example-wrapper'>
+      <div className='small-container-example'>
+        <CioQuiz {...args} />
+      </div>
+    </div>
+  );
+}
+export const RenderInASmallContainer = RenderInASmallContainerTemplate.bind({});
+RenderInASmallContainer.args = { apiKey, quizId, resultsPageOptions };
