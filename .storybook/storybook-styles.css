@@ -12,6 +12,7 @@
   height: 100%;
   display: grid;
   align-content: center;
+  background-color: #F8F8F8;
 }
 
 .small-container-example {

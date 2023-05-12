@@ -9,6 +9,7 @@ import {
   basicDescription,
   componentDescription,
   cioJsClientDescription,
+  smallContainerDescription,
   apiKey,
   quizId,
 } from '../../../constants';
@@ -51,6 +52,26 @@ addComponentStoryDescription(
   basicDescription
 );
 
+function RenderInASmallContainerTemplate(args: IQuizProps) {
+  return (
+    <div className='small-container-example-wrapper'>
+      <div className='small-container-example'>
+        <CioQuiz {...args} />
+      </div>
+    </div>
+  );
+}
+export const RenderInASmallContainer = RenderInASmallContainerTemplate.bind({});
+RenderInASmallContainer.args = { apiKey, quizId, resultsPageOptions };
+addComponentStoryDescription(
+  RenderInASmallContainer,
+  `
+import '@constructor-io/constructorio-ui-quizzes/styles.css';
+
+const args = ${stringifyWithDefaults(BasicUsage.args)}`,
+  smallContainerDescription
+);
+
 const cioJsClient = new ConstructorIOClient({ apiKey });
 
 // The following block is to remove unrelated modules from Storybook's "Controls" panel
@@ -84,15 +105,3 @@ const cioJsClient = new ConstructorIOClient({ apiKey: '${apiKey}' });
 const args = ${stringifyWithDefaults(ProvideCIOClientInstance.args)};`,
   cioJsClientDescription
 );
-
-function RenderInASmallContainerTemplate(args: IQuizProps) {
-  return (
-    <div className='small-container-example-wrapper'>
-      <div className='small-container-example'>
-        <CioQuiz {...args} />
-      </div>
-    </div>
-  );
-}
-export const RenderInASmallContainer = RenderInASmallContainerTemplate.bind({});
-RenderInASmallContainer.args = { apiKey, quizId, resultsPageOptions };
