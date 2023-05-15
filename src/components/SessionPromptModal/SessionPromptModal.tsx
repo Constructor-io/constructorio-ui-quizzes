@@ -17,7 +17,8 @@ export default function SessionPromptModal({
       <div className='cio-session-prompt-modal'>
         <div className='cio-session-prompt-content'>
           <div>Do you want to continue where you left off?</div>
-          <div className='cio-session-prompt-button-container'>
+          <div className='cio-session-prompt-controls-container'>
+            <CTAButton ctaText='No' type='button' onClick={() => setShowSessionPrompt(false)} />
             <CTAButton
               type='button'
               ctaText='Yes'
@@ -26,7 +27,6 @@ export default function SessionPromptModal({
                 setShowSessionPrompt(false);
               }}
             />
-            <CTAButton ctaText='No' type='button' onClick={() => setShowSessionPrompt(false)} />
           </div>
         </div>
       </div>

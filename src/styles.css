@@ -91,7 +91,7 @@
   background: #ffffff;
 }
 
-.cio-session-prompt-button-container {
+.cio-session-prompt-controls-container {
   display: flex;
   justify-content: space-between;
 }
@@ -99,6 +99,11 @@
 .cio-session-prompt-content .cio-button-container {
   margin: 0px;
   padding: 0px;
+}
+
+.cio-session-prompt-controls-container .cio-button-container:nth-child(1) .cio-question-cta-button {
+  color: var(--primary-color);
+  background-color: #ffffff;
 }
 
 /* Content */
