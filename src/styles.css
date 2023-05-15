@@ -469,7 +469,7 @@
 /* Media Queries */
 
 /* Small Tablet */
-@container (min-width: 640px) {
+@container quiz (min-width: 640px) {
   .cio-container {
     padding-bottom: 0;
   }
@@ -530,7 +530,7 @@
 }
 
 /* Big Tablet */
-@container (min-width: 768px) {
+@container quiz (min-width: 768px) {
   /* Container */
   .cio-container {
     align-items: center;
@@ -619,7 +619,7 @@
 }
 
 /* Desktop */
-@container (min-width: 1280px) {
+@container quiz (min-width: 1280px) {
   /* Container */
   .cio-cover-question-container--with-image {
     padding: 0;
