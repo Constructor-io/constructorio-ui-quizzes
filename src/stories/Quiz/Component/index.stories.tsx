@@ -26,11 +26,15 @@ export default {
 };
 
 const resultsPageOptions = {
-  clickItemCallback: (item) => {
-    console.log('Click item');
-    console.dir(item);
+  onQuizResultClick: (result, position) => {
+    console.log('Click result');
+    console.dir(result, position);
   },
-  addToCartCallback: (item) => {
+  onQuizResultsLoaded: (results) => {
+    console.log('Loaded results');
+    console.dir(results);
+  },
+  onAddToCartClick: (item) => {
     console.log('Add to cart');
     console.dir(item);
   },
@@ -59,8 +63,17 @@ delete cioJsClient.browse;
 // @ts-ignore
 delete cioJsClient.recommendations;
 
+const cioClientStoryResultsPageOptions = {
+  onAddToCartClick: resultsPageOptions.onAddToCartClick,
+  resultCardRegularPriceKey: resultsPageOptions.resultCardRegularPriceKey,
+};
+
 export const ProvideCIOClientInstance = ComponentTemplate.bind({});
-ProvideCIOClientInstance.args = { quizId, resultsPageOptions, cioJsClient };
+ProvideCIOClientInstance.args = {
+  quizId,
+  resultsPageOptions: cioClientStoryResultsPageOptions,
+  cioJsClient,
+};
 addComponentStoryDescription(
   ProvideCIOClientInstance,
   `

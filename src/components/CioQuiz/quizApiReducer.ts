@@ -40,7 +40,8 @@ export default function apiReducer(state: QuizAPIReducerState, action: ActionQui
         }),
       };
     case QuizAPIActionTypes.SET_QUIZ_RESULTS: {
-      const filterExpression = state?.quizResults?.request?.collection_filter_expression || null;
+      const filterExpression =
+        action.payload?.quizResults?.request?.collection_filter_expression || null;
       const quizResultsFilters = [...new Set(getFilterValuesFromExpression(filterExpression))];
       return {
         ...state,
