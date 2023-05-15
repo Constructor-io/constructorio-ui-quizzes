@@ -470,12 +470,17 @@
 
 /* Small Tablet */
 @container (min-width: 640px) {
+  .cio-container {
+    padding-bottom: 0;
+  }
+
   /* Container */
   .cio-container--with-image {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 0;
+    padding-bottom: 0;
   }
 
   /* Image */
@@ -490,6 +495,7 @@
   .cio-cover-question-container--with-image {
     justify-content: center;
     margin-bottom: 0;
+    padding-bottom: 0;
   }
 
   /* Select Component */
@@ -531,7 +537,7 @@
     margin-top: 0;
   }
   .cio-container--with-image {
-    padding: 6rem 2rem;
+    padding: 6% 2%;
     align-items: center;
     flex-direction: row;
   }
@@ -615,9 +621,6 @@
 /* Desktop */
 @container (min-width: 1280px) {
   /* Container */
-  .cio-container--with-image {
-    padding: 6rem 2rem;
-  }
   .cio-cover-question-container--with-image {
     padding: 0;
   }
