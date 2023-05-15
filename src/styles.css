@@ -93,6 +93,7 @@
   padding: 2rem;
   border-radius: 8px;
   background: #ffffff;
+  line-height: 1.5;
 }
 
 .cio-session-prompt-controls-container {
