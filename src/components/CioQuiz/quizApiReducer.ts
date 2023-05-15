@@ -5,8 +5,6 @@ import { QuizAPIActionTypes, ActionQuizAPI } from './actions';
 
 export type QuizAPIReducerState = {
   quizRequestState: RequestStates;
-  quizVersionId?: string;
-  quizSessionId?: string;
   quizFirstQuestion?: NextQuestionResponse;
   quizCurrentQuestion?: NextQuestionResponse;
   quizResults?: QuizResultsResponse;
@@ -34,8 +32,6 @@ export default function apiReducer(state: QuizAPIReducerState, action: ActionQui
       return {
         ...state,
         quizRequestState: RequestStates.Success,
-        quizVersionId: action.payload?.quizVersionId,
-        quizSessionId: action.payload?.quizSessionId,
         quizCurrentQuestion: action.payload?.quizCurrentQuestion,
         quizResults: undefined,
         // If no current question set first question value

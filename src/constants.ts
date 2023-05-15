@@ -2,6 +2,9 @@
 export const apiKey = 'key_wJSdZSiesX5hiVLt';
 export const quizId = 'coffee-quiz';
 
+// Session Storage default key
+export const quizSessionStateKey = 'constructorIOQuizState';
+
 /// //////////////////////////////
 // Storybook Folder Descriptions
 /// //////////////////////////////

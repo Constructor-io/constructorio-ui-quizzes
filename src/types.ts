@@ -75,6 +75,9 @@ export namespace QuizEventsReturn {
     result: QuizResultDataPartial,
     price?: number
   ) => void;
+  export type HydrateQuiz = () => void;
+  export type HasStoredState = () => boolean;
+  export type ResetStoredState = () => void;
 }
 
 export interface QuizEventsReturn {
@@ -83,6 +86,9 @@ export interface QuizEventsReturn {
   resetQuiz: QuizEventsReturn.ResetQuiz;
   resultClick: QuizEventsReturn.ResultClick;
   addToCart: QuizEventsReturn.AddToCart;
+  hydrateQuiz: QuizEventsReturn.HydrateQuiz;
+  hasStoredState: QuizEventsReturn.HasStoredState;
+  resetStoredState: QuizEventsReturn.ResetStoredState;
 }
 
 export interface UseQuizReturn {
