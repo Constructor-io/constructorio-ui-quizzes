@@ -10,7 +10,6 @@ export enum QuestionTypes {
   Back = 'back',
   Reset = 'reset',
   Hydrate = 'hydrate',
-  UpdateClientAndSession = 'updateClientAndSession',
 }
 
 export interface QuestionAnswer<Value> {
@@ -22,7 +21,6 @@ export interface QuestionAnswer<Value> {
 export type SelectQuestionPayload = QuestionAnswer<string[]>;
 export type OpenTextQuestionPayload = QuestionAnswer<string>;
 export type CoverQuestionPayload = { isLastQuestion?: boolean };
-export type UpdateClientAndSessionPayload = { quizVersionId?: string; quizSessionId?: string };
 
 interface Action<Type, Payload = {}> {
   type: Type;
@@ -39,8 +37,7 @@ export type ActionAnswerQuestion =
   | Action<QuestionTypes.Cover, CoverQuestionPayload>
   | Action<QuestionTypes.Back>
   | Action<QuestionTypes.Reset>
-  | Action<QuestionTypes.Hydrate, QuizLocalReducerState>
-  | Action<QuestionTypes.UpdateClientAndSession, UpdateClientAndSessionPayload>;
+  | Action<QuestionTypes.Hydrate, Partial<QuizLocalReducerState>>;
 
 // API actions
 export enum QuizAPIActionTypes {

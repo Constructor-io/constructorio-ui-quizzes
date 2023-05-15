@@ -78,11 +78,6 @@ export default function quizLocalReducer(
         ...state,
         ...action.payload,
       };
-    case QuestionTypes.UpdateClientAndSession:
-      return {
-        ...state,
-        ...action.payload,
-      };
     default:
       return state;
   }

@@ -66,7 +66,7 @@ const useFetchQuiz = (
             (!quizVersionId && questionResult.quiz_version_id)
           ) {
             dispatchLocalState({
-              type: QuestionTypes.UpdateClientAndSession,
+              type: QuestionTypes.Hydrate,
               payload: {
                 quizVersionId: questionResult?.quiz_version_id,
                 quizSessionId: questionResult?.quiz_session_id,
