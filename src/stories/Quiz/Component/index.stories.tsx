@@ -1,7 +1,7 @@
 /* eslint-disable no-console, react/jsx-props-no-spreading */
 import React from 'react';
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
-import CioQuiz, { IQuizProps } from '../../../components/CioQuiz';
+import CioQuiz from '../../../components/CioQuiz';
 import { argTypes } from '../argTypes';
 import { stringifyWithDefaults } from '../../../utils';
 import { ComponentTemplate, addComponentStoryDescription } from '.';
@@ -13,6 +13,7 @@ import {
   apiKey,
   quizId,
 } from '../../../constants';
+import { IQuizProps } from '../../../types';
 
 export default {
   title: 'Quiz/Component',
