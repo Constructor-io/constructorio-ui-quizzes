@@ -74,6 +74,8 @@ import '@constructor-io/constructorio-ui-quizzes/styles.css';
  - These starter styles are intended to be extended by layering in your own css rules
  - If you import the starter styles, `CioQuiz` component will take up the full width and height of its parent container
 
+> Please note the starter styles utilize @container queries and enable responsive styles for our quizzes based on the size of their container element. Since this feature is supported by modern browsers, polyfills have not been included in this library. However, if you want to support older browsers, you can add fallback styles or use a [polyfill](https://github.com/GoogleChromeLabs/container-query-polyfill).
+
 ## Troubleshooting
 
 ### Known Issues
