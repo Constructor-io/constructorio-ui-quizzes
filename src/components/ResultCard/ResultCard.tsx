@@ -22,7 +22,7 @@ export default function ResultCard(props: ResultCardProps) {
     }
   };
 
-  const keyDownHandler = (event: KeyboardEvent<HTMLAnchorElement>) => {
+  const keyDownHandler = (event: KeyboardEvent<HTMLElement>) => {
     if (event?.key === ' ' || event?.key === 'Enter') {
       if (resultClick) {
         resultClick(result, resultPosition);
@@ -46,41 +46,33 @@ export default function ResultCard(props: ResultCardProps) {
           )}
         </div>
       </div>
-      <ResultCtaButton item={result} price={salePrice || regularPrice} />
     </>
   );
 
+  const resultCardContentWithoutLink = () => (
+    <div
+      onClick={() => clickHandler()}
+      onKeyDown={(e) => keyDownHandler(e)}
+      role='button'
+      tabIndex={0}>
+      {resultCardContent()}
+    </div>
+  );
+
   const resultCardContentWithLink = () => (
-    <>
-      <a
-        onClick={() => clickHandler()}
-        onKeyDown={(e) => keyDownHandler(e)}
-        className='cio-result-card-image'
-        href={result.data?.url}>
-        <img src={result.data?.image_url} alt='product' />
-      </a>
-      <a
-        onClick={() => clickHandler()}
-        onKeyDown={(e) => keyDownHandler(e)}
-        className='cio-result-card-text'
-        href={result.data?.url}>
-        <p className='cio-result-card-title'>{result.value}</p>
-        <div className='cio-result-card-prices'>
-          {salePrice && <span className='cio-result-card-sale-price'>${salePrice}</span>}
-          {regularPrice && (
-            <span className={`cio-result-card-regular-price${salePrice ? '--strike-through' : ''}`}>
-              ${regularPrice}
-            </span>
-          )}
-        </div>
-      </a>
-      <ResultCtaButton item={result} price={salePrice || regularPrice} />
-    </>
+    <a
+      className='cio-result-card-content'
+      href={result.data?.url}
+      onClick={() => clickHandler()}
+      onKeyDown={(e) => keyDownHandler(e)}>
+      {resultCardContent()}
+    </a>
   );
 
   return (
     <div className='cio-result-card'>
-      {!customClickItemCallback ? resultCardContentWithLink() : resultCardContent()}
+      {!customClickItemCallback ? resultCardContentWithLink() : resultCardContentWithoutLink()}
+      <ResultCtaButton item={result} price={salePrice || regularPrice} />
     </div>
   );
 }
