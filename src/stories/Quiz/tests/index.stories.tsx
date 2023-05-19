@@ -4,7 +4,7 @@ import { within, userEvent } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 import CioQuiz from '../../../components/CioQuiz';
 import { argTypes } from '../argTypes';
-import { stringifyWithDefaults } from '../../../utils';
+import { isTrackingRequestSent, stringifyWithDefaults } from '../../../utils';
 import { ComponentTemplate, addComponentStoryDescription } from '../Component';
 import { basicDescription, apiKey, quizId } from '../../../constants';
 
@@ -140,6 +140,18 @@ e2eInteractionTest.play = async ({ canvasElement }) => {
   expect(await canvas.findByText('Here are your results')).toBeInTheDocument();
   expect(await canvas.findByText('Because you answered')).toBeInTheDocument();
   expect(document.querySelectorAll('.cio-results-filter-option')?.length).toBeGreaterThan(0);
+  const isQuizResultsTrackingRequestSent = isTrackingRequestSent('/quiz_result_load');
+  expect(isQuizResultsTrackingRequestSent).toBeTruthy();
+
+  // Result Card
+  const resultCard = document.querySelector('.cio-result-card');
+  const addToCardButton = document.querySelector('.cio-result-card-cta-button');
+  await userEvent.click(resultCard);
+  const isResultClickTrackingRequestSent = isTrackingRequestSent('/quiz_result_click');
+  expect(isResultClickTrackingRequestSent).toBeTruthy();
+  await userEvent.click(addToCardButton);
+  const isAddToCartTrackingRequestSent = isTrackingRequestSent('/quiz_conversion');
+  expect(isAddToCartTrackingRequestSent).toBeTruthy();
 
   // Reset button test
   await userEvent.click(await canvas.findByText('Redo Quiz'));

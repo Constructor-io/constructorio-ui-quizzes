@@ -1,6 +1,6 @@
 import { Question } from '@constructor-io/constructorio-client-javascript/lib/types';
-import { QuestionTypes } from '../../../../components/CioQuiz/actions';
-import { QuizContextValue } from '../../../../components/CioQuiz/context';
+import { QuestionTypes } from '../../../components/CioQuiz/actions';
+import { QuizContextValue } from '../../../components/CioQuiz/context';
 
 export const getMockQuestion = (type: QuestionTypes) => ({
   id: 1,
@@ -60,7 +60,7 @@ export const questionOptions = [
   },
 ];
 
-export const getMockState = (question: Question): any => ({
+export const getMockState = (question?: Question): any => ({
   answers: {
     inputs: { 1: '' }, // Key is the question Id and value is the answer input
     isLastAnswer: false,
@@ -77,9 +77,30 @@ export const getMockState = (question: Question): any => ({
       response: {
         results: [
           {
-            value: 'result',
+            value: 'This is a result card item',
             data: {
               id: '0',
+              price: 100,
+              image_url:
+                'https://demo.constructor.io/sandbox_files/farmstandquizassets/HiThereNameInput.png',
+            },
+          },
+          {
+            value: 'This is a result card item',
+            data: {
+              id: '1',
+              price: 200,
+              salePrice: 150,
+              image_url:
+                'https://demo.constructor.io/sandbox_files/farmstandquizassets/HiThereNameInput.png',
+            },
+          },
+          {
+            value: 'This is a result card item',
+            data: {
+              id: '2',
+              price: 300,
+              salePrice: 250,
               image_url:
                 'https://demo.constructor.io/sandbox_files/farmstandquizassets/HiThereNameInput.png',
             },
@@ -87,10 +108,11 @@ export const getMockState = (question: Question): any => ({
         ],
       },
     },
+    resultsFilters: ['Chocolate', 'Medium'],
   },
 });
 
-export const getMockContextValue = (question: Question): QuizContextValue => ({
+export const getMockContextValue = (question?: Question): QuizContextValue => ({
   state: getMockState(question),
   previousQuestion: () => {},
   nextQuestion: () => {},

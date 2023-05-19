@@ -11,7 +11,7 @@ import {
   getMockQuestionWithImage,
   questionOptionsWithImages,
   questionOptions,
-} from './mocks';
+} from '../../tests/mocks';
 import QuestionTypeDecorator from './QuestionTypeDecorator';
 
 const singleSelectQuestionWithImages = {

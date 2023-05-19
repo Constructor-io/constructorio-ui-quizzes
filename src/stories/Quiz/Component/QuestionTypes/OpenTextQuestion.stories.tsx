@@ -5,7 +5,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { userEvent, within } from '@storybook/testing-library';
 import OpenTextTypeQuestion from '../../../../components/OpenTextTypeQuestion/OpenTextTypeQuestion';
-import { getMockQuestionWithImage, getMockQuestion } from './mocks';
+import { getMockQuestionWithImage, getMockQuestion } from '../../tests/mocks';
 import QuestionTypeDecorator from './QuestionTypeDecorator';
 import { QuestionTypes } from '../../../../components/CioQuiz/actions';
 
