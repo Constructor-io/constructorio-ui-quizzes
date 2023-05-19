@@ -6,9 +6,9 @@ import quizLocalReducer, {
 } from '../components/CioQuiz/quizLocalReducer';
 import { quizSessionStateKey } from '../constants';
 
-const useQuizLocalState = () => {
+const useQuizLocalState = (sessionStateKey?: string) => {
   const [quizLocalState, dispatch] = useReducer(quizLocalReducer, initialState);
-  const [quizStateKey, setQuizStateKey] = useState(quizSessionStateKey);
+  const quizStateKey = sessionStateKey || quizSessionStateKey;
 
   const getStateFromSessionStorage = (): QuizLocalReducerState | null => {
     const state = window?.sessionStorage?.getItem(quizStateKey);

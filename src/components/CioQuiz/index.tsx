@@ -20,16 +20,16 @@ export default function CioQuiz(props: IQuizProps) {
       resultClick,
       hydrateQuiz,
       hasStoredState,
+      resetStoredState,
     },
   } = useQuiz(props);
   const [showSessionPrompt, setShowSessionPrompt] = useState(false);
+  const { resultsPageOptions, sessionStateOptions } = props;
 
   useEffect(() => {
-    setShowSessionPrompt(hasStoredState());
+    setShowSessionPrompt(sessionStateOptions?.showSessionModal || hasStoredState());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const { resultsPageOptions } = props;
 
   const contextValue: QuizContextValue = {
     cioClient,
@@ -54,6 +54,7 @@ export default function CioQuiz(props: IQuizProps) {
     return (
       <div className='cio-quiz'>
         <SessionPromptModal
+          resetStoredState={resetStoredState}
           continueSession={hydrateQuiz}
           showSessionPrompt={showSessionPrompt}
           setShowSessionPrompt={setShowSessionPrompt}

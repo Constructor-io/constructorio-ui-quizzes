@@ -5,7 +5,14 @@ import useQuizApiState from './useQuizApiState';
 import useQuizEvents from './useQuizEvents';
 import useQuizLocalState from './useQuizLocalState';
 
-const useQuiz: UseQuiz = ({ quizId, apiKey, cioJsClient, quizVersionId, resultsPageOptions }) => {
+const useQuiz: UseQuiz = ({
+  quizId,
+  apiKey,
+  cioJsClient,
+  quizVersionId,
+  resultsPageOptions,
+  sessionStateOptions,
+}) => {
   // Log console errors for required parameters quizId and resultsPageOptions
   useConsoleErrors(quizId, resultsPageOptions);
 
@@ -17,7 +24,7 @@ const useQuiz: UseQuiz = ({ quizId, apiKey, cioJsClient, quizVersionId, resultsP
     hydrateQuizLocalState,
     hasQuizStoredState,
     resetQuizStoredState,
-  } = useQuizLocalState();
+  } = useQuizLocalState(sessionStateOptions?.sessionStateKey);
 
   // Quiz Cio Client
   const cioClient = useCioClient({ apiKey, cioJsClient });

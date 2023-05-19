@@ -39,12 +39,18 @@ export interface ResultsPageOptions extends ResultsProps {
   onAddToCartClick: QuizResultsEventsProps.OnAddToCartClick;
 }
 
+export interface SessionStateOptions {
+  showSessionModal?: boolean;
+  sessionStateKey?: string;
+}
+
 export interface IQuizProps {
   apiKey?: string;
   cioJsClient?: ConstructorIOClient;
   quizId: string;
   quizVersionId?: string;
   resultsPageOptions: ResultsPageOptions;
+  sessionStateOptions?: SessionStateOptions;
 }
 
 // QUIZ RETURN VALUES
