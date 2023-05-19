@@ -27,7 +27,11 @@ export default function CioQuiz(props: IQuizProps) {
   const { resultsPageOptions, sessionStateOptions } = props;
 
   useEffect(() => {
-    setShowSessionPrompt(sessionStateOptions?.showSessionModal || hasStoredState());
+    if (sessionStateOptions?.showSessionModal !== undefined) {
+      setShowSessionPrompt(sessionStateOptions?.showSessionModal && hasStoredState());
+    } else {
+      setShowSessionPrompt(hasStoredState());
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
