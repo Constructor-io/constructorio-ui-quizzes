@@ -16,7 +16,7 @@ import {
 import { IQuizProps } from '../../../types';
 
 export default {
-  title: 'Quiz/Component',
+  title: 'Quiz/Full Quiz',
   component: CioQuiz,
   argTypes,
   parameters: {

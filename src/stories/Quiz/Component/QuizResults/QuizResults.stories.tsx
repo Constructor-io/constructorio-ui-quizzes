@@ -7,7 +7,7 @@ import ResultContainer from '../../../../components/ResultContainer/ResultContai
 import QuizResultsDecorator from './QuizResultsDecorator';
 
 const meta: Meta<typeof ResultContainer> = {
-  title: 'Quiz/QuizResults',
+  title: 'Quiz/Results/QuizResultsPage',
   component: ResultContainer,
   argTypes: {},
 };

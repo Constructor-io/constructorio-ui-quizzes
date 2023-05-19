@@ -9,7 +9,7 @@ import { ComponentTemplate, addComponentStoryDescription } from '../Component';
 import { basicDescription, apiKey, quizId } from '../../../constants';
 
 export default {
-  title: 'Quiz/Interaction Tests',
+  title: 'Quiz/Full Quiz e2e tests',
   component: CioQuiz,
   argTypes,
   parameters: {

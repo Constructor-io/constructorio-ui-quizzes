@@ -17,7 +17,7 @@ const product = {
 };
 
 const meta: Meta<typeof ResultCard> = {
-  title: 'Quiz/ResultCard',
+  title: 'Quiz/Results/ResultCard',
   component: ResultCard,
   argTypes: {},
 };
