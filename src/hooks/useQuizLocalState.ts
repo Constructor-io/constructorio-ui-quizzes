@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from 'react';
+import { useEffect, useReducer } from 'react';
 import { QuestionTypes } from '../components/CioQuiz/actions';
 import quizLocalReducer, {
   QuizLocalReducerState,

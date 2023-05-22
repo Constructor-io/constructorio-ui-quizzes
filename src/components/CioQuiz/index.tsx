@@ -27,6 +27,7 @@ export default function CioQuiz(props: IQuizProps) {
   const { resultsPageOptions, sessionStateOptions } = props;
 
   useEffect(() => {
+    // Respect showSessionModal if defined, else default to true.
     if (sessionStateOptions?.showSessionModal !== undefined) {
       setShowSessionPrompt(sessionStateOptions?.showSessionModal && hasStoredState());
     } else {
