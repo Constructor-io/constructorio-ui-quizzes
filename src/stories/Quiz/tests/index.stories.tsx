@@ -142,6 +142,6 @@ e2eInteractionTest.play = async ({ canvasElement }) => {
   expect(document.querySelectorAll('.cio-results-filter-option')?.length).toBeGreaterThan(0);
 
   // Reset button test
-  // await userEvent.click(await canvas.findByText('Redo Quiz'));
-  // expect(await canvas.findByText('Oh, hi there!')).toBeInTheDocument();
+  await userEvent.click(await canvas.findByText('Redo Quiz'));
+  expect(await canvas.findByText('Oh, hi there!')).toBeInTheDocument();
 };

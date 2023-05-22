@@ -61,7 +61,7 @@ export default function ResultCard(props: ResultCardProps) {
 
   const resultCardContentWithLink = () => (
     <a
-      className='cio-result-card-content'
+      className='cio-result-card-anchor'
       href={result.data?.url}
       onClick={() => clickHandler()}
       onKeyDown={(e) => keyDownHandler(e)}>

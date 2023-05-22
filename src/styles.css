@@ -115,6 +115,7 @@
   outline: none;
   font-size: 1rem;
 }
+.cio-question-input-text:focus,
 .cio-question-input-text:active {
   border-bottom: 1px solid var(--blue-denim-500);
 }
@@ -382,9 +383,6 @@
   display: flex;
   flex-direction: column;
 }
-.cio-result-card-content {
-  text-decoration: none;
-}
 .cio-result-card-anchor {
   text-decoration: none;
   background-color: transparent;
@@ -418,10 +416,6 @@
   margin-bottom: 1rem;
   font-weight: 700;
 }
-a .cio-result-card-title:hover {
-  color: var(--blue-denim-500);
-  text-decoration: underline;
-}
 .cio-result-card-prices {
   margin-bottom: 1rem;
   font-weight: 700;
@@ -430,16 +424,8 @@ a .cio-result-card-title:hover {
   color: #bf1728;
   margin-right: 0.75rem;
 }
-a .cio-result-card-sale-price:hover {
-  color: var(--blue-denim-500);
-  text-decoration: underline;
-}
 .cio-result-card-regular-price {
   color: var(--gray-dust-900);
-}
-a .cio-result-card-regular-price:hover {
-  color: var(--blue-denim-500);
-  text-decoration: underline;
 }
 .cio-result-card-regular-price--strike-through {
   text-decoration: line-through;
