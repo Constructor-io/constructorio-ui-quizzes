@@ -51,6 +51,7 @@ export default function ResultCard(props: ResultCardProps) {
 
   const resultCardContentWithoutLink = () => (
     <div
+      className='cio-result-card-container'
       onClick={() => clickHandler()}
       onKeyDown={(e) => keyDownHandler(e)}
       role='button'

@@ -383,7 +383,8 @@
   display: flex;
   flex-direction: column;
 }
-.cio-result-card-anchor {
+.cio-result-card-anchor,
+.cio-result-card-container {
   text-decoration: none;
   background-color: transparent;
   color: inherit;
