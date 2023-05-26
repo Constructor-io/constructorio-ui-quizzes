@@ -6,6 +6,7 @@ function BackButton(props: React.ButtonHTMLAttributes<HTMLButtonElement>) {
 
   return (
     <button
+      title='Quiz Back Button'
       type='button'
       className={`cio-question-back-button ${disabled ? 'disabled' : ''}`}
       // eslint-disable-next-line react/jsx-props-no-spreading
