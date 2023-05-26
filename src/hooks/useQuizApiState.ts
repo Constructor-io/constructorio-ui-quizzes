@@ -1,7 +1,11 @@
 /* eslint-disable max-params */
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
 import { useEffect, useReducer } from 'react';
-import { QuizAPIActionTypes } from '../components/CioQuiz/actions';
+import {
+  ActionAnswerQuestion,
+  QuestionTypes,
+  QuizAPIActionTypes,
+} from '../components/CioQuiz/actions';
 import apiReducer, { initialState } from '../components/CioQuiz/quizApiReducer';
 import { QuizLocalReducerState } from '../components/CioQuiz/quizLocalReducer';
 import { nextQuestion, getQuizResults } from '../services';
@@ -10,6 +14,7 @@ import { ResultsPageOptions } from '../types';
 const useFetchQuiz = (
   quizId: string,
   quizLocalState: QuizLocalReducerState,
+  dispatchLocalState: React.Dispatch<ActionAnswerQuestion>,
   resultsPageOptions: ResultsPageOptions,
   quizVersionIdProp: string | undefined,
   cioClient: ConstructorIOClient
@@ -29,8 +34,8 @@ const useFetchQuiz = (
           const quizResults = await getQuizResults(cioClient, quizId, {
             answers: quizLocalState.answers,
             resultsPerPage: resultsPageOptions?.numResultsToDisplay,
-            quizVersionId: quizApiState.quizVersionId,
-            quizSessionId: quizApiState.quizSessionId,
+            quizVersionId: quizLocalState.quizVersionId,
+            quizSessionId: quizLocalState.quizSessionId,
           });
           // Set quiz results state
           dispatch({
@@ -46,8 +51,8 @@ const useFetchQuiz = (
         }
       } else {
         try {
-          let quizVersionId = quizApiState.quizVersionId || quizVersionIdProp;
-          let { quizSessionId } = quizApiState;
+          const quizVersionId = quizLocalState.quizVersionId || quizVersionIdProp;
+          const { quizSessionId } = quizLocalState;
 
           const questionResult = await nextQuestion(cioClient, quizId, {
             answers: quizLocalState.answers,
@@ -55,19 +60,24 @@ const useFetchQuiz = (
             quizSessionId,
           });
 
-          if (!quizVersionId && questionResult?.quiz_version_id) {
-            quizVersionId = questionResult.quiz_version_id;
+          // Update quizSessionId, quizVersionId
+          if (
+            (!quizSessionId && questionResult?.quiz_session_id) ||
+            (!quizVersionId && questionResult.quiz_version_id)
+          ) {
+            dispatchLocalState({
+              type: QuestionTypes.Hydrate,
+              payload: {
+                quizVersionId: questionResult?.quiz_version_id,
+                quizSessionId: questionResult?.quiz_session_id,
+              },
+            });
           }
 
-          if (!quizSessionId && questionResult?.quiz_session_id) {
-            quizSessionId = questionResult.quiz_session_id;
-          }
           // Set current question state
           dispatch({
             type: QuizAPIActionTypes.SET_CURRENT_QUESTION,
             payload: {
-              quizSessionId,
-              quizVersionId,
               quizCurrentQuestion: questionResult,
             },
           });
@@ -82,7 +92,7 @@ const useFetchQuiz = (
   }, [
     cioClient,
     quizId,
-    quizLocalState,
+    quizLocalState.answers,
     quizLocalState.isLastAnswer,
     resultsPageOptions?.numResultsToDisplay,
   ]);

@@ -1,4 +1,5 @@
 import { NextQuestionResponse, QuizResultsResponse } from '../../types';
+import type { QuizLocalReducerState } from './quizLocalReducer';
 
 // Local Actions
 export enum QuestionTypes {
@@ -8,6 +9,7 @@ export enum QuestionTypes {
   MultipleSelect = 'multiple',
   Back = 'back',
   Reset = 'reset',
+  Hydrate = 'hydrate',
 }
 
 export interface QuestionAnswer<Value> {
@@ -34,7 +36,8 @@ export type ActionAnswerQuestion =
   | ActionAnswerInputQuestion
   | Action<QuestionTypes.Cover, CoverQuestionPayload>
   | Action<QuestionTypes.Back>
-  | Action<QuestionTypes.Reset>;
+  | Action<QuestionTypes.Reset>
+  | Action<QuestionTypes.Hydrate, Partial<QuizLocalReducerState>>;
 
 // API actions
 export enum QuizAPIActionTypes {
