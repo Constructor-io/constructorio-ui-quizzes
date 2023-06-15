@@ -33,6 +33,7 @@ export const cioJsClientDescription = `If you are already using an instance of t
 
 > Note: \`cioJsClient\` refers to an instance of the [constructorio-client-javascript](https://www.npmjs.com/package/@constructor-io/constructorio-client-javascript)`;
 export const smallContainerDescription = `If you are using the provided styles, CioQuiz component will respect the height and width of its parent container and use responsive styles based on the parent container's dimensions`;
+export const changePrimaryColorDescription = `If you would like to use a different primary color, pass a \`primaryColor\` string in RGB format ('R, G, B'). Accent colors for borders and different states (hover, focus, active) will be calculated automatically based on the primary color you provided`;
 
 export enum RequestStates {
   Stale,

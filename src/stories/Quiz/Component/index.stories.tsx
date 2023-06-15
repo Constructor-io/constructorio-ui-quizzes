@@ -10,6 +10,7 @@ import {
   componentDescription,
   cioJsClientDescription,
   smallContainerDescription,
+  changePrimaryColorDescription,
   apiKey,
   quizId,
 } from '../../../constants';
@@ -71,6 +72,14 @@ import '@constructor-io/constructorio-ui-quizzes/styles.css';
 
 const args = ${stringifyWithDefaults(BasicUsage.args)}`,
   smallContainerDescription
+);
+
+export const ChangePrimaryColor = ComponentTemplate.bind({});
+ChangePrimaryColor.args = { apiKey, quizId, resultsPageOptions, primaryColor: '255, 82, 48' };
+addComponentStoryDescription(
+  ChangePrimaryColor,
+  `const args = ${stringifyWithDefaults(ChangePrimaryColor.args)}`,
+  changePrimaryColorDescription
 );
 
 const cioJsClient = new ConstructorIOClient({ apiKey });
