@@ -1,11 +1,16 @@
 import { useMemo } from 'react';
+import { PrimaryColorStyles } from '../types';
 import { rgbToHsl } from '../utils';
 
-type UsePrimaryColorStyles = (primaryColor?: string) => any;
+type UsePrimaryColorStyles = (primaryColor?: string) => PrimaryColorStyles;
 
 const usePrimaryColorStyles: UsePrimaryColorStyles = (primaryColor) => {
   const memoizedPrimaryColorStyles = useMemo(() => {
-    let primaryColorStyles = {};
+    let primaryColorStyles = {
+      '--primary-color-h': '227',
+      '--primary-color-s': '70%',
+      '--primary-color-l': '46%',
+    };
 
     if (primaryColor) {
       // Extract r, g, b values from the string. (r), (g), (b)

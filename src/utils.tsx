@@ -6,7 +6,7 @@ import {
   FilterExpressionValue,
 } from '@constructor-io/constructorio-client-javascript/lib/types';
 import { QuestionTypes } from './components/CioQuiz/actions';
-import { QuestionImages } from './types';
+import { PrimaryColorStyles, QuestionImages } from './types';
 
 export const renderImages = (images: Partial<QuestionImages>, cssClasses?: string) => {
   const {
@@ -188,4 +188,12 @@ export function rgbToHsl(r: number, g: number, b: number) {
   const finalL = Math.round(l * 100);
 
   return [finalH, finalS, finalL];
+}
+
+export function convertPrimaryColorsToString(primaryColorStyles: PrimaryColorStyles) {
+  return `{
+    --primary-color-h: ${primaryColorStyles['--primary-color-h']}; 
+    --primary-color-s: ${primaryColorStyles['--primary-color-s']}; 
+    --primary-color-l: ${primaryColorStyles['--primary-color-l']}; 
+  }`;
 }
