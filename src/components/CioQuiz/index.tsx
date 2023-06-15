@@ -22,6 +22,7 @@ export default function CioQuiz(props: IQuizProps) {
       hasStoredState,
       resetStoredState,
     },
+    primaryColorStyles,
   } = useQuiz(props);
   const [showSessionPrompt, setShowSessionPrompt] = useState(false);
   const { resultsPageOptions, sessionStateOptions } = props;
@@ -57,7 +58,7 @@ export default function CioQuiz(props: IQuizProps) {
 
   if (state.quiz.requestState === RequestStates.Success) {
     return (
-      <div className='cio-quiz'>
+      <div className='cio-quiz' style={primaryColorStyles}>
         <SessionPromptModal
           resetStoredState={resetStoredState}
           continueSession={hydrateQuiz}

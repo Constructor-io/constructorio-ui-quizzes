@@ -1,4 +1,5 @@
 import { UseQuiz } from '../types';
+import { rgbToHsl } from '../utils';
 import useCioClient from './useCioClient';
 import useConsoleErrors from './useConsoleErrors';
 import useQuizApiState from './useQuizApiState';
@@ -12,6 +13,7 @@ const useQuiz: UseQuiz = ({
   quizVersionId,
   resultsPageOptions,
   sessionStateOptions,
+  primaryColor,
 }) => {
   // Log console errors for required parameters quizId and resultsPageOptions
   useConsoleErrors(quizId, resultsPageOptions);
@@ -52,6 +54,23 @@ const useQuiz: UseQuiz = ({
     hasQuizStoredState,
   });
 
+  // Convert this to a hook, maybe?
+  let primaryColorStyles = {};
+  if (primaryColor) {
+    const rgbMatch = primaryColor.trim().match(/^\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})/);
+
+    if (rgbMatch && rgbMatch.length === 4) {
+      const [r, g, b] = rgbMatch.slice(1);
+      const [h, s, l] = rgbToHsl(Number(r), Number(g), Number(b));
+
+      primaryColorStyles = {
+        '--primary-color-h': `${h}`,
+        '--primary-color-s': `${s}%`,
+        '--primary-color-l': `${l}%`,
+      };
+    }
+  }
+
   return {
     cioClient,
     state: {
@@ -73,6 +92,7 @@ const useQuiz: UseQuiz = ({
     events: {
       ...quizEvents,
     },
+    primaryColorStyles,
   };
 };
 
