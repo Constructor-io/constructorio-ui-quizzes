@@ -67,8 +67,8 @@ function OpenTextQuestion(props: OpenTextQuestionProps) {
         className={`
           cio-container${hasImage ? '--with-image' : ''}
           cio-open-text-question-container${hasImage ? '--with-image' : ''}
-          cio-question-${question.key}
-        `}>
+        `}
+        data-question-key={question.key}>
         {hasImage ? renderImages(question.images, 'cio-question-image-container') : ''}
 
         <div className='cio-question-content'>
