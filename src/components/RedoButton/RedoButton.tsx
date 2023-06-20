@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import RedoSVG from './RedoSVG';
+import QuizContext from '../CioQuiz/context';
 
 interface RedoButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   redoText?: string;
@@ -7,17 +8,21 @@ interface RedoButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> 
 
 function RedoButton(props: RedoButtonProps) {
   const { redoText = 'Redo Quiz', disabled, ...rest } = props;
+  const { getResetQuizButtonProps } = useContext(QuizContext);
 
-  return (
-    <button
-      type='button'
-      className={`${disabled ? 'cio-question-redo-button disabled' : 'cio-question-redo-button'}`}
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      {...rest}>
-      <RedoSVG />
-      <span>{redoText}</span>
-    </button>
-  );
+  if (getResetQuizButtonProps) {
+    return (
+      // eslint-disable-next-line react/button-has-type
+      <button
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...rest}
+        {...getResetQuizButtonProps()}>
+        <RedoSVG />
+        <span>{redoText}</span>
+      </button>
+    );
+  }
+  return null;
 }
 
 export default RedoButton;

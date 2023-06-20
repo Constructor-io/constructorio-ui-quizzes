@@ -47,7 +47,8 @@
     "max-nested-callbacks": ["error", 5],
     "max-params": ["error", 4],
     "complexity": ["error", 20],
-    "@cspell/spellchecker": ["error"]
+    "@cspell/spellchecker": ["error"],
+    "react/jsx-props-no-spreading": "off"
   },
   "overrides": [
     {

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import QuizContext from '../CioQuiz/context';
 
 interface CTAButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   ctaText?: string;
@@ -6,16 +7,16 @@ interface CTAButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 function CTAButton(props: CTAButtonProps) {
   const { ctaText = 'Continue', disabled, className = 'cio-button-container', ...rest } = props;
+  const { getNextQuestionButtonProps } = useContext(QuizContext);
 
   return (
     <div className={`${className || ''}`}>
-      <button
-        type='button'
-        className={`${disabled ? 'cio-question-cta-button disabled' : 'cio-question-cta-button'}`}
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        {...rest}>
-        {ctaText || 'Continue'}
-      </button>
+      {getNextQuestionButtonProps && (
+        // eslint-disable-next-line react/button-has-type
+        <button {...rest} {...getNextQuestionButtonProps()}>
+          {ctaText || 'Continue'}
+        </button>
+      )}
     </div>
   );
 }

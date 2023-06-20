@@ -6,7 +6,7 @@ import { renderImages } from '../../utils';
 import ControlBar from '../ControlBar/ControlBar';
 
 export default function CoverTypeQuestion() {
-  const { state, previousQuestion, nextQuestion } = useContext(QuizContext);
+  const { state } = useContext(QuizContext);
   let question;
 
   if (state?.quiz.currentQuestion) {
@@ -14,12 +14,6 @@ export default function CoverTypeQuestion() {
   }
 
   const hasImage = question?.images?.primary_url;
-
-  const onNextClick = () => {
-    if (nextQuestion) {
-      nextQuestion();
-    }
-  };
 
   if (question) {
     return (
@@ -31,12 +25,7 @@ export default function CoverTypeQuestion() {
         <div className='cio-question-content'>
           <QuestionTitle title={question?.title} />
           <QuestionDescription description={question.description} />
-          <ControlBar
-            nextButtonHandler={onNextClick}
-            backButtonHandler={previousQuestion}
-            showBackButton={!state?.quiz.isFirstQuestion}
-            ctaButtonText={question?.cta_text}
-          />
+          <ControlBar ctaButtonText={question?.cta_text} />
         </div>
         {hasImage ? renderImages(question.images, 'cio-question-image-container') : ''}
       </div>

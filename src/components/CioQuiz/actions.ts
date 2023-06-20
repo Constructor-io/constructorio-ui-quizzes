@@ -1,4 +1,5 @@
-import { NextQuestionResponse, QuizResultsResponse } from '../../types';
+// eslint-disable-next-line import/no-cycle
+import { CurrentQuestion, NextQuestionResponse, QuizResultsResponse } from '../../types';
 import type { QuizLocalReducerState } from './quizLocalReducer';
 
 // Local Actions
@@ -7,6 +8,7 @@ export enum QuestionTypes {
   Cover = 'cover',
   SingleSelect = 'single',
   MultipleSelect = 'multiple',
+  Next = 'next',
   Back = 'back',
   Reset = 'reset',
   Hydrate = 'hydrate',
@@ -20,7 +22,7 @@ export interface QuestionAnswer<Value> {
 
 export type SelectQuestionPayload = QuestionAnswer<string[]>;
 export type OpenTextQuestionPayload = QuestionAnswer<string>;
-export type CoverQuestionPayload = { isLastQuestion?: boolean };
+export type CoverQuestionPayload = QuestionAnswer<string>;
 
 interface Action<Type, Payload = {}> {
   type: Type;
@@ -30,12 +32,13 @@ interface Action<Type, Payload = {}> {
 export type ActionAnswerInputQuestion =
   | Action<QuestionTypes.OpenText, OpenTextQuestionPayload>
   | Action<QuestionTypes.SingleSelect, SelectQuestionPayload>
-  | Action<QuestionTypes.MultipleSelect, SelectQuestionPayload>;
+  | Action<QuestionTypes.MultipleSelect, SelectQuestionPayload>
+  | Action<QuestionTypes.Cover, CoverQuestionPayload>;
 
 export type ActionAnswerQuestion =
   | ActionAnswerInputQuestion
-  | Action<QuestionTypes.Cover, CoverQuestionPayload>
-  | Action<QuestionTypes.Back>
+  | Action<QuestionTypes.Next, CurrentQuestion>
+  | Action<QuestionTypes.Back, CurrentQuestion>
   | Action<QuestionTypes.Reset>
   | Action<QuestionTypes.Hydrate, Partial<QuizLocalReducerState>>;
 

@@ -4,24 +4,19 @@ import QuizContext from '../CioQuiz/context';
 
 interface ResultCtaButtonProps {
   item: QuizResultDataPartial;
-  className?: string;
   price?: number;
 }
 
 export default function ResultCtaButton(props: ResultCtaButtonProps) {
-  const { item, className, price } = props;
-  const { addToCart } = useContext(QuizContext);
+  const { item, price } = props;
+  const { getAddToCartButtonProps } = useContext(QuizContext);
 
-  return (
-    <button
-      type='button'
-      className={`cio-result-card-cta-button ${className || ''}`}
-      onClick={(e) => {
-        if (addToCart) {
-          addToCart(e, item, price);
-        }
-      }}>
-      Add to Cart
-    </button>
-  );
+  if (getAddToCartButtonProps) {
+    return (
+      // eslint-disable-next-line react/button-has-type
+      <button {...getAddToCartButtonProps(item, price)}>Add to Cart</button>
+    );
+  }
+
+  return null;
 }

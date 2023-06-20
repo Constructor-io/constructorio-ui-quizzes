@@ -19,7 +19,7 @@ export const getCioClient = (apiKey?: string) => {
   return undefined;
 };
 
-export const nextQuestion = (
+export const getNextQuestion = (
   cioClient: ConstructorIOClient,
   quizId: string,
   parameters: QuizzesParameters

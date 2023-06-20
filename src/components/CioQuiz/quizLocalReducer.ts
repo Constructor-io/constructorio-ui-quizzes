@@ -1,21 +1,14 @@
-import {
-  ActionAnswerQuestion,
-  QuestionTypes,
-  OpenTextQuestionPayload,
-  SelectQuestionPayload,
-  ActionAnswerInputQuestion,
-} from './actions';
+/* eslint-disable no-restricted-syntax */
+import { AnswerInputState } from '../../types';
+import { ActionAnswerQuestion, QuestionTypes, ActionAnswerInputQuestion } from './actions';
 
 export type Answers = string[][];
 export type QuizLocalReducerState = {
   answers: Answers;
-  answerInputs: {};
+  answerInputs: AnswerInputState;
   isLastAnswer: boolean;
   quizVersionId?: string;
   quizSessionId?: string;
-};
-export type AnswerInputState = {
-  [key: string]: OpenTextQuestionPayload | SelectQuestionPayload;
 };
 
 export const initialState: QuizLocalReducerState = {
@@ -27,48 +20,85 @@ export const initialState: QuizLocalReducerState = {
 function answerInputReducer(state: AnswerInputState, action: ActionAnswerInputQuestion) {
   return {
     ...state,
-    [String(action.payload!.questionId)]: action.payload!.input,
+    [String(action.payload!.questionId)]: {
+      type: action.type,
+      value: action.payload!.input,
+      ignore: false,
+    },
   };
 }
 
 export default function quizLocalReducer(
   state: QuizLocalReducerState,
   action: ActionAnswerQuestion
-) {
+): QuizLocalReducerState {
   switch (action.type) {
     case QuestionTypes.OpenText:
       return {
         ...state,
-        answers: [...state.answers, ['true']],
         answerInputs: answerInputReducer(state.answerInputs, action),
         isLastAnswer: !!action.payload?.isLastQuestion,
       };
     case QuestionTypes.Cover:
       return {
         ...state,
-        answers: [...state.answers, ['seen']],
+        answerInputs: answerInputReducer(state.answerInputs, action),
         isLastAnswer: !!action.payload?.isLastQuestion,
       };
     case QuestionTypes.SingleSelect:
       return {
         ...state,
-        answers: [...state.answers, action.payload?.input!],
         answerInputs: answerInputReducer(state.answerInputs, action),
         isLastAnswer: !!action.payload?.isLastQuestion,
       };
     case QuestionTypes.MultipleSelect:
       return {
         ...state,
-        answers: [...state.answers, action.payload?.input!],
         answerInputs: answerInputReducer(state.answerInputs, action),
         isLastAnswer: !!action.payload?.isLastQuestion,
       };
-    case QuestionTypes.Back:
+    case QuestionTypes.Next: {
+      const answers: string[][] = [];
+      for (const input of Object.values(state.answerInputs)) {
+        if (!input.ignore) {
+          switch (input.type) {
+            case QuestionTypes.OpenText:
+              answers.push(['true']);
+              break;
+            case QuestionTypes.Cover:
+              answers.push(['seen']);
+              break;
+            case QuestionTypes.SingleSelect:
+              answers.push(input.value as string[]);
+              break;
+            case QuestionTypes.MultipleSelect:
+              answers.push(input.value as string[]);
+              break;
+            default:
+              answers.push([]);
+          }
+        }
+      }
+
       return {
         ...state,
+        answers,
+        isLastAnswer: false,
+      };
+    }
+
+    case QuestionTypes.Back: {
+      const questionToDeleteId = action.payload?.next_question.id!;
+      const newAnswerInputs = { ...state.answerInputs };
+      newAnswerInputs[questionToDeleteId].ignore = true;
+      return {
+        ...state,
+        answerInputs: { ...newAnswerInputs },
         answers: [...state.answers.slice(0, -1)],
         isLastAnswer: false,
       };
+    }
+
     case QuestionTypes.Reset:
       return {
         ...initialState,

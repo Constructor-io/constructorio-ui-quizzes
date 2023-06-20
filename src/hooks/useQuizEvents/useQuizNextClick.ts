@@ -1,58 +1,32 @@
 import { useCallback } from 'react';
 import { ActionAnswerQuestion, QuestionTypes } from '../../components/CioQuiz/actions';
 import { QuizAPIReducerState } from '../../components/CioQuiz/quizApiReducer';
+import { QuizLocalReducerState } from '../../components/CioQuiz/quizLocalReducer';
 import { QuizEventsReturn } from '../../types';
 
 const useQuizNextClick = (
   quizApiState: QuizAPIReducerState,
+  quizLocalState: QuizLocalReducerState,
   dispatchLocalState: React.Dispatch<ActionAnswerQuestion>
 ): QuizEventsReturn.NextQuestion => {
-  const quizNextHandler = useCallback(
-    (payload?: string | string[]) => {
-      const questionType = quizApiState.quizCurrentQuestion?.next_question.type;
-      const currentQuestion = quizApiState.quizCurrentQuestion;
-      switch (questionType) {
-        case QuestionTypes.Cover:
-          dispatchLocalState({
-            type: QuestionTypes.Cover,
-            payload: {
-              isLastQuestion: currentQuestion!.is_last_question,
-            },
-          });
-          break;
-        case QuestionTypes.OpenText:
-          dispatchLocalState({
-            type: QuestionTypes.OpenText,
-            payload: {
-              questionId: currentQuestion!.next_question.id,
-              input: payload as string,
-              isLastQuestion: currentQuestion!.is_last_question,
-            },
-          });
-          break;
-        case QuestionTypes.SingleSelect:
-        case QuestionTypes.MultipleSelect:
-          dispatchLocalState({
-            type:
-              currentQuestion!.next_question.type === QuestionTypes.SingleSelect
-                ? QuestionTypes.SingleSelect
-                : QuestionTypes.MultipleSelect,
-            payload: {
-              questionId: currentQuestion!.next_question.id,
-              input: payload as string[],
-              isLastQuestion: currentQuestion!.is_last_question,
-            },
-          });
-          break;
-
-        default:
-          break;
+  const quizNexClickHandler = useCallback(() => {
+    const currentQuestion = quizApiState.quizCurrentQuestion?.next_question;
+    const currentQuestionId = currentQuestion?.id;
+    if (dispatchLocalState && currentQuestionId) {
+      const currentAnswerInput = quizLocalState.answerInputs[currentQuestionId];
+      if (
+        (currentAnswerInput?.value && currentAnswerInput?.value?.length) ||
+        currentQuestion?.type === 'cover'
+      ) {
+        dispatchLocalState({
+          type: QuestionTypes.Next,
+          payload: quizApiState.quizCurrentQuestion,
+        });
       }
-    },
-    [quizApiState, dispatchLocalState]
-  );
+    }
+  }, [dispatchLocalState, quizApiState.quizCurrentQuestion, quizLocalState.answerInputs]);
 
-  return quizNextHandler;
+  return quizNexClickHandler;
 };
 
 export default useQuizNextClick;
