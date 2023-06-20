@@ -22,7 +22,8 @@ function OpenTextQuestion() {
         className={`
           cio-container${hasImage ? '--with-image' : ''}
           cio-open-text-question-container${hasImage ? '--with-image' : ''}
-        `}>
+        `}
+        data-question-key={question.key}>
         {hasImage ? renderImages(question.images, 'cio-question-image-container') : ''}
 
         <div className='cio-question-content'>

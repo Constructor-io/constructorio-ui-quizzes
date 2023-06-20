@@ -22,7 +22,7 @@ function SelectTypeQuestion() {
 
   if (question) {
     return (
-      <div className='cio-select-question-container'>
+      <div className='cio-select-question-container' data-question-key={question.key}>
         <div className='cio-select-question-text'>
           <QuestionTitle title={question.title} />
           {question?.description ? <QuestionDescription description={question.description} /> : ''}
