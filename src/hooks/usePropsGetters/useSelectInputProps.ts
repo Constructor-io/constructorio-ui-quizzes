@@ -1,8 +1,13 @@
 import { useState, useCallback, useEffect, KeyboardEvent } from 'react';
 import { QuestionTypes } from '../../components/CioQuiz/actions';
-import { AnswerInputState } from '../../components/CioQuiz/quizLocalReducer';
 import { Selected } from '../../components/SelectTypeQuestion/SelectTypeQuestion';
-import { GetSelectInputProps, Question, QuestionOption, QuizEventsReturn } from '../../types';
+import {
+  AnswerInputState,
+  GetSelectInputProps,
+  Question,
+  QuestionOption,
+  QuizEventsReturn,
+} from '../../types';
 
 export default function useSelectInputProps(
   quizAnswerChanged: QuizEventsReturn.QuizAnswerChanged,

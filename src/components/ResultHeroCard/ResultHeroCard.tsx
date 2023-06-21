@@ -42,7 +42,7 @@ export default function ResultHeroCard(props: ResultHeroCardProps) {
         <h2 className='cio-hero-card-item-name'>{heroItem?.value}</h2>
         <div className='cio-hero-card-item-price'>${heroItem?.data?.price}</div>
         <p className='cio-hero-card-item-description' />
-        <ResultCtaButton className='cio-hero-cta-btn' item={[heroItem]} />
+        <ResultCtaButton item={[heroItem]} />
       </div>
     </div>
   );

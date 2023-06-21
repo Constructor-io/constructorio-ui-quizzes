@@ -1,6 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
-import { AnswerInputState } from '../../components/CioQuiz/quizLocalReducer';
-import { GetOpenTextInputProps, Question, QuizEventsReturn } from '../../types';
+import { AnswerInputState, GetOpenTextInputProps, Question, QuizEventsReturn } from '../../types';
 
 export default function useOpenTextInputProps(
   setQuizAnswers: QuizEventsReturn.QuizAnswerChanged,

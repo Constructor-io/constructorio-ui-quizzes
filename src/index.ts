@@ -1,7 +1,7 @@
 import CioQuiz from './components/CioQuiz';
 
 // Hook
-export { default as useQuiz } from './hooks/useQuiz';
+export { default as useCioQuiz } from './hooks/useQuiz';
 
 // Questions Components
 export { default as QuizQuestions } from './components/QuizQuestions/index';
