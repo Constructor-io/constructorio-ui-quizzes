@@ -3,7 +3,7 @@
 import { QuestionOption } from '@constructor-io/constructorio-client-javascript/lib/types';
 import React from 'react';
 import RedoSVG from '../../../components/RedoButton/RedoSVG';
-import { useQuiz } from '../../../index';
+import { useCioQuiz } from '../../../index';
 import '../../../styles.css';
 import { getStoryParams } from '../../../utils';
 
@@ -19,7 +19,7 @@ export default function HooksTemplate(args) {
     getResetQuizButtonProps,
     getQuizResultButtonProps,
     getAddToCartButtonProps,
-  } = useQuiz(args);
+  } = useCioQuiz(args);
 
   if (state.quiz.requestState === 'SUCCESS') {
     const quizResults = state.quiz.results?.response?.results;
