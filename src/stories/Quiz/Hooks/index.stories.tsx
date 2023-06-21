@@ -1,26 +1,33 @@
-import type { Meta, StoryObj } from '@storybook/react';
-
-import MyQuiz from './index';
+import MyQuiz, { addHookStoryCode } from './index';
 import '../../../styles.css';
+import { basicDescription, apiKey, quizId, hookDescription } from '../../../constants';
+import { stringifyWithDefaults } from '../../../utils';
+import { argTypes } from '../argTypes';
 
-const meta: Meta<typeof MyQuiz> = {
-  /* 👇 The title prop is optional.
-   * See https://storybook.js.org/docs/react/configure/overview#configure-story-loading
-   * to learn how to generate automatic titles
-   */
+export default {
   title: 'Quiz/Hooks',
   component: MyQuiz,
+  argTypes,
+  parameters: {
+    docs: {
+      description: {
+        component: hookDescription,
+      },
+    },
+  },
 };
 
-type Story = StoryObj<typeof MyQuiz>;
-
-/*
- *👇 Render functions are a framework specific feature to allow you control on how the component renders.
- * See https://storybook.js.org/docs/react/api/csf
- * to learn how to use render functions.
- */
-export const Primary: Story = {
-  render: () => <MyQuiz />,
+const resultsPageOptions = {
+  numResultsToDisplay: 10,
+  onQuizResultsLoaded: () => console.log('onQuizResultLoaded'),
+  onQuizResultClick: () => console.log('onQuizResultClick'),
+  onAddToCartClick: () => console.log('onQuizAddToCart'),
 };
 
-export default meta;
+export const BasicUsage = MyQuiz.bind({});
+BasicUsage.args = { apiKey, quizId, resultsPageOptions };
+addHookStoryCode(
+  BasicUsage,
+  `const args = ${stringifyWithDefaults(BasicUsage.args)}`,
+  basicDescription
+);
