@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { expect } from '@storybook/jest';
 import { OpenQuestion } from '@constructor-io/constructorio-client-javascript/lib/types';
 import type { Meta, StoryObj } from '@storybook/react';

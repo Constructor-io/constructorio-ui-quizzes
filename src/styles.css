@@ -393,6 +393,7 @@
   height: 240px;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 10px;
 }
 .cio-result-card-image img {
   height: 100%;

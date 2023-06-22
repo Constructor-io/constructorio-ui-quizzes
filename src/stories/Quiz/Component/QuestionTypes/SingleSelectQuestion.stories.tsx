@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { SelectQuestion } from '@constructor-io/constructorio-client-javascript/lib/types';
 import { expect } from '@storybook/jest';
 import type { Meta, StoryObj } from '@storybook/react';

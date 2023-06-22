@@ -47,7 +47,17 @@
     "max-nested-callbacks": ["error", 5],
     "max-params": ["error", 4],
     "complexity": ["error", 20],
-    "@cspell/spellchecker": ["error"]
+    "@cspell/spellchecker": ["error"],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "**/*.stories.*",
+          "**/.storybook/**/*.*"
+        ],
+        "peerDependencies": true
+      }
+    ]
   },
   "overrides": [
     {
