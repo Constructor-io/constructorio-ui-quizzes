@@ -19,6 +19,8 @@ export default {
   title: 'Quiz/Full Quiz',
   component: CioQuiz,
   argTypes,
+  // eslint-disable-next-line @cspell/spellchecker
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {

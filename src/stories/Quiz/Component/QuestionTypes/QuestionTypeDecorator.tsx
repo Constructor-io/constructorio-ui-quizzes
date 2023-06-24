@@ -12,22 +12,10 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 export default function QuestionTypeDecorator(Story: any, question: Question) {
-  const { images } = question;
-  const questionHasImage = images?.primary_url;
   return (
     <div className='cio-quiz'>
       <QuizContext.Provider value={getMockContextValue(question)}>
-        <div
-          style={
-            questionHasImage
-              ? { width: '100%' }
-              : {
-                  width: '70%',
-                  marginTop: '8%',
-                }
-          }>
-          <Story />
-        </div>
+        <Story />
       </QuizContext.Provider>
     </div>
   );

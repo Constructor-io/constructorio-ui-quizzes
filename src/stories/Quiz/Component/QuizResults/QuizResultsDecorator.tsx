@@ -20,17 +20,7 @@ export default function QuizResultsDecorator(
   return (
     <div className='cio-quiz'>
       <QuizContext.Provider value={getMockContextValue()}>
-        <div
-          style={
-            options.resultCardRegularPriceKey
-              ? { width: '100%', display: 'flex', justifyContent: 'space-around' }
-              : {
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: '100%',
-                }
-          }>
+        <div>
           <Story options={options} />
         </div>
       </QuizContext.Provider>
