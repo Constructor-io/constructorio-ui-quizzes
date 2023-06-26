@@ -52,7 +52,7 @@
       "error",
       {
         "devDependencies": [
-          "**/*.stories.*",
+          "**/stories/**/*.*",
           "**/.storybook/**/*.*"
         ],
         "peerDependencies": true

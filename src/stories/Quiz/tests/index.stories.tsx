@@ -1,5 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies, no-console */
-
 import { within, userEvent } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 import CioQuiz from '../../../components/CioQuiz';
