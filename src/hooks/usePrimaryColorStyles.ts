@@ -14,7 +14,7 @@ const usePrimaryColorStyles: UsePrimaryColorStyles = (primaryColor) => {
 
     if (primaryColor) {
       // Extract r, g, b values from the string. (r), (g), (b)
-      const rgbRegex = /^\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})/;
+      const rgbRegex = /^\s*\(?(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\)?/;
       const rgbMatch = primaryColor.trim().match(rgbRegex)?.slice(1);
 
       if (rgbMatch && rgbMatch.length === 3) {

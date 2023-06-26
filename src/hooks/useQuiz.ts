@@ -1,5 +1,4 @@
 import { UseQuiz } from '../types';
-import { rgbToHsl } from '../utils';
 import useCioClient from './useCioClient';
 import useConsoleErrors from './useConsoleErrors';
 import usePrimaryColorStyles from './usePrimaryColorStyles';
