@@ -35,7 +35,6 @@ const useQuizApiState: UseQuizApiState = (
       dispatchApiState({
         type: QuizAPIActionTypes.SET_IS_LOADING,
       });
-      // debugger;
 
       if (quizLocalState.isLastAnswer) {
         try {

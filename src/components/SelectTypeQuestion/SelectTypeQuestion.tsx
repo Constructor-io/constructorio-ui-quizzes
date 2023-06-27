@@ -20,10 +20,6 @@ function SelectTypeQuestion() {
     hasImages = question.options.some((option: QuestionOption) => option.images);
   }
 
-  if (state?.quiz.currentQuestion?.next_question.title === 'Are you into latte-art?') {
-    // debugger;
-  }
-
   if (question) {
     return (
       <div className='cio-select-question-container' data-question-key={question.key}>
