@@ -17,13 +17,10 @@ const useQuizLocalState = (sessionStateKey?: string) => {
 
   const hasQuizStoredState = (): boolean => getStateFromSessionStorage(quizStateKey) !== null;
 
-  const dispatchLocalState = useCallback(
-    (action: ActionAnswerQuestion) => {
-      logger(action);
-      dispatch(action);
-    },
-    [dispatch]
-  );
+  const dispatchLocalState = useCallback((action: ActionAnswerQuestion) => {
+    logger(action);
+    dispatch(action);
+  }, []);
 
   return {
     quizLocalState,

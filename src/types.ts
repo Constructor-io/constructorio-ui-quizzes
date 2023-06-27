@@ -77,7 +77,6 @@ export type AnswerInputState = {
   [key: string]: {
     type: InputQuestionsTypes;
     value: string | string[];
-    ignore?: boolean;
   };
 };
 

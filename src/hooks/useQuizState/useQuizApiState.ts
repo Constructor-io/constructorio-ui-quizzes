@@ -35,6 +35,8 @@ const useQuizApiState: UseQuizApiState = (
       dispatchApiState({
         type: QuizAPIActionTypes.SET_IS_LOADING,
       });
+      // debugger;
+
       if (quizLocalState.isLastAnswer) {
         try {
           const quizResults = await getQuizResults(cioClient, quizId, {
@@ -100,7 +102,7 @@ const useQuizApiState: UseQuizApiState = (
     quizId,
     quizLocalState.answers,
     resultsPageOptions?.numResultsToDisplay,
-    quizLocalState.isLastAnswer,
+    // quizLocalState.isLastAnswer,
   ]);
 
   return {

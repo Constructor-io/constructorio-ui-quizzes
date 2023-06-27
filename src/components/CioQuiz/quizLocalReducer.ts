@@ -23,7 +23,6 @@ function answerInputReducer(state: AnswerInputState, action: ActionAnswerInputQu
     [String(action.payload!.questionId)]: {
       type: action.type,
       value: action.payload!.input,
-      ignore: false,
     },
   };
 }
@@ -58,39 +57,34 @@ export default function quizLocalReducer(
         isLastAnswer: !!action.payload?.isLastQuestion,
       };
     case QuestionTypes.Next: {
-      const answers: string[][] = [];
-      for (const input of Object.values(state.answerInputs)) {
-        if (!input.ignore) {
-          switch (input.type) {
-            case QuestionTypes.OpenText:
-              answers.push(['true']);
-              break;
-            case QuestionTypes.Cover:
-              answers.push(['seen']);
-              break;
-            case QuestionTypes.SingleSelect:
-              answers.push(input.value as string[]);
-              break;
-            case QuestionTypes.MultipleSelect:
-              answers.push(input.value as string[]);
-              break;
-            default:
-              answers.push([]);
-          }
-        }
+      const { answers } = state;
+      const newAnswers = [...answers];
+      const lastAnswerInputIndex = answers.length;
+      const currentAnswerInput = Object.values(state.answerInputs)?.[lastAnswerInputIndex];
+      switch (currentAnswerInput.type) {
+        case QuestionTypes.OpenText:
+          newAnswers.push(['true']);
+          break;
+        case QuestionTypes.Cover:
+          newAnswers.push(['seen']);
+          break;
+        case QuestionTypes.SingleSelect:
+          newAnswers.push(currentAnswerInput.value as string[]);
+          break;
+        case QuestionTypes.MultipleSelect:
+          newAnswers.push(currentAnswerInput.value as string[]);
+          break;
+        default:
+          newAnswers.push([]);
       }
-
       return {
         ...state,
-        answers,
-        isLastAnswer: false,
+        answers: newAnswers,
       };
     }
 
     case QuestionTypes.Back: {
-      const questionToDeleteId = action.payload?.next_question.id!;
       const newAnswerInputs = { ...state.answerInputs };
-      newAnswerInputs[questionToDeleteId].ignore = true;
       return {
         ...state,
         answerInputs: { ...newAnswerInputs },

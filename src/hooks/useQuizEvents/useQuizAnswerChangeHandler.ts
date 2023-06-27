@@ -35,10 +35,9 @@ const useQuizAnswerChangeHandler = (
         case QuestionTypes.SingleSelect:
         case QuestionTypes.MultipleSelect:
           dispatchLocalState({
-            type:
-              currentQuestion!.next_question.type === QuestionTypes.SingleSelect
-                ? QuestionTypes.SingleSelect
-                : QuestionTypes.MultipleSelect,
+            type: currentQuestion!.next_question.type as
+              | QuestionTypes.SingleSelect
+              | QuestionTypes.MultipleSelect,
             payload: {
               questionId: currentQuestion!.next_question.id,
               input: payload as string[],

@@ -14,10 +14,7 @@ const useQuizNextClick = (
     const currentQuestionId = currentQuestion?.id;
     if (dispatchLocalState && currentQuestionId) {
       const currentAnswerInput = quizLocalState.answerInputs[currentQuestionId];
-      if (
-        (currentAnswerInput?.value && currentAnswerInput?.value?.length) ||
-        currentQuestion?.type === 'cover'
-      ) {
+      if (currentAnswerInput?.value?.length || currentQuestion?.type === 'cover') {
         dispatchLocalState({
           type: QuestionTypes.Next,
           payload: quizApiState.quizCurrentQuestion,
