@@ -39,14 +39,14 @@ export const trackQuizResultsLoaded = (
   const { quiz_id, quiz_session_id, quiz_version_id, result_id, request, response } = quizResults;
 
   cioClient?.tracker.trackQuizResultsLoaded({
-    quiz_id,
-    quiz_version_id,
-    quiz_session_id,
+    quizId: quiz_id,
+    quizVersionId: quiz_version_id,
+    quizSessionId: quiz_session_id,
     url: window.location.href,
     section: request?.section,
-    result_count: response?.total_num_results,
-    result_page: request?.page,
-    result_id,
+    resultCount: response?.total_num_results,
+    resultPage: request?.page,
+    resultId: result_id,
   });
 };
 
@@ -67,17 +67,17 @@ export const trackQuizResultClick = (
     } = quizResults;
 
     cioClient?.tracker.trackQuizResultClick({
-      quiz_id,
-      quiz_version_id,
-      quiz_session_id,
-      item_id: result.data?.id,
-      item_name: result?.value,
+      quizId: quiz_id,
+      quizVersionId: quiz_version_id,
+      quizSessionId: quiz_session_id,
+      itemId: result.data?.id,
+      itemName: result?.value,
       section,
-      result_count: total_num_results,
-      result_page: page,
-      result_id,
-      result_position_on_page: position,
-      num_results_per_page,
+      resultCount: total_num_results,
+      resultPage: page,
+      resultId: result_id,
+      resultPositionOnPage: position,
+      numResultsPerPage: num_results_per_page,
     });
   }
 };
@@ -97,13 +97,13 @@ export const trackQuizConversion = (
     } = quizResults;
 
     cioClient?.tracker.trackQuizConversion({
-      quiz_id,
-      quiz_version_id,
-      quiz_session_id,
-      item_id: result.data?.id,
-      item_name: result.value,
+      quizId: quiz_id,
+      quizVersionId: quiz_version_id,
+      quizSessionId: quiz_session_id,
+      itemId: result.data?.id,
+      itemName: result.value,
       section,
-      variation_id: result.data?.variation_id,
+      variationId: result.data?.variation_id,
       revenue: (price && String(price)) || undefined,
     });
   }

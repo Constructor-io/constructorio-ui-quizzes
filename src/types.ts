@@ -51,6 +51,7 @@ export interface IQuizProps {
   quizVersionId?: string;
   resultsPageOptions: ResultsPageOptions;
   sessionStateOptions?: SessionStateOptions;
+  primaryColor?: string;
 }
 
 // QUIZ RETURN VALUES
@@ -97,10 +98,17 @@ export interface QuizEventsReturn {
   resetStoredState: QuizEventsReturn.ResetStoredState;
 }
 
+export interface PrimaryColorStyles {
+  '--primary-color-h': string;
+  '--primary-color-s': string;
+  '--primary-color-l': string;
+}
+
 export interface UseQuizReturn {
   cioClient?: ConstructorIOClient;
   state: QuizReturnState;
   events: QuizEventsReturn;
+  primaryColorStyles: PrimaryColorStyles;
 }
 
 // USE QUIZ HOOK
