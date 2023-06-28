@@ -1,6 +1,7 @@
 import { UseQuiz } from '../types';
 import useCioClient from './useCioClient';
 import useConsoleErrors from './useConsoleErrors';
+import usePrimaryColorStyles from './usePrimaryColorStyles';
 import useQuizApiState from './useQuizApiState';
 import useQuizEvents from './useQuizEvents';
 import useQuizLocalState from './useQuizLocalState';
@@ -12,6 +13,7 @@ const useQuiz: UseQuiz = ({
   quizVersionId,
   resultsPageOptions,
   sessionStateOptions,
+  primaryColor,
 }) => {
   // Log console errors for required parameters quizId and resultsPageOptions
   useConsoleErrors(quizId, resultsPageOptions);
@@ -52,6 +54,8 @@ const useQuiz: UseQuiz = ({
     hasQuizStoredState,
   });
 
+  const primaryColorStyles = usePrimaryColorStyles(primaryColor);
+
   return {
     cioClient,
     state: {
@@ -73,6 +77,7 @@ const useQuiz: UseQuiz = ({
     events: {
       ...quizEvents,
     },
+    primaryColorStyles,
   };
 };
 
