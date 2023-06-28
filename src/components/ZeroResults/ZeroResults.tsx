@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import CTAButton from '../CTAButton/CTAButton';
+import QuizContext from '../CioQuiz/context';
 
-interface ZeroResultsProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  resetQuizClickHandler?: () => {};
-}
+interface ZeroResultsProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
 function ZeroResults(props: ZeroResultsProps) {
-  const { resetQuizClickHandler } = props;
+  const { getResetQuizButtonProps } = useContext(QuizContext);
 
   return (
     <div className='cio-zero-results'>
@@ -17,7 +16,7 @@ function ZeroResults(props: ZeroResultsProps) {
         This is embarrassing 😢. It might be that some of the questions are not properly set up from
         our end. Would you give us another try?
       </p>
-      <CTAButton ctaText='Try Again' onClick={resetQuizClickHandler} />
+      <CTAButton ctaText='Try Again' propsGetters={getResetQuizButtonProps} />
     </div>
   );
 }
