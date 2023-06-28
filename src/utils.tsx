@@ -169,9 +169,14 @@ export const getFilterValuesFromExpression = (exp: FilterExpression | null): str
 export function isTrackingRequestSent(trackingRequestUrl) {
   // eslint-disable-next-line
   const trackingRequestsQueue = window.localStorage?._constructorio_requests;
-
   return (
     trackingRequestsQueue &&
     JSON.parse(trackingRequestsQueue)?.some((request) => request?.url?.includes(trackingRequestUrl))
   );
+}
+
+// Function to emulate pausing between interactions
+export function sleep(ms) {
+  // eslint-disable-next-line
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
