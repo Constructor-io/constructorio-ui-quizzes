@@ -34,6 +34,7 @@ function YourComponent() {
       <CioQuiz quizId="coffee-quiz" apiKey="key_wJSdZSiesX5hiVLt" />
     </div>
   );
+}
 ```
 ### Using the Javascript Bundle
 
