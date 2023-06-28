@@ -42,7 +42,7 @@ By default, the primary color has a value of "35, 71, 199" (Constructor Blue).
 
 In the example below, the \`primaryColor\` prop has been used to override this color to "255, 82, 48" (Orange).
 
-> Advanced Option: Instead of passing a primaryColor prop, you can also override \`--primary-color-h\`, \`--primary-color-s\`, and \`--primary-color-l\` CSS variables within a \`.cio-quiz\` container element. If explicitly given a value in your CSS, then the values of these variables will be used as the HSL values for your quiz within a quiz.
+> Advanced Option: Instead of passing a primaryColor prop, you can also override \`--primary-color-h\`, \`--primary-color-s\`, and \`--primary-color-l\` CSS variables within a \`.cio-quiz\` container element. If explicitly given a value in your CSS, then the values of these variables will be used as the HSL values for your quiz.
 `;
 
 export enum RequestStates {
