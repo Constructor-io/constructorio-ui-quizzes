@@ -25,6 +25,8 @@ export const argTypes = {
     },
   },
   primaryColor: {
-    type: 'text',
+    control: {
+      type: 'text',
+    },
   },
 };
