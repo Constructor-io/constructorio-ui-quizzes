@@ -11,6 +11,8 @@ export type QuizLocalReducerState = {
   answers: Answers;
   answerInputs: {};
   isLastAnswer: boolean;
+  quizVersionId?: string;
+  quizSessionId?: string;
 };
 export type AnswerInputState = {
   [key: string]: OpenTextQuestionPayload | SelectQuestionPayload;
@@ -70,6 +72,11 @@ export default function quizLocalReducer(
     case QuestionTypes.Reset:
       return {
         ...initialState,
+      };
+    case QuestionTypes.Hydrate:
+      return {
+        ...state,
+        ...action.payload,
       };
     default:
       return state;

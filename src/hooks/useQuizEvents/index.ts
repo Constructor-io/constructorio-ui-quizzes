@@ -15,6 +15,9 @@ export type UseQuizEventOptions = {
   dispatchLocalState: React.Dispatch<ActionAnswerQuestion>;
   resetQuizApiState: () => void;
   resetQuizLocalState: () => void;
+  hydrateQuizLocalState: () => void;
+  resetQuizStoredState: () => void;
+  hasQuizStoredState: () => boolean;
 };
 
 const useQuizEvents = (options: UseQuizEventOptions): QuizEventsReturn => {
@@ -25,6 +28,9 @@ const useQuizEvents = (options: UseQuizEventOptions): QuizEventsReturn => {
     dispatchLocalState,
     resetQuizApiState,
     resetQuizLocalState,
+    hydrateQuizLocalState,
+    resetQuizStoredState,
+    hasQuizStoredState,
   } = options;
 
   const { onAddToCartClick, onQuizResultClick, onQuizResultsLoaded } = resultsPageOptions;
@@ -48,6 +54,7 @@ const useQuizEvents = (options: UseQuizEventOptions): QuizEventsReturn => {
     if (quizApiState.quizResults) {
       resetQuizApiState();
       resetQuizLocalState();
+      resetQuizStoredState();
     }
   };
 
@@ -57,6 +64,9 @@ const useQuizEvents = (options: UseQuizEventOptions): QuizEventsReturn => {
     nextQuestion,
     previousQuestion,
     resetQuiz,
+    hydrateQuiz: hydrateQuizLocalState,
+    hasStoredState: hasQuizStoredState,
+    resetStoredState: resetQuizStoredState,
   };
 };
 

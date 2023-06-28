@@ -70,7 +70,7 @@ function SelectTypeQuestion() {
 
   if (question) {
     return (
-      <div className='cio-select-question-container'>
+      <div className='cio-select-question-container' data-question-key={question.key}>
         <div className='cio-select-question-text'>
           <QuestionTitle title={question.title} />
           {question?.description ? <QuestionDescription description={question.description} /> : ''}
@@ -88,6 +88,7 @@ function SelectTypeQuestion() {
                   ? 'cio-question-option-container-text-only'
                   : 'cio-question-option-container'
               } ${selected[option.id] ? 'selected' : ''}`}
+              data-question-option-key={option.key}
               onClick={() => {
                 toggleIdSelected(option.id);
               }}

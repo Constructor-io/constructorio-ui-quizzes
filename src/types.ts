@@ -39,12 +39,18 @@ export interface ResultsPageOptions extends ResultsProps {
   onAddToCartClick: QuizResultsEventsProps.OnAddToCartClick;
 }
 
+export interface SessionStateOptions {
+  showSessionModal?: boolean;
+  sessionStateKey?: string;
+}
+
 export interface IQuizProps {
   apiKey?: string;
   cioJsClient?: ConstructorIOClient;
   quizId: string;
   quizVersionId?: string;
   resultsPageOptions: ResultsPageOptions;
+  sessionStateOptions?: SessionStateOptions;
 }
 
 // QUIZ RETURN VALUES
@@ -75,6 +81,9 @@ export namespace QuizEventsReturn {
     result: QuizResultDataPartial,
     price?: number
   ) => void;
+  export type HydrateQuiz = () => void;
+  export type HasStoredState = () => boolean;
+  export type ResetStoredState = () => void;
 }
 
 export interface QuizEventsReturn {
@@ -83,6 +92,9 @@ export interface QuizEventsReturn {
   resetQuiz: QuizEventsReturn.ResetQuiz;
   resultClick: QuizEventsReturn.ResultClick;
   addToCart: QuizEventsReturn.AddToCart;
+  hydrateQuiz: QuizEventsReturn.HydrateQuiz;
+  hasStoredState: QuizEventsReturn.HasStoredState;
+  resetStoredState: QuizEventsReturn.ResetStoredState;
 }
 
 export interface UseQuizReturn {

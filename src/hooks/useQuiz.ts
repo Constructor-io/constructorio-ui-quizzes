@@ -5,12 +5,26 @@ import useQuizApiState from './useQuizApiState';
 import useQuizEvents from './useQuizEvents';
 import useQuizLocalState from './useQuizLocalState';
 
-const useQuiz: UseQuiz = ({ quizId, apiKey, cioJsClient, quizVersionId, resultsPageOptions }) => {
+const useQuiz: UseQuiz = ({
+  quizId,
+  apiKey,
+  cioJsClient,
+  quizVersionId,
+  resultsPageOptions,
+  sessionStateOptions,
+}) => {
   // Log console errors for required parameters quizId and resultsPageOptions
   useConsoleErrors(quizId, resultsPageOptions);
 
   // Quiz Local state
-  const { quizLocalState, resetQuizLocalState, dispatchLocalState } = useQuizLocalState();
+  const {
+    quizLocalState,
+    resetQuizLocalState,
+    dispatchLocalState,
+    hydrateQuizLocalState,
+    hasQuizStoredState,
+    resetQuizStoredState,
+  } = useQuizLocalState(sessionStateOptions?.sessionStateKey);
 
   // Quiz Cio Client
   const cioClient = useCioClient({ apiKey, cioJsClient });
@@ -19,6 +33,7 @@ const useQuiz: UseQuiz = ({ quizId, apiKey, cioJsClient, quizVersionId, resultsP
   const { isFirstQuestion, quizApiState, resetQuizApiState } = useQuizApiState(
     quizId,
     quizLocalState,
+    dispatchLocalState,
     resultsPageOptions,
     quizVersionId,
     cioClient
@@ -32,6 +47,9 @@ const useQuiz: UseQuiz = ({ quizId, apiKey, cioJsClient, quizVersionId, resultsP
     dispatchLocalState,
     resetQuizApiState,
     resetQuizLocalState,
+    hydrateQuizLocalState,
+    resetQuizStoredState,
+    hasQuizStoredState,
   });
 
   return {
@@ -43,8 +61,8 @@ const useQuiz: UseQuiz = ({ quizId, apiKey, cioJsClient, quizVersionId, resultsP
       },
       quiz: {
         requestState: quizApiState.quizRequestState,
-        versionId: quizApiState.quizVersionId,
-        sessionId: quizApiState.quizSessionId,
+        versionId: quizLocalState.quizVersionId,
+        sessionId: quizLocalState.quizSessionId,
         firstQuestion: quizApiState.quizFirstQuestion,
         currentQuestion: quizApiState.quizCurrentQuestion,
         results: quizApiState.quizResults,

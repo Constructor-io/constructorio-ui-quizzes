@@ -6,6 +6,7 @@ function BackButton(props: React.ButtonHTMLAttributes<HTMLButtonElement>) {
 
   return (
     <button
+      title='Quiz Back Button'
       type='button'
       title='Quiz Back Button'
       className={`cio-question-back-button ${disabled ? 'disabled' : ''}`}
