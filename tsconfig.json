@@ -4,7 +4,7 @@
     "moduleResolution": "node",
     "removeComments": false,
     "jsx": "react",
-    "target": "esnext",
+    "target": "es2015",
     "outDir": "lib/mjs",
     "declaration": true,
     "declarationDir": "lib/types",
