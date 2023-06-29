@@ -16,11 +16,22 @@ function SelectTypeQuestion() {
   let question;
   let type: `${QuestionTypes}`;
   let hasImages = false;
+  let instructions;
 
   if (state?.quiz.currentQuestion) {
     question = state.quiz.currentQuestion.next_question;
     type = question.type;
     hasImages = question.options.some((option: QuestionOption) => option.images);
+    switch (type) {
+      case QuestionTypes.MultipleSelect:
+        instructions = 'Select one or more options';
+        break;
+      case QuestionTypes.SingleSelect:
+        instructions = 'Select one option';
+        break;
+      default:
+        instructions = null;
+    }
   }
 
   const [selected, setSelected] = useState<Selected>({});
@@ -109,6 +120,7 @@ function SelectTypeQuestion() {
           backButtonHandler={previousQuestion}
           showBackButton={!state?.quiz.isFirstQuestion}
           ctaButtonText={question?.cta_text}
+          instructions={instructions}
         />
       </div>
     );
