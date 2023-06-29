@@ -166,6 +166,12 @@ export const getFilterValuesFromExpression = (exp: FilterExpression | null): str
   return [];
 };
 
+// Function to emulate pausing between interactions
+export function sleep(ms) {
+  // eslint-disable-next-line
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 export function rgbToHsl(r: number, g: number, b: number) {
   const rConverted = r / 255;
   const gConverted = g / 255;

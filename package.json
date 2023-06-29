@@ -54,12 +54,13 @@
     "check-license": "license-checker --production --onlyAllow 'Apache-2.0;BSD-3-Clause;MIT;0BSD;BSD-2-Clause' --excludePackages 'picocolors@1.0.0'"
   },
   "peerDependencies": {
-    "@constructor-io/constructorio-client-javascript": "^2.35.6",
+    "@constructor-io/constructorio-client-javascript": "^2.35.12",
     "react": ">=16.12.0",
     "react-dom": ">=16.12.0",
     "tslib": "^2.4.0"
   },
   "devDependencies": {
+    "@axe-core/react": "^4.7.0",
     "@cspell/eslint-plugin": "^6.18.1",
     "@storybook/addon-a11y": "^7.0.11",
     "@storybook/addon-actions": "7.0.11",
@@ -91,8 +92,8 @@
     "start-server-and-test": "^2.0.0",
     "storybook": "7.0.11",
     "typescript": "^4.9.4",
-    "webpack": "^5.75.0",
     "vite": "^4.2.1",
-    "vite-plugin-css-injected-by-js": "^3.1.0"
+    "vite-plugin-css-injected-by-js": "^3.1.0",
+    "webpack": "^5.75.0"
   }
 }

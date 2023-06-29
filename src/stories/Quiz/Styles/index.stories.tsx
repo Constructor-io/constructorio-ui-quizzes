@@ -9,6 +9,7 @@ export default {
   title: 'Quiz/Style Customizations',
   component: CioQuiz,
   argTypes,
+  tags: ['autodocs'],
 };
 
 const resultsPageOptions = {
