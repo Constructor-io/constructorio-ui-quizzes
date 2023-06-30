@@ -604,6 +604,9 @@
   .cio-container--with-image {
     padding: 6% 2%;
     align-items: center;
+    flex-direction: row;
+  }
+  .cio-cover-question-container--with-image {
     flex-direction: row-reverse;
   }
 
