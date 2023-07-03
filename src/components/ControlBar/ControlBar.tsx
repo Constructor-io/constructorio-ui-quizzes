@@ -24,11 +24,7 @@ function ControlBar(props: ControlBarProps) {
   return (
     <div className='cio-question-buttons-container'>
       {showBackButton && <BackButton onClick={backButtonHandler} />}
-      {instructions ? (
-        <div className='cio-question-buttons-container-text'>{instructions}</div>
-      ) : (
-        ''
-      )}
+      {instructions && <div className='cio-question-buttons-container-text'>{instructions}</div>}
       <CTAButton
         disabled={isNextButtonDisabled}
         ctaText={ctaButtonText}
