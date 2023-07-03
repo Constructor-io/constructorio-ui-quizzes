@@ -192,6 +192,9 @@
   background-color: rgba(255, 255, 255, 0.87);
   align-items: center;
 }
+.cio-question-buttons-container-text {
+  display: none;
+}
 .cio-question-cta-button {
   background: var(--primary-color);
   color: #ffffff;
@@ -593,6 +596,15 @@
   /* Result Card component */
   .cio-result-card {
     flex-basis: 30%;
+  }
+
+  /* Control Bar Instructions */
+    .cio-question-buttons-container-text {
+    text-align: center;
+    flex-grow: 1;
+    color: var(--gray-dust-100);
+    font-size: 1.125rem;
+    display: block;
   }
 }
 
