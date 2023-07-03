@@ -22,16 +22,7 @@ function SelectTypeQuestion() {
     question = state.quiz.currentQuestion.next_question;
     type = question.type;
     hasImages = question.options.some((option: QuestionOption) => option.images);
-    switch (type) {
-      case QuestionTypes.MultipleSelect:
-        instructions = 'Select one or more options';
-        break;
-      case QuestionTypes.SingleSelect:
-        instructions = 'Select one option';
-        break;
-      default:
-        instructions = null;
-    }
+    instructions = type === QuestionTypes.MultipleSelect && 'Select one or more options';
   }
 
   const [selected, setSelected] = useState<Selected>({});
