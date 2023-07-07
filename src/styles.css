@@ -73,6 +73,7 @@
   justify-content: center;
   margin-top: 2rem;
   padding-bottom: var(--bottom-bar-height);
+  width: 100%;
 }
 .cio-container--with-image {
   display: flex;
@@ -599,7 +600,7 @@
   }
 
   /* Control Bar Instructions */
-    .cio-question-buttons-container-text {
+  .cio-question-buttons-container-text {
     text-align: center;
     flex-grow: 1;
     color: var(--gray-dust-100);

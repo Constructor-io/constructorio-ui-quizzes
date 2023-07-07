@@ -21,28 +21,17 @@
   margin: auto auto;
 }
 
-.cio-container {
-  width: 100% !important;
+
+.cio-quiz .results-example-wrapper .cio-result-card {
+  width: 400px;
+  margin-top: 100px;
 }
 
-.cio-question-content {
-  width: 100% !important;
+.cio-quiz .results-example-wrapper .cio-result-card-image {
+  width: 100%;
 }
 
-.cio-question-image {
-  height: unset !important;
-}
-
-.cio-result-card {
-  width: 400px !important;
-  margin-top: 100px !important;
-}
-
-.cio-result-card-image {
-  width: 100% !important;
-}
-
-.cio-result-card-image img {
-  width: 100% !important;
-  object-fit: cover !important;
+.cio-quiz .results-example-wrapper .cio-result-card-image img {
+  width: 100%;
+  object-fit: cover;
 }
