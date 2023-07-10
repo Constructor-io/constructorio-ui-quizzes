@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
 /* Theme colors */
 .cio-quiz {
   --primary-color-h: 227;
@@ -597,7 +599,7 @@
   }
 
   /* Control Bar Instructions */
-    .cio-question-buttons-container-text {
+  .cio-question-buttons-container-text {
     text-align: center;
     flex-grow: 1;
     color: var(--gray-dust-100);
