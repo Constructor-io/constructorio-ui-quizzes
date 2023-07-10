@@ -58,9 +58,12 @@ ${templateCode}
   };
 };
 
-export const defaultOnAddToCartClickCode = `"onAddToCartClick": (item) => console.dir(item)`;
-export const defaultOnQuizResultClickCode = `"onQuizResultClick": (result, position) => console.dir(result, position)`;
-export const defaultOnQuizResultsLoadedCode = `"onQuizResultsLoaded": (results) => console.dir(results)`;
+export const functionStrings = {
+  onAddToCartClick: `(item) => console.dir(item)`,
+  onQuizResultClick: `(result, position) => console.dir(result, position)`,
+  onQuizResultsLoaded: `(results) => console.dir(results)`,
+  cioJsClient: `cioJsClient`,
+};
 
 export const stringifyWithDefaults = (obj: {
   cioJsClient?: any;
@@ -70,41 +73,31 @@ export const stringifyWithDefaults = (obj: {
     onQuizResultsLoaded: any;
   };
 }) => {
-  const { resultsPageOptions, cioJsClient, ...rest } = obj;
-  const { onAddToCartClick, onQuizResultsLoaded, onQuizResultClick } = resultsPageOptions;
-  let res = JSON.stringify({ ...rest, resultsPageOptions }, null, '  ');
+  // Stringify non-function values normally. Add a template block for functions to be replaced later
+  const customJsonTransformer = (key: string, value: any) => {
+    if (value instanceof Function) {
+      return `${key}_CODE`;
+    }
 
-  if (cioJsClient) {
-    res = res.replace(
-      '"resultsPageOptions": {',
-      `"cioJsClient": cioJsClient,
-  "resultsPageOptions": {`
-    );
-  }
+    if (key === 'cioJsClient') {
+      return `${key}_CODE`;
+    }
 
-  if (onQuizResultsLoaded) {
-    res = res.replace(
-      '"resultsPageOptions": {',
-      `"resultsPageOptions": {
-    ${defaultOnQuizResultsLoadedCode},`
-    );
-  }
+    return value;
+  };
+  let res = JSON.stringify(obj, customJsonTransformer, '  ');
 
-  if (onQuizResultClick) {
-    res = res.replace(
-      '"resultsPageOptions": {',
-      `"resultsPageOptions": {
-    ${defaultOnQuizResultClickCode},`
-    );
-  }
+  // Replace template blocks with function strings
+  Array.from(res.matchAll(/"(\w*)_CODE"/g)).forEach((match) => {
+    const [codePlaceholder, key] = match;
+    const functionString = functionStrings[key];
 
-  if (onAddToCartClick) {
-    res = res.replace(
-      '"resultsPageOptions": {',
-      `"resultsPageOptions": {
-    ${defaultOnAddToCartClickCode},`
-    );
-  }
+    if (functionString) {
+      res = res.replaceAll(codePlaceholder, functionString);
+    } else {
+      console.error(`Function string for ${key} not found.`); // eslint-disable-line
+    }
+  });
 
   return res;
 };
