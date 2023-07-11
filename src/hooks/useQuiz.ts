@@ -2,11 +2,12 @@ import { UseQuiz } from '../types';
 import useCioClient from './useCioClient';
 import useConsoleErrors from './useConsoleErrors';
 import usePropsGetters from './usePropsGetters';
+import usePrimaryColorStyles from './usePrimaryColorStyles';
 import useQuizEvents from './useQuizEvents';
 import useQuizState from './useQuizState';
 
 const useQuiz: UseQuiz = (quizOptions) => {
-  const { apiKey, cioJsClient } = quizOptions;
+  const { apiKey, cioJsClient, primaryColor } = quizOptions;
 
   // Log console errors for required parameters quizId and resultsPageOptions
   useConsoleErrors(quizOptions);
@@ -26,6 +27,8 @@ const useQuiz: UseQuiz = (quizOptions) => {
 
   console.log(quizLocalState.answers);
   console.log(quizLocalState.answerInputs);
+
+  const primaryColorStyles = usePrimaryColorStyles(primaryColor);
 
   return {
     cioClient,
@@ -47,6 +50,7 @@ const useQuiz: UseQuiz = (quizOptions) => {
       ...quizEvents,
     },
     ...propGetters,
+    primaryColorStyles,
   };
 };
 

@@ -23,12 +23,12 @@ export default function CoverTypeQuestion() {
         cio-cover-question-container${hasImage ? '--with-image' : ''}
       `}
         data-question-key={question.key}>
+        {hasImage ? renderImages(question.images, 'cio-question-image-container') : ''}
         <div className='cio-question-content'>
           <QuestionTitle title={question?.title} />
           <QuestionDescription description={question.description} />
           <ControlBar ctaButtonText={question?.cta_text} />
         </div>
-        {hasImage ? renderImages(question.images, 'cio-question-image-container') : ''}
       </div>
     );
   }

@@ -2,9 +2,10 @@ import React, { useContext } from 'react';
 import QuestionTitle from '../QuestionTitle/QuestionTitle';
 import QuestionDescription from '../QuestionDescription/QuestionDescription';
 import QuizContext from '../CioQuiz/context';
-import { QuestionOption } from '../../types';
+import { Question, QuestionOption } from '../../types';
 import { renderImages } from '../../utils';
 import ControlBar from '../ControlBar/ControlBar';
+import { QuestionTypes } from '../CioQuiz/actions';
 
 export interface Selected {
   [key: number]: boolean;
@@ -12,12 +13,14 @@ export interface Selected {
 
 function SelectTypeQuestion() {
   const { state, getSelectInputProps } = useContext(QuizContext);
-  let question;
+  let question: Question | undefined;
   let hasImages = false;
+  let instructions;
 
   if (state?.quiz.currentQuestion) {
     question = state.quiz.currentQuestion.next_question;
     hasImages = question.options.some((option: QuestionOption) => option.images);
+    instructions = question.type === QuestionTypes.MultipleSelect && 'Select one or more options';
   }
 
   if (question) {
@@ -43,7 +46,7 @@ function SelectTypeQuestion() {
               )
           )}
         </div>
-        <ControlBar ctaButtonText={question?.cta_text} />
+        <ControlBar ctaButtonText={question?.cta_text || 'Continue'} instructions={instructions} />
       </div>
     );
   }

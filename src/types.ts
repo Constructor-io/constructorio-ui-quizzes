@@ -55,6 +55,7 @@ export interface IQuizProps {
   quizVersionId?: string;
   resultsPageOptions: ResultsPageOptions;
   sessionStateOptions?: SessionStateOptions;
+  primaryColor?: string;
 }
 
 // QUIZ RETURN VALUES
@@ -222,6 +223,12 @@ export type GetQuizResultButtonProps = (
 ) => QuizResultPropsButton;
 export type GetQuizResultLinkProps = (options: QuizResultOptions<'link'>) => QuizResultPropsLink;
 
+export interface PrimaryColorStyles {
+  '--primary-color-h': string;
+  '--primary-color-s': string;
+  '--primary-color-l': string;
+}
+
 export interface UseQuizReturn {
   cioClient?: ConstructorIOClient;
   state: QuizReturnState;
@@ -238,6 +245,7 @@ export interface UseQuizReturn {
   getAddToCartButtonProps: GetAddToCartButtonProps;
   getQuizResultButtonProps: GetQuizResultButtonProps;
   getQuizResultLinkProps: GetQuizResultLinkProps;
+  primaryColorStyles: PrimaryColorStyles;
 }
 
 // USE QUIZ HOOK

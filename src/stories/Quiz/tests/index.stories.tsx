@@ -1,5 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies, no-console */
-
 import { within, userEvent } from '@storybook/testing-library';
 import { expect, jest } from '@storybook/jest';
 import CioQuiz from '../../../components/CioQuiz';
@@ -9,7 +7,7 @@ import { ComponentTemplate, addComponentStoryDescription } from '../Component';
 import { basicDescription, apiKey, quizId } from '../../../constants';
 
 export default {
-  title: 'Quiz/Interaction Tests',
+  title: 'Quiz/Full Quiz e2e tests',
   component: CioQuiz,
   argTypes,
   parameters: {

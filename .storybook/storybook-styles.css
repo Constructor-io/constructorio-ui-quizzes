@@ -20,3 +20,29 @@
   width: 70%;
   margin: auto auto;
 }
+
+.cio-container {
+  width: 100% !important;
+}
+
+.cio-question-content {
+  width: 100% !important;
+}
+
+.cio-question-image {
+  height: unset !important;
+}
+
+.cio-result-card {
+  width: 400px !important;
+  margin-top: 100px !important;
+}
+
+.cio-result-card-image {
+  width: 100% !important;
+}
+
+.cio-result-card-image img {
+  width: 100% !important;
+  object-fit: cover !important;
+}

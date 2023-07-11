@@ -7,6 +7,7 @@ import Spinner from '../Spinner/Spinner';
 import useQuiz from '../../hooks/useQuiz';
 import SessionPromptModal from '../SessionPromptModal/SessionPromptModal';
 import { IQuizProps } from '../../types';
+import { convertPrimaryColorsToString } from '../../utils';
 
 export default function CioQuiz(props: IQuizProps) {
   const {
@@ -24,6 +25,7 @@ export default function CioQuiz(props: IQuizProps) {
     getQuizResultLinkProps,
     getResetQuizButtonProps,
     getSelectInputProps,
+    primaryColorStyles,
   } = useQuiz(props);
 
   const [showSessionPrompt, setShowSessionPrompt] = useState(false);
@@ -54,6 +56,7 @@ export default function CioQuiz(props: IQuizProps) {
     getResetQuizButtonProps,
     getSelectInputProps,
     customClickItemCallback: !!resultsPageOptions?.onQuizResultClick,
+    primaryColorStyles,
   };
 
   if (state.quiz.requestState === RequestStates.Loading) {
@@ -67,6 +70,7 @@ export default function CioQuiz(props: IQuizProps) {
   if (state.quiz.requestState === RequestStates.Success) {
     return (
       <div className='cio-quiz'>
+        <style>.cio-quiz {convertPrimaryColorsToString(primaryColorStyles)}</style>
         <SessionPromptModal
           resetStoredState={resetSessionStorageState}
           continueSession={hydrateQuiz}

@@ -7,8 +7,8 @@ import {
   FilterExpressionValue,
 } from '@constructor-io/constructorio-client-javascript/lib/types';
 import { QuestionTypes } from './components/CioQuiz/actions';
-import { QuestionImages } from './types';
 import { QuizLocalReducerState } from './components/CioQuiz/quizLocalReducer';
+import { PrimaryColorStyles, QuestionImages } from './types';
 
 export const renderImages = (images: Partial<QuestionImages>, cssClasses?: string) => {
   const {
@@ -60,9 +60,12 @@ ${templateCode}
   };
 };
 
-export const defaultOnAddToCartClickCode = `"onAddToCartClick": (item) => console.dir(item)`;
-export const defaultOnQuizResultClickCode = `"onQuizResultClick": (result, position) => console.dir(result, position)`;
-export const defaultOnQuizResultsLoadedCode = `"onQuizResultsLoaded": (results) => console.dir(results)`;
+export const functionStrings = {
+  onAddToCartClick: `(item) => console.dir(item)`,
+  onQuizResultClick: `(result, position) => console.dir(result, position)`,
+  onQuizResultsLoaded: `(results) => console.dir(results)`,
+  cioJsClient: `cioJsClient`,
+};
 
 export const stringifyWithDefaults = (obj: {
   cioJsClient?: any;
@@ -72,41 +75,31 @@ export const stringifyWithDefaults = (obj: {
     onQuizResultsLoaded: any;
   };
 }) => {
-  const { resultsPageOptions, cioJsClient, ...rest } = obj;
-  const { onAddToCartClick, onQuizResultsLoaded, onQuizResultClick } = resultsPageOptions;
-  let res = JSON.stringify({ ...rest, resultsPageOptions }, null, '  ');
+  // Stringify non-function values normally. Add a template block for functions to be replaced later
+  const customJsonTransformer = (key: string, value: any) => {
+    if (value instanceof Function) {
+      return `${key}_CODE`;
+    }
 
-  if (cioJsClient) {
-    res = res.replace(
-      '"resultsPageOptions": {',
-      `"cioJsClient": cioJsClient,
-  "resultsPageOptions": {`
-    );
-  }
+    if (key === 'cioJsClient') {
+      return `${key}_CODE`;
+    }
 
-  if (onQuizResultsLoaded) {
-    res = res.replace(
-      '"resultsPageOptions": {',
-      `"resultsPageOptions": {
-    ${defaultOnQuizResultsLoadedCode},`
-    );
-  }
+    return value;
+  };
+  let res = JSON.stringify(obj, customJsonTransformer, '  ');
 
-  if (onQuizResultClick) {
-    res = res.replace(
-      '"resultsPageOptions": {',
-      `"resultsPageOptions": {
-    ${defaultOnQuizResultClickCode},`
-    );
-  }
+  // Replace template blocks with function strings
+  Array.from(res.matchAll(/"(\w*)_CODE"/g)).forEach((match) => {
+    const [codePlaceholder, key] = match;
+    const functionString = functionStrings[key];
 
-  if (onAddToCartClick) {
-    res = res.replace(
-      '"resultsPageOptions": {',
-      `"resultsPageOptions": {
-    ${defaultOnAddToCartClickCode},`
-    );
-  }
+    if (functionString) {
+      res = res.replaceAll(codePlaceholder, functionString);
+    } else {
+      console.error(`Function string for ${key} not found.`); // eslint-disable-line
+    }
+  });
 
   return res;
 };
@@ -196,4 +189,36 @@ export const logger = (action: any) => {
 export function sleep(ms) {
   // eslint-disable-next-line
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+export function rgbToHsl(r: number, g: number, b: number) {
+  const rConverted = r / 255;
+  const gConverted = g / 255;
+  const bConverted = b / 255;
+  const max = Math.max(rConverted, gConverted, bConverted);
+  const min = Math.min(rConverted, gConverted, bConverted);
+  const delta = max - min;
+  let h = 0;
+
+  if (delta === 0) h = 0;
+  else if (max === rConverted) h = ((gConverted - bConverted) / delta) % 6;
+  else if (max === gConverted) h = (bConverted - rConverted) / delta + 2;
+  else if (max === bConverted) h = (rConverted - gConverted) / delta + 4;
+
+  const l = (min + max) / 2;
+  const s = delta === 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+
+  const finalH = Math.round(h * 60);
+  const finalS = Math.round(s * 100);
+  const finalL = Math.round(l * 100);
+
+  return [finalH, finalS, finalL];
+}
+
+export function convertPrimaryColorsToString(primaryColorStyles: PrimaryColorStyles) {
+  return `{
+    --primary-color-h: ${primaryColorStyles['--primary-color-h']}; 
+    --primary-color-s: ${primaryColorStyles['--primary-color-s']}; 
+    --primary-color-l: ${primaryColorStyles['--primary-color-l']}; 
+  }`;
 }

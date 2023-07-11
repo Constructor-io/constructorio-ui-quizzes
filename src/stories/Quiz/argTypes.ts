@@ -24,4 +24,9 @@ export const argTypes = {
       type: 'text',
     },
   },
+  primaryColor: {
+    control: {
+      type: 'text',
+    },
+  },
 };
