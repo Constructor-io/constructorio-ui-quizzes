@@ -74,6 +74,7 @@
   justify-content: center;
   margin-top: 2rem;
   padding-bottom: var(--bottom-bar-height);
+  width: 100%;
 }
 .cio-container--with-image {
   display: flex;
