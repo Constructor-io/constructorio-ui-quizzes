@@ -1,5 +1,5 @@
 import { within, userEvent } from '@storybook/testing-library';
-import { expect, jest } from '@storybook/jest';
+import { expect } from '@storybook/jest';
 import CioQuiz from '../../../components/CioQuiz';
 import { argTypes } from '../argTypes';
 import { sleep, stringifyWithDefaults } from '../../../utils';

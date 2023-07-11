@@ -12,6 +12,7 @@ import {
   GetQuizResultLinkProps,
   GetResetQuizButtonProps,
   GetSelectInputProps,
+  PrimaryColorStyles,
   QuizReturnState,
 } from '../../types';
 
@@ -29,6 +30,7 @@ export interface QuizContextValue {
   getAddToCartButtonProps: GetAddToCartButtonProps;
   getQuizResultButtonProps: GetQuizResultButtonProps;
   getQuizResultLinkProps: GetQuizResultLinkProps;
+  primaryColorStyles: PrimaryColorStyles;
   customClickItemCallback: boolean;
 }
 
