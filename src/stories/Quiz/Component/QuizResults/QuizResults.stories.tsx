@@ -2,6 +2,7 @@ import { expect } from '@storybook/jest';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { within } from '@storybook/testing-library';
+import React from 'react';
 import ResultContainer from '../../../../components/ResultContainer/ResultContainer';
 import QuizResultsDecorator from './QuizResultsDecorator';
 
@@ -26,6 +27,7 @@ export const QuizResultsPage: Story = {
   args: {
     options: resultsPageOptions,
   },
+  render: () => <div className="results-example-wrapper"><ResultContainer options={resultsPageOptions} /></div>, // eslint-disable-line
   decorators: [(story) => QuizResultsDecorator(story, resultsPageOptions)],
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);

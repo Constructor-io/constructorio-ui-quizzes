@@ -2,6 +2,7 @@ import { expect } from '@storybook/jest';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { within } from '@storybook/testing-library';
+import React from 'react';
 import ResultCard from '../../../../components/ResultCard/ResultCard';
 import QuizResultsDecorator from './QuizResultsDecorator';
 
@@ -26,12 +27,14 @@ const meta: Meta<typeof ResultCard> = {
 export default meta;
 type Story = StoryObj<typeof ResultCard>;
 
+const regularPriceArgs = {
+  result: product,
+  regularPriceKey: 'price',
+  resultPosition: 0,
+};
 export const ResultCardWithRegularPrice: Story = {
-  args: {
-    result: product,
-    regularPriceKey: 'price',
-    resultPosition: 0,
-  },
+  args: regularPriceArgs,
+  render: () => <div className="results-example-wrapper"><ResultCard {...regularPriceArgs} /></div>, // eslint-disable-line
 
   decorators: [(story) => QuizResultsDecorator(story)],
   play: async ({ canvasElement }) => {
@@ -52,14 +55,17 @@ export const ResultCardWithRegularPrice: Story = {
   },
 };
 
+const salePriceStoryArgs = {
+  result: product,
+  regularPriceKey: 'price',
+  salePriceKey: 'salePrice',
+  ratingCountKey: 'ratingCount',
+  ratingScoreKey: 'ratingScore',
+  resultPosition: 0,
+};
 export const ResultCardWithSalePrice: Story = {
-  args: {
-    result: product,
-    regularPriceKey: 'price',
-    salePriceKey: 'salePrice',
-    ratingCountKey: 'ratingCount',
-    ratingScoreKey: 'ratingScore',
-  },
+  args: salePriceStoryArgs,
+  render: () => <div className="results-example-wrapper"><ResultCard {...salePriceStoryArgs} /></div>, // eslint-disable-line
 
   decorators: [(story) => QuizResultsDecorator(story)],
   play: async ({ canvasElement }) => {
