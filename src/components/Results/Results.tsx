@@ -1,10 +1,15 @@
 import React, { useContext } from 'react';
-import { ResultsProps } from '../../types';
+import { ResultCardProps } from '../../types';
 import QuizContext from '../CioQuiz/context';
 import ResultCard from '../ResultCard/ResultCard';
 
-function Results(props: ResultsProps) {
-  const { resultCardSalePriceKey, resultCardRegularPriceKey } = props;
+function Results(props: ResultCardProps) {
+  const {
+    resultCardSalePriceKey,
+    resultCardRegularPriceKey,
+    resultCardRatingCountKey,
+    resultCardRatingScoreKey,
+  } = props;
   const { state } = useContext(QuizContext);
   return (
     <div className='cio-results'>
@@ -14,6 +19,8 @@ function Results(props: ResultsProps) {
           key={result.data?.id}
           salePriceKey={resultCardSalePriceKey}
           regularPriceKey={resultCardRegularPriceKey}
+          ratingCountKey={resultCardRatingCountKey}
+          ratingScoreKey={resultCardRatingScoreKey}
           resultPosition={index + 1}
         />
       ))}

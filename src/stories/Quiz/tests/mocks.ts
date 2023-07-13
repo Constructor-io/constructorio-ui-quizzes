@@ -81,6 +81,8 @@ export const getMockState = (question?: Question): any => ({
             data: {
               id: '0',
               price: 100,
+              ratingCount: '12',
+              ratingScore: '4',
               image_url:
                 'https://demo.constructor.io/sandbox_files/farmstandquizassets/HiThereNameInput.png',
             },
@@ -91,6 +93,8 @@ export const getMockState = (question?: Question): any => ({
               id: '1',
               price: 200,
               salePrice: 150,
+              ratingCount: '6',
+              ratingScore: '3',
               image_url:
                 'https://demo.constructor.io/sandbox_files/farmstandquizassets/HiThereNameInput.png',
             },
@@ -101,6 +105,8 @@ export const getMockState = (question?: Question): any => ({
               id: '2',
               price: 300,
               salePrice: 250,
+              ratingCount: '2',
+              ratingScore: '5',
               image_url:
                 'https://demo.constructor.io/sandbox_files/farmstandquizassets/HiThereNameInput.png',
             },

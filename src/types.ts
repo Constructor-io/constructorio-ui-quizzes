@@ -21,9 +21,11 @@ export type {
 export type QuizResultDataPartial = Partial<QuizResultData>;
 
 // QUIZ PROPS
-export interface ResultsProps {
+export interface ResultCardProps {
   resultCardSalePriceKey?: string;
   resultCardRegularPriceKey?: string;
+  resultCardRatingCountKey?: string;
+  resultCardRatingScoreKey?: string;
 }
 
 export namespace QuizResultsEventsProps {
@@ -32,7 +34,7 @@ export namespace QuizResultsEventsProps {
   export type OnAddToCartClick = (result: QuizResultDataPartial) => void;
 }
 
-export interface ResultsPageOptions extends ResultsProps {
+export interface ResultsPageOptions extends ResultCardProps {
   numResultsToDisplay?: number;
   onQuizResultsLoaded?: QuizResultsEventsProps.OnQuizResultsLoaded;
   onQuizResultClick?: QuizResultsEventsProps.OnQuizResultClick;
