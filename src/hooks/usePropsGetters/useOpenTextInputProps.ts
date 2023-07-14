@@ -9,30 +9,32 @@ export default function useOpenTextInputProps(
 ): GetOpenTextInputProps {
   const [input, setInput] = useState('');
 
-  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeHandler = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
-  };
+  }, []);
 
-  const onKeyDownHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    const { key } = e;
+  const onKeyDownHandler = useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      const { key } = e;
 
-    if (key === 'Enter') {
-      if (input && currentQuestionData?.type === 'open') {
-        nextQuestion();
+      if (key === 'Enter') {
+        if (input && currentQuestionData?.type === 'open') {
+          nextQuestion();
+        }
       }
-    }
-  };
+    },
+    [currentQuestionData?.type, input, nextQuestion]
+  );
 
   useEffect(() => {
     if (currentQuestionData?.type === 'open') {
       setQuizAnswers(input);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [input, currentQuestionData]);
+  }, [input, currentQuestionData?.type, currentQuestionData?.id, setQuizAnswers]);
 
   // Reset input for new open text questions
   useEffect(() => {
-    if (answerInputs && currentQuestionData) {
+    if (answerInputs && currentQuestionData?.id) {
       const questionAnswer = answerInputs[currentQuestionData.id]?.value;
       if (questionAnswer) {
         setInput(questionAnswer as string);
@@ -41,7 +43,7 @@ export default function useOpenTextInputProps(
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentQuestionData]);
+  }, [currentQuestionData?.id]);
 
   const getOpenTextInputProps: GetOpenTextInputProps = useCallback(
     () => ({
@@ -50,12 +52,9 @@ export default function useOpenTextInputProps(
       value: input,
       onChange: onChangeHandler,
       onKeyDown: onKeyDownHandler,
-      style: {
-        marginBottom: '10px',
-      },
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [currentQuestionData, input]
+    [currentQuestionData?.input_placeholder, currentQuestionData?.id, input, onKeyDownHandler]
   );
 
   return getOpenTextInputProps;

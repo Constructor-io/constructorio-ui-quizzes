@@ -11,12 +11,9 @@ export default function usePreviousQuestionButtonProps(
     return {
       title: 'Quiz Back Button',
       role: 'button',
-      className: 'cio-question-back-button',
+      className: `cio-question-back-button ${buttonDisabled ? 'disabled' : ''}`,
       type: 'button',
       onClick: () => previousQuestion(),
-      style: {
-        display: buttonDisabled ? 'none' : '',
-      },
     };
   }, [quizApiState, previousQuestion]);
 

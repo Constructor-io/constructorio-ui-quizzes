@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-syntax */
 import { AnswerInputState } from '../../types';
 import { ActionAnswerQuestion, QuestionTypes, ActionAnswerInputQuestion } from './actions';
 
@@ -87,7 +86,7 @@ export default function quizLocalReducer(
       const newAnswerInputs = { ...state.answerInputs };
       return {
         ...state,
-        answerInputs: { ...newAnswerInputs },
+        answerInputs: newAnswerInputs,
         answers: [...state.answers.slice(0, -1)],
         isLastAnswer: false,
       };

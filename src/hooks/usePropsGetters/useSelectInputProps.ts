@@ -68,7 +68,7 @@ export default function useSelectInputProps(
       const selectedAnswers = Object.keys(selected).filter((key) => selected[Number(key)]);
       quizAnswerChanged(selectedAnswers);
     }
-  }, [selected, currentQuestionData, quizAnswerChanged]);
+  }, [selected, currentQuestionData?.id, currentQuestionData?.type, quizAnswerChanged]);
 
   const getSelectInputProps: GetSelectInputProps = useCallback(
     (option: QuestionOption) => ({

@@ -25,9 +25,6 @@ const useQuiz: UseQuiz = (quizOptions) => {
   const { quizApiState, quizLocalState } = quizState;
   const propGetters = usePropsGetters(quizEvents, quizApiState, quizLocalState);
 
-  console.log(quizLocalState.answers);
-  console.log(quizLocalState.answerInputs);
-
   const primaryColorStyles = usePrimaryColorStyles(primaryColor);
 
   return {

@@ -101,7 +101,7 @@ export default function HooksTemplate(args) {
       // Open Text Question
       if (currentQuestion.isOpenQuestion) {
         return (
-          <div className='cio-quiz' style={{ padding: '40px' }}>
+          <div className='cio-quiz'>
             {currentQuestion.next_question.images?.primary_url && (
               <img {...getQuizImageProps()} width='100%' height={400} />
             )}
@@ -121,7 +121,7 @@ export default function HooksTemplate(args) {
       // Cover Question
       if (currentQuestion.isCoverQuestion) {
         return (
-          <div className='cio-quiz' style={{ padding: '40px' }}>
+          <div className='cio-quiz'>
             {currentQuestion.next_question.images?.primary_url && (
               <img {...getQuizImageProps()} width='100%' height={400} />
             )}
@@ -259,7 +259,7 @@ function MyQuiz(quizConfiguration) {
       // Open Text Question
       if (currentQuestion.isOpenQuestion) {
         return (
-          <div className='cio-quiz' style={{ padding: '40px' }}>
+          <div className='cio-quiz'>
             {currentQuestion.next_question.images?.primary_url && (
               <img {...getQuizImageProps()} width='100%' height={400} />
             )}
@@ -279,7 +279,7 @@ function MyQuiz(quizConfiguration) {
       // Cover Question
       if (currentQuestion.isCoverQuestion) {
         return (
-          <div className='cio-quiz' style={{ padding: '40px' }}>
+          <div className='cio-quiz'>
             {currentQuestion.next_question.images?.primary_url && (
               <img {...getQuizImageProps()} width='100%' height={400} />
             )}
