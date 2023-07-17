@@ -90,7 +90,7 @@ If you're using older Javascript syntax you might get this error.
 `Module parse failed: Unexpected token (15:32)
 You may need an appropriate loader to handle this file type, currently no loaders are configured to process this file`
 
-We expose an ES2015 supported version of our library which can be imported by doing:
+We expose an ES2015 version of our library which can be imported by doing:
 
 `import CioQuiz from '@constructor-io/constructorio-ui-quizzes/commonJs'`
 
