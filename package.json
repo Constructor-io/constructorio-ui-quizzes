@@ -26,6 +26,10 @@
     ".": {
       "import": "./lib/mjs/index.js",
       "require": "./lib/cjs/index.js"
+    },
+    "./commonJs": {
+      "import": "./lib/cjs/index.js",
+      "require": "./lib/cjs/index.js"
     }
   },
   "files": [

@@ -82,6 +82,18 @@ import '@constructor-io/constructorio-ui-quizzes/styles.css';
 
 ### Known Issues
 
+**Javascript version**
+
+The default exported javascript syntax is ESNext, the latest supported syntax of JavaScript. 
+If you're using older Javascript syntax you might get this error.
+
+`Module parse failed: Unexpected token (15:32)
+You may need an appropriate loader to handle this file type, currently no loaders are configured to process this file`
+
+We expose an ES2015 supported version of our library which can be imported by doing:
+
+`import CioQuiz from '@constructor-io/constructorio-ui-quizzes/commonJs'`
+
 **ESLint**
 
 There is a known issue with ESLint where it fails to resolve the paths exposed in the `exports` statement of NPM packages. If you are receiving the following error, you can safely disable ESLint using `// eslint-disable-line` for that line.
