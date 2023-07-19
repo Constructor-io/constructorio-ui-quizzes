@@ -77,6 +77,7 @@
   width: 100%;
   position: relative;
   align-self: start;
+  min-height: calc(100% - 2rem); /* Full height - margin */
 }
 .cio-container--with-image {
   display: flex;
@@ -86,6 +87,7 @@
   padding-bottom: var(--bottom-bar-height);
   position: relative;
   align-self: start;
+  min-height: 100%;
 }
 
 /* Session Prompt Modal */
