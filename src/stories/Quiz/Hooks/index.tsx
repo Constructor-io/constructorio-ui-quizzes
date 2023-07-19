@@ -138,6 +138,11 @@ export default function HooksTemplate(args) {
         return (
           <div className='cio-quiz'>
             <div className='cio-container--with-image cio-cover-question-container--with-image'>
+              {currentQuestion.next_question.images?.primary_url && (
+                <span className='cio-question-image-container'>
+                  <img {...getQuizImageProps()} className='cio-question-image' />
+                </span>
+              )}
               <div className='cio-question-content'>
                 <h1 className='cio-question-title'>{currentQuestionData.title}</h1>
                 <p className='cio-question-description'>{currentQuestionData.description}</p>
@@ -148,11 +153,6 @@ export default function HooksTemplate(args) {
                   </div>
                 </div>
               </div>
-              {currentQuestion.next_question.images?.primary_url && (
-                <span className='cio-question-image-container'>
-                  <img {...getQuizImageProps()} className='cio-question-image' />
-                </span>
-              )}
             </div>
           </div>
         );
