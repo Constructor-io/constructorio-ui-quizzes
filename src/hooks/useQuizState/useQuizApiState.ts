@@ -96,13 +96,7 @@ const useQuizApiState: UseQuizApiState = (
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    cioClient,
-    quizId,
-    quizLocalState.answers,
-    resultsPageOptions?.numResultsToDisplay,
-    // quizLocalState.isLastAnswer,
-  ]);
+  }, [cioClient, quizId, quizLocalState.answers, resultsPageOptions?.numResultsToDisplay]);
 
   return {
     quizApiState,
