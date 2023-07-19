@@ -31,7 +31,7 @@ export default function ResultContainer(props: IResultContainerProps) {
             resultCardRegularPriceKey={resultCardRegularPriceKey}
           />
         )}
-        {zeroResults && <ZeroResults />}
+        {zeroResults && resetQuiz && <ZeroResults resetQuizClickHandler={resetQuiz} />}
       </div>
     );
   }

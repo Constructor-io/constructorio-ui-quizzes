@@ -1,8 +1,9 @@
 import React from 'react';
+import { QuizEventsReturn } from '../../types';
 import CTAButton from '../CTAButton/CTAButton';
 
 interface ZeroResultsProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  resetQuizClickHandler?: () => {};
+  resetQuizClickHandler: QuizEventsReturn.ResetQuiz;
 }
 
 function ZeroResults(props: ZeroResultsProps) {
