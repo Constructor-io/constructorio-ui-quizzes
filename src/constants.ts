@@ -31,7 +31,7 @@ export const hookDescription = `- import \`useCioQuiz\` and call this custom hoo
   - keyboard navigation
   - mouse interactions
   - focus and submit event handling
-- To use this hook, an \`apiKey\` or \`quizId\` are required, and \`resultsPageOptions\` must be passed to the \`useCioQuiz\` hook to configure behavior. All other values are optional.
+- To use this hook, an \`apiKey\` and \`quizId\` are required, and \`resultsPageOptions\` must be passed to the \`useCioQuiz\` hook to configure behavior. All other values are optional.
 - use the <a href="https://kentcdodds.com/blog/how-to-give-rendering-control-to-users-with-prop-getters" target="__blank">prop getters</a> and other variables returned by this hook (below) to leverage the functionality described above with jsx elements in your react component definitions
 
 Calling the \`useCioQuiz\` hook returns an object with the following keys:
@@ -50,7 +50,7 @@ const {
   getSelectInputProps: () => ({...})), // prop getter for jsx select input for select type questions,
   getQuizImageProps: () => ({...})), // prop getter for jsx quiz image,
   getQuizResultButtonProps: () => ({...})), // prop getter for jsx result card click as a button,
-  getQuizResultLinkProps: () => ({...})), // prop getter for jsx result card click as a link,
+  getQuizResultLinkProps: () => ({...})), // prop getter for jsx result card click as a link. Should be spread into <a> tags,
   getResetQuizButtonProps: () => ({...})), // prop getter for jsx reset quiz button,
   cioClient, // instance of constructorio-client-javascript
  } = useCioQuiz(args);

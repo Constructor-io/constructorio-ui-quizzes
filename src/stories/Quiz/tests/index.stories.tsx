@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { within, userEvent } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 import CioQuiz from '../../../components/CioQuiz';
@@ -43,6 +44,7 @@ const sessionStateOptions = {
   showSessionModal: false,
 };
 
+// eslint-disable-next-line storybook/prefer-pascal-case
 export const e2eInteractionTest = ComponentTemplate.bind({});
 e2eInteractionTest.args = { apiKey, quizId, resultsPageOptions, sessionStateOptions };
 addComponentStoryDescription(

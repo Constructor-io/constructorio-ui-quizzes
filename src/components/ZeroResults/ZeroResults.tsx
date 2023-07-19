@@ -2,9 +2,7 @@ import React, { useContext } from 'react';
 import CTAButton from '../CTAButton/CTAButton';
 import QuizContext from '../CioQuiz/context';
 
-interface ZeroResultsProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
-
-function ZeroResults(props: ZeroResultsProps) {
+function ZeroResults() {
   const { getResetQuizButtonProps } = useContext(QuizContext);
 
   return (
