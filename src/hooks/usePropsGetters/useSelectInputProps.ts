@@ -86,7 +86,7 @@ export default function useSelectInputProps(
       key: option.id,
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [currentQuestionData, selected]
+    [currentQuestionData?.id, selected]
   );
 
   return getSelectInputProps;
