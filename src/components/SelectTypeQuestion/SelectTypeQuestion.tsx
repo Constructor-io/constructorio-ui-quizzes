@@ -112,7 +112,6 @@ function SelectTypeQuestion() {
           backButtonHandler={previousQuestion}
           showBackButton={!state?.quiz.isFirstQuestion}
           ctaButtonText={question?.cta_text}
-          instructions={instructions}
         />
       </div>
     );
