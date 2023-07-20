@@ -31,6 +31,7 @@ export const hookDescription = `- import \`useCioQuiz\` and call this custom hoo
   - keyboard navigation
   - mouse interactions
   - focus and submit event handling
+- Since the markup is controlled by you, the default styles might not be applied if you have a different DOM structure
 - To use this hook, an \`apiKey\` and \`quizId\` are required, and \`resultsPageOptions\` must be passed to the \`useCioQuiz\` hook to configure behavior. All other values are optional.
 - use the <a href="https://kentcdodds.com/blog/how-to-give-rendering-control-to-users-with-prop-getters" target="__blank">prop getters</a> and other variables returned by this hook (below) to leverage the functionality described above with jsx elements in your react component definitions
 
