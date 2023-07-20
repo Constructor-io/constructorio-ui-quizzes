@@ -77,6 +77,7 @@ function SelectTypeQuestion() {
           <QuestionTitle title={question.title} />
           {question?.description ? <QuestionDescription description={question.description} /> : ''}
         </div>
+        {instructions && <div className='cio-select-question-instructions'>{instructions}</div>}
         <div
           className={`${
             !hasImages
@@ -111,7 +112,6 @@ function SelectTypeQuestion() {
           backButtonHandler={previousQuestion}
           showBackButton={!state?.quiz.isFirstQuestion}
           ctaButtonText={question?.cta_text}
-          instructions={instructions}
         />
       </div>
     );

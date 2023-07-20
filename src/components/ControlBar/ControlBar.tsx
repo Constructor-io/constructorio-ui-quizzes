@@ -8,7 +8,6 @@ interface ControlBarProps {
   backButtonHandler?: () => void;
   nextButtonHandler: () => void;
   ctaButtonText?: string;
-  instructions?: string;
 }
 
 function ControlBar(props: ControlBarProps) {
@@ -18,13 +17,11 @@ function ControlBar(props: ControlBarProps) {
     ctaButtonText,
     nextButtonHandler,
     isNextButtonDisabled,
-    instructions,
   } = props;
 
   return (
     <div className='cio-question-buttons-container'>
       {showBackButton && <BackButton onClick={backButtonHandler} />}
-      {instructions && <div className='cio-question-buttons-container-text'>{instructions}</div>}
       <CTAButton
         disabled={isNextButtonDisabled}
         ctaText={ctaButtonText}

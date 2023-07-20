@@ -194,9 +194,6 @@
   background-color: rgba(255, 255, 255, 0.87);
   align-items: center;
 }
-.cio-question-buttons-container-text {
-  display: none;
-}
 .cio-question-cta-button {
   background: var(--primary-color);
   color: #ffffff;
@@ -358,6 +355,16 @@
 }
 .cio-select-question-text .cio-question-description {
   margin-bottom: 0;
+}
+
+/* Select Instructions */
+.cio-select-question-instructions {
+  text-align: center;
+  font-size: 1.125rem;
+  color: var(--gray-dust-100);
+  line-height: 150%;
+  margin-top: 2.75rem;
+  margin-bottom: -1rem;
 }
 
 /* Results component */
@@ -597,15 +604,6 @@
   /* Result Card component */
   .cio-result-card {
     flex-basis: 30%;
-  }
-
-  /* Control Bar Instructions */
-  .cio-question-buttons-container-text {
-    text-align: center;
-    flex-grow: 1;
-    color: var(--gray-dust-100);
-    font-size: 1.125rem;
-    display: block;
   }
 }
 
