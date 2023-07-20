@@ -3,7 +3,9 @@ import { ResultCardProps } from '../../types';
 import QuizContext from '../CioQuiz/context';
 import ResultCard from '../ResultCard/ResultCard';
 
-function Results(props: ResultCardProps) {
+interface ResultsProps extends ResultCardProps {}
+
+function Results(props: ResultsProps) {
   const {
     resultCardSalePriceKey,
     resultCardRegularPriceKey,

@@ -42,22 +42,25 @@ export default function ResultCard(props: ResultCardProps) {
       </div>
       <div className='cio-result-card-text'>
         <p className='cio-result-card-title'>{result.value}</p>
-        <div className='cio-result-card-rating'>
-          {ratingScore && (
-            <span className='cio-result-card-rating-score'>
-              {Array(Number(ratingScore)).fill('★')}
-              {Array(5 - Number(ratingScore)).fill('☆')}{' '}
-            </span>
-          )}
-          {ratingCount && <span className='cio-result-card-rating-count'>({ratingCount})</span>}
-        </div>
-        <div className='cio-result-card-prices'>
-          {salePrice && <span className='cio-result-card-sale-price'>${salePrice}</span>}
-          {regularPrice && (
-            <span className={`cio-result-card-regular-price${salePrice ? '--strike-through' : ''}`}>
-              ${regularPrice}
-            </span>
-          )}
+        <div>
+          <div className='cio-result-card-rating'>
+            {ratingScore && (
+              <span className='cio-result-card-rating-score'>
+                {Array(Number(ratingScore)).fill('★')}
+                {Array(5 - Number(ratingScore)).fill('☆')}
+              </span>
+            )}
+            {ratingCount && <span className='cio-result-card-rating-count'>({ratingCount})</span>}
+          </div>
+          <div className='cio-result-card-prices'>
+            {salePrice && <span className='cio-result-card-sale-price'>${salePrice}</span>}
+            {regularPrice && (
+              <span
+                className={`cio-result-card-regular-price${salePrice ? '--strike-through' : ''}`}>
+                ${regularPrice}
+              </span>
+            )}
+          </div>
         </div>
       </div>
     </>
