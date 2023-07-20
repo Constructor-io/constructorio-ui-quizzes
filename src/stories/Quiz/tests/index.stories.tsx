@@ -80,17 +80,6 @@ e2eInteractionTest.play = async ({ canvasElement }) => {
   expect(await canvas.findByText('How much coffee do you generally drink?')).toBeInTheDocument();
   expect(canvas.getByRole('button', { name: 'Continue' })).toHaveClass('disabled');
   userEvent.click(canvas.getByRole('button', { name: /More than one/ }));
-  await sleep(100);
-  expect(canvas.getByRole('button', { name: /More than one/ })).toHaveClass('selected');
-
-  await sleep(500);
-  expect(canvas.getByRole('button', { name: 'Continue' })).not.toHaveClass('disabled');
-  userEvent.click(canvas.getByRole('button', { name: /All day long/ }));
-  await sleep(100);
-  expect(canvas.getByRole('button', { name: /All day long/ })).toHaveClass('selected');
-  expect(canvas.getByRole('button', { name: /More than one/ })).not.toHaveClass('selected');
-  expect(canvas.getByRole('button', { name: 'Continue' })).not.toHaveClass('disabled');
-  userEvent.click(canvas.getByRole('button', { name: 'Continue' }));
 
   // Single Select back button test
   await sleep(500);
@@ -98,7 +87,7 @@ e2eInteractionTest.play = async ({ canvasElement }) => {
   userEvent.click(canvas.getByRole('button', { name: 'Quiz Back Button' }));
   await sleep(500);
   expect(await canvas.findByText('How much coffee do you generally drink?')).toBeInTheDocument();
-  expect(canvas.getByRole('button', { name: /All day long/ })).toHaveClass('selected');
+  expect(canvas.getByRole('button', { name: /More than one/ })).toHaveClass('selected');
   expect(canvas.getByRole('button', { name: 'Continue' })).not.toHaveClass('disabled');
   userEvent.click(canvas.getByRole('button', { name: 'Continue' }));
 
@@ -129,10 +118,6 @@ e2eInteractionTest.play = async ({ canvasElement }) => {
   userEvent.click(canvas.getByRole('button', { name: /No, I'm open/ }));
 
   await sleep(500);
-  expect(canvas.getByRole('button', { name: 'Continue' })).not.toHaveClass('disabled');
-  userEvent.click(canvas.getByRole('button', { name: 'Continue' }));
-
-  await sleep(500);
   expect(await canvas.findByText('Do you have preferred coffee notes?')).toBeInTheDocument();
   userEvent.click(canvas.getByRole('button', { name: /Chocolates/ }));
   await sleep(100);
@@ -147,8 +132,6 @@ e2eInteractionTest.play = async ({ canvasElement }) => {
   await sleep(500);
   expect(await canvas.findByText('Are you into latte-art?')).toBeInTheDocument();
   userEvent.click(canvas.getByRole('button', { name: /I have no idea/ }));
-  await sleep(100);
-  userEvent.click(canvas.getByRole('button', { name: 'Continue' }));
 
   // Results page
   await sleep(500);

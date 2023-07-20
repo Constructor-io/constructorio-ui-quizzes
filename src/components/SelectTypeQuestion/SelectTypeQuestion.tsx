@@ -44,8 +44,9 @@ function SelectTypeQuestion() {
   }, [state?.quiz.currentQuestion?.next_question.id]);
 
   const toggleIdSelected = (id: number) => {
-    if (type === QuestionTypes.SingleSelect) {
+    if (type === QuestionTypes.SingleSelect && nextQuestion) {
       setSelected({ [id]: true });
+      nextQuestion([id.toString()]);
     } else if (type === QuestionTypes.MultipleSelect) {
       if (selected[id]) {
         const newState = { ...selected };
