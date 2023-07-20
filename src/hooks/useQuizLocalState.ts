@@ -48,12 +48,18 @@ const useQuizLocalState = (sessionStateKey?: string) => {
 
   const hasQuizStoredState = (): boolean => getStateFromSessionStorage() !== null;
 
+  const isResultsStep = () => {
+    const quizState = getStateFromSessionStorage();
+    return !!quizState?.isLastAnswer;
+  };
+
   return {
     quizLocalState,
     resetQuizLocalState,
     hydrateQuizLocalState,
     hasQuizStoredState,
     resetQuizStoredState,
+    isResultsStep,
     dispatchLocalState: dispatch,
   };
 };

@@ -18,6 +18,7 @@ export type UseQuizEventOptions = {
   hydrateQuizLocalState: () => void;
   resetQuizStoredState: () => void;
   hasQuizStoredState: () => boolean;
+  isResultsStep: () => boolean;
 };
 
 const useQuizEvents = (options: UseQuizEventOptions): QuizEventsReturn => {
@@ -31,6 +32,7 @@ const useQuizEvents = (options: UseQuizEventOptions): QuizEventsReturn => {
     hydrateQuizLocalState,
     resetQuizStoredState,
     hasQuizStoredState,
+    isResultsStep,
   } = options;
 
   const { onAddToCartClick, onQuizResultClick, onQuizResultsLoaded } = resultsPageOptions;
@@ -66,6 +68,7 @@ const useQuizEvents = (options: UseQuizEventOptions): QuizEventsReturn => {
     resetQuiz,
     hydrateQuiz: hydrateQuizLocalState,
     hasStoredState: hasQuizStoredState,
+    isResultsStep,
     resetStoredState: resetQuizStoredState,
   };
 };

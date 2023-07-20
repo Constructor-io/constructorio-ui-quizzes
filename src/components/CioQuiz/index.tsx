@@ -22,6 +22,7 @@ export default function CioQuiz(props: IQuizProps) {
       hydrateQuiz,
       hasStoredState,
       resetStoredState,
+      isResultsStep,
     },
     primaryColorStyles,
   } = useQuiz(props);
@@ -29,12 +30,17 @@ export default function CioQuiz(props: IQuizProps) {
   const { resultsPageOptions, sessionStateOptions } = props;
 
   useEffect(() => {
+    const goToResults = isResultsStep() && !sessionStateOptions?.showSessionModalOnResults;
     // Respect showSessionModal if defined, else default to true.
     if (sessionStateOptions?.showSessionModal !== undefined) {
-      setShowSessionPrompt(sessionStateOptions?.showSessionModal && hasStoredState());
+      setShowSessionPrompt(
+        sessionStateOptions?.showSessionModal && hasStoredState() && !goToResults
+      );
     } else {
-      setShowSessionPrompt(hasStoredState());
+      setShowSessionPrompt(hasStoredState() && !goToResults);
     }
+
+    if (goToResults) hydrateQuiz();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

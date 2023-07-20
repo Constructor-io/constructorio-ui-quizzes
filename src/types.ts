@@ -41,6 +41,7 @@ export interface ResultsPageOptions extends ResultsProps {
 
 export interface SessionStateOptions {
   showSessionModal?: boolean;
+  showSessionModalOnResults?: boolean;
   sessionStateKey?: string;
 }
 
@@ -85,6 +86,7 @@ export namespace QuizEventsReturn {
   export type HydrateQuiz = () => void;
   export type HasStoredState = () => boolean;
   export type ResetStoredState = () => void;
+  export type IsResultsStep = () => boolean;
 }
 
 export interface QuizEventsReturn {
@@ -96,6 +98,7 @@ export interface QuizEventsReturn {
   hydrateQuiz: QuizEventsReturn.HydrateQuiz;
   hasStoredState: QuizEventsReturn.HasStoredState;
   resetStoredState: QuizEventsReturn.ResetStoredState;
+  isResultsStep: QuizEventsReturn.IsResultsStep;
 }
 
 export interface PrimaryColorStyles {

@@ -26,6 +26,7 @@ const useQuiz: UseQuiz = ({
     hydrateQuizLocalState,
     hasQuizStoredState,
     resetQuizStoredState,
+    isResultsStep,
   } = useQuizLocalState(sessionStateOptions?.sessionStateKey);
 
   // Quiz Cio Client
@@ -52,6 +53,7 @@ const useQuiz: UseQuiz = ({
     hydrateQuizLocalState,
     resetQuizStoredState,
     hasQuizStoredState,
+    isResultsStep,
   });
 
   const primaryColorStyles = usePrimaryColorStyles(primaryColor);
