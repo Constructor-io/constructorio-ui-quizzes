@@ -126,8 +126,6 @@ e2eInteractionTest.play = async ({ canvasElement }) => {
   await sleep(500);
   expect(await canvas.findByText('Lastly, do you have a roasting preference?')).toBeInTheDocument();
   userEvent.click(canvas.getByRole('button', { name: 'Medium' }));
-  await sleep(100);
-  userEvent.click(canvas.getByRole('button', { name: 'Continue' }));
 
   await sleep(500);
   expect(await canvas.findByText('Are you into latte-art?')).toBeInTheDocument();
