@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
 /* Theme colors */
 .cio-quiz {
   --primary-color-h: 227;
@@ -72,13 +74,19 @@
   justify-content: center;
   margin-top: 2rem;
   padding-bottom: var(--bottom-bar-height);
+  width: 100%;
+  position: relative;
+  align-self: start;
+  min-height: calc(100% - 2rem); /* Full height - margin */
 }
 .cio-container--with-image {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-height: 100vh;
   padding-bottom: var(--bottom-bar-height);
+  position: relative;
+  align-self: start;
+  min-height: 100%;
 }
 
 /* Session Prompt Modal */
@@ -190,9 +198,6 @@
   background: white;
   background-color: rgba(255, 255, 255, 0.87);
   align-items: center;
-}
-.cio-question-buttons-container-text {
-  display: none;
 }
 .cio-question-cta-button {
   background: var(--primary-color);
@@ -319,7 +324,7 @@
   gap: 1rem;
   width: 100%;
   padding: 10px;
-  margin-bottom: auto;
+  margin-bottom: var(--bottom-bar-height);
   margin-top: 2rem;
 }
 .cio-question-option-container-text-only {
@@ -359,6 +364,16 @@
 }
 .cio-select-question-text .cio-question-description {
   margin-bottom: 0;
+}
+
+/* Select Instructions */
+.cio-select-question-instructions {
+  text-align: center;
+  font-size: 1.125rem;
+  color: var(--gray-dust-100);
+  line-height: 150%;
+  margin-top: 2.75rem;
+  margin-bottom: -1rem;
 }
 
 /* Results component */
@@ -544,6 +559,7 @@
 @container quiz (min-width: 640px) {
   .cio-container {
     padding-bottom: 0;
+    align-self: normal;
   }
 
   /* Container */
@@ -553,6 +569,7 @@
     align-items: center;
     margin-bottom: 0;
     padding-bottom: 0;
+    align-self: normal;
   }
 
   /* Image */
@@ -598,15 +615,6 @@
   /* Result Card component */
   .cio-result-card {
     flex-basis: 30%;
-  }
-
-  /* Control Bar Instructions */
-    .cio-question-buttons-container-text {
-    text-align: center;
-    flex-grow: 1;
-    color: var(--gray-dust-100);
-    font-size: 1.125rem;
-    display: block;
   }
 }
 

@@ -30,6 +30,7 @@ function SelectTypeQuestion() {
           <QuestionTitle title={question.title} />
           {question?.description ? <QuestionDescription description={question.description} /> : ''}
         </div>
+        {instructions && <div className='cio-select-question-instructions'>{instructions}</div>}
         <div
           className={`${
             !hasImages
@@ -46,7 +47,7 @@ function SelectTypeQuestion() {
               )
           )}
         </div>
-        <ControlBar ctaButtonText={question?.cta_text || 'Continue'} instructions={instructions} />
+        <ControlBar ctaButtonText={question?.cta_text || 'Continue'} />
       </div>
     );
   }

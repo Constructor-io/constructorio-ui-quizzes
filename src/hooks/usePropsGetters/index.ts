@@ -52,6 +52,7 @@ const usePropsGetters = (
 
   const getSelectInputProps: GetSelectInputProps = useSelectInputProps(
     quizAnswerChanged,
+    nextQuestion,
     quizApiState.quizCurrentQuestion?.next_question,
     quizLocalState.answerInputs
   );

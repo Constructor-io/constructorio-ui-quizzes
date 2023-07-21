@@ -1,5 +1,6 @@
-import { useState, useCallback, useEffect, KeyboardEvent } from 'react';
+import { useState, useCallback, useEffect, KeyboardEvent, useRef } from 'react';
 import { QuestionTypes } from '../../components/CioQuiz/actions';
+import { Answers } from '../../components/CioQuiz/quizLocalReducer';
 import { Selected } from '../../components/SelectTypeQuestion/SelectTypeQuestion';
 import {
   AnswerInputState,
@@ -9,15 +10,19 @@ import {
   QuizEventsReturn,
 } from '../../types';
 
+// eslint-disable-next-line max-params
 export default function useSelectInputProps(
   quizAnswerChanged: QuizEventsReturn.QuizAnswerChanged,
+  nextQuestion: QuizEventsReturn.NextQuestion,
   currentQuestionData?: Question,
-  answerInputs?: AnswerInputState
+  answerInputs?: AnswerInputState,
+  answers?: Answers
 ): GetSelectInputProps {
   const type: `${QuestionTypes}` | undefined = currentQuestionData?.type;
   const hasImages = currentQuestionData?.options?.some((option: QuestionOption) => option.images);
 
   const [selected, setSelected] = useState<Selected>({});
+  const singleSelectQuestionAnswer = useRef({});
 
   const toggleIdSelected = useCallback(
     (id: number) => {
@@ -69,6 +74,40 @@ export default function useSelectInputProps(
       quizAnswerChanged(selectedAnswers);
     }
   }, [selected, currentQuestionData?.id, currentQuestionData?.type, quizAnswerChanged]);
+
+  useEffect(() => {
+    console.log(answerInputs);
+    if (currentQuestionData?.type === 'single') {
+      debugger;
+      nextQuestion();
+    }
+  }, [answerInputs]);
+
+  // const currentQuestionId = currentQuestionData?.id;
+  // let currentAnswer;
+  // if (currentQuestionId) {
+  //   currentAnswer = answerInputs?.[currentQuestionId];
+  // }
+
+  // const [currentAnswerId, setCurrentAnswerId] = useState('');
+
+  // useEffect(() => {
+  //   console.log(selected);
+  //   debugger;
+  //   if (Object.keys(selected).length) {
+  //     setCurrentAnswerId(Object.keys(selected)?.[0]);
+  //   }
+  // }, [selected]);
+
+  // useEffect(() => {
+  //   if (currentQuestionData?.type === 'single' && currentAnswer.type === 'single') {
+  //     console.log('selectedssssssssssss', selected);
+  //     console.log('currentAnswerId', currentAnswerId);
+
+  //     nextQuestion();
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [currentAnswerId]);
 
   const getSelectInputProps: GetSelectInputProps = useCallback(
     (option: QuestionOption) => ({
