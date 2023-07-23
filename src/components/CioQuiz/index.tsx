@@ -29,8 +29,9 @@ export default function CioQuiz(props: IQuizProps) {
   const [showSessionPrompt, setShowSessionPrompt] = useState(false);
   const { resultsPageOptions, sessionStateOptions } = props;
 
+  const goToResults = isResultsStep() && !sessionStateOptions?.showSessionModalOnResults;
+
   useEffect(() => {
-    const goToResults = isResultsStep() && !sessionStateOptions?.showSessionModalOnResults;
     // Respect showSessionModal if defined, else default to true.
     if (sessionStateOptions?.showSessionModal !== undefined) {
       setShowSessionPrompt(
@@ -42,7 +43,7 @@ export default function CioQuiz(props: IQuizProps) {
 
     if (goToResults) hydrateQuiz();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [goToResults]);
 
   const contextValue: QuizContextValue = {
     cioClient,
@@ -74,8 +75,11 @@ export default function CioQuiz(props: IQuizProps) {
           setShowSessionPrompt={setShowSessionPrompt}
         />
         <QuizContext.Provider value={contextValue}>
-          {state.quiz.results && <ResultContainer options={resultsPageOptions} />}
-          {state.quiz.currentQuestion && <QuizQuestions />}
+          {state.quiz.results || goToResults ? (
+            <ResultContainer options={resultsPageOptions} />
+          ) : (
+            state.quiz.currentQuestion && <QuizQuestions />
+          )}
         </QuizContext.Provider>
       </div>
     );

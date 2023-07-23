@@ -18,7 +18,7 @@ export type UseQuizEventOptions = {
   hydrateQuizLocalState: () => void;
   resetQuizStoredState: () => void;
   hasQuizStoredState: () => boolean;
-  isResultsStep: () => boolean;
+  isResultsStep: QuizEventsReturn.IsResultsStep;
 };
 
 const useQuizEvents = (options: UseQuizEventOptions): QuizEventsReturn => {
