@@ -82,15 +82,16 @@ import '@constructor-io/constructorio-ui-quizzes/styles.css';
 
 ### Known Issues
 
-**Javascript version**
+**Older Javascript environments**
+The library provides two different builds. CommonJS (cjs) and ECMAScript Modules (mjs) 
 
-The default exported javascript syntax is ESNext, the latest supported syntax of JavaScript. 
-If you're using older Javascript syntax you might get this error.
+For ECMAScript Modules (mjs) build. The Javascript version is ESNext which might not be supported by your environment.
+If that's the case and your environment is using an older Javascript version like ES6 (ES2015), you might get this error.
 
 `Module parse failed: Unexpected token (15:32)
 You may need an appropriate loader to handle this file type, currently no loaders are configured to process this file`
 
-We expose an ES2015 version of our library which can be imported by doing:
+To solve this you can import the CommonJS (cjs) build. Which supports ES6 (ES2015) syntax:
 
 `import CioQuiz from '@constructor-io/constructorio-ui-quizzes/commonJs'`
 
