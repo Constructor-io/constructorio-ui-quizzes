@@ -161,7 +161,11 @@ export const useMockContextValue = (question?: Question): QuizContextValue => {
 
   const getCoverQuestionProps = useCoverQuestionProps(() => {}, question);
 
-  const getSelectInputProps = useSelectInputProps(() => {}, question);
+  const getSelectInputProps = useSelectInputProps(
+    () => {},
+    () => {},
+    question
+  );
 
   return {
     state: getMockState(question),
