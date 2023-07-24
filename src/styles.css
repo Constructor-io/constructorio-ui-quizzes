@@ -561,7 +561,6 @@
   /* Container */
   .cio-container--with-image {
     display: flex;
-    justify-content: center;
     align-items: center;
     margin-bottom: 0;
     padding-bottom: 0;
@@ -578,7 +577,6 @@
 
   /* Cover Page Component */
   .cio-cover-question-container--with-image {
-    justify-content: center;
     margin-bottom: 0;
     padding-bottom: 0;
   }
@@ -625,6 +623,7 @@
     padding: 6% 2%;
     align-items: center;
     flex-direction: row;
+    justify-content: center;
   }
   .cio-cover-question-container--with-image {
     flex-direction: row-reverse;
