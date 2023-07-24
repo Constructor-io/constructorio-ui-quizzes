@@ -1,6 +1,6 @@
 import { Question } from '@constructor-io/constructorio-client-javascript/lib/types';
 import QuizContext from '../../../../components/CioQuiz/context';
-import { getMockContextValue } from '../../tests/mocks';
+import { useMockContextValue } from '../../tests/mocks';
 
 const React = require('react');
 const ReactDOM = require('react-dom');
@@ -12,9 +12,11 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 export default function QuestionTypeDecorator(Story: any, question: Question) {
+  const contextValue = useMockContextValue(question);
+
   return (
     <div className='cio-quiz'>
-      <QuizContext.Provider value={getMockContextValue(question)}>
+      <QuizContext.Provider value={contextValue}>
         <Story />
       </QuizContext.Provider>
     </div>

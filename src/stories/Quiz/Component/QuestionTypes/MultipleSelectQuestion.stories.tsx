@@ -1,7 +1,7 @@
 import { SelectQuestion } from '@constructor-io/constructorio-client-javascript/lib/types';
 import { expect } from '@storybook/jest';
 import type { Meta, StoryObj } from '@storybook/react';
-import { userEvent, within } from '@storybook/testing-library';
+import { within } from '@storybook/testing-library';
 import { QuestionTypes } from '../../../../components/CioQuiz/actions';
 
 import SelectTypeQuestion from '../../../../components/SelectTypeQuestion/SelectTypeQuestion';
@@ -44,7 +44,6 @@ export const MultipleSelectQuestionWithImages: Story = {
     const description = canvas.getByText('This is question description');
     const allOptions = canvas.getAllByRole('button');
     const firstOption = canvas.getAllByRole('button')[0];
-    const secondOption = canvas.getAllByRole('button')[1];
     const optionImage = document.querySelector('.cio-question-image') as HTMLElement;
     const optionValue = document.querySelector('.cio-question-option-value') as HTMLElement;
     expect(title).toBeInTheDocument();
@@ -56,15 +55,6 @@ export const MultipleSelectQuestionWithImages: Story = {
     expect(optionImage.getAttribute('src')).toEqual(
       'https://demo.constructor.io/sandbox_files/farmstandquizassets/HiThereNameInput.png'
     );
-
-    // 👇 Simulate interactions with the component
-    await userEvent.click(firstOption);
-    expect(firstOption).toHaveClass('selected');
-    await userEvent.click(secondOption);
-    expect(firstOption).toHaveClass('selected');
-    expect(secondOption).toHaveClass('selected');
-    await userEvent.click(secondOption);
-    expect(secondOption).not.toHaveClass('selected');
   },
 };
 

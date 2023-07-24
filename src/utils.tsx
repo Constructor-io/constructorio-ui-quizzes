@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import {
   FilterExpression,
@@ -6,6 +7,7 @@ import {
   FilterExpressionValue,
 } from '@constructor-io/constructorio-client-javascript/lib/types';
 import { QuestionTypes } from './components/CioQuiz/actions';
+import { QuizLocalReducerState } from './components/CioQuiz/quizLocalReducer';
 import { PrimaryColorStyles, QuestionImages } from './types';
 
 export const renderImages = (images: Partial<QuestionImages>, cssClasses?: string) => {
@@ -157,6 +159,30 @@ export const getFilterValuesFromExpression = (exp: FilterExpression | null): str
   }
 
   return [];
+};
+
+export const getStateFromSessionStorage = (quizStateKey: string): QuizLocalReducerState | null => {
+  const state = window?.sessionStorage?.getItem(quizStateKey);
+
+  if (state) {
+    return JSON.parse(state);
+  }
+  return null;
+};
+
+export const resetQuizSessionStorageState = (quizStateKey: string) => () => {
+  window?.sessionStorage?.removeItem(quizStateKey);
+};
+
+export const logger = (action: any) => {
+  console.group(
+    `%cAction:%c  ${action.type}`,
+    'color: red; font-weight: bold;',
+    'color: green; font-weight: lighter;'
+  );
+  console.log('%c type:', 'color: #9E9E9E; font-weight: 700;', action.type);
+  console.log('%c payload:', 'color: #00A7F7; font-weight: 700;', action.payload);
+  console.groupEnd();
 };
 
 // Function to emulate pausing between interactions

@@ -1,75 +1,27 @@
-import React, { useEffect, useState, useContext, KeyboardEvent } from 'react';
+import React, { useContext } from 'react';
 import QuestionTitle from '../QuestionTitle/QuestionTitle';
 import QuestionDescription from '../QuestionDescription/QuestionDescription';
 import QuizContext from '../CioQuiz/context';
-import { QuestionOption } from '../../types';
+import { Question, QuestionOption } from '../../types';
 import { renderImages } from '../../utils';
-import { QuestionTypes } from '../CioQuiz/actions';
 import ControlBar from '../ControlBar/ControlBar';
+import { QuestionTypes } from '../CioQuiz/actions';
 
-interface Selected {
+export interface Selected {
   [key: number]: boolean;
 }
 
 function SelectTypeQuestion() {
-  const { state, nextQuestion, previousQuestion } = useContext(QuizContext);
-  let question;
-  let type: `${QuestionTypes}`;
+  const { state, getSelectInputProps } = useContext(QuizContext);
+  let question: Question | undefined;
   let hasImages = false;
   let instructions;
 
   if (state?.quiz.currentQuestion) {
     question = state.quiz.currentQuestion.next_question;
-    type = question.type;
     hasImages = question.options.some((option: QuestionOption) => option.images);
-    instructions = type === QuestionTypes.MultipleSelect && 'Select one or more options';
+    instructions = question.type === QuestionTypes.MultipleSelect && 'Select one or more options';
   }
-
-  const [selected, setSelected] = useState<Selected>({});
-  const isDisabled = Object.keys(selected).length === 0;
-
-  useEffect(() => {
-    if (state?.quiz.currentQuestion?.next_question?.type) {
-      const nextQuestionId = state.quiz.currentQuestion.next_question.id;
-      const answers = state.answers?.inputs?.[nextQuestionId] || [];
-      const prevSelected: Selected = {};
-
-      (answers as string[])?.forEach((answer) => {
-        prevSelected[Number(answer)] = true;
-      });
-
-      setSelected(prevSelected);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state?.quiz.currentQuestion?.next_question.id]);
-
-  const toggleIdSelected = (id: number) => {
-    if (type === QuestionTypes.SingleSelect && nextQuestion) {
-      setSelected({ [id]: true });
-      nextQuestion([id.toString()]);
-    } else if (type === QuestionTypes.MultipleSelect) {
-      if (selected[id]) {
-        const newState = { ...selected };
-        delete newState[id];
-        setSelected(newState);
-      } else {
-        setSelected({ ...selected, [id]: true });
-      }
-    }
-  };
-
-  const onOptionKeyDown = (event: KeyboardEvent<HTMLDivElement>, id: number) => {
-    if (event?.key === ' ' || event?.key === 'Enter') {
-      toggleIdSelected(id);
-    }
-  };
-
-  const onNextClick = () => {
-    if (nextQuestion && !isDisabled && state?.quiz.currentQuestion) {
-      const selectedAnswers = Object.keys(selected).filter((key) => selected[Number(key)]);
-      nextQuestion(selectedAnswers);
-    }
-  };
 
   if (question) {
     return (
@@ -85,35 +37,17 @@ function SelectTypeQuestion() {
               ? 'cio-question-options-container-text-only'
               : 'cio-question-options-container'
           }`}>
-          {question?.options?.map((option: QuestionOption) => (
-            <div
-              className={`${
-                !hasImages
-                  ? 'cio-question-option-container-text-only'
-                  : 'cio-question-option-container'
-              } ${selected[option.id] ? 'selected' : ''}`}
-              data-question-option-key={option.key}
-              onClick={() => {
-                toggleIdSelected(option.id);
-              }}
-              onKeyDown={(event) => {
-                onOptionKeyDown(event, option.id);
-              }}
-              role='button'
-              tabIndex={0}
-              key={option.id}>
-              {option.images ? renderImages(option.images, 'cio-question-option-image') : ''}
-              <div className='cio-question-option-value'>{option?.value}</div>
-            </div>
-          ))}
+          {question?.options?.map(
+            (option: QuestionOption) =>
+              getSelectInputProps && (
+                <div {...getSelectInputProps(option)}>
+                  {option.images ? renderImages(option.images, 'cio-question-option-image') : ''}
+                  <div className='cio-question-option-value'>{option?.value}</div>
+                </div>
+              )
+          )}
         </div>
-        <ControlBar
-          nextButtonHandler={onNextClick}
-          isNextButtonDisabled={isDisabled}
-          backButtonHandler={previousQuestion}
-          showBackButton={!state?.quiz.isFirstQuestion}
-          ctaButtonText={question?.cta_text}
-        />
+        <ControlBar ctaButtonText={question?.cta_text || 'Continue'} />
       </div>
     );
   }

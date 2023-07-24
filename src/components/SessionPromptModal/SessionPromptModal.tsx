@@ -18,7 +18,22 @@ export default function SessionPromptModal({
     resetStoredState();
     setShowSessionPrompt(false);
   };
-  if (showSessionPrompt)
+  if (showSessionPrompt) {
+    const getContinueSessionButtonProps = () => ({
+      className: 'cio-question-cta-button',
+      onClick: () => {
+        continueSession();
+        setShowSessionPrompt(false);
+      },
+    });
+    const getResetSession = () => ({
+      className: 'cio-question-cta-button',
+      onClick: () => {
+        resetStoredState();
+        setShowSessionPrompt(false);
+      },
+    });
+
     return (
       <div className='cio-session-prompt-modal' role='presentation' onClick={onNoClickHandler}>
         <div className='cio-session-prompt-container'>
@@ -28,19 +43,14 @@ export default function SessionPromptModal({
             onClick={(e) => e.stopPropagation()}>
             <div>Do you want to continue where you left off?</div>
             <div className='cio-session-prompt-controls-container'>
-              <CTAButton ctaText='No' type='button' onClick={onNoClickHandler} />
-              <CTAButton
-                type='button'
-                ctaText='Yes'
-                onClick={() => {
-                  continueSession();
-                  setShowSessionPrompt(false);
-                }}
-              />
+              <CTAButton ctaText='No' type='button' propsGetters={getResetSession} />
+              <CTAButton type='button' ctaText='Yes' propsGetters={getContinueSessionButtonProps} />
             </div>
           </div>
         </div>
       </div>
     );
+  }
+
   return null;
 }

@@ -255,6 +255,10 @@
 .cio-question-back-button:focus {
   outline: 3px solid var(--primary-color-variant-100);
 }
+.cio-question-back-button.disabled {
+  display: none;
+}
+
 .cio-question-back-button svg {
   display: inline;
 }

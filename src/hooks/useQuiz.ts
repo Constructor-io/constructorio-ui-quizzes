@@ -1,61 +1,33 @@
 import { UseQuiz } from '../types';
 import useCioClient from './useCioClient';
 import useConsoleErrors from './useConsoleErrors';
+import usePropsGetters from './usePropsGetters';
 import usePrimaryColorStyles from './usePrimaryColorStyles';
-import useQuizApiState from './useQuizApiState';
 import useQuizEvents from './useQuizEvents';
-import useQuizLocalState from './useQuizLocalState';
+import useQuizState from './useQuizState';
 
-const useQuiz: UseQuiz = ({
-  quizId,
-  apiKey,
-  cioJsClient,
-  quizVersionId,
-  resultsPageOptions,
-  sessionStateOptions,
-  primaryColor,
-}) => {
+const useQuiz: UseQuiz = (quizOptions) => {
+  const { apiKey, cioJsClient, primaryColor } = quizOptions;
+
   // Log console errors for required parameters quizId and resultsPageOptions
-  useConsoleErrors(quizId, resultsPageOptions);
-
-  // Quiz Local state
-  const {
-    quizLocalState,
-    resetQuizLocalState,
-    dispatchLocalState,
-    hydrateQuizLocalState,
-    hasQuizStoredState,
-    resetQuizStoredState,
-  } = useQuizLocalState(sessionStateOptions?.sessionStateKey);
+  useConsoleErrors(quizOptions);
 
   // Quiz Cio Client
   const cioClient = useCioClient({ apiKey, cioJsClient });
 
-  // Quiz API state
-  const { isFirstQuestion, quizApiState, resetQuizApiState } = useQuizApiState(
-    quizId,
-    quizLocalState,
-    dispatchLocalState,
-    resultsPageOptions,
-    quizVersionId,
-    cioClient
-  );
+  // Quiz state (Local and API)
+  const quizState = useQuizState(quizOptions, cioClient);
 
   // Quiz callback events
-  const quizEvents = useQuizEvents({
-    cioClient,
-    quizApiState,
-    resultsPageOptions,
-    dispatchLocalState,
-    resetQuizApiState,
-    resetQuizLocalState,
-    hydrateQuizLocalState,
-    resetQuizStoredState,
-    hasQuizStoredState,
-  });
+  const quizEvents = useQuizEvents(quizOptions, cioClient, quizState);
+
+  // Props getters
+  const { quizApiState, quizLocalState } = quizState;
+  const propGetters = usePropsGetters(quizEvents, quizApiState, quizLocalState);
 
   const primaryColorStyles = usePrimaryColorStyles(primaryColor);
 
+  console.log('quizLocalState.answerInputs', quizLocalState.answerInputs);
   return {
     cioClient,
     state: {
@@ -67,16 +39,15 @@ const useQuiz: UseQuiz = ({
         requestState: quizApiState.quizRequestState,
         versionId: quizLocalState.quizVersionId,
         sessionId: quizLocalState.quizSessionId,
-        firstQuestion: quizApiState.quizFirstQuestion,
         currentQuestion: quizApiState.quizCurrentQuestion,
         results: quizApiState.quizResults,
         resultsFilters: quizApiState.quizResultsFilters,
-        isFirstQuestion,
       },
     },
     events: {
       ...quizEvents,
     },
+    ...propGetters,
     primaryColorStyles,
   };
 };

@@ -10,7 +10,7 @@ const useQuizResultClick = (
   quizApiState: QuizAPIReducerState,
   onQuizResultClick?: QuizResultsEventsProps.OnQuizResultClick
 ): QuizEventsReturn.ResultClick => {
-  const resultClickHandler = useCallback(
+  const quizResultClickHandler = useCallback(
     (result: QuizResultDataPartial, position: number) => {
       if (quizApiState.quizResults) {
         // Tracking call
@@ -25,7 +25,7 @@ const useQuizResultClick = (
     [quizApiState, cioClient, onQuizResultClick]
   );
 
-  return resultClickHandler;
+  return quizResultClickHandler;
 };
 
 export default useQuizResultClick;
