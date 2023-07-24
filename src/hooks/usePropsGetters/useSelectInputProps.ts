@@ -80,7 +80,7 @@ export default function useSelectInputProps(
   // Go to next question only every time answerInputs (answers input state) changes...
   // and it's a singleSelectQuestion and user has just clicked on an option
   useEffect(() => {
-    if (currentQuestionData?.type === 'single' && singleSelectClicked) {
+    if (currentQuestionData?.type === 'single' && singleSelectClicked.current) {
       nextQuestion();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
