@@ -48,7 +48,7 @@ export default function useOpenTextInputProps(
   const getOpenTextInputProps: GetOpenTextInputProps = useCallback(
     () => ({
       className: 'cio-question-input-text',
-      placeholder: currentQuestionData?.input_placeholder,
+      placeholder: currentQuestionData?.input_placeholder || 'Answer here...',
       value: input,
       onChange: onChangeHandler,
       onKeyDown: onKeyDownHandler,
