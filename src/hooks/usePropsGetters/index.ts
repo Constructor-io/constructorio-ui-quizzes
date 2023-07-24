@@ -67,8 +67,8 @@ const usePropsGetters = (
     usePreviousQuestionButtonProps(quizApiState, previousQuestion);
 
   const getResetQuizButtonProps: GetResetQuizButtonProps = useCallback(
-    () => ({
-      className: 'cio-question-redo-button',
+    (stylesType = 'primary') => ({
+      className: stylesType === 'primary' ? 'cio-question-cta-button' : 'cio-question-redo-button',
       type: 'button',
       onClick: () => resetQuiz(),
     }),

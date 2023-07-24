@@ -204,7 +204,9 @@ export type GetCoverQuestionProps = () => CoverQuestionProps;
 export type GetSelectInputProps = (option: QuestionOption) => SelectInputProps;
 export type GetNextQuestionButtonProps = () => NextQuestionButtonProps;
 export type GetPreviousQuestionButtonProps = () => PreviousQuestionButtonProps;
-export type GetResetQuizButtonProps = () => ResetQuizButtonProps;
+export type GetResetQuizButtonProps = (
+  stylesType?: 'primary' | 'secondary'
+) => ResetQuizButtonProps;
 export type GetHydrateQuizButtonProps = () => HydrateQuizButtonProps;
 export type GetAddToCartButtonProps = (
   result: QuizResultDataPartial,

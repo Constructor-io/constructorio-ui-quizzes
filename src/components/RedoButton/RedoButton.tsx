@@ -13,7 +13,7 @@ function RedoButton(props: RedoButtonProps) {
   if (getResetQuizButtonProps) {
     return (
       // eslint-disable-next-line react/button-has-type
-      <button {...rest} {...getResetQuizButtonProps()}>
+      <button {...rest} {...getResetQuizButtonProps('secondary')}>
         <RedoSVG />
         <span>{redoText}</span>
       </button>
