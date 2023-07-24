@@ -42,7 +42,7 @@ export default function ResultCard(props: ResultCardProps) {
       </div>
       <div className='cio-result-card-text'>
         <p className='cio-result-card-title'>{result.value}</p>
-        <div>
+        <div className='cio-result-card-details'>
           <div className='cio-result-card-rating'>
             {ratingScore && (
               <span className='cio-result-card-rating-score'>
