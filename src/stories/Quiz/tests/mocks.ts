@@ -135,8 +135,7 @@ export const getMockState = (question?: Question): QuizReturnState => ({
       quiz_version_id: '',
       quiz_selected_options: [{ value: 'Option 1', has_attribute: true }],
     },
-    resultsFilters: ['Chocolate', 'Medium'],
-    selectedOptionsWithAttributes: ['Option 1'],
+    selectedOptionsWithAttributes: ['Option 1', 'Option 2'],
   },
 });
 

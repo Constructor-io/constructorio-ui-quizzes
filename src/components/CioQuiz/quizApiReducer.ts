@@ -1,6 +1,6 @@
 import { RequestStates } from '../../constants';
 import { CurrentQuestion, NextQuestionResponse, QuizResultsResponse } from '../../types';
-import { getFilterValuesFromExpression, getQuestionTypes } from '../../utils';
+import { getQuestionTypes } from '../../utils';
 import { QuizAPIActionTypes, ActionQuizAPI } from './actions';
 
 export type QuizAPIReducerState = {
@@ -8,7 +8,6 @@ export type QuizAPIReducerState = {
   quizCurrentQuestion?: CurrentQuestion;
   quizFirstQuestion?: NextQuestionResponse;
   quizResults?: QuizResultsResponse;
-  quizResultsFilters?: string[];
   selectedOptionsWithAttributes?: string[];
 };
 
@@ -65,19 +64,15 @@ export default function apiReducer(
       };
     }
     case QuizAPIActionTypes.SET_QUIZ_RESULTS: {
-      const filterExpression =
-        action.payload?.quizResults?.request?.collection_filter_expression || null;
-      const selectedOptionsWithAttributes = action.payload?.quizResults.quiz_selected_options
-        ? action.payload.quizResults.quiz_selected_options
-            .filter((option) => option.has_attribute)
-            .map((option) => option.value)
-        : [];
-      const quizResultsFilters = [...new Set(getFilterValuesFromExpression(filterExpression))];
+      const selectedOptionsWithAttributes =
+        action.payload?.quizResults.quiz_selected_options
+          .filter((option) => option.has_attribute)
+          .map((option) => option.value) || [];
+
       return {
         ...state,
         quizRequestState: RequestStates.Success,
         quizResults: action.payload?.quizResults,
-        quizResultsFilters,
         quizCurrentQuestion: undefined,
         selectedOptionsWithAttributes,
       };
