@@ -93,9 +93,7 @@ export default function HooksTemplate(args) {
                   set up from our end. Would you give us another try?
                 </p>
                 <div className='cio-button-container'>
-                  <button {...getResetQuizButtonProps()}>
-                    Try Again
-                  </button>
+                  <button {...getResetQuizButtonProps()}>Try Again</button>
                 </div>
               </div>
             )}
@@ -278,9 +276,7 @@ function HooksTemplate(quizConfiguration) {
                   set up from our end. Would you give us another try?
                 </p>
                 <div className='cio-button-container'>
-                  <button {...getResetQuizButtonProps()}>
-                    Try Again
-                  </button>
+                  <button {...getResetQuizButtonProps()}>Try Again</button>
                 </div>
               </div>
             )}
