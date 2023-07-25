@@ -2,7 +2,7 @@ import ConstructorIOClient from '@constructor-io/constructorio-client-javascript
 import { ActionAnswerQuestion, ActionQuizAPI } from '../../components/CioQuiz/actions';
 import { QuizAPIReducerState } from '../../components/CioQuiz/quizApiReducer';
 import { QuizLocalReducerState } from '../../components/CioQuiz/quizLocalReducer';
-import { IQuizProps } from '../../types';
+import { IQuizProps, QuizEventsReturn } from '../../types';
 import useQuizApiState from './useQuizApiState';
 import useQuizLocalState from './useQuizLocalState';
 
@@ -15,6 +15,7 @@ type UseQuizState = (
   dispatchApiState: React.Dispatch<ActionQuizAPI>;
   dispatchLocalState: React.Dispatch<ActionAnswerQuestion>;
   hasQuizStoredState: () => boolean;
+  isQuizCompleted: QuizEventsReturn.IsQuizCompleted;
   quizStateKey: string;
 };
 
@@ -22,7 +23,7 @@ const useQuizState: UseQuizState = (quizOptions, cioClient) => {
   const { sessionStateOptions } = quizOptions;
 
   // Quiz Local state
-  const { quizLocalState, dispatchLocalState, hasQuizStoredState, quizStateKey } =
+  const { quizLocalState, dispatchLocalState, hasQuizStoredState, isQuizCompleted, quizStateKey } =
     useQuizLocalState(sessionStateOptions?.sessionStateKey);
 
   // Quiz API state
@@ -30,6 +31,7 @@ const useQuizState: UseQuizState = (quizOptions, cioClient) => {
     quizOptions,
     cioClient,
     quizLocalState,
+    isQuizCompleted,
     dispatchLocalState
   );
 
@@ -39,6 +41,7 @@ const useQuizState: UseQuizState = (quizOptions, cioClient) => {
     dispatchApiState,
     dispatchLocalState,
     hasQuizStoredState,
+    isQuizCompleted,
     quizStateKey,
   };
 };

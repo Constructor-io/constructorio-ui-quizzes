@@ -23,6 +23,7 @@ const useQuizEvents: UseQuizEvents = (quizOptions, cioClient, quizState) => {
     dispatchLocalState,
     dispatchApiState,
     hasQuizStoredState,
+    isQuizCompleted,
     quizStateKey,
     quizLocalState,
   } = quizState;
@@ -50,7 +51,7 @@ const useQuizEvents: UseQuizEvents = (quizOptions, cioClient, quizState) => {
 
   // Quiz reset
   const resetQuiz = useQuizResetClick(
-    quizStateKey,
+    resetQuizSessionStorageState(quizStateKey),
     dispatchLocalState,
     dispatchApiState,
     quizApiState.quizResults
@@ -66,6 +67,7 @@ const useQuizEvents: UseQuizEvents = (quizOptions, cioClient, quizState) => {
     previousQuestion,
     nextQuestion,
     resetQuiz,
+    isQuizCompleted,
     hydrateQuiz: hydrateQuizLocalState,
     hasSessionStorageState: hasQuizStoredState,
     resetSessionStorageState: resetQuizSessionStorageState(quizStateKey),

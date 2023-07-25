@@ -45,6 +45,7 @@ export interface ResultsPageOptions extends ResultsProps {
 
 export interface SessionStateOptions {
   showSessionModal?: boolean;
+  showSessionModalOnResults?: boolean;
   sessionStateKey?: string;
 }
 
@@ -71,6 +72,7 @@ export interface QuizReturnState {
     currentQuestion?: CurrentQuestion | undefined;
     results?: QuizResultsResponse | undefined;
     resultsFilters?: string[];
+    isCompleted: boolean;
   };
 }
 
@@ -109,6 +111,7 @@ export namespace QuizEventsReturn {
   ) => void;
   export type HydrateQuiz = () => void;
   export type HasSessionStorageState = () => boolean;
+  export type IsQuizCompleted = () => boolean;
   export type ResetSessionStorageState = () => void;
 }
 
@@ -120,6 +123,7 @@ export interface QuizEventsReturn {
   resultClick: QuizEventsReturn.ResultClick;
   addToCart: QuizEventsReturn.AddToCart;
   hydrateQuiz: QuizEventsReturn.HydrateQuiz;
+  isQuizCompleted: QuizEventsReturn.IsQuizCompleted;
   hasSessionStorageState: QuizEventsReturn.HasSessionStorageState;
   resetSessionStorageState: QuizEventsReturn.ResetSessionStorageState;
 }

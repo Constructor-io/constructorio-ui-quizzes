@@ -17,6 +17,9 @@ const useQuizLocalState = (sessionStateKey?: string) => {
 
   const hasQuizStoredState = (): boolean => getStateFromSessionStorage(quizStateKey) !== null;
 
+  const isQuizCompleted = (): boolean =>
+    !!getStateFromSessionStorage(quizStateKey)?.isQuizCompleted;
+
   const dispatchLocalState = useCallback((action: ActionAnswerQuestion) => {
     logger(action);
     dispatch(action);
@@ -26,6 +29,7 @@ const useQuizLocalState = (sessionStateKey?: string) => {
     quizLocalState,
     hasQuizStoredState,
     dispatchLocalState,
+    isQuizCompleted,
     quizStateKey,
   };
 };

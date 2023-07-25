@@ -5,6 +5,7 @@ import ResultFilters from '../ResultFilters/ResultFilters';
 import ZeroResults from '../ZeroResults/ZeroResults';
 import { ResultsProps } from '../../types';
 import Results from '../Results/Results';
+import Spinner from '../Spinner/Spinner';
 
 export interface IResultContainerProps {
   options: ResultsProps;
@@ -36,5 +37,9 @@ export default function ResultContainer(props: IResultContainerProps) {
     );
   }
 
-  return <div>Loading</div>;
+  return (
+    <div className='cio-results-container'>
+      <Spinner />
+    </div>
+  );
 }
