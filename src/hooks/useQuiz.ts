@@ -41,7 +41,7 @@ const useQuiz: UseQuiz = (quizOptions) => {
         isCompleted: quizLocalState.isQuizCompleted,
         currentQuestion: quizApiState.quizCurrentQuestion,
         results: quizApiState.quizResults,
-        resultsFilters: quizApiState.quizResultsFilters,
+        selectedOptionsWithAttributes: quizApiState.selectedOptionsWithAttributes,
       },
     },
     events: {
