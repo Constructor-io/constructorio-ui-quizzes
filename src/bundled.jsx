@@ -10,6 +10,7 @@ const CioQuiz = ({ selector, includeCSS = true, ...rest }) => {
     const containerElement = document.querySelector(selector);
 
     if (!containerElement) {
+      // eslint-disable-next-line no-console
       console.error(`CioQuiz: There were no elements found for the provided selector`);
 
       return;

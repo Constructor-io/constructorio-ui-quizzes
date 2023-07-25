@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
-import { ResultsPageOptions } from '../types';
+import { IQuizProps } from '../types';
 
-const useConsoleErrors = (quizId: string, resultsPageOptions: ResultsPageOptions) => {
+const useConsoleErrors = (quizOptions: IQuizProps) => {
+  const { quizId, resultsPageOptions } = quizOptions;
   useEffect(() => {
     if (!quizId) {
       // eslint-disable-next-line no-console

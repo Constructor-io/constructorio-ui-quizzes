@@ -1,4 +1,4 @@
-import React, { KeyboardEvent, useContext } from 'react';
+import React, { useContext } from 'react';
 import ResultCtaButton from '../ResultCtaButton/ResultCtaButton';
 import QuizContext from '../CioQuiz/context';
 import { QuizResultDataPartial } from '../../types';
@@ -12,23 +12,10 @@ interface ResultCardProps {
 
 export default function ResultCard(props: ResultCardProps) {
   const { result, salePriceKey, regularPriceKey, resultPosition } = props;
-  const { resultClick, customClickItemCallback } = useContext(QuizContext);
+  const { customClickItemCallback, getQuizResultButtonProps, getQuizResultLinkProps } =
+    useContext(QuizContext);
   const salePrice = salePriceKey && result?.data?.[salePriceKey];
   const regularPrice = regularPriceKey && result?.data?.[regularPriceKey];
-
-  const clickHandler = () => {
-    if (resultClick) {
-      resultClick(result, resultPosition);
-    }
-  };
-
-  const keyDownHandler = (event: KeyboardEvent<HTMLElement>) => {
-    if (event?.key === ' ' || event?.key === 'Enter') {
-      if (resultClick) {
-        resultClick(result, resultPosition);
-      }
-    }
-  };
 
   const resultCardContent = () => (
     <>
@@ -49,26 +36,21 @@ export default function ResultCard(props: ResultCardProps) {
     </>
   );
 
-  const resultCardContentWithoutLink = () => (
-    <div
-      className='cio-result-card-container'
-      onClick={() => clickHandler()}
-      onKeyDown={(e) => keyDownHandler(e)}
-      role='button'
-      tabIndex={0}>
-      {resultCardContent()}
-    </div>
-  );
+  const resultCardContentWithoutLink = () =>
+    getQuizResultButtonProps && (
+      <div {...getQuizResultButtonProps({ result, position: resultPosition, type: 'button' })}>
+        {resultCardContent()}
+      </div>
+    );
 
-  const resultCardContentWithLink = () => (
-    <a
-      className='cio-result-card-anchor'
-      href={result.data?.url}
-      onClick={() => clickHandler()}
-      onKeyDown={(e) => keyDownHandler(e)}>
-      {resultCardContent()}
-    </a>
-  );
+  const resultCardContentWithLink = () =>
+    getQuizResultLinkProps && (
+      <a
+        className='cio-result-card-anchor'
+        {...getQuizResultLinkProps({ result, position: resultPosition, type: 'link' })}>
+        {resultCardContent()}
+      </a>
+    );
 
   return (
     <div className='cio-result-card'>
