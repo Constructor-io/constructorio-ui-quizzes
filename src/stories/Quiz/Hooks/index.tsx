@@ -42,7 +42,7 @@ export default function HooksTemplate(args) {
                   ))}
                 </div>
               </div>
-              <button {...getResetQuizButtonProps()}>
+              <button {...getResetQuizButtonProps('secondary')}>
                 <RedoSVG />
                 <span>redo</span>
               </button>
@@ -62,10 +62,10 @@ export default function HooksTemplate(args) {
                       <div className='cio-result-card-text'>
                         <p className='cio-result-card-title'>{result.value}</p>
                         <div className='cio-result-card-prices'>
-                          {result.data.price && (
+                          {result?.data?.price && (
                             <span className='cio-result-card-sale-price'>${result.data.price}</span>
                           )}
-                          {result.data.price && (
+                          {result?.data?.price && (
                             <span
                               className={`cio-result-card-regular-price${
                                 result.data.price ? '--strike-through' : ''
@@ -75,7 +75,7 @@ export default function HooksTemplate(args) {
                           )}
                         </div>
                       </div>
-                      <button {...getAddToCartButtonProps(result, result.data.price)}>
+                      <button {...getAddToCartButtonProps(result, result?.data?.price)}>
                         Add to Cart
                       </button>
                     </div>
@@ -93,7 +93,7 @@ export default function HooksTemplate(args) {
                   set up from our end. Would you give us another try?
                 </p>
                 <div className='cio-button-container'>
-                  <button {...getResetQuizButtonProps()} className=''>
+                  <button {...getResetQuizButtonProps()}>
                     Try Again
                   </button>
                 </div>
@@ -105,7 +105,7 @@ export default function HooksTemplate(args) {
     }
 
     const { currentQuestion } = state.quiz;
-    const currentQuestionData = state.quiz.currentQuestion.next_question;
+    const currentQuestionData = state?.quiz?.currentQuestion?.next_question;
     if (currentQuestion) {
       // Open Text Question
       if (currentQuestion.isOpenQuestion) {
@@ -118,8 +118,8 @@ export default function HooksTemplate(args) {
                 </span>
               )}
               <div className='cio-question-content'>
-                <h1 className='cio-question-title'>{currentQuestionData.title}</h1>
-                <p className='cio-question-description'>{currentQuestionData.description}</p>
+                <h1 className='cio-question-title'>{currentQuestionData?.title}</h1>
+                <p className='cio-question-description'>{currentQuestionData?.description}</p>
                 <input {...getOpenTextInputProps()} />
                 <div className='cio-question-buttons-container'>
                   <button {...getPreviousQuestionButtonProps()}>Back</button>
@@ -144,8 +144,8 @@ export default function HooksTemplate(args) {
                 </span>
               )}
               <div className='cio-question-content'>
-                <h1 className='cio-question-title'>{currentQuestionData.title}</h1>
-                <p className='cio-question-description'>{currentQuestionData.description}</p>
+                <h1 className='cio-question-title'>{currentQuestionData?.title}</h1>
+                <p className='cio-question-description'>{currentQuestionData?.description}</p>
                 <div className='cio-question-buttons-container'>
                   <button {...getPreviousQuestionButtonProps()}>Back</button>
                   <div className='cio-button-container'>
@@ -164,8 +164,8 @@ export default function HooksTemplate(args) {
           <div className='cio-quiz'>
             <div className='cio-select-question-container'>
               <div className='cio-select-question-text'>
-                <h1>{currentQuestionData.title}</h1>
-                <p>{currentQuestionData.description}</p>
+                <h1>{currentQuestionData?.title}</h1>
+                <p>{currentQuestionData?.description}</p>
               </div>
               <div className='cio-question-options-container'>
                 {currentQuestion.next_question?.options?.map((option: QuestionOption) => (
@@ -227,7 +227,7 @@ function HooksTemplate(quizConfiguration) {
                   ))}
                 </div>
               </div>
-              <button {...getResetQuizButtonProps()}>
+              <button {...getResetQuizButtonProps('secondary')}>
                 <RedoSVG />
                 <span>redo</span>
               </button>
@@ -247,20 +247,20 @@ function HooksTemplate(quizConfiguration) {
                       <div className='cio-result-card-text'>
                         <p className='cio-result-card-title'>{result.value}</p>
                         <div className='cio-result-card-prices'>
-                          {result.data.price && (
-                            <span className='cio-result-card-sale-price'>{result.data.price}</span>
+                          {result?.data?.price && (
+                            <span className='cio-result-card-sale-price'>\${result.data.price}</span>
                           )}
-                          {result.data.price && (
+                          {result?.data?.price && (
                             <span
                               className={'cio-result-card-regular-price\${
                                 result.data.price ? '--strike-through' : ''
-                              '}}>
+                              }'}>
                               \${result.data.price}
                             </span>
                           )}
                         </div>
                       </div>
-                      <button {...getAddToCartButtonProps(result, result.data.price)}>
+                      <button {...getAddToCartButtonProps(result, result?.data?.price)}>
                         Add to Cart
                       </button>
                     </div>
@@ -290,7 +290,7 @@ function HooksTemplate(quizConfiguration) {
     }
 
     const { currentQuestion } = state.quiz;
-    const currentQuestionData = state.quiz.currentQuestion.next_question;
+    const currentQuestionData = state?.quiz?.currentQuestion?.next_question;
     if (currentQuestion) {
       // Open Text Question
       if (currentQuestion.isOpenQuestion) {
@@ -303,8 +303,8 @@ function HooksTemplate(quizConfiguration) {
                 </span>
               )}
               <div className='cio-question-content'>
-                <h1 className='cio-question-title'>{currentQuestionData.title}</h1>
-                <p className='cio-question-description'>{currentQuestionData.description}</p>
+                <h1 className='cio-question-title'>{currentQuestionData?.title}</h1>
+                <p className='cio-question-description'>{currentQuestionData?.description}</p>
                 <input {...getOpenTextInputProps()} />
                 <div className='cio-question-buttons-container'>
                   <button {...getPreviousQuestionButtonProps()}>Back</button>
@@ -323,9 +323,14 @@ function HooksTemplate(quizConfiguration) {
         return (
           <div className='cio-quiz'>
             <div className='cio-container--with-image cio-cover-question-container--with-image'>
+              {currentQuestion.next_question.images?.primary_url && (
+                <span className='cio-question-image-container'>
+                  <img {...getQuizImageProps()} className='cio-question-image' />
+                </span>
+              )}
               <div className='cio-question-content'>
-                <h1 className='cio-question-title'>{currentQuestionData.title}</h1>
-                <p className='cio-question-description'>{currentQuestionData.description}</p>
+                <h1 className='cio-question-title'>{currentQuestionData?.title}</h1>
+                <p className='cio-question-description'>{currentQuestionData?.description}</p>
                 <div className='cio-question-buttons-container'>
                   <button {...getPreviousQuestionButtonProps()}>Back</button>
                   <div className='cio-button-container'>
@@ -333,11 +338,6 @@ function HooksTemplate(quizConfiguration) {
                   </div>
                 </div>
               </div>
-              {currentQuestion.next_question.images?.primary_url && (
-                <span className='cio-question-image-container'>
-                  <img {...getQuizImageProps()} className='cio-question-image' />
-                </span>
-              )}
             </div>
           </div>
         );
@@ -349,8 +349,8 @@ function HooksTemplate(quizConfiguration) {
           <div className='cio-quiz'>
             <div className='cio-select-question-container'>
               <div className='cio-select-question-text'>
-                <h1>{currentQuestionData.title}</h1>
-                <p>{currentQuestionData.description}</p>
+                <h1>{currentQuestionData?.title}</h1>
+                <p>{currentQuestionData?.description}</p>
               </div>
               <div className='cio-question-options-container'>
                 {currentQuestion.next_question?.options?.map((option: QuestionOption) => (
