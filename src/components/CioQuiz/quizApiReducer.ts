@@ -9,6 +9,7 @@ export type QuizAPIReducerState = {
   quizFirstQuestion?: NextQuestionResponse;
   quizResults?: QuizResultsResponse;
   quizResultsFilters?: string[];
+  selectedOptionsWithAttributes?: string[];
 };
 
 export const initialState: QuizAPIReducerState = {
@@ -33,6 +34,7 @@ export default function apiReducer(
         quizRequestState: RequestStates.Error,
         quizCurrentQuestion: undefined,
         quizResults: undefined,
+        selectedOptionsWithAttributes: undefined,
       };
     case QuizAPIActionTypes.SET_CURRENT_QUESTION: {
       const {
@@ -59,11 +61,17 @@ export default function apiReducer(
         },
         quizFirstQuestion,
         quizResults: undefined,
+        selectedOptionsWithAttributes: undefined,
       };
     }
     case QuizAPIActionTypes.SET_QUIZ_RESULTS: {
       const filterExpression =
         action.payload?.quizResults?.request?.collection_filter_expression || null;
+      const selectedOptionsWithAttributes = action.payload?.quizResults.quiz_selected_options
+        ? action.payload.quizResults.quiz_selected_options
+            .filter((option) => option.has_attribute)
+            .map((option) => option.value)
+        : [];
       const quizResultsFilters = [...new Set(getFilterValuesFromExpression(filterExpression))];
       return {
         ...state,
@@ -71,6 +79,7 @@ export default function apiReducer(
         quizResults: action.payload?.quizResults,
         quizResultsFilters,
         quizCurrentQuestion: undefined,
+        selectedOptionsWithAttributes,
       };
     }
 

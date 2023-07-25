@@ -42,6 +42,7 @@ const useQuiz: UseQuiz = (quizOptions) => {
         currentQuestion: quizApiState.quizCurrentQuestion,
         results: quizApiState.quizResults,
         resultsFilters: quizApiState.quizResultsFilters,
+        selectedOptionsWithAttributes: quizApiState.selectedOptionsWithAttributes,
       },
     },
     events: {

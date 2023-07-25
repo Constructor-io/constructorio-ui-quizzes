@@ -71,6 +71,7 @@ export interface QuizReturnState {
     currentQuestion?: CurrentQuestion | undefined;
     results?: QuizResultsResponse | undefined;
     resultsFilters?: string[];
+    selectedOptionsWithAttributes?: string[];
   };
 }
 
