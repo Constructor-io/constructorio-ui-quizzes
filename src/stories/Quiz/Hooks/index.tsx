@@ -278,7 +278,7 @@ function HooksTemplate(quizConfiguration) {
                   set up from our end. Would you give us another try?
                 </p>
                 <div className='cio-button-container'>
-                  <button {...getResetQuizButtonProps()} className=''>
+                  <button {...getResetQuizButtonProps()}>
                     Try Again
                   </button>
                 </div>
