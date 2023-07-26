@@ -15,14 +15,14 @@ export default function ResultContainer(props: IResultContainerProps) {
   const { resultCardSalePriceKey, resultCardRegularPriceKey } = options;
   const { state } = useContext(QuizContext);
   const zeroResults = !state?.quiz.results?.response?.results?.length;
-  const resultsTitle = zeroResults ? 'Oops, there are no results' : 'Here are your results';
+  const resultsTitle = zeroResults ? '' : 'Here are your results';
 
   if (state?.quiz.results) {
     return (
       <div className='cio-results-container'>
         <h1 className='cio-results-title'>{resultsTitle}</h1>
         <div className='cio-results-filter-and-redo-container'>
-          <ResultFilters />
+          <ResultFilters hasNoResults={zeroResults} />
           <RedoButton />
         </div>
         {!zeroResults && (
