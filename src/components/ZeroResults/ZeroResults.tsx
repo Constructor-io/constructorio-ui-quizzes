@@ -10,7 +10,7 @@ function ZeroResults() {
       <h3 className='cio-zero-results-subtitle'>
         Sorry, we couldn’t find products that perfectly match your preferences.
       </h3>
-      <CTAButton ctaText='Redo quiz' propsGetters={getResetQuizButtonProps} />
+      <CTAButton ctaText='Redo Quiz' propsGetters={getResetQuizButtonProps} />
     </div>
   );
 }
