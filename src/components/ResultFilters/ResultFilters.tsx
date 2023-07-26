@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import QuizContext from '../CioQuiz/context';
 
-type ResultFiltersProps = {
+interface ResultFiltersProps {
   hasNoResults: boolean;
-};
+}
 
 function ResultFilters({ hasNoResults }: ResultFiltersProps) {
   const { state } = useContext(QuizContext);
