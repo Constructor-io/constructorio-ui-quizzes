@@ -86,15 +86,11 @@ export default function HooksTemplate(args) {
             {zeroResults && (
               <div className='cio-zero-results'>
                 <h3 className='cio-zero-results-subtitle'>
-                  Sorry, it seems like we couldn’t find results based on your answers.
+                  Sorry, we couldn’t find products that perfectly match your preferences.
                 </h3>
-                <p className='cio-zero-results-description'>
-                  This is embarrassing 😢. It might be that some of the questions are not properly
-                  set up from our end. Would you give us another try?
-                </p>
                 <div className='cio-button-container'>
                   <button {...getResetQuizButtonProps()} className=''>
-                    Try Again
+                    Redo Quiz
                   </button>
                 </div>
               </div>
@@ -271,15 +267,11 @@ function HooksTemplate(quizConfiguration) {
             {zeroResults && (
               <div className='cio-zero-results'>
                 <h3 className='cio-zero-results-subtitle'>
-                  Sorry, it seems like we couldn’t find results based on your answers.
+                  Sorry, we couldn’t find products that perfectly match your preferences.
                 </h3>
-                <p className='cio-zero-results-description'>
-                  This is embarrassing 😢. It might be that some of the questions are not properly
-                  set up from our end. Would you give us another try?
-                </p>
                 <div className='cio-button-container'>
                   <button {...getResetQuizButtonProps()} className=''>
-                    Try Again
+                    Redo Quiz
                   </button>
                 </div>
               </div>
