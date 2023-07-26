@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
-
+.cio-question-background-image {
+  height: 99%;
+  width: 100%;
+  position: absolute;
+  z-index: -1;
+}
 /* Theme colors */
 .cio-quiz {
   --primary-color-h: 227;
@@ -280,6 +285,7 @@
   display: flex;
   flex-direction: column;
   cursor: pointer;
+  background-color: white;
 }
 .cio-question-option-container.selected {
   outline: 3px solid var(--primary-color-variant-600);
@@ -337,6 +343,7 @@
   width: 100%;
   margin: auto;
   cursor: pointer;
+  background-color: white;
 }
 
 /* Option Image */
@@ -656,14 +663,6 @@
     margin-bottom: 2rem;
   }
 
-  /* CTA Button Component */
-  .cio-question-buttons-container {
-    position: sticky;
-    padding: 0;
-    margin: 0;
-    align-items: center;
-  }
-
   /* Cover Component */
   .cio-cover-question-container--with-image {
     padding: 0;
@@ -679,6 +678,7 @@
     padding: 1rem 5rem;
   }
   .cio-select-question-container {
+    position: static;
     justify-content: center;
     margin: 0;
     padding: 2rem;
