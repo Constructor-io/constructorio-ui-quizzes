@@ -86,11 +86,11 @@ export default function HooksTemplate(args) {
             {zeroResults && (
               <div className='cio-zero-results'>
                 <h3 className='cio-zero-results-subtitle'>
-                  Sorry, it seems like we couldn’t find results based on your answers.
+                  Sorry, we couldn’t find products that perfectly match your preferences.
                 </h3>
                 <div className='cio-button-container'>
                   <button {...getResetQuizButtonProps()} className=''>
-                    Try Again
+                    Redo Quiz
                   </button>
                 </div>
               </div>
@@ -267,11 +267,11 @@ function HooksTemplate(quizConfiguration) {
             {zeroResults && (
               <div className='cio-zero-results'>
                 <h3 className='cio-zero-results-subtitle'>
-                  Sorry, it seems like we couldn’t find results based on your answers.
+                  Sorry, we couldn’t find products that perfectly match your preferences.
                 </h3>
                 <div className='cio-button-container'>
                   <button {...getResetQuizButtonProps()} className=''>
-                    Try Again
+                    Redo Quiz
                   </button>
                 </div>
               </div>
