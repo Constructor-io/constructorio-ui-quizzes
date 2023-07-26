@@ -80,6 +80,7 @@ export const getMockState = (question?: Question): QuizReturnState => ({
     requestState: RequestStates.Success,
     versionId: '',
     sessionId: '',
+    isCompleted: false,
     currentQuestion: {
       next_question: question!,
       isFirstQuestion: false,
