@@ -8,9 +8,9 @@ function ResultFilters() {
     <div className='cio-results-filter-container'>
       <p>Because you answered</p>
       <div className='cio-results-filter-options'>
-        {state?.quiz.resultsFilters?.map((filter) => (
-          <div className='cio-results-filter-option' key={filter}>
-            {filter}
+        {state?.quiz.selectedOptionsWithAttributes?.map((option) => (
+          <div className='cio-results-filter-option' key={option}>
+            {option}
           </div>
         ))}
       </div>

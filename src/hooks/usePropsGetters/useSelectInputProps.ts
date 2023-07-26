@@ -1,6 +1,5 @@
 import { useState, useCallback, useEffect, KeyboardEvent, useRef } from 'react';
 import { QuestionTypes } from '../../components/CioQuiz/actions';
-import { Answers } from '../../components/CioQuiz/quizLocalReducer';
 import { Selected } from '../../components/SelectTypeQuestion/SelectTypeQuestion';
 import {
   AnswerInputState,
