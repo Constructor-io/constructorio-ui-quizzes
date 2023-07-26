@@ -436,12 +436,6 @@
   color: var(--gray-dust-500);
   margin-top: 0;
 }
-.cio-zero-results-description {
-  color: var(--gray-dust-100);
-  line-height: 1.25rem;
-  margin-top: 0;
-}
-
 .cio-zero-results .cio-button-container {
   width: 14rem;
   margin-right: auto;
