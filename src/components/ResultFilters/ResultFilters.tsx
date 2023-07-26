@@ -1,7 +1,11 @@
 import React, { useContext } from 'react';
 import QuizContext from '../CioQuiz/context';
 
-function ResultFilters({ hasNoResults }: Props) {
+type ResultFiltersProps = {
+  hasNoResults: boolean;
+};
+
+function ResultFilters({ hasNoResults }: ResultFiltersProps) {
   const { state } = useContext(QuizContext);
 
   return (
@@ -17,9 +21,5 @@ function ResultFilters({ hasNoResults }: Props) {
     </div>
   );
 }
-
-type Props = {
-  hasNoResults: boolean;
-};
 
 export default ResultFilters;
