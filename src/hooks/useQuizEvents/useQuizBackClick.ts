@@ -1,17 +1,19 @@
 import { useCallback } from 'react';
 import { ActionAnswerQuestion, QuestionTypes } from '../../components/CioQuiz/actions';
+import { QuizAPIReducerState } from '../../components/CioQuiz/quizApiReducer';
 import { QuizEventsReturn } from '../../types';
 
 const useQuizBackClick = (
+  quizApiState: QuizAPIReducerState,
   dispatchLocalState: React.Dispatch<ActionAnswerQuestion>
 ): QuizEventsReturn.PreviousQuestion => {
-  const quizBackHandler = useCallback(() => {
+  const quizBackClickHandler = useCallback(() => {
     if (dispatchLocalState) {
-      dispatchLocalState({ type: QuestionTypes.Back });
+      dispatchLocalState({ type: QuestionTypes.Back, payload: quizApiState.quizCurrentQuestion });
     }
-  }, [dispatchLocalState]);
+  }, [dispatchLocalState, quizApiState.quizCurrentQuestion]);
 
-  return quizBackHandler;
+  return quizBackClickHandler;
 };
 
 export default useQuizBackClick;

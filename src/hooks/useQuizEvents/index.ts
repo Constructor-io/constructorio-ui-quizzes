@@ -1,45 +1,43 @@
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
-import { ActionAnswerQuestion } from '../../components/CioQuiz/actions';
-import { QuizAPIReducerState } from '../../components/CioQuiz/quizApiReducer';
 import useQuizResultsLoaded from './useQuizResultsLoaded';
 import useQuizResultClick from './useQuizResultClick';
 import useQuizAddToCart from './useQuizAddToCart';
-import useQuizNextClick from './useQuizNextClick';
 import useQuizBackClick from './useQuizBackClick';
-import { QuizEventsReturn, ResultsPageOptions } from '../../types';
+import { IQuizProps, QuizEventsReturn } from '../../types';
+import useQuizAnswerChangeHandler from './useQuizAnswerChangeHandler';
+import useQuizNextClick from './useQuizNextClick';
+import useQuizResetClick from './useQuizResetClick';
+import useHydrateQuizLocalState from './useHydrateQuizLocalState';
+import useQuizState from '../useQuizState';
+import { resetQuizSessionStorageState } from '../../utils';
 
-export type UseQuizEventOptions = {
-  cioClient: ConstructorIOClient;
-  quizApiState: QuizAPIReducerState;
-  resultsPageOptions: ResultsPageOptions;
-  dispatchLocalState: React.Dispatch<ActionAnswerQuestion>;
-  resetQuizApiState: () => void;
-  resetQuizLocalState: () => void;
-  hydrateQuizLocalState: () => void;
-  resetQuizStoredState: () => void;
-  hasQuizStoredState: () => boolean;
-};
+type UseQuizEvents = (
+  quizOptions: IQuizProps,
+  cioClient: ConstructorIOClient,
+  quizState: ReturnType<typeof useQuizState>
+) => QuizEventsReturn;
 
-const useQuizEvents = (options: UseQuizEventOptions): QuizEventsReturn => {
+const useQuizEvents: UseQuizEvents = (quizOptions, cioClient, quizState) => {
   const {
-    cioClient,
     quizApiState,
-    resultsPageOptions,
     dispatchLocalState,
-    resetQuizApiState,
-    resetQuizLocalState,
-    hydrateQuizLocalState,
-    resetQuizStoredState,
+    dispatchApiState,
     hasQuizStoredState,
-  } = options;
+    quizStateKey,
+    quizLocalState,
+  } = quizState;
+  const { resultsPageOptions } = quizOptions;
 
   const { onAddToCartClick, onQuizResultClick, onQuizResultsLoaded } = resultsPageOptions;
 
-  // Quiz Next button click
-  const nextQuestion = useQuizNextClick(quizApiState, dispatchLocalState);
+  // Quiz answer change
+  const quizAnswerChanged = useQuizAnswerChangeHandler(quizApiState, dispatchLocalState);
+
+  // Quiz Next button click callback
+  const nextQuestion = useQuizNextClick(quizApiState, quizLocalState, dispatchLocalState);
 
   // Quiz Back button click callback
-  const previousQuestion = useQuizBackClick(dispatchLocalState);
+  const previousQuestion = useQuizBackClick(quizApiState, dispatchLocalState);
 
   // Quiz result add to cart callback
   const addToCart = useQuizAddToCart(cioClient, quizApiState, onAddToCartClick);
@@ -50,23 +48,27 @@ const useQuizEvents = (options: UseQuizEventOptions): QuizEventsReturn => {
   // Quiz results loaded event
   useQuizResultsLoaded(cioClient, quizApiState, onQuizResultsLoaded);
 
-  const resetQuiz = () => {
-    if (quizApiState.quizResults) {
-      resetQuizApiState();
-      resetQuizLocalState();
-      resetQuizStoredState();
-    }
-  };
+  // Quiz reset
+  const resetQuiz = useQuizResetClick(
+    quizStateKey,
+    dispatchLocalState,
+    dispatchApiState,
+    quizApiState.quizResults
+  );
+
+  // Quiz rehydrate
+  const hydrateQuizLocalState = useHydrateQuizLocalState(quizStateKey, dispatchLocalState);
 
   return {
     addToCart,
     resultClick,
-    nextQuestion,
+    quizAnswerChanged,
     previousQuestion,
+    nextQuestion,
     resetQuiz,
     hydrateQuiz: hydrateQuizLocalState,
-    hasStoredState: hasQuizStoredState,
-    resetStoredState: resetQuizStoredState,
+    hasSessionStorageState: hasQuizStoredState,
+    resetSessionStorageState: resetQuizSessionStorageState(quizStateKey),
   };
 };
 

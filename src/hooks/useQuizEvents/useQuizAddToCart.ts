@@ -10,7 +10,7 @@ const useQuizAddToCart = (
   quizApiState: QuizAPIReducerState,
   onAddToCartClick?: QuizResultsEventsProps.OnAddToCartClick
 ): QuizEventsReturn.AddToCart => {
-  const addToCartClickHandler = useCallback(
+  const quizAddToCartClickHandler = useCallback(
     (e: React.MouseEvent<HTMLElement>, result: QuizResultDataPartial, price?: number) => {
       e.preventDefault();
 
@@ -27,7 +27,7 @@ const useQuizAddToCart = (
     [quizApiState, cioClient, onAddToCartClick]
   );
 
-  return addToCartClickHandler;
+  return quizAddToCartClickHandler;
 };
 
 export default useQuizAddToCart;

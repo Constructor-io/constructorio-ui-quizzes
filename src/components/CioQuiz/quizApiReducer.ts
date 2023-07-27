@@ -1,54 +1,80 @@
 import { RequestStates } from '../../constants';
-import { NextQuestionResponse, QuizResultsResponse } from '../../types';
-import { getFilterValuesFromExpression } from '../../utils';
+import { CurrentQuestion, NextQuestionResponse, QuizResultsResponse } from '../../types';
+import { getQuestionTypes } from '../../utils';
 import { QuizAPIActionTypes, ActionQuizAPI } from './actions';
 
 export type QuizAPIReducerState = {
   quizRequestState: RequestStates;
+  quizCurrentQuestion?: CurrentQuestion;
   quizFirstQuestion?: NextQuestionResponse;
-  quizCurrentQuestion?: NextQuestionResponse;
   quizResults?: QuizResultsResponse;
-  quizResultsFilters?: string[];
+  selectedOptionsWithAttributes?: string[];
 };
 
 export const initialState: QuizAPIReducerState = {
   quizRequestState: RequestStates.Stale,
 };
 
-export default function apiReducer(state: QuizAPIReducerState, action: ActionQuizAPI) {
+export default function apiReducer(
+  state: QuizAPIReducerState,
+  action: ActionQuizAPI
+): QuizAPIReducerState {
   switch (action.type) {
     case QuizAPIActionTypes.SET_IS_LOADING:
       return {
         ...state,
         quizRequestState: RequestStates.Loading,
+        quizCurrentQuestion: undefined,
+        quizResults: undefined,
       };
     case QuizAPIActionTypes.SET_IS_ERROR:
       return {
         ...state,
         quizRequestState: RequestStates.Error,
+        quizCurrentQuestion: undefined,
         quizResults: undefined,
+        selectedOptionsWithAttributes: undefined,
       };
-    case QuizAPIActionTypes.SET_CURRENT_QUESTION:
+    case QuizAPIActionTypes.SET_CURRENT_QUESTION: {
+      const {
+        isOpenQuestion,
+        isCoverQuestion,
+        isSingleQuestion,
+        isMultipleQuestion,
+        isSelectQuestion,
+      } = getQuestionTypes(action.payload?.quizCurrentQuestion?.next_question?.type);
+      const quizFirstQuestion = state.quizFirstQuestion || action.payload?.quizCurrentQuestion;
       return {
         ...state,
         quizRequestState: RequestStates.Success,
-        quizCurrentQuestion: action.payload?.quizCurrentQuestion,
+        quizCurrentQuestion: {
+          ...action.payload?.quizCurrentQuestion!,
+          isFirstQuestion:
+            quizFirstQuestion?.next_question.id ===
+            action.payload?.quizCurrentQuestion?.next_question?.id,
+          isOpenQuestion,
+          isCoverQuestion,
+          isSingleQuestion,
+          isMultipleQuestion,
+          isSelectQuestion,
+        },
+        quizFirstQuestion,
         quizResults: undefined,
-        // If no current question set first question value
-        ...(!state.quizCurrentQuestion && {
-          quizFirstQuestion: action.payload?.quizCurrentQuestion,
-        }),
+        selectedOptionsWithAttributes: undefined,
       };
+    }
     case QuizAPIActionTypes.SET_QUIZ_RESULTS: {
-      const filterExpression =
-        action.payload?.quizResults?.request?.collection_filter_expression || null;
-      const quizResultsFilters = [...new Set(getFilterValuesFromExpression(filterExpression))];
+      const selectedOptionsWithAttributes =
+        action.payload?.quizResults.quiz_selected_options
+          .filter((option) => option.has_attribute)
+          .map((option) => option.value) || [];
+
       return {
         ...state,
         quizRequestState: RequestStates.Success,
         quizResults: action.payload?.quizResults,
-        quizResultsFilters,
         quizCurrentQuestion: undefined,
+        selectedOptionsWithAttributes,
       };
     }
 

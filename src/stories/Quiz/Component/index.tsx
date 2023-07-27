@@ -17,6 +17,7 @@ function YourComponent() {
   );
 }
 `;
+
 const importComponent = `import CioQuiz from '@constructor-io/constructorio-ui-quizzes';`;
 
 export const getComponentStoryParams = (storyParams) =>

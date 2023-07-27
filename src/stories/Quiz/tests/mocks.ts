@@ -1,6 +1,11 @@
 import { Question } from '@constructor-io/constructorio-client-javascript/lib/types';
+import { RequestStates } from '../../../constants';
+import { InputQuestionsTypes, QuizReturnState } from '../../../types';
 import { QuestionTypes } from '../../../components/CioQuiz/actions';
 import { QuizContextValue } from '../../../components/CioQuiz/context';
+import useOpenTextInputProps from '../../../hooks/usePropsGetters/useOpenTextInputProps';
+import useCoverQuestionProps from '../../../hooks/usePropsGetters/useCoverQuestionProps';
+import useSelectInputProps from '../../../hooks/usePropsGetters/useSelectInputProps';
 
 export const getMockQuestion = (type: QuestionTypes) => ({
   id: 1,
@@ -8,6 +13,7 @@ export const getMockQuestion = (type: QuestionTypes) => ({
   description: 'This is question description',
   cta_text: 'Continue',
   type,
+  input_placeholder: 'Answer here...',
 });
 
 const getMockImages = () => ({
@@ -60,18 +66,28 @@ export const questionOptions = [
   },
 ];
 
-export const getMockState = (question?: Question): any => ({
+export const getMockState = (question?: Question): QuizReturnState => ({
   answers: {
-    inputs: { 1: '' }, // Key is the question Id and value is the answer input
+    inputs: {
+      1: {
+        type: question?.type as InputQuestionsTypes,
+        value: '',
+      },
+    }, // Key is the question Id and value is the answer input
     isLastAnswer: false,
   },
   quiz: {
-    requestState: 1,
+    requestState: RequestStates.Success,
     versionId: '',
     sessionId: '',
-    isFirstQuestion: false,
     currentQuestion: {
-      next_question: question,
+      next_question: question!,
+      isFirstQuestion: false,
+      isOpenQuestion: question?.type === 'open',
+      isCoverQuestion: question?.type === 'cover',
+      isSingleQuestion: question?.type === 'single',
+      isMultipleQuestion: question?.type === 'multiple',
+      isSelectQuestion: question?.type === 'single',
     },
     results: {
       response: {
@@ -112,18 +128,82 @@ export const getMockState = (question?: Question): any => ({
             },
           },
         ],
+        facets: [],
+        groups: [],
+        sort_options: [],
+        refined_content: [],
+        total_num_results: 10,
+        features: [],
+        result_sources: {},
       },
+      quiz_id: '',
+      quiz_session_id: '',
+      quiz_version_id: '',
+      quiz_selected_options: [
+        { value: 'Option 1', has_attribute: true },
+        { value: 'Option 2', has_attribute: true },
+      ],
     },
-    resultsFilters: ['Chocolate', 'Medium'],
+    selectedOptionsWithAttributes: ['Option 1', 'Option 2'],
   },
 });
 
-export const getMockContextValue = (question?: Question): QuizContextValue => ({
-  state: getMockState(question),
-  previousQuestion: () => {},
-  nextQuestion: () => {},
-  addToCart: () => {},
-  customClickItemCallback: false,
-  resetQuiz: () => {},
-  resultClick: () => {},
-});
+const mockElementProps = {
+  className: '',
+  type: 'submit' as 'submit',
+  onClick: () => {},
+  onChange: () => {},
+  onKeyDown: () => {},
+  role: 'button' as 'button',
+  tabIndex: 0,
+  key: 0,
+  style: {},
+  placeholder: '',
+  value: '',
+};
+
+export const useMockContextValue = (question?: Question): QuizContextValue => {
+  const getOpenTextInputProps = useOpenTextInputProps(
+    () => {},
+    () => {},
+    question
+  );
+
+  const getCoverQuestionProps = useCoverQuestionProps(() => {}, question);
+
+  const getSelectInputProps = useSelectInputProps(
+    () => {},
+    () => {},
+    question
+  );
+
+  return {
+    state: getMockState(question),
+    getCoverQuestionProps,
+    getOpenTextInputProps,
+    getSelectInputProps,
+    getAddToCartButtonProps: () => ({ ...mockElementProps, className: 'cio-question-cta-button' }),
+    getHydrateQuizButtonProps: () => ({
+      ...mockElementProps,
+      className: 'cio-question-cta-button',
+    }),
+    getNextQuestionButtonProps: () => ({
+      ...mockElementProps,
+      className: 'cio-question-cta-button',
+    }),
+    getPreviousQuestionButtonProps: () => ({
+      ...mockElementProps,
+      className: 'cio-question-back-button',
+    }),
+    getQuizImageProps: () => mockElementProps,
+    getQuizResultButtonProps: () => mockElementProps,
+    getQuizResultLinkProps: () => mockElementProps,
+    getResetQuizButtonProps: () => ({ ...mockElementProps, className: 'cio-question-redo-button' }),
+    primaryColorStyles: {
+      '--primary-color-h': '12',
+      '--primary-color-s': '14',
+      '--primary-color-l': '14',
+    },
+    customClickItemCallback: false,
+  };
+};

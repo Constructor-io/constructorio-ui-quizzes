@@ -21,10 +21,21 @@
   margin: auto auto;
 }
 
-
 .cio-quiz .results-example-wrapper .cio-result-card {
-  width: 400px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.cio-quiz .results-example-wrapper .cio-result-card:only-child {
   margin-top: 100px;
+}
+
+/* Desktop */
+@container quiz (min-width: 768px) {
+  .cio-quiz .results-example-wrapper .cio-result-card {
+    width: 400px;
+    margin-top: 20px;
+  }
 }
 
 .cio-quiz .results-example-wrapper .cio-result-card-image {
