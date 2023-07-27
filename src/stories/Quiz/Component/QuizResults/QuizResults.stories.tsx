@@ -39,8 +39,8 @@ export const QuizResultsPage: Story = {
     // 👇 Assert DOM structure
     const resultsTitle = canvas.getByText('Here are your results');
     const selectedOptions = document.querySelector('.cio-results-filter-options');
-    const resultsFilterChocolate = canvas.getByText('Chocolate');
-    const resultsFilterMedium = canvas.getByText('Medium');
+    const resultsFilterChocolate = canvas.getByText('Option 1');
+    const resultsFilterMedium = canvas.getByText('Option 2');
     const redoButton = document.querySelector('.cio-question-redo-button');
     const resultCards = document.querySelectorAll('.cio-result-card');
 
