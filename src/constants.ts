@@ -17,7 +17,9 @@ export const componentDescription = `- import \`CioQuiz\` to render in your JSX.
   - \`onQuizResultClick\` is an optional callback function that will be called when the result card is clicked. The default behavior is redirecting the user to the item's URL
   - \`onQuizResultsLoaded\` is an optional callback function that will be called when the quiz results are loaded
   - \`resultCardRegularPriceKey\` is a parameter that specifies the metadata field name for the regular price
-  - \`resultCardSalePriceKey\` is an optional parameter that specifies the metadata field name for the sale price
+  - \`resultCardSalePriceKey\` is an optional parameter that specifies the metadata field name for the sale price 
+  - \`resultCardRatingCountKey\` is an optional parameter that specifies the metadata field name for the ratings count 
+  - \`resultCardRatingScoreKey\` is an optional parameter that specifies the metadata field name for the ratings score 
 - Use different props to configure the behavior of this component.
 - The following stories show how different props affect the component's behavior
 
