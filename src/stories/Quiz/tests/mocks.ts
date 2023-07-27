@@ -140,11 +140,11 @@ export const getMockState = (question?: Question): QuizReturnState => ({
       quiz_session_id: '',
       quiz_version_id: '',
       quiz_selected_options: [
-        { value: 'Option 1', has_attribute: true },
-        { value: 'Option 2', has_attribute: true },
+        { value: 'Chocolate', has_attribute: true },
+        { value: 'Medium', has_attribute: true },
       ],
     },
-    selectedOptionsWithAttributes: ['Option 1', 'Option 2'],
+    selectedOptionsWithAttributes: ['Chocolate', 'Medium'],
   },
 });
 
