@@ -34,6 +34,7 @@ export namespace QuizResultsEventsProps {
   export type OnQuizResultsLoaded = (results: QuizResultDataPartial) => void;
   export type OnQuizResultClick = (result: QuizResultDataPartial, position: number) => void;
   export type OnAddToCartClick = (result: QuizResultDataPartial) => void;
+  export type OnAddToFavoritesClick = (result: QuizResultDataPartial) => void;
 }
 
 export interface ResultsPageOptions extends ResultsProps {
@@ -41,6 +42,7 @@ export interface ResultsPageOptions extends ResultsProps {
   onQuizResultsLoaded?: QuizResultsEventsProps.OnQuizResultsLoaded;
   onQuizResultClick?: QuizResultsEventsProps.OnQuizResultClick;
   onAddToCartClick: QuizResultsEventsProps.OnAddToCartClick;
+  onAddToFavoritesClick?: QuizResultsEventsProps.OnAddToFavoritesClick;
 }
 
 export interface SessionStateOptions {
@@ -103,6 +105,11 @@ export namespace QuizEventsReturn {
   export type ResetQuiz = () => void;
   export type ResultClick = (result: QuizResultDataPartial, position: number) => void;
   export type AddToCart = (
+    e: React.MouseEvent<HTMLElement>,
+    result: QuizResultDataPartial,
+    price?: number
+  ) => void;
+  export type AddToFavorites = (
     e: React.MouseEvent<HTMLElement>,
     result: QuizResultDataPartial,
     price?: number

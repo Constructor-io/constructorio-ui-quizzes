@@ -28,7 +28,8 @@ const useQuizEvents: UseQuizEvents = (quizOptions, cioClient, quizState) => {
   } = quizState;
   const { resultsPageOptions } = quizOptions;
 
-  const { onAddToCartClick, onQuizResultClick, onQuizResultsLoaded } = resultsPageOptions;
+  const { onAddToCartClick, onQuizResultClick, onQuizResultsLoaded, onAddToFavoritesClick } =
+    resultsPageOptions;
 
   // Quiz answer change
   const quizAnswerChanged = useQuizAnswerChangeHandler(quizApiState, dispatchLocalState);
@@ -44,6 +45,8 @@ const useQuizEvents: UseQuizEvents = (quizOptions, cioClient, quizState) => {
 
   // Quiz result click callback
   const resultClick = useQuizResultClick(cioClient, quizApiState, onQuizResultClick);
+
+  const addToFavorites = useQuizAddToFavorites(cioClient, quizApiState, onAddToFavoritesClick);
 
   // Quiz results loaded event
   useQuizResultsLoaded(cioClient, quizApiState, onQuizResultsLoaded);
