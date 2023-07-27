@@ -27,7 +27,6 @@ export default function CoverTypeQuestion() {
         <div className='cio-question-content'>
           <QuestionTitle title={question?.title} />
           <QuestionDescription description={question.description} />
-          <ControlBar ctaButtonText={question?.cta_text} />
         </div>
       </div>
     );

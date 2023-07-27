@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import QuizContext, { QuizContextValue } from './context';
 import QuizQuestions from '../QuizQuestions';
 import ResultContainer from '../ResultContainer/ResultContainer';
+import ControlBar from '../ControlBar/ControlBar';
 import { RequestStates } from '../../constants';
 import Spinner from '../Spinner/Spinner';
 import useQuiz from '../../hooks/useQuiz';
@@ -87,6 +88,9 @@ export default function CioQuiz(props: IQuizProps) {
         <QuizContext.Provider value={contextValue}>
           {state.quiz.results && <ResultContainer options={resultsPageOptions} />}
           {state.quiz.currentQuestion && <QuizQuestions />}
+          {state.quiz.currentQuestion && (
+            <ControlBar ctaButtonText={state.quiz.currentQuestion?.cta_text} />
+          )}
         </QuizContext.Provider>
       </div>
     );

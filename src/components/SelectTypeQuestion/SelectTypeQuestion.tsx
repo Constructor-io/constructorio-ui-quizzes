@@ -47,7 +47,6 @@ function SelectTypeQuestion() {
               )
           )}
         </div>
-        <ControlBar ctaButtonText={question?.cta_text || 'Continue'} />
       </div>
     );
   }

@@ -30,7 +30,6 @@ function OpenTextQuestion() {
           <QuestionTitle title={question.title} />
           <QuestionDescription description={question.description} />
           {getOpenTextInputProps && <input {...getOpenTextInputProps()} />}
-          <ControlBar ctaButtonText={question?.cta_text} />
         </div>
       </div>
     );
