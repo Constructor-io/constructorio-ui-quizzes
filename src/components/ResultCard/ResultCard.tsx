@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import ResultCtaButton from '../ResultCtaButton/ResultCtaButton';
+import ResultFavoritesButton from '../ResultFavoritesButton/ResultFavoritesButton';
 import QuizContext from '../CioQuiz/context';
 import { QuizResultDataPartial } from '../../types';
 
@@ -54,6 +55,7 @@ export default function ResultCard(props: ResultCardProps) {
 
   return (
     <div className='cio-result-card'>
+      <ResultFavoritesButton item={result} price={salePrice || regularPrice} />
       {!customClickItemCallback ? resultCardContentWithLink() : resultCardContentWithoutLink()}
       <ResultCtaButton item={result} price={salePrice || regularPrice} />
     </div>

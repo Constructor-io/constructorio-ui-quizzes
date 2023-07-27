@@ -10,6 +10,7 @@ import useQuizResetClick from './useQuizResetClick';
 import useHydrateQuizLocalState from './useHydrateQuizLocalState';
 import useQuizState from '../useQuizState';
 import { resetQuizSessionStorageState } from '../../utils';
+import useQuizAddToFavorites from './useQuizAddToFavorites';
 
 type UseQuizEvents = (
   quizOptions: IQuizProps,
@@ -64,6 +65,7 @@ const useQuizEvents: UseQuizEvents = (quizOptions, cioClient, quizState) => {
 
   return {
     addToCart,
+    addToFavorites,
     resultClick,
     quizAnswerChanged,
     previousQuestion,

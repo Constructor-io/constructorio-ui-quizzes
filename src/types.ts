@@ -126,6 +126,7 @@ export interface QuizEventsReturn {
   resetQuiz: QuizEventsReturn.ResetQuiz;
   resultClick: QuizEventsReturn.ResultClick;
   addToCart: QuizEventsReturn.AddToCart;
+  addToFavorites: QuizEventsReturn.AddToFavorites;
   hydrateQuiz: QuizEventsReturn.HydrateQuiz;
   hasSessionStorageState: QuizEventsReturn.HasSessionStorageState;
   resetSessionStorageState: QuizEventsReturn.ResetSessionStorageState;
@@ -219,6 +220,10 @@ export type GetAddToCartButtonProps = (
   result: QuizResultDataPartial,
   price?: number
 ) => AddToCartButtonProps;
+export type GetAddToFavoritesButtonProps = (
+  result: QuizResultDataPartial,
+  price?: number
+) => AddToCartButtonProps;
 export type GetQuizImageProps = () => QuizImageProps;
 export type GetSelectQuestionImageProps = (option: QuestionOption) => QuizImageProps;
 
@@ -252,6 +257,7 @@ export interface UseQuizReturn {
   getResetQuizButtonProps: GetResetQuizButtonProps;
   getHydrateQuizButtonProps: GetHydrateQuizButtonProps;
   getAddToCartButtonProps: GetAddToCartButtonProps;
+  getAddToFavoritesButtonProps: GetAddToFavoritesButtonProps;
   getQuizResultButtonProps: GetQuizResultButtonProps;
   getQuizResultLinkProps: GetQuizResultLinkProps;
   primaryColorStyles: PrimaryColorStyles;

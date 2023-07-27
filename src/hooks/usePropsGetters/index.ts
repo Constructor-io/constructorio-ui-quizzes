@@ -14,6 +14,7 @@ import {
   GetQuizResultButtonProps,
   GetQuizResultLinkProps,
   GetSelectQuestionImageProps,
+  GetAddToFavoritesButtonProps,
 } from '../../types';
 import { QuizAPIReducerState } from '../../components/CioQuiz/quizApiReducer';
 import { QuizLocalReducerState } from '../../components/CioQuiz/quizLocalReducer';
@@ -35,6 +36,7 @@ const usePropsGetters = (
     resetQuiz,
     hydrateQuiz,
     addToCart,
+    addToFavorites,
     resultClick,
   } = quizEvents;
 
@@ -91,6 +93,15 @@ const usePropsGetters = (
       onClick: (e) => addToCart(e, result, price),
     }),
     [addToCart]
+  );
+
+  const getAddToFavoritesButtonProps: GetAddToFavoritesButtonProps = useCallback(
+    (result, price) => ({
+      className: 'cio-result-card-favorites-button',
+      type: 'button',
+      onClick: (e) => addToFavorites(e, result, price),
+    }),
+    [addToFavorites]
   );
 
   const quizResultClickDown = useCallback(
@@ -154,6 +165,7 @@ const usePropsGetters = (
     getResetQuizButtonProps,
     getHydrateQuizButtonProps,
     getAddToCartButtonProps,
+    getAddToFavoritesButtonProps,
     getQuizResultButtonProps,
     getQuizResultLinkProps,
   };

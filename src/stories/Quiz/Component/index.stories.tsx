@@ -42,6 +42,10 @@ const resultsPageOptions = {
     console.log('Add to cart');
     console.dir(item);
   },
+  onAddToFavoritesClick: (item) => {
+    console.log('Add to favorites');
+    console.dir(item);
+  },
   resultCardRegularPriceKey: 'price',
   resultCardSalePriceKey: 'salePrice',
 };

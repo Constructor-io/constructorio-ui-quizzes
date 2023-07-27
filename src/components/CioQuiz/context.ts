@@ -2,6 +2,7 @@ import React from 'react';
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
 import {
   GetAddToCartButtonProps,
+  GetAddToFavoritesButtonProps,
   GetCoverQuestionProps,
   GetHydrateQuizButtonProps,
   GetNextQuestionButtonProps,
@@ -28,6 +29,7 @@ export interface QuizContextValue {
   getResetQuizButtonProps: GetResetQuizButtonProps;
   getHydrateQuizButtonProps: GetHydrateQuizButtonProps;
   getAddToCartButtonProps: GetAddToCartButtonProps;
+  getAddToFavoritesButtonProps: GetAddToFavoritesButtonProps;
   getQuizResultButtonProps: GetQuizResultButtonProps;
   getQuizResultLinkProps: GetQuizResultLinkProps;
   primaryColorStyles: PrimaryColorStyles;
