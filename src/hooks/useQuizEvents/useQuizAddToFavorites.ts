@@ -10,13 +10,13 @@ const useQuizAddToFavorites = (
   quizApiState: QuizAPIReducerState,
   onAddToCartClick?: QuizResultsEventsProps.OnAddToFavoritesClick
 ): QuizEventsReturn.AddToFavorites => {
-  const quizAddToCartClickHandler = useCallback(
+  const quizAddToFavoritesHandler = useCallback(
     (e: React.MouseEvent<HTMLElement>, result: QuizResultDataPartial, price?: number) => {
       e.preventDefault();
 
       if (quizApiState.quizResults) {
         // Tracking call
-        trackQuizConversion(cioClient, quizApiState.quizResults, result, price);
+        trackQuizConversion(cioClient, quizApiState.quizResults, result, price, 'add_to_wishlist');
 
         // User custom callback function
         if (isFunction(onAddToCartClick)) {
@@ -27,7 +27,7 @@ const useQuizAddToFavorites = (
     [quizApiState, cioClient, onAddToCartClick]
   );
 
-  return quizAddToCartClickHandler;
+  return quizAddToFavoritesHandler;
 };
 
 export default useQuizAddToFavorites;
