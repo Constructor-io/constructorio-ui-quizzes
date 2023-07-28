@@ -8,7 +8,7 @@ import { isFunction } from '../../utils';
 const useQuizAddToFavorites = (
   cioClient: ConstructorIOClient,
   quizApiState: QuizAPIReducerState,
-  onAddToCartClick?: QuizResultsEventsProps.OnAddToFavoritesClick
+  onAddToFavoritesClick?: QuizResultsEventsProps.OnAddToFavoritesClick
 ): QuizEventsReturn.AddToFavorites => {
   const quizAddToFavoritesHandler = useCallback(
     (e: React.MouseEvent<HTMLElement>, result: QuizResultDataPartial, price?: number) => {
@@ -19,12 +19,12 @@ const useQuizAddToFavorites = (
         trackQuizConversion(cioClient, quizApiState.quizResults, result, price, 'add_to_wishlist');
 
         // User custom callback function
-        if (isFunction(onAddToCartClick)) {
-          onAddToCartClick!(result);
+        if (isFunction(onAddToFavoritesClick)) {
+          onAddToFavoritesClick!(result);
         }
       }
     },
-    [quizApiState, cioClient, onAddToCartClick]
+    [quizApiState, cioClient, onAddToFavoritesClick]
   );
 
   return quizAddToFavoritesHandler;
