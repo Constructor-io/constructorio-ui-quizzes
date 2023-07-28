@@ -3,7 +3,6 @@ import QuestionTitle from '../QuestionTitle/QuestionTitle';
 import QuestionDescription from '../QuestionDescription/QuestionDescription';
 import { renderImages } from '../../utils';
 import QuizContext from '../CioQuiz/context';
-import ControlBar from '../ControlBar/ControlBar';
 
 function OpenTextQuestion() {
   const { state, getOpenTextInputProps } = useContext(QuizContext);

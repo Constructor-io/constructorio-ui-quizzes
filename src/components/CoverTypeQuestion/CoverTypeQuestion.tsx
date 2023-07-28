@@ -3,7 +3,6 @@ import QuestionTitle from '../QuestionTitle/QuestionTitle';
 import QuizContext from '../CioQuiz/context';
 import QuestionDescription from '../QuestionDescription/QuestionDescription';
 import { renderImages } from '../../utils';
-import ControlBar from '../ControlBar/ControlBar';
 
 export default function CoverTypeQuestion() {
   const { state } = useContext(QuizContext);
