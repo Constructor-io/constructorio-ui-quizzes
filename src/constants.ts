@@ -14,6 +14,7 @@ export const componentDescription = `- import \`CioQuiz\` to render in your JSX.
 - To use this component, \`quizId\`, \`resultsPageOptions\`, and one of \`apiKey\` or \`cioJsClient\` are required.
 - \`resultsPageOptions\` lets you configure the results page
   - \`onAddToCartClick\` is a callback function that will be called when the "Add to cart" button is clicked
+  - \`onAddToFavoritesClick\` is an optional callback function that will be called when the "Add To Favorites" heart icon is clicked
   - \`onQuizResultClick\` is an optional callback function that will be called when the result card is clicked. The default behavior is redirecting the user to the item's URL
   - \`onQuizResultsLoaded\` is an optional callback function that will be called when the quiz results are loaded
   - \`resultCardRegularPriceKey\` is a parameter that specifies the metadata field name for the regular price
@@ -43,6 +44,7 @@ const {
   state: QuizReturnState, // Quiz state
   events: [{...}], // array of quiz events
   getAddToCartButtonProps: () => ({...})), // prop getter for jsx add to cart button for quiz result,
+  getAddToFavoritesButtonProps: () => ({...})), // prop getter for jsx add to favorites button for quiz result,
   getCoverQuestionProps: () => ({...})), // prop getter for jsx quiz cover question,
   getHydrateQuizButtonProps: () => ({...})), // prop getter for jsx hydrate quiz button,
   getNextQuestionButtonProps: () => ({...})), // prop getter for jsx next button to traverse the quiz,
