@@ -16,8 +16,12 @@ interface ResultCardProps {
 export default function ResultCard(props: ResultCardProps) {
   const { result, salePriceKey, regularPriceKey, resultPosition, ratingCountKey, ratingScoreKey } =
     props;
-  const { customAddToFavoritesCallback, customClickItemCallback, getQuizResultButtonProps, getQuizResultLinkProps } =
-    useContext(QuizContext);
+  const {
+    customAddToFavoritesCallback,
+    customClickItemCallback,
+    getQuizResultButtonProps,
+    getQuizResultLinkProps,
+  } = useContext(QuizContext);
   const salePrice = salePriceKey && result?.data?.[salePriceKey];
   const regularPrice = regularPriceKey && result?.data?.[regularPriceKey];
   const ratingCount = ratingCountKey && result?.data?.[ratingCountKey];
