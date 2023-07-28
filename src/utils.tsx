@@ -1,11 +1,7 @@
+/* eslint-disable no-console */
 import React from 'react';
-import {
-  FilterExpression,
-  FilterExpressionGroupOr,
-  FilterExpressionGroupAnd,
-  FilterExpressionValue,
-} from '@constructor-io/constructorio-client-javascript/lib/types';
 import { QuestionTypes } from './components/CioQuiz/actions';
+import { QuizLocalReducerState } from './components/CioQuiz/quizLocalReducer';
 import { PrimaryColorStyles, QuestionImages } from './types';
 
 export const renderImages = (images: Partial<QuestionImages>, cssClasses?: string) => {
@@ -133,30 +129,28 @@ export function isFunction(fn): boolean {
   return fn && typeof fn === 'function';
 }
 
-const isValueExpression = (exp: FilterExpression): exp is FilterExpressionValue =>
-  'name' in exp && 'value' in exp;
-const isAndFilter = (exp: FilterExpression): exp is FilterExpressionGroupAnd => 'and' in exp;
-const isOrFilter = (exp: FilterExpression): exp is FilterExpressionGroupOr => 'or' in exp;
+export const getStateFromSessionStorage = (quizStateKey: string): QuizLocalReducerState | null => {
+  const state = window?.sessionStorage?.getItem(quizStateKey);
 
-export const getFilterValuesFromExpression = (exp: FilterExpression | null): string[] => {
-  if (!exp) {
-    return [];
+  if (state) {
+    return JSON.parse(state);
   }
-  if (isAndFilter(exp)) {
-    return exp.and.flatMap((innerExpression: FilterExpression) =>
-      getFilterValuesFromExpression(innerExpression)
-    );
-  }
-  if (isOrFilter(exp)) {
-    return exp.or.flatMap((innerExpression: FilterExpression) =>
-      getFilterValuesFromExpression(innerExpression)
-    );
-  }
-  if (isValueExpression(exp)) {
-    return [exp.value];
-  }
+  return null;
+};
 
-  return [];
+export const resetQuizSessionStorageState = (quizStateKey: string) => () => {
+  window?.sessionStorage?.removeItem(quizStateKey);
+};
+
+export const logger = (action: any) => {
+  console.group(
+    `%cAction:%c  ${action.type}`,
+    'color: red; font-weight: bold;',
+    'color: green; font-weight: lighter;'
+  );
+  console.log('%c type:', 'color: #9E9E9E; font-weight: 700;', action.type);
+  console.log('%c payload:', 'color: #00A7F7; font-weight: 700;', action.payload);
+  console.groupEnd();
 };
 
 // Function to emulate pausing between interactions

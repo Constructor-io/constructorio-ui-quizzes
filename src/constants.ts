@@ -17,11 +17,49 @@ export const componentDescription = `- import \`CioQuiz\` to render in your JSX.
   - \`onQuizResultClick\` is an optional callback function that will be called when the result card is clicked. The default behavior is redirecting the user to the item's URL
   - \`onQuizResultsLoaded\` is an optional callback function that will be called when the quiz results are loaded
   - \`resultCardRegularPriceKey\` is a parameter that specifies the metadata field name for the regular price
-  - \`resultCardSalePriceKey\` is an optional parameter that specifies the metadata field name for the sale price
+  - \`resultCardSalePriceKey\` is an optional parameter that specifies the metadata field name for the sale price 
+  - \`resultCardRatingCountKey\` is an optional parameter that specifies the metadata field name for the ratings count 
+  - \`resultCardRatingScoreKey\` is an optional parameter that specifies the metadata field name for the ratings score 
 - Use different props to configure the behavior of this component.
 - The following stories show how different props affect the component's behavior
 
 > Note: \`cioJsClient\` refers to an instance of the [constructorio-client-javascript](https://www.npmjs.com/package/@constructor-io/constructorio-client-javascript)
+`;
+
+export const hookDescription = `- import \`useCioQuiz\` and call this custom hook in a functional component.
+- This hook leaves rendering logic up to you, while handling:
+  - state management
+  - data fetching
+  - keyboard navigation
+  - mouse interactions
+  - focus and submit event handling
+- Since the markup is controlled by you, the default styles might not be applied if you have a different DOM structure
+- To use this hook, an \`apiKey\` and \`quizId\` are required, and \`resultsPageOptions\` must be passed to the \`useCioQuiz\` hook to configure behavior. All other values are optional.
+- use the <a href="https://kentcdodds.com/blog/how-to-give-rendering-control-to-users-with-prop-getters" target="__blank">prop getters</a> and other variables returned by this hook (below) to leverage the functionality described above with jsx elements in your react component definitions
+
+Calling the \`useCioQuiz\` hook returns an object with the following keys:
+
+\`\`\`jsx
+const {
+  // must be used for a hooks integrations
+  state: QuizReturnState, // Quiz state
+  events: [{...}], // array of quiz events
+  getAddToCartButtonProps: () => ({...})), // prop getter for jsx add to cart button for quiz result,
+  getCoverQuestionProps: () => ({...})), // prop getter for jsx quiz cover question,
+  getHydrateQuizButtonProps: () => ({...})), // prop getter for jsx hydrate quiz button,
+  getNextQuestionButtonProps: () => ({...})), // prop getter for jsx next button to traverse the quiz,
+  getPreviousQuestionButtonProps: () => ({...})), // prop getter for jsx back button to traverse the quiz, 
+  getOpenTextInputProps: () => ({...})), // prop getter for jsx open text input,
+  getSelectInputProps: () => ({...})), // prop getter for jsx select input for select type questions,
+  getQuizImageProps: () => ({...})), // prop getter for jsx quiz image,
+  getQuizResultButtonProps: () => ({...})), // prop getter for jsx result card click as a button,
+  getQuizResultLinkProps: () => ({...})), // prop getter for jsx result card click as a link. Should be spread into <a> tags,
+  getResetQuizButtonProps: () => ({...})), // prop getter for jsx reset quiz button,
+  cioClient, // instance of constructorio-client-javascript
+ } = useCioQuiz(args);
+\`\`\`
+
+> Note: when we say \`cioClient\`, we are referring to an instance of the [constructorio-client-javascript](https://www.npmjs.com/package/@constructor-io/constructorio-client-javascript)
 `;
 
 /// //////////////////////////////
@@ -46,8 +84,8 @@ In the example below, the \`primaryColor\` prop has been used to override this c
 `;
 
 export enum RequestStates {
-  Stale,
-  Loading,
-  Success,
-  Error,
+  Stale = 'STALE',
+  Loading = 'LOADING',
+  Success = 'SUCCESS',
+  Error = 'ERROR',
 }

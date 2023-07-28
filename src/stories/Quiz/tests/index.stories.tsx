@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { within, userEvent } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 import CioQuiz from '../../../components/CioQuiz';
@@ -39,8 +40,13 @@ const resultsPageOptions = {
   resultCardSalePriceKey: 'salePrice',
 };
 
+const sessionStateOptions = {
+  showSessionModal: false,
+};
+
+// eslint-disable-next-line storybook/prefer-pascal-case
 export const e2eInteractionTest = ComponentTemplate.bind({});
-e2eInteractionTest.args = { apiKey, quizId, resultsPageOptions };
+e2eInteractionTest.args = { apiKey, quizId, resultsPageOptions, sessionStateOptions };
 addComponentStoryDescription(
   e2eInteractionTest,
   `const args = ${stringifyWithDefaults(e2eInteractionTest.args)}`,
@@ -126,8 +132,6 @@ e2eInteractionTest.play = async ({ canvasElement }) => {
   await sleep(500);
   expect(await canvas.findByText('Lastly, do you have a roasting preference?')).toBeInTheDocument();
   userEvent.click(canvas.getByRole('button', { name: 'Medium' }));
-  await sleep(100);
-  userEvent.click(canvas.getByRole('button', { name: 'Continue' }));
 
   await sleep(500);
   expect(await canvas.findByText('Are you into latte-art?')).toBeInTheDocument();

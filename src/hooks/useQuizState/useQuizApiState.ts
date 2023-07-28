@@ -1,34 +1,41 @@
-/* eslint-disable max-params */
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
 import { useEffect, useReducer } from 'react';
 import {
   ActionAnswerQuestion,
+  ActionQuizAPI,
   QuestionTypes,
   QuizAPIActionTypes,
-} from '../components/CioQuiz/actions';
-import apiReducer, { initialState } from '../components/CioQuiz/quizApiReducer';
-import { QuizLocalReducerState } from '../components/CioQuiz/quizLocalReducer';
-import { nextQuestion, getQuizResults } from '../services';
-import { ResultsPageOptions } from '../types';
+} from '../../components/CioQuiz/actions';
+import apiReducer, {
+  initialState,
+  QuizAPIReducerState,
+} from '../../components/CioQuiz/quizApiReducer';
+import { QuizLocalReducerState } from '../../components/CioQuiz/quizLocalReducer';
+import { getNextQuestion, getQuizResults } from '../../services';
+import { IQuizProps } from '../../types';
 
-const useFetchQuiz = (
-  quizId: string,
+type UseQuizApiState = (
+  quizOptions: IQuizProps,
+  cioClient: ConstructorIOClient,
   quizLocalState: QuizLocalReducerState,
-  dispatchLocalState: React.Dispatch<ActionAnswerQuestion>,
-  resultsPageOptions: ResultsPageOptions,
-  quizVersionIdProp: string | undefined,
-  cioClient: ConstructorIOClient
+  dispatchLocalState: React.Dispatch<ActionAnswerQuestion>
+) => { quizApiState: QuizAPIReducerState; dispatchApiState: React.Dispatch<ActionQuizAPI> };
+
+const useQuizApiState: UseQuizApiState = (
+  quizOptions,
+  cioClient,
+  quizLocalState,
+  dispatchLocalState
 ) => {
-  const [quizApiState, dispatch] = useReducer(apiReducer, initialState);
-  const firstQuestionId = quizApiState.quizFirstQuestion?.next_question.id;
-  const currentQuestionId = quizApiState.quizCurrentQuestion?.next_question.id;
-  const isFirstQuestion = firstQuestionId === currentQuestionId;
+  const [quizApiState, dispatchApiState] = useReducer(apiReducer, initialState);
+  const { quizId, quizVersionId: quizVersionIdProp, resultsPageOptions } = quizOptions;
 
   useEffect(() => {
     (async () => {
-      dispatch({
+      dispatchApiState({
         type: QuizAPIActionTypes.SET_IS_LOADING,
       });
+
       if (quizLocalState.isLastAnswer) {
         try {
           const quizResults = await getQuizResults(cioClient, quizId, {
@@ -38,14 +45,14 @@ const useFetchQuiz = (
             quizSessionId: quizLocalState.quizSessionId,
           });
           // Set quiz results state
-          dispatch({
+          dispatchApiState({
             type: QuizAPIActionTypes.SET_QUIZ_RESULTS,
             payload: {
               quizResults,
             },
           });
         } catch (error) {
-          dispatch({
+          dispatchApiState({
             type: QuizAPIActionTypes.SET_IS_ERROR,
           });
         }
@@ -54,7 +61,7 @@ const useFetchQuiz = (
           const quizVersionId = quizLocalState.quizVersionId || quizVersionIdProp;
           const { quizSessionId } = quizLocalState;
 
-          const questionResult = await nextQuestion(cioClient, quizId, {
+          const questionResult = await getNextQuestion(cioClient, quizId, {
             answers: quizLocalState.answers,
             quizVersionId,
             quizSessionId,
@@ -75,38 +82,26 @@ const useFetchQuiz = (
           }
 
           // Set current question state
-          dispatch({
+          dispatchApiState({
             type: QuizAPIActionTypes.SET_CURRENT_QUESTION,
             payload: {
               quizCurrentQuestion: questionResult,
             },
           });
         } catch (error) {
-          dispatch({
+          dispatchApiState({
             type: QuizAPIActionTypes.SET_IS_ERROR,
           });
         }
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    cioClient,
-    quizId,
-    quizLocalState.answers,
-    quizLocalState.isLastAnswer,
-    resultsPageOptions?.numResultsToDisplay,
-  ]);
-
-  const resetQuizApiState = () => {
-    dispatch({ type: QuizAPIActionTypes.RESET_QUIZ });
-  };
+  }, [cioClient, quizId, quizLocalState.answers, resultsPageOptions?.numResultsToDisplay]);
 
   return {
-    cioClient,
     quizApiState,
-    isFirstQuestion,
-    resetQuizApiState,
+    dispatchApiState,
   };
 };
 
-export default useFetchQuiz;
+export default useQuizApiState;

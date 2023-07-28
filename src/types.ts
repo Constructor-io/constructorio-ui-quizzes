@@ -2,9 +2,13 @@ import {
   QuizResultData,
   NextQuestionResponse,
   QuizResultsResponse,
+  Nullable,
+  QuestionOption,
 } from '@constructor-io/constructorio-client-javascript/lib/types';
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
 import { RequestStates } from './constants';
+// eslint-disable-next-line import/no-cycle
+import { QuestionTypes } from './components/CioQuiz/actions';
 
 export type {
   QuestionOption,
@@ -21,9 +25,11 @@ export type {
 export type QuizResultDataPartial = Partial<QuizResultData>;
 
 // QUIZ PROPS
-export interface ResultsProps {
+export interface ResultCardProps {
   resultCardSalePriceKey?: string;
   resultCardRegularPriceKey?: string;
+  resultCardRatingCountKey?: string;
+  resultCardRatingScoreKey?: string;
 }
 
 export namespace QuizResultsEventsProps {
@@ -32,7 +38,7 @@ export namespace QuizResultsEventsProps {
   export type OnAddToCartClick = (result: QuizResultDataPartial) => void;
 }
 
-export interface ResultsPageOptions extends ResultsProps {
+export interface ResultsPageOptions extends ResultCardProps {
   numResultsToDisplay?: number;
   onQuizResultsLoaded?: QuizResultsEventsProps.OnQuizResultsLoaded;
   onQuizResultClick?: QuizResultsEventsProps.OnQuizResultClick;
@@ -57,23 +63,44 @@ export interface IQuizProps {
 // QUIZ RETURN VALUES
 export interface QuizReturnState {
   answers: {
-    inputs: Record<string, string | string[]>; // Key is the question Id and value is the answer input
+    inputs: AnswerInputState; // Key is the question Id and value is the answer input
     isLastAnswer: boolean;
   };
   quiz: {
     requestState: RequestStates;
     versionId?: string;
     sessionId?: string;
-    firstQuestion?: NextQuestionResponse;
-    currentQuestion?: NextQuestionResponse;
-    results?: QuizResultsResponse;
-    resultsFilters?: string[];
-    isFirstQuestion?: boolean;
+    currentQuestion?: CurrentQuestion | undefined;
+    results?: QuizResultsResponse | undefined;
+    selectedOptionsWithAttributes?: string[];
   };
 }
 
+export type AnswerInputState = {
+  [key: string]: {
+    type: InputQuestionsTypes;
+    value: string | string[];
+  };
+};
+
+export type InputQuestionsTypes =
+  | QuestionTypes.OpenText
+  | QuestionTypes.Cover
+  | QuestionTypes.SingleSelect
+  | QuestionTypes.MultipleSelect;
+
+export type CurrentQuestion = NextQuestionResponse & {
+  isFirstQuestion: boolean;
+  isOpenQuestion: boolean;
+  isCoverQuestion: boolean;
+  isSingleQuestion: boolean;
+  isMultipleQuestion: boolean;
+  isSelectQuestion: boolean;
+};
+
 export namespace QuizEventsReturn {
-  export type NextQuestion = (payload?: string | string[]) => void;
+  export type QuizAnswerChanged = (payload?: string | string[]) => void;
+  export type NextQuestion = () => void;
   export type PreviousQuestion = () => void;
   export type ResetQuiz = () => void;
   export type ResultClick = (result: QuizResultDataPartial, position: number) => void;
@@ -83,20 +110,122 @@ export namespace QuizEventsReturn {
     price?: number
   ) => void;
   export type HydrateQuiz = () => void;
-  export type HasStoredState = () => boolean;
-  export type ResetStoredState = () => void;
+  export type HasSessionStorageState = () => boolean;
+  export type ResetSessionStorageState = () => void;
 }
 
 export interface QuizEventsReturn {
   nextQuestion: QuizEventsReturn.NextQuestion;
+  quizAnswerChanged: QuizEventsReturn.QuizAnswerChanged;
   previousQuestion: QuizEventsReturn.PreviousQuestion;
   resetQuiz: QuizEventsReturn.ResetQuiz;
   resultClick: QuizEventsReturn.ResultClick;
   addToCart: QuizEventsReturn.AddToCart;
   hydrateQuiz: QuizEventsReturn.HydrateQuiz;
-  hasStoredState: QuizEventsReturn.HasStoredState;
-  resetStoredState: QuizEventsReturn.ResetStoredState;
+  hasSessionStorageState: QuizEventsReturn.HasSessionStorageState;
+  resetSessionStorageState: QuizEventsReturn.ResetSessionStorageState;
 }
+
+export interface OpenTextInputProps {
+  className: string;
+  placeholder: string;
+  value: string;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  onKeyDown: React.KeyboardEventHandler<HTMLInputElement>;
+}
+
+export interface CoverQuestionProps {}
+
+export interface NextQuestionButtonProps {
+  className: string;
+  type: 'submit' | 'reset' | 'button' | undefined;
+  disabled?: boolean;
+  onClick: React.MouseEventHandler<HTMLElement>;
+}
+
+export interface PreviousQuestionButtonProps {
+  className: string;
+  type: 'submit' | 'reset' | 'button' | undefined;
+  onClick: React.MouseEventHandler<HTMLElement>;
+  style?: Record<string, string>;
+}
+
+export interface ResetQuizButtonProps {
+  className: string;
+  type: 'submit' | 'reset' | 'button' | undefined;
+  onClick: React.MouseEventHandler<HTMLElement>;
+  style?: Record<string, string>;
+}
+
+export interface HydrateQuizButtonProps {
+  className: string;
+  type: 'submit' | 'reset' | 'button' | undefined;
+  onClick: React.MouseEventHandler<HTMLElement>;
+  style?: Record<string, string>;
+}
+
+export interface AddToCartButtonProps {
+  className: string;
+  type: 'submit' | 'reset' | 'button' | undefined;
+  onClick: React.MouseEventHandler<HTMLElement>;
+  style?: Record<string, string>;
+}
+
+export interface QuizImageProps {
+  className?: string;
+  src?: Nullable<string>;
+  alt?: Nullable<string>;
+}
+
+export interface QuizResultPropsLink {
+  href?: string;
+  onClick: React.MouseEventHandler<HTMLElement>;
+  onKeyDown: React.KeyboardEventHandler<HTMLElement>;
+}
+
+export interface QuizResultPropsButton {
+  className: string;
+  role: 'button';
+  tabIndex: number;
+  onClick: React.MouseEventHandler<HTMLElement>;
+  onKeyDown: React.KeyboardEventHandler<HTMLElement>;
+}
+
+export type QuizResultProps = QuizResultPropsLink | QuizResultPropsButton;
+export interface SelectInputProps {
+  className: string;
+  onClick: React.MouseEventHandler<HTMLElement>;
+  onKeyDown: React.KeyboardEventHandler<HTMLElement>;
+  role: 'button';
+  tabIndex: number;
+  key: number;
+}
+
+export type GetOpenTextInputProps = () => OpenTextInputProps;
+export type GetCoverQuestionProps = () => CoverQuestionProps;
+export type GetSelectInputProps = (option: QuestionOption) => SelectInputProps;
+export type GetNextQuestionButtonProps = () => NextQuestionButtonProps;
+export type GetPreviousQuestionButtonProps = () => PreviousQuestionButtonProps;
+export type GetResetQuizButtonProps = (
+  stylesType?: 'primary' | 'secondary'
+) => ResetQuizButtonProps;
+export type GetHydrateQuizButtonProps = () => HydrateQuizButtonProps;
+export type GetAddToCartButtonProps = (
+  result: QuizResultDataPartial,
+  price?: number
+) => AddToCartButtonProps;
+export type GetQuizImageProps = () => QuizImageProps;
+export type GetSelectQuestionImageProps = (option: QuestionOption) => QuizImageProps;
+
+export interface QuizResultOptions<T = 'button' | 'link'> {
+  result: QuizResultDataPartial;
+  position: number;
+  type?: T;
+}
+export type GetQuizResultButtonProps = (
+  options: QuizResultOptions<'button'>
+) => QuizResultPropsButton;
+export type GetQuizResultLinkProps = (options: QuizResultOptions<'link'>) => QuizResultPropsLink;
 
 export interface PrimaryColorStyles {
   '--primary-color-h': string;
@@ -108,6 +237,18 @@ export interface UseQuizReturn {
   cioClient?: ConstructorIOClient;
   state: QuizReturnState;
   events: QuizEventsReturn;
+  getOpenTextInputProps: GetOpenTextInputProps;
+  getNextQuestionButtonProps: GetNextQuestionButtonProps;
+  getPreviousQuestionButtonProps: GetPreviousQuestionButtonProps;
+  getQuizImageProps: GetQuizImageProps;
+  getSelectQuestionImageProps: GetSelectQuestionImageProps;
+  getSelectInputProps: GetSelectInputProps;
+  getCoverQuestionProps: GetCoverQuestionProps;
+  getResetQuizButtonProps: GetResetQuizButtonProps;
+  getHydrateQuizButtonProps: GetHydrateQuizButtonProps;
+  getAddToCartButtonProps: GetAddToCartButtonProps;
+  getQuizResultButtonProps: GetQuizResultButtonProps;
+  getQuizResultLinkProps: GetQuizResultLinkProps;
   primaryColorStyles: PrimaryColorStyles;
 }
 
