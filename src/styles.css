@@ -1,15 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
-.cio-question-background-image {
-  height: calc(100% - 4px);
-  width: 100%;
-  position: absolute;
-  z-index: -1;
-}
-
-.cio-quiz-loading {
-  display: flex;
-  justify-content: center;
-}
 
 /* Theme colors */
 .cio-quiz {
@@ -73,6 +62,12 @@
   font-size: 16px;
 }
 
+/* Container for the loading spinner */
+.cio-quiz.cio-quiz-loading {
+  display: flex;
+  justify-content: center;
+}
+
 .cio-quiz button {
   cursor: pointer;
 }
@@ -86,7 +81,9 @@
   width: 100%;
   position: relative;
   align-self: start;
-  height: calc(100% - 2rem - calc(var(--bottom-bar-height)));
+  height: calc(
+    100% - 2rem - calc(var(--bottom-bar-height))
+  ); /* Full height - margin - control bar */
 }
 .cio-container--with-image {
   display: flex;
@@ -95,7 +92,15 @@
   padding-bottom: var(--bottom-bar-height);
   position: relative;
   align-self: start;
-  height: calc(100% - calc(var(--bottom-bar-height)));
+  height: calc(100% - calc(var(--bottom-bar-height))); /* Full height - margin - control bar */
+}
+
+/* Background image */
+.cio-question-background-image {
+  height: calc(100% - 4px);
+  width: 100%;
+  position: absolute;
+  z-index: -1;
 }
 
 /* Session Prompt Modal */
@@ -633,7 +638,7 @@
   .cio-container {
     align-items: center;
     margin-top: 0;
-    height: calc(100% - calc(var(--bottom-bar-height)));
+    height: calc(100% - calc(var(--bottom-bar-height))); /* Full height - control bar */
   }
   .cio-container--with-image {
     padding: 6% 2%;
@@ -686,7 +691,6 @@
     padding: 1rem 5rem;
   }
   .cio-select-question-container {
-    position: static;
     justify-content: center;
     margin-bottom: 0;
     margin-top: 0;
