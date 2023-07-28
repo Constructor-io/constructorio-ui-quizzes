@@ -12,6 +12,8 @@ const product = {
     id: '1',
     price: 200,
     salePrice: 150,
+    ratingCount: '12',
+    ratingScore: '4',
     image_url: 'https://demo.constructor.io/sandbox_files/farmstandquizassets/HiThereNameInput.png',
   },
 };
@@ -57,6 +59,8 @@ const salePriceStoryArgs = {
   result: product,
   regularPriceKey: 'price',
   salePriceKey: 'salePrice',
+  ratingCountKey: 'ratingCount',
+  ratingScoreKey: 'ratingScore',
   resultPosition: 0,
 };
 export const ResultCardWithSalePrice: Story = {

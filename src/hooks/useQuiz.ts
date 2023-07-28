@@ -27,7 +27,6 @@ const useQuiz: UseQuiz = (quizOptions) => {
 
   const primaryColorStyles = usePrimaryColorStyles(primaryColor);
 
-  console.log('quizLocalState.answerInputs', quizLocalState.answerInputs);
   return {
     cioClient,
     state: {
