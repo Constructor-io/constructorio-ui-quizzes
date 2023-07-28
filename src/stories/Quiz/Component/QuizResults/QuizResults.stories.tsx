@@ -19,6 +19,8 @@ const resultsPageOptions = {
   onAddToCartClick: () => {},
   resultCardRegularPriceKey: 'price',
   resultCardSalePriceKey: 'salePrice',
+  resultCardRatingCountKey: 'ratingCount',
+  resultCardRatingScoreKey: 'ratingScore',
 };
 
 export const QuizResultsPage: Story = {

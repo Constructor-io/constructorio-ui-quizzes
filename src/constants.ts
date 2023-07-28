@@ -17,7 +17,9 @@ export const componentDescription = `- import \`CioQuiz\` to render in your JSX.
   - \`onQuizResultClick\` is an optional callback function that will be called when the result card is clicked. The default behavior is redirecting the user to the item's URL
   - \`onQuizResultsLoaded\` is an optional callback function that will be called when the quiz results are loaded
   - \`resultCardRegularPriceKey\` is a parameter that specifies the metadata field name for the regular price
-  - \`resultCardSalePriceKey\` is an optional parameter that specifies the metadata field name for the sale price
+  - \`resultCardSalePriceKey\` is an optional parameter that specifies the metadata field name for the sale price 
+  - \`resultCardRatingCountKey\` is an optional parameter that specifies the metadata field name for the ratings count 
+  - \`resultCardRatingScoreKey\` is an optional parameter that specifies the metadata field name for the ratings score 
 - \`sessionStateOptions\` lets you configure the session modal behavior
   - \`showSessionModal\` is a boolean used to decide whether to show the session modal. The default behavior is to show the session modal
   - \`showSessionModalOnResults\` is a boolean to decide whether to show the session modal after reaching the results page. The default behavior is to not show the session modal

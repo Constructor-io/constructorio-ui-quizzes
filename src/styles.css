@@ -432,15 +432,10 @@
   font-weight: 500;
   font-size: 1.25rem;
   line-height: 1.5rem;
+  margin-bottom: 2rem;
   color: var(--gray-dust-500);
   margin-top: 0;
 }
-.cio-zero-results-description {
-  color: var(--gray-dust-100);
-  line-height: 1.25rem;
-  margin-top: 0;
-}
-
 .cio-zero-results .cio-button-container {
   width: 14rem;
   margin-right: auto;
@@ -508,6 +503,12 @@
 }
 .cio-result-card-regular-price--strike-through {
   text-decoration: line-through;
+}
+.cio-result-card-rating {
+  margin-bottom: 10px;
+}
+.cio-result-card-rating-score {
+  margin-right: 5px;
 }
 
 /* Result CTA Button */
