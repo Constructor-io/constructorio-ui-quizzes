@@ -34,6 +34,7 @@ export interface QuizContextValue {
   getQuizResultLinkProps: GetQuizResultLinkProps;
   primaryColorStyles: PrimaryColorStyles;
   customClickItemCallback: boolean;
+  customAddToFavoritesCallback: boolean;
 }
 
 export default React.createContext<Partial<QuizContextValue>>({});

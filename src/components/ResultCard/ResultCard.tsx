@@ -13,8 +13,12 @@ interface ResultCardProps {
 
 export default function ResultCard(props: ResultCardProps) {
   const { result, salePriceKey, regularPriceKey, resultPosition } = props;
-  const { customClickItemCallback, getQuizResultButtonProps, getQuizResultLinkProps } =
-    useContext(QuizContext);
+  const {
+    customAddToFavoritesCallback,
+    customClickItemCallback,
+    getQuizResultButtonProps,
+    getQuizResultLinkProps,
+  } = useContext(QuizContext);
   const salePrice = salePriceKey && result?.data?.[salePriceKey];
   const regularPrice = regularPriceKey && result?.data?.[regularPriceKey];
 
@@ -55,7 +59,9 @@ export default function ResultCard(props: ResultCardProps) {
 
   return (
     <div className='cio-result-card'>
-      <ResultFavoritesButton item={result} price={salePrice || regularPrice} />
+      {customAddToFavoritesCallback && (
+        <ResultFavoritesButton item={result} price={salePrice || regularPrice} />
+      )}
       {!customClickItemCallback ? resultCardContentWithLink() : resultCardContentWithoutLink()}
       <ResultCtaButton item={result} price={salePrice || regularPrice} />
     </div>
