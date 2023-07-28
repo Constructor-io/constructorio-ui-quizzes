@@ -62,7 +62,7 @@ export default function CioQuiz(props: IQuizProps) {
 
   if (state.quiz.requestState === RequestStates.Loading) {
     return (
-      <div className='cio-quiz'>
+      <div className='cio-quiz cio-quiz-loading'>
         <Spinner />
       </div>
     );
