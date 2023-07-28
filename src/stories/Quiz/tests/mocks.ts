@@ -97,6 +97,8 @@ export const getMockState = (question?: Question): QuizReturnState => ({
             data: {
               id: '0',
               price: 100,
+              ratingCount: '12',
+              ratingScore: '4',
               image_url:
                 'https://demo.constructor.io/sandbox_files/farmstandquizassets/HiThereNameInput.png',
             },
@@ -107,6 +109,8 @@ export const getMockState = (question?: Question): QuizReturnState => ({
               id: '1',
               price: 200,
               salePrice: 150,
+              ratingCount: '6',
+              ratingScore: '3',
               image_url:
                 'https://demo.constructor.io/sandbox_files/farmstandquizassets/HiThereNameInput.png',
             },
@@ -117,6 +121,8 @@ export const getMockState = (question?: Question): QuizReturnState => ({
               id: '2',
               price: 300,
               salePrice: 250,
+              ratingCount: '2',
+              ratingScore: '5',
               image_url:
                 'https://demo.constructor.io/sandbox_files/farmstandquizassets/HiThereNameInput.png',
             },
@@ -134,11 +140,11 @@ export const getMockState = (question?: Question): QuizReturnState => ({
       quiz_session_id: '',
       quiz_version_id: '',
       quiz_selected_options: [
-        { value: 'Option 1', has_attribute: true },
-        { value: 'Option 2', has_attribute: true },
+        { value: 'Chocolate', has_attribute: true },
+        { value: 'Medium', has_attribute: true },
       ],
     },
-    selectedOptionsWithAttributes: ['Option 1', 'Option 2'],
+    selectedOptionsWithAttributes: ['Chocolate', 'Medium'],
   },
 });
 

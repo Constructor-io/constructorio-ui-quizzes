@@ -504,6 +504,12 @@
 .cio-result-card-regular-price--strike-through {
   text-decoration: line-through;
 }
+.cio-result-card-rating {
+  margin-bottom: 10px;
+}
+.cio-result-card-rating-score {
+  margin-right: 5px;
+}
 
 /* Result Favorites Button*/
 .cio-result-card-favorites-button {
