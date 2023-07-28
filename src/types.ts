@@ -73,7 +73,7 @@ export interface QuizReturnState {
     sessionId?: string;
     currentQuestion?: CurrentQuestion | undefined;
     results?: QuizResultsResponse | undefined;
-    isCompleted: boolean;
+    skipToResults: boolean;
     selectedOptionsWithAttributes?: string[];
   };
 }
@@ -113,7 +113,6 @@ export namespace QuizEventsReturn {
   ) => void;
   export type HydrateQuiz = () => void;
   export type HasSessionStorageState = () => boolean;
-  export type IsQuizCompleted = () => boolean;
   export type ResetSessionStorageState = () => void;
 }
 
@@ -125,7 +124,6 @@ export interface QuizEventsReturn {
   resultClick: QuizEventsReturn.ResultClick;
   addToCart: QuizEventsReturn.AddToCart;
   hydrateQuiz: QuizEventsReturn.HydrateQuiz;
-  isQuizCompleted: QuizEventsReturn.IsQuizCompleted;
   hasSessionStorageState: QuizEventsReturn.HasSessionStorageState;
   resetSessionStorageState: QuizEventsReturn.ResetSessionStorageState;
 }

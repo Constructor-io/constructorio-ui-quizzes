@@ -18,7 +18,7 @@ type UseQuizApiState = (
   quizOptions: IQuizProps,
   cioClient: ConstructorIOClient,
   quizLocalState: QuizLocalReducerState,
-  isQuizCompleted: () => boolean,
+  skipToResults: boolean,
   dispatchLocalState: React.Dispatch<ActionAnswerQuestion>
 ) => { quizApiState: QuizAPIReducerState; dispatchApiState: React.Dispatch<ActionQuizAPI> };
 
@@ -26,17 +26,12 @@ const useQuizApiState: UseQuizApiState = (
   quizOptions,
   cioClient,
   quizLocalState,
-  isQuizCompleted,
+  skipToResults,
   dispatchLocalState
   // eslint-disable-next-line max-params
 ) => {
   const [quizApiState, dispatchApiState] = useReducer(apiReducer, initialState);
-  const {
-    quizId,
-    quizVersionId: quizVersionIdProp,
-    resultsPageOptions,
-    sessionStateOptions,
-  } = quizOptions;
+  const { quizId, quizVersionId: quizVersionIdProp, resultsPageOptions } = quizOptions;
 
   useEffect(() => {
     (async () => {
@@ -44,10 +39,7 @@ const useQuizApiState: UseQuizApiState = (
         type: QuizAPIActionTypes.SET_IS_LOADING,
       });
 
-      if (
-        quizLocalState.isLastAnswer ||
-        (isQuizCompleted() && !sessionStateOptions?.showSessionModalOnResults)
-      ) {
+      if (quizLocalState.isLastAnswer || skipToResults) {
         try {
           const quizResults = await getQuizResults(cioClient, quizId, {
             answers: quizLocalState.answers,
