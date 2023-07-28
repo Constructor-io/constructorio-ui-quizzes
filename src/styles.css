@@ -516,7 +516,7 @@
   outline: inherit;
   width: 25px;
   margin-left: auto;
-  margin-right: .5rem;
+  margin-bottom: 1rem;
 }
 
 .cio-result-card-favorites-button svg:hover {
