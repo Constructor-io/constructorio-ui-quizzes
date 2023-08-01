@@ -22,7 +22,7 @@ const useQuiz: UseQuiz = (quizOptions) => {
   const quizEvents = useQuizEvents(quizOptions, cioClient, quizState);
 
   // Props getters
-  const { quizApiState, quizLocalState } = quizState;
+  const { quizApiState, quizLocalState, skipToResults } = quizState;
   const propGetters = usePropsGetters(quizEvents, quizApiState, quizLocalState);
 
   const primaryColorStyles = usePrimaryColorStyles(primaryColor);
@@ -38,6 +38,7 @@ const useQuiz: UseQuiz = (quizOptions) => {
         requestState: quizApiState.quizRequestState,
         versionId: quizLocalState.quizVersionId,
         sessionId: quizLocalState.quizSessionId,
+        skipToResults,
         currentQuestion: quizApiState.quizCurrentQuestion,
         results: quizApiState.quizResults,
         selectedOptionsWithAttributes: quizApiState.selectedOptionsWithAttributes,

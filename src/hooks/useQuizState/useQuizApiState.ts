@@ -18,6 +18,7 @@ type UseQuizApiState = (
   quizOptions: IQuizProps,
   cioClient: ConstructorIOClient,
   quizLocalState: QuizLocalReducerState,
+  skipToResults: boolean,
   dispatchLocalState: React.Dispatch<ActionAnswerQuestion>
 ) => { quizApiState: QuizAPIReducerState; dispatchApiState: React.Dispatch<ActionQuizAPI> };
 
@@ -25,7 +26,9 @@ const useQuizApiState: UseQuizApiState = (
   quizOptions,
   cioClient,
   quizLocalState,
+  skipToResults,
   dispatchLocalState
+  // eslint-disable-next-line max-params
 ) => {
   const [quizApiState, dispatchApiState] = useReducer(apiReducer, initialState);
   const { quizId, quizVersionId: quizVersionIdProp, resultsPageOptions } = quizOptions;
@@ -36,7 +39,7 @@ const useQuizApiState: UseQuizApiState = (
         type: QuizAPIActionTypes.SET_IS_LOADING,
       });
 
-      if (quizLocalState.isLastAnswer) {
+      if (quizLocalState.isLastAnswer || skipToResults) {
         try {
           const quizResults = await getQuizResults(cioClient, quizId, {
             answers: quizLocalState.answers,
@@ -51,6 +54,10 @@ const useQuizApiState: UseQuizApiState = (
               quizResults,
             },
           });
+          if (!quizLocalState.isQuizCompleted)
+            dispatchLocalState({
+              type: QuestionTypes.Complete,
+            });
         } catch (error) {
           dispatchApiState({
             type: QuizAPIActionTypes.SET_IS_ERROR,
