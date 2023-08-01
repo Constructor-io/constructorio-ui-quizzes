@@ -92,7 +92,7 @@ If that's the case and your environment is using an older Javascript version lik
 `Module parse failed: Unexpected token (15:32)
 You may need an appropriate loader to handle this file type, currently no loaders are configured to process this file`
 
-To solve this you can import the CommonJS (cjs) build Which supports ES6 (ES2015) syntax:
+To solve this you can import the CommonJS (cjs) build which supports ES6 (ES2015) syntax:
 
 `import CioQuiz from '@constructor-io/constructorio-ui-quizzes/cjs'`
 
