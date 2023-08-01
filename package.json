@@ -27,7 +27,7 @@
       "import": "./lib/mjs/index.js",
       "require": "./lib/cjs/index.js"
     },
-    "./commonJs": {
+    "./cjs": {
       "import": "./lib/cjs/index.js",
       "require": "./lib/cjs/index.js"
     }

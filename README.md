@@ -93,7 +93,7 @@ You may need an appropriate loader to handle this file type, currently no loader
 
 To solve this you can import the CommonJS (cjs) build. Which supports ES6 (ES2015) syntax:
 
-`import CioQuiz from '@constructor-io/constructorio-ui-quizzes/commonJs'`
+`import CioQuiz from '@constructor-io/constructorio-ui-quizzes/cjs'`
 
 **ESLint**
 
