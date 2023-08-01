@@ -17,6 +17,7 @@ export default function ResultContainer(props: IResultContainerProps) {
     resultCardRegularPriceKey,
     resultCardRatingCountKey,
     resultCardRatingScoreKey,
+    resultCardDiscountLabelKey,
   } = options;
   const { state } = useContext(QuizContext);
   const zeroResults = !state?.quiz.results?.response?.results?.length;
@@ -36,6 +37,7 @@ export default function ResultContainer(props: IResultContainerProps) {
             resultCardRegularPriceKey={resultCardRegularPriceKey}
             resultCardRatingCountKey={resultCardRatingCountKey}
             resultCardRatingScoreKey={resultCardRatingScoreKey}
+            resultCardDiscountLabelKey={resultCardDiscountLabelKey}
           />
         )}
         {zeroResults && <ZeroResults />}

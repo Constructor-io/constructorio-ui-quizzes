@@ -21,6 +21,7 @@ const resultsPageOptions = {
   resultCardSalePriceKey: 'salePrice',
   resultCardRatingCountKey: 'ratingCount',
   resultCardRatingScoreKey: 'ratingScore',
+  resultCardDiscountLabelKey: 'discount',
 };
 
 export const QuizResultsPage: Story = {

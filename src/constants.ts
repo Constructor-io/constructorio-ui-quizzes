@@ -20,6 +20,7 @@ export const componentDescription = `- import \`CioQuiz\` to render in your JSX.
   - \`resultCardSalePriceKey\` is an optional parameter that specifies the metadata field name for the sale price 
   - \`resultCardRatingCountKey\` is an optional parameter that specifies the metadata field name for the ratings count 
   - \`resultCardRatingScoreKey\` is an optional parameter that specifies the metadata field name for the ratings score 
+  - \`resultCardDiscountLabelKey\` is an optional parameter that specifies the metadata field name for the discount label 
 - Use different props to configure the behavior of this component.
 - The following stories show how different props affect the component's behavior
 

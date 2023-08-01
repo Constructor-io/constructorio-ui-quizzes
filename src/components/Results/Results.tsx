@@ -11,6 +11,7 @@ function Results(props: ResultsProps) {
     resultCardRegularPriceKey,
     resultCardRatingCountKey,
     resultCardRatingScoreKey,
+    resultCardDiscountLabelKey,
   } = props;
   const { state } = useContext(QuizContext);
   return (
@@ -23,6 +24,7 @@ function Results(props: ResultsProps) {
           regularPriceKey={resultCardRegularPriceKey}
           ratingCountKey={resultCardRatingCountKey}
           ratingScoreKey={resultCardRatingScoreKey}
+          discountLabelKey={resultCardDiscountLabelKey}
           resultPosition={index + 1}
         />
       ))}

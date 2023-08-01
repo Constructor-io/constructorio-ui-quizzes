@@ -9,19 +9,30 @@ interface ResultCardProps {
   regularPriceKey?: string;
   ratingCountKey?: string;
   ratingScoreKey?: string;
+  discountLabelKey?: string;
   resultPosition: number;
 }
 
 export default function ResultCard(props: ResultCardProps) {
-  const { result, salePriceKey, regularPriceKey, resultPosition, ratingCountKey, ratingScoreKey } =
-    props;
+  const {
+    result,
+    salePriceKey,
+    regularPriceKey,
+    resultPosition,
+    ratingCountKey,
+    ratingScoreKey,
+    discountLabelKey,
+  } = props;
   const { customClickItemCallback, getQuizResultButtonProps, getQuizResultLinkProps } =
     useContext(QuizContext);
   const salePrice = salePriceKey && result?.data?.[salePriceKey];
   const regularPrice = regularPriceKey && result?.data?.[regularPriceKey];
   const ratingCount = ratingCountKey && result?.data?.[ratingCountKey];
   const ratingScore = ratingScoreKey && result?.data?.[ratingScoreKey];
+  const discountLabel = discountLabelKey && result?.data?.[discountLabelKey];
 
+  console.log(discountLabelKey);
+  console.log('result', result);
   const resultCardContent = () => (
     <>
       <div className='cio-result-card-image'>
@@ -47,6 +58,7 @@ export default function ResultCard(props: ResultCardProps) {
                 ${regularPrice}
               </span>
             )}
+            {discountLabel && <div className='cio-result-card-discount'>was ${discountLabel}</div>}
           </div>
         </div>
       </div>

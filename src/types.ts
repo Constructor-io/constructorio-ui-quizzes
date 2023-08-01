@@ -30,6 +30,7 @@ export interface ResultCardProps {
   resultCardRegularPriceKey?: string;
   resultCardRatingCountKey?: string;
   resultCardRatingScoreKey?: string;
+  resultCardDiscountLabelKey?: string;
 }
 
 export namespace QuizResultsEventsProps {
