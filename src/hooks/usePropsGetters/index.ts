@@ -96,10 +96,15 @@ const usePropsGetters = (
   );
 
   const getAddToFavoritesButtonProps: GetAddToFavoritesButtonProps = useCallback(
-    (result, price) => ({
+    (result, price, clickHandler) => ({
       className: 'cio-result-card-favorites-button',
       type: 'button',
-      onClick: (e) => addToFavorites(e, result, price),
+      onClick: (e) => {
+        if (typeof clickHandler === 'function') {
+          clickHandler();
+        }
+        addToFavorites(e, result, price);
+      },
     }),
     [addToFavorites]
   );

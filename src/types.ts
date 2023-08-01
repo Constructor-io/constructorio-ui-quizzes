@@ -224,7 +224,8 @@ export type GetAddToCartButtonProps = (
 ) => AddToCartButtonProps;
 export type GetAddToFavoritesButtonProps = (
   result: QuizResultDataPartial,
-  price?: number
+  price?: number,
+  clickHandler?: () => void
 ) => AddToCartButtonProps;
 export type GetQuizImageProps = () => QuizImageProps;
 export type GetSelectQuestionImageProps = (option: QuestionOption) => QuizImageProps;
