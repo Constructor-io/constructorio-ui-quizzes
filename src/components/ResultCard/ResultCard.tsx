@@ -9,7 +9,6 @@ interface ResultCardProps {
   regularPriceKey?: string;
   ratingCountKey?: string;
   ratingScoreKey?: string;
-  discountLabelKey?: string;
   resultPosition: number;
   renderResultCardPriceDetails?: (result: QuizResultDataPartial) => JSX.Element;
 }

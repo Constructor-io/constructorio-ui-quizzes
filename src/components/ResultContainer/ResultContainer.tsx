@@ -18,7 +18,6 @@ export default function ResultContainer(props: IResultContainerProps) {
     resultCardRegularPriceKey,
     resultCardRatingCountKey,
     resultCardRatingScoreKey,
-    resultCardDiscountLabelKey,
     renderResultCardPriceDetails,
   } = options;
   const { state } = useContext(QuizContext);
@@ -39,7 +38,6 @@ export default function ResultContainer(props: IResultContainerProps) {
             resultCardRegularPriceKey={resultCardRegularPriceKey}
             resultCardRatingCountKey={resultCardRatingCountKey}
             resultCardRatingScoreKey={resultCardRatingScoreKey}
-            resultCardDiscountLabelKey={resultCardDiscountLabelKey}
             renderResultCardPriceDetails={renderResultCardPriceDetails}
           />
         )}

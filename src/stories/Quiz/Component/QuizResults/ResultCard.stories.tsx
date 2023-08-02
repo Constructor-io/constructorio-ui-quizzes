@@ -62,7 +62,6 @@ const salePriceStoryArgs = {
   salePriceKey: 'salePrice',
   ratingCountKey: 'ratingCount',
   ratingScoreKey: 'ratingScore',
-  discountLabelKey: 'discount',
   resultPosition: 0,
 };
 export const ResultCardWithSalePrice: Story = {
