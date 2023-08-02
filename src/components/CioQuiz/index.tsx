@@ -95,10 +95,12 @@ export default function CioQuiz(props: IQuizProps) {
           {state.quiz.results || state.quiz.skipToResults ? (
             <ResultContainer options={resultsPageOptions} />
           ) : (
-            state.quiz.currentQuestion && <QuizQuestions />
-          )}
-          {state.quiz.currentQuestion && (
-            <ControlBar ctaButtonText={questionData?.cta_text || undefined} />
+            state.quiz.currentQuestion && (
+              <>
+                <QuizQuestions />
+                <ControlBar ctaButtonText={questionData?.cta_text || undefined} />
+              </>
+            )
           )}
         </QuizContext.Provider>
       </div>
