@@ -30,6 +30,7 @@ export interface ResultCardProps {
   resultCardRegularPriceKey?: string;
   resultCardRatingCountKey?: string;
   resultCardRatingScoreKey?: string;
+  renderResultCardPriceDetails?: (result: QuizResultDataPartial) => JSX.Element;
 }
 
 export namespace QuizResultsEventsProps {
