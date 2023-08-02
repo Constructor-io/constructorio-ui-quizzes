@@ -7,7 +7,7 @@ interface RedoButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> 
 }
 
 function RedoButton(props: RedoButtonProps) {
-  const { redoText = 'Redo Quiz', disabled, ...rest } = props;
+  const { redoText = 'Retake Quiz', disabled, ...rest } = props;
   const { getResetQuizButtonProps } = useContext(QuizContext);
 
   if (getResetQuizButtonProps) {

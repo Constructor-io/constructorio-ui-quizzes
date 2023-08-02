@@ -76,6 +76,8 @@ export default function ResultCard(props: ResultCardProps) {
     getQuizResultLinkProps && (
       <a
         className='cio-result-card-anchor'
+        rel='noreferrer'
+        target='_blank'
         {...getQuizResultLinkProps({ result, position: resultPosition, type: 'link' })}>
         {resultCardContent()}
       </a>
