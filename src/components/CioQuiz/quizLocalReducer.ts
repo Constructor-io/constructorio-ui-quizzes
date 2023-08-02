@@ -6,6 +6,7 @@ export type QuizLocalReducerState = {
   answers: Answers;
   answerInputs: AnswerInputState;
   isLastAnswer: boolean;
+  isQuizCompleted: boolean;
   quizVersionId?: string;
   quizSessionId?: string;
 };
@@ -14,6 +15,7 @@ export const initialState: QuizLocalReducerState = {
   answers: [],
   answerInputs: {},
   isLastAnswer: false,
+  isQuizCompleted: false,
 };
 
 function answerInputReducer(state: AnswerInputState, action: ActionAnswerInputQuestion) {
@@ -36,24 +38,28 @@ export default function quizLocalReducer(
         ...state,
         answerInputs: answerInputReducer(state.answerInputs, action),
         isLastAnswer: !!action.payload?.isLastQuestion,
+        isQuizCompleted: false,
       };
     case QuestionTypes.Cover:
       return {
         ...state,
         answerInputs: answerInputReducer(state.answerInputs, action),
         isLastAnswer: !!action.payload?.isLastQuestion,
+        isQuizCompleted: false,
       };
     case QuestionTypes.SingleSelect:
       return {
         ...state,
         answerInputs: answerInputReducer(state.answerInputs, action),
         isLastAnswer: !!action.payload?.isLastQuestion,
+        isQuizCompleted: false,
       };
     case QuestionTypes.MultipleSelect:
       return {
         ...state,
         answerInputs: answerInputReducer(state.answerInputs, action),
         isLastAnswer: !!action.payload?.isLastQuestion,
+        isQuizCompleted: false,
       };
     case QuestionTypes.Next: {
       const { answers } = state;
@@ -79,6 +85,7 @@ export default function quizLocalReducer(
       return {
         ...state,
         answers: newAnswers,
+        isQuizCompleted: false,
       };
     }
 
@@ -89,6 +96,7 @@ export default function quizLocalReducer(
         answerInputs: newAnswerInputs,
         answers: [...state.answers.slice(0, -1)],
         isLastAnswer: false,
+        isQuizCompleted: false,
       };
     }
 
@@ -100,6 +108,11 @@ export default function quizLocalReducer(
       return {
         ...state,
         ...action.payload,
+      };
+    case QuestionTypes.Complete:
+      return {
+        ...state,
+        isQuizCompleted: true,
       };
     default:
       return state;

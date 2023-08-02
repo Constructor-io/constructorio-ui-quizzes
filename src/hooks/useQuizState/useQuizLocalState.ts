@@ -3,10 +3,11 @@ import { ActionAnswerQuestion } from '../../components/CioQuiz/actions';
 import quizLocalReducer, { initialState } from '../../components/CioQuiz/quizLocalReducer';
 import { quizSessionStateKey } from '../../constants';
 import { getStateFromSessionStorage, logger } from '../../utils';
+import { SessionStateOptions } from '../../types';
 
-const useQuizLocalState = (sessionStateKey?: string) => {
+const useQuizLocalState = (sessionStateOptions?: SessionStateOptions) => {
   const [quizLocalState, dispatch] = useReducer(quizLocalReducer, initialState);
-  const quizStateKey = sessionStateKey || quizSessionStateKey;
+  const quizStateKey = sessionStateOptions?.sessionStateKey || quizSessionStateKey;
 
   useEffect(() => {
     // don't save state if initial state
@@ -17,6 +18,10 @@ const useQuizLocalState = (sessionStateKey?: string) => {
 
   const hasQuizStoredState = (): boolean => getStateFromSessionStorage(quizStateKey) !== null;
 
+  const skipToResults =
+    !!getStateFromSessionStorage(quizStateKey)?.isQuizCompleted &&
+    !sessionStateOptions?.showSessionModalOnResults;
+
   const dispatchLocalState = useCallback((action: ActionAnswerQuestion) => {
     logger(action);
     dispatch(action);
@@ -26,6 +31,7 @@ const useQuizLocalState = (sessionStateKey?: string) => {
     quizLocalState,
     hasQuizStoredState,
     dispatchLocalState,
+    skipToResults,
     quizStateKey,
   };
 };

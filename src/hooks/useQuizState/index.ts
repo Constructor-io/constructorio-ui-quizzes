@@ -15,6 +15,7 @@ type UseQuizState = (
   dispatchApiState: React.Dispatch<ActionQuizAPI>;
   dispatchLocalState: React.Dispatch<ActionAnswerQuestion>;
   hasQuizStoredState: () => boolean;
+  skipToResults: boolean;
   quizStateKey: string;
 };
 
@@ -22,14 +23,15 @@ const useQuizState: UseQuizState = (quizOptions, cioClient) => {
   const { sessionStateOptions } = quizOptions;
 
   // Quiz Local state
-  const { quizLocalState, dispatchLocalState, hasQuizStoredState, quizStateKey } =
-    useQuizLocalState(sessionStateOptions?.sessionStateKey);
+  const { quizLocalState, dispatchLocalState, hasQuizStoredState, skipToResults, quizStateKey } =
+    useQuizLocalState(sessionStateOptions);
 
   // Quiz API state
   const { quizApiState, dispatchApiState } = useQuizApiState(
     quizOptions,
     cioClient,
     quizLocalState,
+    skipToResults,
     dispatchLocalState
   );
 
@@ -39,6 +41,7 @@ const useQuizState: UseQuizState = (quizOptions, cioClient) => {
     dispatchApiState,
     dispatchLocalState,
     hasQuizStoredState,
+    skipToResults,
     quizStateKey,
   };
 };

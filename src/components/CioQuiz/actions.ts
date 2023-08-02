@@ -12,6 +12,7 @@ export enum QuestionTypes {
   Back = 'back',
   Reset = 'reset',
   Hydrate = 'hydrate',
+  Complete = 'complete',
 }
 
 export interface QuestionAnswer<Value> {
@@ -40,6 +41,7 @@ export type ActionAnswerQuestion =
   | Action<QuestionTypes.Next, CurrentQuestion>
   | Action<QuestionTypes.Back, CurrentQuestion>
   | Action<QuestionTypes.Reset>
+  | Action<QuestionTypes.Complete>
   | Action<QuestionTypes.Hydrate, Partial<QuizLocalReducerState>>;
 
 // API actions

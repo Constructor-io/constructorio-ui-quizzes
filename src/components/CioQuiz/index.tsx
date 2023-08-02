@@ -35,10 +35,16 @@ export default function CioQuiz(props: IQuizProps) {
   useEffect(() => {
     // Respect showSessionModal if defined, else default to true.
     if (sessionStateOptions?.showSessionModal !== undefined) {
-      setShowSessionPrompt(sessionStateOptions?.showSessionModal && hasSessionStorageState());
+      setShowSessionPrompt(
+        sessionStateOptions?.showSessionModal &&
+          hasSessionStorageState() &&
+          !state.quiz.skipToResults
+      );
     } else {
-      setShowSessionPrompt(hasSessionStorageState());
+      setShowSessionPrompt(hasSessionStorageState() && !state.quiz.skipToResults);
     }
+
+    if (state.quiz.skipToResults) hydrateQuiz();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -86,8 +92,11 @@ export default function CioQuiz(props: IQuizProps) {
           setShowSessionPrompt={setShowSessionPrompt}
         />
         <QuizContext.Provider value={contextValue}>
-          {state.quiz.results && <ResultContainer options={resultsPageOptions} />}
-          {state.quiz.currentQuestion && <QuizQuestions />}
+          {state.quiz.results || state.quiz.skipToResults ? (
+            <ResultContainer options={resultsPageOptions} />
+          ) : (
+            state.quiz.currentQuestion && <QuizQuestions />
+          )}
           {state.quiz.currentQuestion && (
             <ControlBar ctaButtonText={questionData?.cta_text || undefined} />
           )}
