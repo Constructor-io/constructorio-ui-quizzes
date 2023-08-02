@@ -3,7 +3,6 @@ import QuestionTitle from '../QuestionTitle/QuestionTitle';
 import QuestionDescription from '../QuestionDescription/QuestionDescription';
 import { renderImages } from '../../utils';
 import QuizContext from '../CioQuiz/context';
-import ControlBar from '../ControlBar/ControlBar';
 
 function OpenTextQuestion() {
   const { state, getOpenTextInputProps } = useContext(QuizContext);
@@ -30,7 +29,6 @@ function OpenTextQuestion() {
           <QuestionTitle title={question.title} />
           <QuestionDescription description={question.description} />
           {getOpenTextInputProps && <input {...getOpenTextInputProps()} />}
-          <ControlBar ctaButtonText={question?.cta_text} />
         </div>
       </div>
     );

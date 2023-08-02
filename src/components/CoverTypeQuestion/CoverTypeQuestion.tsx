@@ -3,7 +3,6 @@ import QuestionTitle from '../QuestionTitle/QuestionTitle';
 import QuizContext from '../CioQuiz/context';
 import QuestionDescription from '../QuestionDescription/QuestionDescription';
 import { renderImages } from '../../utils';
-import ControlBar from '../ControlBar/ControlBar';
 
 export default function CoverTypeQuestion() {
   const { state } = useContext(QuizContext);
@@ -27,7 +26,6 @@ export default function CoverTypeQuestion() {
         <div className='cio-question-content'>
           <QuestionTitle title={question?.title} />
           <QuestionDescription description={question.description} />
-          <ControlBar ctaButtonText={question?.cta_text} />
         </div>
       </div>
     );
