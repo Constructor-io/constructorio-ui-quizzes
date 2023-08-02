@@ -11,6 +11,7 @@ interface ResultCardProps {
   ratingScoreKey?: string;
   discountLabelKey?: string;
   resultPosition: number;
+  renderResultCardPriceDetails?: (result: QuizResultDataPartial) => JSX.Element;
 }
 
 export default function ResultCard(props: ResultCardProps) {
@@ -21,7 +22,7 @@ export default function ResultCard(props: ResultCardProps) {
     resultPosition,
     ratingCountKey,
     ratingScoreKey,
-    discountLabelKey,
+    renderResultCardPriceDetails,
   } = props;
   const { customClickItemCallback, getQuizResultButtonProps, getQuizResultLinkProps } =
     useContext(QuizContext);
@@ -29,10 +30,6 @@ export default function ResultCard(props: ResultCardProps) {
   const regularPrice = regularPriceKey && result?.data?.[regularPriceKey];
   const ratingCount = ratingCountKey && result?.data?.[ratingCountKey];
   const ratingScore = ratingScoreKey && result?.data?.[ratingScoreKey];
-  const discountLabel = discountLabelKey && result?.data?.[discountLabelKey];
-
-  console.log(discountLabelKey);
-  console.log('result', result);
   const resultCardContent = () => (
     <>
       <div className='cio-result-card-image'>
@@ -50,16 +47,19 @@ export default function ResultCard(props: ResultCardProps) {
             )}
             {ratingCount && <span className='cio-result-card-rating-count'>({ratingCount})</span>}
           </div>
-          <div className='cio-result-card-prices'>
-            {salePrice && <span className='cio-result-card-sale-price'>${salePrice}</span>}
-            {regularPrice && (
-              <span
-                className={`cio-result-card-regular-price${salePrice ? '--strike-through' : ''}`}>
-                ${regularPrice}
-              </span>
-            )}
-            {discountLabel && <div className='cio-result-card-discount'>was ${discountLabel}</div>}
-          </div>
+          {renderResultCardPriceDetails ? (
+            renderResultCardPriceDetails(result)
+          ) : (
+            <div className='cio-result-card-prices'>
+              {salePrice && <span className='cio-result-card-sale-price'>${salePrice}</span>}
+              {regularPrice && (
+                <span
+                  className={`cio-result-card-regular-price${salePrice ? '--strike-through' : ''}`}>
+                  ${regularPrice}
+                </span>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </>
