@@ -20,13 +20,13 @@ export default function useAddToFavoritesButtonProps(
         favorited?.[result?.data?.id || '0'] ? 'favorited' : ''
       }`,
       onClick: (e) => {
+        addToFavorites(e, result, price, !favorited?.[result?.data?.id || '0']);
         toggleIdFavorited(result?.data?.id || '0');
-        addToFavorites(e, result, price);
       },
       type: 'button',
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [favorited]
+    [favorited, addToFavorites]
   );
 
   return getAddToFavoritesButtonProps;

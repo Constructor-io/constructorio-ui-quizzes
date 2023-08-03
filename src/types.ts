@@ -117,7 +117,8 @@ export namespace QuizEventsReturn {
   export type AddToFavorites = (
     e: React.MouseEvent<HTMLElement>,
     result: QuizResultDataPartial,
-    price?: number
+    price?: number,
+    sendEvent?: boolean
   ) => void;
   export type HydrateQuiz = () => void;
   export type HasSessionStorageState = () => boolean;
