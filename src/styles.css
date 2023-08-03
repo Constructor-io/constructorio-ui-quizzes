@@ -525,6 +525,10 @@
   margin-bottom: 1rem;
 }
 
+.cio-result-card-favorites-button.favorited svg{
+  fill: red;
+}
+
 .cio-result-card-favorites-button svg:hover {
   stroke: black;
   stroke-width: 1px;

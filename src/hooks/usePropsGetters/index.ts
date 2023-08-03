@@ -23,6 +23,7 @@ import useCoverQuestionProps from './useCoverQuestionProps';
 import useOpenTextInputProps from './useOpenTextInputProps';
 import useNextQuestionButtonProps from './useNextQuestionButtonProps';
 import usePreviousQuestionButtonProps from './usePreviousQuestionButtonProps';
+import useAddToFavoritesButtonProps from './useAddToFavoritesbuttonProps';
 
 const usePropsGetters = (
   quizEvents: QuizEventsReturn,
@@ -95,19 +96,8 @@ const usePropsGetters = (
     [addToCart]
   );
 
-  const getAddToFavoritesButtonProps: GetAddToFavoritesButtonProps = useCallback(
-    (result, price, clickHandler) => ({
-      className: 'cio-result-card-favorites-button',
-      type: 'button',
-      onClick: (e) => {
-        if (typeof clickHandler === 'function') {
-          clickHandler();
-        }
-        addToFavorites(e, result, price);
-      },
-    }),
-    [addToFavorites]
-  );
+  const getAddToFavoritesButtonProps: GetAddToFavoritesButtonProps =
+    useAddToFavoritesButtonProps(addToFavorites);
 
   const quizResultClickDown = useCallback(
     (event: KeyboardEvent<HTMLElement>, result: Partial<QuizResultData>, position: number) => {
