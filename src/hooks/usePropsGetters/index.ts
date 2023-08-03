@@ -23,7 +23,7 @@ import useCoverQuestionProps from './useCoverQuestionProps';
 import useOpenTextInputProps from './useOpenTextInputProps';
 import useNextQuestionButtonProps from './useNextQuestionButtonProps';
 import usePreviousQuestionButtonProps from './usePreviousQuestionButtonProps';
-import useAddToFavoritesButtonProps from './useAddToFavoritesbuttonProps';
+import useAddToFavoritesButtonProps from './useAddToFavoritesButtonProps';
 
 const usePropsGetters = (
   quizEvents: QuizEventsReturn,
