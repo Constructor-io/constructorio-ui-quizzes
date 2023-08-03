@@ -30,6 +30,7 @@ export interface ResultCardProps {
   resultCardRegularPriceKey?: string;
   resultCardRatingCountKey?: string;
   resultCardRatingScoreKey?: string;
+  renderResultCardPriceDetails?: (result: QuizResultDataPartial) => JSX.Element;
 }
 
 export namespace QuizResultsEventsProps {
@@ -49,6 +50,7 @@ export interface ResultsPageOptions extends ResultCardProps {
 
 export interface SessionStateOptions {
   showSessionModal?: boolean;
+  showSessionModalOnResults?: boolean;
   sessionStateKey?: string;
 }
 
@@ -74,6 +76,7 @@ export interface QuizReturnState {
     sessionId?: string;
     currentQuestion?: CurrentQuestion | undefined;
     results?: QuizResultsResponse | undefined;
+    skipToResults: boolean;
     selectedOptionsWithAttributes?: string[];
   };
 }

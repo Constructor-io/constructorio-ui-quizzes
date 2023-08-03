@@ -44,7 +44,7 @@ export default function HooksTemplate(args) {
               </div>
               <button {...getResetQuizButtonProps('secondary')}>
                 <RedoSVG />
-                <span>redo</span>
+                <span>retake</span>
               </button>
             </div>
             <div className='cio-results'>
@@ -223,7 +223,7 @@ function HooksTemplate(quizConfiguration) {
               </div>
               <button {...getResetQuizButtonProps('secondary')}>
                 <RedoSVG />
-                <span>redo</span>
+                <span>retake</span>
               </button>
             </div>
             <div className='cio-results'>

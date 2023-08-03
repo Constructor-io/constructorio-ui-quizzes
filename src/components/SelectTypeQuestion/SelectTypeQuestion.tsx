@@ -4,7 +4,6 @@ import QuestionDescription from '../QuestionDescription/QuestionDescription';
 import QuizContext from '../CioQuiz/context';
 import { Question, QuestionOption } from '../../types';
 import { renderImages } from '../../utils';
-import ControlBar from '../ControlBar/ControlBar';
 import { QuestionTypes } from '../CioQuiz/actions';
 
 export interface Selected {
@@ -47,7 +46,6 @@ function SelectTypeQuestion() {
               )
           )}
         </div>
-        <ControlBar ctaButtonText={question?.cta_text || 'Continue'} />
       </div>
     );
   }

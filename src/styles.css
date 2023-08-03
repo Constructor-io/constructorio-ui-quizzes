@@ -57,11 +57,15 @@
   min-height: 100%;
   height: 100%;
   overflow: auto;
-  display: flex;
-  justify-content: center;
   background-color: #ffffff;
   color: var(--gray-dust-500);
   font-size: 16px;
+}
+
+/* Container for the loading spinner */
+.cio-quiz.cio-quiz-loading {
+  display: flex;
+  justify-content: center;
 }
 
 .cio-quiz button {
@@ -77,7 +81,9 @@
   width: 100%;
   position: relative;
   align-self: start;
-  min-height: calc(100% - 2rem); /* Full height - margin */
+  height: calc(
+    100% - 2rem - calc(var(--bottom-bar-height))
+  ); /* Full height - margin - control bar */
 }
 .cio-container--with-image {
   display: flex;
@@ -86,7 +92,15 @@
   padding-bottom: var(--bottom-bar-height);
   position: relative;
   align-self: start;
-  min-height: 100%;
+  height: calc(100% - calc(var(--bottom-bar-height))); /* Full height - margin - control bar */
+}
+
+/* Background image */
+.cio-question-background-image {
+  height: calc(100% - 4px);
+  width: 100%;
+  position: absolute;
+  z-index: -1;
 }
 
 /* Session Prompt Modal */
@@ -163,8 +177,9 @@
   width: 100%;
   object-fit: cover;
   max-height: var(--container-image-small-height);
-  height: var(--container-image-small-height); /* Fixed height for layout shifts*/
+  height: var(--container-image-small-height); /* Fixed height for layout shifts */
   display: flex;
+  align-self: stretch;
 }
 
 /* Input */
@@ -192,7 +207,7 @@
   height: var(--bottom-bar-height);
   padding: 8px 16px;
   display: flex;
-  position: absolute;
+  position: sticky;
   bottom: 0px;
   left: 0px;
   background: white;
@@ -280,6 +295,7 @@
   display: flex;
   flex-direction: column;
   cursor: pointer;
+  background-color: white;
 }
 .cio-question-option-container.selected {
   outline: 3px solid var(--primary-color-variant-600);
@@ -302,12 +318,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  align-self: start;
   max-width: 1200px;
   padding: 1rem;
   margin-top: 2rem;
-  min-height: calc(100% - 3rem); /* Full height - padding - margin */
+  min-height: calc(
+    100% - 2rem - calc(var(--bottom-bar-height))
+  ); /* Full height - padding - margin */
   width: 100%;
+  margin-right: auto;
+  margin-left: auto;
 }
 .cio-question-options-container {
   display: flex;
@@ -337,6 +356,7 @@
   width: 100%;
   margin: auto;
   cursor: pointer;
+  background-color: white;
 }
 
 /* Option Image */
@@ -383,6 +403,8 @@
   padding: 2rem 1rem;
   display: flex;
   flex-direction: column;
+  margin-right: auto;
+  margin-left: auto;
 }
 .cio-results-title {
   margin-top: 0;
@@ -510,6 +532,11 @@
 .cio-result-card-rating-score {
   margin-right: 5px;
 }
+.cio-result-card-discount {
+  font-weight: normal;
+  font-size: .9em;
+  margin-top: 4px;
+}
 
 /* Result Favorites Button*/
 .cio-result-card-favorites-button {
@@ -597,7 +624,6 @@
 
   /* Image */
   .cio-question-image-container {
-    height: 100%;
     flex-basis: 50%;
     flex-shrink: 0;
     border-radius: 4px;
@@ -646,6 +672,7 @@
   .cio-container {
     align-items: center;
     margin-top: 0;
+    height: calc(100% - calc(var(--bottom-bar-height))); /* Full height - control bar */
   }
   .cio-container--with-image {
     padding: 6% 2%;
@@ -664,10 +691,8 @@
 
   /* Image */
   .cio-question-image-container {
-    max-height: 100%;
-  }
-  .cio-cover-question-container--with-image .cio-question-image-container {
     max-height: unset;
+    height: unset;
   }
 
   /* Content */
@@ -683,14 +708,6 @@
   /* Description */
   .cio-question-description {
     margin-bottom: 2rem;
-  }
-
-  /* CTA Button Component */
-  .cio-question-buttons-container {
-    position: sticky;
-    padding: 0;
-    margin: 0;
-    align-items: center;
   }
 
   /* Cover Component */
@@ -709,9 +726,11 @@
   }
   .cio-select-question-container {
     justify-content: center;
-    margin: 0;
+    margin-bottom: 0;
+    margin-top: 0;
     padding: 2rem;
     padding-bottom: 0;
+    min-height: calc(100% - calc(var(--bottom-bar-height))); /* Full height - padding - margin */
   }
   .cio-question-option-container {
     width: calc(25% - 13px);

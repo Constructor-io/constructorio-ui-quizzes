@@ -80,6 +80,7 @@ export const getMockState = (question?: Question): QuizReturnState => ({
     requestState: RequestStates.Success,
     versionId: '',
     sessionId: '',
+    skipToResults: false,
     currentQuestion: {
       next_question: question!,
       isFirstQuestion: false,
@@ -101,6 +102,7 @@ export const getMockState = (question?: Question): QuizReturnState => ({
               ratingScore: '4',
               image_url:
                 'https://demo.constructor.io/sandbox_files/farmstandquizassets/HiThereNameInput.png',
+              discount: '59.9',
             },
           },
           {

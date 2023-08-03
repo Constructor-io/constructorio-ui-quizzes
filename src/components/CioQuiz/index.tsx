@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import QuizContext, { QuizContextValue } from './context';
 import QuizQuestions from '../QuizQuestions';
 import ResultContainer from '../ResultContainer/ResultContainer';
+import ControlBar from '../ControlBar/ControlBar';
 import { RequestStates } from '../../constants';
 import Spinner from '../Spinner/Spinner';
 import useQuiz from '../../hooks/useQuiz';
 import SessionPromptModal from '../SessionPromptModal/SessionPromptModal';
 import { IQuizProps } from '../../types';
-import { convertPrimaryColorsToString } from '../../utils';
+import { convertPrimaryColorsToString, renderImages } from '../../utils';
 
 export default function CioQuiz(props: IQuizProps) {
   const {
@@ -35,10 +36,16 @@ export default function CioQuiz(props: IQuizProps) {
   useEffect(() => {
     // Respect showSessionModal if defined, else default to true.
     if (sessionStateOptions?.showSessionModal !== undefined) {
-      setShowSessionPrompt(sessionStateOptions?.showSessionModal && hasSessionStorageState());
+      setShowSessionPrompt(
+        sessionStateOptions?.showSessionModal &&
+          hasSessionStorageState() &&
+          !state.quiz.skipToResults
+      );
     } else {
-      setShowSessionPrompt(hasSessionStorageState());
+      setShowSessionPrompt(hasSessionStorageState() && !state.quiz.skipToResults);
     }
+
+    if (state.quiz.skipToResults) hydrateQuiz();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -64,15 +71,22 @@ export default function CioQuiz(props: IQuizProps) {
 
   if (state.quiz.requestState === RequestStates.Loading) {
     return (
-      <div className='cio-quiz'>
+      <div className='cio-quiz cio-quiz-loading'>
         <Spinner />
       </div>
     );
   }
 
+  const questionData = state.quiz.currentQuestion?.next_question;
+  const questionType = questionData?.type;
+  const questionImages = questionData?.images;
+  const displayBackgroundImage =
+    (questionType === 'single' || questionType === 'multiple') && questionImages;
+
   if (state.quiz.requestState === RequestStates.Success) {
     return (
       <div className='cio-quiz'>
+        {displayBackgroundImage && renderImages(questionImages, 'cio-question-background-image')}
         <style>.cio-quiz {convertPrimaryColorsToString(primaryColorStyles)}</style>
         <SessionPromptModal
           resetStoredState={resetSessionStorageState}
@@ -81,8 +95,16 @@ export default function CioQuiz(props: IQuizProps) {
           setShowSessionPrompt={setShowSessionPrompt}
         />
         <QuizContext.Provider value={contextValue}>
-          {state.quiz.results && <ResultContainer options={resultsPageOptions} />}
-          {state.quiz.currentQuestion && <QuizQuestions />}
+          {state.quiz.results || state.quiz.skipToResults ? (
+            <ResultContainer options={resultsPageOptions} />
+          ) : (
+            state.quiz.currentQuestion && (
+              <>
+                <QuizQuestions />
+                <ControlBar ctaButtonText={questionData?.cta_text || undefined} />
+              </>
+            )
+          )}
         </QuizContext.Provider>
       </div>
     );

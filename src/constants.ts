@@ -21,6 +21,11 @@ export const componentDescription = `- import \`CioQuiz\` to render in your JSX.
   - \`resultCardSalePriceKey\` is an optional parameter that specifies the metadata field name for the sale price 
   - \`resultCardRatingCountKey\` is an optional parameter that specifies the metadata field name for the ratings count 
   - \`resultCardRatingScoreKey\` is an optional parameter that specifies the metadata field name for the ratings score 
+  - \`renderResultCardPriceDetails\` is an optional render function to render custom prices section in result card 
+- \`sessionStateOptions\` lets you configure the session modal behavior
+  - \`showSessionModal\` is a boolean used to decide whether to show the session modal. The default behavior is to show the session modal
+  - \`showSessionModalOnResults\` is a boolean to decide whether to show the session modal after reaching the results page. The default behavior is to not show the session modal
+  - \`sessionStateKey\` is a custom string that will be used as a session storage key
 - Use different props to configure the behavior of this component.
 - The following stories show how different props affect the component's behavior
 

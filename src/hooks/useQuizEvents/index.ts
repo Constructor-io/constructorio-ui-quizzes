@@ -54,7 +54,7 @@ const useQuizEvents: UseQuizEvents = (quizOptions, cioClient, quizState) => {
 
   // Quiz reset
   const resetQuiz = useQuizResetClick(
-    quizStateKey,
+    resetQuizSessionStorageState(quizStateKey),
     dispatchLocalState,
     dispatchApiState,
     quizApiState.quizResults

@@ -6,10 +6,9 @@ import {
   QuizAPIActionTypes,
 } from '../../components/CioQuiz/actions';
 import { QuizEventsReturn, QuizResultsResponse } from '../../types';
-import { resetQuizSessionStorageState } from '../../utils';
 
 const useQuizResetClick = (
-  quizStateKey: string,
+  resetQuizSessionStorageState: () => void,
   dispatchLocalState: React.Dispatch<ActionAnswerQuestion>,
   dispatchApiState: React.Dispatch<ActionQuizAPI>,
   quizResults?: QuizResultsResponse
@@ -22,9 +21,9 @@ const useQuizResetClick = (
       dispatchApiState({
         type: QuizAPIActionTypes.RESET_QUIZ,
       });
-      resetQuizSessionStorageState(quizStateKey);
+      resetQuizSessionStorageState();
     }
-  }, [dispatchLocalState, dispatchApiState, quizStateKey, quizResults]);
+  }, [dispatchLocalState, dispatchApiState, resetQuizSessionStorageState, quizResults]);
 
   return quizResetClickHandler;
 };

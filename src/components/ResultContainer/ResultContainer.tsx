@@ -5,6 +5,7 @@ import ResultFilters from '../ResultFilters/ResultFilters';
 import ZeroResults from '../ZeroResults/ZeroResults';
 import { ResultCardProps } from '../../types';
 import Results from '../Results/Results';
+import Spinner from '../Spinner/Spinner';
 
 export interface IResultContainerProps {
   options: ResultCardProps;
@@ -17,6 +18,7 @@ export default function ResultContainer(props: IResultContainerProps) {
     resultCardRegularPriceKey,
     resultCardRatingCountKey,
     resultCardRatingScoreKey,
+    renderResultCardPriceDetails,
   } = options;
   const { state } = useContext(QuizContext);
   const zeroResults = !state?.quiz.results?.response?.results?.length;
@@ -36,6 +38,7 @@ export default function ResultContainer(props: IResultContainerProps) {
             resultCardRegularPriceKey={resultCardRegularPriceKey}
             resultCardRatingCountKey={resultCardRatingCountKey}
             resultCardRatingScoreKey={resultCardRatingScoreKey}
+            renderResultCardPriceDetails={renderResultCardPriceDetails}
           />
         )}
         {zeroResults && <ZeroResults />}
@@ -43,5 +46,9 @@ export default function ResultContainer(props: IResultContainerProps) {
     );
   }
 
-  return <div>Loading</div>;
+  return (
+    <div className='cio-results-container'>
+      <Spinner />
+    </div>
+  );
 }
