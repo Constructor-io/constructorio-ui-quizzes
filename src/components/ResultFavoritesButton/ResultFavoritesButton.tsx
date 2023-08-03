@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { QuizResultDataPartial } from '../../types';
 import QuizContext from '../CioQuiz/context';
 
