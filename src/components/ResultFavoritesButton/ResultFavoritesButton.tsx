@@ -7,8 +7,8 @@ interface ResultFavoritesButtonProps {
   price?: number;
 }
 
-export interface Selected {
-  [key: number]: boolean;
+export interface Favorited {
+  [key: string]: boolean;
 }
 
 export default function ResultFavoritesButton(props: ResultFavoritesButtonProps) {

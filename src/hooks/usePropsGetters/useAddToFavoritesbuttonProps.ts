@@ -1,11 +1,11 @@
 import { useState, useCallback } from 'react';
-import { Selected } from '../../components/SelectTypeQuestion/SelectTypeQuestion';
 import { GetAddToFavoritesButtonProps, QuizEventsReturn } from '../../types';
+import { Favorited } from '../../components/ResultFavoritesButton/ResultFavoritesButton';
 
 export default function useAddToFavoritesButtonProps(
   addToFavorites: QuizEventsReturn.AddToFavorites
 ): GetAddToFavoritesButtonProps {
-  const [favorited, setFavorited] = useState<Selected>({});
+  const [favorited, setFavorited] = useState<Favorited>({});
 
   const toggleIdFavorited = useCallback(
     (id: string) => {
