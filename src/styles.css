@@ -217,7 +217,7 @@
 .cio-question-cta-button {
   background: var(--primary-color);
   color: #ffffff;
-  border: 1px solid var(--primary-color);
+  border: 2px solid var(--primary-color);
   border-radius: 4px;
   height: 3rem;
   font-size: 1rem;
@@ -543,7 +543,7 @@
   padding: 0.75rem 2.5rem;
   height: 3rem;
   background: var(--primary-color);
-  border: 1px solid var(--primary-color);
+  border: 2px solid var(--primary-color);
   border-radius: 4px;
   color: #ffffff;
   font-size: 1rem;
