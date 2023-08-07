@@ -57,6 +57,7 @@ ${templateCode}
 export const functionStrings = {
   onAddToCartClick: `(item) => console.dir(item)`,
   onQuizResultClick: `(result, position) => console.dir(result, position)`,
+  onAddToFavoritesClick: `(item) => console.dir(item)`,
   onQuizResultsLoaded: `(results) => console.dir(results)`,
   cioJsClient: `cioJsClient`,
 };
