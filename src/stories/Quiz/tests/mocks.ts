@@ -184,7 +184,10 @@ export const useMockContextValue = (question?: Question): QuizContextValue => {
     getCoverQuestionProps,
     getOpenTextInputProps,
     getSelectInputProps,
-    getAddToCartButtonProps: () => ({ ...mockElementProps, className: 'cio-question-cta-button' }),
+    getAddToCartButtonProps: () => ({
+      ...mockElementProps,
+      className: 'cio-result-card-cta-button',
+    }),
     getAddToFavoritesButtonProps: () => ({
       ...mockElementProps,
       className: 'cio-result-card-favorites-button',
