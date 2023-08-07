@@ -188,6 +188,10 @@ export const useMockContextValue = (question?: Question): QuizContextValue => {
       ...mockElementProps,
       className: 'cio-result-card-cta-button',
     }),
+    getAddToFavoritesButtonProps: () => ({
+      ...mockElementProps,
+      className: 'cio-result-card-favorites-button',
+    }),
     getHydrateQuizButtonProps: () => ({
       ...mockElementProps,
       className: 'cio-question-cta-button',
@@ -210,5 +214,6 @@ export const useMockContextValue = (question?: Question): QuizContextValue => {
       '--primary-color-l': '14',
     },
     customClickItemCallback: false,
+    customAddToFavoritesCallback: true,
   };
 };

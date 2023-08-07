@@ -16,6 +16,7 @@ export default function CioQuiz(props: IQuizProps) {
     state,
     events: { hydrateQuiz, hasSessionStorageState, resetSessionStorageState },
     getAddToCartButtonProps,
+    getAddToFavoritesButtonProps,
     getCoverQuestionProps,
     getHydrateQuizButtonProps,
     getNextQuestionButtonProps,
@@ -52,6 +53,7 @@ export default function CioQuiz(props: IQuizProps) {
     cioClient,
     state,
     getAddToCartButtonProps,
+    getAddToFavoritesButtonProps,
     getCoverQuestionProps,
     getHydrateQuizButtonProps,
     getNextQuestionButtonProps,
@@ -63,6 +65,7 @@ export default function CioQuiz(props: IQuizProps) {
     getResetQuizButtonProps,
     getSelectInputProps,
     customClickItemCallback: !!resultsPageOptions?.onQuizResultClick,
+    customAddToFavoritesCallback: !!resultsPageOptions?.onAddToFavoritesClick,
     primaryColorStyles,
   };
 

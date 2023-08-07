@@ -81,9 +81,7 @@
   width: 100%;
   position: relative;
   align-self: start;
-  height: calc(
-    100% - 2rem - calc(var(--bottom-bar-height))
-  ); /* Full height - margin - control bar */
+  height: calc(100% - 2rem - var(--bottom-bar-height)); /* Full height - margin - control bar */
 }
 .cio-container--with-image {
   display: flex;
@@ -92,7 +90,7 @@
   padding-bottom: var(--bottom-bar-height);
   position: relative;
   align-self: start;
-  height: calc(100% - calc(var(--bottom-bar-height))); /* Full height - margin - control bar */
+  height: calc(100% - var(--bottom-bar-height)); /* Full height - margin - control bar */
 }
 
 /* Background image */
@@ -321,9 +319,7 @@
   max-width: 1200px;
   padding: 1rem;
   margin-top: 2rem;
-  min-height: calc(
-    100% - 2rem - calc(var(--bottom-bar-height))
-  ); /* Full height - padding - margin */
+  min-height: calc(100% - 2rem - var(--bottom-bar-height)); /* Full height - padding - margin */
   width: 100%;
   margin-right: auto;
   margin-left: auto;
@@ -532,10 +528,28 @@
 .cio-result-card-rating-score {
   margin-right: 5px;
 }
-.cio-result-card-discount {
-  font-weight: normal;
-  font-size: .9em;
-  margin-top: 4px;
+
+/* Result Favorites Button*/
+.cio-result-card-favorites-button {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  width: 25px;
+  margin-left: auto;
+  margin-bottom: 1rem;
+}
+
+.cio-result-card-favorites-button.favorited svg{
+  fill: red;
+}
+
+.cio-result-card-favorites-button svg:hover {
+  stroke: black;
+  stroke-width: 1px;
 }
 
 /* Result CTA Button */
@@ -649,7 +663,7 @@
   .cio-container {
     align-items: center;
     margin-top: 0;
-    height: calc(100% - calc(var(--bottom-bar-height))); /* Full height - control bar */
+    height: calc(100% - var(--bottom-bar-height)); /* Full height - control bar */
   }
   .cio-container--with-image {
     padding: 6% 2%;
@@ -707,7 +721,7 @@
     margin-top: 0;
     padding: 2rem;
     padding-bottom: 0;
-    min-height: calc(100% - calc(var(--bottom-bar-height))); /* Full height - padding - margin */
+    min-height: calc(100% - var(--bottom-bar-height)); /* Full height - padding - margin */
   }
   .cio-question-option-container {
     width: calc(25% - 13px);

@@ -37,6 +37,7 @@ export namespace QuizResultsEventsProps {
   export type OnQuizResultsLoaded = (results: QuizResultDataPartial) => void;
   export type OnQuizResultClick = (result: QuizResultDataPartial, position: number) => void;
   export type OnAddToCartClick = (result: QuizResultDataPartial) => void;
+  export type OnAddToFavoritesClick = (result: QuizResultDataPartial) => void;
 }
 
 export interface ResultsPageOptions extends ResultCardProps {
@@ -44,6 +45,7 @@ export interface ResultsPageOptions extends ResultCardProps {
   onQuizResultsLoaded?: QuizResultsEventsProps.OnQuizResultsLoaded;
   onQuizResultClick?: QuizResultsEventsProps.OnQuizResultClick;
   onAddToCartClick: QuizResultsEventsProps.OnAddToCartClick;
+  onAddToFavoritesClick?: QuizResultsEventsProps.OnAddToFavoritesClick;
 }
 
 export interface SessionStateOptions {
@@ -112,6 +114,12 @@ export namespace QuizEventsReturn {
     result: QuizResultDataPartial,
     price?: number
   ) => void;
+  export type AddToFavorites = (
+    e: React.MouseEvent<HTMLElement>,
+    result: QuizResultDataPartial,
+    price?: number,
+    sendEvent?: boolean
+  ) => void;
   export type HydrateQuiz = () => void;
   export type HasSessionStorageState = () => boolean;
   export type ResetSessionStorageState = () => void;
@@ -124,6 +132,7 @@ export interface QuizEventsReturn {
   resetQuiz: QuizEventsReturn.ResetQuiz;
   resultClick: QuizEventsReturn.ResultClick;
   addToCart: QuizEventsReturn.AddToCart;
+  addToFavorites: QuizEventsReturn.AddToFavorites;
   hydrateQuiz: QuizEventsReturn.HydrateQuiz;
   hasSessionStorageState: QuizEventsReturn.HasSessionStorageState;
   resetSessionStorageState: QuizEventsReturn.ResetSessionStorageState;
@@ -217,6 +226,11 @@ export type GetAddToCartButtonProps = (
   result: QuizResultDataPartial,
   price?: number
 ) => AddToCartButtonProps;
+export type GetAddToFavoritesButtonProps = (
+  result: QuizResultDataPartial,
+  price?: number,
+  clickHandler?: () => void
+) => AddToCartButtonProps;
 export type GetQuizImageProps = () => QuizImageProps;
 export type GetSelectQuestionImageProps = (option: QuestionOption) => QuizImageProps;
 
@@ -250,6 +264,7 @@ export interface UseQuizReturn {
   getResetQuizButtonProps: GetResetQuizButtonProps;
   getHydrateQuizButtonProps: GetHydrateQuizButtonProps;
   getAddToCartButtonProps: GetAddToCartButtonProps;
+  getAddToFavoritesButtonProps: GetAddToFavoritesButtonProps;
   getQuizResultButtonProps: GetQuizResultButtonProps;
   getQuizResultLinkProps: GetQuizResultLinkProps;
   primaryColorStyles: PrimaryColorStyles;

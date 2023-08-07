@@ -27,7 +27,7 @@
 }
 
 .cio-quiz .results-example-wrapper .cio-result-card:only-child {
-  margin-top: 100px;
+  margin: 100px auto auto auto;
 }
 
 /* Desktop */
@@ -45,4 +45,10 @@
 .cio-quiz .results-example-wrapper .cio-result-card-image img {
   width: 100%;
   object-fit: cover;
+}
+
+.cio-result-card-discount {
+  font-weight: normal;
+  font-size: 0.9em;
+  margin-top: 4px;
 }

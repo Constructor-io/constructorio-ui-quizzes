@@ -86,7 +86,9 @@ export const trackQuizConversion = (
   cioClient: ConstructorIOClient,
   quizResults: QuizResultsResponse,
   result: QuizResultDataPartial,
-  price?: number
+  price?: number,
+  type?: string
+  // eslint-disable-next-line max-params
 ) => {
   if (quizResults.request) {
     const {
@@ -105,6 +107,7 @@ export const trackQuizConversion = (
       section,
       variationId: result.data?.variation_id,
       revenue: (price && String(price)) || undefined,
+      type,
     });
   }
 };

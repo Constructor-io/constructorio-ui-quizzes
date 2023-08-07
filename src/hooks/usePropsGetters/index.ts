@@ -14,6 +14,7 @@ import {
   GetQuizResultButtonProps,
   GetQuizResultLinkProps,
   GetSelectQuestionImageProps,
+  GetAddToFavoritesButtonProps,
 } from '../../types';
 import { QuizAPIReducerState } from '../../components/CioQuiz/quizApiReducer';
 import { QuizLocalReducerState } from '../../components/CioQuiz/quizLocalReducer';
@@ -22,6 +23,7 @@ import useCoverQuestionProps from './useCoverQuestionProps';
 import useOpenTextInputProps from './useOpenTextInputProps';
 import useNextQuestionButtonProps from './useNextQuestionButtonProps';
 import usePreviousQuestionButtonProps from './usePreviousQuestionButtonProps';
+import useAddToFavoritesButtonProps from './useAddToFavoritesButtonProps';
 
 const usePropsGetters = (
   quizEvents: QuizEventsReturn,
@@ -35,6 +37,7 @@ const usePropsGetters = (
     resetQuiz,
     hydrateQuiz,
     addToCart,
+    addToFavorites,
     resultClick,
   } = quizEvents;
 
@@ -92,6 +95,9 @@ const usePropsGetters = (
     }),
     [addToCart]
   );
+
+  const getAddToFavoritesButtonProps: GetAddToFavoritesButtonProps =
+    useAddToFavoritesButtonProps(addToFavorites);
 
   const quizResultClickDown = useCallback(
     (event: KeyboardEvent<HTMLElement>, result: Partial<QuizResultData>, position: number) => {
@@ -154,6 +160,7 @@ const usePropsGetters = (
     getResetQuizButtonProps,
     getHydrateQuizButtonProps,
     getAddToCartButtonProps,
+    getAddToFavoritesButtonProps,
     getQuizResultButtonProps,
     getQuizResultLinkProps,
   };
