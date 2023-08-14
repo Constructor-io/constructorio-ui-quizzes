@@ -140,6 +140,7 @@ e2eInteractionTest.play = async ({ canvasElement }) => {
   // Results page
   await sleep(500);
   expect(await canvas.findByText('Here are your results')).toBeInTheDocument();
+  expect(await canvas.findByText('10 results')).toBeInTheDocument();
   expect(await canvas.findByText('Because you answered')).toBeInTheDocument();
   expect(document.querySelectorAll('.cio-results-filter-option')?.length).toBeGreaterThan(0);
 

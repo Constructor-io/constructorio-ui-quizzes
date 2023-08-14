@@ -43,6 +43,7 @@ export const QuizResultsPage: Story = {
     const resultsFilterMedium = canvas.getByText('Medium');
     const redoButton = document.querySelector('.cio-question-redo-button');
     const resultCards = document.querySelectorAll('.cio-result-card');
+    const numResults = canvas.getByText('3 results');
 
     expect(resultsTitle).toBeInTheDocument();
     expect(selectedOptions).toBeInTheDocument();
@@ -50,5 +51,6 @@ export const QuizResultsPage: Story = {
     expect(selectedOptions).toContainElement(resultsFilterMedium);
     expect(redoButton).toBeInTheDocument();
     expect(resultCards.length).toEqual(3);
+    expect(numResults).toBeInTheDocument();
   },
 };
