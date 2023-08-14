@@ -35,7 +35,9 @@ export default function ResultContainer(props: IResultContainerProps) {
         </div>
         {!zeroResults && (
           <>
-            <div className='cio-results-num-results'>{numberOfResults} results</div>
+            <div className='cio-results-num-results'>
+              {numberOfResults} {numberOfResults === 1 ? 'result' : 'results'}
+            </div>
             <Results
               resultCardSalePriceKey={resultCardSalePriceKey}
               resultCardRegularPriceKey={resultCardRegularPriceKey}
