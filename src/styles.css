@@ -167,7 +167,7 @@
 /* Image */
 .cio-question-image {
   width: 100%;
-  height: 100%;
+  max-height: 100%;
   object-fit: cover;
 }
 .cio-question-image-container {
@@ -280,6 +280,9 @@
 .cio-cover-question-container--with-image {
   padding: 0;
   padding-bottom: var(--bottom-bar-height);
+}
+.cio-cover-question-container--with-image .cio-question-image {
+  height: auto;
 }
 
 /** Select Component */
@@ -595,7 +598,7 @@
   margin-top: 1px;
 }
 
-/* Media Queries */
+/* Container Queries */
 
 /* Small Tablet */
 @container quiz (min-width: 640px) {

@@ -1,35 +1,34 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { Nullable } from '@constructor-io/constructorio-client-javascript/lib/types';
 import QuestionTitle from '../QuestionTitle/QuestionTitle';
-import QuizContext from '../CioQuiz/context';
 import QuestionDescription from '../QuestionDescription/QuestionDescription';
 import { renderImages } from '../../utils';
+import { QuestionImages } from '../../types';
 
-export default function CoverTypeQuestion() {
-  const { state } = useContext(QuizContext);
-  let question;
+export interface ICoverTypeQuestionProps {
+  id: number;
+  title: string;
+  description: string;
+  images?: Nullable<QuestionImages>;
+}
 
-  if (state?.quiz.currentQuestion) {
-    question = state?.quiz.currentQuestion.next_question;
-  }
+export default function CoverTypeQuestion(props: ICoverTypeQuestionProps) {
+  const { id, title, description, images } = props;
 
-  const hasImage = question?.images?.primary_url;
+  const hasImage = images?.primary_url;
 
-  if (question) {
-    return (
-      <div
-        className={`
+  return (
+    <div
+      className={`
         cio-container${hasImage ? '--with-image' : ''}
         cio-cover-question-container${hasImage ? '--with-image' : ''}
       `}
-        data-question-key={question.key}>
-        {hasImage ? renderImages(question.images, 'cio-question-image-container') : ''}
-        <div className='cio-question-content'>
-          <QuestionTitle title={question?.title} />
-          <QuestionDescription description={question.description} />
-        </div>
+      data-question-key={id}>
+      {hasImage ? renderImages(images, 'cio-question-image-container') : ''}
+      <div className='cio-question-content'>
+        <QuestionTitle title={title} />
+        <QuestionDescription description={description} />
       </div>
-    );
-  }
-
-  return null;
+    </div>
+  );
 }

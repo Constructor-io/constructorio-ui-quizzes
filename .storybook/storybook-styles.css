@@ -1,11 +1,17 @@
 .docs-story > div:first-child {
   min-height: 500px;
-  background-color: #212425;
+  background-color: #F8F8F8;
 }
 
 #storybook-root {
   min-height: 100dvh;
   height: 100dvh;
+  display: flex;
+  background-color: #F6F9FC;
+}
+
+#storybook-docs {
+  background-color: #F6F9FC;
 }
 
 .small-container-example-wrapper {
@@ -13,6 +19,7 @@
   display: grid;
   align-content: center;
   background-color: #F8F8F8;
+  width: 100%;
 }
 
 .small-container-example {
@@ -52,3 +59,75 @@
   font-size: 0.9em;
   margin-top: 4px;
 }
+
+.story-preview {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #F6F9FC;
+  padding: 40px;
+}
+
+.story-preview * {
+  box-sizing: border-box;
+}
+
+.box {
+  width: 100%;
+  background-color: transparent;
+  border: 1px solid #8080806b;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.box:only-of-type {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.story-title {
+  padding: 0 20px;
+  text-align: center;
+}
+
+.story-variations{
+  display: flex;
+  flex-direction: column;
+}
+
+/* 42 pixels are padding + border and the calc here to match the width of cio-quiz */
+.story-variations .box-small-mobile {
+  /* width < 640px is Mobile */
+  width: calc(375px + 42px);
+}
+
+.story-variations .box-mobile {
+  /* width < 640px is Mobile */
+  width: calc(480px + 42px);
+}
+
+.story-variations .box-small-tablet {
+  /*  640px < width < 768px is Small Tablet */
+  width: calc(767px + 42px);
+}
+
+.story-variations .box-big-tablet {
+  /*  768px < width < 1280px is Big Tablet */
+  width: calc(794px + 42px);
+}
+
+.story-variations .box-desktop {
+  /*  1280px < width is Desktop Tablet */
+  width: calc(1200px + 42px);
+}
+
+.box-wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.box-wrapper h3 {
+  flex: 100%;
+}
+
