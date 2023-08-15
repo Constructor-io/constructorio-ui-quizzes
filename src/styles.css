@@ -281,7 +281,7 @@
 
 /* Cover Page Component */
 .cio-quiz .cio-cover-question-container--with-image {
-  padding: 20px;
+  padding: 0;
   padding-bottom: var(--bottom-bar-height);
 }
 .cio-cover-question-container--with-image .cio-question-image {
@@ -678,7 +678,7 @@
     justify-content: center;
   }
   .cio-quiz .cio-cover-question-container--with-image {
-    flex-direction: column;
+    flex-direction: row-reverse;
   }
 
   /* Input */
@@ -709,7 +709,7 @@
 
   /* Cover Component */
   .cio-quiz .cio-cover-question-container--with-image {
-    padding: 20px;
+    padding: 0;
   }
 
   /* Select Component */
