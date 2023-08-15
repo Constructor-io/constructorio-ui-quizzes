@@ -8,7 +8,6 @@ push:
     branches:
       - '*'
       - '!main'
-
 # List of jobs
 jobs:
   chromatic-deployment:
