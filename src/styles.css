@@ -675,7 +675,7 @@
     justify-content: center;
   }
   .cio-cover-question-container--with-image {
-    flex-direction: row-reverse;
+    flex-direction: column;
   }
 
   /* Input */
@@ -706,7 +706,7 @@
 
   /* Cover Component */
   .cio-cover-question-container--with-image {
-    padding: 0;
+    padding: 20px;
   }
 
   /* Select Component */
@@ -750,7 +750,7 @@
 @container quiz (min-width: 1280px) {
   /* Container */
   .cio-cover-question-container--with-image {
-    padding: 0;
+    padding: 20px;
   }
 
   /* Select component */
