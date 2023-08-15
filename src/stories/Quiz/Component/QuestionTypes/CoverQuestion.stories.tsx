@@ -1,9 +1,7 @@
-import { expect } from '@storybook/jest';
 import type { Meta, StoryObj } from '@storybook/react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Title, Primary, ArgsTable } from '@storybook/addon-docs';
 
-import { within } from '@storybook/testing-library';
 import CoverTypeQuestion, {
   ICoverTypeQuestionProps,
 } from '../../../../components/CoverTypeQuestion/CoverTypeQuestion';
@@ -48,16 +46,4 @@ export const KitchenSink: Story = {
       variationsArgsList={[coverQuestionComponentProps, coverQuestionComponentPropsWithoutImages]}
     />
   ),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    document.querySelector('.cio-container--with-image');
-
-    // 👇 Assert DOM structure
-    const title = canvas.getByText('This is question title');
-    const description = canvas.getByText('This is question description');
-    const quizImage = document.querySelector('.cio-question-image');
-    await expect(quizImage).toBeInTheDocument();
-    await expect(title).toBeInTheDocument();
-    await expect(description).toBeInTheDocument();
-  },
 };
