@@ -434,6 +434,13 @@
   align-items: center;
   font-size: 0.75rem;
 }
+.cio-quiz .cio-results-num-results {
+  margin-top: 2.75rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--gray-dust-500);
+}
 .cio-quiz .cio-results {
   display: flex;
   flex-direction: row;

@@ -21,7 +21,8 @@ export default function ResultContainer(props: IResultContainerProps) {
     renderResultCardPriceDetails,
   } = options;
   const { state } = useContext(QuizContext);
-  const zeroResults = !state?.quiz.results?.response?.results?.length;
+  const numberOfResults = state?.quiz.results?.response?.results?.length;
+  const zeroResults = !numberOfResults;
   const resultsTitle = zeroResults ? '' : 'Here are your results';
 
   if (state?.quiz.results) {
@@ -33,13 +34,18 @@ export default function ResultContainer(props: IResultContainerProps) {
           <RedoButton />
         </div>
         {!zeroResults && (
-          <Results
-            resultCardSalePriceKey={resultCardSalePriceKey}
-            resultCardRegularPriceKey={resultCardRegularPriceKey}
-            resultCardRatingCountKey={resultCardRatingCountKey}
-            resultCardRatingScoreKey={resultCardRatingScoreKey}
-            renderResultCardPriceDetails={renderResultCardPriceDetails}
-          />
+          <>
+            <div className='cio-results-num-results'>
+              {numberOfResults} {numberOfResults === 1 ? 'result' : 'results'}
+            </div>
+            <Results
+              resultCardSalePriceKey={resultCardSalePriceKey}
+              resultCardRegularPriceKey={resultCardRegularPriceKey}
+              resultCardRatingCountKey={resultCardRatingCountKey}
+              resultCardRatingScoreKey={resultCardRatingScoreKey}
+              renderResultCardPriceDetails={renderResultCardPriceDetails}
+            />
+          </>
         )}
         {zeroResults && <ZeroResults />}
       </div>
