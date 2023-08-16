@@ -825,3 +825,184 @@
     transform: rotate(360deg);
   }
 }
+
+/* Fallback for browsers that don't support media queries */
+/* Media queries */
+
+/* use media query if container query not supported */
+@supports not (container-type: inline-size) {
+  /* Small Tablet */
+  @media (min-width: 640px) {
+    .cio-quiz .cio-container {
+      padding-bottom: 0;
+      align-self: normal;
+    }
+
+    /* Container */
+    .cio-quiz .cio-container--with-image {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0;
+      padding-bottom: 0;
+      align-self: normal;
+    }
+
+    /* Image */
+    .cio-quiz .cio-question-image-container {
+      flex-basis: 50%;
+      flex-shrink: 0;
+      border-radius: 4px;
+    }
+
+    /* Cover Page Component */
+    .cio-quiz .cio-cover-question-container--with-image {
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    /* Select Component */
+    .cio-quiz .cio-select-question-text {
+      margin-top: 2rem;
+    }
+    .cio-quiz .cio-select-question-buttons {
+      padding: 1rem 3rem;
+    }
+
+    /* Results component */
+    .cio-quiz .cio-results-container {
+      padding: 3rem 4rem;
+    }
+    .cio-quiz .cio-results-filter-and-redo-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      margin-bottom: 1.5rem;
+    }
+    .cio-quiz .cio-results-filter-container {
+      margin-bottom: 0;
+    }
+    .cio-quiz .cio-results {
+      column-gap: 5%;
+    }
+
+    /* Result Card component */
+    .cio-quiz .cio-result-card {
+      flex-basis: 30%;
+    }
+  }
+  /* Big Tablet */
+  @media (min-width: 768px) {
+    /* Container */
+    .cio-quiz .cio-container {
+      align-items: center;
+      margin-top: 0;
+      height: calc(100% - var(--bottom-bar-height)); /* Full height - control bar */
+    }
+    .cio-quiz .cio-container--with-image {
+      padding: 6% 2%;
+      align-items: center;
+      flex-direction: row;
+      justify-content: center;
+    }
+    .cio-quiz .cio-cover-question-container--with-image {
+      flex-direction: row-reverse;
+    }
+
+    /* Input */
+    .cio-quiz .cio-question-input-text {
+      margin-bottom: 1rem;
+    }
+
+    /* Image */
+    .cio-quiz .cio-question-image-container {
+      max-height: unset;
+      height: unset;
+    }
+
+    /* Content */
+    .cio-quiz .cio-question-content {
+      justify-content: center;
+      height: fit-content;
+      flex-basis: 70%;
+      flex-shrink: 1;
+      margin: 0 auto;
+      padding: 3rem;
+    }
+
+    /* Description */
+    .cio-quiz .cio-question-description {
+      margin-bottom: 2rem;
+    }
+
+    /* Cover Component */
+    .cio-quiz .cio-cover-question-container--with-image {
+      padding: 0;
+    }
+
+    /* Select Component */
+    .cio-quiz .cio-select-question-text {
+      padding: 0;
+      padding-bottom: 2rem;
+      margin: 0;
+    }
+    .cio-quiz .cio-select-question-buttons {
+      padding: 1rem 5rem;
+    }
+    .cio-quiz .cio-select-question-container {
+      justify-content: center;
+      margin-bottom: 0;
+      margin-top: 0;
+      padding: 2rem;
+      padding-bottom: 0;
+      min-height: calc(100% - var(--bottom-bar-height)); /* Full height - padding - margin */
+    }
+    .cio-quiz .cio-question-option-container {
+      width: calc(25% - 13px);
+    }
+    .cio-quiz .cio-question-options-container {
+      padding: 0;
+      margin-bottom: 2rem;
+    }
+    .cio-quiz .cio-question-options-container-text-only {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 2rem;
+      margin-top: 0;
+    }
+    .cio-quiz .cio-question-option-container-text-only {
+      margin: 0;
+      width: 30%;
+    }
+  }
+
+  /* Desktop */
+  @media (min-width: 1280px) {
+    /* Container */
+    .cio-quiz .cio-quiz .cio-cover-question-container--with-image {
+      padding: 0;
+    }
+
+    /* Select component */
+    .cio-quiz .cio-question-option-container-text-only {
+      width: 30%;
+    }
+    .cio-quiz .cio-select-question-container {
+      margin-bottom: 0;
+    }
+    .cio-quiz .cio-select-question-text {
+      padding: 2.5rem 0rem;
+    }
+
+    /* Results component */
+    .cio-quiz .cio-results-container {
+      margin-top: 3rem;
+    }
+    .cio-quiz .cio-zero-results {
+      margin-top: 7rem;
+    }
+    .cio-quiz .cio-question-content {
+      padding: 5rem;
+    }
+  }
+}
