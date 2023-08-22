@@ -395,6 +395,35 @@
   margin-bottom: -1rem;
 }
 
+/* Affixed progress bar */
+.cio-quiz .cio-question-progress-affixed-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.9rem;
+}
+
+.cio-quiz .cio-question-progress-progress-bar {
+  width: 100px;
+  border-color: #505a75;
+  height: 6px;
+  border-width: 1px;
+  border-style: solid;
+  background: transparent;
+  mix-blend-mode: difference;
+}
+
+.cio-quiz .cio-question-progress-progress-indicator {
+  width: 36%;
+  background: #505a75;
+  height: 100%;
+}
+
 /* Results component */
 .cio-quiz .cio-results-container {
   width: 100%;
