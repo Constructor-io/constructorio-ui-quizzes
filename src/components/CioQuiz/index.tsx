@@ -101,9 +101,9 @@ export default function CioQuiz(props: IQuizProps) {
             state.quiz.currentQuestion && (
               <>
                 <div className='cio-question-progress-affixed-container'>
-                  <div className='cio-question-progress-progress-bar'>
+                  <div className='cio-question-progress-progress-container'>
                     <div
-                      className='cio-question-progress-progress-indicator'
+                      className='cio-question-progress-progress-bar'
                       style={{
                         width: `${
                           ((state.quiz.currentQuestion.next_question.id - 1) /

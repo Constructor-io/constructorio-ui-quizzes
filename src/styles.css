@@ -410,8 +410,7 @@
   color: white;
   mix-blend-mode: difference;
 }
-
-.cio-quiz .cio-question-progress-progress-bar {
+.cio-quiz .cio-question-progress-progress-container {
   width: 100px;
   border-color: white;
   height: 6px;
@@ -420,8 +419,7 @@
   background: transparent;
   border-radius: 4px;
 }
-
-.cio-quiz .cio-question-progress-progress-indicator {
+.cio-quiz .cio-question-progress-progress-bar {
   background: white;
   height: 100%;
 }
