@@ -9,6 +9,7 @@ import useQuiz from '../../hooks/useQuiz';
 import SessionPromptModal from '../SessionPromptModal/SessionPromptModal';
 import { IQuizProps } from '../../types';
 import { convertPrimaryColorsToString, renderImages } from '../../utils';
+import ProgressBar from '../ProgressBar/ProgressBar';
 
 export default function CioQuiz(props: IQuizProps) {
   const {
@@ -100,20 +101,10 @@ export default function CioQuiz(props: IQuizProps) {
           ) : (
             state.quiz.currentQuestion && (
               <>
-                <div className='cio-question-progress-affixed-container'>
-                  <div className='cio-question-progress-progress-container'>
-                    <div
-                      className='cio-question-progress-progress-bar'
-                      style={{
-                        width: `${
-                          ((state.quiz.currentQuestion.next_question.id - 1) /
-                            state.quiz.currentQuestion.total_questions) *
-                          100
-                        }%`,
-                      }}
-                    />
-                  </div>
-                </div>
+                <ProgressBar
+                  currentQuestionId={state.quiz.currentQuestion.next_question.id}
+                  totalQuestions={state.quiz.currentQuestion.total_questions}
+                />
                 <QuizQuestions />
                 <ControlBar ctaButtonText={questionData?.cta_text || undefined} />
               </>
