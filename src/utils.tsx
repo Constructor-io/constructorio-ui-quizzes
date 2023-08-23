@@ -144,14 +144,16 @@ export const resetQuizSessionStorageState = (quizStateKey: string) => () => {
 };
 
 export const logger = (action: any) => {
-  console.group(
-    `%cAction:%c  ${action.type}`,
-    'color: red; font-weight: bold;',
-    'color: green; font-weight: lighter;'
-  );
-  console.log('%c type:', 'color: #9E9E9E; font-weight: 700;', action.type);
-  console.log('%c payload:', 'color: #00A7F7; font-weight: 700;', action.payload);
-  console.groupEnd();
+  if (process?.env?.LOGGER) {
+    console.group(
+      `%cAction:%c  ${action.type}`,
+      'color: red; font-weight: bold;',
+      'color: green; font-weight: lighter;'
+    );
+    console.log('%c type:', 'color: #9E9E9E; font-weight: 700;', action.type);
+    console.log('%c payload:', 'color: #00A7F7; font-weight: 700;', action.payload);
+    console.groupEnd();
+  }
 };
 
 // Function to emulate pausing between interactions

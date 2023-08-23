@@ -18,4 +18,12 @@ module.exports = {
     autodocs: 'tag',
     defaultName: 'Documentation',
   },
+    /*
+   * 👇 The `config` argument contains all the other existing environment variables.
+   * Either configured in an `.env` file or configured on the command line.
+   */
+  env: (config) => ({
+    ...config,
+    LOGGER: true,
+  }),
 };
