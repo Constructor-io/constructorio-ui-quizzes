@@ -105,7 +105,11 @@ export default function CioQuiz(props: IQuizProps) {
                     <div
                       className='cio-question-progress-progress-indicator'
                       style={{
-                        width: `${((state.quiz.currentQuestion.next_question.id - 1) / 13) * 100}%`,
+                        width: `${
+                          ((state.quiz.currentQuestion.next_question.id - 1) /
+                            state.quiz.currentQuestion.total_questions) *
+                          100
+                        }%`,
                       }}
                     />
                   </div>
