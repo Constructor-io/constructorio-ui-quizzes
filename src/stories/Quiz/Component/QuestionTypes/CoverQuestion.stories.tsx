@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { Title, Primary, ArgsTable } from '@storybook/addon-docs';
 
 import CoverTypeQuestion, {

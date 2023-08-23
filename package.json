@@ -71,6 +71,7 @@
     "@storybook/addon-essentials": "7.0.11",
     "@storybook/addon-interactions": "^7.0.11",
     "@storybook/addon-links": "7.0.11",
+    "@storybook/addon-docs": "7.0.11",
     "@storybook/jest": "^0.1.0",
     "@storybook/react-webpack5": "7.0.11",
     "@storybook/test-runner": "0.10.0",

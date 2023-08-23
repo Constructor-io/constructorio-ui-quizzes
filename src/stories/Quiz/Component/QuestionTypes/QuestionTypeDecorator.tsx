@@ -6,7 +6,6 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 
 if (process.env.NODE_ENV !== 'production') {
-  // eslint-disable-next-line import/no-extraneous-dependencies
   const axe = require('@axe-core/react');
   axe(React, ReactDOM, 1000, {});
 }
