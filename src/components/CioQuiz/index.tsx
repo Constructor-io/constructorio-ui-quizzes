@@ -101,7 +101,6 @@ export default function CioQuiz(props: IQuizProps) {
             state.quiz.currentQuestion && (
               <>
                 <div className='cio-question-progress-affixed-container'>
-                  Progress{' '}
                   <div className='cio-question-progress-progress-bar'>
                     <div className='cio-question-progress-progress-indicator' />
                   </div>

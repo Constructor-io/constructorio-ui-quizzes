@@ -398,34 +398,31 @@
 /* Affixed progress bar */
 .cio-quiz .cio-question-progress-affixed-container {
   position: fixed;
-  top: 20px;
-  right: 20px;
+  top: 8px;
+  right: 16px;
   z-index: 100;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 7px;
   font-size: 0.75rem;
-  background: rgba(68, 68, 68, 0.267);
-  border-radius: 4px;
   padding: 8px;
   color: white;
+  mix-blend-mode: difference;
 }
 
 .cio-quiz .cio-question-progress-progress-bar {
   width: 100px;
-  /* border-color: #505a75; */
   border-color: white;
   height: 6px;
   border-width: 1px;
   border-style: solid;
   background: transparent;
-  mix-blend-mode: difference;
+  border-radius: 4px;
 }
 
 .cio-quiz .cio-question-progress-progress-indicator {
   width: 36%;
-  /* background: #505a75; */
   background: white;
   height: 100%;
 }
