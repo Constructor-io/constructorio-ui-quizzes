@@ -89,6 +89,7 @@ export const getMockState = (question?: Question): QuizReturnState => ({
       isSingleQuestion: question?.type === 'single',
       isMultipleQuestion: question?.type === 'multiple',
       isSelectQuestion: question?.type === 'single',
+      total_questions: 1,
     },
     results: {
       response: {
