@@ -38,6 +38,12 @@ export const trackQuizResultsLoaded = (
 ) => {
   const { quiz_id, quiz_session_id, quiz_version_id, result_id, request, response } = quizResults;
 
+  const items = response?.results?.map((result) => ({
+    itemId: result?.data?.id,
+    variationId: result?.data?.variation_id,
+    itemName: result?.value,
+  }))!;
+
   cioClient?.tracker.trackQuizResultsLoaded({
     quizId: quiz_id,
     quizVersionId: quiz_version_id,
@@ -47,6 +53,7 @@ export const trackQuizResultsLoaded = (
     resultCount: response?.total_num_results,
     resultPage: request?.page,
     resultId: result_id,
+    items,
   });
 };
 
