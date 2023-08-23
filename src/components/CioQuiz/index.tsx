@@ -101,10 +101,7 @@ export default function CioQuiz(props: IQuizProps) {
           ) : (
             state.quiz.currentQuestion && (
               <>
-                <ProgressBar
-                  currentQuestionId={state.quiz.currentQuestion.next_question.id}
-                  totalQuestions={state.quiz.currentQuestion.total_questions}
-                />
+                <ProgressBar />
                 <QuizQuestions />
                 <ControlBar ctaButtonText={questionData?.cta_text || undefined} />
               </>
