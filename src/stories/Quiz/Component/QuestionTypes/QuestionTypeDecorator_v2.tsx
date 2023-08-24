@@ -1,6 +1,7 @@
+import { Question } from '@constructor-io/constructorio-client-javascript/lib/types';
 import QuizContext from '../../../../components/CioQuiz/context';
-import { ResultsPageOptions } from '../../../../types';
 import { useMockContextValue } from '../../tests/mocks';
+import StoryPreview from '../../utils/StoryPreview';
 
 const React = require('react');
 const ReactDOM = require('react-dom');
@@ -10,20 +11,14 @@ if (process.env.NODE_ENV !== 'production') {
   axe(React, ReactDOM, 1000, {});
 }
 
-export default function QuizResultsDecorator(
-  Story: any,
-  options: ResultsPageOptions = {
-    onAddToCartClick: () => {},
-  }
-) {
-  const contextValue = useMockContextValue();
+export default function QuestionTypeDecorator(Story: any, questions: Question[]) {
+  const [question] = questions;
+  const contextValue = useMockContextValue(question);
 
   return (
     <div className='cio-quiz'>
       <QuizContext.Provider value={contextValue}>
-        <div>
-          <Story options={options} />
-        </div>
+        <StoryPreview Component={Story} variationsArgsList={questions} />
       </QuizContext.Provider>
     </div>
   );

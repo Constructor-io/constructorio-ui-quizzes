@@ -7,7 +7,7 @@ import useOpenTextInputProps from '../../../hooks/usePropsGetters/useOpenTextInp
 import useCoverQuestionProps from '../../../hooks/usePropsGetters/useCoverQuestionProps';
 import useSelectInputProps from '../../../hooks/usePropsGetters/useSelectInputProps';
 
-export const getMockQuestion = (type: QuestionTypes) => ({
+export const getMockQuestion = (type: `${QuestionTypes}`) => ({
   id: 1,
   title: 'This is question title',
   description: 'This is question description',

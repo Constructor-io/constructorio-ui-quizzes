@@ -284,6 +284,9 @@
   padding: 0;
   padding-bottom: var(--bottom-bar-height);
 }
+.cio-cover-question-container--with-image .cio-question-image {
+  height: auto;
+}
 
 /** Select Component */
 /* Options */
@@ -634,7 +637,7 @@
   margin-top: 1px;
 }
 
-/* Media Queries */
+/* Container Queries */
 
 /* Small Tablet */
 @container quiz (min-width: 640px) {

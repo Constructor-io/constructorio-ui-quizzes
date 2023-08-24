@@ -10,11 +10,15 @@ export default function QuizQuestions() {
   const nextQuestion = state?.quiz.currentQuestion?.next_question;
   const questionTypes = getQuestionTypes(nextQuestion?.type);
 
-  return (
-    <>
-      {questionTypes.isOpenQuestion && <OpenTextQuestion key={nextQuestion?.id} />}
-      {questionTypes.isCoverQuestion && <CoverTypeQuestion key={nextQuestion?.id} />}
-      {questionTypes.isSelectQuestion && <SelectTypeQuestion key={nextQuestion?.id} />}
-    </>
-  );
+  if (nextQuestion) {
+    return (
+      <>
+        {questionTypes.isOpenQuestion && <OpenTextQuestion key={nextQuestion?.id} />}
+        {questionTypes.isCoverQuestion && <CoverTypeQuestion key={nextQuestion?.id} />}
+        {questionTypes.isSelectQuestion && <SelectTypeQuestion key={nextQuestion?.id} />}
+      </>
+    );
+  }
+
+  return null;
 }
