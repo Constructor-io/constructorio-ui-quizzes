@@ -14,15 +14,7 @@ export default function QuizQuestions() {
     return (
       <>
         {questionTypes.isOpenQuestion && <OpenTextQuestion key={nextQuestion?.id} />}
-        {questionTypes.isCoverQuestion && (
-          <CoverTypeQuestion
-            key={nextQuestion.id}
-            id={nextQuestion.id}
-            title={nextQuestion.title}
-            images={nextQuestion.images}
-            description={nextQuestion.description}
-          />
-        )}
+        {questionTypes.isCoverQuestion && <CoverTypeQuestion key={nextQuestion?.id} />}
         {questionTypes.isSelectQuestion && <SelectTypeQuestion key={nextQuestion?.id} />}
       </>
     );
