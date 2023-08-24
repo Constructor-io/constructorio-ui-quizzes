@@ -59,6 +59,7 @@ export const functionStrings = {
   onQuizResultClick: `(result, position) => console.dir(result, position)`,
   onAddToFavoritesClick: `(item) => console.dir(item)`,
   onQuizResultsLoaded: `(results) => console.dir(results)`,
+  onQuizNextQuestion: `(question) => console.dir(question)`,
   cioJsClient: `cioJsClient`,
 };
 

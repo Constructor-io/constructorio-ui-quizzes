@@ -12,8 +12,9 @@ import {
   smallContainerDescription,
   apiKey,
   quizId,
+  callbacksDescription,
 } from '../../../constants';
-import { IQuizProps } from '../../../types';
+import { IQuizProps, QuestionWithAnswer } from '../../../types';
 
 export default {
   title: 'Quiz/Full Quiz',
@@ -50,8 +51,18 @@ const resultsPageOptions = {
   resultCardSalePriceKey: 'salePrice',
 };
 
+const callbacks = {
+  onQuizNextQuestion: (question: QuestionWithAnswer) => {
+    console.dir(question);
+  },
+};
+
 export const BasicUsage = ComponentTemplate.bind({});
-BasicUsage.args = { apiKey, quizId, resultsPageOptions };
+BasicUsage.args = {
+  apiKey,
+  quizId,
+  resultsPageOptions,
+};
 addComponentStoryDescription(
   BasicUsage,
   `const args = ${stringifyWithDefaults(BasicUsage.args)}`,
@@ -110,4 +121,17 @@ import ConstructorIOClient from '@constructor-io/constructorio-client-javascript
 const cioJsClient = new ConstructorIOClient({ apiKey: '${apiKey}' });
 const args = ${stringifyWithDefaults(ProvideCIOClientInstance.args)};`,
   cioJsClientDescription
+);
+
+export const PassCallbacks = ComponentTemplate.bind({});
+PassCallbacks.args = {
+  apiKey,
+  quizId,
+  resultsPageOptions,
+  callbacks,
+};
+addComponentStoryDescription(
+  PassCallbacks,
+  `const args = ${stringifyWithDefaults(PassCallbacks.args)}`,
+  callbacksDescription
 );
