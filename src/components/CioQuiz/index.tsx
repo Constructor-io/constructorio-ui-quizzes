@@ -9,6 +9,7 @@ import useQuiz from '../../hooks/useQuiz';
 import SessionPromptModal from '../SessionPromptModal/SessionPromptModal';
 import { IQuizProps } from '../../types';
 import { convertPrimaryColorsToString, renderImages } from '../../utils';
+import ProgressBar from '../ProgressBar/ProgressBar';
 
 export default function CioQuiz(props: IQuizProps) {
   const {
@@ -100,6 +101,7 @@ export default function CioQuiz(props: IQuizProps) {
           ) : (
             state.quiz.currentQuestion && (
               <>
+                <ProgressBar />
                 <QuizQuestions />
                 <ControlBar ctaButtonText={questionData?.cta_text || undefined} />
               </>
