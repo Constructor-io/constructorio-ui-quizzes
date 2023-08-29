@@ -62,6 +62,7 @@ export interface IQuizProps {
   resultsPageOptions: ResultsPageOptions;
   sessionStateOptions?: SessionStateOptions;
   primaryColor?: string;
+  enableHydration?: boolean;
 }
 
 // QUIZ RETURN VALUES
@@ -76,9 +77,9 @@ export interface QuizReturnState {
     sessionId?: string;
     currentQuestion?: CurrentQuestion | undefined;
     results?: QuizResultsResponse | undefined;
-    skipToResults: boolean;
     selectedOptionsWithAttributes?: string[];
   };
+  quizSessionStorageState: QuizSessionStorageState;
 }
 
 export type AnswerInputState = {
@@ -87,6 +88,12 @@ export type AnswerInputState = {
     value: string | string[];
   };
 };
+
+export interface QuizSessionStorageState {
+  key: string;
+  skipToResults: boolean;
+  hasSessionStorageState: () => boolean;
+}
 
 export type InputQuestionsTypes =
   | QuestionTypes.OpenText
@@ -121,7 +128,6 @@ export namespace QuizEventsReturn {
     sendEvent?: boolean
   ) => void;
   export type HydrateQuiz = () => void;
-  export type HasSessionStorageState = () => boolean;
   export type ResetSessionStorageState = () => void;
 }
 
@@ -134,7 +140,6 @@ export interface QuizEventsReturn {
   addToCart: QuizEventsReturn.AddToCart;
   addToFavorites: QuizEventsReturn.AddToFavorites;
   hydrateQuiz: QuizEventsReturn.HydrateQuiz;
-  hasSessionStorageState: QuizEventsReturn.HasSessionStorageState;
   resetSessionStorageState: QuizEventsReturn.ResetSessionStorageState;
 }
 

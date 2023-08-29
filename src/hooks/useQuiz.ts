@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { UseQuiz } from '../types';
 import useCioClient from './useCioClient';
 import useConsoleErrors from './useConsoleErrors';
@@ -22,10 +23,16 @@ const useQuiz: UseQuiz = (quizOptions) => {
   const quizEvents = useQuizEvents(quizOptions, cioClient, quizState);
 
   // Props getters
-  const { quizApiState, quizLocalState, skipToResults } = quizState;
+  const { quizApiState, quizLocalState, quizSessionStorageState } = quizState;
+  const { skipToResults } = quizSessionStorageState;
   const propGetters = usePropsGetters(quizEvents, quizApiState, quizLocalState);
 
   const primaryColorStyles = usePrimaryColorStyles(primaryColor);
+
+  useEffect(() => {
+    if (skipToResults) quizEvents.hydrateQuiz();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return {
     cioClient,
@@ -38,11 +45,11 @@ const useQuiz: UseQuiz = (quizOptions) => {
         requestState: quizApiState.quizRequestState,
         versionId: quizLocalState.quizVersionId,
         sessionId: quizLocalState.quizSessionId,
-        skipToResults,
         currentQuestion: quizApiState.quizCurrentQuestion,
         results: quizApiState.quizResults,
         selectedOptionsWithAttributes: quizApiState.selectedOptionsWithAttributes,
       },
+      quizSessionStorageState,
     },
     events: {
       ...quizEvents,

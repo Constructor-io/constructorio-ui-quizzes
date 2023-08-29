@@ -2,9 +2,10 @@ import ConstructorIOClient from '@constructor-io/constructorio-client-javascript
 import { ActionAnswerQuestion, ActionQuizAPI } from '../../components/CioQuiz/actions';
 import { QuizAPIReducerState } from '../../components/CioQuiz/quizApiReducer';
 import { QuizLocalReducerState } from '../../components/CioQuiz/quizLocalReducer';
-import { IQuizProps } from '../../types';
+import { IQuizProps, QuizSessionStorageState } from '../../types';
 import useQuizApiState from './useQuizApiState';
 import useQuizLocalState from './useQuizLocalState';
+import useSessionStorageState from './useSessionStorageState';
 
 type UseQuizState = (
   quizOptions: IQuizProps,
@@ -14,17 +15,18 @@ type UseQuizState = (
   quizLocalState: QuizLocalReducerState;
   dispatchApiState: React.Dispatch<ActionQuizAPI>;
   dispatchLocalState: React.Dispatch<ActionAnswerQuestion>;
-  hasQuizStoredState: () => boolean;
-  skipToResults: boolean;
-  quizStateKey: string;
+  quizSessionStorageState: QuizSessionStorageState;
 };
 
 const useQuizState: UseQuizState = (quizOptions, cioClient) => {
-  const { sessionStateOptions } = quizOptions;
+  const { sessionStateOptions, enableHydration } = quizOptions;
 
   // Quiz Local state
-  const { quizLocalState, dispatchLocalState, hasQuizStoredState, skipToResults, quizStateKey } =
-    useQuizLocalState(sessionStateOptions);
+  const { quizLocalState, dispatchLocalState } = useQuizLocalState();
+
+  // Quiz Session Storage state
+  const { skipToResults, quizSessionStorageStateKey, hasSessionStorageState } =
+    useSessionStorageState(quizLocalState, sessionStateOptions, enableHydration);
 
   // Quiz API state
   const { quizApiState, dispatchApiState } = useQuizApiState(
@@ -40,9 +42,11 @@ const useQuizState: UseQuizState = (quizOptions, cioClient) => {
     quizLocalState,
     dispatchApiState,
     dispatchLocalState,
-    hasQuizStoredState,
-    skipToResults,
-    quizStateKey,
+    quizSessionStorageState: {
+      skipToResults,
+      key: quizSessionStorageStateKey,
+      hasSessionStorageState,
+    },
   };
 };
 
