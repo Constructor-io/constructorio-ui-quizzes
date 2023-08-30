@@ -23,6 +23,8 @@ export const componentDescription = `- import \`CioQuiz\` to render in your JSX.
   - \`resultCardRatingScoreKey\` is an optional parameter that specifies the metadata field name for the ratings score 
   - \`renderResultCardPriceDetails\` is an optional render function to render custom prices section in result card 
   - \`numResultsToDisplay\` is an optional parameter that determines how many results should be displayed on results page
+- \`callbacks\` lets you pass callback functions that will be called on certain actions
+  - \`onQuizNextQuestion\` is an optional callback function that will be called when user moves to the next question
 - \`sessionStateOptions\` lets you configure the session modal behavior
   - \`showSessionModal\` is a boolean used to decide whether to show the session modal. The default behavior is to show the session modal
   - \`showSessionModalOnResults\` is a boolean to decide whether to show the session modal after reaching the results page. The default behavior is to not show the session modal
@@ -90,6 +92,7 @@ In the example below, the \`primaryColor\` prop has been used to override this c
 
 > Advanced Option: Instead of passing a primaryColor prop, you can also override \`--primary-color-h\`, \`--primary-color-s\`, and \`--primary-color-l\` CSS variables within a \`.cio-quiz\` container element. If explicitly given a value in your CSS, then the values of these variables will be used as the HSL values for your quiz.
 `;
+export const callbacksDescription = `Pass an \`apiKey\`, a \`quizId\`, and \`callbacks\``;
 
 export enum RequestStates {
   Stale = 'STALE',

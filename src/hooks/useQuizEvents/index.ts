@@ -27,7 +27,7 @@ const useQuizEvents: UseQuizEvents = (quizOptions, cioClient, quizState) => {
     quizStateKey,
     quizLocalState,
   } = quizState;
-  const { resultsPageOptions } = quizOptions;
+  const { resultsPageOptions, callbacks } = quizOptions;
 
   const { onAddToCartClick, onQuizResultClick, onQuizResultsLoaded, onAddToFavoritesClick } =
     resultsPageOptions;
@@ -36,7 +36,12 @@ const useQuizEvents: UseQuizEvents = (quizOptions, cioClient, quizState) => {
   const quizAnswerChanged = useQuizAnswerChangeHandler(quizApiState, dispatchLocalState);
 
   // Quiz Next button click callback
-  const nextQuestion = useQuizNextClick(quizApiState, quizLocalState, dispatchLocalState);
+  const nextQuestion = useQuizNextClick(
+    quizApiState,
+    quizLocalState,
+    dispatchLocalState,
+    callbacks?.onQuizNextQuestion
+  );
 
   // Quiz Back button click callback
   const previousQuestion = useQuizBackClick(quizApiState, dispatchLocalState);
