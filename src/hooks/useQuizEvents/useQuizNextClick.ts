@@ -25,8 +25,8 @@ const useQuizNextClick = (
         });
       }
 
-      if (currentQuestion && onQuizNextQuestion && isFunction(onQuizNextQuestion)) {
-        onQuizNextQuestion({ ...currentQuestion, answer: currentAnswerInput });
+      if (currentQuestion && isFunction(onQuizNextQuestion)) {
+        onQuizNextQuestion!({ ...currentQuestion, answer: currentAnswerInput });
       }
     }
   }, [
