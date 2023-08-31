@@ -4,6 +4,7 @@ import {
   QuizResultsResponse,
   Nullable,
   QuestionOption,
+  Question,
 } from '@constructor-io/constructorio-client-javascript/lib/types';
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
 import { RequestStates } from './constants';
@@ -54,6 +55,16 @@ export interface SessionStateOptions {
   sessionStateKey?: string;
 }
 
+export type QuestionWithAnswer = Question & {
+  answer: AnswerInput;
+};
+
+export type OnQuizNextQuestion = (question: QuestionWithAnswer) => void;
+
+export interface Callbacks {
+  onQuizNextQuestion?: OnQuizNextQuestion;
+}
+
 export interface IQuizProps {
   apiKey?: string;
   cioJsClient?: ConstructorIOClient;
@@ -63,6 +74,7 @@ export interface IQuizProps {
   sessionStateOptions?: SessionStateOptions;
   primaryColor?: string;
   enableHydration?: boolean;
+  callbacks?: Callbacks;
 }
 
 // QUIZ RETURN VALUES
@@ -82,11 +94,13 @@ export interface QuizReturnState {
   quizSessionStorageState: QuizSessionStorageState;
 }
 
+export type AnswerInput = {
+  type: InputQuestionsTypes;
+  value: string | string[];
+};
+
 export type AnswerInputState = {
-  [key: string]: {
-    type: InputQuestionsTypes;
-    value: string | string[];
-  };
+  [key: string]: AnswerInput;
 };
 
 export interface QuizSessionStorageState {
