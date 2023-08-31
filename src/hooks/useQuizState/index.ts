@@ -26,7 +26,11 @@ const useQuizState: UseQuizState = (quizOptions, cioClient) => {
 
   // Quiz Session Storage state
   const { skipToResults, quizSessionStorageStateKey, hasSessionStorageState } =
-    useSessionStorageState(quizLocalState, sessionStateOptions, enableHydration);
+    useSessionStorageState(
+      quizLocalState,
+      sessionStateOptions,
+      enableHydration === undefined ? true : enableHydration
+    );
 
   // Quiz API state
   const { quizApiState, dispatchApiState } = useQuizApiState(

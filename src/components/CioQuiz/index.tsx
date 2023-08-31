@@ -12,7 +12,6 @@ import { convertPrimaryColorsToString, renderImages } from '../../utils';
 import ProgressBar from '../ProgressBar/ProgressBar';
 
 export default function CioQuiz(props: IQuizProps) {
-  const { enableHydration } = props;
   const {
     cioClient,
     state,
@@ -30,10 +29,7 @@ export default function CioQuiz(props: IQuizProps) {
     getResetQuizButtonProps,
     getSelectInputProps,
     primaryColorStyles,
-  } = useQuiz({
-    ...props,
-    enableHydration: enableHydration === undefined ? true : enableHydration,
-  });
+  } = useQuiz(props);
 
   const [showSessionPrompt, setShowSessionPrompt] = useState(false);
   const { resultsPageOptions, sessionStateOptions } = props;
