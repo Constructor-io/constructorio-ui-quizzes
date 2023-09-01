@@ -15,7 +15,7 @@ export default function CioQuiz(props: IQuizProps) {
   const {
     cioClient,
     state,
-    events: { hydrateQuiz, hasSessionStorageState, resetSessionStorageState },
+    events: { hydrateQuiz, resetSessionStorageState },
     getAddToCartButtonProps,
     getAddToFavoritesButtonProps,
     getCoverQuestionProps,
@@ -33,20 +33,19 @@ export default function CioQuiz(props: IQuizProps) {
 
   const [showSessionPrompt, setShowSessionPrompt] = useState(false);
   const { resultsPageOptions, sessionStateOptions } = props;
+  const {
+    quizSessionStorageState: { hasSessionStorageState, skipToResults },
+  } = state;
 
   useEffect(() => {
     // Respect showSessionModal if defined, else default to true.
     if (sessionStateOptions?.showSessionModal !== undefined) {
       setShowSessionPrompt(
-        sessionStateOptions?.showSessionModal &&
-          hasSessionStorageState() &&
-          !state.quiz.skipToResults
+        sessionStateOptions?.showSessionModal && hasSessionStorageState() && !skipToResults
       );
     } else {
-      setShowSessionPrompt(hasSessionStorageState() && !state.quiz.skipToResults);
+      setShowSessionPrompt(hasSessionStorageState() && !skipToResults);
     }
-
-    if (state.quiz.skipToResults) hydrateQuiz();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -96,7 +95,7 @@ export default function CioQuiz(props: IQuizProps) {
           setShowSessionPrompt={setShowSessionPrompt}
         />
         <QuizContext.Provider value={contextValue}>
-          {state.quiz.results || state.quiz.skipToResults ? (
+          {state.quiz.results || skipToResults ? (
             <ResultContainer options={resultsPageOptions} />
           ) : (
             state.quiz.currentQuestion && (

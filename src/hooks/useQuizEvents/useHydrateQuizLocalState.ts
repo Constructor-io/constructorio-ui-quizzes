@@ -4,18 +4,18 @@ import { QuizEventsReturn } from '../../types';
 import { getStateFromSessionStorage } from '../../utils';
 
 const useHydrateQuizLocalState = (
-  quizStateKey: string,
+  quizSessionStorageStateKey: string,
   dispatchLocalState: React.Dispatch<ActionAnswerQuestion>
 ): QuizEventsReturn.NextQuestion => {
-  const quizState = getStateFromSessionStorage(quizStateKey);
+  const sessionStorageQuizState = getStateFromSessionStorage(quizSessionStorageStateKey);
   const hydrateQuizLocalStateHandler = useCallback(() => {
-    if (quizState) {
+    if (sessionStorageQuizState) {
       dispatchLocalState({
         type: QuestionTypes.Hydrate,
-        payload: quizState,
+        payload: sessionStorageQuizState,
       });
     }
-  }, [dispatchLocalState, quizState]);
+  }, [dispatchLocalState, sessionStorageQuizState]);
 
   return hydrateQuizLocalStateHandler;
 };

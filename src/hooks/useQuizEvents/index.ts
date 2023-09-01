@@ -23,9 +23,8 @@ const useQuizEvents: UseQuizEvents = (quizOptions, cioClient, quizState) => {
     quizApiState,
     dispatchLocalState,
     dispatchApiState,
-    hasQuizStoredState,
-    quizStateKey,
     quizLocalState,
+    quizSessionStorageState,
   } = quizState;
   const { resultsPageOptions, callbacks } = quizOptions;
 
@@ -59,14 +58,17 @@ const useQuizEvents: UseQuizEvents = (quizOptions, cioClient, quizState) => {
 
   // Quiz reset
   const resetQuiz = useQuizResetClick(
-    resetQuizSessionStorageState(quizStateKey),
+    resetQuizSessionStorageState(quizSessionStorageState.key),
     dispatchLocalState,
     dispatchApiState,
     quizApiState.quizResults
   );
 
   // Quiz rehydrate
-  const hydrateQuizLocalState = useHydrateQuizLocalState(quizStateKey, dispatchLocalState);
+  const hydrateQuizLocalState = useHydrateQuizLocalState(
+    quizSessionStorageState.key,
+    dispatchLocalState
+  );
 
   return {
     addToCart,
@@ -77,8 +79,7 @@ const useQuizEvents: UseQuizEvents = (quizOptions, cioClient, quizState) => {
     nextQuestion,
     resetQuiz,
     hydrateQuiz: hydrateQuizLocalState,
-    hasSessionStorageState: hasQuizStoredState,
-    resetSessionStorageState: resetQuizSessionStorageState(quizStateKey),
+    resetSessionStorageState: resetQuizSessionStorageState(quizSessionStorageState.key),
   };
 };
 

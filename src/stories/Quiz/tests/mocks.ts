@@ -1,5 +1,5 @@
 import { Question } from '@constructor-io/constructorio-client-javascript/lib/types';
-import { RequestStates } from '../../../constants';
+import { quizSessionStateKey, RequestStates } from '../../../constants';
 import { InputQuestionsTypes, QuizReturnState } from '../../../types';
 import { QuestionTypes } from '../../../components/CioQuiz/actions';
 import { QuizContextValue } from '../../../components/CioQuiz/context';
@@ -80,7 +80,6 @@ export const getMockState = (question?: Question): QuizReturnState => ({
     requestState: RequestStates.Success,
     versionId: '',
     sessionId: '',
-    skipToResults: false,
     currentQuestion: {
       next_question: question!,
       isFirstQuestion: false,
@@ -148,6 +147,11 @@ export const getMockState = (question?: Question): QuizReturnState => ({
       ],
     },
     selectedOptionsWithAttributes: ['Chocolate', 'Medium'],
+  },
+  quizSessionStorageState: {
+    key: quizSessionStateKey,
+    skipToResults: true,
+    hasSessionStorageState: () => true,
   },
 });
 
