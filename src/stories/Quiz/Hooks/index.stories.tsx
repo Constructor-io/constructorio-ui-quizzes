@@ -27,7 +27,7 @@ const resultsPageOptions = {
 };
 
 export const BasicUsage = MyQuiz.bind({});
-BasicUsage.args = { apiKey, quizId, resultsPageOptions, enableHydration: true };
+BasicUsage.args = { apiKey, quizId, resultsPageOptions };
 addHookStoryCode(
   BasicUsage,
   `const args = ${stringifyWithDefaults(BasicUsage.args)}`,
