@@ -94,7 +94,7 @@ export default function quizLocalReducer(
       return {
         ...state,
         answerInputs: newAnswerInputs,
-        answers: [...state.answers.slice(0, -1)],
+        answers: [...state.answers.slice(0, -2)],
         isLastAnswer: false,
         isQuizCompleted: false,
       };
