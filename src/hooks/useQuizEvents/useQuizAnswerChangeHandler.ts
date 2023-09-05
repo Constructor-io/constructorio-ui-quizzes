@@ -18,7 +18,8 @@ const useQuizAnswerChangeHandler = (
             payload: {
               questionId: currentQuestion!.next_question.id,
               input: '',
-              isLastQuestion: currentQuestion!.is_last_question,
+              // Is last question if is_last_question flag is true or next_question is null
+              isLastQuestion: currentQuestion!.is_last_question || !currentQuestion?.next_question,
             },
           });
           break;
@@ -28,7 +29,8 @@ const useQuizAnswerChangeHandler = (
             payload: {
               questionId: currentQuestion!.next_question.id,
               input: payload as string,
-              isLastQuestion: currentQuestion!.is_last_question,
+              // Is last question if is_last_question flag is true or next_question is null
+              isLastQuestion: currentQuestion!.is_last_question || !currentQuestion?.next_question,
             },
           });
           break;
@@ -41,7 +43,8 @@ const useQuizAnswerChangeHandler = (
             payload: {
               questionId: currentQuestion!.next_question.id,
               input: payload as string[],
-              isLastQuestion: currentQuestion!.is_last_question,
+              // Is last question if is_last_question flag is true or next_question is null
+              isLastQuestion: currentQuestion!.is_last_question || !currentQuestion?.next_question,
             },
           });
           break;
