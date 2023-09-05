@@ -86,7 +86,7 @@ export default function quizLocalReducer(
       }
       return {
         ...state,
-        // We now commit prev answers to current answers
+        // We now commit current answers to prevAnswerInputs
         prevAnswerInputs: answerInputs,
         answers: newAnswers,
         isQuizCompleted: false,
