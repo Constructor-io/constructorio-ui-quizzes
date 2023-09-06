@@ -1,10 +1,11 @@
+import { Nullable } from '@constructor-io/constructorio-client-javascript/lib/types';
 import { useState, useCallback, useEffect } from 'react';
 import { AnswerInputState, GetOpenTextInputProps, Question, QuizEventsReturn } from '../../types';
 
 export default function useOpenTextInputProps(
   setQuizAnswers: QuizEventsReturn.QuizAnswerChanged,
   nextQuestion: QuizEventsReturn.NextQuestion,
-  currentQuestionData?: Question,
+  currentQuestionData?: Nullable<Question>,
   answerInputs?: AnswerInputState
 ): GetOpenTextInputProps {
   const [input, setInput] = useState('');

@@ -1,3 +1,4 @@
+import { Nullable } from '@constructor-io/constructorio-client-javascript/lib/types';
 import { useState, useCallback, useEffect, KeyboardEvent, useRef } from 'react';
 import { QuestionTypes } from '../../components/CioQuiz/actions';
 import { Selected } from '../../components/SelectTypeQuestion/SelectTypeQuestion';
@@ -13,7 +14,7 @@ import {
 export default function useSelectInputProps(
   quizAnswerChanged: QuizEventsReturn.QuizAnswerChanged,
   nextQuestion: QuizEventsReturn.NextQuestion,
-  currentQuestionData?: Question,
+  currentQuestionData?: Nullable<Question>,
   answerInputs?: AnswerInputState
 ): GetSelectInputProps {
   const type: `${QuestionTypes}` | undefined = currentQuestionData?.type;
