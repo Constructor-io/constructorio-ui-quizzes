@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Nullable } from '@constructor-io/constructorio-client-javascript/lib/types';
 import QuestionTitle from '../QuestionTitle/QuestionTitle';
 import QuestionDescription from '../QuestionDescription/QuestionDescription';
 import QuizContext from '../CioQuiz/context';
@@ -12,14 +13,14 @@ export interface Selected {
 
 function SelectTypeQuestion() {
   const { state, getSelectInputProps } = useContext(QuizContext);
-  let question: Question | undefined;
+  let question: Nullable<Question> | undefined;
   let hasImages = false;
   let instructions;
 
   if (state?.quiz.currentQuestion) {
     question = state.quiz.currentQuestion.next_question;
-    hasImages = question.options.some((option: QuestionOption) => option.images);
-    instructions = question.type === QuestionTypes.MultipleSelect && 'Select one or more options';
+    hasImages = question?.options.some((option: QuestionOption) => option.images);
+    instructions = question?.type === QuestionTypes.MultipleSelect && 'Select one or more options';
   }
 
   if (question) {

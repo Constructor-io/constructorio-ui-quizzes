@@ -50,7 +50,7 @@ export default function apiReducer(
         quizCurrentQuestion: {
           ...action.payload?.quizCurrentQuestion!,
           isFirstQuestion:
-            quizFirstQuestion?.next_question.id ===
+            quizFirstQuestion?.next_question?.id ===
             action.payload?.quizCurrentQuestion?.next_question?.id,
           isOpenQuestion,
           isCoverQuestion,

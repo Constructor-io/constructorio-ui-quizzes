@@ -1,9 +1,10 @@
+import { Nullable } from '@constructor-io/constructorio-client-javascript/lib/types';
 import { useCallback, useEffect } from 'react';
 import { GetCoverQuestionProps, Question, QuizEventsReturn } from '../../types';
 
 export default function useCoverQuestionProps(
   setQuizAnswers: QuizEventsReturn.QuizAnswerChanged,
-  currentQuestionData?: Question
+  currentQuestionData?: Nullable<Question>
 ): GetCoverQuestionProps {
   useEffect(() => {
     if (currentQuestionData?.type === 'cover') {

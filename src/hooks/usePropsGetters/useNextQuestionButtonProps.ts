@@ -9,7 +9,7 @@ export default function useNextQuestionButtonProps(
   quizLocalState: QuizLocalReducerState
 ): GetNextQuestionButtonProps {
   const getNextQuestionButtonProps: GetNextQuestionButtonProps = useCallback(() => {
-    const currentQuestionId = quizApiState.quizCurrentQuestion?.next_question.id;
+    const currentQuestionId = quizApiState.quizCurrentQuestion?.next_question?.id;
     let buttonDisabled;
     if (currentQuestionId && !quizApiState.quizCurrentQuestion?.isCoverQuestion) {
       buttonDisabled =

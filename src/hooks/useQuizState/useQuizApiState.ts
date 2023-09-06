@@ -33,6 +33,32 @@ const useQuizApiState: UseQuizApiState = (
   const [quizApiState, dispatchApiState] = useReducer(apiReducer, initialState);
   const { quizId, quizVersionId: quizVersionIdProp, resultsPageOptions } = quizOptions;
 
+  const dispatchQuizResults = async () => {
+    try {
+      const quizResults = await getQuizResults(cioClient, quizId, {
+        answers: quizLocalState.answers,
+        resultsPerPage: resultsPageOptions?.numResultsToDisplay,
+        quizVersionId: quizLocalState.quizVersionId,
+        quizSessionId: quizLocalState.quizSessionId,
+      });
+      // Set quiz results state
+      dispatchApiState({
+        type: QuizAPIActionTypes.SET_QUIZ_RESULTS,
+        payload: {
+          quizResults,
+        },
+      });
+      if (!quizLocalState.isQuizCompleted)
+        dispatchLocalState({
+          type: QuestionTypes.Complete,
+        });
+    } catch (error) {
+      dispatchApiState({
+        type: QuizAPIActionTypes.SET_IS_ERROR,
+      });
+    }
+  };
+
   useEffect(() => {
     (async () => {
       dispatchApiState({
@@ -40,29 +66,7 @@ const useQuizApiState: UseQuizApiState = (
       });
 
       if (quizLocalState.isLastAnswer || skipToResults) {
-        try {
-          const quizResults = await getQuizResults(cioClient, quizId, {
-            answers: quizLocalState.answers,
-            resultsPerPage: resultsPageOptions?.numResultsToDisplay,
-            quizVersionId: quizLocalState.quizVersionId,
-            quizSessionId: quizLocalState.quizSessionId,
-          });
-          // Set quiz results state
-          dispatchApiState({
-            type: QuizAPIActionTypes.SET_QUIZ_RESULTS,
-            payload: {
-              quizResults,
-            },
-          });
-          if (!quizLocalState.isQuizCompleted)
-            dispatchLocalState({
-              type: QuestionTypes.Complete,
-            });
-        } catch (error) {
-          dispatchApiState({
-            type: QuizAPIActionTypes.SET_IS_ERROR,
-          });
-        }
+        await dispatchQuizResults();
       } else {
         try {
           const quizVersionId = quizLocalState.quizVersionId || quizVersionIdProp;
@@ -74,6 +78,10 @@ const useQuizApiState: UseQuizApiState = (
             quizSessionId,
           });
 
+          if (!questionResult.next_question) {
+            await dispatchQuizResults();
+            return;
+          }
           // Update quizSessionId, quizVersionId
           if (
             (!quizSessionId && questionResult?.quiz_session_id) ||
