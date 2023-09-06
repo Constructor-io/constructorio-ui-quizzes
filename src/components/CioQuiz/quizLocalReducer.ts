@@ -5,6 +5,7 @@ export type Answers = string[][];
 export type QuizLocalReducerState = {
   answers: Answers;
   answerInputs: AnswerInputState;
+  prevAnswerInputs: AnswerInputState;
   isLastAnswer: boolean;
   isQuizCompleted: boolean;
   quizVersionId?: string;
@@ -14,6 +15,7 @@ export type QuizLocalReducerState = {
 export const initialState: QuizLocalReducerState = {
   answers: [],
   answerInputs: {},
+  prevAnswerInputs: {},
   isLastAnswer: false,
   isQuizCompleted: false,
 };
@@ -62,7 +64,7 @@ export default function quizLocalReducer(
         isQuizCompleted: false,
       };
     case QuestionTypes.Next: {
-      const { answers } = state;
+      const { answers, answerInputs } = state;
       const newAnswers = [...answers];
       const lastAnswerInputIndex = answers.length;
       const currentAnswerInput = Object.values(state.answerInputs)?.[lastAnswerInputIndex];
@@ -84,16 +86,18 @@ export default function quizLocalReducer(
       }
       return {
         ...state,
+        // We now commit current answers to prevAnswerInputs
+        prevAnswerInputs: answerInputs,
         answers: newAnswers,
         isQuizCompleted: false,
       };
     }
 
     case QuestionTypes.Back: {
-      const newAnswerInputs = { ...state.answerInputs };
+      const prevAnswerInputs = { ...state.prevAnswerInputs };
       return {
         ...state,
-        answerInputs: newAnswerInputs,
+        answerInputs: prevAnswerInputs,
         answers: [...state.answers.slice(0, -1)],
         isLastAnswer: false,
         isQuizCompleted: false,
