@@ -2,23 +2,18 @@ import { useEffect } from 'react';
 import { IQuizProps } from '../types';
 
 const useConsoleErrors = (quizOptions: IQuizProps) => {
-  const { quizId, resultsPageOptions } = quizOptions;
+  const { quizId, resultsPageOptions, callbacks } = quizOptions;
   useEffect(() => {
     if (!quizId) {
       // eslint-disable-next-line no-console
       console.error('quizId is a required field of type string');
     }
 
-    if (!resultsPageOptions || Object.keys(resultsPageOptions).length === 0) {
+    if (!callbacks?.onAddToCartClick) {
       // eslint-disable-next-line no-console
-      console.error('resultsPageOptions is a required field of type object');
+      console.error('callbacks?.onAddToCartClick is a required field of type function');
     }
-
-    if (resultsPageOptions && !resultsPageOptions?.onAddToCartClick) {
-      // eslint-disable-next-line no-console
-      console.error('resultsPageOptions.onAddToCartClick is a required field of type function');
-    }
-  }, [quizId, resultsPageOptions, resultsPageOptions?.onAddToCartClick]);
+  }, [quizId, resultsPageOptions, callbacks?.onAddToCartClick]);
 };
 
 export default useConsoleErrors;

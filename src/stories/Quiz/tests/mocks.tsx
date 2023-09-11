@@ -1,6 +1,16 @@
+/* eslint-disable no-console */
 import { Question } from '@constructor-io/constructorio-client-javascript/lib/types';
 import { quizSessionStateKey, RequestStates } from '../../../constants';
-import { InputQuestionsTypes, QuizReturnState } from '../../../types';
+import {
+  Callbacks,
+  InputQuestionsTypes,
+  QuestionWithAnswer,
+  QuizResultDataPartial,
+  QuizReturnState,
+  ResultCardOptions,
+  ResultsPageOptions,
+  SessionStateOptions,
+} from '../../../types';
 import { QuestionTypes } from '../../../components/CioQuiz/actions';
 import { QuizContextValue } from '../../../components/CioQuiz/context';
 import useOpenTextInputProps from '../../../hooks/usePropsGetters/useOpenTextInputProps';
@@ -221,4 +231,39 @@ export const useMockContextValue = (question?: Question): QuizContextValue => {
     customClickItemCallback: false,
     customAddToFavoritesCallback: true,
   };
+};
+
+export const resultsPageOptions: ResultsPageOptions = {
+  numResultsToDisplay: 10,
+};
+
+export const resultCardOptions: ResultCardOptions = {
+  resultCardRegularPriceKey: 'price',
+  resultCardSalePriceKey: 'salePrice',
+  resultCardRatingCountKey: '',
+  resultCardRatingScoreKey: '',
+};
+
+export const sessionStateOptions: SessionStateOptions = {
+  showSessionModal: true,
+  showSessionModalOnResults: false,
+  sessionStateKey: 'quiz_state',
+};
+
+export const callbacks: Callbacks = {
+  onQuizNextQuestion: (question: QuestionWithAnswer) => {
+    console.dir(question);
+  },
+  onAddToCartClick: (item: QuizResultDataPartial) => {
+    console.dir(item);
+  },
+  onAddToFavoritesClick: (item: QuizResultDataPartial) => {
+    console.dir(item);
+  },
+  onQuizResultClick: (item: QuizResultDataPartial) => {
+    console.dir(item);
+  },
+  onQuizResultsLoaded: (item: QuizResultDataPartial) => {
+    console.dir(item);
+  },
 };

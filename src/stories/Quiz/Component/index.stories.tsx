@@ -1,73 +1,47 @@
 /* eslint-disable no-console, react/jsx-props-no-spreading */
 import React from 'react';
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
+import type { Meta } from '@storybook/react';
 import CioQuiz from '../../../components/CioQuiz';
 import { argTypes } from '../argTypes';
 import { stringifyWithDefaults } from '../../../utils';
 import { ComponentTemplate, addComponentStoryDescription } from '.';
 import {
-  basicDescription,
-  componentDescription,
   cioJsClientDescription,
   smallContainerDescription,
   apiKey,
   quizId,
   callbacksDescription,
 } from '../../../constants';
-import { IQuizProps, QuestionWithAnswer } from '../../../types';
+import {
+  callbacks,
+  resultsPageOptions,
+  sessionStateOptions,
+  resultCardOptions,
+} from '../tests/mocks';
 
-export default {
+import { IQuizProps } from '../../../types';
+
+const meta: Meta<typeof CioQuiz> = {
   title: 'Quiz/Full Quiz',
   component: CioQuiz,
-  argTypes,
   tags: ['autodocs'],
-  parameters: {
-    docs: {
-      description: {
-        component: componentDescription,
-      },
-    },
-  },
+  argTypes,
 };
 
-const resultsPageOptions = {
-  onQuizResultClick: (result, position) => {
-    console.log('Click result');
-    console.dir(result, position);
-  },
-  onQuizResultsLoaded: (results) => {
-    console.log('Loaded results');
-    console.dir(results);
-  },
-  onAddToCartClick: (item) => {
-    console.log('Add to cart');
-    console.dir(item);
-  },
-  onAddToFavoritesClick: (item) => {
-    console.log('Add to favorites');
-    console.dir(item);
-  },
-  resultCardRegularPriceKey: 'price',
-  resultCardSalePriceKey: 'salePrice',
-};
-
-const callbacks = {
-  onQuizNextQuestion: (question: QuestionWithAnswer) => {
-    console.dir(question);
-  },
-};
+export default meta;
 
 export const BasicUsage = ComponentTemplate.bind({});
 BasicUsage.args = {
-  apiKey,
   quizId,
+  apiKey,
+  quizVersionId: '',
   resultsPageOptions,
+  resultCardOptions,
+  callbacks,
+  sessionStateOptions,
+  primaryColor: '35, 71, 199',
 };
-addComponentStoryDescription(
-  BasicUsage,
-  `const args = ${stringifyWithDefaults(BasicUsage.args)}`,
-  basicDescription
-);
 
 function RenderInASmallContainerTemplate(args: IQuizProps) {
   return (
@@ -79,7 +53,7 @@ function RenderInASmallContainerTemplate(args: IQuizProps) {
   );
 }
 export const RenderInASmallContainer = RenderInASmallContainerTemplate.bind({});
-RenderInASmallContainer.args = { apiKey, quizId, resultsPageOptions };
+RenderInASmallContainer.args = { apiKey, quizId, callbacks };
 addComponentStoryDescription(
   RenderInASmallContainer,
   `
@@ -103,8 +77,8 @@ delete cioJsClient.browse;
 delete cioJsClient.recommendations;
 
 const cioClientStoryResultsPageOptions = {
-  onAddToCartClick: resultsPageOptions.onAddToCartClick,
-  resultCardRegularPriceKey: resultsPageOptions.resultCardRegularPriceKey,
+  onAddToCartClick: callbacks.onAddToCartClick,
+  resultCardRegularPriceKey: resultCardOptions.resultCardRegularPriceKey,
 };
 
 export const ProvideCIOClientInstance = ComponentTemplate.bind({});

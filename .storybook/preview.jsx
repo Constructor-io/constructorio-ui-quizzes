@@ -1,5 +1,5 @@
 import React from 'react';
-import { Title, Description, Stories } from '@storybook/addon-docs';
+import { Title, Description, Stories, Controls } from '@storybook/addon-docs';
 import './custom-styles-story.css';
 import './storybook-styles.css';
 import '../src/styles.css'
@@ -22,13 +22,7 @@ export const parameters = {
     'storybook/docs/panel': { index: -1 }
   },
   docs: {
-    page: () => (
-      <>
-        <Title />
-        <Description />
-        <Stories includePrimary />
-      </>
-    )
+    toc: true,
   },
   backgrounds: {
     default: 'light',

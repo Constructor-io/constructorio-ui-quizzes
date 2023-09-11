@@ -6,6 +6,7 @@ import { argTypes } from '../argTypes';
 import { sleep, stringifyWithDefaults } from '../../../utils';
 import { ComponentTemplate, addComponentStoryDescription } from '../Component';
 import { basicDescription, apiKey, quizId } from '../../../constants';
+import { callbacks, resultsPageOptions, resultCardOptions } from './mocks';
 
 export default {
   title: 'Quiz/Full Quiz e2e tests',
@@ -23,30 +24,21 @@ export default {
   },
 };
 
-const resultsPageOptions = {
-  onQuizResultClick: (result, position) => {
-    console.log('Click result');
-    console.dir(result, position);
-  },
-  onQuizResultsLoaded: (results) => {
-    console.log('Loaded results');
-    console.dir(results);
-  },
-  onAddToCartClick: (item) => {
-    console.log('Add to cart');
-    console.dir(item);
-  },
-  resultCardRegularPriceKey: 'price',
-  resultCardSalePriceKey: 'salePrice',
-};
-
 const sessionStateOptions = {
   showSessionModal: false,
 };
 
 // eslint-disable-next-line storybook/prefer-pascal-case
 export const e2eInteractionTest = ComponentTemplate.bind({});
-e2eInteractionTest.args = { apiKey, quizId, resultsPageOptions, sessionStateOptions };
+e2eInteractionTest.args = {
+  apiKey,
+  quizId,
+  resultsPageOptions,
+  sessionStateOptions,
+  callbacks,
+  resultCardOptions,
+  enableHydration: false,
+};
 addComponentStoryDescription(
   e2eInteractionTest,
   `const args = ${stringifyWithDefaults(e2eInteractionTest.args)}`,

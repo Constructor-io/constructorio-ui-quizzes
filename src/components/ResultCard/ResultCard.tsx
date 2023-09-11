@@ -4,7 +4,7 @@ import ResultFavoritesButton from '../ResultFavoritesButton/ResultFavoritesButto
 import QuizContext from '../CioQuiz/context';
 import { QuizResultDataPartial } from '../../types';
 
-interface ResultCardProps {
+interface ResultCardOptions {
   result: QuizResultDataPartial;
   salePriceKey?: string;
   regularPriceKey?: string;
@@ -14,7 +14,7 @@ interface ResultCardProps {
   renderResultCardPriceDetails?: (result: QuizResultDataPartial) => JSX.Element;
 }
 
-export default function ResultCard(props: ResultCardProps) {
+export default function ResultCard(props: ResultCardOptions) {
   const {
     result,
     salePriceKey,
