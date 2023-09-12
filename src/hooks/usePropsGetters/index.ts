@@ -28,7 +28,8 @@ import useAddToFavoritesButtonProps from './useAddToFavoritesButtonProps';
 const usePropsGetters = (
   quizEvents: QuizEventsReturn,
   quizApiState: QuizAPIReducerState,
-  quizLocalState: QuizLocalReducerState
+  quizLocalState: QuizLocalReducerState,
+  favoriteItems?: string[]
 ) => {
   const {
     quizAnswerChanged,
@@ -96,8 +97,10 @@ const usePropsGetters = (
     [addToCart]
   );
 
-  const getAddToFavoritesButtonProps: GetAddToFavoritesButtonProps =
-    useAddToFavoritesButtonProps(addToFavorites);
+  const getAddToFavoritesButtonProps: GetAddToFavoritesButtonProps = useAddToFavoritesButtonProps(
+    addToFavorites,
+    favoriteItems
+  );
 
   const quizResultClickDown = useCallback(
     (event: KeyboardEvent<HTMLElement>, result: Partial<QuizResultData>, position: number) => {

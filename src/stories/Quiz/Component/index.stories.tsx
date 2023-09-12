@@ -49,6 +49,7 @@ const resultsPageOptions = {
   },
   resultCardRegularPriceKey: 'price',
   resultCardSalePriceKey: 'salePrice',
+  favoriteItems: ['119010868', '119011085'],
 };
 
 const callbacks = {

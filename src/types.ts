@@ -43,6 +43,7 @@ export namespace QuizResultsEventsProps {
 
 export interface ResultsPageOptions extends ResultCardProps {
   numResultsToDisplay?: number;
+  favoriteItems?: string[];
   onQuizResultsLoaded?: QuizResultsEventsProps.OnQuizResultsLoaded;
   onQuizResultClick?: QuizResultsEventsProps.OnQuizResultClick;
   onAddToCartClick: QuizResultsEventsProps.OnAddToCartClick;
