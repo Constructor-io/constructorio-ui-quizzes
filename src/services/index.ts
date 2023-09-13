@@ -13,6 +13,7 @@ export const getCioClient = (apiKey?: string) => {
     return new ConstructorIOClient({
       apiKey,
       sendTrackingEvents: true,
+      version: 'cio-ui-quizzes',
     });
   }
 
