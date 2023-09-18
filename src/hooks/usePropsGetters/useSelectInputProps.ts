@@ -55,7 +55,7 @@ export default function useSelectInputProps(
       const prevSelected: Selected = {};
       if (Array.isArray(currentAnswer?.value)) {
         currentAnswer?.value?.forEach((answer) => {
-          prevSelected[Number(answer)] = true;
+          prevSelected[Number(answer.id)] = true;
           setSelected(prevSelected);
         });
       }
