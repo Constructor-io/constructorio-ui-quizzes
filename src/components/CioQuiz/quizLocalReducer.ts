@@ -76,10 +76,12 @@ export default function quizLocalReducer(
           newAnswers.push(['seen']);
           break;
         case QuestionTypes.SingleSelect:
-          newAnswers.push(currentAnswerInput.value as string[]);
-          break;
         case QuestionTypes.MultipleSelect:
-          newAnswers.push(currentAnswerInput.value as string[]);
+          newAnswers.push(
+            (typeof currentAnswerInput.value === 'string'
+              ? [currentAnswerInput.value]
+              : currentAnswerInput.value.map((answer) => answer.id)) as string[]
+          );
           break;
         default:
           newAnswers.push([]);

@@ -96,7 +96,7 @@ export interface QuizReturnState {
 
 export type AnswerInput = {
   type: InputQuestionsTypes;
-  value: string | string[];
+  value: string | Partial<QuestionOption>[];
 };
 
 export type AnswerInputState = {
@@ -125,7 +125,7 @@ export type CurrentQuestion = NextQuestionResponse & {
 };
 
 export namespace QuizEventsReturn {
-  export type QuizAnswerChanged = (payload?: string | string[]) => void;
+  export type QuizAnswerChanged = (payload?: string | Partial<QuestionOption>[]) => void;
   export type NextQuestion = () => void;
   export type PreviousQuestion = () => void;
   export type ResetQuiz = () => void;

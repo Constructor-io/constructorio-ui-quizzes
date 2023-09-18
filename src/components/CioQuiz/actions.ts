@@ -1,5 +1,10 @@
 // eslint-disable-next-line import/no-cycle
-import { CurrentQuestion, NextQuestionResponse, QuizResultsResponse } from '../../types';
+import {
+  CurrentQuestion,
+  NextQuestionResponse,
+  QuestionOption,
+  QuizResultsResponse,
+} from '../../types';
 import type { QuizLocalReducerState } from './quizLocalReducer';
 
 // Local Actions
@@ -21,7 +26,7 @@ export interface QuestionAnswer<Value> {
   isLastQuestion?: boolean;
 }
 
-export type SelectQuestionPayload = QuestionAnswer<string[]>;
+export type SelectQuestionPayload = QuestionAnswer<Partial<QuestionOption>[]>;
 export type OpenTextQuestionPayload = QuestionAnswer<string>;
 export type CoverQuestionPayload = QuestionAnswer<string>;
 
