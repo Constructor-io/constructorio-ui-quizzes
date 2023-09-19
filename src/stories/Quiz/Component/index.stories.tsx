@@ -53,7 +53,7 @@ function RenderInASmallContainerTemplate(args: IQuizProps) {
   );
 }
 export const RenderInASmallContainer = RenderInASmallContainerTemplate.bind({});
-RenderInASmallContainer.args = { apiKey, quizId, callbacks };
+RenderInASmallContainer.args = { apiKey, quizId, callbacks, resultCardOptions };
 addComponentStoryDescription(
   RenderInASmallContainer,
   `
@@ -86,6 +86,7 @@ ProvideCIOClientInstance.args = {
   quizId,
   resultsPageOptions: cioClientStoryResultsPageOptions,
   cioJsClient,
+  resultCardOptions,
 };
 addComponentStoryDescription(
   ProvideCIOClientInstance,
@@ -102,6 +103,7 @@ PassCallbacks.args = {
   apiKey,
   quizId,
   resultsPageOptions,
+  resultCardOptions,
   callbacks,
 };
 addComponentStoryDescription(
