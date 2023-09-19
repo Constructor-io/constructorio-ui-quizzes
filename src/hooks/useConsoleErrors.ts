@@ -11,7 +11,7 @@ const useConsoleErrors = (quizOptions: IQuizProps) => {
 
     if (!callbacks?.onAddToCartClick) {
       // eslint-disable-next-line no-console
-      console.error('callbacks?.onAddToCartClick is a required field of type function');
+      console.error('callbacks.onAddToCartClick is a required field of type function');
     }
   }, [quizId, resultsPageOptions, callbacks?.onAddToCartClick]);
 };
