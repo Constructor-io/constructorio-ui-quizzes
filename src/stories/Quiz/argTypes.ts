@@ -35,7 +35,7 @@ export const argTypes = {
   resultCardOptions: {
     description: `Result card configuration options
       (Required for the component interface and has to match the keys in the API response to be correctly rendered)
-      \`resultCardRegularPriceKey: string\`
+      \n\`resultCardRegularPriceKey: string\`
       \`resultCardSalePriceKey: string\` 
       \`resultCardRatingCountKey: string\`
       \`resultCardRatingScoreKey: string\` 
