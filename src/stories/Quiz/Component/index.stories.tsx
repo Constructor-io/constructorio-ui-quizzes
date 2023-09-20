@@ -1,5 +1,5 @@
 /* eslint-disable no-console, react/jsx-props-no-spreading */
-import React from 'react';
+import React, { useState } from 'react';
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
 import CioQuiz from '../../../components/CioQuiz';
 import { argTypes } from '../argTypes';
@@ -71,10 +71,25 @@ addComponentStoryDescription(
 );
 
 function RenderInASmallContainerTemplate(args: IQuizProps) {
+  const [favorites, setFavorites] = useState<string[]>([]);
+
   return (
     <div className='small-container-example-wrapper'>
       <div className='small-container-example'>
-        <CioQuiz {...args} />
+        <CioQuiz
+          {...args}
+          resultsPageOptions={{
+            favoriteItems: favorites,
+            onAddToCartClick: () => {},
+            onAddToFavoritesClick: (result) => {
+              if (!favorites.includes(result.data.id)) {
+                setFavorites([...favorites, result.data.id]);
+              } else {
+                setFavorites(favorites.filter((id) => id !== result.data.id));
+              }
+            },
+          }}
+        />
       </div>
     </div>
   );
