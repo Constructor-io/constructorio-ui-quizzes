@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import MyQuiz, { addHookStoryCode } from './index';
 import '../../../styles.css';
-import { basicDescription, apiKey, quizId, hookDescription } from '../../../constants';
+import { basicDescription, apiKey, quizId } from '../../../constants';
 import { stringifyWithDefaults } from '../../../utils';
 import { argTypes } from '../argTypes';
 
@@ -9,14 +9,6 @@ export default {
   title: 'Quiz/Hooks',
   component: MyQuiz,
   argTypes,
-  tags: ['autodocs'],
-  parameters: {
-    docs: {
-      description: {
-        component: hookDescription,
-      },
-    },
-  },
 };
 
 const resultsPageOptions = {
