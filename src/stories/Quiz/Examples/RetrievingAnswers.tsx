@@ -62,7 +62,10 @@ export default function RetrievingAnswersStory() {
           {!state.quiz.results ? (
             <>
               <QuizQuestions />
-              <ControlBar ctaButtonText={currentQuestionData?.cta_text || undefined} />
+              <ControlBar
+                ctaButtonText={currentQuestionData?.cta_text || undefined}
+                isSkippable={currentQuestionData?.is_skippable || false}
+              />
             </>
           ) : (
             <ResultContainer options={resultsPageOptions} />
@@ -147,7 +150,10 @@ function Quiz() {
           {!state.quiz.results ? (
             <>
               <QuizQuestions />
-              <ControlBar ctaButtonText={currentQuestionData?.cta_text || undefined} />
+              <ControlBar
+                ctaButtonText={currentQuestionData?.cta_text || undefined}
+                isSkippable={currentQuestionData?.is_skippable || false}
+              />
             </>
           ) : (
             <ResultContainer options={resultsPageOptions} />

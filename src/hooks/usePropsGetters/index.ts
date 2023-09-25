@@ -15,6 +15,7 @@ import {
   GetQuizResultLinkProps,
   GetSelectQuestionImageProps,
   GetAddToFavoritesButtonProps,
+  GetSkipQuestionButtonProps,
 } from '../../types';
 import { QuizAPIReducerState } from '../../components/CioQuiz/quizApiReducer';
 import { QuizLocalReducerState } from '../../components/CioQuiz/quizLocalReducer';
@@ -24,6 +25,7 @@ import useOpenTextInputProps from './useOpenTextInputProps';
 import useNextQuestionButtonProps from './useNextQuestionButtonProps';
 import usePreviousQuestionButtonProps from './usePreviousQuestionButtonProps';
 import useAddToFavoritesButtonProps from './useAddToFavoritesButtonProps';
+import useSkipQuestionButtonProps from './useSkipQuestionButtonProps';
 
 const usePropsGetters = (
   quizEvents: QuizEventsReturn,
@@ -33,6 +35,7 @@ const usePropsGetters = (
   const {
     quizAnswerChanged,
     nextQuestion,
+    skipQuestion,
     previousQuestion,
     resetQuiz,
     hydrateQuiz,
@@ -64,6 +67,11 @@ const usePropsGetters = (
     nextQuestion,
     quizApiState,
     quizLocalState
+  );
+
+  const getSkipQuestionButtonProps: GetSkipQuestionButtonProps = useSkipQuestionButtonProps(
+    skipQuestion,
+    quizApiState
   );
 
   const getPreviousQuestionButtonProps: GetPreviousQuestionButtonProps =
@@ -163,6 +171,7 @@ const usePropsGetters = (
     getAddToFavoritesButtonProps,
     getQuizResultButtonProps,
     getQuizResultLinkProps,
+    getSkipQuestionButtonProps,
   };
 };
 

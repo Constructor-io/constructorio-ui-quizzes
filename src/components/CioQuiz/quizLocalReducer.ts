@@ -92,6 +92,35 @@ export default function quizLocalReducer(
         isQuizCompleted: false,
       };
     }
+    case QuestionTypes.Skip: {
+      const { answers, answerInputs } = state;
+      const newAnswers = [...answers];
+      const lastAnswerInputIndex = answers.length;
+      const currentAnswerInput = Object.values(state.answerInputs)?.[lastAnswerInputIndex];
+      switch (currentAnswerInput.type) {
+        case QuestionTypes.OpenText:
+          newAnswers.push(['false']);
+          break;
+        case QuestionTypes.Cover:
+          newAnswers.push(['seen']);
+          break;
+        case QuestionTypes.SingleSelect:
+          newAnswers.push([]);
+          break;
+        case QuestionTypes.MultipleSelect:
+          newAnswers.push([]);
+          break;
+        default:
+          newAnswers.push([]);
+      }
+      return {
+        ...state,
+        // We now commit current answers to prevAnswerInputs
+        prevAnswerInputs: answerInputs,
+        answers: newAnswers,
+        isQuizCompleted: false,
+      };
+    }
 
     case QuestionTypes.Back: {
       const prevAnswerInputs = { ...state.prevAnswerInputs };

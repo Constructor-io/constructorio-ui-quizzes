@@ -21,6 +21,7 @@ export default function CioQuiz(props: IQuizProps) {
     getCoverQuestionProps,
     getHydrateQuizButtonProps,
     getNextQuestionButtonProps,
+    getSkipQuestionButtonProps,
     getOpenTextInputProps,
     getPreviousQuestionButtonProps,
     getQuizImageProps,
@@ -57,6 +58,7 @@ export default function CioQuiz(props: IQuizProps) {
     getCoverQuestionProps,
     getHydrateQuizButtonProps,
     getNextQuestionButtonProps,
+    getSkipQuestionButtonProps,
     getOpenTextInputProps,
     getPreviousQuestionButtonProps,
     getQuizImageProps,
@@ -102,7 +104,10 @@ export default function CioQuiz(props: IQuizProps) {
               <>
                 <ProgressBar />
                 <QuizQuestions />
-                <ControlBar ctaButtonText={questionData?.cta_text || undefined} />
+                <ControlBar
+                  ctaButtonText={questionData?.cta_text || undefined}
+                  isSkippable={questionData?.is_skippable || false}
+                />
               </>
             )
           )}

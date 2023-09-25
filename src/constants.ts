@@ -58,6 +58,7 @@ const {
   getCoverQuestionProps: () => ({...})), // prop getter for jsx quiz cover question,
   getHydrateQuizButtonProps: () => ({...})), // prop getter for jsx hydrate quiz button,
   getNextQuestionButtonProps: () => ({...})), // prop getter for jsx next button to traverse the quiz,
+  getSkipQuestionButtonProps: () => ({...})), // prop getter for jsx skip button to traverse the quiz,
   getPreviousQuestionButtonProps: () => ({...})), // prop getter for jsx back button to traverse the quiz, 
   getOpenTextInputProps: () => ({...})), // prop getter for jsx open text input,
   getSelectInputProps: () => ({...})), // prop getter for jsx select input for select type questions,

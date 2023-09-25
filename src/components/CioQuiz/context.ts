@@ -6,6 +6,7 @@ import {
   GetCoverQuestionProps,
   GetHydrateQuizButtonProps,
   GetNextQuestionButtonProps,
+  GetSkipQuestionButtonProps,
   GetOpenTextInputProps,
   GetPreviousQuestionButtonProps,
   GetQuizImageProps,
@@ -22,6 +23,7 @@ export interface QuizContextValue {
   state?: QuizReturnState;
   getOpenTextInputProps: GetOpenTextInputProps;
   getNextQuestionButtonProps: GetNextQuestionButtonProps;
+  getSkipQuestionButtonProps: GetSkipQuestionButtonProps;
   getPreviousQuestionButtonProps: GetPreviousQuestionButtonProps;
   getQuizImageProps: GetQuizImageProps;
   getSelectInputProps: GetSelectInputProps;
