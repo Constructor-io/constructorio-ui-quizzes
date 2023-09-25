@@ -9,7 +9,10 @@ export default function useNextQuestionButtonProps(
   const getSkipQuestionButtonProps: GetSkipQuestionButtonProps = useCallback(() => {
     const currentQuestionId = quizApiState.quizCurrentQuestion?.next_question?.id;
 
-    const isHidden = currentQuestionId && quizApiState.quizCurrentQuestion?.isCoverQuestion;
+    const isHidden =
+      currentQuestionId &&
+      (quizApiState.quizCurrentQuestion?.isCoverQuestion ||
+        !quizApiState.quizCurrentQuestion?.next_question.is_skippable);
 
     return {
       className: isHidden ? 'cio-question-skip-button hide' : 'cio-question-skip-button',

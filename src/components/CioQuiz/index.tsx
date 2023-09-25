@@ -104,10 +104,7 @@ export default function CioQuiz(props: IQuizProps) {
               <>
                 <ProgressBar />
                 <QuizQuestions />
-                <ControlBar
-                  ctaButtonText={questionData?.cta_text || undefined}
-                  isSkippable={questionData?.is_skippable || false}
-                />
+                <ControlBar ctaButtonText={questionData?.cta_text || undefined} />
               </>
             )
           )}

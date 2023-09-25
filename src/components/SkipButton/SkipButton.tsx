@@ -2,21 +2,10 @@ import React from 'react';
 
 interface SkipButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   propsGetters?: () => React.ButtonHTMLAttributes<HTMLButtonElement>;
-  isSkippable: boolean;
 }
 
 function SkipButton(props: SkipButtonProps) {
-  const {
-    propsGetters,
-    isSkippable = false,
-    disabled,
-    className = 'cio-button-container',
-    ...rest
-  } = props;
-
-  if (!isSkippable) {
-    return null;
-  }
+  const { propsGetters, className = 'cio-button-container', ...rest } = props;
 
   return (
     <div className={`${className || ''}`}>

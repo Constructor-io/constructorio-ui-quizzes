@@ -6,18 +6,17 @@ import QuizContext from '../CioQuiz/context';
 
 interface ControlBarProps {
   ctaButtonText?: string;
-  isSkippable: boolean;
 }
 
 function ControlBar(props: ControlBarProps) {
-  const { ctaButtonText, isSkippable } = props;
+  const { ctaButtonText } = props;
   const { getNextQuestionButtonProps, getSkipQuestionButtonProps } = useContext(QuizContext);
 
   return (
     <div className='cio-question-buttons-container'>
       <BackButton />
       <div className='cio-question-buttons-group'>
-        <SkipButton isSkippable={isSkippable} propsGetters={getSkipQuestionButtonProps} />
+        <SkipButton propsGetters={getSkipQuestionButtonProps} />
         <CTAButton ctaText={ctaButtonText} propsGetters={getNextQuestionButtonProps} />
       </div>
     </div>

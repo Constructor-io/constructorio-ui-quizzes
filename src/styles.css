@@ -278,7 +278,7 @@
   text-decoration-color: var(--gray-dust-200);
 }
 .cio-quiz .cio-question-skip-button.hide {
-  visibility: none;
+  visibility: hidden;
   pointer-events: none;
 }
 /* Back Button Component */
