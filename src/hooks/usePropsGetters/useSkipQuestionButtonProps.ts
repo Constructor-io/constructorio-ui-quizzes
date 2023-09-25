@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { QuizAPIReducerState } from '../../components/CioQuiz/quizApiReducer';
 import { GetSkipQuestionButtonProps, QuizEventsReturn } from '../../types';
 
-export default function useNextQuestionButtonProps(
+export default function useSkipQuestionButtonProps(
   skipQuestion: QuizEventsReturn.SkipQuestion,
   quizApiState: QuizAPIReducerState
 ): GetSkipQuestionButtonProps {
