@@ -12,7 +12,7 @@ function SkipButton(props: SkipButtonProps) {
       {propsGetters && (
         // eslint-disable-next-line react/button-has-type
         <button {...rest} {...propsGetters()}>
-          Skip
+          Skip<span> question</span>
         </button>
       )}
     </div>
