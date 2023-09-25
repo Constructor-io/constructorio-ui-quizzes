@@ -49,6 +49,18 @@ export default function CioQuiz(props: IQuizProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    // Scroll to the top of quiz
+    const topElement =
+      document.querySelector('.cio-results-title') ||
+      document.querySelector('.cio-question-progress-affixed-container') ||
+      document.querySelector('.cio-question-title');
+
+    if (topElement) {
+      topElement.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' });
+    }
+  }, [state.quiz.currentQuestion]);
+
   const contextValue: QuizContextValue = {
     cioClient,
     state,
