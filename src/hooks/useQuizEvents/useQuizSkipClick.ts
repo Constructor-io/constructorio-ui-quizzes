@@ -5,13 +5,13 @@ import { QuizLocalReducerState } from '../../components/CioQuiz/quizLocalReducer
 import { QuizEventsReturn, OnQuizSkipQuestion } from '../../types';
 import { isFunction } from '../../utils';
 
-const useQuizNextClick = (
+const useQuizSkipClick = (
   quizApiState: QuizAPIReducerState,
   quizLocalState: QuizLocalReducerState,
   dispatchLocalState: React.Dispatch<ActionAnswerQuestion>,
   onQuizSkipQuestion?: OnQuizSkipQuestion
 ): QuizEventsReturn.NextQuestion => {
-  const quizNexClickHandler = useCallback(() => {
+  const quizSkipClickHandler = useCallback(() => {
     const currentQuestion = quizApiState.quizCurrentQuestion?.next_question;
     const currentQuestionId = currentQuestion?.id;
 
@@ -19,13 +19,13 @@ const useQuizNextClick = (
       if (!(currentQuestion?.type === 'cover')) {
         dispatchLocalState({
           type: QuestionTypes.Skip,
-          payload: quizApiState.quizCurrentQuestion,
+          payload: quizApiState.quizCurrentQuestion
         });
       }
 
       const currentAnswerInput = {
         ...quizLocalState.answerInputs[currentQuestionId],
-        value: currentQuestion?.type === 'open' ? 'false' : null,
+        value: currentQuestion?.type === 'open' ? 'false' : null
       };
 
       if (currentQuestion && isFunction(onQuizSkipQuestion)) {
@@ -36,10 +36,10 @@ const useQuizNextClick = (
     dispatchLocalState,
     onQuizSkipQuestion,
     quizApiState.quizCurrentQuestion,
-    quizLocalState.answerInputs,
+    quizLocalState.answerInputs
   ]);
 
-  return quizNexClickHandler;
+  return quizSkipClickHandler;
 };
 
-export default useQuizNextClick;
+export default useQuizSkipClick;
