@@ -105,11 +105,7 @@ export default function quizLocalReducer(
           newAnswers.push(['seen']);
           break;
         case QuestionTypes.SingleSelect:
-          newAnswers.push([]);
-          break;
         case QuestionTypes.MultipleSelect:
-          newAnswers.push([]);
-          break;
         default:
           newAnswers.push([]);
       }
