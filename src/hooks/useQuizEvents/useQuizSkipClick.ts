@@ -19,13 +19,13 @@ const useQuizSkipClick = (
       if (!(currentQuestion?.type === 'cover')) {
         dispatchLocalState({
           type: QuestionTypes.Skip,
-          payload: quizApiState.quizCurrentQuestion
+          payload: quizApiState.quizCurrentQuestion,
         });
       }
 
       const currentAnswerInput = {
         ...quizLocalState.answerInputs[currentQuestionId],
-        value: currentQuestion?.type === 'open' ? 'false' : null
+        value: currentQuestion?.type === 'open' ? 'false' : null,
       };
 
       if (currentQuestion && isFunction(onQuizSkipQuestion)) {
@@ -36,7 +36,7 @@ const useQuizSkipClick = (
     dispatchLocalState,
     onQuizSkipQuestion,
     quizApiState.quizCurrentQuestion,
-    quizLocalState.answerInputs
+    quizLocalState.answerInputs,
   ]);
 
   return quizSkipClickHandler;
