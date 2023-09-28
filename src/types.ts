@@ -205,8 +205,8 @@ export interface AddToCartButtonProps {
 
 export interface QuizImageProps {
   className?: string;
-  src?: Nullable<string>;
-  alt?: Nullable<string>;
+  src?: string;
+  alt?: string;
 }
 
 export interface QuizResultPropsLink {

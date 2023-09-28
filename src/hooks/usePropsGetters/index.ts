@@ -137,8 +137,8 @@ const usePropsGetters = (
 
   const getQuizImageProps: GetQuizImageProps = useCallback(
     () => ({
-      src: quizApiState.quizCurrentQuestion?.next_question?.images?.primary_url,
-      alt: quizApiState.quizCurrentQuestion?.next_question?.images?.primary_alt,
+      src: quizApiState.quizCurrentQuestion?.next_question?.images?.primary_url || undefined,
+      alt: quizApiState.quizCurrentQuestion?.next_question?.images?.primary_alt || undefined,
     }),
     [quizApiState.quizCurrentQuestion]
   );
@@ -146,8 +146,8 @@ const usePropsGetters = (
   const getSelectQuestionImageProps: GetSelectQuestionImageProps = useCallback(
     (option) => ({
       className: 'cio-question-option-image',
-      src: option?.images?.primary_url,
-      alt: option?.images?.primary_alt,
+      src: option?.images?.primary_url || undefined,
+      alt: option?.images?.primary_alt || undefined,
     }),
     []
   );

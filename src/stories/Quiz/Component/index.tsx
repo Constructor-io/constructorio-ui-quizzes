@@ -14,10 +14,12 @@ export function ComponentTemplate(args: IQuizProps) {
         favoriteItems: favorites,
         onAddToCartClick: () => {},
         onAddToFavoritesClick: (result) => {
-          if (!favorites.includes(result.data.id)) {
-            setFavorites([...favorites, result.data.id]);
-          } else {
-            setFavorites(favorites.filter((id) => id !== result.data.id));
+          if (result.data) {
+            if (!favorites.includes(result.data.id)) {
+              setFavorites([...favorites, result.data.id]);
+            } else {
+              setFavorites(favorites.filter((id) => id !== result.data?.id));
+            }
           }
         },
       }}

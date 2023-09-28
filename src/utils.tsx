@@ -57,7 +57,15 @@ ${templateCode}
 export const functionStrings = {
   onAddToCartClick: `(item) => console.dir(item)`,
   onQuizResultClick: `(result, position) => console.dir(result, position)`,
-  onAddToFavoritesClick: `(item) => console.dir(item)`,
+  onAddToFavoritesClick: `(result) => {
+      if (result.data) {
+        if (!favorites.includes(result.data.id)) {
+          setFavorites([...favorites, result.data.id]);
+        } else {
+          setFavorites(favorites.filter((id) => id !== result.data?.id));
+        }
+      }
+    }`,
   onQuizResultsLoaded: `(results) => console.dir(results)`,
   onQuizNextQuestion: `(question) => console.dir(question)`,
   cioJsClient: `cioJsClient`,

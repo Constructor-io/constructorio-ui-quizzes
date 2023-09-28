@@ -13,6 +13,7 @@ import {
   apiKey,
   quizId,
   callbacksDescription,
+  favoritesDescription,
 } from '../../../constants';
 import { IQuizProps, QuestionWithAnswer } from '../../../types';
 
@@ -82,10 +83,12 @@ function RenderInASmallContainerTemplate(args: IQuizProps) {
             favoriteItems: favorites,
             onAddToCartClick: () => {},
             onAddToFavoritesClick: (result) => {
-              if (!favorites.includes(result.data.id)) {
-                setFavorites([...favorites, result.data.id]);
-              } else {
-                setFavorites(favorites.filter((id) => id !== result.data.id));
+              if (result.data) {
+                if (!favorites.includes(result.data.id)) {
+                  setFavorites([...favorites, result.data.id]);
+                } else {
+                  setFavorites(favorites.filter((id) => id !== result.data?.id));
+                }
               }
             },
           }}
@@ -150,4 +153,17 @@ addComponentStoryDescription(
   PassCallbacks,
   `const args = ${stringifyWithDefaults(PassCallbacks.args)}`,
   callbacksDescription
+);
+
+export const HandleFavoritesOnResultsPage = ComponentTemplate.bind({});
+HandleFavoritesOnResultsPage.args = {
+  apiKey,
+  quizId,
+  resultsPageOptions,
+  callbacks,
+};
+addComponentStoryDescription(
+  HandleFavoritesOnResultsPage,
+  `const args = ${stringifyWithDefaults(HandleFavoritesOnResultsPage.args)}`,
+  favoritesDescription
 );
