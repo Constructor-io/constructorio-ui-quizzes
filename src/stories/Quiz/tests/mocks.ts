@@ -207,7 +207,7 @@ export const useMockContextValue = (question?: Question): QuizContextValue => {
     }),
     getSkipQuestionButtonProps: () => ({
       ...mockElementProps,
-      className: 'cio-question-cta-button',
+      className: 'cio-question-skip-button',
     }),
     getPreviousQuestionButtonProps: () => ({
       ...mockElementProps,

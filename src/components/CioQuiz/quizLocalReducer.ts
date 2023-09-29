@@ -96,7 +96,7 @@ export default function quizLocalReducer(
       const { answers, answerInputs } = state;
       const newAnswers = [...answers];
       const lastAnswerInputIndex = answers.length;
-      const currentAnswerInput = Object.values(state.answerInputs)?.[lastAnswerInputIndex];
+      const currentAnswerInput = Object.values(state.answerInputs)[lastAnswerInputIndex];
       switch (currentAnswerInput.type) {
         case QuestionTypes.OpenText:
           newAnswers.push(['false']);
