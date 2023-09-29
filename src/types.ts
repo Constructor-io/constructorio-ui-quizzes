@@ -2,7 +2,6 @@ import {
   QuizResultData,
   NextQuestionResponse,
   QuizResultsResponse,
-  Nullable,
   QuestionOption,
   Question,
 } from '@constructor-io/constructorio-client-javascript/lib/types';

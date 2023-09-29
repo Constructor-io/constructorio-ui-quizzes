@@ -95,9 +95,9 @@ In the example below, the \`primaryColor\` prop has been used to override this c
 export const callbacksDescription = `Pass an \`apiKey\`, a \`quizId\`, and \`callbacks\``;
 
 export const favoritesDescription = `
-Add \`const [favorites, setFavorites] = useState<string[]>([]);\` to your component.
+Add \`const [favorites, setFavorites] = useState([]);\` or equivalent to manage the favorite items' state.
 
-Pass an favorites as an array to \`favoriteItems\` in \`resultsPageOptions\` as a prop to CioQuiz.
+Pass favorites as an array to \`favoriteItems\` in \`resultsPageOptions\` as a prop to CioQuiz.
 
 Pass a callback function to \`onAddToFavoritesClick\` in \`resultsPageOptions\` as a prop to CioQuiz to handle favorites state changes to update \`favorites\` array.    
 `;
