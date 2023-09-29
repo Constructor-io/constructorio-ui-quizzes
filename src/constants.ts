@@ -25,6 +25,7 @@ export const componentDescription = `- import \`CioQuiz\` to render in your JSX.
   - \`numResultsToDisplay\` is an optional parameter that determines how many results should be displayed on results page
 - \`callbacks\` lets you pass callback functions that will be called on certain actions
   - \`onQuizNextQuestion\` is an optional callback function that will be called when user moves to the next question
+  - \`onQuizSkipQuestion\` is an optional callback function that will be called when user skips a question
 - \`sessionStateOptions\` lets you configure the session modal behavior
   - \`showSessionModal\` is a boolean used to decide whether to show the session modal. The default behavior is to show the session modal
   - \`showSessionModalOnResults\` is a boolean to decide whether to show the session modal after reaching the results page. The default behavior is to not show the session modal
@@ -58,6 +59,7 @@ const {
   getCoverQuestionProps: () => ({...})), // prop getter for jsx quiz cover question,
   getHydrateQuizButtonProps: () => ({...})), // prop getter for jsx hydrate quiz button,
   getNextQuestionButtonProps: () => ({...})), // prop getter for jsx next button to traverse the quiz,
+  getSkipQuestionButtonProps: () => ({...})), // prop getter for jsx skip button to traverse the quiz,
   getPreviousQuestionButtonProps: () => ({...})), // prop getter for jsx back button to traverse the quiz, 
   getOpenTextInputProps: () => ({...})), // prop getter for jsx open text input,
   getSelectInputProps: () => ({...})), // prop getter for jsx select input for select type questions,

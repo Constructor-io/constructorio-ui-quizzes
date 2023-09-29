@@ -60,6 +60,7 @@ export const functionStrings = {
   onAddToFavoritesClick: `(item) => console.dir(item)`,
   onQuizResultsLoaded: `(results) => console.dir(results)`,
   onQuizNextQuestion: `(question) => console.dir(question)`,
+  onQuizSkipQuestion: `(question) => console.dir(question)`,
   cioJsClient: `cioJsClient`,
 };
 

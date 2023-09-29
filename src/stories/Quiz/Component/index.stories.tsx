@@ -55,6 +55,9 @@ const callbacks = {
   onQuizNextQuestion: (question: QuestionWithAnswer) => {
     console.dir(question);
   },
+  onQuizSkipQuestion: (question: QuestionWithAnswer) => {
+    console.dir(question);
+  },
 };
 
 export const BasicUsage = ComponentTemplate.bind({});
