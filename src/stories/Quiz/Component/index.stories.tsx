@@ -1,5 +1,5 @@
 /* eslint-disable no-console, react/jsx-props-no-spreading */
-import React from 'react';
+import React, { useState } from 'react';
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
 import type { Meta } from '@storybook/react';
 import CioQuiz from '../../../components/CioQuiz';
@@ -12,6 +12,7 @@ import {
   apiKey,
   quizId,
   callbacksDescription,
+  favoritesDescription,
 } from '../../../constants';
 import {
   callbacks,
@@ -44,10 +45,29 @@ BasicUsage.args = {
 };
 
 function RenderInASmallContainerTemplate(args: IQuizProps) {
+  const [favorites, setFavorites] = useState<string[]>([]);
+
   return (
     <div className='small-container-example-wrapper'>
       <div className='small-container-example'>
-        <CioQuiz {...args} />
+        <CioQuiz
+          {...args}
+          resultsPageOptions={{
+            favoriteItems: favorites,
+          }}
+          callbacks={{
+            onAddToCartClick: () => {},
+            onAddToFavoritesClick: (result) => {
+              if (result.data) {
+                if (!favorites.includes(result.data.id)) {
+                  setFavorites([...favorites, result.data.id]);
+                } else {
+                  setFavorites(favorites.filter((id) => id !== result.data?.id));
+                }
+              }
+            },
+          }}
+        />
       </div>
     </div>
   );
@@ -110,4 +130,17 @@ addComponentStoryDescription(
   PassCallbacks,
   `const args = ${stringifyWithDefaults(PassCallbacks.args)}`,
   callbacksDescription
+);
+
+export const HandleFavoritesOnResultsPage = ComponentTemplate.bind({});
+HandleFavoritesOnResultsPage.args = {
+  apiKey,
+  quizId,
+  resultsPageOptions,
+  callbacks,
+};
+addComponentStoryDescription(
+  HandleFavoritesOnResultsPage,
+  `const args = ${stringifyWithDefaults(HandleFavoritesOnResultsPage.args)}`,
+  favoritesDescription
 );

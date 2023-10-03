@@ -1,11 +1,32 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
+import React, { useState } from 'react';
 import CioQuiz from '../../../components/CioQuiz';
 import { IQuizProps } from '../../../types';
 import { getStoryParams } from '../../../utils';
 
 export function ComponentTemplate(args: IQuizProps) {
-  return <CioQuiz {...args} />;
+  const [favorites, setFavorites] = useState<string[]>([]);
+
+  return (
+    <CioQuiz
+      {...args}
+      resultsPageOptions={{
+        favoriteItems: favorites,
+      }}
+      callbacks={{
+        onAddToCartClick: () => {},
+        onAddToFavoritesClick: (result) => {
+          if (result.data) {
+            if (!favorites.includes(result.data.id)) {
+              setFavorites([...favorites, result.data.id]);
+            } else {
+              setFavorites(favorites.filter((id) => id !== result.data?.id));
+            }
+          }
+        },
+      }}
+    />
+  );
 }
 
 const componentTemplateCode = `

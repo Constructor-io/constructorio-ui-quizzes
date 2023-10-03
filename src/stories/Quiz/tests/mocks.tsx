@@ -239,6 +239,7 @@ export const useMockContextValue = (question?: Question): QuizContextValue => {
 
 export const resultsPageOptions: ResultsPageOptions = {
   numResultsToDisplay: 10,
+  favoriteItems: ['119010868', '119011085'],
 };
 
 export const resultCardOptions: ResultCardOptions = {
