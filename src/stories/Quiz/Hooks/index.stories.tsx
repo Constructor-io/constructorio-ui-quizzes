@@ -3,7 +3,7 @@ import MyQuiz, { addHookStoryCode } from './index';
 import '../../../styles.css';
 import { basicDescription, apiKey, quizId, hookDescription } from '../../../constants';
 import { stringifyWithDefaults } from '../../../utils';
-import { argTypes } from '../argTypes';
+import { argTypes, docsControls, storiesControls } from '../argTypes';
 
 export default {
   title: 'Quiz/Hooks',
@@ -15,7 +15,9 @@ export default {
       description: {
         component: hookDescription,
       },
+      controls: docsControls,
     },
+    controls: storiesControls,
   },
 };
 

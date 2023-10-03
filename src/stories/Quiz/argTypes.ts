@@ -12,7 +12,7 @@ export const argTypes = {
   apiKey: {
     description: 'Your Constructor API key. Either `apiKey` or `cioJsClient` are required',
   },
-  onQuizNextQuestion: {
+  'callbacks.onQuizNextQuestion': {
     description: 'Callback function to be called when the next question is loaded',
     control: false,
     table: {
@@ -26,7 +26,7 @@ export const argTypes = {
       },
     },
   },
-  onQuizResultsLoaded: {
+  'callbacks.onQuizResultsLoaded': {
     description: 'Callback function to be called when the quiz results are loaded',
     control: false,
     table: {
@@ -40,7 +40,7 @@ export const argTypes = {
       },
     },
   },
-  onQuizResultClick: {
+  'callbacks.onQuizResultClick': {
     description: 'Callback function to be called when a quiz result is clicked',
     control: false,
     table: {
@@ -54,7 +54,7 @@ export const argTypes = {
       },
     },
   },
-  onAddToCartClick: {
+  'callbacks.onAddToCartClick': {
     description: 'Callback function to be called when the add to cart button is clicked',
     control: false,
     table: {
@@ -68,7 +68,7 @@ export const argTypes = {
       },
     },
   },
-  onAddToFavoritesClick: {
+  'callbacks.onAddToFavoritesClick': {
     description: 'Callback function to be called when the add to favorites button is clicked',
     control: false,
     table: {
@@ -92,7 +92,7 @@ export const argTypes = {
       type: 'text',
     },
   },
-  resultCardRegularPriceKey: {
+  'resultCardOptions.resultCardRegularPriceKey': {
     description: 'Key name for the regular price in the API response',
     control: {
       type: 'text',
@@ -107,7 +107,7 @@ export const argTypes = {
       },
     },
   },
-  resultCardSalePriceKey: {
+  'resultCardOptions.resultCardSalePriceKey': {
     description: 'Key name for the sale price in the API response',
     control: {
       type: 'text',
@@ -122,7 +122,7 @@ export const argTypes = {
       },
     },
   },
-  resultCardRatingCountKey: {
+  'resultCardOptions.resultCardRatingCountKey': {
     description: 'Key name for the rating count in the API response',
     control: {
       type: 'text',
@@ -137,7 +137,7 @@ export const argTypes = {
       },
     },
   },
-  resultCardRatingScoreKey: {
+  'resultCardOptions.resultCardRatingScoreKey': {
     description: 'Key name for the rating score in the API response',
     control: {
       type: 'text',
@@ -152,7 +152,7 @@ export const argTypes = {
       },
     },
   },
-  renderResultCardPriceDetails: {
+  'resultCardOptions.renderResultCardPriceDetails': {
     description: 'Callback function to render result card price details',
     control: false,
     table: {
@@ -166,7 +166,7 @@ export const argTypes = {
       },
     },
   },
-  numResultsToDisplay: {
+  'resultsPageOptions.numResultsToDisplay': {
     description: 'Number of results to display on the results page',
     control: {
       type: 'number',
@@ -181,7 +181,17 @@ export const argTypes = {
       },
     },
   },
-  showSessionModal: {
+  'resultsPageOptions.favoriteItems': {
+    description: 'Array of favorite item IDs',
+    control: false,
+    table: {
+      subcategory: 'resultsPageOptions',
+      type: {
+        summary: 'string[]',
+      },
+    },
+  },
+  'sessionStateOptions.showSessionModal': {
     description:
       'Boolean for whether or not to show session modal to hydrate quiz on the results page',
     control: {
@@ -197,7 +207,7 @@ export const argTypes = {
       },
     },
   },
-  showSessionModalOnResults: {
+  'sessionStateOptions.showSessionModalOnResults': {
     description: 'Boolean for whether or not to show session modal to hydrate quiz',
     control: {
       type: 'boolean',
@@ -212,7 +222,7 @@ export const argTypes = {
       },
     },
   },
-  sessionStateKey: {
+  'sessionStateOptions.sessionStateKey': {
     description: 'Key name where session storage state is saved',
     control: {
       type: 'text',
@@ -230,4 +240,12 @@ export const argTypes = {
   enableHydration: {
     description: 'Boolean for whether or not to hydrate quiz questions and results on page reload',
   },
+};
+
+export const docsControls = {
+  exclude: ['sessionStateOptions', 'callbacks', 'resultsPageOptions', 'resultCardOptions'],
+};
+
+export const storiesControls = {
+  include: ['apiKey', 'quizId', 'quizVersionId', 'primaryColor'],
 };

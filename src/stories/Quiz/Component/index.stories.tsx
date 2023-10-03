@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
 import type { Meta } from '@storybook/react';
 import CioQuiz from '../../../components/CioQuiz';
-import { argTypes } from '../argTypes';
+import { argTypes, docsControls, storiesControls } from '../argTypes';
 import { stringifyWithDefaults } from '../../../utils';
 import { ComponentTemplate, addComponentStoryDescription } from '.';
 import {
@@ -27,6 +27,12 @@ const meta: Meta<typeof CioQuiz> = {
   title: 'Quiz/Full Quiz',
   component: CioQuiz,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      controls: docsControls,
+    },
+    controls: storiesControls,
+  },
   argTypes,
 };
 
