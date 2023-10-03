@@ -613,11 +613,21 @@
   margin-bottom: 1rem;
 }
 
-.cio-quiz .cio-result-card-favorites-button.favorited svg {
-  fill: red;
+.cio-quiz .cio-result-card-favorites-button svg {
+  fill: none;
 }
 
-.cio-quiz .cio-result-card-favorites-button svg:hover {
+.cio-quiz .cio-result-card-favorites-button:hover svg {
+  fill: rgb(255, 51, 51);
+  stroke: rgb(255, 51, 51);
+}
+
+.cio-quiz .cio-result-card-favorites-button.favorited svg {
+  fill: rgb(255, 51, 51);
+  stroke: transparent;
+}
+
+.cio-quiz .cio-result-card-favorites-button svg {
   stroke: black;
   stroke-width: 1px;
 }
