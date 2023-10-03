@@ -215,6 +215,14 @@
   background-color: rgba(255, 255, 255, 0.87);
   align-items: center;
 }
+.cio-quiz .cio-question-buttons-group {
+  width: 20rem;
+  height: var(--bottom-bar-height);
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
 .cio-quiz .cio-question-cta-button {
   background: var(--primary-color);
   color: #ffffff;
@@ -250,7 +258,27 @@
   cursor: auto;
   outline: none;
 }
-
+.cio-quiz .cio-question-skip-button {
+  background: transparent;
+  color: var(--gray-dust-500);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+  font-size: 1rem;
+  width: 100%;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: text-decoration-color 0.2s ease-in-out;
+}
+.cio-quiz .cio-question-skip-button:hover,
+.cio-quiz .cio-question-skip-button:focus {
+  text-decoration-color: var(--gray-dust-200);
+}
+.cio-quiz .cio-question-skip-button.hide {
+  visibility: hidden;
+  pointer-events: none;
+}
 /* Back Button Component */
 .cio-quiz .cio-question-back-button {
   color: var(--primary-color);
@@ -638,6 +666,12 @@
 }
 
 /* Container Queries */
+
+@container quiz (max-width: 640px) {
+  .cio-quiz .cio-question-skip-button span {
+    display: none;
+  }
+}
 
 /* Small Tablet */
 @container quiz (min-width: 640px) {
