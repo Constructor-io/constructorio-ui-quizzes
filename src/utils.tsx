@@ -65,7 +65,7 @@ export const functionStrings = {
 
 export const stringifyWithDefaults = (obj: {
   cioJsClient?: any;
-  resultsPageOptions: {
+  callbacks: {
     onAddToCartClick: any;
     onQuizResultClick: any;
     onQuizResultsLoaded: any;

@@ -50,8 +50,7 @@ CioQuiz({
   quizId: 'coffee-quiz',
   apiKey: 'key_wJSdZSiesX5hiVLt',
   includeCSS: true, // Include the default CSS styles. Defaults to true.
-  resultsPageOptions: {
-    onAddToCartClick: (item) => console.dir(item),
+  resultCardOptions: {
     resultCardRegularPriceKey: 'price',
   },
   // ... additional arguments
