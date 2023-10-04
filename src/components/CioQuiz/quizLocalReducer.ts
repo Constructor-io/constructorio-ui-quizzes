@@ -78,9 +78,9 @@ export default function quizLocalReducer(
         case QuestionTypes.SingleSelect:
         case QuestionTypes.MultipleSelect:
           newAnswers.push(
-            (typeof currentAnswerInput.value === 'string'
+            typeof currentAnswerInput.value === 'string'
               ? [currentAnswerInput.value]
-              : currentAnswerInput.value.map((answer) => answer.id)) as string[]
+              : currentAnswerInput.value.map((answer) => answer.id)
           );
           break;
         default:

@@ -96,7 +96,7 @@ export interface QuizReturnState {
 
 export type AnswerInput = {
   type: InputQuestionsTypes;
-  value: string | Partial<QuestionOption>[];
+  value: string | Omit<QuestionOption, 'attribute' | 'images'>[];
 };
 
 export type AnswerInputState = {
