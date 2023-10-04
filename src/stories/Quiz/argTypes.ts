@@ -243,6 +243,7 @@ export const argTypes = {
 };
 
 export const docsControls = {
+  sort: 'requiredFirst',
   exclude: ['sessionStateOptions', 'callbacks', 'resultsPageOptions', 'resultCardOptions'],
 };
 

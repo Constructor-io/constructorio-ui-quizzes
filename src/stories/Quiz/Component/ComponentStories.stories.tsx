@@ -24,13 +24,9 @@ import {
 import { IQuizProps } from '../../../types';
 
 const meta: Meta<typeof CioQuiz> = {
-  title: 'Quiz/Full Quiz',
+  title: 'Quiz/Component',
   component: CioQuiz,
-  tags: ['autodocs'],
   parameters: {
-    docs: {
-      controls: docsControls,
-    },
     controls: storiesControls,
   },
   argTypes,
@@ -79,6 +75,7 @@ function RenderInASmallContainerTemplate(args: IQuizProps) {
   );
 }
 export const RenderInASmallContainer = RenderInASmallContainerTemplate.bind({});
+
 RenderInASmallContainer.args = { apiKey, quizId, callbacks, resultCardOptions };
 addComponentStoryDescription(
   RenderInASmallContainer,
@@ -108,6 +105,7 @@ const cioClientStoryResultsPageOptions = {
 };
 
 export const ProvideCIOClientInstance = ComponentTemplate.bind({});
+
 ProvideCIOClientInstance.args = {
   quizId,
   resultsPageOptions: cioClientStoryResultsPageOptions,
