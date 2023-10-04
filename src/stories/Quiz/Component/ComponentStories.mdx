@@ -1,8 +1,5 @@
 import { Meta, Controls, ArgTypes, Title, Story, Canvas, Description, Markdown } from '@storybook/blocks';
-// import * as HooksStories from './HooksStories.stories';
-// import { BasicUsage } from '../Component/index.stories';
 import { e2eInteractionTest } from '../tests/index.stories';
-// import{ RenderInASmallContainer } from '../tests/index.stories';
 import * as ComponentStories from './ComponentStories.stories';
 
 <Meta of={ComponentStories} />
@@ -20,11 +17,11 @@ function YourComponent() {
   );
 }
 ``` 
+
 ##### Usage Code Examples
 - [Basic Usage](#basic-usage)
 - [Provide CIO Client Instance](#provide-cio-client-instance)
 - [Handle Favorites On Results Page](#handle-favorites-on-results-page)
-
 
 <h2>Quiz Props</h2>
 <ArgTypes of={e2eInteractionTest} />
@@ -34,7 +31,6 @@ function YourComponent() {
 </Canvas>
 <h2>Quiz Controls</h2>
 <Controls />
-
 
 ### Basic Usage
 Minimal quiz implementation
