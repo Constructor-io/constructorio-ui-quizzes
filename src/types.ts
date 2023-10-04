@@ -127,7 +127,9 @@ export type CurrentQuestion = NextQuestionResponse & {
 };
 
 export namespace QuizEventsReturn {
-  export type QuizAnswerChanged = (payload?: string | Partial<QuestionOption>[]) => void;
+  export type QuizAnswerChanged = (
+    payload?: string | Omit<QuestionOption, 'attribute' | 'images'>[]
+  ) => void;
   export type NextQuestion = () => void;
   export type SkipQuestion = () => void;
   export type PreviousQuestion = () => void;

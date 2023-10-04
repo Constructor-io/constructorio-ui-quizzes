@@ -41,7 +41,7 @@ const useQuizAnswerChangeHandler = (
                 | QuestionTypes.MultipleSelect,
               payload: {
                 questionId: currentQuestion.next_question.id,
-                input: payload as Partial<QuestionOption>[],
+                input: payload as Omit<QuestionOption, 'attribute' | 'images'>[],
                 isLastQuestion: currentQuestion.is_last_question,
               },
             });

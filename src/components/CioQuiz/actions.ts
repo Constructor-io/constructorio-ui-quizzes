@@ -27,7 +27,7 @@ export interface QuestionAnswer<Value> {
   isLastQuestion?: boolean;
 }
 
-export type SelectQuestionPayload = QuestionAnswer<Partial<QuestionOption>[]>;
+export type SelectQuestionPayload = QuestionAnswer<Omit<QuestionOption, 'attribute' | 'images'>[]>;
 export type OpenTextQuestionPayload = QuestionAnswer<string>;
 export type CoverQuestionPayload = QuestionAnswer<string>;
 
