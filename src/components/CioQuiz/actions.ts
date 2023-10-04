@@ -14,6 +14,7 @@ export enum QuestionTypes {
   SingleSelect = 'single',
   MultipleSelect = 'multiple',
   Next = 'next',
+  Skip = 'skip',
   Back = 'back',
   Reset = 'reset',
   Hydrate = 'hydrate',
@@ -44,6 +45,7 @@ export type ActionAnswerInputQuestion =
 export type ActionAnswerQuestion =
   | ActionAnswerInputQuestion
   | Action<QuestionTypes.Next, CurrentQuestion>
+  | Action<QuestionTypes.Skip, CurrentQuestion>
   | Action<QuestionTypes.Back, CurrentQuestion>
   | Action<QuestionTypes.Reset>
   | Action<QuestionTypes.Complete>

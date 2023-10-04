@@ -1,5 +1,5 @@
 /* eslint-disable no-console, react/jsx-props-no-spreading */
-import React from 'react';
+import React, { useState } from 'react';
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
 import CioQuiz from '../../../components/CioQuiz';
 import { argTypes } from '../argTypes';
@@ -13,6 +13,7 @@ import {
   apiKey,
   quizId,
   callbacksDescription,
+  favoritesDescription,
 } from '../../../constants';
 import { IQuizProps, QuestionWithAnswer } from '../../../types';
 
@@ -49,10 +50,14 @@ const resultsPageOptions = {
   },
   resultCardRegularPriceKey: 'price',
   resultCardSalePriceKey: 'salePrice',
+  favoriteItems: ['119010868', '119011085'],
 };
 
 const callbacks = {
   onQuizNextQuestion: (question: QuestionWithAnswer) => {
+    console.dir(question);
+  },
+  onQuizSkipQuestion: (question: QuestionWithAnswer) => {
     console.dir(question);
   },
 };
@@ -70,10 +75,27 @@ addComponentStoryDescription(
 );
 
 function RenderInASmallContainerTemplate(args: IQuizProps) {
+  const [favorites, setFavorites] = useState<string[]>([]);
+
   return (
     <div className='small-container-example-wrapper'>
       <div className='small-container-example'>
-        <CioQuiz {...args} />
+        <CioQuiz
+          {...args}
+          resultsPageOptions={{
+            favoriteItems: favorites,
+            onAddToCartClick: () => {},
+            onAddToFavoritesClick: (result) => {
+              if (result.data) {
+                if (!favorites.includes(result.data.id)) {
+                  setFavorites([...favorites, result.data.id]);
+                } else {
+                  setFavorites(favorites.filter((id) => id !== result.data?.id));
+                }
+              }
+            },
+          }}
+        />
       </div>
     </div>
   );
@@ -134,4 +156,17 @@ addComponentStoryDescription(
   PassCallbacks,
   `const args = ${stringifyWithDefaults(PassCallbacks.args)}`,
   callbacksDescription
+);
+
+export const HandleFavoritesOnResultsPage = ComponentTemplate.bind({});
+HandleFavoritesOnResultsPage.args = {
+  apiKey,
+  quizId,
+  resultsPageOptions,
+  callbacks,
+};
+addComponentStoryDescription(
+  HandleFavoritesOnResultsPage,
+  `const args = ${stringifyWithDefaults(HandleFavoritesOnResultsPage.args)}`,
+  favoritesDescription
 );

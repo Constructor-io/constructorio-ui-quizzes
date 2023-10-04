@@ -13,6 +13,7 @@ export default function HooksTemplate(args) {
     getOpenTextInputProps,
     getNextQuestionButtonProps,
     getPreviousQuestionButtonProps,
+    getSkipQuestionButtonProps,
     getQuizImageProps,
     getSelectQuestionImageProps,
     getSelectInputProps,
@@ -118,6 +119,7 @@ export default function HooksTemplate(args) {
                 <div className='cio-question-buttons-container'>
                   <button {...getPreviousQuestionButtonProps()}>Back</button>
                   <div className='cio-button-container'>
+                    <button {...getSkipQuestionButtonProps()}>Skip</button>
                     <button {...getNextQuestionButtonProps()}>Continue</button>
                   </div>
                 </div>
@@ -143,6 +145,7 @@ export default function HooksTemplate(args) {
                 <div className='cio-question-buttons-container'>
                   <button {...getPreviousQuestionButtonProps()}>Back</button>
                   <div className='cio-button-container'>
+                    <button {...getSkipQuestionButtonProps()}>Skip</button>
                     <button {...getNextQuestionButtonProps()}>Continue</button>
                   </div>
                 </div>
@@ -173,6 +176,7 @@ export default function HooksTemplate(args) {
               <div className='cio-question-buttons-container'>
                 <button {...getPreviousQuestionButtonProps()}>Back</button>
                 <div className='cio-button-container'>
+                  <button {...getSkipQuestionButtonProps()}>Skip</button>
                   <button {...getNextQuestionButtonProps()}>Continue</button>
                 </div>
               </div>
@@ -191,6 +195,7 @@ function HooksTemplate(quizConfiguration) {
     state,
     getOpenTextInputProps,
     getNextQuestionButtonProps,
+    getSkipQuestionButtonProps,
     getPreviousQuestionButtonProps,
     getQuizImageProps,
     getSelectQuestionImageProps,
@@ -297,6 +302,7 @@ function HooksTemplate(quizConfiguration) {
                 <div className='cio-question-buttons-container'>
                   <button {...getPreviousQuestionButtonProps()}>Back</button>
                   <div className='cio-button-container'>
+                    <button {...getSkipQuestionButtonProps()}>Skip</button>
                     <button {...getNextQuestionButtonProps()}>Continue</button>
                   </div>
                 </div>
@@ -322,6 +328,7 @@ function HooksTemplate(quizConfiguration) {
                 <div className='cio-question-buttons-container'>
                   <button {...getPreviousQuestionButtonProps()}>Back</button>
                   <div className='cio-button-container'>
+                    <button {...getSkipQuestionButtonProps()}>Skip</button>
                     <button {...getNextQuestionButtonProps()}>Continue</button>
                   </div>
                 </div>
@@ -352,6 +359,7 @@ function HooksTemplate(quizConfiguration) {
               <div className='cio-question-buttons-container'>
                 <button {...getPreviousQuestionButtonProps()}>Back</button>
                 <div className='cio-button-container'>
+                  <button {...getSkipQuestionButtonProps()}>Skip</button>
                   <button {...getNextQuestionButtonProps()}>Continue</button>
                 </div>
               </div>

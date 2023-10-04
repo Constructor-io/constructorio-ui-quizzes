@@ -15,6 +15,7 @@ import {
   GetQuizResultLinkProps,
   GetSelectQuestionImageProps,
   GetAddToFavoritesButtonProps,
+  GetSkipQuestionButtonProps,
 } from '../../types';
 import { QuizAPIReducerState } from '../../components/CioQuiz/quizApiReducer';
 import { QuizLocalReducerState } from '../../components/CioQuiz/quizLocalReducer';
@@ -24,15 +25,18 @@ import useOpenTextInputProps from './useOpenTextInputProps';
 import useNextQuestionButtonProps from './useNextQuestionButtonProps';
 import usePreviousQuestionButtonProps from './usePreviousQuestionButtonProps';
 import useAddToFavoritesButtonProps from './useAddToFavoritesButtonProps';
+import useSkipQuestionButtonProps from './useSkipQuestionButtonProps';
 
 const usePropsGetters = (
   quizEvents: QuizEventsReturn,
   quizApiState: QuizAPIReducerState,
-  quizLocalState: QuizLocalReducerState
+  quizLocalState: QuizLocalReducerState,
+  favoriteItems?: string[]
 ) => {
   const {
     quizAnswerChanged,
     nextQuestion,
+    skipQuestion,
     previousQuestion,
     resetQuiz,
     hydrateQuiz,
@@ -66,6 +70,11 @@ const usePropsGetters = (
     quizLocalState
   );
 
+  const getSkipQuestionButtonProps: GetSkipQuestionButtonProps = useSkipQuestionButtonProps(
+    skipQuestion,
+    quizApiState
+  );
+
   const getPreviousQuestionButtonProps: GetPreviousQuestionButtonProps =
     usePreviousQuestionButtonProps(quizApiState, previousQuestion);
 
@@ -96,8 +105,10 @@ const usePropsGetters = (
     [addToCart]
   );
 
-  const getAddToFavoritesButtonProps: GetAddToFavoritesButtonProps =
-    useAddToFavoritesButtonProps(addToFavorites);
+  const getAddToFavoritesButtonProps: GetAddToFavoritesButtonProps = useAddToFavoritesButtonProps(
+    addToFavorites,
+    favoriteItems
+  );
 
   const quizResultClickDown = useCallback(
     (event: KeyboardEvent<HTMLElement>, result: Partial<QuizResultData>, position: number) => {
@@ -134,8 +145,8 @@ const usePropsGetters = (
 
   const getQuizImageProps: GetQuizImageProps = useCallback(
     () => ({
-      src: quizApiState.quizCurrentQuestion?.next_question?.images?.primary_url,
-      alt: quizApiState.quizCurrentQuestion?.next_question?.images?.primary_alt,
+      src: quizApiState.quizCurrentQuestion?.next_question?.images?.primary_url || undefined,
+      alt: quizApiState.quizCurrentQuestion?.next_question?.images?.primary_alt || undefined,
     }),
     [quizApiState.quizCurrentQuestion]
   );
@@ -143,8 +154,8 @@ const usePropsGetters = (
   const getSelectQuestionImageProps: GetSelectQuestionImageProps = useCallback(
     (option) => ({
       className: 'cio-question-option-image',
-      src: option?.images?.primary_url,
-      alt: option?.images?.primary_alt,
+      src: option?.images?.primary_url || undefined,
+      alt: option?.images?.primary_alt || undefined,
     }),
     []
   );
@@ -163,6 +174,7 @@ const usePropsGetters = (
     getAddToFavoritesButtonProps,
     getQuizResultButtonProps,
     getQuizResultLinkProps,
+    getSkipQuestionButtonProps,
   };
 };
 
