@@ -7,14 +7,14 @@ import {
   QuizResultsResponse,
   QuizResultDataPartial,
 } from '../types';
-import { version as packageVersion } from '../../package.json';
+import packageJSON from '../../package.json';
 
 export const getCioClient = (apiKey?: string) => {
   if (apiKey) {
     return new ConstructorIOClient({
       apiKey,
       sendTrackingEvents: true,
-      version: `cio-ui-quizzes-${packageVersion}`,
+      version: `cio-ui-quizzes-${packageJSON.version}`,
     });
   }
 
