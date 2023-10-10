@@ -19,7 +19,6 @@ const useQuizAnswerChangeHandler = (
               payload: {
                 questionId: currentQuestion.next_question.id,
                 input: '',
-                isLastQuestion: currentQuestion.next_question === null,
               },
             });
             break;
@@ -29,7 +28,6 @@ const useQuizAnswerChangeHandler = (
               payload: {
                 questionId: currentQuestion!.next_question.id,
                 input: payload as string,
-                isLastQuestion: currentQuestion.next_question === null,
               },
             });
             break;
@@ -42,7 +40,6 @@ const useQuizAnswerChangeHandler = (
               payload: {
                 questionId: currentQuestion.next_question.id,
                 input: payload as string[],
-                isLastQuestion: currentQuestion.next_question === null,
               },
             });
             break;

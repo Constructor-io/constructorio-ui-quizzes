@@ -83,7 +83,6 @@ export interface IQuizProps {
 export interface QuizReturnState {
   answers: {
     inputs: AnswerInputState; // Key is the question Id and value is the answer input
-    isLastAnswer: boolean;
   };
   quiz: {
     requestState: RequestStates;

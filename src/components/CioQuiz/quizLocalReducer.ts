@@ -6,7 +6,6 @@ export type QuizLocalReducerState = {
   answers: Answers;
   answerInputs: AnswerInputState;
   prevAnswerInputs: AnswerInputState;
-  isLastAnswer: boolean;
   isQuizCompleted: boolean;
   quizVersionId?: string;
   quizSessionId?: string;
@@ -16,7 +15,6 @@ export const initialState: QuizLocalReducerState = {
   answers: [],
   answerInputs: {},
   prevAnswerInputs: {},
-  isLastAnswer: false,
   isQuizCompleted: false,
 };
 
@@ -39,28 +37,24 @@ export default function quizLocalReducer(
       return {
         ...state,
         answerInputs: answerInputReducer(state.answerInputs, action),
-        isLastAnswer: !!action.payload?.isLastQuestion,
         isQuizCompleted: false,
       };
     case QuestionTypes.Cover:
       return {
         ...state,
         answerInputs: answerInputReducer(state.answerInputs, action),
-        isLastAnswer: !!action.payload?.isLastQuestion,
         isQuizCompleted: false,
       };
     case QuestionTypes.SingleSelect:
       return {
         ...state,
         answerInputs: answerInputReducer(state.answerInputs, action),
-        isLastAnswer: !!action.payload?.isLastQuestion,
         isQuizCompleted: false,
       };
     case QuestionTypes.MultipleSelect:
       return {
         ...state,
         answerInputs: answerInputReducer(state.answerInputs, action),
-        isLastAnswer: !!action.payload?.isLastQuestion,
         isQuizCompleted: false,
       };
     case QuestionTypes.Next: {
@@ -124,7 +118,6 @@ export default function quizLocalReducer(
         ...state,
         answerInputs: prevAnswerInputs,
         answers: [...state.answers.slice(0, -1)],
-        isLastAnswer: false,
         isQuizCompleted: false,
       };
     }
