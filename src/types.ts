@@ -98,7 +98,7 @@ export interface QuizReturnState {
 
 export type AnswerInput = {
   type: InputQuestionsTypes;
-  value: string | string[] | null;
+  value: string | Omit<QuestionOption, 'attribute' | 'images'>[] | null;
 };
 
 export type AnswerInputState = {
@@ -127,7 +127,9 @@ export type CurrentQuestion = NextQuestionResponse & {
 };
 
 export namespace QuizEventsReturn {
-  export type QuizAnswerChanged = (payload?: string | string[]) => void;
+  export type QuizAnswerChanged = (
+    payload?: string | Omit<QuestionOption, 'attribute' | 'images'>[]
+  ) => void;
   export type NextQuestion = () => void;
   export type SkipQuestion = () => void;
   export type PreviousQuestion = () => void;

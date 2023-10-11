@@ -1,14 +1,14 @@
 import { useCallback } from 'react';
 import { ActionAnswerQuestion, QuestionTypes } from '../../components/CioQuiz/actions';
 import { QuizAPIReducerState } from '../../components/CioQuiz/quizApiReducer';
-import { QuizEventsReturn } from '../../types';
+import { QuestionOption, QuizEventsReturn } from '../../types';
 
 const useQuizAnswerChangeHandler = (
   quizApiState: QuizAPIReducerState,
   dispatchLocalState: React.Dispatch<ActionAnswerQuestion>
 ): QuizEventsReturn.QuizAnswerChanged => {
-  const quizAnswerChangedHandler = useCallback(
-    (payload?: string | string[]) => {
+  const quizAnswerChangedHandler: QuizEventsReturn.QuizAnswerChanged = useCallback(
+    (payload) => {
       const questionType = quizApiState.quizCurrentQuestion?.next_question?.type;
       const currentQuestion = quizApiState.quizCurrentQuestion;
       if (currentQuestion?.next_question) {
@@ -41,7 +41,7 @@ const useQuizAnswerChangeHandler = (
                 | QuestionTypes.MultipleSelect,
               payload: {
                 questionId: currentQuestion.next_question.id,
-                input: payload as string[],
+                input: payload as Omit<QuestionOption, 'attribute' | 'images'>[],
                 isLastQuestion: currentQuestion.is_last_question,
               },
             });
