@@ -5,7 +5,7 @@ import React from 'react';
 import RedoSVG from '../../../components/RedoButton/RedoSVG';
 import { useCioQuiz } from '../../../index';
 import '../../../styles.css';
-import { getStoryParams } from '../../../utils';
+import { convertPrimaryColorsToString, getStoryParams } from '../../../utils';
 
 export default function HooksTemplate(args) {
   const {
@@ -20,6 +20,7 @@ export default function HooksTemplate(args) {
     getResetQuizButtonProps,
     getQuizResultButtonProps,
     getAddToCartButtonProps,
+    primaryColorStyles,
   } = useCioQuiz(args);
 
   if (state.quiz.requestState === 'SUCCESS') {
@@ -106,6 +107,7 @@ export default function HooksTemplate(args) {
       if (currentQuestion.isOpenQuestion) {
         return (
           <div className='cio-quiz'>
+            <style>.cio-quiz {convertPrimaryColorsToString(primaryColorStyles)}</style>
             <div className='cio-container--with-image cio-open-text-question-container--with-image'>
               {currentQuestionData.images?.primary_url && (
                 <span className='cio-question-image-container'>

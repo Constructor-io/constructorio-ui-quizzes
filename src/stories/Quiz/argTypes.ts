@@ -91,6 +91,9 @@ export const argTypes = {
     control: {
       type: 'text',
     },
+    defaultValue: {
+      summary: '35, 71, 199',
+    },
   },
   'resultCardOptions.resultCardRegularPriceKey': {
     description: 'Key name for the regular price in the API response',
@@ -239,6 +242,9 @@ export const argTypes = {
   },
   enableHydration: {
     description: 'Boolean for whether or not to hydrate quiz questions and results on page reload',
+    defaultValue: {
+      summary: 'true',
+    },
   },
 };
 

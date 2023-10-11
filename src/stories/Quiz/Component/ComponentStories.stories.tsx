@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
 import type { Meta } from '@storybook/react';
 import CioQuiz from '../../../components/CioQuiz';
-import { argTypes, docsControls, storiesControls } from '../argTypes';
+import { argTypes, storiesControls } from '../argTypes';
 import { stringifyWithDefaults } from '../../../utils';
 import { ComponentTemplate, addComponentStoryDescription } from '.';
 import {
