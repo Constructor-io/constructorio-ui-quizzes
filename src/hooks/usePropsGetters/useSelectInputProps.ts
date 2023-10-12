@@ -55,7 +55,7 @@ export default function useSelectInputProps(
       const prevSelected: Selected = {};
       if (Array.isArray(currentAnswer?.value)) {
         currentAnswer?.value?.forEach((answer) => {
-          prevSelected[Number(answer)] = true;
+          prevSelected[Number(answer.id)] = true;
           setSelected(prevSelected);
         });
       }
@@ -72,10 +72,19 @@ export default function useSelectInputProps(
   // Update global state
   useEffect(() => {
     if (currentQuestionData?.type === 'multiple' || currentQuestionData?.type === 'single') {
-      const selectedAnswers = Object.keys(selected).filter((key) => selected[Number(key)]);
+      const selectedAnswers = currentQuestionData?.options
+        ?.filter((opt) => selected[Number(opt.id)])
+        ?.map((opt) => ({ id: opt.id, value: opt.value }));
+
       quizAnswerChanged(selectedAnswers);
     }
-  }, [selected, currentQuestionData?.id, currentQuestionData?.type, quizAnswerChanged]);
+  }, [
+    selected,
+    currentQuestionData?.id,
+    currentQuestionData?.type,
+    currentQuestionData?.options,
+    quizAnswerChanged,
+  ]);
 
   // Go to next question only every time answerInputs (answers input state) changes...
   // and it's a singleSelectQuestion and user has just clicked on an option
