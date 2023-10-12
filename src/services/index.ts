@@ -81,6 +81,7 @@ export const trackQuizResultClick = (
       quizSessionId: quiz_session_id,
       itemId: result.data?.id,
       itemName: result?.value,
+      variationId: result.data?.variation_id,
       section,
       resultCount: total_num_results,
       resultPage: page,
