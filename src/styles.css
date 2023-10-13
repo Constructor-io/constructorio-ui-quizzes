@@ -677,12 +677,6 @@
 
 /* Container Queries */
 
-@container quiz (max-width: 640px) {
-  .cio-quiz .cio-question-skip-button span {
-    display: none;
-  }
-}
-
 /* Small Tablet */
 @container quiz (min-width: 640px) {
   .cio-quiz .cio-container {
