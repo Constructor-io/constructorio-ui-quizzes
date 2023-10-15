@@ -52,8 +52,11 @@ CioQuiz({
   includeCSS: true, // Include the default CSS styles. Defaults to true.
   resultsPageOptions: {
     onAddToCartClick: (item) => console.dir(item),
-    resultCardRegularPriceKey: 'price',
+    resultCardRegularPriceKey: 'price'
   },
+  questionsPageOptions: {
+    skipQuestionButtonText: 'Skip'
+  }
   // ... additional arguments
 });
 ```
@@ -84,7 +87,7 @@ import '@constructor-io/constructorio-ui-quizzes/styles.css';
 
 **Older Javascript environments**
 
-The library provides two different builds. CommonJS (cjs) and ECMAScript Modules (mjs) 
+The library provides two different builds. CommonJS (cjs) and ECMAScript Modules (mjs)
 
 For ECMAScript Modules (mjs) build. The Javascript version is ESNext which might not be supported by your environment.
 If that's the case and your environment is using an older Javascript version like ES6 (ES2015), you might get this error.

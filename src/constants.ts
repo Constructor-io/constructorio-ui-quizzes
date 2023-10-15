@@ -30,6 +30,8 @@ export const componentDescription = `- import \`CioQuiz\` to render in your JSX.
   - \`showSessionModal\` is a boolean used to decide whether to show the session modal. The default behavior is to show the session modal
   - \`showSessionModalOnResults\` is a boolean to decide whether to show the session modal after reaching the results page. The default behavior is to not show the session modal
   - \`sessionStateKey\` is a custom string that will be used as a session storage key
+- \`questionsPageOptions\` lets you configure the question page
+  - \`skipQuestionButtonText\` is an optional string that will be used as the skip button text
 - Use different props to configure the behavior of this component.
 - The following stories show how different props affect the component's behavior
 
