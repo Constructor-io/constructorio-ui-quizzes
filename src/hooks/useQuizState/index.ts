@@ -6,6 +6,7 @@ import { IQuizProps, QuizSessionStorageState } from '../../types';
 import useQuizApiState from './useQuizApiState';
 import useQuizLocalState from './useQuizLocalState';
 import useSessionStorageState from './useSessionStorageState';
+import useUrlState from './useUrlState';
 
 type UseQuizState = (
   quizOptions: IQuizProps,
@@ -23,6 +24,9 @@ const useQuizState: UseQuizState = (quizOptions, cioClient) => {
 
   // Quiz Local state
   const { quizLocalState, dispatchLocalState } = useQuizLocalState();
+  const urlState = useUrlState();
+
+  // TODO: Can we utilize the window location for detecting states here
 
   // Quiz Session Storage state
   const { skipToResults, quizSessionStorageStateKey, hasSessionStorageState } =

@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import RedoButton from '../RedoButton/RedoButton';
+import ShareButton from '../ShareButton/ShareButton';
 import QuizContext from '../CioQuiz/context';
 import ResultFilters from '../ResultFilters/ResultFilters';
 import ZeroResults from '../ZeroResults/ZeroResults';
@@ -31,7 +32,10 @@ export default function ResultContainer(props: IResultContainerProps) {
         <h1 className='cio-results-title'>{resultsTitle}</h1>
         <div className='cio-results-filter-and-redo-container'>
           <ResultFilters hasNoResults={zeroResults} />
-          <RedoButton />
+          <div className='cio-results-redo-and-share-container'>
+            <RedoButton />
+            <ShareButton />
+          </div>
         </div>
         {!zeroResults && (
           <>
