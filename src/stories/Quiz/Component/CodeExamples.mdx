@@ -1,36 +1,14 @@
-import { Meta, Controls, ArgTypes, Title, Story, Canvas, Description, Markdown } from '@storybook/blocks';
-import { e2eInteractionTest } from '../tests/index.stories';
 import * as ComponentStories from './ComponentStories.stories';
+import { Meta, Controls, ArgTypes, Title, Story, Canvas, Description, Markdown } from '@storybook/blocks';
 
 <Meta of={ComponentStories} />
 
-<Title>Cio Quiz Component</Title>
-This component `<CioQuiz />` handles state management, data fetching, and rendering logic
-```jsx
-import CioQuiz from '@constructor-io/constructorio-ui-quizzes';
+<Title>Quiz Component Usage Examples</Title>
 
-function YourComponent() {
-  return (
-    <div>
-      <CioQuiz quizId='coffee-quiz' apiKey='key_wJSdZSiesX5hiVLt' />
-    </div>
-  );
-}
-``` 
-
-##### Usage Code Examples
 - [Basic Usage](#basic-usage)
 - [Provide CIO Client Instance](#provide-cio-client-instance)
 - [Handle Favorites On Results Page](#handle-favorites-on-results-page)
 
-<h2>Quiz Props</h2>
-<ArgTypes of={e2eInteractionTest} />
-
-<Canvas>
-  <Story of={ComponentStories.BasicUsage} />
-</Canvas>
-<h2>Controls</h2>
-<Controls />
 
 ### Basic Usage
 Minimal quiz implementation
