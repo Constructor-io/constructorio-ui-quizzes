@@ -1,0 +1,104 @@
+import * as ComponentStories from './ComponentStories.stories';
+import { Meta, Controls, ArgTypes, Title, Story, Canvas, Description, Markdown } from '@storybook/blocks';
+
+<Meta of={ComponentStories} />
+
+<Title>Quiz Component Usage Examples</Title>
+
+- [Basic Usage](#basic-usage)
+- [Provide CIO Client Instance](#provide-cio-client-instance)
+- [Handle Favorites On Results Page](#handle-favorites-on-results-page)
+
+
+### Basic Usage
+Minimal quiz implementation
+
+```jsx
+import CioQuiz from '@constructor-io/constructorio-ui-quizzes';
+import '@constructor-io/constructorio-ui-quizzes/styles.css';
+
+export function YourComponent() {
+  const quizArgs = {
+    quizId: 'coffee-quiz',
+    apiKey: 'key_wJSdZSiesX5hiVLt',
+    resultCardOptions: {
+      resultCardRegularPriceKey: 'price',
+    },
+  };
+
+  return (
+    <CioQuiz
+      {...args}
+    />
+  );
+}
+```
+
+### Provide CIO Client Instance
+If you are already using an instance of the `ConstructorIOClient`, you can pass a `cioJsClient` instead of an `apiKey` to request results from Constructor's servers
+
+> Note: `cioJsClient` refers to an instance of the [constructorio-client-javascript](https://www.npmjs.com/package/@constructor-io/constructorio-client-javascript)`;
+
+```jsx
+import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
+import CioQuiz from '@constructor-io/constructorio-ui-quizzes';
+import '@constructor-io/constructorio-ui-quizzes/styles.css';
+
+const cioJsClient = new ConstructorIOClient({ apiKey: 'key_wJSdZSiesX5hiVLt' });
+
+export function YourComponent() {
+  const quizArgs = {
+    quizId: 'coffee-quiz',
+    cioJsClient,
+    resultCardOptions: {
+      resultCardRegularPriceKey: 'price',
+    },
+  };
+
+  return (
+    <CioQuiz
+      {...args}
+    />
+  );
+}
+```
+
+### Handle Favorites On Results Page
+On quiz results page. You can add/remove results as favorites. This is an example on how to handle favorites states
+
+```jsx
+import CioQuiz from '@constructor-io/constructorio-ui-quizzes';
+import '@constructor-io/constructorio-ui-quizzes/styles.css';
+
+export function YourComponent() {
+  const quizArgs = {
+    quizId: 'coffee-quiz',
+    apiKey: 'key_wJSdZSiesX5hiVLt',
+    resultCardOptions: {
+      resultCardRegularPriceKey: 'price',
+    },
+    callbacks: {
+      onAddToFavoritesClick: 
+    }
+  };
+
+  const [favorites, setFavorites] = useState<string[]>([]);
+
+  const handleFavoritesClick = (result) => {
+    if (result.data) {
+      if (!favorites.includes(result.data.id)) {
+        setFavorites([...favorites, result.data.id]);
+      } else {
+        setFavorites(favorites.filter((id) => id !== result.data?.id));
+      }
+    }
+  }
+
+  return (
+    <CioQuiz
+      {...args}
+      onAddToFavoritesClick={handleFavoritesClick}
+    />
+  );
+}
+```
