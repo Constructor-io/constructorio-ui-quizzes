@@ -24,7 +24,6 @@ export enum QuestionTypes {
 export interface QuestionAnswer<Value> {
   questionId: number;
   input: Value;
-  isLastQuestion?: boolean;
 }
 
 export type SelectQuestionPayload = QuestionAnswer<Omit<QuestionOption, 'attribute' | 'images'>[]>;
