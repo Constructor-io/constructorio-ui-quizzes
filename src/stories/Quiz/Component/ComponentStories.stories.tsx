@@ -4,16 +4,8 @@ import ConstructorIOClient from '@constructor-io/constructorio-client-javascript
 import type { Meta } from '@storybook/react';
 import CioQuiz from '../../../components/CioQuiz';
 import { argTypes, storiesControls } from '../argTypes';
-import { stringifyWithDefaults } from '../../../utils';
-import { ComponentTemplate, addComponentStoryDescription } from '.';
-import {
-  cioJsClientDescription,
-  smallContainerDescription,
-  apiKey,
-  quizId,
-  callbacksDescription,
-  favoritesDescription,
-} from '../../../constants';
+import { ComponentTemplate } from '.';
+import { apiKey, quizId } from '../../../constants';
 import {
   callbacks,
   resultsPageOptions,
@@ -77,14 +69,6 @@ function RenderInASmallContainerTemplate(args: IQuizProps) {
 export const RenderInASmallContainer = RenderInASmallContainerTemplate.bind({});
 
 RenderInASmallContainer.args = { apiKey, quizId, callbacks, resultCardOptions };
-addComponentStoryDescription(
-  RenderInASmallContainer,
-  `
-import '@constructor-io/constructorio-ui-quizzes/styles.css';
-
-const args = ${stringifyWithDefaults(BasicUsage.args)}`,
-  smallContainerDescription
-);
 
 const cioJsClient = new ConstructorIOClient({ apiKey });
 
@@ -112,15 +96,6 @@ ProvideCIOClientInstance.args = {
   cioJsClient,
   resultCardOptions,
 };
-addComponentStoryDescription(
-  ProvideCIOClientInstance,
-  `
-import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
-
-const cioJsClient = new ConstructorIOClient({ apiKey: '${apiKey}' });
-const args = ${stringifyWithDefaults(ProvideCIOClientInstance.args)};`,
-  cioJsClientDescription
-);
 
 export const PassCallbacks = ComponentTemplate.bind({});
 PassCallbacks.args = {
@@ -130,11 +105,6 @@ PassCallbacks.args = {
   resultCardOptions,
   callbacks,
 };
-addComponentStoryDescription(
-  PassCallbacks,
-  `const args = ${stringifyWithDefaults(PassCallbacks.args)}`,
-  callbacksDescription
-);
 
 export const HandleFavoritesOnResultsPage = ComponentTemplate.bind({});
 HandleFavoritesOnResultsPage.args = {
@@ -143,8 +113,3 @@ HandleFavoritesOnResultsPage.args = {
   resultsPageOptions,
   callbacks,
 };
-addComponentStoryDescription(
-  HandleFavoritesOnResultsPage,
-  `const args = ${stringifyWithDefaults(HandleFavoritesOnResultsPage.args)}`,
-  favoritesDescription
-);
