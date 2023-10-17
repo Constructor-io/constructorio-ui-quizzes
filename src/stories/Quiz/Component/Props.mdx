@@ -5,13 +5,11 @@ import * as ComponentStories from './ComponentStories.stories';
 <Meta of={ComponentStories} />
 
 <Title>Quiz Component Props</Title>
-The props below are available to customize the quiz component. The `quizId` and `apiKey` or `cioJsClient` are required props.
+<p>The props below are available to customize the quiz component. The `quizId` and `apiKey` or `cioJsClient` are required props.</p>
 
 <ArgTypes of={e2eInteractionTest} />
 
-<Canvas>
-  <Story of={ComponentStories.BasicUsage} />
-  
-</Canvas>
+<Canvas of={ComponentStories.BasicUsage} />
+
 <h2>Controls</h2>
 <Controls />
