@@ -44,7 +44,6 @@ const useQuiz: UseQuiz = (quizOptions) => {
     state: {
       answers: {
         inputs: quizLocalState.answerInputs,
-        isLastAnswer: quizLocalState.isLastAnswer,
       },
       quiz: {
         requestState: quizApiState.quizRequestState,

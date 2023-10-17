@@ -84,7 +84,6 @@ export const getMockState = (question?: Question): QuizReturnState => ({
         value: '',
       },
     }, // Key is the question Id and value is the answer input
-    isLastAnswer: false,
   },
   quiz: {
     requestState: RequestStates.Success,
