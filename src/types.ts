@@ -49,6 +49,10 @@ export interface ResultsPageOptions extends ResultCardProps {
   onAddToFavoritesClick?: QuizResultsEventsProps.OnAddToFavoritesClick;
 }
 
+export interface QuestionsPageOptions {
+  skipQuestionButtonText?: string;
+}
+
 export interface SessionStateOptions {
   showSessionModal?: boolean;
   showSessionModalOnResults?: boolean;
@@ -77,6 +81,7 @@ export interface IQuizProps {
   primaryColor?: string;
   enableHydration?: boolean;
   callbacks?: Callbacks;
+  questionsPageOptions?: QuestionsPageOptions;
 }
 
 // QUIZ RETURN VALUES

@@ -267,6 +267,9 @@
   outline: none;
   font-size: 1rem;
   width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   text-decoration: underline;
   text-decoration-color: transparent;
   transition: text-decoration-color 0.2s ease-in-out;
@@ -676,12 +679,6 @@
 }
 
 /* Container Queries */
-
-@container quiz (max-width: 640px) {
-  .cio-quiz .cio-question-skip-button span {
-    display: none;
-  }
-}
 
 /* Small Tablet */
 @container quiz (min-width: 640px) {
