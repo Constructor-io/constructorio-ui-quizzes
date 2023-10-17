@@ -1,4 +1,4 @@
-import { AnswerInputState } from '../../types';
+import { AnswerInputState, QuestionOption } from '../../types';
 import { ActionAnswerQuestion, QuestionTypes, ActionAnswerInputQuestion } from './actions';
 
 export type Answers = string[][];
@@ -76,10 +76,12 @@ export default function quizLocalReducer(
           newAnswers.push(['seen']);
           break;
         case QuestionTypes.SingleSelect:
-          newAnswers.push(currentAnswerInput.value as string[]);
-          break;
         case QuestionTypes.MultipleSelect:
-          newAnswers.push(currentAnswerInput.value as string[]);
+          newAnswers.push(
+            (currentAnswerInput.value as Omit<QuestionOption, 'attribute' | 'images'>[]).map(
+              (answer) => answer.id
+            )
+          );
           break;
         default:
           newAnswers.push([]);

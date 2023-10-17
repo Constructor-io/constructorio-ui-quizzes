@@ -33,7 +33,7 @@ export default function CioQuiz(props: IQuizProps) {
   } = useQuiz(props);
 
   const [showSessionPrompt, setShowSessionPrompt] = useState(false);
-  const { resultCardOptions, sessionStateOptions, callbacks } = props;
+  const { callbacks, sessionStateOptions, questionsPageOptions, resultCardOptions } = props;
   const {
     quizSessionStorageState: { hasSessionStorageState, skipToResults },
   } = state;
@@ -104,7 +104,10 @@ export default function CioQuiz(props: IQuizProps) {
               <>
                 <ProgressBar />
                 <QuizQuestions />
-                <ControlBar ctaButtonText={questionData?.cta_text || undefined} />
+                <ControlBar
+                  skipQuestionButtonText={questionsPageOptions?.skipQuestionButtonText}
+                  ctaButtonText={questionData?.cta_text || undefined}
+                />
               </>
             )
           )}

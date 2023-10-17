@@ -1,6 +1,6 @@
 {
   "name": "@constructor-io/constructorio-ui-quizzes",
-  "version": "1.9.1",
+  "version": "1.9.6",
   "description": "Constructor.io Quizzes UI library for web applications",
   "author": "constructor.io",
   "license": "MIT",
@@ -53,12 +53,13 @@
     "build-storybook": "storybook build -o 'docs'",
     "serve-built-storybook": "npx http-server docs",
     "verify-node-version": "chmod +x ./scripts/verify-node-version.sh && ./scripts/verify-node-version.sh",
-    "version": "npm run verify-node-version && npm run build-storybook && git add -u ./docs && git add ./docs/* && npm run compile",
-    "compile": "rm -rf lib && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json && npm run copy-styles && vite build",
+    "preversion": "node ./src/generateVersion.js",
+    "version": "npm run preversion && npm run verify-node-version && npm run build-storybook && git add -u ./docs && git add ./docs/* && git add ./src/version.ts && npm run compile",
+    "compile": "node ./src/generateVersion.js && rm -rf lib && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json && npm run copy-styles && vite build",
     "check-license": "license-checker --production --onlyAllow 'Apache-2.0;BSD-3-Clause;MIT;0BSD;BSD-2-Clause' --excludePackages 'picocolors@1.0.0'"
   },
   "peerDependencies": {
-    "@constructor-io/constructorio-client-javascript": "^2.35.17",
+    "@constructor-io/constructorio-client-javascript": "^2.36.4",
     "react": ">=16.12.0",
     "react-dom": ">=16.12.0",
     "tslib": "^2.4.0"
