@@ -10,10 +10,7 @@ function ShareButton(props: Props) {
   if (getShareResultsButtonProps) {
     return (
       // eslint-disable-next-line react/button-has-type
-      <button
-        {...rest}
-        {...getShareResultsButtonProps('secondary')}
-        onClick={() => console.log('test')}>
+      <button {...rest} {...getShareResultsButtonProps()} onClick={() => console.log('test')}>
         <ShareSVG />
         <span>{shareText}</span>
       </button>

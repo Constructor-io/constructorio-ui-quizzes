@@ -89,8 +89,8 @@ const usePropsGetters = (
   );
 
   const getShareResultsButtonProps: GetShareResultsButtonProps = useCallback(
-    (stylesType = 'primary') => ({
-      className: stylesType === 'primary' ? 'cio-question-cta-button' : 'cio-question-redo-button',
+    () => ({
+      className: 'cio-question-share-results-button',
       type: 'button',
     }),
     []

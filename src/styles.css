@@ -675,6 +675,21 @@
   margin-top: 1px;
 }
 
+/* Share results Button Component */
+.cio-quiz .cio-question-share-results-button {
+  background: none;
+  border: none;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.cio-quiz .cio-question-share-results-button:hover {
+  text-decoration: underline;
+}
+.cio-quiz .cio-question-share-results-button span {
+  margin-top: 1px;
+}
+
 /* Container Queries */
 
 @container quiz (max-width: 640px) {
