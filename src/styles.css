@@ -948,3 +948,64 @@
   background: #ffffff;
   line-height: 1.5;
 }
+
+.cio-quiz .cio-share-results-heading {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.cio-quiz .cio-share-results-title {
+  font-weight: 700;
+  font-size: 24px;
+  text-transform: capitalize;
+}
+
+.cio-quiz .cio-modal-close-button {
+  background: none;
+  border: none;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.cio-quiz .cio-share-results-button-group {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.cio-quiz .cio-share-results-share-button {
+  background: #d3e5fb;
+  color: var(--primary-color);
+  border: 2px solid #d3e5fb;
+  border-radius: 4px;
+  height: 3rem;
+  font-size: 1rem;
+  flex-grow: 1;
+  width: 100%;
+  padding: 12px 32px;
+}
+
+.cio-quiz .cio-share-results-share-button:hover {
+  background: var(--primary-color-variant-500);
+  border: 2px solid var(--primary-color-variant-600);
+  color: white;
+}
+.cio-quiz .cio-share-results-share-button:active {
+  background: var(--primary-color-variant-700);
+  border: 2px solid var(--primary-color-variant-800);
+  color: white;
+}
+.cio-quiz .cio-share-results-share-button:focus {
+  outline: 3px solid var(--primary-color-variant-100);
+}
+
+.cio-quiz .cio-share-results-input {
+  font-size: 1rem;
+  padding: 12px 20px;
+  border-radius: 4px;
+  border: 1px solid var(--gray-dust-100);
+  color: var(--gray-dust-100);
+  min-width: 364px;
+}
