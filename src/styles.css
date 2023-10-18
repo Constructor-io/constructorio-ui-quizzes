@@ -1014,6 +1014,14 @@
   gap: 12px;
 }
 
+.cio-quiz .cio-share-results-input {
+  font-size: 1rem;
+  padding: 12px 20px;
+  border-radius: 4px;
+  border: 1px solid var(--gray-dust-100);
+  color: var(--gray-dust-100);
+}
+
 @container (max-width: 640px) {
   .cio-quiz .cio-share-results-button-group {
     display: flex;
@@ -1022,11 +1030,6 @@
   }
 
   .cio-quiz .cio-share-results-input {
-    font-size: 1rem;
-    padding: 12px 20px;
-    border-radius: 4px;
-    border: 1px solid var(--gray-dust-100);
-    color: var(--gray-dust-100);
     width: 100%;
   }
 }
@@ -1039,11 +1042,6 @@
   }
 
   .cio-quiz .cio-share-results-input {
-    font-size: 1rem;
-    padding: 12px 20px;
-    border-radius: 4px;
-    border: 1px solid var(--gray-dust-100);
-    color: var(--gray-dust-100);
     min-width: 364px;
   }
 }
