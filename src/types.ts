@@ -77,6 +77,7 @@ export interface IQuizProps {
   primaryColor?: string;
   enableHydration?: boolean;
   callbacks?: Callbacks;
+  quizBasePath?: string;
 }
 
 // QUIZ RETURN VALUES
@@ -201,6 +202,13 @@ export interface ResetQuizButtonProps {
   style?: Record<string, string>;
 }
 
+export interface ShareResultsButtonProps {
+  className: string;
+  type: 'submit' | 'button' | undefined;
+  onClick?: React.MouseEventHandler<HTMLElement>;
+  style?: Record<string, string>;
+}
+
 export interface HydrateQuizButtonProps {
   className: string;
   type: 'submit' | 'reset' | 'button' | undefined;
@@ -254,6 +262,9 @@ export type GetPreviousQuestionButtonProps = () => PreviousQuestionButtonProps;
 export type GetResetQuizButtonProps = (
   stylesType?: 'primary' | 'secondary'
 ) => ResetQuizButtonProps;
+export type GetShareResultsButtonProps = (
+  stylesType?: 'primary' | 'secondary'
+) => ShareResultsButtonProps;
 export type GetHydrateQuizButtonProps = () => HydrateQuizButtonProps;
 export type GetAddToCartButtonProps = (
   result: QuizResultDataPartial,
@@ -296,6 +307,7 @@ export interface UseQuizReturn {
   getSelectInputProps: GetSelectInputProps;
   getCoverQuestionProps: GetCoverQuestionProps;
   getResetQuizButtonProps: GetResetQuizButtonProps;
+  getShareResultsButtonProps: GetShareResultsButtonProps;
   getHydrateQuizButtonProps: GetHydrateQuizButtonProps;
   getAddToCartButtonProps: GetAddToCartButtonProps;
   getAddToFavoritesButtonProps: GetAddToFavoritesButtonProps;

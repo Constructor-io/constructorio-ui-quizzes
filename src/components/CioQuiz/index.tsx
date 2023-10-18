@@ -30,6 +30,7 @@ export default function CioQuiz(props: IQuizProps) {
     getResetQuizButtonProps,
     getSelectInputProps,
     primaryColorStyles,
+    getShareResultsButtonProps,
   } = useQuiz(props);
 
   const [showSessionPrompt, setShowSessionPrompt] = useState(false);
@@ -65,6 +66,7 @@ export default function CioQuiz(props: IQuizProps) {
     getQuizResultButtonProps,
     getQuizResultLinkProps,
     getResetQuizButtonProps,
+    getShareResultsButtonProps,
     getSelectInputProps,
     customClickItemCallback: !!resultsPageOptions?.onQuizResultClick,
     customAddToFavoritesCallback: !!resultsPageOptions?.onAddToFavoritesClick,

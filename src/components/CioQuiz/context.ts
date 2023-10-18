@@ -16,6 +16,7 @@ import {
   GetSelectInputProps,
   PrimaryColorStyles,
   QuizReturnState,
+  GetShareResultsButtonProps,
 } from '../../types';
 
 export interface QuizContextValue {
@@ -29,6 +30,7 @@ export interface QuizContextValue {
   getSelectInputProps: GetSelectInputProps;
   getCoverQuestionProps: GetCoverQuestionProps;
   getResetQuizButtonProps: GetResetQuizButtonProps;
+  getShareResultsButtonProps: GetShareResultsButtonProps;
   getHydrateQuizButtonProps: GetHydrateQuizButtonProps;
   getAddToCartButtonProps: GetAddToCartButtonProps;
   getAddToFavoritesButtonProps: GetAddToFavoritesButtonProps;
