@@ -7,6 +7,7 @@ import { RequestStates } from '../../constants';
 import Spinner from '../Spinner/Spinner';
 import useQuiz from '../../hooks/useQuiz';
 import SessionPromptModal from '../SessionPromptModal/SessionPromptModal';
+import ShareResultsModal from '../ShareResultsModal/ShareResultsModal';
 import { IQuizProps } from '../../types';
 import { convertPrimaryColorsToString, renderImages } from '../../utils';
 import ProgressBar from '../ProgressBar/ProgressBar';
@@ -34,6 +35,7 @@ export default function CioQuiz(props: IQuizProps) {
   } = useQuiz(props);
 
   const [showSessionPrompt, setShowSessionPrompt] = useState(false);
+  const [showShareModal, setShowShareModal] = useState(false);
   const { resultsPageOptions, sessionStateOptions } = props;
   const {
     quizSessionStorageState: { hasSessionStorageState, skipToResults },
@@ -98,9 +100,17 @@ export default function CioQuiz(props: IQuizProps) {
           showSessionPrompt={showSessionPrompt}
           setShowSessionPrompt={setShowSessionPrompt}
         />
+        <ShareResultsModal
+          url=''
+          showShareModal={showShareModal}
+          setShowShareModal={setShowShareModal}
+        />
         <QuizContext.Provider value={contextValue}>
           {state.quiz.results || skipToResults ? (
-            <ResultContainer options={resultsPageOptions} />
+            <ResultContainer
+              options={resultsPageOptions}
+              setShowShareModal={(show) => setShowShareModal(show)}
+            />
           ) : (
             state.quiz.currentQuestion && (
               <>

@@ -204,7 +204,6 @@ export interface ResetQuizButtonProps {
 
 export interface ShareResultsButtonProps {
   className: string;
-  type: 'submit' | 'button' | undefined;
   onClick?: React.MouseEventHandler<HTMLElement>;
   style?: Record<string, string>;
 }

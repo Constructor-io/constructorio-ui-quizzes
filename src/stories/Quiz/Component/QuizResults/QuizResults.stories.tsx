@@ -9,7 +9,7 @@ import QuizResultsDecorator from './QuizResultsDecorator';
 const meta: Meta<typeof ResultContainer> = {
   title: 'Quiz/Results/QuizResultsPage',
   component: ResultContainer,
-  argTypes: {},
+  argTypes: { setShowShareModal: { action: 'setShowShareModal' } },
 };
 
 export default meta;
@@ -27,9 +27,9 @@ export const QuizResultsPage: Story = {
   args: {
     options: resultsPageOptions,
   },
-  render: () => (
+  render: (args) => (
     <div className='results-example-wrapper'>
-      <ResultContainer options={resultsPageOptions} />
+      <ResultContainer options={resultsPageOptions} setShowShareModal={args.setShowShareModal} />
     </div>
   ), // eslint-disable-line
   decorators: [(story) => QuizResultsDecorator(story, resultsPageOptions)],

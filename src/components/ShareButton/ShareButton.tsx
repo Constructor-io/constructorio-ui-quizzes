@@ -3,14 +3,12 @@ import ShareSVG from './ShareSVG';
 import QuizContext from '../CioQuiz/context';
 
 function ShareButton(props: Props) {
-  const { shareText = 'Share Results', disabled, ...rest } = props;
-  const { getShareResultsButtonProps, state } = useContext(QuizContext);
-  // TODO: Get state here and create a URL out of it
+  const { shareText = 'Share Results', disabled, onClick, ...rest } = props;
+  const { getShareResultsButtonProps } = useContext(QuizContext);
 
   if (getShareResultsButtonProps) {
     return (
-      // eslint-disable-next-line react/button-has-type
-      <button {...rest} {...getShareResultsButtonProps()} onClick={() => console.log('test')}>
+      <button {...rest} {...getShareResultsButtonProps()} type='button' onClick={onClick}>
         <ShareSVG />
         <span>{shareText}</span>
       </button>
@@ -21,6 +19,7 @@ function ShareButton(props: Props) {
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   shareText?: string;
+  onClick: () => void;
 }
 
 export default ShareButton;

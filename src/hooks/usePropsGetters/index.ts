@@ -89,10 +89,7 @@ const usePropsGetters = (
   );
 
   const getShareResultsButtonProps: GetShareResultsButtonProps = useCallback(
-    () => ({
-      className: 'cio-question-share-results-button',
-      type: 'button',
-    }),
+    () => ({ className: 'cio-question-share-results-button' }),
     []
   );
 
