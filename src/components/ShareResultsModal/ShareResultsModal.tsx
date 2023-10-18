@@ -5,9 +5,18 @@ import CheckMarkCircleSVG from './CheckMarkCircleSVG';
 
 import { QuizResultsResponse } from '../../types';
 
-export default function ShareResultsModal({ showShareModal, setShowShareModal, results }: Props) {
+export default function ShareResultsModal({
+  showShareModal,
+  setShowShareModal,
+  results,
+  basePath,
+}: Props) {
   const [isCopied, setIsCopied] = useState(false);
   if (!showShareModal) return null;
+
+  const value = `${basePath}/items=${results.response?.results
+    .map((item) => item.data?.id)
+    .join(',')}`;
 
   const handleClose = () => {
     setIsCopied(false);
@@ -26,17 +35,12 @@ export default function ShareResultsModal({ showShareModal, setShowShareModal, r
           </div>
           <div>Share or save your quiz results with this link.</div>
           <div className='cio-share-results-button-group'>
-            <input
-              className='cio-share-results-input'
-              value='http://www.website.com/quiz/results/121323442'
-              disabled
-            />
+            <input className='cio-share-results-input' value={value} disabled />
             <button
               className='cio-share-results-share-button'
               type='button'
               onClick={() => {
-                console.log(results);
-                navigator.clipboard.writeText('test');
+                navigator.clipboard.writeText(value);
                 setIsCopied(true);
               }}>
               Copy link
@@ -58,4 +62,5 @@ type Props = {
   showShareModal: boolean;
   setShowShareModal: (show: boolean) => void;
   results: QuizResultsResponse;
+  basePath?: string;
 };
