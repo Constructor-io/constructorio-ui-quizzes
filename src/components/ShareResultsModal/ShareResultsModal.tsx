@@ -1,25 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import CloseSVG from './CloseSVG';
+import CheckMarkCircleSVG from './CheckMarkCircleSVG';
 
 import { QuizResultsResponse } from '../../types';
 
 export default function ShareResultsModal({ showShareModal, setShowShareModal, results }: Props) {
+  const [isCopied, setIsCopied] = useState(false);
   if (!showShareModal) return null;
 
+  const handleClose = () => {
+    setIsCopied(false);
+    setShowShareModal(false);
+  };
+
   return (
-    <div
-      className='cio-share-results-modal'
-      role='presentation'
-      onClick={() => setShowShareModal(false)}>
+    <div className='cio-share-results-modal' role='presentation'>
       <div className='cio-share-results-container'>
         <div className='cio-share-results-content' role='presentation'>
           <div className='cio-share-results-heading'>
             <div className='cio-share-results-title'>Share results</div>
-            <button
-              onClick={() => setShowShareModal(false)}
-              type='button'
-              className='cio-modal-close-button'>
+            <button onClick={handleClose} type='button' className='cio-modal-close-button'>
               <CloseSVG />
             </button>
           </div>
@@ -33,10 +34,20 @@ export default function ShareResultsModal({ showShareModal, setShowShareModal, r
             <button
               className='cio-share-results-share-button'
               type='button'
-              onClick={() => console.log(results)}>
+              onClick={() => {
+                console.log(results);
+                navigator.clipboard.writeText('test');
+                setIsCopied(true);
+              }}>
               Copy link
             </button>
           </div>
+          {isCopied && (
+            <div className='cio-share-results-copied-notification'>
+              <CheckMarkCircleSVG />
+              <div>Link copied to clipboard</div>
+            </div>
+          )}
         </div>
       </div>
     </div>

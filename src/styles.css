@@ -1009,3 +1009,16 @@
   color: var(--gray-dust-100);
   min-width: 364px;
 }
+
+.cio-quiz .cio-share-results-copied-notification {
+  width: 100%;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px;
+  font-weight: 500;
+  border: 1px solid var(--gray-dust-100);
+  box-shadow: 0px 4px 10px 0px rgba(93, 124, 232, 0.15);
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
