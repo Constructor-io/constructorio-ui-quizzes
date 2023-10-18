@@ -100,11 +100,14 @@ export default function CioQuiz(props: IQuizProps) {
           showSessionPrompt={showSessionPrompt}
           setShowSessionPrompt={setShowSessionPrompt}
         />
-        <ShareResultsModal
-          url=''
-          showShareModal={showShareModal}
-          setShowShareModal={setShowShareModal}
-        />
+        {state.quiz.results && (
+          <ShareResultsModal
+            showShareModal={showShareModal}
+            setShowShareModal={setShowShareModal}
+            results={state.quiz.results}
+          />
+        )}
+
         <QuizContext.Provider value={contextValue}>
           {state.quiz.results || skipToResults ? (
             <ResultContainer
