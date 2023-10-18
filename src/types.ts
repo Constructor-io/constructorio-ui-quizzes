@@ -25,7 +25,7 @@ export type {
 export type QuizResultDataPartial = Partial<QuizResultData>;
 
 // QUIZ PROPS
-export interface ResultCardProps {
+export interface ResultCardOptions {
   resultCardSalePriceKey?: string;
   resultCardRegularPriceKey?: string;
   resultCardRatingCountKey?: string;
@@ -38,15 +38,13 @@ export namespace QuizResultsEventsProps {
   export type OnQuizResultClick = (result: QuizResultDataPartial, position: number) => void;
   export type OnAddToCartClick = (result: QuizResultDataPartial) => void;
   export type OnAddToFavoritesClick = (result: QuizResultDataPartial) => void;
+  export type OnQuizNextQuestion = (question: QuestionWithAnswer) => void;
+  export type OnQuizSkipQuestion = (question: QuestionWithAnswer) => void;
 }
 
-export interface ResultsPageOptions extends ResultCardProps {
+export interface ResultsPageOptions {
   numResultsToDisplay?: number;
   favoriteItems?: string[];
-  onQuizResultsLoaded?: QuizResultsEventsProps.OnQuizResultsLoaded;
-  onQuizResultClick?: QuizResultsEventsProps.OnQuizResultClick;
-  onAddToCartClick: QuizResultsEventsProps.OnAddToCartClick;
-  onAddToFavoritesClick?: QuizResultsEventsProps.OnAddToFavoritesClick;
 }
 
 export interface QuestionsPageOptions {
@@ -63,12 +61,13 @@ export type QuestionWithAnswer = Question & {
   answer: AnswerInput;
 };
 
-export type OnQuizNextQuestion = (question: QuestionWithAnswer) => void;
-export type OnQuizSkipQuestion = (question: QuestionWithAnswer) => void;
-
 export interface Callbacks {
-  onQuizNextQuestion?: OnQuizNextQuestion;
-  onQuizSkipQuestion?: OnQuizSkipQuestion;
+  onQuizNextQuestion?: QuizResultsEventsProps.OnQuizNextQuestion;
+  onQuizResultsLoaded?: QuizResultsEventsProps.OnQuizResultsLoaded;
+  onQuizResultClick?: QuizResultsEventsProps.OnQuizResultClick;
+  onAddToCartClick: QuizResultsEventsProps.OnAddToCartClick;
+  onAddToFavoritesClick?: QuizResultsEventsProps.OnAddToFavoritesClick;
+  onQuizSkipQuestion?: QuizResultsEventsProps.OnQuizSkipQuestion;
 }
 
 export interface IQuizProps {
@@ -76,7 +75,8 @@ export interface IQuizProps {
   cioJsClient?: ConstructorIOClient;
   quizId: string;
   quizVersionId?: string;
-  resultsPageOptions: ResultsPageOptions;
+  resultsPageOptions?: ResultsPageOptions;
+  resultCardOptions?: ResultCardOptions;
   sessionStateOptions?: SessionStateOptions;
   primaryColor?: string;
   enableHydration?: boolean;

@@ -9,36 +9,7 @@ export const quizSessionStateKey = 'constructorIOQuizState';
 // Storybook Folder Descriptions
 /// //////////////////////////////
 
-export const componentDescription = `- import \`CioQuiz\` to render in your JSX.
-- This component handles state management, data fetching, and rendering logic.
-- To use this component, \`quizId\`, \`resultsPageOptions\`, and one of \`apiKey\` or \`cioJsClient\` are required.
-- \`resultsPageOptions\` lets you configure the results page
-  - \`onAddToCartClick\` is a callback function that will be called when the "Add to cart" button is clicked
-  - \`onAddToFavoritesClick\` is an optional callback function that will be called when the "Add To Favorites" heart icon is clicked
-  - \`onQuizResultClick\` is an optional callback function that will be called when the result card is clicked. The default behavior is redirecting the user to the item's URL
-  - \`onQuizResultsLoaded\` is an optional callback function that will be called when the quiz results are loaded
-  - \`resultCardRegularPriceKey\` is a parameter that specifies the metadata field name for the regular price
-  - \`resultCardSalePriceKey\` is an optional parameter that specifies the metadata field name for the sale price 
-  - \`resultCardRatingCountKey\` is an optional parameter that specifies the metadata field name for the ratings count 
-  - \`resultCardRatingScoreKey\` is an optional parameter that specifies the metadata field name for the ratings score 
-  - \`renderResultCardPriceDetails\` is an optional render function to render custom prices section in result card 
-  - \`numResultsToDisplay\` is an optional parameter that determines how many results should be displayed on results page
-- \`callbacks\` lets you pass callback functions that will be called on certain actions
-  - \`onQuizNextQuestion\` is an optional callback function that will be called when user moves to the next question
-  - \`onQuizSkipQuestion\` is an optional callback function that will be called when user skips a question
-- \`sessionStateOptions\` lets you configure the session modal behavior
-  - \`showSessionModal\` is a boolean used to decide whether to show the session modal. The default behavior is to show the session modal
-  - \`showSessionModalOnResults\` is a boolean to decide whether to show the session modal after reaching the results page. The default behavior is to not show the session modal
-  - \`sessionStateKey\` is a custom string that will be used as a session storage key
-- \`questionsPageOptions\` lets you configure the question page
-  - \`skipQuestionButtonText\` is an optional string that will be used as the skip button text
-- Use different props to configure the behavior of this component.
-- The following stories show how different props affect the component's behavior
-
-> Note: \`cioJsClient\` refers to an instance of the [constructorio-client-javascript](https://www.npmjs.com/package/@constructor-io/constructorio-client-javascript)
-`;
-
-export const hookDescription = `- import \`useCioQuiz\` and call this custom hook in a functional component.
+export const hookDescription = `- Import \`useCioQuiz\` and call this custom hook in a functional component.
 - This hook leaves rendering logic up to you, while handling:
   - state management
   - data fetching
@@ -47,7 +18,7 @@ export const hookDescription = `- import \`useCioQuiz\` and call this custom hoo
   - focus and submit event handling
 - Since the markup is controlled by you, the default styles might not be applied if you have a different DOM structure
 - To use this hook, an \`apiKey\` and \`quizId\` are required, and \`resultsPageOptions\` must be passed to the \`useCioQuiz\` hook to configure behavior. All other values are optional.
-- use the <a href="https://kentcdodds.com/blog/how-to-give-rendering-control-to-users-with-prop-getters" target="__blank">prop getters</a> and other variables returned by this hook (below) to leverage the functionality described above with jsx elements in your react component definitions
+- Use the <a href="https://kentcdodds.com/blog/how-to-give-rendering-control-to-users-with-prop-getters" target="__blank">prop getters</a> and other variables returned by this hook (below) to leverage the functionality described above with jsx elements in your react component definitions
 
 Calling the \`useCioQuiz\` hook returns an object with the following keys:
 
@@ -81,9 +52,6 @@ const {
 /// //////////////////////////////
 
 export const basicDescription = `Pass an \`apiKey\` and a \`quizId\` to request questions and quiz results from Constructor's servers`;
-export const cioJsClientDescription = `If you are already using an instance of the \`ConstructorIOClient\`, you can pass a \`cioJsClient\` instead of an \`apiKey\` to request results from Constructor's servers
-
-> Note: \`cioJsClient\` refers to an instance of the [constructorio-client-javascript](https://www.npmjs.com/package/@constructor-io/constructorio-client-javascript)`;
 export const smallContainerDescription = `If you are using the provided styles, CioQuiz component will respect the height and width of its parent container and use responsive styles based on the parent container's dimensions`;
 export const changePrimaryColorDescription = `
 If you would like to use a different primary color, pass a \`primaryColor\` string in RGB format ('R, G, B').
@@ -95,15 +63,6 @@ By default, the primary color has a value of "35, 71, 199" (Constructor Blue).
 In the example below, the \`primaryColor\` prop has been used to override this color to "255, 82, 48" (Orange).
 
 > Advanced Option: Instead of passing a primaryColor prop, you can also override \`--primary-color-h\`, \`--primary-color-s\`, and \`--primary-color-l\` CSS variables within a \`.cio-quiz\` container element. If explicitly given a value in your CSS, then the values of these variables will be used as the HSL values for your quiz.
-`;
-export const callbacksDescription = `Pass an \`apiKey\`, a \`quizId\`, and \`callbacks\``;
-
-export const favoritesDescription = `
-Add \`const [favorites, setFavorites] = useState([]);\` or equivalent to manage the favorite items' state.
-
-Pass favorites as an array to \`favoriteItems\` in \`resultsPageOptions\` as a prop to CioQuiz.
-
-Pass a callback function to \`onAddToFavoritesClick\` in \`resultsPageOptions\` as a prop to CioQuiz to handle favorites state changes to update \`favorites\` array.    
 `;
 
 export enum RequestStates {

@@ -12,6 +12,8 @@ export function ComponentTemplate(args: IQuizProps) {
       {...args}
       resultsPageOptions={{
         favoriteItems: favorites,
+      }}
+      callbacks={{
         onAddToCartClick: () => {},
         onAddToFavoritesClick: (result) => {
           if (result.data) {

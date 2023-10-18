@@ -33,7 +33,7 @@ export default function CioQuiz(props: IQuizProps) {
   } = useQuiz(props);
 
   const [showSessionPrompt, setShowSessionPrompt] = useState(false);
-  const { resultsPageOptions, sessionStateOptions, questionsPageOptions } = props;
+  const { callbacks, sessionStateOptions, questionsPageOptions, resultCardOptions } = props;
   const {
     quizSessionStorageState: { hasSessionStorageState, skipToResults },
   } = state;
@@ -66,8 +66,8 @@ export default function CioQuiz(props: IQuizProps) {
     getQuizResultLinkProps,
     getResetQuizButtonProps,
     getSelectInputProps,
-    customClickItemCallback: !!resultsPageOptions?.onQuizResultClick,
-    customAddToFavoritesCallback: !!resultsPageOptions?.onAddToFavoritesClick,
+    customClickItemCallback: !!callbacks?.onQuizResultClick,
+    customAddToFavoritesCallback: !!callbacks?.onAddToFavoritesClick,
     primaryColorStyles,
   };
 
@@ -98,7 +98,7 @@ export default function CioQuiz(props: IQuizProps) {
         />
         <QuizContext.Provider value={contextValue}>
           {state.quiz.results || skipToResults ? (
-            <ResultContainer options={resultsPageOptions} />
+            <ResultContainer resultCardOptions={resultCardOptions} />
           ) : (
             state.quiz.currentQuestion && (
               <>

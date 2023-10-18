@@ -9,14 +9,11 @@ import QuizQuestions from '../../../components/QuizQuestions';
 import ControlBar from '../../../components/ControlBar/ControlBar';
 
 import { apiKey, quizId } from '../../../constants';
-import { IQuizProps, ResultsPageOptions } from '../../../types';
+import { IQuizProps } from '../../../types';
 import '../../../styles.css';
+import { resultCardOptions, resultsPageOptions } from '../tests/mocks';
 
 export default function RetrievingAnswersStory() {
-  const resultsPageOptions: ResultsPageOptions = {
-    onAddToCartClick: () => {},
-  };
-
   const quizProps: IQuizProps = {
     apiKey,
     quizId,
@@ -65,7 +62,7 @@ export default function RetrievingAnswersStory() {
               <ControlBar ctaButtonText={currentQuestionData?.cta_text || undefined} />
             </>
           ) : (
-            <ResultContainer options={resultsPageOptions} />
+            <ResultContainer resultCardOptions={resultCardOptions} />
           )}
         </div>
       </QuizContext.Provider>

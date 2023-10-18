@@ -1,0 +1,15 @@
+import { Meta, Description, Controls, ArgTypes, Title, Story, Canvas, Markdown } from '@storybook/blocks';
+import { e2eInteractionTest } from '../tests/index.stories';
+import * as ComponentStories from './ComponentStories.stories';
+
+<Meta of={ComponentStories} />
+
+<Title>Quiz Component Props</Title>
+<p>The props below are available to customize the quiz component. The `quizId` and `apiKey` or `cioJsClient` are required props.</p>
+
+<ArgTypes of={e2eInteractionTest} />
+
+<Canvas of={ComponentStories.BasicUsage} />
+
+<h2>Controls</h2>
+<Controls />

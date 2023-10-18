@@ -2,14 +2,14 @@ import { useCallback } from 'react';
 import { ActionAnswerQuestion, QuestionTypes } from '../../components/CioQuiz/actions';
 import { QuizAPIReducerState } from '../../components/CioQuiz/quizApiReducer';
 import { QuizLocalReducerState } from '../../components/CioQuiz/quizLocalReducer';
-import { QuizEventsReturn, OnQuizSkipQuestion } from '../../types';
+import { QuizEventsReturn, QuizResultsEventsProps } from '../../types';
 import { isFunction } from '../../utils';
 
 const useQuizSkipClick = (
   quizApiState: QuizAPIReducerState,
   quizLocalState: QuizLocalReducerState,
   dispatchLocalState: React.Dispatch<ActionAnswerQuestion>,
-  onQuizSkipQuestion?: OnQuizSkipQuestion
+  onQuizSkipQuestion?: QuizResultsEventsProps.OnQuizSkipQuestion
 ): QuizEventsReturn.NextQuestion => {
   const quizSkipClickHandler = useCallback(() => {
     const currentQuestion = quizApiState.quizCurrentQuestion?.next_question;

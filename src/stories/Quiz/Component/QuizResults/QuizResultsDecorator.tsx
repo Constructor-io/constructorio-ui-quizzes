@@ -1,5 +1,4 @@
 import QuizContext from '../../../../components/CioQuiz/context';
-import { ResultsPageOptions } from '../../../../types';
 import { useMockContextValue } from '../../tests/mocks';
 
 const React = require('react');
@@ -10,19 +9,14 @@ if (process.env.NODE_ENV !== 'production') {
   axe(React, ReactDOM, 1000, {});
 }
 
-export default function QuizResultsDecorator(
-  Story: any,
-  options: ResultsPageOptions = {
-    onAddToCartClick: () => {},
-  }
-) {
+export default function QuizResultsDecorator(Story: any) {
   const contextValue = useMockContextValue();
 
   return (
     <div className='cio-quiz'>
       <QuizContext.Provider value={contextValue}>
         <div>
-          <Story options={options} />
+          <Story />
         </div>
       </QuizContext.Provider>
     </div>

@@ -696,11 +696,16 @@
     align-self: normal;
   }
 
-  /* Image */
+  /* Image Container */
   .cio-quiz .cio-question-image-container {
     flex-basis: 50%;
     flex-shrink: 0;
     border-radius: 4px;
+  }
+
+  /* Image */
+  .cio-quiz .cio-question-image {
+    height: auto;
   }
 
   /* Cover Page Component */
