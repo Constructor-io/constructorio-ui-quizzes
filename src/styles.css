@@ -971,7 +971,7 @@
 
 .cio-quiz .cio-results-redo-and-share-container {
   display: flex;
-  gap: 28px;
+  gap: 8px;
   align-items: end;
   justify-content: space-between;
 }
