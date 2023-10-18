@@ -14,9 +14,14 @@ export default function ShareResultsModal({
   const [isCopied, setIsCopied] = useState(false);
   if (!showShareModal) return null;
 
-  const value = `${basePath}/items=${results.response?.results
-    .map((item) => item.data?.id)
-    .join(',')}`;
+  const value = `${basePath}/?items=${encodeURIComponent(
+    results.response?.results
+      .filter((item) => item.data?.id)
+      .map((item) => item.data!.id)
+      .join(',') || ''
+  )}&options=${encodeURIComponent(
+    results.quiz_selected_options.map((option) => option.value).join(',')
+  )}`;
 
   const handleClose = () => {
     setIsCopied(false);
