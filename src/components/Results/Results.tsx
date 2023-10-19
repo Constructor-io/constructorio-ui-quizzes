@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import { ResultCardProps } from '../../types';
+import { ResultCardOptions } from '../../types';
 import QuizContext from '../CioQuiz/context';
 import ResultCard from '../ResultCard/ResultCard';
 
-interface ResultsProps extends ResultCardProps {}
+interface ResultsProps extends ResultCardOptions {}
 
 function Results(props: ResultsProps) {
   const {

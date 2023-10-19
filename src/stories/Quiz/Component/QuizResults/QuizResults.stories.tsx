@@ -4,35 +4,28 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { within } from '@storybook/testing-library';
 import React from 'react';
 import ResultContainer from '../../../../components/ResultContainer/ResultContainer';
+import { resultCardOptions } from '../../tests/mocks';
 import QuizResultsDecorator from './QuizResultsDecorator';
 
 const meta: Meta<typeof ResultContainer> = {
   title: 'Quiz/Results/QuizResultsPage',
   component: ResultContainer,
-  argTypes: { setShowShareModal: { action: 'setShowShareModal' } },
+  argTypes: { onShare: { action: 'onShare' } },
 };
 
 export default meta;
 type Story = StoryObj<typeof ResultContainer>;
 
-const resultsPageOptions = {
-  onAddToCartClick: () => {},
-  resultCardRegularPriceKey: 'price',
-  resultCardSalePriceKey: 'salePrice',
-  resultCardRatingCountKey: 'ratingCount',
-  resultCardRatingScoreKey: 'ratingScore',
-};
-
 export const QuizResultsPage: Story = {
   args: {
-    options: resultsPageOptions,
+    resultCardOptions,
   },
   render: (args) => (
     <div className='results-example-wrapper'>
-      <ResultContainer options={resultsPageOptions} setShowShareModal={args.setShowShareModal} />
+      <ResultContainer resultCardOptions={resultCardOptions} onShare={args.onShare} />
     </div>
   ), // eslint-disable-line
-  decorators: [(story) => QuizResultsDecorator(story, resultsPageOptions)],
+  decorators: [(story) => QuizResultsDecorator(story)],
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 

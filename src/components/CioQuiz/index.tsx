@@ -37,7 +37,7 @@ export default function CioQuiz(props: IQuizProps) {
 
   const [showSessionPrompt, setShowSessionPrompt] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
-  const { resultsPageOptions, sessionStateOptions } = props;
+  const { callbacks, sessionStateOptions, questionsPageOptions, resultCardOptions } = props;
   const {
     quizSessionStorageState: { hasSessionStorageState, skipToResults },
   } = state;
@@ -71,8 +71,8 @@ export default function CioQuiz(props: IQuizProps) {
     getResetQuizButtonProps,
     getShareResultsButtonProps,
     getSelectInputProps,
-    customClickItemCallback: !!resultsPageOptions?.onQuizResultClick,
-    customAddToFavoritesCallback: !!resultsPageOptions?.onAddToFavoritesClick,
+    customClickItemCallback: !!callbacks?.onQuizResultClick,
+    customAddToFavoritesCallback: !!callbacks?.onAddToFavoritesClick,
     primaryColorStyles,
   };
 
@@ -113,13 +113,19 @@ export default function CioQuiz(props: IQuizProps) {
 
         <QuizContext.Provider value={contextValue}>
           {state.quiz.results || skipToResults ? (
-            <ResultContainer options={resultsPageOptions} onShare={() => setShowShareModal(true)} />
+            <ResultContainer
+              resultCardOptions={resultCardOptions}
+              onShare={() => setShowShareModal(true)}
+            />
           ) : (
             state.quiz.currentQuestion && (
               <>
                 <ProgressBar />
                 <QuizQuestions />
-                <ControlBar ctaButtonText={questionData?.cta_text || undefined} />
+                <ControlBar
+                  skipQuestionButtonText={questionsPageOptions?.skipQuestionButtonText}
+                  ctaButtonText={questionData?.cta_text || undefined}
+                />
               </>
             )
           )}

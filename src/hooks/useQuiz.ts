@@ -8,14 +8,9 @@ import useQuizEvents from './useQuizEvents';
 import useQuizState from './useQuizState';
 
 const useQuiz: UseQuiz = (quizOptions) => {
-  const {
-    apiKey,
-    cioJsClient,
-    primaryColor,
-    resultsPageOptions: { favoriteItems },
-  } = quizOptions;
+  const { apiKey, cioJsClient, primaryColor, resultsPageOptions } = quizOptions;
 
-  // Log console errors for required parameters quizId and resultsPageOptions
+  // Log console errors for required parameters quizId
   useConsoleErrors(quizOptions);
 
   // Quiz Cio Client
@@ -30,7 +25,12 @@ const useQuiz: UseQuiz = (quizOptions) => {
   // Props getters
   const { quizApiState, quizLocalState, quizSessionStorageState } = quizState;
   const { skipToResults } = quizSessionStorageState;
-  const propGetters = usePropsGetters(quizEvents, quizApiState, quizLocalState, favoriteItems);
+  const propGetters = usePropsGetters(
+    quizEvents,
+    quizApiState,
+    quizLocalState,
+    resultsPageOptions?.favoriteItems
+  );
 
   const primaryColorStyles = usePrimaryColorStyles(primaryColor);
 
@@ -44,7 +44,6 @@ const useQuiz: UseQuiz = (quizOptions) => {
     state: {
       answers: {
         inputs: quizLocalState.answerInputs,
-        isLastAnswer: quizLocalState.isLastAnswer,
       },
       quiz: {
         requestState: quizApiState.quizRequestState,

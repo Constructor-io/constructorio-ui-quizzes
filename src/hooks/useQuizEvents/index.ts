@@ -27,10 +27,15 @@ const useQuizEvents: UseQuizEvents = (quizOptions, cioClient, quizState) => {
     quizLocalState,
     quizSessionStorageState,
   } = quizState;
-  const { resultsPageOptions, callbacks } = quizOptions;
-
-  const { onAddToCartClick, onQuizResultClick, onQuizResultsLoaded, onAddToFavoritesClick } =
-    resultsPageOptions;
+  const { callbacks } = quizOptions;
+  const {
+    onAddToCartClick,
+    onAddToFavoritesClick,
+    onQuizNextQuestion,
+    onQuizResultClick,
+    onQuizResultsLoaded,
+    onQuizSkipQuestion,
+  } = callbacks || {};
 
   // Quiz answer change
   const quizAnswerChanged = useQuizAnswerChangeHandler(quizApiState, dispatchLocalState);
@@ -40,14 +45,14 @@ const useQuizEvents: UseQuizEvents = (quizOptions, cioClient, quizState) => {
     quizApiState,
     quizLocalState,
     dispatchLocalState,
-    callbacks?.onQuizNextQuestion
+    onQuizNextQuestion
   );
 
   const skipQuestion = useQuizSkipClick(
     quizApiState,
     quizLocalState,
     dispatchLocalState,
-    callbacks?.onQuizSkipQuestion
+    onQuizSkipQuestion
   );
 
   // Quiz Back button click callback

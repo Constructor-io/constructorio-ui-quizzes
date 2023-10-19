@@ -3,7 +3,13 @@ import MyQuiz, { addHookStoryCode } from './index';
 import '../../../styles.css';
 import { basicDescription, apiKey, quizId, hookDescription } from '../../../constants';
 import { stringifyWithDefaults } from '../../../utils';
-import { argTypes } from '../argTypes';
+import { argTypes, storiesControls } from '../argTypes';
+import {
+  callbacks,
+  resultsPageOptions,
+  sessionStateOptions,
+  resultCardOptions,
+} from '../tests/mocks';
 
 export default {
   title: 'Quiz/Hooks',
@@ -16,18 +22,22 @@ export default {
         component: hookDescription,
       },
     },
+    controls: storiesControls,
   },
 };
 
-const resultsPageOptions = {
-  numResultsToDisplay: 10,
-  onQuizResultsLoaded: () => console.log('onQuizResultLoaded'),
-  onQuizResultClick: () => console.log('onQuizResultClick'),
-  onAddToCartClick: () => console.log('onQuizAddToCart'),
+export const BasicUsage = MyQuiz.bind({});
+BasicUsage.args = {
+  quizId,
+  apiKey,
+  quizVersionId: '',
+  resultsPageOptions,
+  resultCardOptions,
+  callbacks,
+  sessionStateOptions,
+  primaryColor: '35, 71, 199',
 };
 
-export const BasicUsage = MyQuiz.bind({});
-BasicUsage.args = { apiKey, quizId, resultsPageOptions };
 addHookStoryCode(
   BasicUsage,
   `const args = ${stringifyWithDefaults(BasicUsage.args)}`,

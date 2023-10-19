@@ -65,7 +65,7 @@ const useQuizApiState: UseQuizApiState = (
         type: QuizAPIActionTypes.SET_IS_LOADING,
       });
 
-      if (quizLocalState.isLastAnswer || skipToResults) {
+      if (skipToResults) {
         await dispatchQuizResults();
       } else {
         try {

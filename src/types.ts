@@ -25,7 +25,7 @@ export type {
 export type QuizResultDataPartial = Partial<QuizResultData>;
 
 // QUIZ PROPS
-export interface ResultCardProps {
+export interface ResultCardOptions {
   resultCardSalePriceKey?: string;
   resultCardRegularPriceKey?: string;
   resultCardRatingCountKey?: string;
@@ -38,15 +38,18 @@ export namespace QuizResultsEventsProps {
   export type OnQuizResultClick = (result: QuizResultDataPartial, position: number) => void;
   export type OnAddToCartClick = (result: QuizResultDataPartial) => void;
   export type OnAddToFavoritesClick = (result: QuizResultDataPartial) => void;
+  export type OnQuizNextQuestion = (question: QuestionWithAnswer) => void;
+  export type OnQuizSkipQuestion = (question: QuestionWithAnswer) => void;
+  export type OnEmailResults = (data: { email: string; url: string }) => void;
 }
 
-export interface ResultsPageOptions extends ResultCardProps {
+export interface ResultsPageOptions {
   numResultsToDisplay?: number;
   favoriteItems?: string[];
-  onQuizResultsLoaded?: QuizResultsEventsProps.OnQuizResultsLoaded;
-  onQuizResultClick?: QuizResultsEventsProps.OnQuizResultClick;
-  onAddToCartClick: QuizResultsEventsProps.OnAddToCartClick;
-  onAddToFavoritesClick?: QuizResultsEventsProps.OnAddToFavoritesClick;
+}
+
+export interface QuestionsPageOptions {
+  skipQuestionButtonText?: string;
 }
 
 export interface SessionStateOptions {
@@ -59,14 +62,14 @@ export type QuestionWithAnswer = Question & {
   answer: AnswerInput;
 };
 
-export type OnQuizNextQuestion = (question: QuestionWithAnswer) => void;
-export type OnQuizSkipQuestion = (question: QuestionWithAnswer) => void;
-export type OnEmailResults = (data: { email: string; url: string }) => void;
-
 export interface Callbacks {
-  onQuizNextQuestion?: OnQuizNextQuestion;
-  onQuizSkipQuestion?: OnQuizSkipQuestion;
-  onEmailResults?: OnEmailResults;
+  onQuizNextQuestion?: QuizResultsEventsProps.OnQuizNextQuestion;
+  onQuizResultsLoaded?: QuizResultsEventsProps.OnQuizResultsLoaded;
+  onQuizResultClick?: QuizResultsEventsProps.OnQuizResultClick;
+  onAddToCartClick: QuizResultsEventsProps.OnAddToCartClick;
+  onAddToFavoritesClick?: QuizResultsEventsProps.OnAddToFavoritesClick;
+  onQuizSkipQuestion?: QuizResultsEventsProps.OnQuizSkipQuestion;
+  onEmailResults: QuizResultsEventsProps.OnEmailResults;
 }
 
 export interface IQuizProps {
@@ -74,19 +77,20 @@ export interface IQuizProps {
   cioJsClient?: ConstructorIOClient;
   quizId: string;
   quizVersionId?: string;
-  resultsPageOptions: ResultsPageOptions;
+  resultsPageOptions?: ResultsPageOptions;
+  resultCardOptions?: ResultCardOptions;
   sessionStateOptions?: SessionStateOptions;
   primaryColor?: string;
   enableHydration?: boolean;
   callbacks?: Callbacks;
   quizBasePath?: string;
+  questionsPageOptions?: QuestionsPageOptions;
 }
 
 // QUIZ RETURN VALUES
 export interface QuizReturnState {
   answers: {
     inputs: AnswerInputState; // Key is the question Id and value is the answer input
-    isLastAnswer: boolean;
   };
   quiz: {
     requestState: RequestStates;

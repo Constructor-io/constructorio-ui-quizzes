@@ -1,6 +1,6 @@
 /* eslint-disable no-console, react/jsx-props-no-spreading */
 import CioQuiz from '../../../components/CioQuiz';
-import { argTypes } from '../argTypes';
+import { argTypes, storiesControls } from '../argTypes';
 import { stringifyWithDefaults } from '../../../utils';
 import { ComponentTemplate, addComponentStoryDescription } from '../Component';
 import { changePrimaryColorDescription, apiKey, quizId } from '../../../constants';
@@ -9,6 +9,9 @@ export default {
   title: 'Quiz/Style Customizations',
   component: CioQuiz,
   argTypes,
+  parameters: {
+    controls: storiesControls,
+  },
   tags: ['autodocs'],
 };
 
