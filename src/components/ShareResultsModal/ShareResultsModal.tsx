@@ -19,18 +19,14 @@ export default function ShareResultsModal({
   const existingParams = urlObj.searchParams;
   existingParams.set(
     'items',
-    encodeURIComponent(
-      quizState.results?.response?.results
-        .filter((item) => item.data?.id)
-        .map((item) => item.data!.id)
-        .join(',') || ''
-    )
+    quizState.results?.response?.results
+      .filter((item) => item.data?.id)
+      .map((item) => item.data!.id)
+      .join(',') || ''
   );
   existingParams.set(
     'attributes',
-    encodeURIComponent(
-      quizState.selectedOptionsWithAttributes?.map((option) => option).join(',') || ''
-    )
+    quizState.selectedOptionsWithAttributes?.map((option) => option).join(',') || ''
   );
   const value = urlObj.toString();
 
