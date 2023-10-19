@@ -1,4 +1,5 @@
 import React from 'react';
+import Modal from 'react-modal';
 
 import CloseSVG from './CloseSVG';
 import LinkField from './LinkField';
@@ -13,8 +14,6 @@ export default function ShareResultsModal({
   basePath,
   onEmailResults,
 }: Props) {
-  if (!showShareModal) return null;
-
   const urlObj = new URL(basePath || window.location.href);
   const existingParams = urlObj.searchParams;
   existingParams.set(
@@ -31,9 +30,29 @@ export default function ShareResultsModal({
   const value = urlObj.toString();
 
   return (
-    <div className='cio-share-results-modal' role='presentation'>
-      <div className='cio-share-results-container'>
-        <div className='cio-share-results-content' role='presentation'>
+    <Modal
+      isOpen={showShareModal}
+      onRequestClose={onClose}
+      style={{
+        content: {
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '24px',
+          padding: '2rem',
+          borderRadius: '8px',
+          position: 'unset',
+          maxWidth: '600px',
+          width: '100%',
+        },
+        overlay: {
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          justifyContent: 'center',
+          display: 'flex',
+          alignItems: 'center',
+        },
+      }}>
+      <div className='cio-quiz'>
+        <div className='cio-share-results-content'>
           <div className='cio-share-results-header'>
             <div className='cio-share-results-title'>Share results</div>
             <button onClick={onClose} type='button' className='cio-modal-close-button'>
@@ -47,7 +66,7 @@ export default function ShareResultsModal({
           <LinkField url={value} />
         </div>
       </div>
-    </div>
+    </Modal>
   );
 }
 
