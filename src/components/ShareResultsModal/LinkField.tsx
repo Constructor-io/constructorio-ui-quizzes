@@ -16,7 +16,6 @@ export default function LinkField({ url }: Props) {
           onClick={() => {
             navigator.clipboard.writeText(url);
             setIsCopied(true);
-            setTimeout(() => setIsCopied(false), 5_000);
           }}>
           Copy link
         </button>
