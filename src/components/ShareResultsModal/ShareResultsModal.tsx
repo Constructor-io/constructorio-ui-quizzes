@@ -30,17 +30,13 @@ export default function ShareResultsModal({
   );
   const value = urlObj.toString();
 
-  const handleClose = () => {
-    onClose();
-  };
-
   return (
     <div className='cio-share-results-modal' role='presentation'>
       <div className='cio-share-results-container'>
         <div className='cio-share-results-content' role='presentation'>
           <div className='cio-share-results-header'>
             <div className='cio-share-results-title'>Share results</div>
-            <button onClick={handleClose} type='button' className='cio-modal-close-button'>
+            <button onClick={onClose} type='button' className='cio-modal-close-button'>
               <CloseSVG />
             </button>
           </div>
