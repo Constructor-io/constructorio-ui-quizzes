@@ -101,11 +101,11 @@ export default function CioQuiz(props: IQuizProps) {
           showSessionPrompt={showSessionPrompt}
           setShowSessionPrompt={setShowSessionPrompt}
         />
-        {state.quiz.results && (
+        {state.quiz && (
           <ShareResultsModal
             showShareModal={showShareModal}
-            setShowShareModal={setShowShareModal}
-            results={state.quiz.results}
+            onClose={() => setShowShareModal(false)}
+            quizState={state.quiz}
             basePath={quizBasePath}
             onEmailResults={callbacks?.onEmailResults}
           />
@@ -113,10 +113,7 @@ export default function CioQuiz(props: IQuizProps) {
 
         <QuizContext.Provider value={contextValue}>
           {state.quiz.results || skipToResults ? (
-            <ResultContainer
-              options={resultsPageOptions}
-              setShowShareModal={(show) => setShowShareModal(show)}
-            />
+            <ResultContainer options={resultsPageOptions} onShare={() => setShowShareModal(true)} />
           ) : (
             state.quiz.currentQuestion && (
               <>

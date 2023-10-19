@@ -4,30 +4,38 @@ import CloseSVG from './CloseSVG';
 import LinkField from './LinkField';
 import EmailField from './EmailField';
 
-import { QuizResultsResponse } from '../../types';
+import { QuizReturnState } from '../../types';
 
 export default function ShareResultsModal({
   showShareModal,
-  setShowShareModal,
-  results,
+  onClose,
+  quizState,
   basePath,
   onEmailResults,
 }: Props) {
   if (!showShareModal) return null;
 
-  // TODO: Choose a better way to get the base path
-
-  const value = `${basePath}/?items=${encodeURIComponent(
-    results.response?.results
-      .filter((item) => item.data?.id)
-      .map((item) => item.data!.id)
-      .join(',') || ''
-  )}&options=${encodeURIComponent(
-    results.quiz_selected_options.map((option) => option.value).join(',')
-  )}`;
+  const urlObj = new URL(basePath || window.location.href);
+  const existingParams = urlObj.searchParams;
+  existingParams.set(
+    'items',
+    encodeURIComponent(
+      quizState.results?.response?.results
+        .filter((item) => item.data?.id)
+        .map((item) => item.data!.id)
+        .join(',') || ''
+    )
+  );
+  existingParams.set(
+    'attributes',
+    encodeURIComponent(
+      quizState.selectedOptionsWithAttributes?.map((option) => option).join(',') || ''
+    )
+  );
+  const value = urlObj.toString();
 
   const handleClose = () => {
-    setShowShareModal(false);
+    onClose();
   };
 
   return (
@@ -53,8 +61,8 @@ export default function ShareResultsModal({
 
 type Props = {
   showShareModal: boolean;
-  setShowShareModal: (show: boolean) => void;
-  results: QuizResultsResponse;
+  onClose: () => void;
+  quizState: QuizReturnState['quiz'];
   basePath?: string;
   onEmailResults?: (data: { email: string; url: string }) => void;
 };

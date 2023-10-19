@@ -10,11 +10,11 @@ import Spinner from '../Spinner/Spinner';
 
 export interface IResultContainerProps {
   options: ResultCardProps;
-  setShowShareModal: (show: boolean) => void;
+  onShare: () => void;
 }
 
 export default function ResultContainer(props: IResultContainerProps) {
-  const { options, setShowShareModal } = props;
+  const { options, onShare } = props;
   const {
     resultCardSalePriceKey,
     resultCardRegularPriceKey,
@@ -35,7 +35,7 @@ export default function ResultContainer(props: IResultContainerProps) {
           <ResultFilters hasNoResults={zeroResults} />
           <div className='cio-results-redo-and-share-container'>
             <RedoButton />
-            <ShareButton onClick={() => setShowShareModal(true)} />
+            <ShareButton onClick={onShare} />
           </div>
         </div>
         {!zeroResults && (
