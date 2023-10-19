@@ -263,9 +263,7 @@ export type GetPreviousQuestionButtonProps = () => PreviousQuestionButtonProps;
 export type GetResetQuizButtonProps = (
   stylesType?: 'primary' | 'secondary'
 ) => ResetQuizButtonProps;
-export type GetShareResultsButtonProps = (
-  stylesType?: 'primary' | 'secondary'
-) => ShareResultsButtonProps;
+export type GetShareResultsButtonProps = () => ShareResultsButtonProps;
 export type GetHydrateQuizButtonProps = () => HydrateQuizButtonProps;
 export type GetAddToCartButtonProps = (
   result: QuizResultDataPartial,
