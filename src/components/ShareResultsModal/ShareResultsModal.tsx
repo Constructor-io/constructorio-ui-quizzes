@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import CloseSVG from './CloseSVG';
-import CheckMarkCircleSVG from './CheckMarkCircleSVG';
+import LinkField from './LinkField';
+import EmailField from './EmailField';
 
 import { QuizResultsResponse } from '../../types';
 
@@ -11,7 +12,6 @@ export default function ShareResultsModal({
   results,
   basePath,
 }: Props) {
-  const [isCopied, setIsCopied] = useState(false);
   if (!showShareModal) return null;
 
   const value = `${basePath}/?items=${encodeURIComponent(
@@ -24,7 +24,6 @@ export default function ShareResultsModal({
   )}`;
 
   const handleClose = () => {
-    setIsCopied(false);
     setShowShareModal(false);
   };
 
@@ -32,31 +31,15 @@ export default function ShareResultsModal({
     <div className='cio-share-results-modal' role='presentation'>
       <div className='cio-share-results-container'>
         <div className='cio-share-results-content' role='presentation'>
-          <div className='cio-share-results-heading'>
+          <div className='cio-share-results-header'>
             <div className='cio-share-results-title'>Share results</div>
             <button onClick={handleClose} type='button' className='cio-modal-close-button'>
               <CloseSVG />
             </button>
           </div>
           <div>Share or save your quiz results with this link.</div>
-          <div className='cio-share-results-button-group'>
-            <input className='cio-share-results-input' value={value} disabled />
-            <button
-              className='cio-share-results-share-button'
-              type='button'
-              onClick={() => {
-                navigator.clipboard.writeText(value);
-                setIsCopied(true);
-              }}>
-              Copy link
-            </button>
-          </div>
-          {isCopied && (
-            <div className='cio-share-results-copied-notification'>
-              <CheckMarkCircleSVG />
-              <div>Link copied to clipboard</div>
-            </div>
-          )}
+          <EmailField url={value} />
+          <LinkField url={value} />
         </div>
       </div>
     </div>
