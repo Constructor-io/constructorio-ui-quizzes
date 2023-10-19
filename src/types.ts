@@ -69,7 +69,7 @@ export interface Callbacks {
   onAddToCartClick: QuizResultsEventsProps.OnAddToCartClick;
   onAddToFavoritesClick?: QuizResultsEventsProps.OnAddToFavoritesClick;
   onQuizSkipQuestion?: QuizResultsEventsProps.OnQuizSkipQuestion;
-  onEmailResults: QuizResultsEventsProps.OnEmailResults;
+  onEmailResults?: QuizResultsEventsProps.OnEmailResults;
 }
 
 export interface IQuizProps {

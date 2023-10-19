@@ -274,4 +274,7 @@ export const callbacks: Callbacks = {
   onQuizResultsLoaded: (item: QuizResultDataPartial) => {
     console.dir(item);
   },
+  onEmailResults: (data) => {
+    console.dir(data);
+  },
 };

@@ -101,6 +101,7 @@ export default function CioQuiz(props: IQuizProps) {
           showSessionPrompt={showSessionPrompt}
           setShowSessionPrompt={setShowSessionPrompt}
         />
+        {/* TODO: position the modal only within the container */}
         {state.quiz && (
           <ShareResultsModal
             showShareModal={showShareModal}

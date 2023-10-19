@@ -33,6 +33,7 @@ export default function ShareResultsModal({
     <Modal
       isOpen={showShareModal}
       onRequestClose={onClose}
+      ariaHideApp={false}
       style={{
         content: {
           display: 'flex',
@@ -46,8 +47,8 @@ export default function ShareResultsModal({
         },
         overlay: {
           backgroundColor: 'rgba(0, 0, 0, 0.5)',
-          justifyContent: 'center',
           display: 'flex',
+          justifyContent: 'center',
           alignItems: 'center',
         },
       }}>
@@ -59,7 +60,11 @@ export default function ShareResultsModal({
               <CloseSVG />
             </button>
           </div>
-          <div>Share or save your quiz results with this link.</div>
+          <div>
+            {onEmailResults
+              ? 'Share or save your quiz results through email or using the link below.'
+              : 'Share or save your quiz results with this link.'}
+          </div>
           {onEmailResults && (
             <EmailField onSubmit={(email) => onEmailResults({ email, url: value })} />
           )}

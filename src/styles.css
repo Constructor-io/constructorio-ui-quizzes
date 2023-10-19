@@ -995,7 +995,6 @@
   flex-grow: 1;
   width: 100%;
   padding: 12px 32px;
-  max-width: fit-content;
 }
 
 .cio-quiz .cio-share-results-share-button:hover {
@@ -1067,6 +1066,10 @@
     flex-direction: column;
     gap: 1rem;
   }
+
+  .cio-quiz .cio-share-results-share-button {
+    max-width: 100%;
+  }
 }
 
 @container (min-width: 500px) {
@@ -1074,5 +1077,9 @@
     display: flex;
     flex-direction: row;
     gap: 1rem;
+  }
+
+  .cio-quiz .cio-share-results-share-button {
+    max-width: fit-content;
   }
 }
