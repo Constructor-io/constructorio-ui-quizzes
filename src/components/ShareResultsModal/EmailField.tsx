@@ -1,32 +1,47 @@
-import React, { useState } from 'react';
+import React from 'react';
+import * as z from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import CheckMarkCircleSVG from './CheckMarkCircleSVG';
 
-export default function EmailField({ url }: Props) {
-  const [isCopied, setIsCopied] = useState(false);
-  const [email, setEmail] = useState('');
+const emailSchema = z.object({
+  email: z.string().email({ message: 'Please enter a valid email address' }),
+});
+
+export default function EmailField({ onSubmit }: Props) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitSuccessful },
+  } = useForm<{ email: string }>({
+    resolver: zodResolver(emailSchema),
+  });
 
   return (
     <div className='cio-share-results-feature-group'>
-      <div className='cio-share-results-description'>Share by email</div>
-      <div className='cio-share-results-button-group'>
-        <input
-          className='cio-share-results-email-input'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <button
-          className='cio-share-results-share-button'
-          type='button'
-          onClick={() => {
-            navigator.clipboard.writeText(url);
-            setIsCopied(true);
-            setTimeout(() => setIsCopied(false), 5_000);
-          }}>
-          Send
-        </button>
-      </div>
-      {isCopied && (
+      <form onSubmit={handleSubmit(({ email }) => onSubmit(email))}>
+        <div className='cio-share-results-description'>Share by email</div>
+        <div className='cio-share-results-button-group'>
+          <div className='cio-share-results-email-input-group'>
+            <input
+              className={`cio-share-results-email-input ${
+                errors.email ? 'cio-share-results-email-input--error' : ''
+              }`}
+              {...register('email')}
+            />
+            {errors.email && (
+              <div className='cio-share-results-email-input-error-message'>
+                {errors.email.message}
+              </div>
+            )}
+          </div>
+          <button className='cio-share-results-share-button' type='submit'>
+            Send
+          </button>
+        </div>
+      </form>
+      {isSubmitSuccessful && (
         <div className='cio-share-results-copied-notification'>
           <CheckMarkCircleSVG />
           <div>Email sent</div>
@@ -37,5 +52,5 @@ export default function EmailField({ url }: Props) {
 }
 
 type Props = {
-  url: string;
+  onSubmit: (email: string) => void;
 };

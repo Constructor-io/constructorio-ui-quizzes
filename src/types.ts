@@ -61,10 +61,12 @@ export type QuestionWithAnswer = Question & {
 
 export type OnQuizNextQuestion = (question: QuestionWithAnswer) => void;
 export type OnQuizSkipQuestion = (question: QuestionWithAnswer) => void;
+export type OnEmailResults = (data: { email: string; url: string }) => void;
 
 export interface Callbacks {
   onQuizNextQuestion?: OnQuizNextQuestion;
   onQuizSkipQuestion?: OnQuizSkipQuestion;
+  onEmailResults?: OnEmailResults;
 }
 
 export interface IQuizProps {

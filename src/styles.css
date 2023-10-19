@@ -1034,6 +1034,16 @@
   color: var(--gray-dust-100);
 }
 
+.cio-quiz .cio-share-results-email-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cio-quiz .cio-share-results-email-input-error-message {
+  color: #e0182d;
+}
+
 .cio-quiz .cio-share-results-email-input {
   padding: 0.5rem;
   border: 0;
@@ -1042,6 +1052,10 @@
   padding: 0.8rem;
   outline: none;
   font-size: 1rem;
+}
+
+.cio-quiz .cio-share-results-email-input--error {
+  border-bottom: 1px solid #e0182d;
 }
 
 @container (max-width: 640px) {

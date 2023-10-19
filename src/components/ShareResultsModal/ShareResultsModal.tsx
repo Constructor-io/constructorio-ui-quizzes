@@ -11,6 +11,7 @@ export default function ShareResultsModal({
   setShowShareModal,
   results,
   basePath,
+  onEmailResults,
 }: Props) {
   if (!showShareModal) return null;
 
@@ -38,7 +39,9 @@ export default function ShareResultsModal({
             </button>
           </div>
           <div>Share or save your quiz results with this link.</div>
-          <EmailField url={value} />
+          {onEmailResults && (
+            <EmailField onSubmit={(email) => onEmailResults({ email, url: value })} />
+          )}
           <LinkField url={value} />
         </div>
       </div>
@@ -51,4 +54,5 @@ type Props = {
   setShowShareModal: (show: boolean) => void;
   results: QuizResultsResponse;
   basePath?: string;
+  onEmailResults?: (data: { email: string; url: string }) => void;
 };

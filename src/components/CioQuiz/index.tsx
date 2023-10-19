@@ -13,7 +13,7 @@ import { convertPrimaryColorsToString, renderImages } from '../../utils';
 import ProgressBar from '../ProgressBar/ProgressBar';
 
 export default function CioQuiz(props: IQuizProps) {
-  const { quizBasePath } = props;
+  const { quizBasePath, callbacks } = props;
   const {
     cioClient,
     state,
@@ -107,6 +107,7 @@ export default function CioQuiz(props: IQuizProps) {
             setShowShareModal={setShowShareModal}
             results={state.quiz.results}
             basePath={quizBasePath}
+            onEmailResults={callbacks?.onEmailResults}
           />
         )}
 
