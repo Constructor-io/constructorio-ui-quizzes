@@ -13,7 +13,6 @@ import { convertPrimaryColorsToString, renderImages } from '../../utils';
 import ProgressBar from '../ProgressBar/ProgressBar';
 
 export default function CioQuiz(props: IQuizProps) {
-  const { quizBasePath, callbacks } = props;
   const {
     cioClient,
     state,
@@ -37,7 +36,8 @@ export default function CioQuiz(props: IQuizProps) {
 
   const [showSessionPrompt, setShowSessionPrompt] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
-  const { callbacks, sessionStateOptions, questionsPageOptions, resultCardOptions } = props;
+  const { callbacks, sessionStateOptions, questionsPageOptions, resultCardOptions, quizBasePath } =
+    props;
   const {
     quizSessionStorageState: { hasSessionStorageState, skipToResults },
   } = state;
