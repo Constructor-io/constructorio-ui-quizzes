@@ -15,6 +15,8 @@ export default function ShareResultsModal({
 }: Props) {
   if (!showShareModal) return null;
 
+  // TODO: Choose a better way to get the base path
+
   const value = `${basePath}/?items=${encodeURIComponent(
     results.response?.results
       .filter((item) => item.data?.id)

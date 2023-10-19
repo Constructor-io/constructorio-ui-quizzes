@@ -67,6 +67,10 @@ BasicUsage.args = {
   apiKey,
   quizId,
   resultsPageOptions,
+  callbacks: {
+    onEmailResults: () => {},
+  },
+  quizBasePath: 'http://localhost:6006',
 };
 addComponentStoryDescription(
   BasicUsage,
