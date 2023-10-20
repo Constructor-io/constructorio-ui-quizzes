@@ -23,6 +23,7 @@ export type {
 } from '@constructor-io/constructorio-client-javascript/lib/types';
 
 export type QuizResultDataPartial = Partial<QuizResultData>;
+export type QuizEmailResults = { email: string; url: string };
 
 // QUIZ PROPS
 export interface ResultCardOptions {
@@ -40,7 +41,7 @@ export namespace QuizResultsEventsProps {
   export type OnAddToFavoritesClick = (result: QuizResultDataPartial) => void;
   export type OnQuizNextQuestion = (question: QuestionWithAnswer) => void;
   export type OnQuizSkipQuestion = (question: QuestionWithAnswer) => void;
-  export type OnEmailResults = (data: { email: string; url: string }) => void;
+  export type OnEmailResults = (data: QuizEmailResults) => void;
 }
 
 export interface ResultsPageOptions {

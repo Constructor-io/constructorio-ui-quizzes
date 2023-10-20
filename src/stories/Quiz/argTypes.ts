@@ -82,6 +82,20 @@ export const argTypes = {
       },
     },
   },
+  'callbacks.onEmailResults': {
+    description: 'Callback function to be called when emailing results./',
+    control: false,
+    table: {
+      subcategory: 'callbacks',
+      defaultValue: {
+        summary: 'null',
+      },
+      type: {
+        summary: '(args) => void',
+        detail: '(args: QuizEmailResults) => void',
+      },
+    },
+  },
   cioJsClient: {
     description:
       'Optional custom constructor instance. Either `apiKey` or `cioJsClient` are required',

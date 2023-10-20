@@ -76,7 +76,6 @@ const cioJsClient = new ConstructorIOClient({ apiKey });
 const cioClientStoryResultsPageOptions = {
   onAddToCartClick: callbacks.onAddToCartClick,
   resultCardRegularPriceKey: resultCardOptions.resultCardRegularPriceKey,
-  onEmailResults: callbacks.onEmailResults,
 };
 
 export const ProvideCIOClientInstance = ComponentTemplate.bind({});
