@@ -1,5 +1,6 @@
 import React from 'react';
-import Modal from 'react-modal';
+import Modal from 'react-responsive-modal';
+import 'react-responsive-modal/styles.css';
 
 import CloseSVG from './CloseSVG';
 import LinkField from './LinkField';
@@ -13,6 +14,7 @@ export default function ShareResultsModal({
   quizState,
   basePath,
   onEmailResults,
+  containerRef,
 }: Props) {
   const urlObj = new URL(basePath || window.location.href);
   const existingParams = urlObj.searchParams;
@@ -31,45 +33,31 @@ export default function ShareResultsModal({
 
   return (
     <Modal
-      isOpen={showShareModal}
-      onRequestClose={onClose}
-      ariaHideApp={false}
-      style={{
-        content: {
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '24px',
-          padding: '2rem',
-          borderRadius: '8px',
-          position: 'unset',
-          maxWidth: '600px',
-          width: '100%',
-        },
-        overlay: {
-          backgroundColor: 'rgba(0, 0, 0, 0.5)',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        },
+      open={showShareModal}
+      onClose={onClose}
+      container={containerRef}
+      center
+      showCloseIcon={false}
+      classNames={{
+        modal: 'cio-share-results-container',
+        modalContainer: 'cio-share-results-modal-container',
       }}>
-      <div className='cio-quiz'>
-        <div className='cio-share-results-content'>
-          <div className='cio-share-results-header'>
-            <div className='cio-share-results-title'>Share results</div>
-            <button onClick={onClose} type='button' className='cio-modal-close-button'>
-              <CloseSVG />
-            </button>
-          </div>
-          <div>
-            {onEmailResults
-              ? 'Share or save your quiz results through email or using the link below.'
-              : 'Share or save your quiz results with this link.'}
-          </div>
-          {onEmailResults && (
-            <EmailField onSubmit={(email) => onEmailResults({ email, url: value })} />
-          )}
-          <LinkField url={value} />
+      <div className='cio-share-results-content'>
+        <div className='cio-share-results-header'>
+          <div className='cio-share-results-title'>Share results</div>
+          <button onClick={onClose} type='button' className='cio-modal-close-button'>
+            <CloseSVG />
+          </button>
         </div>
+        <div>
+          {onEmailResults
+            ? 'Share or save your quiz results through email or using the link below.'
+            : 'Share or save your quiz results with this link.'}
+        </div>
+        {onEmailResults && (
+          <EmailField onSubmit={(email) => onEmailResults({ email, url: value })} />
+        )}
+        <LinkField url={value} />
       </div>
     </Modal>
   );
@@ -81,4 +69,5 @@ type Props = {
   quizState: QuizReturnState['quiz'];
   basePath?: string;
   onEmailResults?: (data: { email: string; url: string }) => void;
+  containerRef: Element;
 };
