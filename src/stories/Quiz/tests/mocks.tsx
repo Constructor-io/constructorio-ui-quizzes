@@ -5,6 +5,7 @@ import {
   Callbacks,
   InputQuestionsTypes,
   QuestionWithAnswer,
+  QuizEmailResults,
   QuizResultDataPartial,
   QuizReturnState,
   ResultCardOptions,
@@ -274,7 +275,7 @@ export const callbacks: Callbacks = {
   onQuizResultsLoaded: (item: QuizResultDataPartial) => {
     console.dir(item);
   },
-  onEmailResults: (data) => {
+  onEmailResults: (data: QuizEmailResults) => {
     console.dir(data);
   },
 };

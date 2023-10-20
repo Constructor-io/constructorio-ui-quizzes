@@ -137,6 +137,13 @@ e2eInteractionTest.play = async ({ canvasElement }) => {
   expect(await canvas.findByText('Because you answered')).toBeInTheDocument();
   expect(document.querySelectorAll('.cio-results-filter-option')?.length).toBeGreaterThan(0);
 
+  // Share modal test
+  await userEvent.click(await canvas.findByText('Share Results'));
+  expect(
+    await canvas.findByText('Share or save your quiz results with this link.')
+  ).toBeInTheDocument();
+  await userEvent.click(await canvas.findByLabelText('Close button'));
+
   // Reset button test
   await userEvent.click(await canvas.findByText('Retake Quiz'));
   expect(await canvas.findByText('Oh, hi there!')).toBeInTheDocument();

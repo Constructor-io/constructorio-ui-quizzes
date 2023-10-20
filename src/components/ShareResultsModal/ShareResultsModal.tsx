@@ -45,7 +45,11 @@ export default function ShareResultsModal({
       <div className='cio-share-results-content'>
         <div className='cio-share-results-header'>
           <div className='cio-share-results-title'>Share results</div>
-          <button onClick={onClose} type='button' className='cio-modal-close-button'>
+          <button
+            onClick={onClose}
+            type='button'
+            className='cio-modal-close-button'
+            aria-label='Close button'>
             <CloseSVG />
           </button>
         </div>
