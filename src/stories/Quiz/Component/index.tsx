@@ -24,6 +24,7 @@ export function ComponentTemplate(args: IQuizProps) {
             }
           }
         },
+        onEmailResults: () => {},
       }}
     />
   );

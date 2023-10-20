@@ -69,6 +69,7 @@ export const functionStrings = {
   onQuizResultsLoaded: `(results) => console.dir(results)`,
   onQuizNextQuestion: `(question) => console.dir(question)`,
   onQuizSkipQuestion: `(question) => console.dir(question)`,
+  onEmailResults: `(data) => console.dir(data)`,
   cioJsClient: `cioJsClient`,
 };
 

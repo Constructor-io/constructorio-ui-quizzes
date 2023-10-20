@@ -92,6 +92,7 @@ export default function CioQuiz(props: IQuizProps) {
   const displayBackgroundImage =
     (questionType === 'single' || questionType === 'multiple') && questionImages;
 
+  console.log('🚀 ~ file: index.tsx:117 ~ CioQuiz ~ callbacks:', callbacks);
   if (state.quiz.requestState === RequestStates.Success) {
     return (
       <div

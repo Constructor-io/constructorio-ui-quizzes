@@ -140,7 +140,9 @@ e2eInteractionTest.play = async ({ canvasElement }) => {
   // Share modal test
   await userEvent.click(await canvas.findByText('Share Results'));
   expect(
-    await canvas.findByText('Share or save your quiz results with this link.')
+    await canvas.findByText(
+      'Share or save your quiz results through email or using the link below.'
+    )
   ).toBeInTheDocument();
   await userEvent.click(await canvas.findByLabelText('Close button'));
 
