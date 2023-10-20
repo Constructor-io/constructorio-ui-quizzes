@@ -20,6 +20,7 @@ const resultsPageOptions = {
     console.log('Add to cart');
     console.dir(item);
   },
+  onEmailResults: (item) => console.dir(item),
 };
 
 export const ChangePrimaryColor = ComponentTemplate.bind({});
