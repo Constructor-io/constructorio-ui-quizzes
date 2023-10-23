@@ -4,6 +4,7 @@ import { QuizAPIReducerState } from '../../components/CioQuiz/quizApiReducer';
 import { QuizLocalReducerState } from '../../components/CioQuiz/quizLocalReducer';
 import { IQuizProps, QuizSessionStorageState } from '../../types';
 import useQuizApiState from './useQuizApiState';
+import useQueryParams from '../useQueryParams';
 import useQuizLocalState from './useQuizLocalState';
 import useSessionStorageState from './useSessionStorageState';
 
@@ -23,6 +24,7 @@ const useQuizState: UseQuizState = (quizOptions, cioClient) => {
 
   // Quiz Local state
   const { quizLocalState, dispatchLocalState } = useQuizLocalState();
+  const { isSharedResultsQuery } = useQueryParams();
 
   // Quiz Session Storage state
   const { skipToResults, quizSessionStorageStateKey, hasSessionStorageState } =
@@ -38,7 +40,8 @@ const useQuizState: UseQuizState = (quizOptions, cioClient) => {
     cioClient,
     quizLocalState,
     skipToResults,
-    dispatchLocalState
+    dispatchLocalState,
+    isSharedResultsQuery
   );
 
   return {

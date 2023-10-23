@@ -5,15 +5,18 @@ import {
   QuestionTypes,
   QuizAPIActionTypes,
 } from '../../components/CioQuiz/actions';
-import { QuizEventsReturn, QuizResultsResponse } from '../../types';
+import { QuizEventsReturn, QuizResultsResponse, QuizSharedResultsData } from '../../types';
+import useQueryParams from '../useQueryParams';
 
 const useQuizResetClick = (
   resetQuizSessionStorageState: () => void,
   dispatchLocalState: React.Dispatch<ActionAnswerQuestion>,
   dispatchApiState: React.Dispatch<ActionQuizAPI>,
-  quizResults?: QuizResultsResponse
+  quizResults?: QuizResultsResponse | QuizSharedResultsData
 ): QuizEventsReturn.NextQuestion => {
+  const { removeQueryParams } = useQueryParams();
   const quizResetClickHandler = useCallback(() => {
+    removeQueryParams();
     if (quizResults) {
       dispatchLocalState({
         type: QuestionTypes.Reset,
@@ -23,7 +26,13 @@ const useQuizResetClick = (
       });
       resetQuizSessionStorageState();
     }
-  }, [dispatchLocalState, dispatchApiState, resetQuizSessionStorageState, quizResults]);
+  }, [
+    dispatchLocalState,
+    dispatchApiState,
+    resetQuizSessionStorageState,
+    quizResults,
+    removeQueryParams,
+  ]);
 
   return quizResetClickHandler;
 };

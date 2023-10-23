@@ -11,15 +11,17 @@ import apiReducer, {
   QuizAPIReducerState,
 } from '../../components/CioQuiz/quizApiReducer';
 import { QuizLocalReducerState } from '../../components/CioQuiz/quizLocalReducer';
-import { getNextQuestion, getQuizResults } from '../../services';
+import { getNextQuestion, getQuizResults, getBrowseResultsForItemIds } from '../../services';
 import { IQuizProps } from '../../types';
+import useQueryParams from '../useQueryParams';
 
 type UseQuizApiState = (
   quizOptions: IQuizProps,
   cioClient: ConstructorIOClient,
   quizLocalState: QuizLocalReducerState,
   skipToResults: boolean,
-  dispatchLocalState: React.Dispatch<ActionAnswerQuestion>
+  dispatchLocalState: React.Dispatch<ActionAnswerQuestion>,
+  isSharedResultsQuery: boolean
 ) => { quizApiState: QuizAPIReducerState; dispatchApiState: React.Dispatch<ActionQuizAPI> };
 
 const useQuizApiState: UseQuizApiState = (
@@ -27,12 +29,13 @@ const useQuizApiState: UseQuizApiState = (
   cioClient,
   quizLocalState,
   skipToResults,
-  dispatchLocalState
+  dispatchLocalState,
+  isSharedResultsQuery
   // eslint-disable-next-line max-params
 ) => {
   const [quizApiState, dispatchApiState] = useReducer(apiReducer, initialState);
   const { quizId, quizVersionId: quizVersionIdProp, resultsPageOptions } = quizOptions;
-
+  const { queryItems, queryOptions } = useQueryParams();
   const dispatchQuizResults = async () => {
     try {
       const quizResults = await getQuizResults(cioClient, quizId, {
@@ -59,13 +62,29 @@ const useQuizApiState: UseQuizApiState = (
     }
   };
 
+  const dispatchSharedQuizResults = async () => {
+    try {
+      const quizResults = await getBrowseResultsForItemIds(cioClient, queryItems);
+
+      dispatchApiState({
+        type: QuizAPIActionTypes.SET_QUIZ_SHARED_RESULTS,
+        payload: { quizResults: { ...quizResults, attributes: queryOptions } },
+      });
+    } catch (error) {
+      dispatchApiState({
+        type: QuizAPIActionTypes.SET_IS_ERROR,
+      });
+    }
+  };
+
   useEffect(() => {
     (async () => {
       dispatchApiState({
         type: QuizAPIActionTypes.SET_IS_LOADING,
       });
-
-      if (skipToResults) {
+      if (isSharedResultsQuery) {
+        await dispatchSharedQuizResults();
+      } else if (skipToResults) {
         await dispatchQuizResults();
       } else {
         try {
@@ -111,7 +130,13 @@ const useQuizApiState: UseQuizApiState = (
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cioClient, quizId, quizLocalState.answers, resultsPageOptions?.numResultsToDisplay]);
+  }, [
+    cioClient,
+    quizId,
+    quizLocalState.answers,
+    resultsPageOptions?.numResultsToDisplay,
+    isSharedResultsQuery,
+  ]);
 
   return {
     quizApiState,

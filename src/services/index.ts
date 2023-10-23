@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
+import ConstructorIOClient, {
+  type GetBrowseResultsForItemIdsResponse,
+} from '@constructor-io/constructorio-client-javascript';
 import {
   QuizzesParameters,
   QuizzesResultsParameters,
@@ -21,7 +23,6 @@ export const getCioClient = (apiKey?: string) => {
   return undefined;
 };
 
-//test
 export const getNextQuestion = (
   cioClient: ConstructorIOClient,
   quizId: string,
@@ -33,6 +34,12 @@ export const getQuizResults = async (
   quizId: string,
   parameters: QuizzesResultsParameters
 ): Promise<QuizResultsResponse> => cioClient?.quizzes.getQuizResults(quizId, parameters);
+
+export const getBrowseResultsForItemIds = async (
+  cioClient: ConstructorIOClient,
+  itemIds: string[]
+): Promise<GetBrowseResultsForItemIdsResponse> =>
+  cioClient?.browse.getBrowseResultsForItemIds(itemIds);
 
 // Tracking requests
 export const trackQuizResultsLoaded = (

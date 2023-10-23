@@ -5,7 +5,9 @@ import {
   QuestionOption,
   Question,
 } from '@constructor-io/constructorio-client-javascript/lib/types';
-import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
+import ConstructorIOClient, {
+  GetBrowseResultsForItemIdsResponse,
+} from '@constructor-io/constructorio-client-javascript';
 import { RequestStates } from './constants';
 // eslint-disable-next-line import/no-cycle
 import { QuestionTypes } from './components/CioQuiz/actions';
@@ -173,6 +175,9 @@ export interface OpenTextInputProps {
   value: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   onKeyDown: React.KeyboardEventHandler<HTMLInputElement>;
+}
+export interface QuizSharedResultsData extends GetBrowseResultsForItemIdsResponse {
+  attributes: string[];
 }
 
 export interface CoverQuestionProps {}
