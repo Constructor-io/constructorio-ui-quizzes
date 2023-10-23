@@ -1,5 +1,10 @@
 // eslint-disable-next-line import/no-cycle
-import { CurrentQuestion, NextQuestionResponse, QuizResultsResponse } from '../../types';
+import {
+  CurrentQuestion,
+  NextQuestionResponse,
+  QuestionOption,
+  QuizResultsResponse,
+} from '../../types';
 import type { QuizLocalReducerState } from './quizLocalReducer';
 
 // Local Actions
@@ -9,6 +14,7 @@ export enum QuestionTypes {
   SingleSelect = 'single',
   MultipleSelect = 'multiple',
   Next = 'next',
+  Skip = 'skip',
   Back = 'back',
   Reset = 'reset',
   Hydrate = 'hydrate',
@@ -18,10 +24,9 @@ export enum QuestionTypes {
 export interface QuestionAnswer<Value> {
   questionId: number;
   input: Value;
-  isLastQuestion?: boolean;
 }
 
-export type SelectQuestionPayload = QuestionAnswer<string[]>;
+export type SelectQuestionPayload = QuestionAnswer<Omit<QuestionOption, 'attribute' | 'images'>[]>;
 export type OpenTextQuestionPayload = QuestionAnswer<string>;
 export type CoverQuestionPayload = QuestionAnswer<string>;
 
@@ -39,6 +44,7 @@ export type ActionAnswerInputQuestion =
 export type ActionAnswerQuestion =
   | ActionAnswerInputQuestion
   | Action<QuestionTypes.Next, CurrentQuestion>
+  | Action<QuestionTypes.Skip, CurrentQuestion>
   | Action<QuestionTypes.Back, CurrentQuestion>
   | Action<QuestionTypes.Reset>
   | Action<QuestionTypes.Complete>

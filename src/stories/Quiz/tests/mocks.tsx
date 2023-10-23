@@ -84,7 +84,6 @@ export const getMockState = (question?: Question): QuizReturnState => ({
         value: '',
       },
     }, // Key is the question Id and value is the answer input
-    isLastAnswer: false,
   },
   quiz: {
     requestState: RequestStates.Success,
@@ -215,6 +214,10 @@ export const useMockContextValue = (question?: Question): QuizContextValue => {
       ...mockElementProps,
       className: 'cio-question-cta-button',
     }),
+    getSkipQuestionButtonProps: () => ({
+      ...mockElementProps,
+      className: 'cio-question-skip-button',
+    }),
     getPreviousQuestionButtonProps: () => ({
       ...mockElementProps,
       className: 'cio-question-back-button',
@@ -235,6 +238,7 @@ export const useMockContextValue = (question?: Question): QuizContextValue => {
 
 export const resultsPageOptions: ResultsPageOptions = {
   numResultsToDisplay: 10,
+  favoriteItems: ['119010868', '119011085'],
 };
 
 export const resultCardOptions: ResultCardOptions = {

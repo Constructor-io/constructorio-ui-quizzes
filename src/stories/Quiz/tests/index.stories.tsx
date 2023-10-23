@@ -2,7 +2,7 @@
 import { within, userEvent } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 import CioQuiz from '../../../components/CioQuiz';
-import { argTypes } from '../argTypes';
+import { argTypes, docsControls } from '../argTypes';
 import { sleep, stringifyWithDefaults } from '../../../utils';
 import { ComponentTemplate, addComponentStoryDescription } from '../Component';
 import { basicDescription, apiKey, quizId } from '../../../constants';
@@ -21,6 +21,7 @@ export default {
         type: 'code',
       },
     },
+    controls: docsControls,
   },
 };
 

@@ -1,13 +1,8 @@
-/* eslint-disable no-console, react/jsx-props-no-spreading */
-import CioQuiz from '../../../components/CioQuiz';
-import { argTypes } from '../argTypes';
-
 import RetrievingAnswersStory from './RetrievingAnswers';
 
 export default {
   title: 'Quiz/Specific Examples',
-  component: CioQuiz,
-  argTypes,
+  component: RetrievingAnswersStory,
   tags: ['autodocs'],
 };
 

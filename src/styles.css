@@ -215,6 +215,14 @@
   background-color: rgba(255, 255, 255, 0.87);
   align-items: center;
 }
+.cio-quiz .cio-question-buttons-group {
+  width: 20rem;
+  height: var(--bottom-bar-height);
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
 .cio-quiz .cio-question-cta-button {
   background: var(--primary-color);
   color: #ffffff;
@@ -250,7 +258,30 @@
   cursor: auto;
   outline: none;
 }
-
+.cio-quiz .cio-question-skip-button {
+  background: transparent;
+  color: var(--gray-dust-500);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+  font-size: 1rem;
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: text-decoration-color 0.2s ease-in-out;
+}
+.cio-quiz .cio-question-skip-button:hover,
+.cio-quiz .cio-question-skip-button:focus {
+  text-decoration-color: var(--gray-dust-200);
+}
+.cio-quiz .cio-question-skip-button.hide {
+  visibility: hidden;
+  pointer-events: none;
+}
 /* Back Button Component */
 .cio-quiz .cio-question-back-button {
   color: var(--primary-color);
@@ -585,11 +616,21 @@
   margin-bottom: 1rem;
 }
 
-.cio-quiz .cio-result-card-favorites-button.favorited svg {
-  fill: red;
+.cio-quiz .cio-result-card-favorites-button svg {
+  fill: none;
 }
 
-.cio-quiz .cio-result-card-favorites-button svg:hover {
+.cio-quiz .cio-result-card-favorites-button:hover svg {
+  fill: rgb(255, 51, 51);
+  stroke: rgb(255, 51, 51);
+}
+
+.cio-quiz .cio-result-card-favorites-button.favorited svg {
+  fill: rgb(255, 51, 51);
+  stroke: transparent;
+}
+
+.cio-quiz .cio-result-card-favorites-button svg {
   stroke: black;
   stroke-width: 1px;
 }
@@ -655,11 +696,16 @@
     align-self: normal;
   }
 
-  /* Image */
+  /* Image Container */
   .cio-quiz .cio-question-image-container {
     flex-basis: 50%;
     flex-shrink: 0;
     border-radius: 4px;
+  }
+
+  /* Image */
+  .cio-quiz .cio-question-image {
+    height: auto;
   }
 
   /* Cover Page Component */

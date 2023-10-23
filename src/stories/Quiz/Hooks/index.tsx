@@ -5,7 +5,7 @@ import React from 'react';
 import RedoSVG from '../../../components/RedoButton/RedoSVG';
 import { useCioQuiz } from '../../../index';
 import '../../../styles.css';
-import { getStoryParams } from '../../../utils';
+import { convertPrimaryColorsToString, getStoryParams } from '../../../utils';
 
 export default function HooksTemplate(args) {
   const {
@@ -13,12 +13,14 @@ export default function HooksTemplate(args) {
     getOpenTextInputProps,
     getNextQuestionButtonProps,
     getPreviousQuestionButtonProps,
+    getSkipQuestionButtonProps,
     getQuizImageProps,
     getSelectQuestionImageProps,
     getSelectInputProps,
     getResetQuizButtonProps,
     getQuizResultButtonProps,
     getAddToCartButtonProps,
+    primaryColorStyles,
   } = useCioQuiz(args);
 
   if (state.quiz.requestState === 'SUCCESS') {
@@ -105,6 +107,7 @@ export default function HooksTemplate(args) {
       if (currentQuestion.isOpenQuestion) {
         return (
           <div className='cio-quiz'>
+            <style>.cio-quiz {convertPrimaryColorsToString(primaryColorStyles)}</style>
             <div className='cio-container--with-image cio-open-text-question-container--with-image'>
               {currentQuestionData.images?.primary_url && (
                 <span className='cio-question-image-container'>
@@ -118,6 +121,7 @@ export default function HooksTemplate(args) {
                 <div className='cio-question-buttons-container'>
                   <button {...getPreviousQuestionButtonProps()}>Back</button>
                   <div className='cio-button-container'>
+                    <button {...getSkipQuestionButtonProps()}>Skip</button>
                     <button {...getNextQuestionButtonProps()}>Continue</button>
                   </div>
                 </div>
@@ -143,6 +147,7 @@ export default function HooksTemplate(args) {
                 <div className='cio-question-buttons-container'>
                   <button {...getPreviousQuestionButtonProps()}>Back</button>
                   <div className='cio-button-container'>
+                    <button {...getSkipQuestionButtonProps()}>Skip</button>
                     <button {...getNextQuestionButtonProps()}>Continue</button>
                   </div>
                 </div>
@@ -173,6 +178,7 @@ export default function HooksTemplate(args) {
               <div className='cio-question-buttons-container'>
                 <button {...getPreviousQuestionButtonProps()}>Back</button>
                 <div className='cio-button-container'>
+                  <button {...getSkipQuestionButtonProps()}>Skip</button>
                   <button {...getNextQuestionButtonProps()}>Continue</button>
                 </div>
               </div>
@@ -191,6 +197,7 @@ function HooksTemplate(quizConfiguration) {
     state,
     getOpenTextInputProps,
     getNextQuestionButtonProps,
+    getSkipQuestionButtonProps,
     getPreviousQuestionButtonProps,
     getQuizImageProps,
     getSelectQuestionImageProps,
@@ -297,6 +304,7 @@ function HooksTemplate(quizConfiguration) {
                 <div className='cio-question-buttons-container'>
                   <button {...getPreviousQuestionButtonProps()}>Back</button>
                   <div className='cio-button-container'>
+                    <button {...getSkipQuestionButtonProps()}>Skip</button>
                     <button {...getNextQuestionButtonProps()}>Continue</button>
                   </div>
                 </div>
@@ -322,6 +330,7 @@ function HooksTemplate(quizConfiguration) {
                 <div className='cio-question-buttons-container'>
                   <button {...getPreviousQuestionButtonProps()}>Back</button>
                   <div className='cio-button-container'>
+                    <button {...getSkipQuestionButtonProps()}>Skip</button>
                     <button {...getNextQuestionButtonProps()}>Continue</button>
                   </div>
                 </div>
@@ -352,6 +361,7 @@ function HooksTemplate(quizConfiguration) {
               <div className='cio-question-buttons-container'>
                 <button {...getPreviousQuestionButtonProps()}>Back</button>
                 <div className='cio-button-container'>
+                  <button {...getSkipQuestionButtonProps()}>Skip</button>
                   <button {...getNextQuestionButtonProps()}>Continue</button>
                 </div>
               </div>

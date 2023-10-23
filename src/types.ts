@@ -2,7 +2,6 @@ import {
   QuizResultData,
   NextQuestionResponse,
   QuizResultsResponse,
-  Nullable,
   QuestionOption,
   Question,
 } from '@constructor-io/constructorio-client-javascript/lib/types';
@@ -40,10 +39,16 @@ export namespace QuizResultsEventsProps {
   export type OnAddToCartClick = (result: QuizResultDataPartial) => void;
   export type OnAddToFavoritesClick = (result: QuizResultDataPartial) => void;
   export type OnQuizNextQuestion = (question: QuestionWithAnswer) => void;
+  export type OnQuizSkipQuestion = (question: QuestionWithAnswer) => void;
 }
 
 export interface ResultsPageOptions {
   numResultsToDisplay?: number;
+  favoriteItems?: string[];
+}
+
+export interface QuestionsPageOptions {
+  skipQuestionButtonText?: string;
 }
 
 export interface SessionStateOptions {
@@ -62,6 +67,7 @@ export interface Callbacks {
   onQuizResultClick?: QuizResultsEventsProps.OnQuizResultClick;
   onAddToCartClick: QuizResultsEventsProps.OnAddToCartClick;
   onAddToFavoritesClick?: QuizResultsEventsProps.OnAddToFavoritesClick;
+  onQuizSkipQuestion?: QuizResultsEventsProps.OnQuizSkipQuestion;
 }
 
 export interface IQuizProps {
@@ -75,13 +81,13 @@ export interface IQuizProps {
   primaryColor?: string;
   enableHydration?: boolean;
   callbacks?: Callbacks;
+  questionsPageOptions?: QuestionsPageOptions;
 }
 
 // QUIZ RETURN VALUES
 export interface QuizReturnState {
   answers: {
     inputs: AnswerInputState; // Key is the question Id and value is the answer input
-    isLastAnswer: boolean;
   };
   quiz: {
     requestState: RequestStates;
@@ -96,7 +102,7 @@ export interface QuizReturnState {
 
 export type AnswerInput = {
   type: InputQuestionsTypes;
-  value: string | string[];
+  value: string | Omit<QuestionOption, 'attribute' | 'images'>[] | null;
 };
 
 export type AnswerInputState = {
@@ -125,8 +131,11 @@ export type CurrentQuestion = NextQuestionResponse & {
 };
 
 export namespace QuizEventsReturn {
-  export type QuizAnswerChanged = (payload?: string | string[]) => void;
+  export type QuizAnswerChanged = (
+    payload?: string | Omit<QuestionOption, 'attribute' | 'images'>[]
+  ) => void;
   export type NextQuestion = () => void;
+  export type SkipQuestion = () => void;
   export type PreviousQuestion = () => void;
   export type ResetQuiz = () => void;
   export type ResultClick = (result: QuizResultDataPartial, position: number) => void;
@@ -147,6 +156,7 @@ export namespace QuizEventsReturn {
 
 export interface QuizEventsReturn {
   nextQuestion: QuizEventsReturn.NextQuestion;
+  skipQuestion: QuizEventsReturn.SkipQuestion;
   quizAnswerChanged: QuizEventsReturn.QuizAnswerChanged;
   previousQuestion: QuizEventsReturn.PreviousQuestion;
   resetQuiz: QuizEventsReturn.ResetQuiz;
@@ -168,6 +178,13 @@ export interface OpenTextInputProps {
 export interface CoverQuestionProps {}
 
 export interface NextQuestionButtonProps {
+  className: string;
+  type: 'submit' | 'reset' | 'button' | undefined;
+  disabled?: boolean;
+  onClick: React.MouseEventHandler<HTMLElement>;
+}
+
+export interface SkipQuestionButtonProps {
   className: string;
   type: 'submit' | 'reset' | 'button' | undefined;
   disabled?: boolean;
@@ -204,8 +221,8 @@ export interface AddToCartButtonProps {
 
 export interface QuizImageProps {
   className?: string;
-  src?: Nullable<string>;
-  alt?: Nullable<string>;
+  src?: string;
+  alt?: string;
 }
 
 export interface QuizResultPropsLink {
@@ -236,6 +253,7 @@ export type GetOpenTextInputProps = () => OpenTextInputProps;
 export type GetCoverQuestionProps = () => CoverQuestionProps;
 export type GetSelectInputProps = (option: QuestionOption) => SelectInputProps;
 export type GetNextQuestionButtonProps = () => NextQuestionButtonProps;
+export type GetSkipQuestionButtonProps = () => SkipQuestionButtonProps;
 export type GetPreviousQuestionButtonProps = () => PreviousQuestionButtonProps;
 export type GetResetQuizButtonProps = (
   stylesType?: 'primary' | 'secondary'
@@ -275,6 +293,7 @@ export interface UseQuizReturn {
   events: QuizEventsReturn;
   getOpenTextInputProps: GetOpenTextInputProps;
   getNextQuestionButtonProps: GetNextQuestionButtonProps;
+  getSkipQuestionButtonProps: GetSkipQuestionButtonProps;
   getPreviousQuestionButtonProps: GetPreviousQuestionButtonProps;
   getQuizImageProps: GetQuizImageProps;
   getSelectQuestionImageProps: GetSelectQuestionImageProps;

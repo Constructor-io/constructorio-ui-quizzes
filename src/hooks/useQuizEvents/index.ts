@@ -11,6 +11,7 @@ import useHydrateQuizLocalState from './useHydrateQuizLocalState';
 import useQuizState from '../useQuizState';
 import { resetQuizSessionStorageState } from '../../utils';
 import useQuizAddToFavorites from './useQuizAddToFavorites';
+import useQuizSkipClick from './useQuizSkipClick';
 
 type UseQuizEvents = (
   quizOptions: IQuizProps,
@@ -27,6 +28,7 @@ const useQuizEvents: UseQuizEvents = (quizOptions, cioClient, quizState) => {
     quizSessionStorageState,
   } = quizState;
   const { callbacks } = quizOptions;
+  const { onQuizNextQuestion, onQuizSkipQuestion } = callbacks || {};
 
   // Quiz answer change
   const quizAnswerChanged = useQuizAnswerChangeHandler(quizApiState, dispatchLocalState);
@@ -36,7 +38,14 @@ const useQuizEvents: UseQuizEvents = (quizOptions, cioClient, quizState) => {
     quizApiState,
     quizLocalState,
     dispatchLocalState,
-    callbacks?.onQuizNextQuestion
+    onQuizNextQuestion
+  );
+
+  const skipQuestion = useQuizSkipClick(
+    quizApiState,
+    quizLocalState,
+    dispatchLocalState,
+    onQuizSkipQuestion
   );
 
   // Quiz Back button click callback
@@ -78,6 +87,7 @@ const useQuizEvents: UseQuizEvents = (quizOptions, cioClient, quizState) => {
     quizAnswerChanged,
     previousQuestion,
     nextQuestion,
+    skipQuestion,
     resetQuiz,
     hydrateQuiz: hydrateQuizLocalState,
     resetSessionStorageState: resetQuizSessionStorageState(quizSessionStorageState.key),
