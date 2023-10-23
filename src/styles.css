@@ -741,7 +741,7 @@
   .cio-quiz .cio-results-container {
     padding: 3rem 4rem;
   }
-  .cio-quiz .cio-results-filter-and-redo-container {
+  .cio-quiz .cio-results-button-group {
     display: flex;
     justify-content: space-between;
     align-items: end;
@@ -975,7 +975,7 @@
   gap: 1rem;
 }
 
-.cio-quiz .cio-results-redo-and-share-container {
+.cio-quiz .cio-results-redo-and-share-button-group {
   display: flex;
   gap: 8px;
   align-items: end;
