@@ -144,6 +144,8 @@ e2eInteractionTest.play = async ({ canvasElement }) => {
       'Share or save your quiz results through email or using the link below.'
     )
   ).toBeInTheDocument();
+  await userEvent.click(await canvas.findByText('Copy link'));
+  expect(await canvas.findByText('Link copied to clipboard')).toBeInTheDocument();
   await userEvent.click(await canvas.findByLabelText('Close button'));
 
   // Reset button test
