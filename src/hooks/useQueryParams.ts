@@ -1,9 +1,8 @@
 import { useCallback } from 'react';
 
 const useQueryParams = () => {
-  const queryParams = new URLSearchParams(window.location.search);
-
   const getQueryParam = (queryName) => {
+    const queryParams = new URLSearchParams(window.location.search);
     const queryParam = queryParams.get(queryName);
     if (!queryParam) return [];
 
@@ -13,7 +12,7 @@ const useQueryParams = () => {
   const removeSharedResultsQueryParams = useCallback(() => {
     const updatedUrl = new URL(window.location.href);
     updatedUrl.searchParams.delete('items');
-    updatedUrl.searchParams.delete('options');
+    updatedUrl.searchParams.delete('attributes');
 
     if (!updatedUrl.searchParams.toString().length) {
       updatedUrl.search = '';
@@ -23,10 +22,10 @@ const useQueryParams = () => {
   }, []);
 
   const queryItems = getQueryParam('items');
-  const queryOptions = getQueryParam('options');
-  const isSharedResultsQuery = !!queryItems.length && !!queryOptions.length;
+  const queryAttributes = getQueryParam('attributes');
+  const isSharedResultsQuery = !!queryItems.length && !!queryAttributes.length;
 
-  return { queryItems, queryOptions, isSharedResultsQuery, removeSharedResultsQueryParams };
+  return { queryItems, queryAttributes, isSharedResultsQuery, removeSharedResultsQueryParams };
 };
 
 export default useQueryParams;

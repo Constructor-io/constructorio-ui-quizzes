@@ -20,8 +20,7 @@ type UseQuizApiState = (
   cioClient: ConstructorIOClient,
   quizLocalState: QuizLocalReducerState,
   skipToResults: boolean,
-  dispatchLocalState: React.Dispatch<ActionAnswerQuestion>,
-  isSharedResultsQuery: boolean
+  dispatchLocalState: React.Dispatch<ActionAnswerQuestion>
 ) => { quizApiState: QuizAPIReducerState; dispatchApiState: React.Dispatch<ActionQuizAPI> };
 
 const useQuizApiState: UseQuizApiState = (
@@ -29,13 +28,13 @@ const useQuizApiState: UseQuizApiState = (
   cioClient,
   quizLocalState,
   skipToResults,
-  dispatchLocalState,
-  isSharedResultsQuery
+  dispatchLocalState
+
   // eslint-disable-next-line max-params
 ) => {
   const [quizApiState, dispatchApiState] = useReducer(apiReducer, initialState);
   const { quizId, quizVersionId: quizVersionIdProp, resultsPageOptions } = quizOptions;
-  const { queryItems, queryOptions } = useQueryParams();
+  const { queryItems, queryAttributes, isSharedResultsQuery } = useQueryParams();
   const dispatchQuizResults = async () => {
     try {
       const quizResults = await getQuizResults(cioClient, quizId, {
@@ -68,7 +67,7 @@ const useQuizApiState: UseQuizApiState = (
 
       dispatchApiState({
         type: QuizAPIActionTypes.SET_QUIZ_SHARED_RESULTS,
-        payload: { quizResults: { ...quizResults, attributes: queryOptions } },
+        payload: { quizResults: { ...quizResults, attributes: queryAttributes } },
       });
     } catch (error) {
       dispatchApiState({
