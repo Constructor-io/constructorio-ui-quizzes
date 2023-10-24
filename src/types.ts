@@ -96,7 +96,7 @@ export interface QuizReturnState {
     versionId?: string;
     sessionId?: string;
     currentQuestion?: CurrentQuestion | undefined;
-    results?: QuizResultsResponse | undefined;
+    results?: QuizResultsResponse | QuizSharedResultsData | undefined;
     selectedOptionsWithAttributes?: string[];
   };
   quizSessionStorageState: QuizSessionStorageState;

@@ -8,6 +8,7 @@ import {
   NextQuestionResponse,
   QuizResultsResponse,
   QuizResultDataPartial,
+  QuizSharedResultsData,
 } from '../types';
 import version from '../version';
 
@@ -44,7 +45,7 @@ export const getBrowseResultsForItemIds = async (
 // Tracking requests
 export const trackQuizResultsLoaded = (
   cioClient: ConstructorIOClient,
-  quizResults: QuizResultsResponse
+  quizResults: QuizResultsResponse | QuizSharedResultsData
 ) => {
   const { quiz_id, quiz_session_id, quiz_version_id, result_id, request, response } = quizResults;
 
@@ -69,7 +70,7 @@ export const trackQuizResultsLoaded = (
 
 export const trackQuizResultClick = (
   cioClient: ConstructorIOClient,
-  quizResults: QuizResultsResponse,
+  quizResults: QuizResultsResponse | QuizSharedResultsData,
   result: QuizResultDataPartial,
   position: number
 ) => {
@@ -102,7 +103,7 @@ export const trackQuizResultClick = (
 
 export const trackQuizConversion = (
   cioClient: ConstructorIOClient,
-  quizResults: QuizResultsResponse,
+  quizResults: QuizResultsResponse | QuizSharedResultsData,
   result: QuizResultDataPartial,
   price?: number,
   type?: string

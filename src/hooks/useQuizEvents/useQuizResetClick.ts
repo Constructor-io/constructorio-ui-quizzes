@@ -14,9 +14,8 @@ const useQuizResetClick = (
   dispatchApiState: React.Dispatch<ActionQuizAPI>,
   quizResults?: QuizResultsResponse | QuizSharedResultsData
 ): QuizEventsReturn.NextQuestion => {
-  const { removeQueryParams } = useQueryParams();
+  const { removeSharedResultsQueryParams, isSharedResultsQuery } = useQueryParams();
   const quizResetClickHandler = useCallback(() => {
-    removeQueryParams();
     if (quizResults) {
       dispatchLocalState({
         type: QuestionTypes.Reset,
@@ -25,13 +24,15 @@ const useQuizResetClick = (
         type: QuizAPIActionTypes.RESET_QUIZ,
       });
       resetQuizSessionStorageState();
+      if (isSharedResultsQuery) removeSharedResultsQueryParams();
     }
   }, [
     dispatchLocalState,
     dispatchApiState,
     resetQuizSessionStorageState,
     quizResults,
-    removeQueryParams,
+    removeSharedResultsQueryParams,
+    isSharedResultsQuery,
   ]);
 
   return quizResetClickHandler;

@@ -10,10 +10,14 @@ const useQueryParams = () => {
     return queryParam?.split(',');
   };
 
-  const removeQueryParams = useCallback(() => {
+  const removeSharedResultsQueryParams = useCallback(() => {
     const updatedUrl = new URL(window.location.href);
     updatedUrl.searchParams.delete('items');
     updatedUrl.searchParams.delete('options');
+
+    if (!updatedUrl.searchParams.toString().length) {
+      updatedUrl.search = '';
+    }
 
     window.history.replaceState({}, '', updatedUrl.toString());
   }, []);
@@ -22,7 +26,7 @@ const useQueryParams = () => {
   const queryOptions = getQueryParam('options');
   const isSharedResultsQuery = !!queryItems.length && !!queryOptions.length;
 
-  return { queryItems, queryOptions, isSharedResultsQuery, removeQueryParams };
+  return { queryItems, queryOptions, isSharedResultsQuery, removeSharedResultsQueryParams };
 };
 
 export default useQueryParams;
