@@ -1,3 +1,4 @@
+import { CSSProperties } from 'react';
 import {
   QuizResultData,
   NextQuestionResponse,
@@ -212,7 +213,7 @@ export interface ResetQuizButtonProps {
 export interface ShareResultsButtonProps {
   className: string;
   onClick?: React.MouseEventHandler<HTMLElement>;
-  style?: Record<string, string>;
+  style?: CSSProperties;
 }
 
 export interface HydrateQuizButtonProps {
