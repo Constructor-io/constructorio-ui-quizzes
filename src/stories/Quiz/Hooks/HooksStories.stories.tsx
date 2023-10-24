@@ -3,7 +3,7 @@ import MyQuiz, { addHookStoryCode } from './index';
 import '../../../styles.css';
 import { basicDescription, apiKey, quizId } from '../../../constants';
 import { stringifyWithDefaults } from '../../../utils';
-import { argTypes, storiesControls } from '../argTypes';
+import { argTypes } from '../argTypes';
 import {
   callbacks,
   resultsPageOptions,

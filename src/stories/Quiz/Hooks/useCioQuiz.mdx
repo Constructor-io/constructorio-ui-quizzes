@@ -1,0 +1,327 @@
+import { Meta, Controls, ArgTypes, Title } from '@storybook/blocks';
+import * as HooksStories from './HooksStories.stories';
+import { Markdown } from '@storybook/blocks';
+import { BasicUsage } from '../Component/index.stories';
+import * as ComponentStories from './HooksStories.stories';
+import { e2eInteractionTest } from '../tests/index.stories';
+
+<Meta of={ComponentStories} />
+
+### <Title>useCioQuiz</Title>
+<p>Hook takes [args](#args) as a parameter and returning props giving you complete control over your UI.</p>
+
+### <h2>useCioQuiz Returns</h2>
+
+{/* -------- STATE -------- */}
+### state
+  >This is quiz state. This includes quiz answers and info.
+
+  ```jsx
+  const { state } = useCioQuiz(args);
+  ```
+  
+  <h5>Properties on <b>`state`:</b></h5>
+
+  - `answers`: Is the user entered/selected answers including:
+
+    <Markdown>
+      {`
+      | property          | type                                                          | description                                     |
+      | :---------------- | :----------------------------------                           | :-------------------------------------------    |
+      | inputs            | \`[key: string]: {type: string , value: string | string[];}\` | Is the user entered/selected answers inputs     |
+      | isLastAnswer      | Boolean                                                       | whether it's the last question                  |
+      `}
+    </Markdown>
+
+  <br />
+  - `quiz`: Quiz info including:
+
+    <Markdown>
+    {`
+    | property                      | type                                    | description                          |
+    | :-----------------------------| :---------------------------------------| :------------------------------------|
+    | currentQuestion               | Object                                  | The current question in the quiz.    |
+    | results                       | Object                                  | The quiz results                     |
+    | requestState                  | \`'STALE'|'LOADING'|'SUCCESS'|'ERROR'\` | The API request state                |
+    | versionId                     | string                                  | The quiz version                     |
+    | sessionId                     | string                                  | The quiz session                     |
+    | selectedOptionsWithAttributes | string[]                                | The selected options with attributes |
+    `}
+    </Markdown>
+
+<hr />
+
+{/* -------- EVENTS -------- */}
+### events
+> Events to call to trigger constructor events and quiz actions.
+
+  ```jsx
+  const { events } = useCioQuiz(args);
+  ```
+  Properties on <b>`events`:</b>
+
+  <Markdown>
+  {`
+  | property          | type                                                               | description                                                                   |
+  | :-----------------| :------------------------------------------------------------------| :---------------------------------------------------------------------------- |
+  | nextQuestion      | function() => void                                                 | Action event to go to the next question in the quiz                           |
+  | previousQuestion  | function() => void                                                 | Action event to go to the previous question in the quiz                       |
+  | resetQuiz         | function() => void                                                 | Action event to go to the reset the quiz state and go to the first question    |
+  | resultClick       | function(item) => void item* is the quiz result data)              | Action event to trigger quiz result click events                              |
+  | addToCart         | function(e: React.MouseEvent<HTMLElement>, item, price) => void    | Action event to trigger add to cart click events                              |
+  | addToFavorites    | function(e: React.MouseEvent<HTMLElement>, item, price) => void    | Action event trigger add to favorites click events                            |
+  | hydrateQuiz       | function() => void                                                 | Action event to hydrate the quiz with saved state in session storage on reload|
+  | quizAnswerChanged | \`function(payload: string | string[] ) => void\`                  | Action event to trigger add to cart click events                              |
+  `}
+  </Markdown>
+
+{/* -------- CIO CLIENT -------- */}
+<hr />
+#### `cioClient`
+> Constructor IO client instance.
+
+  ```jsx
+  const { cioClient } = useCioQuiz(args);
+  ```
+
+{/* -------- primaryColorStyles -------- */}
+<hr />
+#### `primaryColorStyles`
+> HSL values of primary theme colors.
+
+  ```jsx
+  const { primaryColorStyles } = useCioQuiz(args);
+  ```
+
+  Properties on <b>`primaryColorStyles`:</b>
+  <Markdown>
+  {`
+  | property              | type        | description                             |
+  | :---------------------| :-----------| :------------------------------         |
+  | --primary-color-h | string  | Hue value of hsl() color function       |
+  | --primary-color-s | string  | Saturation value of hsl() color function|
+  | --primary-color-l | string  | Lightness value of hsl() color function |
+  `}
+  </Markdown>
+
+{/* -------- PROPS GETTERS -------- */}
+<hr />
+
+<h2>Prop getters</h2>
+- ### Quiz questions prop getters
+    - #### `getOpenTextInputProps`
+
+        This method should be applied to an input `<input>` on quiz questions of type OpenText.
+
+        This handles input state, events and styles.
+
+        ```jsx
+        const { getOpenTextInputProps } = useCioQuiz(args);
+
+        const ui = (
+          /* input */
+          <input {...getOpenTextInputProps()} />
+        );
+        ```
+        
+    <br />
+    - #### `getSelectInputProps`
+
+      This method should be applied to an element of type `<li>` or `<dev>` on quiz questions of type SelectQuestion.
+
+      This handles selection state, events and styles.
+
+      It is required to pass an `option` to `getSelectInputProps` in order to be applied.
+
+        - `option`: this is the select question option data that will be selected when the user
+          selects a particular option.
+      <br />
+      ```jsx
+      const { getSelectInputProps, state } = useCioQuiz(args);
+      const currentQuestionData = state.quiz?.currentQuestion?.next_question;
+
+      const ui = (
+        <div>
+          {currentQuestionData.options.map((option) => (
+            <div {...getSelectInputProps(option)}>
+              <div className='cio-question-option-value'>{option.value}</div>
+            </div>
+          ))}
+        </div>
+      );
+      ```
+
+    <br />
+    - #### `getNextQuestionButtonProps`
+
+      This method should be applied to an element of type `<button>` or `<div>` on any quiz question.
+
+      This handles traversing the questions. Next action.
+
+      ```jsx
+      const { getNextQuestionButtonProps } = useCioQuiz(args);
+
+      const ui = (
+        /* button, dev, ... */
+        <button {...getNextQuestionButtonProps()}>Continue</button>
+      );
+      ```
+
+    <br />
+    - #### `getPreviousQuestionButtonProps`
+
+      This method should be applied to an element of type `<button>` or `<div>` on quiz.
+
+      This handles resetting the quiz state and going back to the first question of the quiz.
+
+      ```jsx
+      const { getResetQuizButtonProps } = useCioQuiz(args);
+
+      const ui = (
+        /* button, dev, ... */
+        <button {...getResetQuizButtonProps()}>Reset Quiz</button>
+      );
+      ```
+
+    <br />
+    - #### `getQuizImageProps`
+
+      This method should be applied to an element of type `<image>` or `<div>` on quiz images of any question type.
+
+      ```jsx
+      const { getQuizImageProps } = useCioQuiz(args);
+
+      const ui = (
+        <img {...getQuizImageProps()} className='cio-question-image' />
+      );
+      ```
+
+<br />
+- ### Quiz results prop getters
+    - #### `getAddToCartButtonProps`
+
+      This method should be applied to an element of type `<button>` or `<div>` on quiz results page on quiz result item.
+
+      It is required to pass an `item` and `price` to `getAddToCartButtonProps` in order to apply the logic and tracking.
+
+      - `item`: this is the result item of the quiz that will be selected to be tracked when the user
+        clicks Add to cart button.
+      - `price`: this is the price of the result that will be sent with the tracking event.
+
+      <br />
+      ```jsx
+      const { getAddToCartButtonProps } = useCioQuiz(args);
+
+      const ui = (
+        /* button, dev, ... */
+        <button {...getAddToCartButtonProps(item, price)}>Add to Cart</button>
+      );
+      ```
+
+    <br />
+    - #### `getAddToFavoritesButtonProps`
+
+      This method should be applied to an element of type `<button>` or `<div>` on any quiz question.
+
+      This handles traversing the questions. Back action.
+
+      It is required to pass an `item` and `price` to `getAddToFavoritesButtonProps` in order to apply the logic and tracking.
+
+      - `item`: this is the result item of the quiz that will be selected to be tracked when the user
+        clicks Add to favorites button.
+      - `price`: this is the price of the result that will be sent with the tracking event.
+
+      <br />
+      ```jsx
+      const { getAddToFavoritesButtonProps } = useCioQuiz(args);
+
+      const ui = (
+        /* button, dev, ... */
+        <button {...getAddToCartButtonProps(item, price)}>Add to favorites</button>
+      );
+      ```
+
+    <br />
+    - #### `getQuizResultButtonProps`
+
+      This method should be applied to a product card container of type `<div>` on quiz results page.
+
+      This handles href, events, and tracking.
+
+      It is required to pass an `item` and `position` to `getQuizResultButtonProps` in order to apply the logic and tracking.
+
+      - `item`: this is the result item of the quiz that will be selected to be tracked when the user
+        clicks on it.
+      - `position`: this is the position of the item that will be sent with the tracking event.
+
+      <br />
+      ```jsx
+      const { getQuizResultButtonProps, state } = useCioQuiz(args);
+      const quizResults = state.quiz.results?.response?.results;
+
+      const ui = (
+        <div>
+          {quizResults.map((item, i) => (
+            <div
+              {...getQuizResultButtonProps({
+                result,
+                position: i,
+              })}>
+              <p>{item.value}</p>
+            </div>
+          ))}
+        </div>
+      );
+      ```
+
+    <br />
+    - #### `getQuizResultLinkProps`
+
+      This method should be applied to a product card container of type link `<a>` on quiz results page.
+
+      This handles href, events, and tracking.
+
+      It is required to pass an `item` and `position` to `getQuizResultLinkProps` in order to apply the logic and tracking.
+
+      - `item`: this is the result item of the quiz that will be selected to be tracked when the user
+        clicks on it.
+      - `position`: this is the position of the item that will be sent with the tracking event.
+
+      <br />
+      ```jsx
+      const { getQuizResultLinkProps, state } = useCioQuiz(args);
+      const quizResults = state.quiz.results?.response?.results;
+
+      const ui = (
+        <div>
+          {quizResults.map((item, i) => (
+            <a
+              {...getQuizResultLinkProps({
+                result,
+                position: i,
+              })}>
+              <p>{item.value}</p>
+            </a>
+          ))}
+        </div>
+      );
+      ```
+
+    <br />
+    - #### `getHydrateQuizButtonProps`
+      This method should be applied to an element of type `<button>` or `<div>` to hydrate the quiz with saved state between reloads.
+
+      ```jsx
+      const { getHydrateQuizButtonProps } = useCioQuiz(args);
+
+      const ui = (
+        <button {...getHydrateQuizButtonProps()}>Hydrate quiz</button>
+      );
+      ```
+<br />
+<hr />
+### Args
+Arguments to pass to the `useCioQuiz` hook.
+<ArgTypes of={e2eInteractionTest} />
+
+<hr />
