@@ -29,7 +29,6 @@ const useQuizApiState: UseQuizApiState = (
   quizLocalState,
   skipToResults,
   dispatchLocalState
-
   // eslint-disable-next-line max-params
 ) => {
   const [quizApiState, dispatchApiState] = useReducer(apiReducer, initialState);
