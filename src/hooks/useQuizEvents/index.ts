@@ -70,13 +70,13 @@ const useQuizEvents: UseQuizEvents = (quizOptions, cioClient, quizState) => {
   useQuizResultsLoaded(cioClient, quizApiState, onQuizResultsLoaded);
 
   // Quiz reset
-  const resetQuiz = useQuizResetClick(
-    resetQuizSessionStorageState(quizSessionStorageState.key),
+  const resetQuiz = useQuizResetClick({
+    resetQuizSessionStorageState: resetQuizSessionStorageState(quizSessionStorageState.key),
     dispatchLocalState,
     dispatchApiState,
-    quizApiState.quizResults,
-    quizBasePath
-  );
+    quizResults: quizApiState.quizResults,
+    quizBasePath,
+  });
 
   // Quiz rehydrate
   const hydrateQuizLocalState = useHydrateQuizLocalState(

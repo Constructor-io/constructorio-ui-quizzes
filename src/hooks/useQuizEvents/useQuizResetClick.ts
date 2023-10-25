@@ -13,14 +13,22 @@ import {
 } from '../../types';
 import useQueryParams from '../useQueryParams';
 
-const useQuizResetClick = (
-  resetQuizSessionStorageState: () => void,
-  dispatchLocalState: React.Dispatch<ActionAnswerQuestion>,
-  dispatchApiState: React.Dispatch<ActionQuizAPI>,
-  quizResults?: QuizResultsResponse | QuizSharedResultsData,
-  quizBasePath?: IQuizProps['quizBasePath']
-  // eslint-disable-next-line max-params
-): QuizEventsReturn.NextQuestion => {
+type IUseQuizResetClickProps = {
+  resetQuizSessionStorageState: () => void;
+  dispatchLocalState: React.Dispatch<ActionAnswerQuestion>;
+  dispatchApiState: React.Dispatch<ActionQuizAPI>;
+  quizResults?: QuizResultsResponse | QuizSharedResultsData;
+  quizBasePath?: IQuizProps['quizBasePath'];
+};
+
+const useQuizResetClick = (props: IUseQuizResetClickProps): QuizEventsReturn.NextQuestion => {
+  const {
+    resetQuizSessionStorageState,
+    dispatchLocalState,
+    dispatchApiState,
+    quizResults,
+    quizBasePath,
+  } = props;
   const { removeSharedResultsQueryParams, isSharedResultsQuery } = useQueryParams(quizBasePath);
   const quizResetClickHandler = useCallback(() => {
     if (quizResults) {
