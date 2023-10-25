@@ -1,31 +1,39 @@
 import { useCallback } from 'react';
 
 const useQueryParams = () => {
-  const getQueryParam = (queryName) => {
-    const queryParams = new URLSearchParams(window.location.search);
+  const queryParams = new URLSearchParams(window.location.search);
+  const getParsedQueryParam = (queryName) => {
     const queryParam = queryParams.get(queryName);
     if (!queryParam) return [];
 
     return queryParam?.split(',');
   };
 
+  const queryItems = getParsedQueryParam('items');
+  const queryAttributes = getParsedQueryParam('attributes');
+  const quizBasePath = queryParams.get('quizBasePath');
+  const isSharedResultsQuery = !!queryItems.length && !!queryAttributes.length;
+
   const removeSharedResultsQueryParams = useCallback(() => {
-    const updatedUrl = new URL(window.location.href);
+    const updatedUrl = new URL(quizBasePath ?? window.location.href);
     updatedUrl.searchParams.delete('items');
     updatedUrl.searchParams.delete('attributes');
+    updatedUrl.searchParams.delete('quizBasePath');
 
     if (!updatedUrl.searchParams.toString().length) {
       updatedUrl.search = '';
     }
 
     window.history.replaceState({}, '', updatedUrl.toString());
-  }, []);
+  }, [quizBasePath]);
 
-  const queryItems = getQueryParam('items');
-  const queryAttributes = getQueryParam('attributes');
-  const isSharedResultsQuery = !!queryItems.length && !!queryAttributes.length;
-
-  return { queryItems, queryAttributes, isSharedResultsQuery, removeSharedResultsQueryParams };
+  return {
+    queryItems,
+    queryAttributes,
+    isSharedResultsQuery,
+    quizBasePath,
+    removeSharedResultsQueryParams,
+  };
 };
 
 export default useQueryParams;
