@@ -19,7 +19,6 @@ const useQueryParams = (quizBasePath: IQuizProps['quizBasePath']) => {
     const updatedUrl = new URL(quizBasePath ?? window.location.href);
     updatedUrl.searchParams.delete('items');
     updatedUrl.searchParams.delete('attributes');
-    updatedUrl.searchParams.delete('quizBasePath');
 
     if (!updatedUrl.searchParams.toString().length) {
       updatedUrl.search = '';
