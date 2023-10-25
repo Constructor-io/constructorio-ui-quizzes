@@ -85,7 +85,6 @@ export interface IQuizProps {
   primaryColor?: string;
   enableHydration?: boolean;
   callbacks?: Callbacks;
-  quizBasePath?: string;
   questionsPageOptions?: QuestionsPageOptions;
 }
 

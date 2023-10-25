@@ -38,8 +38,7 @@ export default function CioQuiz(props: IQuizProps) {
 
   const [showSessionPrompt, setShowSessionPrompt] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
-  const { callbacks, sessionStateOptions, questionsPageOptions, resultCardOptions, quizBasePath } =
-    props;
+  const { callbacks, sessionStateOptions, questionsPageOptions, resultCardOptions } = props;
   const {
     quizSessionStorageState: { hasSessionStorageState, skipToResults },
   } = state;
@@ -112,7 +111,6 @@ export default function CioQuiz(props: IQuizProps) {
             showShareModal={showShareModal}
             onClose={() => setShowShareModal(false)}
             quizState={state.quiz}
-            basePath={quizBasePath}
             onEmailResults={callbacks?.onEmailResults}
             containerRef={containerRef.current}
           />

@@ -12,11 +12,10 @@ export default function ShareResultsModal({
   showShareModal,
   onClose,
   quizState,
-  basePath,
   onEmailResults,
   containerRef,
 }: Props) {
-  const urlObj = new URL(basePath || window.location.href);
+  const urlObj = new URL(window.location.href);
   const existingParams = urlObj.searchParams;
   existingParams.set(
     'items',
@@ -71,7 +70,6 @@ type Props = {
   showShareModal: boolean;
   onClose: () => void;
   quizState: QuizReturnState['quiz'];
-  basePath?: string;
   onEmailResults?: (data: { email: string; url: string }) => void;
   containerRef: Element;
 };
