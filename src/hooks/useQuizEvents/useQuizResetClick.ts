@@ -5,16 +5,23 @@ import {
   QuestionTypes,
   QuizAPIActionTypes,
 } from '../../components/CioQuiz/actions';
-import { QuizEventsReturn, QuizResultsResponse, QuizSharedResultsData } from '../../types';
+import {
+  IQuizProps,
+  QuizEventsReturn,
+  QuizResultsResponse,
+  QuizSharedResultsData,
+} from '../../types';
 import useQueryParams from '../useQueryParams';
 
 const useQuizResetClick = (
   resetQuizSessionStorageState: () => void,
   dispatchLocalState: React.Dispatch<ActionAnswerQuestion>,
   dispatchApiState: React.Dispatch<ActionQuizAPI>,
-  quizResults?: QuizResultsResponse | QuizSharedResultsData
+  quizResults?: QuizResultsResponse | QuizSharedResultsData,
+  quizBasePath?: IQuizProps['quizBasePath']
+  // eslint-disable-next-line max-params
 ): QuizEventsReturn.NextQuestion => {
-  const { removeSharedResultsQueryParams, isSharedResultsQuery } = useQueryParams();
+  const { removeSharedResultsQueryParams, isSharedResultsQuery } = useQueryParams(quizBasePath);
   const quizResetClickHandler = useCallback(() => {
     if (quizResults) {
       dispatchLocalState({

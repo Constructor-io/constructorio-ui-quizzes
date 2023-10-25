@@ -32,8 +32,13 @@ const useQuizApiState: UseQuizApiState = (
   // eslint-disable-next-line max-params
 ) => {
   const [quizApiState, dispatchApiState] = useReducer(apiReducer, initialState);
-  const { quizId, quizVersionId: quizVersionIdProp, resultsPageOptions } = quizOptions;
-  const { queryItems, queryAttributes, isSharedResultsQuery } = useQueryParams();
+  const {
+    quizId,
+    quizVersionId: quizVersionIdProp,
+    resultsPageOptions,
+    quizBasePath,
+  } = quizOptions;
+  const { queryItems, queryAttributes, isSharedResultsQuery } = useQueryParams(quizBasePath);
   const dispatchQuizResults = async () => {
     try {
       const quizResults = await getQuizResults(cioClient, quizId, {

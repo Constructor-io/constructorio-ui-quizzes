@@ -1,8 +1,10 @@
 import { useCallback } from 'react';
 
-const useQueryParams = () => {
-  const queryParams = new URLSearchParams(window.location.search);
+import { IQuizProps } from '../types';
+
+const useQueryParams = (quizBasePath: IQuizProps['quizBasePath']) => {
   const getParsedQueryParam = (queryName) => {
+    const queryParams = new URLSearchParams(window.location.search);
     const queryParam = queryParams.get(queryName);
     if (!queryParam) return [];
 
@@ -11,7 +13,6 @@ const useQueryParams = () => {
 
   const queryItems = getParsedQueryParam('items');
   const queryAttributes = getParsedQueryParam('attributes');
-  const quizBasePath = queryParams.get('quizBasePath');
   const isSharedResultsQuery = !!queryItems.length && !!queryAttributes.length;
 
   const removeSharedResultsQueryParams = useCallback(() => {
@@ -31,7 +32,6 @@ const useQueryParams = () => {
     queryItems,
     queryAttributes,
     isSharedResultsQuery,
-    quizBasePath,
     removeSharedResultsQueryParams,
   };
 };
