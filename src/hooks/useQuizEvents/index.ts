@@ -27,7 +27,7 @@ const useQuizEvents: UseQuizEvents = (quizOptions, cioClient, quizState) => {
     quizLocalState,
     quizSessionStorageState,
   } = quizState;
-  const { callbacks, quizBasePath } = quizOptions;
+  const { callbacks } = quizOptions;
   const {
     onAddToCartClick,
     onAddToFavoritesClick,
@@ -75,7 +75,6 @@ const useQuizEvents: UseQuizEvents = (quizOptions, cioClient, quizState) => {
     dispatchLocalState,
     dispatchApiState,
     quizResults: quizApiState.quizResults,
-    quizBasePath,
   });
 
   // Quiz rehydrate

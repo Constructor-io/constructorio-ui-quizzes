@@ -84,7 +84,6 @@ export interface IQuizProps {
   enableHydration?: boolean;
   callbacks?: Callbacks;
   questionsPageOptions?: QuestionsPageOptions;
-  quizBasePath?: string;
 }
 
 // QUIZ RETURN VALUES
