@@ -7,6 +7,7 @@ import LinkField from './LinkField';
 import EmailField from './EmailField';
 
 import { QuizResultsEventsProps, QuizReturnState } from '../../types';
+import useShareResultsLink from '../../hooks/useShareResultsLink';
 
 export default function ShareResultsModal({
   showShareModal,
@@ -15,20 +16,7 @@ export default function ShareResultsModal({
   onEmailResults,
   containerRef,
 }: Props) {
-  const urlObj = new URL(window.location.href);
-  const existingParams = urlObj.searchParams;
-  existingParams.set(
-    'items',
-    quizState.results?.response?.results
-      .filter((item) => item.data?.id)
-      .map((item) => item.data!.id)
-      .join(',') || ''
-  );
-  existingParams.set(
-    'attributes',
-    quizState.selectedOptionsWithAttributes?.map((option) => option).join(',') || ''
-  );
-  const value = urlObj.toString();
+  const url = useShareResultsLink(quizState);
 
   return (
     <Modal
@@ -57,10 +45,8 @@ export default function ShareResultsModal({
             ? 'Share or save your quiz results through email or using the link below.'
             : 'Share or save your quiz results with this link.'}
         </div>
-        {onEmailResults && (
-          <EmailField onSubmit={(email) => onEmailResults({ email, url: value })} />
-        )}
-        <LinkField url={value} />
+        {onEmailResults && <EmailField onSubmit={(email) => onEmailResults({ email, url })} />}
+        <LinkField url={url} />
       </div>
     </Modal>
   );
