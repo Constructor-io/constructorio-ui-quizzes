@@ -83,7 +83,7 @@ export const argTypes = {
     },
   },
   'callbacks.onEmailResults': {
-    description: 'Callback function to be called when emailing results./',
+    description: 'Callback function to be called when emailing results.',
     control: false,
     table: {
       subcategory: 'callbacks',
