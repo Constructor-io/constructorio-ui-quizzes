@@ -24,7 +24,7 @@ export function ComponentTemplate(args: IQuizProps) {
             }
           }
         },
-        onEmailResults: () => {},
+        onEmailResults: async () => {},
       }}
     />
   );

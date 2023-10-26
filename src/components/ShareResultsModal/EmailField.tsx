@@ -52,5 +52,5 @@ export default function EmailField({ onSubmit }: Props) {
 }
 
 type Props = {
-  onSubmit: (email: string) => void;
+  onSubmit: (email: string) => Promise<void>;
 };

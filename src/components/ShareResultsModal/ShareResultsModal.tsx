@@ -6,7 +6,7 @@ import CloseSVG from './CloseSVG';
 import LinkField from './LinkField';
 import EmailField from './EmailField';
 
-import { QuizReturnState } from '../../types';
+import { QuizResultsEventsProps, QuizReturnState } from '../../types';
 
 export default function ShareResultsModal({
   showShareModal,
@@ -70,6 +70,6 @@ type Props = {
   showShareModal: boolean;
   onClose: () => void;
   quizState: QuizReturnState['quiz'];
-  onEmailResults?: (data: { email: string; url: string }) => void;
+  onEmailResults?: QuizResultsEventsProps.OnEmailResults;
   containerRef: Element;
 };

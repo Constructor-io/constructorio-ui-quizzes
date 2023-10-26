@@ -275,7 +275,7 @@ export const callbacks: Callbacks = {
   onQuizResultsLoaded: (item: QuizResultDataPartial) => {
     console.dir(item);
   },
-  onEmailResults: (data: QuizEmailResults) => {
+  onEmailResults: async (data: QuizEmailResults) => {
     console.dir(data);
   },
 };

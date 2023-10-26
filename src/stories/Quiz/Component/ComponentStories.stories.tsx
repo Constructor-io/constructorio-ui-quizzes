@@ -60,7 +60,7 @@ function RenderInASmallContainerTemplate(args: IQuizProps) {
                 }
               }
             },
-            onEmailResults: () => {},
+            onEmailResults: async () => {},
           }}
         />
       </div>

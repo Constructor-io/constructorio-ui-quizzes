@@ -42,7 +42,7 @@ export namespace QuizResultsEventsProps {
   export type OnAddToFavoritesClick = (result: QuizResultDataPartial) => void;
   export type OnQuizNextQuestion = (question: QuestionWithAnswer) => void;
   export type OnQuizSkipQuestion = (question: QuestionWithAnswer) => void;
-  export type OnEmailResults = (data: QuizEmailResults) => void;
+  export type OnEmailResults = (data: QuizEmailResults) => Promise<void>;
 }
 
 export interface ResultsPageOptions {
