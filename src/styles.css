@@ -928,6 +928,8 @@
   border-radius: 8px;
   max-width: 600px;
   width: 100%;
+  padding: 40px;
+  padding-bottom: 80px;
 }
 
 .cio-quiz .cio-share-results-content {
