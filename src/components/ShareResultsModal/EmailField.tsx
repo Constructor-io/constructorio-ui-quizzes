@@ -1,13 +1,7 @@
 import React from 'react';
-import * as z from 'zod';
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 
 import CheckMarkCircleSVG from './CheckMarkCircleSVG';
-
-const emailSchema = z.object({
-  email: z.string().email({ message: 'Please enter a valid email address' }),
-});
 
 interface EmailFieldProps {
   onSubmit: (email: string) => Promise<void>;
@@ -18,9 +12,7 @@ export default function EmailField({ onSubmit }: EmailFieldProps) {
     register,
     handleSubmit,
     formState: { errors, isSubmitSuccessful },
-  } = useForm<{ email: string }>({
-    resolver: zodResolver(emailSchema),
-  });
+  } = useForm<{ email: string }>();
 
   return (
     <div className='cio-share-results-feature-group'>
@@ -32,7 +24,12 @@ export default function EmailField({ onSubmit }: EmailFieldProps) {
               className={`cio-share-results-email-input ${
                 errors.email ? 'cio-share-results-email-input--error' : ''
               }`}
-              {...register('email')}
+              {...register('email', {
+                validate: (value) => {
+                  if (value.length > 0 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return true;
+                  return 'Please enter a valid email address';
+                },
+              })}
             />
             {errors.email && (
               <div className='cio-share-results-email-input-error-message'>
