@@ -9,13 +9,21 @@ import EmailField from './EmailField';
 import { QuizResultsEventsProps, QuizReturnState } from '../../types';
 import useShareResultsLink from '../../hooks/useShareResultsLink';
 
+interface ShareResultsModalProps {
+  showShareModal: boolean;
+  onClose: () => void;
+  quizState: QuizReturnState['quiz'];
+  onEmailResults?: QuizResultsEventsProps.OnEmailResults;
+  containerRef: Element;
+}
+
 export default function ShareResultsModal({
   showShareModal,
   onClose,
   quizState,
   onEmailResults,
   containerRef,
-}: Props) {
+}: ShareResultsModalProps) {
   const url = useShareResultsLink(quizState);
 
   return (
@@ -51,11 +59,3 @@ export default function ShareResultsModal({
     </Modal>
   );
 }
-
-type Props = {
-  showShareModal: boolean;
-  onClose: () => void;
-  quizState: QuizReturnState['quiz'];
-  onEmailResults?: QuizResultsEventsProps.OnEmailResults;
-  containerRef: Element;
-};

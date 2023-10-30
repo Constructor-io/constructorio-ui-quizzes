@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 
 import CheckMarkCircleSVG from './CheckMarkCircleSVG';
 
-export default function LinkField({ url }: Props) {
+interface LinkFieldProps {
+  url: string;
+}
+
+export default function LinkField({ url }: LinkFieldProps) {
   const [isCopied, setIsCopied] = useState(false);
 
   return (
@@ -29,7 +33,3 @@ export default function LinkField({ url }: Props) {
     </div>
   );
 }
-
-type Props = {
-  url: string;
-};

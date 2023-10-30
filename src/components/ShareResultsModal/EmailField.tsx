@@ -9,7 +9,11 @@ const emailSchema = z.object({
   email: z.string().email({ message: 'Please enter a valid email address' }),
 });
 
-export default function EmailField({ onSubmit }: Props) {
+interface EmailFieldProps {
+  onSubmit: (email: string) => Promise<void>;
+}
+
+export default function EmailField({ onSubmit }: EmailFieldProps) {
   const {
     register,
     handleSubmit,
@@ -50,7 +54,3 @@ export default function EmailField({ onSubmit }: Props) {
     </div>
   );
 }
-
-type Props = {
-  onSubmit: (email: string) => Promise<void>;
-};
