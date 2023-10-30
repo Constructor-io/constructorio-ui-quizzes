@@ -3,14 +3,14 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { CoverQuestion } from '@constructor-io/constructorio-client-javascript/lib/types';
 import CoverTypeQuestion from '../../../../components/CoverTypeQuestion/CoverTypeQuestion';
 import { getMockQuestionWithImage, getMockQuestion } from '../../tests/mocks';
-import QuestionTypeDecorator_v2 from './QuestionTypeDecorator_v2';
+import QuestionTypeDecorator from './QuestionTypeDecorator';
 import { QuestionTypes } from '../../../../components/CioQuiz/actions';
 
 const coverQuestionWithImage = getMockQuestionWithImage(QuestionTypes.Cover);
 const coverQuestionWithoutImage = getMockQuestion(QuestionTypes.Cover);
 
 const meta: Meta<typeof CoverTypeQuestion> = {
-  title: 'Quiz/Questions/CoverQuestion',
+  title: 'Quiz/Component/Questions/CoverQuestion',
   component: CoverTypeQuestion,
   argTypes: {},
 };
@@ -18,12 +18,12 @@ const meta: Meta<typeof CoverTypeQuestion> = {
 export default meta;
 type Story = StoryObj<typeof CoverTypeQuestion>;
 
-export const Variations: Story = {
+export const WithImages: Story = {
+  decorators: [(story) => QuestionTypeDecorator(story, [coverQuestionWithImage as CoverQuestion])],
+};
+
+export const WithoutImages: Story = {
   decorators: [
-    (story) =>
-      QuestionTypeDecorator_v2(story, [
-        coverQuestionWithImage as CoverQuestion,
-        coverQuestionWithoutImage as CoverQuestion,
-      ]),
+    (story) => QuestionTypeDecorator(story, [coverQuestionWithoutImage as CoverQuestion]),
   ],
 };

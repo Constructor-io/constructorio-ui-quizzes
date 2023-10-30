@@ -97,3 +97,33 @@ export function YourComponent() {
   );
 }
 ```
+
+### Style Customizations
+If you would like to use a different primary color, pass a \`primaryColor\` string in RGB format ('R, G, B').
+
+Accent colors for borders and different states (hover, focus, active) will be calculated automatically based on the primary color you provided.
+
+By default, the primary color has a value of "35, 71, 199" (Constructor Blue).
+
+In the example below, the \`primaryColor\` prop has been used to override this color to "255, 82, 48" (Orange).
+
+> Advanced Option: Instead of passing a primaryColor prop, you can also override \`--primary-color-h\`, \`--primary-color-s\`, and \`--primary-color-l\` CSS variables within a \`.cio-quiz\` container element. If explicitly given a value in your CSS, then the values of these variables will be used as the HSL values for your quiz.
+
+```jsx
+import CioQuiz from '@constructor-io/constructorio-ui-quizzes';
+import '@constructor-io/constructorio-ui-quizzes/styles.css';
+
+export function YourComponent() {
+  const quizArgs = {
+    quizId: 'coffee-quiz',
+    apiKey: 'key_wJSdZSiesX5hiVLt',
+    primaryColor: "255, 82, 48"
+  };
+
+  return (
+    <CioQuiz
+      {...args}
+    />
+  );
+}
+```
