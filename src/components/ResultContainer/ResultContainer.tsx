@@ -34,7 +34,7 @@ export default function ResultContainer(props: IResultContainerProps) {
       return (
         <div className='cio-results-container'>
           <h1 className='cio-results-title'>{resultsTitle}</h1>
-          <div className='cio-results-button-group'>
+          <div className='cio-results-filter-and-redo-container cio-results-button-group'>
             <ResultFilters hasNoResults={zeroResults} />
             <div className='cio-results-redo-and-share-button-group'>
               <RedoButton />
