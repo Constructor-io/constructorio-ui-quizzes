@@ -208,6 +208,21 @@ export const argTypes = {
       },
     },
   },
+  'resultsPageOptions.showShareResultsButton': {
+    description: 'Boolean for whether or not to show share results button on the results page',
+    control: {
+      type: 'boolean',
+    },
+    table: {
+      subcategory: 'resultCardOptions',
+      defaultValue: {
+        summary: true,
+      },
+      type: {
+        summary: 'boolean',
+      },
+    },
+  },
   'sessionStateOptions.showSessionModal': {
     description:
       'Boolean for whether or not to show session modal to hydrate quiz on the results page',

@@ -4,17 +4,18 @@ import ShareButton from '../ShareButton/ShareButton';
 import QuizContext from '../CioQuiz/context';
 import ResultFilters from '../ResultFilters/ResultFilters';
 import ZeroResults from '../ZeroResults/ZeroResults';
-import { ResultCardOptions } from '../../types';
+import { ResultCardOptions, ResultsPageOptions } from '../../types';
 import Results from '../Results/Results';
 import Spinner from '../Spinner/Spinner';
 
 export interface IResultContainerProps {
   resultCardOptions?: ResultCardOptions;
+  resultsPageOptions?: ResultsPageOptions;
   onShare: () => void;
 }
 
 export default function ResultContainer(props: IResultContainerProps) {
-  const { resultCardOptions, onShare } = props;
+  const { resultCardOptions, onShare, resultsPageOptions } = props;
   const { state } = useContext(QuizContext);
 
   if (resultCardOptions) {
@@ -37,7 +38,7 @@ export default function ResultContainer(props: IResultContainerProps) {
             <ResultFilters hasNoResults={zeroResults} />
             <div className='cio-results-redo-and-share-button-group'>
               <RedoButton />
-              <ShareButton onClick={onShare} />
+              {resultsPageOptions?.showShareResultsButton && <ShareButton onClick={onShare} />}
             </div>
           </div>
           {!zeroResults && (

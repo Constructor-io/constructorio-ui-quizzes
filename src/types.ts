@@ -48,6 +48,7 @@ export namespace QuizResultsEventsProps {
 export interface ResultsPageOptions {
   numResultsToDisplay?: number;
   favoriteItems?: string[];
+  showShareResultsButton?: boolean;
 }
 
 export interface QuestionsPageOptions {

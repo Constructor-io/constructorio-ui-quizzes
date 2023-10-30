@@ -38,7 +38,13 @@ export default function CioQuiz(props: IQuizProps) {
 
   const [showSessionPrompt, setShowSessionPrompt] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
-  const { callbacks, sessionStateOptions, questionsPageOptions, resultCardOptions } = props;
+  const {
+    callbacks,
+    sessionStateOptions,
+    questionsPageOptions,
+    resultCardOptions,
+    resultsPageOptions,
+  } = props;
   const {
     quizSessionStorageState: { hasSessionStorageState, skipToResults },
   } = state;
@@ -121,6 +127,7 @@ export default function CioQuiz(props: IQuizProps) {
             <ResultContainer
               resultCardOptions={resultCardOptions}
               onShare={() => setShowShareModal(true)}
+              resultsPageOptions={resultsPageOptions}
             />
           ) : (
             state.quiz.currentQuestion && (
