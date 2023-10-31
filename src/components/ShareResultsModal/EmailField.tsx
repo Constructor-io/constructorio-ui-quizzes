@@ -26,24 +26,25 @@ export default function EmailField({ onSubmit }: EmailFieldProps) {
     return false;
   };
 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const isValid = validate();
+    if (!isValid) return;
+
+    try {
+      await onSubmit(email);
+      setIsSubmitted(true);
+    } catch (_e) {
+      setFormError({
+        type: 'callback',
+        message: 'Sorry, there was an error sending. Please try again.',
+      });
+    }
+  };
+
   return (
     <div className='cio-share-results-feature-group'>
-      <form
-        onSubmit={async (e) => {
-          e.preventDefault();
-          const isValid = validate();
-          if (!isValid) return;
-
-          try {
-            await onSubmit(email);
-            setIsSubmitted(true);
-          } catch (_e) {
-            setFormError({
-              type: 'callback',
-              message: 'Sorry, there was an error sending. Please try again.',
-            });
-          }
-        }}>
+      <form onSubmit={handleSubmit}>
         <div className='cio-share-results-description'>Share by email</div>
         <div className='cio-share-results-button-group'>
           <div className='cio-share-results-email-input-group'>
