@@ -1016,7 +1016,7 @@
   outline: 3px solid var(--primary-color-variant-100);
 }
 
-.cio-quiz .cio-share-results-copied-notification {
+.cio-quiz .cio-share-results-notification {
   width: 100%;
   padding: 20px;
   border-radius: 8px;
