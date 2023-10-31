@@ -11,8 +11,9 @@ import apiReducer, {
   QuizAPIReducerState,
 } from '../../components/CioQuiz/quizApiReducer';
 import { QuizLocalReducerState } from '../../components/CioQuiz/quizLocalReducer';
-import { getNextQuestion, getQuizResults } from '../../services';
+import { getNextQuestion, getQuizResults, getBrowseResultsForItemIds } from '../../services';
 import { IQuizProps } from '../../types';
+import useQueryParams from '../useQueryParams';
 
 type UseQuizApiState = (
   quizOptions: IQuizProps,
@@ -32,7 +33,7 @@ const useQuizApiState: UseQuizApiState = (
 ) => {
   const [quizApiState, dispatchApiState] = useReducer(apiReducer, initialState);
   const { quizId, quizVersionId: quizVersionIdProp, resultsPageOptions } = quizOptions;
-
+  const { queryItems, queryAttributes, isSharedResultsQuery } = useQueryParams();
   const dispatchQuizResults = async () => {
     try {
       const quizResults = await getQuizResults(cioClient, quizId, {
@@ -59,13 +60,29 @@ const useQuizApiState: UseQuizApiState = (
     }
   };
 
+  const dispatchSharedQuizResults = async () => {
+    try {
+      const quizResults = await getBrowseResultsForItemIds(cioClient, queryItems);
+
+      dispatchApiState({
+        type: QuizAPIActionTypes.SET_QUIZ_SHARED_RESULTS,
+        payload: { quizResults: { ...quizResults, attributes: queryAttributes } },
+      });
+    } catch (error) {
+      dispatchApiState({
+        type: QuizAPIActionTypes.SET_IS_ERROR,
+      });
+    }
+  };
+
   useEffect(() => {
     (async () => {
       dispatchApiState({
         type: QuizAPIActionTypes.SET_IS_LOADING,
       });
-
-      if (skipToResults) {
+      if (isSharedResultsQuery) {
+        await dispatchSharedQuizResults();
+      } else if (skipToResults) {
         await dispatchQuizResults();
       } else {
         try {
@@ -111,7 +128,13 @@ const useQuizApiState: UseQuizApiState = (
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cioClient, quizId, quizLocalState.answers, resultsPageOptions?.numResultsToDisplay]);
+  }, [
+    cioClient,
+    quizId,
+    quizLocalState.answers,
+    resultsPageOptions?.numResultsToDisplay,
+    isSharedResultsQuery,
+  ]);
 
   return {
     quizApiState,

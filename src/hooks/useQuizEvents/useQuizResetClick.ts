@@ -5,14 +5,19 @@ import {
   QuestionTypes,
   QuizAPIActionTypes,
 } from '../../components/CioQuiz/actions';
-import { QuizEventsReturn, QuizResultsResponse } from '../../types';
+import { QuizEventsReturn, QuizResultsResponse, QuizSharedResultsData } from '../../types';
+import useQueryParams from '../useQueryParams';
 
-const useQuizResetClick = (
-  resetQuizSessionStorageState: () => void,
-  dispatchLocalState: React.Dispatch<ActionAnswerQuestion>,
-  dispatchApiState: React.Dispatch<ActionQuizAPI>,
-  quizResults?: QuizResultsResponse
-): QuizEventsReturn.NextQuestion => {
+type IUseQuizResetClickProps = {
+  resetQuizSessionStorageState: () => void;
+  dispatchLocalState: React.Dispatch<ActionAnswerQuestion>;
+  dispatchApiState: React.Dispatch<ActionQuizAPI>;
+  quizResults?: QuizResultsResponse | QuizSharedResultsData;
+};
+
+const useQuizResetClick = (props: IUseQuizResetClickProps): QuizEventsReturn.NextQuestion => {
+  const { resetQuizSessionStorageState, dispatchLocalState, dispatchApiState, quizResults } = props;
+  const { removeSharedResultsQueryParams, isSharedResultsQuery } = useQueryParams();
   const quizResetClickHandler = useCallback(() => {
     if (quizResults) {
       dispatchLocalState({
@@ -22,8 +27,16 @@ const useQuizResetClick = (
         type: QuizAPIActionTypes.RESET_QUIZ,
       });
       resetQuizSessionStorageState();
+      if (isSharedResultsQuery) removeSharedResultsQueryParams();
     }
-  }, [dispatchLocalState, dispatchApiState, resetQuizSessionStorageState, quizResults]);
+  }, [
+    dispatchLocalState,
+    dispatchApiState,
+    resetQuizSessionStorageState,
+    quizResults,
+    removeSharedResultsQueryParams,
+    isSharedResultsQuery,
+  ]);
 
   return quizResetClickHandler;
 };
