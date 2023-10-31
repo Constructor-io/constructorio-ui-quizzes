@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import QuizContext, { QuizContextValue } from './context';
 import QuizQuestions from '../QuizQuestions';
 import ResultContainer from '../ResultContainer/ResultContainer';
@@ -33,8 +33,6 @@ export default function CioQuiz(props: IQuizProps) {
     primaryColorStyles,
     getShareResultsButtonProps,
   } = useQuiz(props);
-
-  const containerRef = useRef<HTMLDivElement | null>(null);
 
   const [showSessionPrompt, setShowSessionPrompt] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
@@ -101,7 +99,6 @@ export default function CioQuiz(props: IQuizProps) {
     return (
       <div
         className='cio-quiz'
-        ref={containerRef}
         style={{ overflow: showShareModal || showSessionPrompt ? 'hidden' : undefined }}>
         {displayBackgroundImage && renderImages(questionImages, 'cio-question-background-image')}
         <style>.cio-quiz {convertPrimaryColorsToString(primaryColorStyles)}</style>
@@ -112,13 +109,11 @@ export default function CioQuiz(props: IQuizProps) {
           setShowSessionPrompt={setShowSessionPrompt}
         />
 
-        {state.quiz && containerRef.current && (
+        {state.quiz && showShareModal && (
           <ShareResultsModal
-            showShareModal={showShareModal}
             onClose={() => setShowShareModal(false)}
             quizState={state.quiz}
             onEmailResults={callbacks?.onEmailResults}
-            containerRef={containerRef.current}
           />
         )}
 

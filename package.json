@@ -104,7 +104,6 @@
     "webpack": "^5.75.0"
   },
   "dependencies": {
-    "react-hook-form": "^7.47.0",
-    "react-responsive-modal": "^6.4.2"
+    "react-hook-form": "^7.47.0"
   }
 }
