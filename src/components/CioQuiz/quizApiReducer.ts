@@ -1,5 +1,10 @@
 import { RequestStates } from '../../constants';
-import { CurrentQuestion, NextQuestionResponse, QuizResultsResponse } from '../../types';
+import {
+  CurrentQuestion,
+  NextQuestionResponse,
+  QuizResultsResponse,
+  QuizSharedResultsData,
+} from '../../types';
 import { getQuestionTypes } from '../../utils';
 import { QuizAPIActionTypes, ActionQuizAPI } from './actions';
 
@@ -7,7 +12,7 @@ export type QuizAPIReducerState = {
   quizRequestState: RequestStates;
   quizCurrentQuestion?: CurrentQuestion;
   quizFirstQuestion?: NextQuestionResponse;
-  quizResults?: QuizResultsResponse;
+  quizResults?: QuizResultsResponse | QuizSharedResultsData;
   selectedOptionsWithAttributes?: string[];
 };
 
@@ -75,6 +80,15 @@ export default function apiReducer(
         quizResults: action.payload?.quizResults,
         quizCurrentQuestion: undefined,
         selectedOptionsWithAttributes,
+      };
+    }
+    case QuizAPIActionTypes.SET_QUIZ_SHARED_RESULTS: {
+      return {
+        ...state,
+        quizRequestState: RequestStates.Success,
+        quizResults: action.payload?.quizResults,
+        quizCurrentQuestion: undefined,
+        selectedOptionsWithAttributes: action.payload?.quizResults.attributes,
       };
     }
 
