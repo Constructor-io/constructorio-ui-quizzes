@@ -48,6 +48,7 @@ function RenderInASmallContainerTemplate(args: IQuizProps) {
           {...args}
           resultsPageOptions={{
             favoriteItems: favorites,
+            showShareResultsButton: true,
           }}
           callbacks={{
             onAddToCartClick: () => {},
@@ -60,6 +61,7 @@ function RenderInASmallContainerTemplate(args: IQuizProps) {
                 }
               }
             },
+            onEmailResults: async () => {},
           }}
         />
       </div>

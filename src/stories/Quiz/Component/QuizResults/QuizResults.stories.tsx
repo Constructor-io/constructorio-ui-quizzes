@@ -10,7 +10,7 @@ import QuizResultsDecorator from './QuizResultsDecorator';
 const meta: Meta<typeof ResultContainer> = {
   title: 'Quiz/Results/QuizResultsPage',
   component: ResultContainer,
-  argTypes: {},
+  argTypes: { onShare: { action: 'onShare' } },
 };
 
 export default meta;
@@ -20,9 +20,9 @@ export const QuizResultsPage: Story = {
   args: {
     resultCardOptions,
   },
-  render: () => (
+  render: (args) => (
     <div className='results-example-wrapper'>
-      <ResultContainer resultCardOptions={resultCardOptions} />
+      <ResultContainer resultCardOptions={resultCardOptions} onShare={args.onShare} />
     </div>
   ), // eslint-disable-line
   decorators: [(story) => QuizResultsDecorator(story)],

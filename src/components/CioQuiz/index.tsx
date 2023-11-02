@@ -7,6 +7,7 @@ import { RequestStates } from '../../constants';
 import Spinner from '../Spinner/Spinner';
 import useQuiz from '../../hooks/useQuiz';
 import SessionPromptModal from '../SessionPromptModal/SessionPromptModal';
+import ShareResultsModal from '../ShareResultsModal/ShareResultsModal';
 import { IQuizProps } from '../../types';
 import { convertPrimaryColorsToString, renderImages } from '../../utils';
 import ProgressBar from '../ProgressBar/ProgressBar';
@@ -30,10 +31,18 @@ export default function CioQuiz(props: IQuizProps) {
     getResetQuizButtonProps,
     getSelectInputProps,
     primaryColorStyles,
+    getShareResultsButtonProps,
   } = useQuiz(props);
 
   const [showSessionPrompt, setShowSessionPrompt] = useState(false);
-  const { callbacks, sessionStateOptions, questionsPageOptions, resultCardOptions } = props;
+  const [showShareModal, setShowShareModal] = useState(false);
+  const {
+    callbacks,
+    sessionStateOptions,
+    questionsPageOptions,
+    resultCardOptions,
+    resultsPageOptions,
+  } = props;
   const {
     quizSessionStorageState: { hasSessionStorageState, skipToResults },
   } = state;
@@ -65,6 +74,7 @@ export default function CioQuiz(props: IQuizProps) {
     getQuizResultButtonProps,
     getQuizResultLinkProps,
     getResetQuizButtonProps,
+    getShareResultsButtonProps,
     getSelectInputProps,
     customClickItemCallback: !!callbacks?.onQuizResultClick,
     customAddToFavoritesCallback: !!callbacks?.onAddToFavoritesClick,
@@ -87,7 +97,9 @@ export default function CioQuiz(props: IQuizProps) {
 
   if (state.quiz.requestState === RequestStates.Success) {
     return (
-      <div className='cio-quiz'>
+      <div
+        className='cio-quiz'
+        style={{ overflow: showShareModal || showSessionPrompt ? 'hidden' : undefined }}>
         {displayBackgroundImage && renderImages(questionImages, 'cio-question-background-image')}
         <style>.cio-quiz {convertPrimaryColorsToString(primaryColorStyles)}</style>
         <SessionPromptModal
@@ -96,9 +108,22 @@ export default function CioQuiz(props: IQuizProps) {
           showSessionPrompt={showSessionPrompt}
           setShowSessionPrompt={setShowSessionPrompt}
         />
+
+        {state.quiz && showShareModal && (
+          <ShareResultsModal
+            onClose={() => setShowShareModal(false)}
+            quizState={state.quiz}
+            onEmailResults={callbacks?.onEmailResults}
+          />
+        )}
+
         <QuizContext.Provider value={contextValue}>
           {state.quiz.results || skipToResults ? (
-            <ResultContainer resultCardOptions={resultCardOptions} />
+            <ResultContainer
+              resultCardOptions={resultCardOptions}
+              onShare={() => setShowShareModal(true)}
+              resultsPageOptions={resultsPageOptions}
+            />
           ) : (
             state.quiz.currentQuestion && (
               <>

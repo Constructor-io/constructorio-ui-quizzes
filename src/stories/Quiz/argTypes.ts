@@ -82,6 +82,20 @@ export const argTypes = {
       },
     },
   },
+  'callbacks.onEmailResults': {
+    description: 'Callback function to be called when emailing results.',
+    control: false,
+    table: {
+      subcategory: 'callbacks',
+      defaultValue: {
+        summary: 'null',
+      },
+      type: {
+        summary: '(args) => void',
+        detail: '(args: QuizEmailResults) => void',
+      },
+    },
+  },
   cioJsClient: {
     description:
       'Optional custom constructor instance. Either `apiKey` or `cioJsClient` are required',
@@ -191,6 +205,21 @@ export const argTypes = {
       subcategory: 'resultsPageOptions',
       type: {
         summary: 'string[]',
+      },
+    },
+  },
+  'resultsPageOptions.showShareResultsButton': {
+    description: 'Boolean for whether or not to show share results button on the results page',
+    control: {
+      type: 'boolean',
+    },
+    table: {
+      subcategory: 'resultCardOptions',
+      defaultValue: {
+        summary: true,
+      },
+      type: {
+        summary: 'boolean',
       },
     },
   },

@@ -5,6 +5,7 @@ import {
   Callbacks,
   InputQuestionsTypes,
   QuestionWithAnswer,
+  QuizEmailResults,
   QuizResultDataPartial,
   QuizReturnState,
   ResultCardOptions,
@@ -226,6 +227,10 @@ export const useMockContextValue = (question?: Question): QuizContextValue => {
     getQuizResultButtonProps: () => mockElementProps,
     getQuizResultLinkProps: () => mockElementProps,
     getResetQuizButtonProps: () => ({ ...mockElementProps, className: 'cio-question-redo-button' }),
+    getShareResultsButtonProps: () => ({
+      ...mockElementProps,
+      className: 'cio-question-share-results-button',
+    }),
     primaryColorStyles: {
       '--primary-color-h': '12',
       '--primary-color-s': '14',
@@ -239,6 +244,7 @@ export const useMockContextValue = (question?: Question): QuizContextValue => {
 export const resultsPageOptions: ResultsPageOptions = {
   numResultsToDisplay: 10,
   favoriteItems: ['119010868', '119011085'],
+  showShareResultsButton: true,
 };
 
 export const resultCardOptions: ResultCardOptions = {
@@ -269,5 +275,8 @@ export const callbacks: Callbacks = {
   },
   onQuizResultsLoaded: (item: QuizResultDataPartial) => {
     console.dir(item);
+  },
+  onEmailResults: async (data: QuizEmailResults) => {
+    console.dir(data);
   },
 };

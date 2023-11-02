@@ -12,6 +12,7 @@ export function ComponentTemplate(args: IQuizProps) {
       {...args}
       resultsPageOptions={{
         favoriteItems: favorites,
+        showShareResultsButton: true,
       }}
       callbacks={{
         onAddToCartClick: () => {},
@@ -24,6 +25,7 @@ export function ComponentTemplate(args: IQuizProps) {
             }
           }
         },
+        onEmailResults: async () => {},
       }}
     />
   );

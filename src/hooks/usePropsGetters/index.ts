@@ -16,6 +16,7 @@ import {
   GetSelectQuestionImageProps,
   GetAddToFavoritesButtonProps,
   GetSkipQuestionButtonProps,
+  GetShareResultsButtonProps,
 } from '../../types';
 import { QuizAPIReducerState } from '../../components/CioQuiz/quizApiReducer';
 import { QuizLocalReducerState } from '../../components/CioQuiz/quizLocalReducer';
@@ -85,6 +86,11 @@ const usePropsGetters = (
       onClick: () => resetQuiz(),
     }),
     [resetQuiz]
+  );
+
+  const getShareResultsButtonProps: GetShareResultsButtonProps = useCallback(
+    () => ({ className: 'cio-question-share-results-button' }),
+    []
   );
 
   const getHydrateQuizButtonProps: GetHydrateQuizButtonProps = useCallback(
@@ -169,6 +175,7 @@ const usePropsGetters = (
     getSelectInputProps,
     getCoverQuestionProps,
     getResetQuizButtonProps,
+    getShareResultsButtonProps,
     getHydrateQuizButtonProps,
     getAddToCartButtonProps,
     getAddToFavoritesButtonProps,

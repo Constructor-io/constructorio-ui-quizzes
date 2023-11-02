@@ -1,3 +1,4 @@
+import { CSSProperties } from 'react';
 import {
   QuizResultData,
   NextQuestionResponse,
@@ -25,6 +26,7 @@ export type {
 } from '@constructor-io/constructorio-client-javascript/lib/types';
 
 export type QuizResultDataPartial = Partial<QuizResultData>;
+export type QuizEmailResults = { email: string; url: string };
 
 // QUIZ PROPS
 export interface ResultCardOptions {
@@ -42,11 +44,13 @@ export namespace QuizResultsEventsProps {
   export type OnAddToFavoritesClick = (result: QuizResultDataPartial) => void;
   export type OnQuizNextQuestion = (question: QuestionWithAnswer) => void;
   export type OnQuizSkipQuestion = (question: QuestionWithAnswer) => void;
+  export type OnEmailResults = (data: QuizEmailResults) => Promise<void>;
 }
 
 export interface ResultsPageOptions {
   numResultsToDisplay?: number;
   favoriteItems?: string[];
+  showShareResultsButton?: boolean;
 }
 
 export interface QuestionsPageOptions {
@@ -70,6 +74,7 @@ export interface Callbacks {
   onAddToCartClick: QuizResultsEventsProps.OnAddToCartClick;
   onAddToFavoritesClick?: QuizResultsEventsProps.OnAddToFavoritesClick;
   onQuizSkipQuestion?: QuizResultsEventsProps.OnQuizSkipQuestion;
+  onEmailResults?: QuizResultsEventsProps.OnEmailResults;
 }
 
 export interface IQuizProps {
@@ -210,6 +215,12 @@ export interface ResetQuizButtonProps {
   style?: Record<string, string>;
 }
 
+export interface ShareResultsButtonProps {
+  className: string;
+  onClick?: React.MouseEventHandler<HTMLElement>;
+  style?: CSSProperties;
+}
+
 export interface HydrateQuizButtonProps {
   className: string;
   type: 'submit' | 'reset' | 'button' | undefined;
@@ -263,6 +274,7 @@ export type GetPreviousQuestionButtonProps = () => PreviousQuestionButtonProps;
 export type GetResetQuizButtonProps = (
   stylesType?: 'primary' | 'secondary'
 ) => ResetQuizButtonProps;
+export type GetShareResultsButtonProps = () => ShareResultsButtonProps;
 export type GetHydrateQuizButtonProps = () => HydrateQuizButtonProps;
 export type GetAddToCartButtonProps = (
   result: QuizResultDataPartial,
@@ -305,6 +317,7 @@ export interface UseQuizReturn {
   getSelectInputProps: GetSelectInputProps;
   getCoverQuestionProps: GetCoverQuestionProps;
   getResetQuizButtonProps: GetResetQuizButtonProps;
+  getShareResultsButtonProps: GetShareResultsButtonProps;
   getHydrateQuizButtonProps: GetHydrateQuizButtonProps;
   getAddToCartButtonProps: GetAddToCartButtonProps;
   getAddToFavoritesButtonProps: GetAddToFavoritesButtonProps;
