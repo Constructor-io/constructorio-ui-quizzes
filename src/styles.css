@@ -1092,7 +1092,7 @@
 
 
 .results-matched-options-container {
-  --grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  --grid-template-columns: repeat(3, minmax(80px, 33%));
   display: grid;
   grid-template-columns: var(--grid-template-columns);
   width: 100%;
