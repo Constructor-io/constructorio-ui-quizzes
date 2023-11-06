@@ -44,7 +44,7 @@ export default function ResultMatchedOptions(props: ResultMatchedOptionsProps) {
   return (
     <div className='results-matched-options-container'>
       {selectedOptionsWithAttributes.map((option) => (
-        <div key={option} className='results-matched-options'>
+        <div key={option} className='results-matched-options' title={option}>
           <div>{matchedOptions.includes(option) ? <TickSVG /> : <CloseSVG />}</div>
           <p>{option}</p>
         </div>
