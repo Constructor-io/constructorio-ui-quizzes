@@ -76,6 +76,10 @@ export default function apiReducer(
         action.payload?.quizResults.quiz_selected_options
           .filter((option) => option.has_attribute)
           .map((option) => option.value) || [];
+      const matchedOptions =
+        action.payload?.quizResults.quiz_selected_options
+          .filter((option) => option.is_matched)
+          .map((option) => option.value) || [];
 
       return {
         ...state,
@@ -83,7 +87,7 @@ export default function apiReducer(
         quizResults: action.payload?.quizResults,
         quizCurrentQuestion: undefined,
         selectedOptionsWithAttributes,
-        matchedOptions: action.payload?.quizResults.relevant_options,
+        matchedOptions,
       };
     }
     case QuizAPIActionTypes.SET_QUIZ_SHARED_RESULTS: {
