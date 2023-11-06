@@ -157,6 +157,7 @@ export const getMockState = (question?: Question): QuizReturnState => ({
       ],
     },
     selectedOptionsWithAttributes: ['Chocolate', 'Medium'],
+    matchedOptions: ['Chocolate'],
   },
   quizSessionStorageState: {
     key: quizSessionStateKey,

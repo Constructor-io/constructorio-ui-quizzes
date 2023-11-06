@@ -14,6 +14,7 @@ export type QuizAPIReducerState = {
   quizFirstQuestion?: NextQuestionResponse;
   quizResults?: QuizResultsResponse | QuizSharedResultsData;
   selectedOptionsWithAttributes?: string[];
+  matchedOptions?: string[];
 };
 
 export const initialState: QuizAPIReducerState = {
@@ -39,6 +40,7 @@ export default function apiReducer(
         quizCurrentQuestion: undefined,
         quizResults: undefined,
         selectedOptionsWithAttributes: undefined,
+        matchedOptions: undefined,
       };
     case QuizAPIActionTypes.SET_CURRENT_QUESTION: {
       const {
@@ -66,6 +68,7 @@ export default function apiReducer(
         quizFirstQuestion,
         quizResults: undefined,
         selectedOptionsWithAttributes: undefined,
+        matchedOptions: undefined,
       };
     }
     case QuizAPIActionTypes.SET_QUIZ_RESULTS: {
@@ -80,6 +83,7 @@ export default function apiReducer(
         quizResults: action.payload?.quizResults,
         quizCurrentQuestion: undefined,
         selectedOptionsWithAttributes,
+        matchedOptions: action.payload?.quizResults.relevant_options,
       };
     }
     case QuizAPIActionTypes.SET_QUIZ_SHARED_RESULTS: {
