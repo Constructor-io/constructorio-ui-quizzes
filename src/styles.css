@@ -1104,8 +1104,6 @@
 }
 
 .results-matched-options {
-  --flex-direction: row;
-  flex-direction: var(--flex-direction, row);
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -1124,7 +1122,7 @@
   }
 
   .results-matched-options {
-    --flex-direction: row-reverse;
+    flex-direction: row-reverse;
     justify-content: space-between;
   }
 }
