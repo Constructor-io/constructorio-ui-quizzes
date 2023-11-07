@@ -1,0 +1,49 @@
+import { Meta, Controls, ArgTypes, Title, Markdown } from '@storybook/blocks';
+import * as HooksStories from '../HooksStories.stories';
+import { e2eInteractionTest } from '../../tests/index.stories';
+import StateDocs from './MDX-Components/StateDocs.mdx';
+import EventsDocs from './MDX-Components/EventsDocs.mdx';
+import QuizQuestionsPropGettersDocs from './MDX-Components/QuizQuestionsPropGettersDocs.mdx';
+import QuizResultsPropGettersDocs from './MDX-Components/QuizResultsPropGettersDocs.mdx';
+import PrimaryColorStylesDocs from './MDX-Components/PrimaryColorStylesDocs.mdx';
+import CioClientDocs from './MDX-Components/CioClientDocs.mdx';
+
+<Meta of={HooksStories} />
+
+### <Title>useCioQuiz</Title>
+<p>Hook takes [args](#args) as a parameter and returning props giving you complete control over your UI.</p>
+
+### <h2>useCioQuiz Returns</h2>
+
+{/* -------- STATE -------- */}
+<StateDocs />
+<hr />
+
+{/* -------- EVENTS -------- */}
+<EventsDocs />
+<hr />
+
+{/* -------- CIO CLIENT -------- */}
+### cioClient
+<CioClientDocs />
+<hr />
+
+{/* -------- primaryColorStyles -------- */}
+### primaryColorStyles
+<PrimaryColorStylesDocs />
+<hr />
+
+{/* -------- PROPS GETTERS -------- */}
+<h2>Prop getters</h2>
+
+<QuizQuestionsPropGettersDocs />
+
+<br />
+<QuizResultsPropGettersDocs />
+<br />
+<hr />
+### Args
+Arguments to pass to the `useCioQuiz` hook.
+<ArgTypes of={e2eInteractionTest} />
+
+<hr />

@@ -28,7 +28,14 @@ const useQuizEvents: UseQuizEvents = (quizOptions, cioClient, quizState) => {
     quizSessionStorageState,
   } = quizState;
   const { callbacks } = quizOptions;
-  const { onQuizNextQuestion, onQuizSkipQuestion } = callbacks || {};
+  const {
+    onAddToCartClick,
+    onAddToFavoritesClick,
+    onQuizNextQuestion,
+    onQuizResultClick,
+    onQuizResultsLoaded,
+    onQuizSkipQuestion,
+  } = callbacks || {};
 
   // Quiz answer change
   const quizAnswerChanged = useQuizAnswerChangeHandler(quizApiState, dispatchLocalState);
@@ -52,19 +59,15 @@ const useQuizEvents: UseQuizEvents = (quizOptions, cioClient, quizState) => {
   const previousQuestion = useQuizBackClick(quizApiState, dispatchLocalState);
 
   // Quiz result add to cart callback
-  const addToCart = useQuizAddToCart(cioClient, quizApiState, callbacks?.onAddToCartClick);
+  const addToCart = useQuizAddToCart(cioClient, quizApiState, onAddToCartClick);
 
   // Quiz result click callback
-  const resultClick = useQuizResultClick(cioClient, quizApiState, callbacks?.onQuizResultClick);
+  const resultClick = useQuizResultClick(cioClient, quizApiState, onQuizResultClick);
 
-  const addToFavorites = useQuizAddToFavorites(
-    cioClient,
-    quizApiState,
-    callbacks?.onAddToFavoritesClick
-  );
+  const addToFavorites = useQuizAddToFavorites(cioClient, quizApiState, onAddToFavoritesClick);
 
   // Quiz results loaded event
-  useQuizResultsLoaded(cioClient, quizApiState, callbacks?.onQuizResultsLoaded);
+  useQuizResultsLoaded(cioClient, quizApiState, onQuizResultsLoaded);
 
   // Quiz reset
   const resetQuiz = useQuizResetClick(

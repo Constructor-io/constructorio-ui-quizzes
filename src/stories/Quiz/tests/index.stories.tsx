@@ -1,11 +1,10 @@
-/* eslint-disable no-console */
 import { within, userEvent } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 import CioQuiz from '../../../components/CioQuiz';
 import { argTypes, docsControls } from '../argTypes';
-import { sleep, stringifyWithDefaults } from '../../../utils';
-import { ComponentTemplate, addComponentStoryDescription } from '../Component';
-import { basicDescription, apiKey, quizId } from '../../../constants';
+import { sleep } from '../../../utils';
+import ComponentTemplate from '../Component';
+import { apiKey, quizId } from '../../../constants';
 import { callbacks, resultsPageOptions, resultCardOptions } from './mocks';
 
 export default {
@@ -40,11 +39,6 @@ e2eInteractionTest.args = {
   resultCardOptions,
   enableHydration: false,
 };
-addComponentStoryDescription(
-  e2eInteractionTest,
-  `const args = ${stringifyWithDefaults(e2eInteractionTest.args)}`,
-  basicDescription
-);
 
 e2eInteractionTest.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);

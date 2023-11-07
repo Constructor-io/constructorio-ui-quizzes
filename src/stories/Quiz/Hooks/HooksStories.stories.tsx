@@ -1,23 +1,32 @@
-/* eslint-disable no-console */
-import MyQuiz, { addHookStoryCode } from './index';
+import type { Meta } from '@storybook/react';
+import HooksTemplate from './index';
 import '../../../styles.css';
-import { basicDescription, apiKey, quizId } from '../../../constants';
-import { stringifyWithDefaults } from '../../../utils';
-import { argTypes } from '../argTypes';
+import { apiKey, quizId } from '../../../constants';
+import { argTypes, storiesControls } from '../argTypes';
 import {
-  callbacks,
   resultsPageOptions,
-  sessionStateOptions,
   resultCardOptions,
+  callbacks,
+  sessionStateOptions,
 } from '../tests/mocks';
 
-export default {
+const meta: Meta<typeof HooksTemplate> = {
   title: 'Quiz/Hooks',
-  component: MyQuiz,
+  component: HooksTemplate,
+  parameters: {
+    controls: storiesControls,
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
   argTypes,
 };
 
-export const BasicUsage = MyQuiz.bind({});
+export default meta;
+
+export const BasicUsage = HooksTemplate.bind({});
 BasicUsage.args = {
   quizId,
   apiKey,
@@ -28,9 +37,3 @@ BasicUsage.args = {
   sessionStateOptions,
   primaryColor: '35, 71, 199',
 };
-
-addHookStoryCode(
-  BasicUsage,
-  `const args = ${stringifyWithDefaults(BasicUsage.args)}`,
-  basicDescription
-);
