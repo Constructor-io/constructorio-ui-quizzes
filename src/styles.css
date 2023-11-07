@@ -1090,7 +1090,6 @@
   }
 }
 
-
 .results-matched-options-container {
   --grid-template-columns: repeat(3, minmax(80px, 33%));
   display: grid;
@@ -1098,7 +1097,7 @@
   width: 100%;
   flex-wrap: wrap;
   margin-bottom: 1rem;
-  gap: 0.5rem;
+  gap: 0.25rem 0.5rem;
   color: var(--gray-dust-500);
   font-size: 15px;
 }

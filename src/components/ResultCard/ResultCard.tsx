@@ -99,7 +99,7 @@ export default function ResultCard(props: ResultCardOptions) {
         <ResultFavoritesButton item={result} price={salePrice || regularPrice} />
       )}
       {!customClickItemCallback ? resultCardContentWithLink() : resultCardContentWithoutLink()}
-      {selectedOptionsWithAttributes && matchedOptions && (
+      {selectedOptionsWithAttributes && matchedOptions && !!matchedOptions.length && (
         <ResultMatchedOptions
           matchedOptions={matchedOptions}
           selectedOptionsWithAttributes={selectedOptionsWithAttributes}
