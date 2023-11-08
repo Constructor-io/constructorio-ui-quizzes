@@ -16,17 +16,15 @@ export default function Popover(props: PopoverProps) {
   useOutsideClick(popoverRef, () => setIsOpen(false));
 
   return (
-    <div>
-      <div className='popover-container' ref={popoverRef}>
-        <button
-          className='popover-trigger-button'
-          type='button'
-          onClick={() => setIsOpen((val) => !val)}>
-          {popoverTrigger}
-        </button>
-        <div className={`popover-content-container ${placement} ${isOpen ? 'open' : ''}`}>
-          {children}
-        </div>
+    <div className='popover-container' ref={popoverRef}>
+      <button
+        className='popover-trigger-button'
+        type='button'
+        onClick={() => setIsOpen((val) => !val)}>
+        {popoverTrigger}
+      </button>
+      <div className={`popover-content-container ${placement}${isOpen ? ' open' : ''}`}>
+        {children}
       </div>
     </div>
   );

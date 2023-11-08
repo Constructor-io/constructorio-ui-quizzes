@@ -50,7 +50,7 @@ export default function ResultMatchedOptions(props: ResultMatchedOptionsProps) {
             {matchedOptions.length} relevant matches
           </p>
         }>
-        <div className='results-matched-options-container'>
+        <div className='results-matched-options-popover'>
           {selectedOptionsWithAttributes.map((option) => (
             <div key={option} className='results-matched-options' title={option}>
               <p>{option}</p>
