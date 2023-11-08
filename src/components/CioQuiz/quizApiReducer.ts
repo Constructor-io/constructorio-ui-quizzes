@@ -78,7 +78,7 @@ export default function apiReducer(
           .map((option) => option.value) || [];
       const matchedOptions =
         action.payload?.quizResults.quiz_selected_options
-          .filter((option) => option.is_matched)
+          .filter((option) => option.is_matched && option.has_attribute)
           .map((option) => option.value) || [];
 
       return {

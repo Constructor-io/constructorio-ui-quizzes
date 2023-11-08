@@ -1,4 +1,5 @@
 import React from 'react';
+import Popover from '../Popover/Popover';
 
 interface ResultMatchedOptionsProps {
   matchedOptions: string[];
@@ -43,12 +44,21 @@ export default function ResultMatchedOptions(props: ResultMatchedOptionsProps) {
   const { matchedOptions, selectedOptionsWithAttributes } = props;
   return (
     <div className='results-matched-options-container'>
-      {selectedOptionsWithAttributes.map((option) => (
-        <div key={option} className='results-matched-options' title={option}>
-          <div>{matchedOptions.includes(option) ? <TickSVG /> : <CloseSVG />}</div>
-          <p>{option}</p>
+      <Popover
+        popoverTrigger={
+          <p className='results-matched-option-overview'>
+            {matchedOptions.length} relevant matches
+          </p>
+        }>
+        <div className='results-matched-options-container'>
+          {selectedOptionsWithAttributes.map((option) => (
+            <div key={option} className='results-matched-options' title={option}>
+              <p>{option}</p>
+              <div>{matchedOptions.includes(option) ? <TickSVG /> : <CloseSVG />}</div>
+            </div>
+          ))}
         </div>
-      ))}
+      </Popover>
     </div>
   );
 }
