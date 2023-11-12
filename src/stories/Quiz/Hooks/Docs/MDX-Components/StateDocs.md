@@ -6,12 +6,12 @@
   const { state } = useCioQuiz(args);
   ```
 
-- `answers`: Is the user entered/selected answers including:
+- `answers`: User entered/selected answers including:
   
   | property    | type                                                          | description                                 |
   |-------------|---------------------------------------------------------------|---------------------------------------------|
-  | inputs      | `[key: string]: {type: string , value: string | string[];}` | Is the user entered/selected answers inputs |
-  | isLastAnswer| Boolean                                                       | whether it's the last question              |
+  | inputs      | `[key: string]: {type: string , value: string | string[];}`   | User entered/selected answers inputs |
+  | isLastAnswer| Boolean                                                       | True if it's the last question, False otherwise|
 
 
 - `quiz`: Quiz info including:

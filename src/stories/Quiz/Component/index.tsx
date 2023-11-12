@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import CioQuiz from '../../../components/CioQuiz';
 import { IQuizProps } from '../../../types';
 
-function ComponentTemplate(args: IQuizProps) {
+export default function ComponentTemplate(args: IQuizProps) {
   const [favorites, setFavorites] = useState<string[]>([]);
 
   return (
@@ -26,5 +26,3 @@ function ComponentTemplate(args: IQuizProps) {
     />
   );
 }
-
-export default ComponentTemplate;
