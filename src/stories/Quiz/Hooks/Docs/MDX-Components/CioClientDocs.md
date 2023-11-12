@@ -1,4 +1,4 @@
-import { Markdown } from '@storybook/blocks';
+### cioClient
 
 > Constructor IO client instance.
 

@@ -1,4 +1,4 @@
-import { Markdown } from '@storybook/blocks';
+### primaryColorStyles
 
 > HSL values of primary theme colors.
 
@@ -6,13 +6,8 @@ import { Markdown } from '@storybook/blocks';
   const { primaryColorStyles } = useCioQuiz(args);
   ```
 
-  Properties on <b>`primaryColorStyles`:</b>
-  <Markdown>
-  {`
-  | property              | type        | description                             |
-  | :---------------------| :-----------| :------------------------------         |
+  | property              | type        | description                     |
+  | :---------------------| :-----------| :------------------------------ |
   | --primary-color-h | string  | Hue value of hsl() color function       |
   | --primary-color-s | string  | Saturation value of hsl() color function|
   | --primary-color-l | string  | Lightness value of hsl() color function |
-  `}
-  </Markdown>

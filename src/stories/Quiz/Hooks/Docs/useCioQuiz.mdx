@@ -1,49 +1,43 @@
 import { Meta, Controls, ArgTypes, Title, Markdown } from '@storybook/blocks';
 import * as HooksStories from '../HooksStories.stories';
 import { e2eInteractionTest } from '../../tests/index.stories';
-import StateDocs from './MDX-Components/StateDocs.mdx';
-import EventsDocs from './MDX-Components/EventsDocs.mdx';
-import QuizQuestionsPropGettersDocs from './MDX-Components/QuizQuestionsPropGettersDocs.mdx';
-import QuizResultsPropGettersDocs from './MDX-Components/QuizResultsPropGettersDocs.mdx';
-import PrimaryColorStylesDocs from './MDX-Components/PrimaryColorStylesDocs.mdx';
-import CioClientDocs from './MDX-Components/CioClientDocs.mdx';
+import StateDocs from './MDX-Components/StateDocs.md';
+import EventsDocs from './MDX-Components/EventsDocs.md';
+import QuizQuestionsPropGettersDocs from './MDX-Components/QuizQuestionsPropGettersDocs.md';
+import QuizResultsPropGettersDocs from './MDX-Components/QuizResultsPropGettersDocs.md';
+import PrimaryColorStylesDocs from './MDX-Components/PrimaryColorStylesDocs.md';
+import CioClientDocs from './MDX-Components/CioClientDocs.md';
 
 <Meta of={HooksStories} />
 
-### <Title>useCioQuiz</Title>
+# useCioQuiz
 <p>Hook takes [args](#args) as a parameter and returning props giving you complete control over your UI.</p>
 
-### <h2>useCioQuiz Returns</h2>
+## Returns
 
 {/* -------- STATE -------- */}
-<StateDocs />
+<Markdown>{StateDocs}</Markdown>
 <hr />
 
 {/* -------- EVENTS -------- */}
-<EventsDocs />
+<Markdown>{EventsDocs}</Markdown>
 <hr />
 
 {/* -------- CIO CLIENT -------- */}
-### cioClient
-<CioClientDocs />
+<Markdown>{CioClientDocs}</Markdown>
 <hr />
 
 {/* -------- primaryColorStyles -------- */}
-### primaryColorStyles
-<PrimaryColorStylesDocs />
+<Markdown>{PrimaryColorStylesDocs}</Markdown>
 <hr />
 
 {/* -------- PROPS GETTERS -------- */}
-<h2>Prop getters</h2>
+### Prop Getters
+The hook useCioQuiz also returns a number of prop getters that enable you to quickly obtain the props you need for certain HTML elements, allowing you to easily get the full benefit of Constructor's tracking and styling without any hassle.
 
-<QuizQuestionsPropGettersDocs />
+Note: Any callbacks passed when calling the useCioQuiz hook, will also be returned as part of the props.
 
-<br />
-<QuizResultsPropGettersDocs />
-<br />
+<Markdown>{QuizQuestionsPropGettersDocs}</Markdown>
 <hr />
-### Args
-Arguments to pass to the `useCioQuiz` hook.
-<ArgTypes of={e2eInteractionTest} />
-
+<Markdown>{QuizResultsPropGettersDocs}</Markdown>
 <hr />
