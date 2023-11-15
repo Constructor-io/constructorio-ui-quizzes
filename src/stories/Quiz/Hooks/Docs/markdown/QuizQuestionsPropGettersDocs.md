@@ -2,7 +2,7 @@
 
   - ##### `getOpenTextInputProps`
 
-    This methods returns the props that should be applied to an input `<input>` on quiz questions of type OpenText.
+    This method returns the props that should be applied to an input `<input>` on quiz questions of type OpenText.
 
     This handles input state, events and styles.
 
