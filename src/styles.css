@@ -560,7 +560,7 @@
 }
 .cio-quiz .cio-result-card-image {
   width: auto;
-  height: 240px;
+  height: 500px;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 10px;
@@ -576,6 +576,7 @@
   flex-direction: column;
   justify-content: space-between;
   text-decoration: none;
+  background-color: blue;
 }
 .cio-quiz .cio-result-card-title {
   color: var(--gray-dust-500);
