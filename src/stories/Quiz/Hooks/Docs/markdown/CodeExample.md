@@ -1,26 +1,17 @@
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable react/button-has-type */
-import { QuestionOption } from '@constructor-io/constructorio-client-javascript/lib/types';
-import React from 'react';
-import RedoSVG from '../../../components/RedoButton/RedoSVG';
-import { useCioQuiz } from '../../../index';
-import '../../../styles.css';
-import { convertPrimaryColorsToString } from '../../../utils';
-
-export default function HooksTemplate(args) {
-  const {
+### Code Example
+Full hook usage example
+```jsx
+ const {
     state,
     getOpenTextInputProps,
     getNextQuestionButtonProps,
     getPreviousQuestionButtonProps,
-    getSkipQuestionButtonProps,
     getQuizImageProps,
     getSelectQuestionImageProps,
     getSelectInputProps,
     getResetQuizButtonProps,
     getQuizResultButtonProps,
     getAddToCartButtonProps,
-    primaryColorStyles,
   } = useCioQuiz(args);
 
   if (state.quiz.requestState === 'SUCCESS') {
@@ -107,7 +98,6 @@ export default function HooksTemplate(args) {
       if (currentQuestion.isOpenQuestion) {
         return (
           <div className='cio-quiz'>
-            <style>.cio-quiz {convertPrimaryColorsToString(primaryColorStyles)}</style>
             <div className='cio-container--with-image cio-open-text-question-container--with-image'>
               {currentQuestionData.images?.primary_url && (
                 <span className='cio-question-image-container'>
@@ -121,7 +111,6 @@ export default function HooksTemplate(args) {
                 <div className='cio-question-buttons-container'>
                   <button {...getPreviousQuestionButtonProps()}>Back</button>
                   <div className='cio-button-container'>
-                    <button {...getSkipQuestionButtonProps()}>Skip</button>
                     <button {...getNextQuestionButtonProps()}>Continue</button>
                   </div>
                 </div>
@@ -147,7 +136,6 @@ export default function HooksTemplate(args) {
                 <div className='cio-question-buttons-container'>
                   <button {...getPreviousQuestionButtonProps()}>Back</button>
                   <div className='cio-button-container'>
-                    <button {...getSkipQuestionButtonProps()}>Skip</button>
                     <button {...getNextQuestionButtonProps()}>Continue</button>
                   </div>
                 </div>
@@ -178,7 +166,6 @@ export default function HooksTemplate(args) {
               <div className='cio-question-buttons-container'>
                 <button {...getPreviousQuestionButtonProps()}>Back</button>
                 <div className='cio-button-container'>
-                  <button {...getSkipQuestionButtonProps()}>Skip</button>
                   <button {...getNextQuestionButtonProps()}>Continue</button>
                 </div>
               </div>
@@ -189,4 +176,5 @@ export default function HooksTemplate(args) {
     }
   }
   return null;
-}
+```
+

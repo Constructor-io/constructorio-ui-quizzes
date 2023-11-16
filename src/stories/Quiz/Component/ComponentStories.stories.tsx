@@ -4,7 +4,7 @@ import ConstructorIOClient from '@constructor-io/constructorio-client-javascript
 import type { Meta } from '@storybook/react';
 import CioQuiz from '../../../components/CioQuiz';
 import { argTypes, storiesControls } from '../argTypes';
-import { ComponentTemplate } from '.';
+import ComponentTemplate from '.';
 import { apiKey, quizId } from '../../../constants';
 import {
   callbacks,

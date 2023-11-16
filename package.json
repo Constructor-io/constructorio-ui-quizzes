@@ -41,6 +41,8 @@
   },
   "types": "lib/types/index.d.ts",
   "scripts": {
+    "storybook-docs-dev": "storybook dev --docs -p 6007",
+    "build-storybook-docs": "storybook build --docs",
     "lint": "eslint src --ext js,ts,jsx,tsx",
     "check-types": "npx tsc --noEmit",
     "copy-styles": "cp src/styles.css lib/styles.css",

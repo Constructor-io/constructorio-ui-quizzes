@@ -1,0 +1,46 @@
+import { Meta, Markdown } from '@storybook/blocks';
+import * as HooksStories from '../HooksStories.stories';
+import StateDocs from './markdown/StateDocs.md';
+import EventsDocs from './markdown/EventsDocs.md';
+import QuizQuestionsPropGettersDocs from './markdown/QuizQuestionsPropGettersDocs.md';
+import QuizResultsPropGettersDocs from './markdown/QuizResultsPropGettersDocs.md';
+import PrimaryColorStylesDocs from './markdown/PrimaryColorStylesDocs.md';
+import CioClientDocs from './markdown/CioClientDocs.md';
+
+<Meta of={HooksStories} />
+
+# useCioQuiz
+<p>Hook takes [args](#args) as a parameter and returning props giving you complete control over your UI.</p>
+
+>The hook useCioQuiz also returns a number of prop getters that enable you to quickly obtain the props you need for certain HTML elements, allowing you to easily get the full benefit of Constructor's tracking and styling without any hassle.
+
+>Note: Any callbacks passed when calling the useCioQuiz hook, will also be returned as part of the props.
+
+## Returns
+
+{/* -------- STATE -------- */}
+<Markdown>{StateDocs}</Markdown>
+<hr />
+
+{/* -------- EVENTS -------- */}
+<Markdown>{EventsDocs}</Markdown>
+<hr />
+
+{/* -------- CIO CLIENT -------- */}
+<Markdown>{CioClientDocs}</Markdown>
+<hr />
+
+{/* -------- primaryColorStyles -------- */}
+<Markdown>{PrimaryColorStylesDocs}</Markdown>
+<hr />
+
+{/* -------- PROPS GETTERS -------- */}
+### Prop Getters
+The hook useCioQuiz also returns a number of prop getters that enable you to quickly obtain the props you need for certain HTML elements, allowing you to easily get the full benefit of Constructor's tracking and styling without any hassle.
+
+Note: Any callbacks passed when calling the useCioQuiz hook, will also be returned as part of the props.
+
+<Markdown>{QuizQuestionsPropGettersDocs}</Markdown>
+<hr />
+<Markdown>{QuizResultsPropGettersDocs}</Markdown>
+<hr />
