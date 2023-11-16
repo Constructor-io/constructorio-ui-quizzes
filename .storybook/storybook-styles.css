@@ -39,7 +39,8 @@
 }
 
 .cio-quiz .results-example-wrapper .cio-result-card:only-child {
-  margin: 100px auto auto auto;
+  margin: auto;
+  padding: 20px;
 }
 
 /* Desktop */
@@ -95,9 +96,14 @@
   text-align: center;
 }
 
-.story-variations{
+.story-variations {
   display: flex;
   flex-direction: column;
+}
+
+.story-variations h3 {
+  text-align: center;
+  margin: 50px;
 }
 
 /* 42 pixels are padding + border and the calc here to match the width of cio-quiz */

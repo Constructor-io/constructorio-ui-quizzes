@@ -1,5 +1,6 @@
 import QuizContext from '../../../../components/CioQuiz/context';
 import { useMockContextValue } from '../../tests/mocks';
+import StoryPreview from '../../utils/StoryPreview';
 
 const React = require('react');
 const ReactDOM = require('react-dom');
@@ -16,7 +17,7 @@ export default function QuizResultsDecorator(Story: any) {
     <div className='cio-quiz'>
       <QuizContext.Provider value={contextValue}>
         <div>
-          <Story />
+          <StoryPreview Component={Story} />
         </div>
       </QuizContext.Provider>
     </div>

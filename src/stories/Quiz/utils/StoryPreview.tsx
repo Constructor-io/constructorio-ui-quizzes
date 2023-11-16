@@ -3,20 +3,19 @@ import StoryVariations from './StoryVariations';
 
 export interface IStoryPreviewProps {
   Component: (props: any) => JSX.Element;
-  variationsArgsList: any[];
 }
 
 export default function StoryPreview(props: IStoryPreviewProps) {
-  const { Component, variationsArgsList } = props;
+  const { Component } = props;
   return (
     <div className='story-preview'>
       <h1 className='story-title'>Primary</h1>
       <div className='box'>
         <div className='cio-quiz'>
-          <Component {...variationsArgsList[0]} />
+          <Component />
         </div>
       </div>
-      <StoryVariations Component={Component} variationsArgsList={variationsArgsList} />
+      <StoryVariations Component={Component} />
     </div>
   );
 }
