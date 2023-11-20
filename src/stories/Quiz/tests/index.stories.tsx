@@ -138,6 +138,29 @@ e2eInteractionTest.play = async ({ canvasElement }) => {
       'Share or save your quiz results through email or using the link below.'
     )
   ).toBeInTheDocument();
+
+  // Add mock clipboard functions that don't require user permissions and replace the native clipboard
+  const mockClipboard = {
+    data: '',
+    writeText(text) {
+      this.data = text;
+      return Promise.resolve();
+    },
+    readText() {
+      return Promise.resolve(this.data);
+    },
+  };
+
+  if (typeof global.navigator === 'undefined') {
+    global.navigator = {} as any;
+  }
+
+  Object.defineProperty(window.navigator, 'clipboard', {
+    value: mockClipboard,
+    writable: true,
+    configurable: true,
+  });
+
   await userEvent.click(await canvas.findByText('Copy link'));
   expect(await canvas.findByText('Link copied to clipboard')).toBeInTheDocument();
   await userEvent.click(await canvas.findByLabelText('Close button'));
