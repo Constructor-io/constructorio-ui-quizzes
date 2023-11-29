@@ -95,7 +95,7 @@ const useQuizApiState: UseQuizApiState = (
       dispatchApiState({
         type: QuizAPIActionTypes.SET_IS_LOADING,
       });
-      dispatchQuizResultsConfig();
+      if (typeof quizApiState.resultsConfig === 'undefined') dispatchQuizResultsConfig();
       if (isSharedResultsQuery) {
         await dispatchSharedQuizResults();
       } else if (skipToResults) {
