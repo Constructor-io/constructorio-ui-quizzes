@@ -19,6 +19,8 @@ export type {
   Question,
   NextQuestionResponse,
   QuizResultsResponse,
+  QuizResultsConfigResponse,
+  QuizResultsConfig,
   BrowseResultData,
   BrowseRequestType,
   QuizzesParameters,

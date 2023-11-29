@@ -5,6 +5,7 @@ import {
   QuestionOption,
   QuizResultsResponse,
   QuizSharedResultsData,
+  QuizResultsConfigResponse,
 } from '../../types';
 import type { QuizLocalReducerState } from './quizLocalReducer';
 
@@ -59,6 +60,7 @@ export enum QuizAPIActionTypes {
   SET_CURRENT_QUESTION,
   RESET_QUIZ,
   SET_QUIZ_SHARED_RESULTS,
+  SET_QUIZ_RESULTS_CONFIG,
 }
 
 export type ActionSetIsLoading = Action<QuizAPIActionTypes.SET_IS_LOADING>;
@@ -80,11 +82,15 @@ export type ActionSetCurrentQuestion = Action<
 >;
 
 export type ActionResetQuiz = Action<QuizAPIActionTypes.RESET_QUIZ>;
-
+export type ActionSetQuizResultsConfig = Action<
+  QuizAPIActionTypes.SET_QUIZ_RESULTS_CONFIG,
+  { quizResultsConfig: QuizResultsConfigResponse }
+>;
 export type ActionQuizAPI =
   | ActionSetIsLoading
   | ActionSetIsError
   | ActionSetQuizResults
   | ActionSetCurrentQuestion
   | ActionResetQuiz
-  | ActionSetQuizSharedResults;
+  | ActionSetQuizSharedResults
+  | ActionSetQuizResultsConfig;

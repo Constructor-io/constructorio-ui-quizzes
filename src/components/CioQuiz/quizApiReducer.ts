@@ -4,6 +4,7 @@ import {
   NextQuestionResponse,
   QuizResultsResponse,
   QuizSharedResultsData,
+  QuizResultsConfig,
 } from '../../types';
 import { getQuestionTypes } from '../../utils';
 import { QuizAPIActionTypes, ActionQuizAPI } from './actions';
@@ -14,6 +15,7 @@ export type QuizAPIReducerState = {
   quizFirstQuestion?: NextQuestionResponse;
   quizResults?: QuizResultsResponse | QuizSharedResultsData;
   selectedOptionsWithAttributes?: string[];
+  resultsConfig?: QuizResultsConfig | null;
 };
 
 export const initialState: QuizAPIReducerState = {
@@ -89,6 +91,12 @@ export default function apiReducer(
         quizResults: action.payload?.quizResults,
         quizCurrentQuestion: undefined,
         selectedOptionsWithAttributes: action.payload?.quizResults.attributes,
+      };
+    }
+    case QuizAPIActionTypes.SET_QUIZ_RESULTS_CONFIG: {
+      return {
+        ...state,
+        resultsConfig: action.payload?.quizResultsConfig.results_config,
       };
     }
 

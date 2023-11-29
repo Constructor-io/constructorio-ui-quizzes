@@ -11,7 +11,12 @@ import apiReducer, {
   QuizAPIReducerState,
 } from '../../components/CioQuiz/quizApiReducer';
 import { QuizLocalReducerState } from '../../components/CioQuiz/quizLocalReducer';
-import { getNextQuestion, getQuizResults, getBrowseResultsForItemIds } from '../../services';
+import {
+  getNextQuestion,
+  getQuizResults,
+  getBrowseResultsForItemIds,
+  getQuizResultsConfig,
+} from '../../services';
 import { IQuizProps } from '../../types';
 import useQueryParams from '../useQueryParams';
 
@@ -60,6 +65,16 @@ const useQuizApiState: UseQuizApiState = (
     }
   };
 
+  const dispatchQuizResultsConfig = async () => {
+    const quizResultsConfig = await getQuizResultsConfig(cioClient, quizId, {
+      quizVersionId: quizLocalState.quizVersionId,
+    });
+    dispatchApiState({
+      type: QuizAPIActionTypes.SET_QUIZ_RESULTS_CONFIG,
+      payload: { quizResultsConfig },
+    });
+  };
+
   const dispatchSharedQuizResults = async () => {
     try {
       const quizResults = await getBrowseResultsForItemIds(cioClient, queryItems);
@@ -80,6 +95,7 @@ const useQuizApiState: UseQuizApiState = (
       dispatchApiState({
         type: QuizAPIActionTypes.SET_IS_LOADING,
       });
+      dispatchQuizResultsConfig();
       if (isSharedResultsQuery) {
         await dispatchSharedQuizResults();
       } else if (skipToResults) {
