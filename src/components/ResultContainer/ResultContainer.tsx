@@ -51,8 +51,6 @@ export default function ResultContainer(props: IResultContainerProps) {
     resultsDescription = '';
   }
 
-  console.log('resultsConfig', resultsConfig);
-
   if (state?.quiz.results) {
     return (
       <div className='cio-results-container'>

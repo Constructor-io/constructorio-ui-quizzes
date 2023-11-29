@@ -1089,4 +1089,6 @@
 
 .cio-results-description {
   margin: 0;
+  color: var(--gray-dust-500);
+  margin-bottom: 1rem;
 }
