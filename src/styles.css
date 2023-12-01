@@ -471,8 +471,7 @@
   margin-left: auto;
 }
 .cio-quiz .cio-results-title {
-  margin-top: 0;
-  margin-bottom: 1rem;
+  margin: 0;
   color: var(--gray-dust-500);
 }
 .cio-quiz .cio-results-filter-container {
@@ -1087,8 +1086,15 @@
   }
 }
 
-.cio-results-description {
+.cio-quiz .cio-results-description {
   margin: 0;
   color: var(--gray-dust-500);
+  font-weight: bold;
+}
+
+.cio-quiz .cio-results-title-container {
   margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }

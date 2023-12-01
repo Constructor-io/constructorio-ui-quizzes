@@ -44,7 +44,7 @@ export default function ResultContainer(props: IResultContainerProps) {
   if (zeroResults) {
     resultsDescription = '';
   } else if (resultsConfig === null) {
-    resultsDescription = 'Based on your answers, these are our recommendations.';
+    resultsDescription = '';
   } else if (resultsConfig?.description?.is_active) {
     resultsDescription = resultsConfig.description.text ?? '';
   } else {
@@ -54,8 +54,10 @@ export default function ResultContainer(props: IResultContainerProps) {
   if (state?.quiz.results) {
     return (
       <div className='cio-results-container'>
-        <h1 className='cio-results-title'>{resultsTitle}</h1>
-        <p className='cio-results-description'>{resultsDescription}</p>
+        <div className='cio-results-title-container'>
+          <h1 className='cio-results-title'>{resultsTitle}</h1>
+          <p className='cio-results-description'>{resultsDescription}</p>
+        </div>
         <div className='cio-results-filter-and-redo-container cio-results-button-group'>
           <ResultFilters hasNoResults={zeroResults} />
           <div className='cio-results-redo-and-share-button-group'>
