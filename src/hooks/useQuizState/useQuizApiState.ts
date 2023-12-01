@@ -92,10 +92,16 @@ const useQuizApiState: UseQuizApiState = (
 
   useEffect(() => {
     (async () => {
+      dispatchQuizResultsConfig();
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    (async () => {
       dispatchApiState({
         type: QuizAPIActionTypes.SET_IS_LOADING,
       });
-      if (typeof quizApiState.resultsConfig === 'undefined') dispatchQuizResultsConfig();
       if (isSharedResultsQuery) {
         await dispatchSharedQuizResults();
       } else if (skipToResults) {
