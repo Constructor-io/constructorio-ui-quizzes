@@ -66,13 +66,20 @@ const useQuizApiState: UseQuizApiState = (
   };
 
   const dispatchQuizResultsConfig = async () => {
-    const quizResultsConfig = await getQuizResultsConfig(cioClient, quizId, {
-      quizVersionId: quizLocalState.quizVersionId,
-    });
-    dispatchApiState({
-      type: QuizAPIActionTypes.SET_QUIZ_RESULTS_CONFIG,
-      payload: { quizResultsConfig },
-    });
+    try {
+      const quizResultsConfig = await getQuizResultsConfig(cioClient, quizId, {
+        quizVersionId: quizLocalState.quizVersionId,
+      });
+      dispatchApiState({
+        type: QuizAPIActionTypes.SET_QUIZ_RESULTS_CONFIG,
+        payload: { quizResultsConfig },
+      });
+    } catch (error) {
+      dispatchApiState({
+        type: QuizAPIActionTypes.SET_QUIZ_RESULTS_CONFIG_ERROR,
+        payload: { quizResultsConfigError: null },
+      });
+    }
   };
 
   const dispatchSharedQuizResults = async () => {

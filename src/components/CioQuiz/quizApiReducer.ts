@@ -100,6 +100,13 @@ export default function apiReducer(
       };
     }
 
+    case QuizAPIActionTypes.SET_QUIZ_RESULTS_CONFIG_ERROR: {
+      return {
+        ...state,
+        resultsConfig: null,
+      };
+    }
+
     case QuizAPIActionTypes.RESET_QUIZ:
       return { ...initialState };
     default:

@@ -61,6 +61,7 @@ export enum QuizAPIActionTypes {
   RESET_QUIZ,
   SET_QUIZ_SHARED_RESULTS,
   SET_QUIZ_RESULTS_CONFIG,
+  SET_QUIZ_RESULTS_CONFIG_ERROR,
 }
 
 export type ActionSetIsLoading = Action<QuizAPIActionTypes.SET_IS_LOADING>;
@@ -82,10 +83,12 @@ export type ActionSetCurrentQuestion = Action<
 >;
 
 export type ActionResetQuiz = Action<QuizAPIActionTypes.RESET_QUIZ>;
-export type ActionSetQuizResultsConfig = Action<
-  QuizAPIActionTypes.SET_QUIZ_RESULTS_CONFIG,
-  { quizResultsConfig: QuizResultsConfigResponse }
->;
+export type ActionSetQuizResultsConfig =
+  | Action<
+      QuizAPIActionTypes.SET_QUIZ_RESULTS_CONFIG,
+      { quizResultsConfig: QuizResultsConfigResponse }
+    >
+  | Action<QuizAPIActionTypes.SET_QUIZ_RESULTS_CONFIG_ERROR>;
 export type ActionQuizAPI =
   | ActionSetIsLoading
   | ActionSetIsError
