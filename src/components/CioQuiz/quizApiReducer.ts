@@ -101,7 +101,7 @@ export default function apiReducer(
     }
 
     case QuizAPIActionTypes.RESET_QUIZ:
-      return { ...initialState, resultsConfig: state.resultsConfig };
+      return { ...initialState };
     default:
       return state;
   }

@@ -91,9 +91,9 @@ const useQuizApiState: UseQuizApiState = (
   };
 
   useEffect(() => {
-    dispatchQuizResultsConfig();
+    if (!quizApiState.resultsConfig) dispatchQuizResultsConfig();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [quizApiState.resultsConfig]);
 
   useEffect(() => {
     (async () => {
