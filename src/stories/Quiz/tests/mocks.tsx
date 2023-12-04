@@ -157,6 +157,18 @@ export const getMockState = (question?: Question): QuizReturnState => ({
       ],
     },
     selectedOptionsWithAttributes: ['Chocolate', 'Medium'],
+    resultsConfig: {
+      desktop: {
+        description: {
+          is_active: false,
+          text: '',
+        },
+        title: {
+          is_active: true,
+          text: 'Here are your results',
+        },
+      },
+    },
   },
   quizSessionStorageState: {
     key: quizSessionStateKey,
