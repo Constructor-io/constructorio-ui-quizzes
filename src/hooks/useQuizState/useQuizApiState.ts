@@ -11,7 +11,12 @@ import apiReducer, {
   QuizAPIReducerState,
 } from '../../components/CioQuiz/quizApiReducer';
 import { QuizLocalReducerState } from '../../components/CioQuiz/quizLocalReducer';
-import { getNextQuestion, getQuizResults, getBrowseResultsForItemIds } from '../../services';
+import {
+  getNextQuestion,
+  getQuizResults,
+  getBrowseResultsForItemIds,
+  getQuizResultsConfig,
+} from '../../services';
 import { IQuizProps } from '../../types';
 import useQueryParams from '../useQueryParams';
 
@@ -60,6 +65,23 @@ const useQuizApiState: UseQuizApiState = (
     }
   };
 
+  const dispatchQuizResultsConfig = async () => {
+    try {
+      const quizResultsConfig = await getQuizResultsConfig(cioClient, quizId, {
+        quizVersionId: quizLocalState.quizVersionId,
+      });
+      dispatchApiState({
+        type: QuizAPIActionTypes.SET_QUIZ_RESULTS_CONFIG,
+        payload: { quizResultsConfig },
+      });
+    } catch (error) {
+      dispatchApiState({
+        type: QuizAPIActionTypes.SET_QUIZ_RESULTS_CONFIG_ERROR,
+        payload: { quizResultsConfigError: null },
+      });
+    }
+  };
+
   const dispatchSharedQuizResults = async () => {
     try {
       const quizResults = await getBrowseResultsForItemIds(cioClient, queryItems);
@@ -74,6 +96,11 @@ const useQuizApiState: UseQuizApiState = (
       });
     }
   };
+
+  useEffect(() => {
+    if (typeof quizApiState.resultsConfig === 'undefined') dispatchQuizResultsConfig();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [quizApiState.resultsConfig]);
 
   useEffect(() => {
     (async () => {

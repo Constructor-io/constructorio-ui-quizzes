@@ -5,6 +5,7 @@ import {
   QuizResultsResponse,
   QuestionOption,
   Question,
+  QuizResultsConfig,
 } from '@constructor-io/constructorio-client-javascript/lib/types';
 import ConstructorIOClient, {
   GetBrowseResultsForItemIdsResponse,
@@ -19,6 +20,8 @@ export type {
   Question,
   NextQuestionResponse,
   QuizResultsResponse,
+  QuizResultsConfigResponse,
+  QuizResultsConfig,
   BrowseResultData,
   BrowseRequestType,
   QuizzesParameters,
@@ -103,6 +106,7 @@ export interface QuizReturnState {
     currentQuestion?: CurrentQuestion | undefined;
     results?: QuizResultsResponse | QuizSharedResultsData | undefined;
     selectedOptionsWithAttributes?: string[];
+    resultsConfig: QuizResultsConfig | null;
   };
   quizSessionStorageState: QuizSessionStorageState;
 }

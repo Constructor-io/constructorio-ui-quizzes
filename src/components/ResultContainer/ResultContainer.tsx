@@ -26,13 +26,38 @@ export default function ResultContainer(props: IResultContainerProps) {
     renderResultCardPriceDetails,
   } = resultCardOptions || {};
   const numberOfResults = state?.quiz.results?.response?.results?.length;
+  const resultsConfig = state?.quiz.resultsConfig;
   const zeroResults = !numberOfResults;
-  const resultsTitle = zeroResults ? '' : 'Here are your results';
+
+  let resultsTitle: string;
+  if (zeroResults) {
+    resultsTitle = '';
+  } else if (resultsConfig === null) {
+    resultsTitle = 'Here are your results';
+  } else if (resultsConfig?.desktop.title?.is_active) {
+    resultsTitle = resultsConfig.desktop.title.text ?? '';
+  } else {
+    resultsTitle = '';
+  }
+
+  let resultsDescription: string;
+  if (zeroResults) {
+    resultsDescription = '';
+  } else if (resultsConfig === null) {
+    resultsDescription = '';
+  } else if (resultsConfig?.desktop.description?.is_active) {
+    resultsDescription = resultsConfig.desktop.description.text ?? '';
+  } else {
+    resultsDescription = '';
+  }
 
   if (state?.quiz.results) {
     return (
       <div className='cio-results-container'>
-        <h1 className='cio-results-title'>{resultsTitle}</h1>
+        <div className='cio-results-title-container'>
+          <h1 className='cio-results-title'>{resultsTitle}</h1>
+          <p className='cio-results-description'>{resultsDescription}</p>
+        </div>
         <div className='cio-results-filter-and-redo-container cio-results-button-group'>
           <ResultFilters hasNoResults={zeroResults} />
           <div className='cio-results-redo-and-share-button-group'>
