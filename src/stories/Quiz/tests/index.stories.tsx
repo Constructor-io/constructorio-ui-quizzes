@@ -129,7 +129,7 @@ e2eInteractionTest.play = async ({ canvasElement }) => {
   // Results Config data is fetched correctly
   expect(await canvas.findByText('Here are your results!!')).toBeInTheDocument();
   expect(
-    await canvas.findByText('Based on your answers, these are our recommendations')
+    await canvas.findByText('Based on your answers, these are our recommendations.')
   ).toBeInTheDocument();
   expect(await canvas.findByText('10 results')).toBeInTheDocument();
   expect(await canvas.findByText('Because you answered')).toBeInTheDocument();
