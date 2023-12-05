@@ -26,7 +26,7 @@ export default function ResultContainer(props: IResultContainerProps) {
     renderResultCardPriceDetails,
   } = resultCardOptions || {};
   const numberOfResults = state?.quiz.results?.response?.results?.length;
-  const resultsConfig = state?.quiz.resultsConfig?.desktop;
+  const resultsConfig = state?.quiz.resultsConfig;
   const zeroResults = !numberOfResults;
 
   let resultsTitle: string;
@@ -34,8 +34,8 @@ export default function ResultContainer(props: IResultContainerProps) {
     resultsTitle = '';
   } else if (resultsConfig === null) {
     resultsTitle = 'Here are your results';
-  } else if (resultsConfig?.title?.is_active) {
-    resultsTitle = resultsConfig.title.text ?? '';
+  } else if (resultsConfig?.desktop.title?.is_active) {
+    resultsTitle = resultsConfig.desktop.title.text ?? '';
   } else {
     resultsTitle = '';
   }
@@ -45,8 +45,8 @@ export default function ResultContainer(props: IResultContainerProps) {
     resultsDescription = '';
   } else if (resultsConfig === null) {
     resultsDescription = '';
-  } else if (resultsConfig?.description?.is_active) {
-    resultsDescription = resultsConfig.description.text ?? '';
+  } else if (resultsConfig?.desktop.description?.is_active) {
+    resultsDescription = resultsConfig.desktop.description.text ?? '';
   } else {
     resultsDescription = '';
   }
