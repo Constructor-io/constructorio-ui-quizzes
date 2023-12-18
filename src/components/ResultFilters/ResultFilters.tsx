@@ -16,26 +16,12 @@ function ResultFilters({ hasNoResults }: ResultFiltersProps) {
     <div className='cio-results-filter-container'>
       {!!matchedOptions.length && (
         <p className='cio-results-explanation'>
-          Based on your answers{' '}
-          {matchedOptions.map((o, idx) => (
-            <span>
-              {!!idx && ', '}
-              {o}
-            </span>
-          ))}{' '}
-          we recommend these matches.
+          Based on your answers <span>{matchedOptions.join(', ')}</span> we recommend these matches.
         </p>
       )}
       {!!unmatchedOptions.length && (
         <p className='cio-results-explanation'>
-          No results found with{' '}
-          {unmatchedOptions.map((o, idx) => (
-            <span>
-              {!!idx && ', '}
-              {o}
-            </span>
-          ))}
-          .
+          No results found with <span>{unmatchedOptions.join(', ')}</span>.
         </p>
       )}
     </div>
