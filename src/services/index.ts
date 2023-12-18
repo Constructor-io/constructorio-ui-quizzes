@@ -9,6 +9,7 @@ import {
   QuizResultsResponse,
   QuizResultDataPartial,
   QuizSharedResultsData,
+  QuizResultsConfigResponse,
 } from '../types';
 import version from '../version';
 
@@ -35,6 +36,13 @@ export const getQuizResults = async (
   quizId: string,
   parameters: QuizzesResultsParameters
 ): Promise<QuizResultsResponse> => cioClient?.quizzes.getQuizResults(quizId, parameters);
+
+export const getQuizResultsConfig = async (
+  cioClient: ConstructorIOClient,
+  quizId: string,
+  parameters: Pick<QuizzesParameters, 'quizVersionId'>
+): Promise<QuizResultsConfigResponse> =>
+  cioClient?.quizzes.getQuizResultsConfig(quizId, parameters);
 
 export const getBrowseResultsForItemIds = async (
   cioClient: ConstructorIOClient,

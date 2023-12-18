@@ -24,6 +24,10 @@ export const parameters = {
     default: 'light',
   },
   docs: {
-    toc: true, // 👈 Enables the table of contents
+    toc: {
+      disable: false,
+      headingSelector: 'h3, h4, h5',
+      ignoreSelector: '.docs-story h2, .docs-story h3',
+    },
   },
 };

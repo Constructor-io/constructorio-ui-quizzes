@@ -99,6 +99,7 @@
   width: 100%;
   position: absolute;
   z-index: -1;
+  overflow: hidden;
 }
 
 /* Session Prompt Modal */
@@ -172,6 +173,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  aspect-ratio: 1/1;
 }
 .cio-quiz .cio-question-image-container {
   box-sizing: border-box;
@@ -181,6 +183,7 @@
   height: var(--container-image-small-height); /* Fixed height for layout shifts */
   display: flex;
   align-self: stretch;
+  overflow: hidden;
 }
 
 /* Input */
@@ -399,7 +402,6 @@
   border-radius: 4px;
   object-fit: cover;
   margin-bottom: 16px;
-  aspect-ratio: 1/1;
 }
 
 /* Select Option Value */
@@ -469,8 +471,7 @@
   margin-left: auto;
 }
 .cio-quiz .cio-results-title {
-  margin-top: 0;
-  margin-bottom: 1rem;
+  margin: 0;
   color: var(--gray-dust-500);
 }
 .cio-quiz .cio-results-filter-container {
@@ -716,11 +717,6 @@
     flex-basis: 50%;
     flex-shrink: 0;
     border-radius: 4px;
-  }
-
-  /* Image */
-  .cio-quiz .cio-question-image {
-    height: auto;
   }
 
   /* Cover Page Component */
@@ -1090,82 +1086,15 @@
   }
 }
 
-.popover-trigger-button {
-  all: unset;
+.cio-quiz .cio-results-description {
+  margin: 0;
+  color: var(--gray-dust-500);
+  font-weight: bold;
 }
 
-.popover-container {
-  position: relative;
-}
-
-.popover-content-container {
-  position: absolute;
-  z-index: 100;
-  background-color: white;
-  border-radius: 4px;
-  box-shadow: 0px 4px 10px rgba(93, 124, 232, 0.25);
-  padding: 0.5rem;
-  opacity: 0;
-  scale: 0.05;
-  transition: all 0.25s ease-in-out;
-}
-
-.popover-content-container.top {
-  bottom: 100%;
-  right: 0;
-  transform-origin: bottom;
-}
-
-.popover-content-container.bottom {
-  top: 100%;
-  transform-origin: top;
-}
-
-.popover-content-container.open {
-  opacity: 1;
-  scale: 1;
-}
-
-.results-matched-options-container {
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.results-matched-options-popover {
-  padding: 4px;
-  border-radius: 4px;
-  font-size: 15px;
-  width: 240px;
+.cio-quiz .cio-results-title-container {
+  margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-}
-
-.results-matched-options {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.results-matched-options p {
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  margin: 0;
-}
-
-.results-matched-option-overview {
-  font-size: 13px;
-  margin: 0;
-  padding-bottom: 0.5rem;
-  text-decoration: underline;
-  text-decoration-color: transparent;
-  color: var(--gray-dust-500);
-  transition: text-decoration-color 0.25s ease-in-out;
-}
-
-.results-matched-option-overview:hover {
-  text-decoration-color: var(--gray-dust-500);
 }

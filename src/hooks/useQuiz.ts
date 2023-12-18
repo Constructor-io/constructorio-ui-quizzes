@@ -53,6 +53,7 @@ const useQuiz: UseQuiz = (quizOptions) => {
         results: quizApiState.quizResults,
         selectedOptionsWithAttributes: quizApiState.selectedOptionsWithAttributes,
         matchedOptions: quizApiState.matchedOptions,
+        resultsConfig: quizApiState.resultsConfig ?? null,
       },
       quizSessionStorageState,
     },

@@ -1,11 +1,10 @@
-/* eslint-disable no-console */
 import { within, userEvent } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 import CioQuiz from '../../../components/CioQuiz';
 import { argTypes, docsControls } from '../argTypes';
-import { sleep, stringifyWithDefaults } from '../../../utils';
-import { ComponentTemplate, addComponentStoryDescription } from '../Component';
-import { basicDescription, apiKey, quizId } from '../../../constants';
+import { sleep } from '../../../utils';
+import ComponentTemplate from '../Component';
+import { apiKey, quizId } from '../../../constants';
 import { callbacks, resultsPageOptions, resultCardOptions } from './mocks';
 
 export default {
@@ -40,11 +39,6 @@ e2eInteractionTest.args = {
   resultCardOptions,
   enableHydration: false,
 };
-addComponentStoryDescription(
-  e2eInteractionTest,
-  `const args = ${stringifyWithDefaults(e2eInteractionTest.args)}`,
-  basicDescription
-);
 
 e2eInteractionTest.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
@@ -132,7 +126,11 @@ e2eInteractionTest.play = async ({ canvasElement }) => {
 
   // Results page
   await sleep(500);
-  expect(await canvas.findByText('Here are your results')).toBeInTheDocument();
+  // Results Config data is fetched correctly
+  expect(await canvas.findByText('Here are your results!!')).toBeInTheDocument();
+  expect(
+    await canvas.findByText('Based on your answers, these are our recommendations.')
+  ).toBeInTheDocument();
   expect(await canvas.findByText('10 results')).toBeInTheDocument();
   expect(await canvas.findByText('Because you answered')).toBeInTheDocument();
   expect(document.querySelectorAll('.cio-results-filter-option')?.length).toBeGreaterThan(0);
@@ -144,6 +142,29 @@ e2eInteractionTest.play = async ({ canvasElement }) => {
       'Share or save your quiz results through email or using the link below.'
     )
   ).toBeInTheDocument();
+
+  // Add mock clipboard functions that don't require user permissions and replace the native clipboard
+  const mockClipboard = {
+    data: '',
+    writeText(text) {
+      this.data = text;
+      return Promise.resolve();
+    },
+    readText() {
+      return Promise.resolve(this.data);
+    },
+  };
+
+  if (typeof global.navigator === 'undefined') {
+    global.navigator = {} as any;
+  }
+
+  Object.defineProperty(window.navigator, 'clipboard', {
+    value: mockClipboard,
+    writable: true,
+    configurable: true,
+  });
+
   await userEvent.click(await canvas.findByText('Copy link'));
   expect(await canvas.findByText('Link copied to clipboard')).toBeInTheDocument();
   await userEvent.click(await canvas.findByLabelText('Close button'));

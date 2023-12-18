@@ -15,7 +15,7 @@ export const renderImages = (images: Partial<QuestionImages>, cssClasses?: strin
   if (primaryUrl) {
     const windowWidth = window.innerWidth;
     let src = primaryUrl;
-    let alt = primaryAlt || 'Quiz Image';
+    let alt = primaryAlt || '';
 
     if (windowWidth > 768 && secondaryUrl) {
       src = secondaryUrl;
@@ -32,26 +32,6 @@ export const renderImages = (images: Partial<QuestionImages>, cssClasses?: strin
   }
 
   return '';
-};
-
-// More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
-export const getStoryParams = (storyCode, templateCode, importCode) => {
-  const code = `
-${importCode}
-${storyCode}
-${templateCode}
-`;
-
-  return {
-    docs: {
-      source: {
-        code,
-        language: 'jsx',
-        format: true,
-        type: 'code',
-      },
-    },
-  };
 };
 
 export const functionStrings = {
