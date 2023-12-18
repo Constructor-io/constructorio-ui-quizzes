@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import ResultCtaButton from '../ResultCtaButton/ResultCtaButton';
 import ResultFavoritesButton from '../ResultFavoritesButton/ResultFavoritesButton';
-import ResultMatchedOptions from '../ResultMatchedOptions/ResultMatchedOptions';
 import QuizContext from '../CioQuiz/context';
 import { QuizResultDataPartial } from '../../types';
 
@@ -13,8 +12,6 @@ interface ResultCardOptions {
   ratingScoreKey?: string;
   resultPosition: number;
   renderResultCardPriceDetails?: (result: QuizResultDataPartial) => JSX.Element;
-  selectedOptionsWithAttributes?: string[];
-  matchedOptions?: string[];
 }
 
 export default function ResultCard(props: ResultCardOptions) {
@@ -26,8 +23,6 @@ export default function ResultCard(props: ResultCardOptions) {
     ratingCountKey,
     ratingScoreKey,
     renderResultCardPriceDetails,
-    matchedOptions,
-    selectedOptionsWithAttributes,
   } = props;
   const {
     customAddToFavoritesCallback,
@@ -99,12 +94,6 @@ export default function ResultCard(props: ResultCardOptions) {
         <ResultFavoritesButton item={result} price={salePrice || regularPrice} />
       )}
       {!customClickItemCallback ? resultCardContentWithLink() : resultCardContentWithoutLink()}
-      {selectedOptionsWithAttributes && matchedOptions && !!matchedOptions.length && (
-        <ResultMatchedOptions
-          matchedOptions={matchedOptions}
-          selectedOptionsWithAttributes={selectedOptionsWithAttributes}
-        />
-      )}
       <ResultCtaButton item={result} price={salePrice || regularPrice} />
     </div>
   );

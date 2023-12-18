@@ -26,8 +26,6 @@ function Results(props: ResultsProps) {
           ratingScoreKey={resultCardRatingScoreKey}
           renderResultCardPriceDetails={renderResultCardPriceDetails}
           resultPosition={index + 1}
-          selectedOptionsWithAttributes={state?.quiz?.selectedOptionsWithAttributes}
-          matchedOptions={state?.quiz?.matchedOptions}
         />
       ))}
     </div>

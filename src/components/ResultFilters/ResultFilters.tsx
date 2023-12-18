@@ -7,17 +7,37 @@ interface ResultFiltersProps {
 
 function ResultFilters({ hasNoResults }: ResultFiltersProps) {
   const { state } = useContext(QuizContext);
+  const matchedOptions = state?.quiz?.matchedOptions || [];
+  const unmatchedOptions = (state?.quiz?.selectedOptionsWithAttributes || []).filter(
+    (option) => !matchedOptions.includes(option)
+  );
 
   return (
     <div className='cio-results-filter-container'>
-      <p>{hasNoResults ? 'Your preferences' : 'Because you answered'}</p>
-      <div className='cio-results-filter-options'>
-        {state?.quiz.selectedOptionsWithAttributes?.map((option) => (
-          <div className='cio-results-filter-option' key={option}>
-            {option}
-          </div>
-        ))}
-      </div>
+      {!!matchedOptions.length && (
+        <p className='cio-results-explanation'>
+          Based on your answers{' '}
+          {matchedOptions.map((o, idx) => (
+            <span>
+              {!!idx && ', '}
+              {o}
+            </span>
+          ))}{' '}
+          we recommend these matches.
+        </p>
+      )}
+      {!!unmatchedOptions.length && (
+        <p className='cio-results-explanation'>
+          No results found with{' '}
+          {unmatchedOptions.map((o, idx) => (
+            <span>
+              {!!idx && ', '}
+              {o}
+            </span>
+          ))}
+          .
+        </p>
+      )}
     </div>
   );
 }
