@@ -1,5 +1,6 @@
 ### Code Example
 Full hook usage example
+
 ```jsx
  const {
     state,
@@ -177,4 +178,3 @@ Full hook usage example
   }
   return null;
 ```
-

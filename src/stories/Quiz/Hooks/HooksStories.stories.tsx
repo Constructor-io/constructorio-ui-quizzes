@@ -11,7 +11,7 @@ import {
 } from '../tests/mocks';
 
 const meta: Meta<typeof HooksTemplate> = {
-  title: 'Quiz/Hooks',
+  title: 'Quiz/useCioQuiz',
   component: HooksTemplate,
   parameters: {
     controls: storiesControls,

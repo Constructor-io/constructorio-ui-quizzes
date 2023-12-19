@@ -12,7 +12,7 @@ export const parameters = {
   },
   options: {
     storySort: {
-      order: ['Quiz', ['Component', 'Hooks', 'Specific Examples', 'Style Customizations', 'Questions', 'Results', 'Full Quiz e2e tests']],
+      order: ['Quiz', ['CioQuiz', 'useCioQuiz', 'Specific Examples', 'Style Customizations', 'Questions', 'Results', 'Full Quiz e2e tests']],
     },
   },
   layout: 'fullscreen',

@@ -10,7 +10,7 @@ if (process.env.NODE_ENV !== 'production') {
   axe(React, ReactDOM, 1000, {});
 }
 
-export default function QuizResultsDecorator(Story: any) {
+export default function QuizResultsVariationsDecorator(Story: any) {
   const contextValue = useMockContextValue();
 
   return (
@@ -18,6 +18,20 @@ export default function QuizResultsDecorator(Story: any) {
       <QuizContext.Provider value={contextValue}>
         <div>
           <StoryPreview Component={Story} />
+        </div>
+      </QuizContext.Provider>
+    </div>
+  );
+}
+
+export function QuizResultsPrimaryDecorator(Story: any) {
+  const contextValue = useMockContextValue();
+
+  return (
+    <div className='cio-quiz'>
+      <QuizContext.Provider value={contextValue}>
+        <div>
+          <Story Component={Story} />
         </div>
       </QuizContext.Provider>
     </div>
