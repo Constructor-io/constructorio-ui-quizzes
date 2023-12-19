@@ -42,7 +42,6 @@
   "types": "lib/types/index.d.ts",
   "scripts": {
     "storybook-docs-dev": "storybook dev --docs -p 6007",
-    "build-storybook-docs": "storybook build --docs",
     "lint": "eslint src --ext js,ts,jsx,tsx",
     "check-types": "npx tsc --noEmit",
     "copy-styles": "cp src/styles.css lib/styles.css",
@@ -52,7 +51,7 @@
     "test-storybook": "test-storybook",
     "test-storybook:watch": "test-storybook --watch",
     "test-storybook:ci": "start-server-and-test storybook:ci http://localhost:6006 test-storybook",
-    "build-storybook": "storybook build -o 'docs'",
+    "build-storybook": "storybook build --docs -o 'docs'",
     "serve-built-storybook": "npx http-server docs",
     "verify-node-version": "chmod +x ./scripts/verify-node-version.sh && ./scripts/verify-node-version.sh",
     "preversion": "node ./src/generateVersion.js",
