@@ -664,6 +664,7 @@
   display: flex;
   gap: 0.5rem;
   align-items: center;
+  white-space: nowrap;
 }
 .cio-quiz .cio-question-redo-button:hover {
   text-decoration: underline;
@@ -732,9 +733,9 @@
   }
   .cio-quiz .cio-results-button-group {
     display: flex;
-    justify-content: space-between;
-    align-items: end;
-    margin-block: 1.5rem;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
   }
   .cio-quiz .cio-results-filter-container {
     margin-bottom: 0;
@@ -972,11 +973,13 @@
   gap: 1rem;
 }
 
-.cio-quiz .cio-results-redo-and-share-button-group {
+.cio-quiz .cio-results-number-and-share-button-group {
   display: flex;
   gap: 8px;
   align-items: end;
   justify-content: space-between;
+  font-size: 0.85em;
+  color: var(--gray-dust-100);
 }
 
 .cio-quiz .cio-share-results-share-button {
@@ -1065,6 +1068,16 @@
   .cio-quiz .cio-share-results-share-button {
     max-width: 100%;
   }
+
+  .cio-quiz .cio-results-header-container {
+    flex-direction: column;
+  }
+  .cio-question-redo-button {
+    margin-left: auto;
+  }
+  .cio-results-button-group {
+    gap: 0.5rem;
+  }
 }
 
 @container (min-width: 500px) {
@@ -1085,11 +1098,27 @@
   font-weight: bold;
 }
 
+.cio-quiz .cio-results-header-container {
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--gray-dust-100);
+  align-items: baseline;
+}
+
+.cio-quiz .cio-results-header-container.no-header {
+  margin: 0;
+  padding-bottom: 1rem;
+  justify-content: flex-end;
+  border: none;
+}
+
 .cio-quiz .cio-results-title-container {
-  margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.5rem;
 }
 
 .cio-quiz .cio-results-explanation {
