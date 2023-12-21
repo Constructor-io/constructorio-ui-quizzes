@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { QuizResultsConfig } from '../../types';
-import RedoButton from '../RedoButton/RedoButton';
 
 export interface IResultHeaderContainerProps {
   resultsConfig?: QuizResultsConfig | null;
@@ -36,15 +35,10 @@ export default function ResultsHeaderContainer({
 
   const hasContent = !!(resultsTitle || resultsDescription);
 
-  return (
-    <div className={`cio-results-header-container${hasContent ? '' : ' no-header'}`}>
-      {hasContent && (
-        <div className='cio-results-title-container'>
-          <h1 className='cio-results-title'>{resultsTitle}</h1>
-          <p className='cio-results-description'>{resultsDescription}</p>
-        </div>
-      )}
-      <RedoButton />
+  return hasContent ? (
+    <div className='cio-results-title-container'>
+      <h1 className='cio-results-title'>{resultsTitle}</h1>
+      <p className='cio-results-description'>{resultsDescription}</p>
     </div>
-  );
+  ) : null;
 }

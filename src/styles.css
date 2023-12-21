@@ -1069,9 +1069,6 @@
     max-width: 100%;
   }
 
-  .cio-quiz .cio-results-header-container {
-    flex-direction: column;
-  }
   .cio-question-redo-button {
     margin-left: auto;
   }
@@ -1098,27 +1095,13 @@
   font-weight: bold;
 }
 
-.cio-quiz .cio-results-header-container {
-  margin-bottom: 2rem;
-  padding-bottom: 2rem;
-  display: flex;
-  gap: 0.5rem;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--gray-dust-100);
-  align-items: baseline;
-}
-
-.cio-quiz .cio-results-header-container.no-header {
-  margin: 0;
-  padding-bottom: 1rem;
-  justify-content: flex-end;
-  border: none;
-}
-
 .cio-quiz .cio-results-title-container {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--gray-dust-100);
 }
 
 .cio-quiz .cio-results-explanation {
@@ -1129,4 +1112,11 @@
 .cio-quiz .cio-results-explanation > span {
   font-weight: bold;
   font-size: 0.95em;
+}
+
+.cio-redo-button-container {
+  width: 100%;
+  padding-top: 1.5rem;
+  display: flex;
+  justify-content: center;
 }

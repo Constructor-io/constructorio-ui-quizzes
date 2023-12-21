@@ -6,6 +6,7 @@ import { ResultCardOptions, ResultsPageOptions } from '../../types';
 import Results from '../Results/Results';
 import Spinner from '../Spinner/Spinner';
 import ResultsHeaderContainer from '../ResultsHeaderContainer/ResultsHeaderContainer';
+import RedoButton from '../RedoButton/RedoButton';
 
 export interface IResultContainerProps {
   resultCardOptions?: ResultCardOptions;
@@ -51,6 +52,11 @@ export default function ResultContainer(props: IResultContainerProps) {
           />
         )}
         {zeroResults && <ZeroResults />}
+        {!zeroResults && (
+          <div className='cio-redo-button-container'>
+            <RedoButton />
+          </div>
+        )}
       </div>
     );
   }
