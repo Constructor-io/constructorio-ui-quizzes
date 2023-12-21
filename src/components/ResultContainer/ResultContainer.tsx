@@ -26,7 +26,7 @@ export default function ResultContainer(props: IResultContainerProps) {
   } = resultCardOptions || {};
   const numberOfResults = state?.quiz.results?.response?.results?.length;
   const resultsConfig = state?.quiz.resultsConfig;
-  const zeroResults = !!numberOfResults;
+  const zeroResults = !numberOfResults;
 
   if (state?.quiz.results) {
     return (
