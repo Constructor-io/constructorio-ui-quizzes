@@ -85,12 +85,14 @@ Full hook usage example
                         Add to Cart
                       </button>
                     </div>
-                    <div className='cio-redo-button-container'>
-                      <button {...getResetQuizButtonProps('secondary')}>
-                        <RedoSVG />
-                        <span>retake</span>
-                      </button>
-                    </div>
+                    {!zeroResults &&
+                      <div className='cio-redo-button-container'>
+                        <button {...getResetQuizButtonProps('secondary')}>
+                          <RedoSVG />
+                          <span>retake</span>
+                        </button>
+                      </div>
+                    }
                   </div>
                 ))}
                   
