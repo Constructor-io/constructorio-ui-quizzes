@@ -77,7 +77,7 @@
     "@storybook/addon-links": "7.4.6",
     "@storybook/jest": "^0.2.3",
     "@storybook/react-webpack5": "7.4.6",
-    "@storybook/test-runner": "0.13.0",
+    "@storybook/test-runner": "0.16.0",
     "@storybook/testing-library": "^0.1.0",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
