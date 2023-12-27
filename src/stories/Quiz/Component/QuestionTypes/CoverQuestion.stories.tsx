@@ -1,13 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import React from 'react';
 import { CoverQuestion } from '@constructor-io/constructorio-client-javascript/lib/types';
 import CoverTypeQuestion from '../../../../components/CoverTypeQuestion/CoverTypeQuestion';
-import { getMockQuestionWithImage, getMockQuestion, useMockContextValue } from '../../tests/mocks';
+import { getMockQuestionWithImage, getMockQuestion } from '../../tests/mocks';
 import QuestionTypeVariationsDecorator, {
   QuestionTypePrimaryDecorator,
 } from './QuestionTypeDecorator';
 import { QuestionTypes } from '../../../../components/CioQuiz/actions';
-import QuizContext from '../../../../components/CioQuiz/context';
 
 const coverQuestionWithImage = getMockQuestionWithImage(QuestionTypes.Cover);
 const coverQuestionWithoutImage = getMockQuestion(QuestionTypes.Cover);

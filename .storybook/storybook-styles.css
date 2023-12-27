@@ -141,3 +141,16 @@
   flex: 100%;
 }
 
+.live-example { 
+  height: 600px;
+}
+
+.live-example .docs-story,
+.live-example .innerZoomElementWrapper,
+.live-example .innerZoomElementWrapper > div,
+.live-example .sb-story, 
+.live-example .sb-story > div,
+.live-example [class^="css-"] {
+  height: 100%;
+}
+
