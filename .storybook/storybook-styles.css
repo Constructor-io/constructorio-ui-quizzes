@@ -1,5 +1,4 @@
 .docs-story > div:first-child {
-  min-height: 500px;
   background-color: #212425;
 }
 
@@ -140,5 +139,18 @@
 
 .box-wrapper h3 {
   flex: 100%;
+}
+
+.live-example { 
+  height: 600px;
+}
+
+.live-example .docs-story,
+.live-example .innerZoomElementWrapper,
+.live-example .innerZoomElementWrapper > div,
+.live-example .sb-story, 
+.live-example .sb-story > div,
+.live-example [class^="css-"] {
+  height: 100%;
 }
 

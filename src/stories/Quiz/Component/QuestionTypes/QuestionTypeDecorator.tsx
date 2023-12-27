@@ -11,7 +11,7 @@ if (process.env.NODE_ENV !== 'production') {
   axe(React, ReactDOM, 1000, {});
 }
 
-export default function QuestionTypeDecorator(Story: any, questions: Question[]) {
+export default function QuestionTypeVariationsDecorator(Story: any, questions: Question[]) {
   const [question] = questions;
   const contextValue = useMockContextValue(question);
 
@@ -19,6 +19,19 @@ export default function QuestionTypeDecorator(Story: any, questions: Question[])
     <div className='cio-quiz'>
       <QuizContext.Provider value={contextValue}>
         <StoryPreview Component={Story} />
+      </QuizContext.Provider>
+    </div>
+  );
+}
+
+export function QuestionTypePrimaryDecorator(Story: any, questions: Question[]) {
+  const [question] = questions;
+  const contextValue = useMockContextValue(question);
+
+  return (
+    <div className='cio-quiz'>
+      <QuizContext.Provider value={contextValue}>
+        <Story />
       </QuizContext.Provider>
     </div>
   );

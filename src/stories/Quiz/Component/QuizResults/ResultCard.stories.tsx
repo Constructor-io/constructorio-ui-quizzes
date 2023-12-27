@@ -2,7 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import React from 'react';
 import ResultCard from '../../../../components/ResultCard/ResultCard';
-import QuizResultsDecorator from './QuizResultsDecorator';
+import QuizResultsVariationsDecorator, {
+  QuizResultsPrimaryDecorator,
+} from './QuizResultsDecorator';
 
 const product = {
   value: 'This is a result card item',
@@ -18,7 +20,7 @@ const product = {
 };
 
 const meta: Meta<typeof ResultCard> = {
-  title: 'Quiz/Component/Results/ResultCard',
+  title: 'Quiz/CioQuiz/Results/ResultCard',
   component: ResultCard,
   argTypes: {},
 };
@@ -32,6 +34,16 @@ const regularPriceArgs = {
   resultPosition: 0,
 };
 
+export const Primary: Story = {
+  args: regularPriceArgs,
+  render: () => (
+    <div className='results-example-wrapper'>
+      <ResultCard {...regularPriceArgs} />
+    </div>
+  ),
+  decorators: [(story) => QuizResultsPrimaryDecorator(story)],
+};
+
 export const WithRegularPrice: Story = {
   args: regularPriceArgs,
   render: () => (
@@ -40,7 +52,7 @@ export const WithRegularPrice: Story = {
     </div>
   ),
 
-  decorators: [(story) => QuizResultsDecorator(story)],
+  decorators: [(story) => QuizResultsVariationsDecorator(story)],
 };
 
 const salePriceStoryArgs = {
@@ -59,7 +71,7 @@ export const WithSalePrice: Story = {
     </div>
   ),
 
-  decorators: [(story) => QuizResultsDecorator(story)],
+  decorators: [(story) => QuizResultsVariationsDecorator(story)],
 };
 
 const customPricesStoryArgs = {
@@ -92,5 +104,5 @@ export const WithCustomPrices: Story = {
     </div>
   ),
 
-  decorators: [(story) => QuizResultsDecorator(story)],
+  decorators: [(story) => QuizResultsVariationsDecorator(story)],
 };

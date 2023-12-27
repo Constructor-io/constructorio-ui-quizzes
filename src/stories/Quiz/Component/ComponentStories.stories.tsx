@@ -16,7 +16,7 @@ import {
 import { IQuizProps } from '../../../types';
 
 const meta: Meta<typeof CioQuiz> = {
-  title: 'Quiz/Component',
+  title: 'Quiz/CioQuiz',
   component: CioQuiz,
   parameters: {
     controls: storiesControls,

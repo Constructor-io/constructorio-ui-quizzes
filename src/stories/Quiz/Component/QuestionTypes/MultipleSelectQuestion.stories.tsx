@@ -9,7 +9,9 @@ import {
   questionOptionsWithImages,
   questionOptions,
 } from '../../tests/mocks';
-import QuestionTypeDecorator from './QuestionTypeDecorator';
+import QuestionTypeVariationsDecorator, {
+  QuestionTypePrimaryDecorator,
+} from './QuestionTypeDecorator';
 
 const multipleSelectQuestionWithImages = {
   ...getMockQuestionWithImage(QuestionTypes.MultipleSelect),
@@ -21,7 +23,7 @@ const multipleSelectQuestionWithoutImages = {
 };
 
 const meta: Meta<typeof SelectTypeQuestion> = {
-  title: 'Quiz/Component/Questions/MultipleSelectQuestion',
+  title: 'Quiz/CioQuiz/Questions/MultipleSelectQuestion',
   component: SelectTypeQuestion,
   argTypes: {},
 };
@@ -29,15 +31,25 @@ const meta: Meta<typeof SelectTypeQuestion> = {
 export default meta;
 type Story = StoryObj<typeof SelectTypeQuestion>;
 
+export const Primary: Story = {
+  decorators: [
+    (story) =>
+      QuestionTypePrimaryDecorator(story, [multipleSelectQuestionWithImages as SelectQuestion]),
+  ],
+};
+
 export const WithImages: Story = {
   decorators: [
-    (story) => QuestionTypeDecorator(story, [multipleSelectQuestionWithImages as SelectQuestion]),
+    (story) =>
+      QuestionTypeVariationsDecorator(story, [multipleSelectQuestionWithImages as SelectQuestion]),
   ],
 };
 
 export const WithoutImages: Story = {
   decorators: [
     (story) =>
-      QuestionTypeDecorator(story, [multipleSelectQuestionWithoutImages as SelectQuestion]),
+      QuestionTypeVariationsDecorator(story, [
+        multipleSelectQuestionWithoutImages as SelectQuestion,
+      ]),
   ],
 };

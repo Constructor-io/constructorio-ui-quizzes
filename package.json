@@ -42,7 +42,6 @@
   "types": "lib/types/index.d.ts",
   "scripts": {
     "storybook-docs-dev": "storybook dev --docs -p 6007",
-    "build-storybook-docs": "storybook build --docs",
     "lint": "eslint src --ext js,ts,jsx,tsx",
     "check-types": "npx tsc --noEmit",
     "copy-styles": "cp src/styles.css lib/styles.css",
@@ -52,11 +51,12 @@
     "test-storybook": "test-storybook",
     "test-storybook:watch": "test-storybook --watch",
     "test-storybook:ci": "start-server-and-test storybook:ci http://localhost:6006 test-storybook",
-    "build-storybook": "storybook build -o 'docs'",
+    "build-storybook": "storybook build",
+    "build-storybook-docs": "storybook build --docs -o 'docs'",
     "serve-built-storybook": "npx http-server docs",
     "verify-node-version": "chmod +x ./scripts/verify-node-version.sh && ./scripts/verify-node-version.sh",
     "preversion": "node ./src/generateVersion.js",
-    "version": "npm run preversion && npm run verify-node-version && npm run build-storybook && git add -u ./docs && git add ./docs/* && git add ./src/version.ts && npm run compile",
+    "version": "npm run preversion && npm run verify-node-version && npm run build-storybook-docs && git add -u ./docs && git add ./docs/* && git add ./src/version.ts && npm run compile",
     "compile": "node ./src/generateVersion.js && rm -rf lib && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json && npm run copy-styles && vite build",
     "check-license": "license-checker --production --onlyAllow 'Apache-2.0;BSD-3-Clause;MIT;0BSD;BSD-2-Clause' --excludePackages 'picocolors@1.0.0'"
   },

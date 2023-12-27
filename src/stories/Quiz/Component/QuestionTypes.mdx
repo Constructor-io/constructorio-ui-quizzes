@@ -1,0 +1,20 @@
+import { Meta, Canvas } from '@storybook/blocks';
+import * as ComponentStories from './ComponentStories.stories';
+import * as CoverQuestionStories from './QuestionTypes/CoverQuestion.stories';
+import * as OpenTextQuestion from './QuestionTypes/OpenTextQuestion.stories';
+import * as SingleSelectQuestion from './QuestionTypes/SingleSelectQuestion.stories';
+import * as MultipleSelectQuestion from './QuestionTypes/MultipleSelectQuestion.stories';
+
+<Meta of={ComponentStories} />
+
+### CoverQuestion
+<Canvas of={CoverQuestionStories.Primary} />
+
+### OpenTextQuestion
+<Canvas of={OpenTextQuestion.Primary} />
+
+### SingleSelectQuestion
+<Canvas of={SingleSelectQuestion.Primary} />
+
+### MultipleSelectQuestion
+<Canvas of={MultipleSelectQuestion.Primary} />
