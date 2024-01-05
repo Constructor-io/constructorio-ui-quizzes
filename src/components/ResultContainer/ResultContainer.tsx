@@ -32,9 +32,7 @@ export default function ResultContainer(props: IResultContainerProps) {
   if (state?.quiz.results) {
     return (
       <div className='cio-results-container'>
-        {!zeroResults && (
-          <ResultsHeaderContainer hasNoResults={zeroResults} resultsConfig={resultsConfig} />
-        )}
+        {!zeroResults && <ResultsHeaderContainer resultsConfig={resultsConfig} />}
         {!zeroResults && (
           <ResultFiltersAndShare
             numberOfResults={numberOfResults}
