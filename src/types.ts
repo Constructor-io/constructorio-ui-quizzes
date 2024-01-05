@@ -106,6 +106,7 @@ export interface QuizReturnState {
     currentQuestion?: CurrentQuestion | undefined;
     results?: QuizResultsResponse | QuizSharedResultsData | undefined;
     selectedOptionsWithAttributes?: string[];
+    matchedOptions?: string[];
     resultsConfig: QuizResultsConfig | null;
   };
   quizSessionStorageState: QuizSessionStorageState;

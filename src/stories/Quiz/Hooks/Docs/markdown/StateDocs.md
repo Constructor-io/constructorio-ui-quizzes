@@ -16,11 +16,13 @@
 
 - `quiz`: Quiz info including:
   
-  | property                      | type                                    | description                          |
-  | :-----------------------------| :---------------------------------------| :------------------------------------|
-  | currentQuestion               | Object                                  | The current question in the quiz.    |
-  | results                       | Object                                  | The quiz results                     |
-  | requestState                  | `'STALE'|'LOADING'|'SUCCESS'|'ERROR'` | The API request state                |
-  | versionId                     | string                                  | The quiz version                     |
-  | sessionId                     | string                                  | The quiz session                     |
-  | selectedOptionsWithAttributes | string[]                                | The selected options with attributes |
+  | property                      | type                                    | description                                                   |
+  | :-----------------------------| :---------------------------------------| :-------------------------------------------------------------|
+  | currentQuestion               | Object                                  | The current question in the quiz.                             |
+  | results                       | Object                                  | The quiz results                                              |
+  | requestState                  | `'STALE'|'LOADING'|'SUCCESS'|'ERROR'`   | The API request state                                         |
+  | versionId                     | string                                  | The quiz version                                              |
+  | sessionId                     | string                                  | The quiz session                                              |
+  | selectedOptionsWithAttributes | string[]                                | The selected options with attributes                          |
+  | matchedOptions                | string[]                                | The selected options with attributed used in fetching results |
+  | resultsConfig                 | Object | null                           | The results page configuration set in the dashboard           |

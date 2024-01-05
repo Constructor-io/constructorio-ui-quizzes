@@ -13,34 +13,47 @@ Full hook usage example
     getResetQuizButtonProps,
     getQuizResultButtonProps,
     getAddToCartButtonProps,
+    getShareResultsButtonProps,
   } = useCioQuiz(args);
 
   if (state.quiz.requestState === 'SUCCESS') {
     const quizResults = state.quiz.results?.response?.results;
-    const zeroResults = !quizResults?.length;
+    const numberOfResults = quizResults.length;
+    const zeroResults = !numberOfResults;
+    const resultsTitle = zeroResults ? state?.quiz.resultsConfig?.desktop?.title.text || 'Here are your results' : '';
+    const resultsDescription = state?.quiz.resultsConfig?.desktop?.description.text || '';
+    const matchedOptions = state.quiz.matchedOptions || [];
 
     // Quiz Results
     if (quizResults) {
       return (
         <div className='cio-quiz'>
           <div className='cio-results-container'>
-            <h1 className='cio-results-title'>Results</h1>
-            <div className='cio-results-filter-and-redo-container'>
-              <div className='cio-results-filter-container'>
-                <p>Because you answered</p>
-                <div className='cio-results-filter-options'>
-                  {state?.quiz.selectedOptionsWithAttributes?.map((option) => (
-                    <div className='cio-results-filter-option' key={option}>
-                      {option}
-                    </div>
-                  ))}
+             {!zeroResults && 
+              <div className='cio-results-title-container'>
+                <h1 className='cio-results-title'>{resultsTitle}</h1>
+                <p className='cio-results-description'>{resultsDescription}</p>
+              </div>
+            }
+            {!zeroResults && 
+              <div className='cio-results-filter-and-redo-container cio-results-button-group'>
+                <div className='cio-results-filter-container'>
+                  {!!matchedOptions.length && (
+                    <p className='cio-results-explanation'>
+                      Based on your answers <span>{matchedOptions.join(', ')}</span> we recommend these
+                      matches.
+                    </p>
+                  )}
+                </div>
+                <div className='cio-results-number-and-share-button-group'>
+                  {numberOfResults} {numberOfResults === 1 ? 'result' : 'results'}
+                  <button {...getShareResultsButtonProps()} type='button'>
+                    <ShareSVG />
+                    <span>Share Results</span>
+                  </button>
                 </div>
               </div>
-              <button {...getResetQuizButtonProps('secondary')}>
-                <RedoSVG />
-                <span>retake</span>
-              </button>
-            </div>
+            }
             <div className='cio-results'>
               {!zeroResults &&
                 quizResults.map((result, i) => (
@@ -73,8 +86,17 @@ Full hook usage example
                         Add to Cart
                       </button>
                     </div>
+                    {!zeroResults &&
+                      <div className='cio-redo-button-container'>
+                        <button {...getResetQuizButtonProps('secondary')}>
+                          <RedoSVG />
+                          <span>retake</span>
+                        </button>
+                      </div>
+                    }
                   </div>
                 ))}
+                  
             </div>
 
             {zeroResults && (

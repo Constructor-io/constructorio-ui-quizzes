@@ -152,11 +152,12 @@ export const getMockState = (question?: Question): QuizReturnState => ({
       quiz_session_id: '',
       quiz_version_id: '',
       quiz_selected_options: [
-        { value: 'Chocolate', has_attribute: true },
-        { value: 'Medium', has_attribute: true },
+        { value: 'Chocolate', has_attribute: true, is_matched: true },
+        { value: 'Medium', has_attribute: true, is_matched: false },
       ],
     },
     selectedOptionsWithAttributes: ['Chocolate', 'Medium'],
+    matchedOptions: ['Chocolate'],
     resultsConfig: {
       desktop: {
         description: {

@@ -14,7 +14,7 @@ export { default as SelectQuestion } from './components/SelectTypeQuestion/Selec
 export { default as Results } from './components/Results/Results';
 export { default as ResultCard } from './components/ResultCard/ResultCard';
 export { default as ResultContainer } from './components/ResultContainer/ResultContainer';
-export { default as ResultFilters } from './components/ResultFilters/ResultFilters';
+export { default as ResultFiltersAndShare } from './components/ResultFiltersAndShare/ResultFiltersAndShare';
 export { default as ResultHeroCard } from './components/ResultHeroCard/ResultHeroCard';
 
 export * from './types';

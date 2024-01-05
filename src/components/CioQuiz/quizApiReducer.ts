@@ -15,6 +15,7 @@ export type QuizAPIReducerState = {
   quizFirstQuestion?: NextQuestionResponse;
   quizResults?: QuizResultsResponse | QuizSharedResultsData;
   selectedOptionsWithAttributes?: string[];
+  matchedOptions?: string[];
   resultsConfig?: QuizResultsConfig | null;
 };
 
@@ -41,6 +42,7 @@ export default function apiReducer(
         quizCurrentQuestion: undefined,
         quizResults: undefined,
         selectedOptionsWithAttributes: undefined,
+        matchedOptions: undefined,
       };
     case QuizAPIActionTypes.SET_CURRENT_QUESTION: {
       const {
@@ -68,12 +70,17 @@ export default function apiReducer(
         quizFirstQuestion,
         quizResults: undefined,
         selectedOptionsWithAttributes: undefined,
+        matchedOptions: undefined,
       };
     }
     case QuizAPIActionTypes.SET_QUIZ_RESULTS: {
       const selectedOptionsWithAttributes =
         action.payload?.quizResults.quiz_selected_options
           .filter((option) => option.has_attribute)
+          .map((option) => option.value) || [];
+      const matchedOptions =
+        action.payload?.quizResults.quiz_selected_options
+          .filter((option) => option.is_matched && option.has_attribute)
           .map((option) => option.value) || [];
 
       return {
@@ -82,6 +89,7 @@ export default function apiReducer(
         quizResults: action.payload?.quizResults,
         quizCurrentQuestion: undefined,
         selectedOptionsWithAttributes,
+        matchedOptions,
       };
     }
     case QuizAPIActionTypes.SET_QUIZ_SHARED_RESULTS: {
