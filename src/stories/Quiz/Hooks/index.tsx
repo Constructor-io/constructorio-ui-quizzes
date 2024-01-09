@@ -108,18 +108,19 @@ export default function HooksTemplate(args) {
                   </div>
                 ))}
             </div>
-
-            {zeroResults && (
-              <div className='cio-zero-results'>
-                <h3 className='cio-zero-results-subtitle'>
-                  Sorry, we couldn’t find products that perfectly match your preferences.
-                </h3>
-                <div className='cio-button-container'>
-                  <button {...getResetQuizButtonProps()}>Try Again</button>
-                </div>
-              </div>
-            )}
           </div>
+
+          {/* Control Bar */}
+          {zeroResults && (
+            <div className='cio-zero-results'>
+              <h3 className='cio-zero-results-subtitle'>
+                Sorry, we couldn’t find products that perfectly match your preferences.
+              </h3>
+              <div className='cio-button-container'>
+                <button {...getResetQuizButtonProps()}>Try Again</button>
+              </div>
+            </div>
+          )}
         </div>
       );
     }
@@ -142,12 +143,18 @@ export default function HooksTemplate(args) {
                 <h1 className='cio-question-title'>{currentQuestionData.title}</h1>
                 <p className='cio-question-description'>{currentQuestionData.description}</p>
                 <input {...getOpenTextInputProps()} />
-                <div className='cio-question-buttons-container'>
-                  <button {...getPreviousQuestionButtonProps()}>Back</button>
-                  <div className='cio-button-container'>
-                    <button {...getSkipQuestionButtonProps()}>Skip</button>
-                    <button {...getNextQuestionButtonProps()}>Continue</button>
-                  </div>
+              </div>
+            </div>
+
+            {/* Control Bar */}
+            <div className='cio-question-buttons-container'>
+              <button {...getPreviousQuestionButtonProps()}>Back</button>
+              <div className='cio-question-buttons-group'>
+                <div className='cio-button-container'>
+                  <button {...getSkipQuestionButtonProps()}>Skip</button>
+                </div>
+                <div className='cio-button-container'>
+                  <button {...getNextQuestionButtonProps()}>Continue</button>
                 </div>
               </div>
             </div>
@@ -168,12 +175,18 @@ export default function HooksTemplate(args) {
               <div className='cio-question-content'>
                 <h1 className='cio-question-title'>{currentQuestionData.title}</h1>
                 <p className='cio-question-description'>{currentQuestionData.description}</p>
-                <div className='cio-question-buttons-container'>
-                  <button {...getPreviousQuestionButtonProps()}>Back</button>
-                  <div className='cio-button-container'>
-                    <button {...getSkipQuestionButtonProps()}>Skip</button>
-                    <button {...getNextQuestionButtonProps()}>Continue</button>
-                  </div>
+              </div>
+            </div>
+
+            {/* Control Bar */}
+            <div className='cio-question-buttons-container'>
+              <button {...getPreviousQuestionButtonProps()}>Back</button>
+              <div className='cio-question-buttons-group'>
+                <div className='cio-button-container'>
+                  <button {...getSkipQuestionButtonProps()}>Skip</button>
+                </div>
+                <div className='cio-button-container'>
+                  <button {...getNextQuestionButtonProps()}>Continue</button>
                 </div>
               </div>
             </div>
@@ -198,11 +211,16 @@ export default function HooksTemplate(args) {
                   </div>
                 ))}
               </div>
+            </div>
 
-              <div className='cio-question-buttons-container'>
-                <button {...getPreviousQuestionButtonProps()}>Back</button>
+            {/* Control Bar */}
+            <div className='cio-question-buttons-container'>
+              <button {...getPreviousQuestionButtonProps()}>Back</button>
+              <div className='cio-question-buttons-group'>
                 <div className='cio-button-container'>
                   <button {...getSkipQuestionButtonProps()}>Skip</button>
+                </div>
+                <div className='cio-button-container'>
                   <button {...getNextQuestionButtonProps()}>Continue</button>
                 </div>
               </div>

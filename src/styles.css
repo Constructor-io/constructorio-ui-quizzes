@@ -236,6 +236,7 @@
   flex-grow: 1;
   margin-left: auto;
   width: 100%;
+  transition: background 0.2s ease-in-out;
 }
 .cio-quiz .cio-button-container {
   max-width: 10rem;
@@ -292,15 +293,19 @@
   border: 1px solid var(--primary-color);
   border-radius: 4px;
   height: 3rem;
-  width: 3rem;
   font-size: 1rem;
   margin-right: 4rem;
+  /* Rather than setting a prefix-ed width, we add padding to allow different contents to fit nicely */
+  /* 1.2rem padding + arrow ~= 48px */
+  padding: 0 1.2rem;
+  outline: 1px solid transparent;
+  transition: outline 0.2s ease-in-out;
 }
 .cio-quiz .cio-question-back-button:hover {
-  border: 2px solid var(--primary-color-variant-600);
+  outline: 1px solid var(--primary-color-variant-600);
 }
 .cio-quiz .cio-question-back-button:active {
-  border: 2px solid var(--primary-color-variant-700);
+  border: 1px solid var(--primary-color-variant-700);
 }
 .cio-quiz .cio-question-back-button:focus {
   outline: 3px solid var(--primary-color-variant-100);
