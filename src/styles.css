@@ -292,9 +292,11 @@
   border: 1px solid var(--primary-color);
   border-radius: 4px;
   height: 3rem;
-  width: 3rem;
   font-size: 1rem;
   margin-right: 4rem;
+  /* Rather than setting a prefix-ed width, we add padding to allow different contents to fit nicely */
+  /* 1.2rem padding + arrow ~= 48px */
+  padding: 0 1.2rem;
 }
 .cio-quiz .cio-question-back-button:hover {
   border: 2px solid var(--primary-color-variant-600);
