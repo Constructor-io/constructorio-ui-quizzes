@@ -136,7 +136,7 @@ export const resetQuizSessionStorageState = (quizStateKey: string) => () => {
 
 export const logger = (action: any) => {
   try {
-    if (typeof process && process?.env?.LOGGER) {
+    if (typeof process !== 'undefined' && process?.env?.LOGGER) {
       console.group(
         `%cAction:%c  ${action.type}`,
         'color: red; font-weight: bold;',
