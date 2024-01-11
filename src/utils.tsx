@@ -135,15 +135,19 @@ export const resetQuizSessionStorageState = (quizStateKey: string) => () => {
 };
 
 export const logger = (action: any) => {
-  if (process?.env?.LOGGER) {
-    console.group(
-      `%cAction:%c  ${action.type}`,
-      'color: red; font-weight: bold;',
-      'color: green; font-weight: lighter;'
-    );
-    console.log('%c type:', 'color: #9E9E9E; font-weight: 700;', action.type);
-    console.log('%c payload:', 'color: #00A7F7; font-weight: 700;', action.payload);
-    console.groupEnd();
+  try {
+    if (typeof process !== 'undefined' && process?.env?.LOGGER) {
+      console.group(
+        `%cAction:%c  ${action.type}`,
+        'color: red; font-weight: bold;',
+        'color: green; font-weight: lighter;'
+      );
+      console.log('%c type:', 'color: #9E9E9E; font-weight: 700;', action.type);
+      console.log('%c payload:', 'color: #00A7F7; font-weight: 700;', action.payload);
+      console.groupEnd();
+    }
+  } catch (error) {
+    // process variable is not available and logger should not be active
   }
 };
 
