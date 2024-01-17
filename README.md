@@ -31,7 +31,7 @@ import CioQuiz from '@constructor-io/constructorio-ui-quizzes';
 function YourComponent() {
   return (
     <div>
-      <CioQuiz quizId='coffee-quiz' apiKey='key_wJSdZSiesX5hiVLt' />
+      <CioQuiz quizId='coffee-quiz' apiKey='key_n4SkMH5PFWLdStQZ' />
     </div>
   );
 }
@@ -48,7 +48,7 @@ import CioQuiz from '@constructor-io/constructorio-ui-quizzes/constructorio-ui-q
 CioQuiz({
   selector: '#quiz-container',
   quizId: 'coffee-quiz',
-  apiKey: 'key_wJSdZSiesX5hiVLt',
+  apiKey: 'key_n4SkMH5PFWLdStQZ',
   includeCSS: true, // Include the default CSS styles. Defaults to true.
   resultCardOptions: {
     resultCardRegularPriceKey: 'price',

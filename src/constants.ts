@@ -1,5 +1,5 @@
 // Autocomplete key index
-export const apiKey = 'key_wJSdZSiesX5hiVLt';
+export const apiKey = 'key_n4SkMH5PFWLdStQZ';
 export const quizId = 'coffee-quiz';
 
 // Session Storage default key
