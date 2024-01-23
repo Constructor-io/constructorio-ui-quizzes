@@ -13,7 +13,7 @@ import CioQuiz from '@constructor-io/constructorio-ui-quizzes';
 import '@constructor-io/constructorio-ui-quizzes/styles.css';
 
 export function YourComponent() {
-  const quizArgs = {
+  const args = {
     quizId: 'coffee-quiz',
     apiKey: 'key_n4SkMH5PFWLdStQZ',
     resultCardOptions: {
@@ -22,9 +22,7 @@ export function YourComponent() {
   };
 
   return (
-    <CioQuiz
-      {...args}
-    />
+    <CioQuiz {...args} />
   );
 }
 ```
@@ -42,7 +40,7 @@ import '@constructor-io/constructorio-ui-quizzes/styles.css';
 const cioJsClient = new ConstructorIOClient({ apiKey: 'key_n4SkMH5PFWLdStQZ' });
 
 export function YourComponent() {
-  const quizArgs = {
+  const args = {
     quizId: 'coffee-quiz',
     cioJsClient,
     resultCardOptions: {
@@ -51,49 +49,7 @@ export function YourComponent() {
   };
 
   return (
-    <CioQuiz
-      {...args}
-    />
-  );
-}
-```
-
-### Handle Favorites On Results Page
-On quiz results page. You can add/remove results as favorites. This is an example on how to handle favorites states
-
-```jsx
-import CioQuiz from '@constructor-io/constructorio-ui-quizzes';
-import '@constructor-io/constructorio-ui-quizzes/styles.css';
-
-export function YourComponent() {
-  const quizArgs = {
-    quizId: 'coffee-quiz',
-    apiKey: 'key_n4SkMH5PFWLdStQZ',
-    resultCardOptions: {
-      resultCardRegularPriceKey: 'price',
-    },
-    callbacks: {
-      onAddToFavoritesClick: 
-    }
-  };
-
-  const [favorites, setFavorites] = useState<string[]>([]);
-
-  const handleFavoritesClick = (result) => {
-    if (result.data) {
-      if (!favorites.includes(result.data.id)) {
-        setFavorites([...favorites, result.data.id]);
-      } else {
-        setFavorites(favorites.filter((id) => id !== result.data?.id));
-      }
-    }
-  }
-
-  return (
-    <CioQuiz
-      {...args}
-      onAddToFavoritesClick={handleFavoritesClick}
-    />
+    <CioQuiz {...args} />
   );
 }
 ```
@@ -114,16 +70,208 @@ import CioQuiz from '@constructor-io/constructorio-ui-quizzes';
 import '@constructor-io/constructorio-ui-quizzes/styles.css';
 
 export function YourComponent() {
-  const quizArgs = {
+  const args = {
     quizId: 'coffee-quiz',
     apiKey: 'key_n4SkMH5PFWLdStQZ',
     primaryColor: "255, 82, 48"
   };
 
   return (
-    <CioQuiz
-      {...args}
-    />
+    <CioQuiz {...args} />
+  );
+}
+```
+
+### Results Page Customizations
+
+Below are some customizations that you can apply to the results page:
+
+#### Handling Result Click
+
+You can pass a custom callback function (`onQuizResultClick`) to run on a result item click (eg: redirect to product page). The following example logs the clicked result `id`:
+
+```jsx
+import CioQuiz from '@constructor-io/constructorio-ui-quizzes';
+import '@constructor-io/constructorio-ui-quizzes/styles.css';
+
+export function YourComponent() {
+  const handleResultClick = (result) => {
+    if (result.data) {
+      console.log('Result ' + result.data.id + ' clicked!');
+    }
+  };
+
+  const args = {
+    quizId: 'coffee-quiz',
+    apiKey: 'key_n4SkMH5PFWLdStQZ',
+    callbacks: {
+      onQuizResultClick: handleResultClick
+    }
+  };
+
+  return (
+    <CioQuiz {...args} />
+  );
+}
+```
+
+#### Handling Favorites
+On quiz results page, you can add/remove results as favorites. This is an example on how to handle favorites states:
+
+```jsx
+import { useState } from 'react';
+import CioQuiz from '@constructor-io/constructorio-ui-quizzes';
+import '@constructor-io/constructorio-ui-quizzes/styles.css';
+
+export function YourComponent() {
+  const [favorites, setFavorites] = useState<string[]>([]);
+
+  const handleFavoritesClick = (result) => {
+    if (result.data) {
+      if (!favorites.includes(result.data.id)) {
+        setFavorites([...favorites, result.data.id]);
+      } else {
+        setFavorites(favorites.filter((id) => id !== result.data?.id));
+      }
+    }
+  };
+
+  const args = {
+    quizId: 'coffee-quiz',
+    apiKey: 'key_n4SkMH5PFWLdStQZ',
+    resultCardOptions: {
+      resultCardRegularPriceKey: 'price',
+    },
+    callbacks: {
+      onAddToFavoritesClick: handleFavoritesClick,
+    }
+  };
+
+  return (
+    <CioQuiz {...args} />
+  );
+}
+```
+
+#### Handling Add To Cart
+
+You can pass a custom callback function (`onAddToCartClick`) to run on a result add to cart button click. The following example logs the clicked result `id`:
+
+```jsx
+import CioQuiz from '@constructor-io/constructorio-ui-quizzes';
+import '@constructor-io/constructorio-ui-quizzes/styles.css';
+
+export function YourComponent() {
+  const handleCartClick = (result) => {
+    if (result.data) {
+      console.log('Result ' + result.data.id + ' added to cart!');
+    }
+  };
+
+  const args = {
+    quizId: 'coffee-quiz',
+    apiKey: 'key_n4SkMH5PFWLdStQZ',
+    callbacks: {
+      onAddToCartClick: handleCartClick
+    }
+  };
+
+  return (
+    <CioQuiz {...args} />
+  );
+}
+```
+
+#### Sale Price
+
+If you want to show a sale price on the product card, you can pass the sale price key (from the API response) to the `resultCardOptions`.\
+In the example below, the sale price is stored under the `salePrice` key in the results API response:
+
+```jsx
+import CioQuiz from '@constructor-io/constructorio-ui-quizzes';
+import '@constructor-io/constructorio-ui-quizzes/styles.css';
+
+/*
+API Response Snippet:
+
+response: {
+  results: [
+    {
+      data: {
+        id: '1',
+        price: '5.99', <-- Regular Price
+        salePrice: '4.99', <-- Sale Price
+        ...
+      },
+      ...
+    },
+    ...
+  ]
+  ...
+}
+*/
+
+export function YourComponent() {
+  const args = {
+    quizId: 'coffee-quiz',
+    apiKey: 'key_n4SkMH5PFWLdStQZ',
+    resultCardOptions: {
+      resultCardRegularPriceKey: 'price',
+      resultCardSalePriceKey: 'salePrice',
+    }
+  };
+
+  return (
+    <CioQuiz {...args} />
+  );
+}
+```
+
+#### Item Rating
+
+If you would like to show the item rating on the product card, you can pass the rating count and/or score keys (from the API response) to the `resultCardOptions`.\
+In the example below, the rating count and score are stored under `ratingCount` and `ratingScore` keys respectively in the results API response:
+
+```jsx
+import CioQuiz from '@constructor-io/constructorio-ui-quizzes';
+import '@constructor-io/constructorio-ui-quizzes/styles.css';
+
+/*
+API Response Snippet:
+
+response: {
+  results: [
+    {
+      data: {
+        id: '1',
+        price: '5.99',
+        salePrice: '4.99',
+        ratingCount: '100', <-- Rating Count
+        ratingScore: '5', <-- Rating Score
+        ...
+      },
+      ...
+    },
+    ...
+  ]
+  ...
+}
+*/
+
+export function YourComponent() {
+  const args = {
+    quizId: 'coffee-quiz',
+    apiKey: 'key_n4SkMH5PFWLdStQZ',
+    resultCardOptions: {
+      resultCardRegularPriceKey: 'price',
+      resultCardSalePriceKey: 'salePrice',
+      resultCardRatingCountKey: 'ratingCount',
+      resultCardRatingScoreKey: 'ratingScore',
+    }
+  };
+
+  return (
+    <CioQuiz {...args} />
   );
 }
 ```
