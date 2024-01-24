@@ -21,8 +21,7 @@ function ResultFiltersAndShare({
       <div className='cio-results-filter-container'>
         {!!matchedOptions.length && (
           <p className='cio-results-explanation'>
-            Based on your answers <span>{matchedOptions.join(', ')}</span> we recommend these
-            matches.
+            Based on your answers <span>{matchedOptions}</span> we recommend these items:
           </p>
         )}
       </div>
