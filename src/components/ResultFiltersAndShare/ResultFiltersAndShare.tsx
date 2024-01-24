@@ -8,20 +8,27 @@ interface ResultFiltersAndShareProps {
   showShareButton: boolean;
 }
 
+const MATCHED_OPTIONS_PLACEHOLDER = '@matched_options';
+
 function ResultFiltersAndShare({
   onShare,
   numberOfResults,
   showShareButton,
 }: ResultFiltersAndShareProps) {
   const { state } = useContext(QuizContext);
-  const matchedOptions = state?.quiz?.matchedOptions || [];
+  const matchedOptions = state?.quiz?.matchedOptions || '';
+  const { text = '', isActive } = state?.quiz?.resultsConfig?.desktop?.responseSummary || {};
+  const isActiveSummary = !!isActive && !!matchedOptions.length && !!text.length;
+  const [explanationFirstPart, explanationLastPart] = text.split(MATCHED_OPTIONS_PLACEHOLDER);
 
   return (
     <div className='cio-results-filter-and-redo-container cio-results-button-group'>
       <div className='cio-results-filter-container'>
-        {!!matchedOptions.length && (
+        {isActiveSummary && (
           <p className='cio-results-explanation'>
-            Based on your answers <span>{matchedOptions}</span> we recommend these items:
+            {explanationFirstPart}
+            <span>{matchedOptions}</span>
+            {explanationLastPart}
           </p>
         )}
       </div>

@@ -188,3 +188,11 @@ export function convertPrimaryColorsToString(primaryColorStyles: PrimaryColorSty
     --primary-color-l: ${primaryColorStyles['--primary-color-l']}; 
   }`;
 }
+
+export function formatMatchedOptions(options, separator, lastSeparator) {
+  if (!options.length) return '';
+
+  const firstPart = options.slice(0, -1).join(`${separator} `);
+
+  return `${firstPart} ${lastSeparator} ${options[options.length - 1]}`;
+}

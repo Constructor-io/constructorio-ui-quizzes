@@ -153,11 +153,13 @@ export const getMockState = (question?: Question): QuizReturnState => ({
       quiz_version_id: '',
       quiz_selected_options: [
         { value: 'Chocolate', has_attribute: true, is_matched: true },
+        { value: 'Milk', has_attribute: true, is_matched: true },
+        { value: 'Potato', has_attribute: true, is_matched: true },
         { value: 'Medium', has_attribute: true, is_matched: false },
       ],
     },
     selectedOptionsWithAttributes: ['Chocolate', 'Medium'],
-    matchedOptions: ['Chocolate'],
+    matchedOptions: 'Chocolate,Milk and Medium',
     resultsConfig: {
       desktop: {
         description: {
@@ -167,6 +169,12 @@ export const getMockState = (question?: Question): QuizReturnState => ({
         title: {
           is_active: true,
           text: 'Here are your results',
+        },
+        response_summary: {
+          itemsSeparator: ',',
+          lastSeparator: 'and',
+          text: 'Based on your answers @matched_options we recommend these items:',
+          isActive: true,
         },
       },
     },

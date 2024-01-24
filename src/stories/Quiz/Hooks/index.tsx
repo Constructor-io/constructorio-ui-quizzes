@@ -8,6 +8,9 @@ import '../../../styles.css';
 import { convertPrimaryColorsToString } from '../../../utils';
 import ShareSVG from '../../../components/ShareButton/ShareSVG';
 
+const MATCHED_OPTIONS_PLACEHOLDER = '@matched_options';
+
+// eslint-disable-next-line complexity
 export default function HooksTemplate(args) {
   const {
     state,
@@ -33,7 +36,10 @@ export default function HooksTemplate(args) {
       ? state.quiz.resultsConfig?.desktop?.title?.text || 'Here are your results'
       : '';
     const resultsDescription = state.quiz.resultsConfig?.desktop?.description?.text || '';
-    const matchedOptions = state.quiz.matchedOptions || [];
+    const matchedOptions = state.quiz.matchedOptions || '';
+    const { text = '', isActive } = state?.quiz?.resultsConfig?.desktop?.responseSummary || {};
+    const isActiveSummary = !!isActive && !!matchedOptions.length && !!text.length;
+    const [explanationFirstPart, explanationLastPart] = text.split(MATCHED_OPTIONS_PLACEHOLDER);
 
     // Quiz Results
     if (quizResults) {
@@ -49,9 +55,11 @@ export default function HooksTemplate(args) {
             {!zeroResults && (
               <div className='cio-results-filter-and-redo-container cio-results-button-group'>
                 <div className='cio-results-filter-container'>
-                  {!!matchedOptions.length && (
+                  {isActiveSummary && (
                     <p className='cio-results-explanation'>
-                      Based on your answers <span>{matchedOptions}</span> we recommend these items:
+                      {explanationFirstPart}
+                      <span>{matchedOptions}</span>
+                      {explanationLastPart}
                     </p>
                   )}
                 </div>

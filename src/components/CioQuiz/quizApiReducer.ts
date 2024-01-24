@@ -6,7 +6,7 @@ import {
   QuizSharedResultsData,
   QuizResultsConfig,
 } from '../../types';
-import { getQuestionTypes } from '../../utils';
+import { getQuestionTypes, formatMatchedOptions } from '../../utils';
 import { QuizAPIActionTypes, ActionQuizAPI } from './actions';
 
 export type QuizAPIReducerState = {
@@ -15,7 +15,7 @@ export type QuizAPIReducerState = {
   quizFirstQuestion?: NextQuestionResponse;
   quizResults?: QuizResultsResponse | QuizSharedResultsData;
   selectedOptionsWithAttributes?: string[];
-  matchedOptions?: string[];
+  matchedOptions?: string;
   resultsConfig?: QuizResultsConfig | null;
 };
 
@@ -82,6 +82,8 @@ export default function apiReducer(
         action.payload?.quizResults.quiz_selected_options
           .filter((option) => option.is_matched && option.has_attribute)
           .map((option) => option.value) || [];
+      const { itemsSeparator = '', lastSeparator = '' } =
+        state?.resultsConfig?.desktop?.responseSummary || {};
 
       return {
         ...state,
@@ -89,7 +91,7 @@ export default function apiReducer(
         quizResults: action.payload?.quizResults,
         quizCurrentQuestion: undefined,
         selectedOptionsWithAttributes,
-        matchedOptions,
+        matchedOptions: formatMatchedOptions(matchedOptions, itemsSeparator, lastSeparator),
       };
     }
     case QuizAPIActionTypes.SET_QUIZ_SHARED_RESULTS: {
