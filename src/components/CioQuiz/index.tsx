@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import QuizContext, { QuizContextValue } from './context';
-import QuizQuestions from '../QuizQuestions';
-import ResultContainer from '../ResultContainer/ResultContainer';
-import ControlBar from '../ControlBar/ControlBar';
-import { RequestStates } from '../../constants';
-import Spinner from '../Spinner/Spinner';
+
 import useQuiz from '../../hooks/useQuiz';
 import SessionPromptModal from '../SessionPromptModal/SessionPromptModal';
-import ShareResultsModal from '../ShareResultsModal/ShareResultsModal';
+
 import { IQuizProps } from '../../types';
 import { convertPrimaryColorsToString, renderImages } from '../../utils';
-import ProgressBar from '../ProgressBar/ProgressBar';
+
+import CioQuizContent from './QuizContent';
+import { RequestStates } from '../../constants';
+import ShareResultsModal from '../ShareResultsModal/ShareResultsModal';
 
 export default function CioQuiz(props: IQuizProps) {
   const {
@@ -59,6 +58,7 @@ export default function CioQuiz(props: IQuizProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // eslint-disable-next-line react/jsx-no-constructed-context-values
   const contextValue: QuizContextValue = {
     cioClient,
     state,
@@ -81,34 +81,27 @@ export default function CioQuiz(props: IQuizProps) {
     primaryColorStyles,
   };
 
-  if (state.quiz.requestState === RequestStates.Loading) {
-    return (
-      <div className='cio-quiz cio-quiz-loading'>
-        <Spinner />
-      </div>
-    );
-  }
-
   const questionData = state.quiz.currentQuestion?.next_question;
   const questionType = questionData?.type;
   const questionImages = questionData?.images;
   const displayBackgroundImage =
     (questionType === 'single' || questionType === 'multiple') && questionImages;
 
-  if (state.quiz.requestState === RequestStates.Success) {
-    return (
-      <div
-        className='cio-quiz'
-        style={{ overflow: showShareModal || showSessionPrompt ? 'hidden' : undefined }}>
-        {displayBackgroundImage && renderImages(questionImages, 'cio-question-background-image')}
-        <style>.cio-quiz {convertPrimaryColorsToString(primaryColorStyles)}</style>
-        <SessionPromptModal
-          resetStoredState={resetSessionStorageState}
-          continueSession={hydrateQuiz}
-          showSessionPrompt={showSessionPrompt}
-          setShowSessionPrompt={setShowSessionPrompt}
-        />
-
+  return (
+    <div
+      className={`cio-quiz ${
+        state.quiz.requestState === RequestStates.Loading ? 'cio-quiz-loading' : ''
+      }`}
+      style={{ overflow: showShareModal || showSessionPrompt ? 'hidden' : undefined }}>
+      {displayBackgroundImage && renderImages(questionImages, 'cio-question-background-image')}
+      <style>.cio-quiz {convertPrimaryColorsToString(primaryColorStyles)}</style>
+      <SessionPromptModal
+        resetStoredState={resetSessionStorageState}
+        continueSession={hydrateQuiz}
+        showSessionPrompt={showSessionPrompt}
+        setShowSessionPrompt={setShowSessionPrompt}
+      />
+      <QuizContext.Provider value={contextValue}>
         {state.quiz && showShareModal && (
           <ShareResultsModal
             onClose={() => setShowShareModal(false)}
@@ -116,29 +109,13 @@ export default function CioQuiz(props: IQuizProps) {
             onEmailResults={callbacks?.onEmailResults}
           />
         )}
-
-        <QuizContext.Provider value={contextValue}>
-          {state.quiz.results || skipToResults ? (
-            <ResultContainer
-              resultCardOptions={resultCardOptions}
-              onShare={() => setShowShareModal(true)}
-              resultsPageOptions={resultsPageOptions}
-            />
-          ) : (
-            state.quiz.currentQuestion && (
-              <>
-                <ProgressBar />
-                <QuizQuestions />
-                <ControlBar
-                  skipQuestionButtonText={questionsPageOptions?.skipQuestionButtonText}
-                  ctaButtonText={questionData?.cta_text || undefined}
-                />
-              </>
-            )
-          )}
-        </QuizContext.Provider>
-      </div>
-    );
-  }
-  return null;
+        <CioQuizContent
+          setShowShareModal={setShowShareModal}
+          questionsPageOptions={questionsPageOptions}
+          resultCardOptions={resultCardOptions}
+          resultsPageOptions={resultsPageOptions}
+        />
+      </QuizContext.Provider>
+    </div>
+  );
 }
