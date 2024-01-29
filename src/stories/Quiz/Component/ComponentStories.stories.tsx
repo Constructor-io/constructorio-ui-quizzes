@@ -83,7 +83,7 @@ const cioJsClient = new ConstructorIOClient({ apiKey });
 export const ProvideCIOClientInstance: Story = {
   args: {
     quizId,
-    resultsPageOptions: {},
+    resultsPageOptions,
     cioJsClient,
     resultCardOptions,
   },
