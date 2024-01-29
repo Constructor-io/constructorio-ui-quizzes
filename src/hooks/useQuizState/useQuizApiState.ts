@@ -40,28 +40,30 @@ const useQuizApiState: UseQuizApiState = (
   const { quizId, quizVersionId: quizVersionIdProp, resultsPageOptions } = quizOptions;
   const { queryItems, queryAttributes, isSharedResultsQuery } = useQueryParams();
   const dispatchQuizResults = async () => {
-    try {
-      const quizResults = await getQuizResults(cioClient, quizId, {
-        answers: quizLocalState.answers,
-        resultsPerPage: resultsPageOptions?.numResultsToDisplay,
-        quizVersionId: quizLocalState.quizVersionId,
-        quizSessionId: quizLocalState.quizSessionId,
-      });
-      // Set quiz results state
-      dispatchApiState({
-        type: QuizAPIActionTypes.SET_QUIZ_RESULTS,
-        payload: {
-          quizResults,
-        },
-      });
-      if (!quizLocalState.isQuizCompleted)
-        dispatchLocalState({
-          type: QuestionTypes.Complete,
+    if (quizLocalState.answers.length) {
+      try {
+        const quizResults = await getQuizResults(cioClient, quizId, {
+          answers: quizLocalState.answers,
+          resultsPerPage: resultsPageOptions?.numResultsToDisplay,
+          quizVersionId: quizLocalState.quizVersionId,
+          quizSessionId: quizLocalState.quizSessionId,
         });
-    } catch (error) {
-      dispatchApiState({
-        type: QuizAPIActionTypes.SET_IS_ERROR,
-      });
+        // Set quiz results state
+        dispatchApiState({
+          type: QuizAPIActionTypes.SET_QUIZ_RESULTS,
+          payload: {
+            quizResults,
+          },
+        });
+        if (!quizLocalState.isQuizCompleted)
+          dispatchLocalState({
+            type: QuestionTypes.Complete,
+          });
+      } catch (error) {
+        dispatchApiState({
+          type: QuizAPIActionTypes.SET_IS_ERROR,
+        });
+      }
     }
   };
 
