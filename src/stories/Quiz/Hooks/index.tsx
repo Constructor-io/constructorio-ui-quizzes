@@ -7,8 +7,7 @@ import { useCioQuiz } from '../../../index';
 import '../../../styles.css';
 import { convertPrimaryColorsToString } from '../../../utils';
 import ShareSVG from '../../../components/ShareButton/ShareSVG';
-
-const MATCHED_OPTIONS_PLACEHOLDER = '@matched_options';
+import { MATCHED_OPTIONS_PLACEHOLDER } from '../../../constants';
 
 // eslint-disable-next-line complexity
 export default function HooksTemplate(args) {

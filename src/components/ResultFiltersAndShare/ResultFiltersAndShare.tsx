@@ -1,14 +1,13 @@
 import React, { useContext } from 'react';
 import QuizContext from '../CioQuiz/context';
 import ShareButton from '../ShareButton/ShareButton';
+import { MATCHED_OPTIONS_PLACEHOLDER } from '../../constants';
 
 interface ResultFiltersAndShareProps {
   onShare: () => void;
   numberOfResults?: number;
   showShareButton: boolean;
 }
-
-const MATCHED_OPTIONS_PLACEHOLDER = '@matched_options';
 
 function ResultFiltersAndShare({
   onShare,
