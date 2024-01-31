@@ -83,7 +83,7 @@ export default function apiReducer(
           .filter((option) => option.is_matched && option.has_attribute)
           .map((option) => option.value) || [];
       const { itemsSeparator = '', lastSeparator = '' } =
-        state?.resultsConfig?.desktop?.responseSummary || {};
+        state.resultsConfig?.desktop?.responseSummary || {};
 
       return {
         ...state,
