@@ -19,16 +19,16 @@ function ResultFiltersAndShare({
   const matchedOptions = state?.quiz?.matchedOptions || '';
   const { text = '', isActive } = state?.quiz?.resultsConfig?.desktop?.responseSummary || {};
   const isActiveSummary = !!isActive && !!matchedOptions.length && !!text.length;
-  const [explanationFirstPart, explanationLastPart] = text.split(MATCHED_OPTIONS_PLACEHOLDER);
+  const [summaryFirstPart, summaryLastPart] = text.split(MATCHED_OPTIONS_PLACEHOLDER);
 
   return (
     <div className='cio-results-filter-and-redo-container cio-results-button-group'>
       <div className='cio-results-filter-container'>
         {isActiveSummary && (
           <p className='cio-results-explanation'>
-            {explanationFirstPart}
+            {summaryFirstPart}
             <span>{matchedOptions}</span>
-            {explanationLastPart}
+            {summaryLastPart}
           </p>
         )}
       </div>

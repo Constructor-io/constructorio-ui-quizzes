@@ -39,7 +39,7 @@ export default function HooksTemplate(args) {
     const matchedOptions = state.quiz.matchedOptions || '';
     const { text = '', isActive } = state?.quiz?.resultsConfig?.desktop?.responseSummary || {};
     const isActiveSummary = !!isActive && !!matchedOptions.length && !!text.length;
-    const [explanationFirstPart, explanationLastPart] = text.split(MATCHED_OPTIONS_PLACEHOLDER);
+    const [summaryFirstPart, summaryLastPart] = text.split(MATCHED_OPTIONS_PLACEHOLDER);
 
     // Quiz Results
     if (quizResults) {
@@ -57,9 +57,9 @@ export default function HooksTemplate(args) {
                 <div className='cio-results-filter-container'>
                   {isActiveSummary && (
                     <p className='cio-results-explanation'>
-                      {explanationFirstPart}
+                      {summaryFirstPart}
                       <span>{matchedOptions}</span>
-                      {explanationLastPart}
+                      {summaryLastPart}
                     </p>
                   )}
                 </div>
