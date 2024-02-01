@@ -5,10 +5,9 @@ import React from 'react';
 import RedoSVG from '../../../components/RedoButton/RedoSVG';
 import { useCioQuiz } from '../../../index';
 import '../../../styles.css';
-import { convertPrimaryColorsToString } from '../../../utils';
+import { convertPrimaryColorsToString, formatMatchedOptions } from '../../../utils';
 import ShareSVG from '../../../components/ShareButton/ShareSVG';
 import { MATCHED_OPTIONS_PLACEHOLDER } from '../../../constants';
-import { formatMatchedOptions } from '../../utils';
 
 // eslint-disable-next-line complexity
 export default function HooksTemplate(args) {
