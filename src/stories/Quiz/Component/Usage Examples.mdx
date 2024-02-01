@@ -116,7 +116,9 @@ export function YourComponent() {
 ```
 
 #### Handling Favorites
-On quiz results page, you can add/remove results as favorites. This is an example on how to handle favorites states:
+On quiz results page, you can add/remove results as favorites.
+In the following example, clicking on the add to favorites button on an item's card will add this item id to the `favorites` array.
+This array is then passed to the `resultsPageOptions` to render favorites:
 
 ```jsx
 import { useState } from 'react';
@@ -141,6 +143,9 @@ export function YourComponent() {
     apiKey: 'key_n4SkMH5PFWLdStQZ',
     resultCardOptions: {
       resultCardRegularPriceKey: 'price',
+    },
+    resultsPageOptions: {
+      favoriteItems: favorites,
     },
     callbacks: {
       onAddToFavoritesClick: handleFavoritesClick,
