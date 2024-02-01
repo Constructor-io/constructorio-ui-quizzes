@@ -189,7 +189,11 @@ export function convertPrimaryColorsToString(primaryColorStyles: PrimaryColorSty
   }`;
 }
 
-export function formatMatchedOptions(options, separator, lastSeparator) {
+export function formatMatchedOptions(
+  options: string[],
+  separator: string,
+  lastSeparator: string
+): string {
   if (!options.length) return '';
 
   const firstPart = options.slice(0, -1).join(`${separator} `);

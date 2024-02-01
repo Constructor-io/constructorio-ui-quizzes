@@ -35,7 +35,7 @@ export default function HooksTemplate(args) {
       ? state.quiz.resultsConfig?.desktop?.title?.text || 'Here are your results'
       : '';
     const resultsDescription = state.quiz.resultsConfig?.desktop?.description?.text || '';
-    const matchedOptions = state.quiz.matchedOptions || '';
+    const matchedOptions = state.quiz.matchedOptions || [];
     const {
       text = '',
       isActive,
