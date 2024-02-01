@@ -1,9 +1,9 @@
 import { within, userEvent } from '@storybook/testing-library';
+import type { StoryObj } from '@storybook/react';
 import { expect } from '@storybook/jest';
 import CioQuiz from '../../../components/CioQuiz';
 import { argTypes, docsControls } from '../argTypes';
 import { sleep } from '../../../utils';
-import ComponentTemplate from '../Component';
 import { apiKey, quizId } from '../../../constants';
 import { callbacks, resultsPageOptions, resultCardOptions } from './mocks';
 
@@ -28,16 +28,19 @@ const sessionStateOptions = {
   showSessionModal: false,
 };
 
+type Story = StoryObj<typeof CioQuiz>;
+
 // eslint-disable-next-line storybook/prefer-pascal-case
-export const e2eInteractionTest = ComponentTemplate.bind({});
-e2eInteractionTest.args = {
-  apiKey,
-  quizId,
-  resultsPageOptions,
-  sessionStateOptions,
-  callbacks,
-  resultCardOptions,
-  enableHydration: false,
+export const e2eInteractionTest: Story = {
+  args: {
+    apiKey,
+    quizId,
+    resultsPageOptions,
+    sessionStateOptions,
+    callbacks,
+    resultCardOptions,
+    enableHydration: false,
+  },
 };
 
 e2eInteractionTest.play = async ({ canvasElement }) => {

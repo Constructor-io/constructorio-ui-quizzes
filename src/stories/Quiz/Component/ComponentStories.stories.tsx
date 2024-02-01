@@ -1,10 +1,9 @@
 /* eslint-disable no-console, react/jsx-props-no-spreading */
 import React, { useState } from 'react';
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import CioQuiz from '../../../components/CioQuiz';
 import { argTypes, storiesControls } from '../argTypes';
-import ComponentTemplate from '.';
 import { apiKey, quizId } from '../../../constants';
 import {
   callbacks,
@@ -26,16 +25,19 @@ const meta: Meta<typeof CioQuiz> = {
 
 export default meta;
 
-export const BasicUsage = ComponentTemplate.bind({});
-BasicUsage.args = {
-  quizId,
-  apiKey,
-  quizVersionId: '',
-  resultsPageOptions,
-  resultCardOptions,
-  callbacks,
-  sessionStateOptions,
-  primaryColor: '35, 71, 199',
+type Story = StoryObj<typeof CioQuiz>;
+
+export const BasicUsage: Story = {
+  args: {
+    quizId,
+    apiKey,
+    quizVersionId: '',
+    resultsPageOptions,
+    resultCardOptions,
+    callbacks,
+    sessionStateOptions,
+    primaryColor: '35, 71, 199',
+  },
 };
 
 function RenderInASmallContainerTemplate(args: IQuizProps) {
@@ -68,39 +70,34 @@ function RenderInASmallContainerTemplate(args: IQuizProps) {
     </div>
   );
 }
-export const RenderInASmallContainer = RenderInASmallContainerTemplate.bind({});
+
+export const RenderInASmallContainer: Story = {
+  args: {},
+  render: (args) => <RenderInASmallContainerTemplate {...args} />,
+};
 
 RenderInASmallContainer.args = { apiKey, quizId, callbacks, resultCardOptions };
 
 const cioJsClient = new ConstructorIOClient({ apiKey });
 
-const cioClientStoryResultsPageOptions = {
-  onAddToCartClick: callbacks.onAddToCartClick,
-  resultCardRegularPriceKey: resultCardOptions.resultCardRegularPriceKey,
+export const ProvideCIOClientInstance: Story = {
+  args: {
+    quizId,
+    resultsPageOptions,
+    cioJsClient,
+    resultCardOptions,
+  },
 };
 
-export const ProvideCIOClientInstance = ComponentTemplate.bind({});
-
-ProvideCIOClientInstance.args = {
-  quizId,
-  resultsPageOptions: cioClientStoryResultsPageOptions,
-  cioJsClient,
-  resultCardOptions,
+export const PassCallbacks: Story = {
+  args: { apiKey, quizId, resultsPageOptions, resultCardOptions, callbacks },
 };
 
-export const PassCallbacks = ComponentTemplate.bind({});
-PassCallbacks.args = {
-  apiKey,
-  quizId,
-  resultsPageOptions,
-  resultCardOptions,
-  callbacks,
-};
-
-export const HandleFavoritesOnResultsPage = ComponentTemplate.bind({});
-HandleFavoritesOnResultsPage.args = {
-  apiKey,
-  quizId,
-  resultsPageOptions,
-  callbacks,
+export const HandleFavoritesOnResultsPage: Story = {
+  args: {
+    apiKey,
+    quizId,
+    resultsPageOptions,
+    callbacks,
+  },
 };
