@@ -8,6 +8,7 @@ import '../../../styles.css';
 import { convertPrimaryColorsToString } from '../../../utils';
 import ShareSVG from '../../../components/ShareButton/ShareSVG';
 import { MATCHED_OPTIONS_PLACEHOLDER } from '../../../constants';
+import { formatMatchedOptions } from '../../utils';
 
 // eslint-disable-next-line complexity
 export default function HooksTemplate(args) {
@@ -36,8 +37,18 @@ export default function HooksTemplate(args) {
       : '';
     const resultsDescription = state.quiz.resultsConfig?.desktop?.description?.text || '';
     const matchedOptions = state.quiz.matchedOptions || '';
-    const { text = '', isActive } = state?.quiz?.resultsConfig?.desktop?.responseSummary || {};
+    const {
+      text = '',
+      isActive,
+      itemsSeparator,
+      lastSeparator,
+    } = state?.quiz?.resultsConfig?.desktop?.responseSummary || {};
     const isActiveSummary = !!isActive && !!matchedOptions.length && !!text.length;
+    const matchedOptionsTemplate = formatMatchedOptions(
+      matchedOptions,
+      itemsSeparator,
+      lastSeparator
+    );
     const [summaryFirstPart, summaryLastPart] = text.split(MATCHED_OPTIONS_PLACEHOLDER);
 
     // Quiz Results
@@ -57,7 +68,7 @@ export default function HooksTemplate(args) {
                   {isActiveSummary && (
                     <p className='cio-results-explanation'>
                       {summaryFirstPart}
-                      <span>{matchedOptions}</span>
+                      <span>{matchedOptionsTemplate}</span>
                       {summaryLastPart}
                     </p>
                   )}

@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import QuizContext from '../CioQuiz/context';
 import ShareButton from '../ShareButton/ShareButton';
 import { MATCHED_OPTIONS_PLACEHOLDER } from '../../constants';
+import { formatMatchedOptions } from '../../utils';
 
 interface ResultFiltersAndShareProps {
   onShare: () => void;
@@ -15,9 +16,19 @@ function ResultFiltersAndShare({
   showShareButton,
 }: ResultFiltersAndShareProps) {
   const { state } = useContext(QuizContext);
-  const matchedOptions = state?.quiz?.matchedOptions || '';
-  const { text = '', isActive } = state?.quiz?.resultsConfig?.desktop?.responseSummary || {};
+  const matchedOptions = state?.quiz?.matchedOptions || [];
+  const {
+    text = '',
+    isActive,
+    itemsSeparator,
+    lastSeparator,
+  } = state?.quiz?.resultsConfig?.desktop?.responseSummary || {};
   const isActiveSummary = !!isActive && !!matchedOptions.length && !!text.length;
+  const matchedOptionsTemplate = formatMatchedOptions(
+    matchedOptions,
+    itemsSeparator,
+    lastSeparator
+  );
   const [summaryFirstPart, summaryLastPart] = text.split(MATCHED_OPTIONS_PLACEHOLDER);
 
   return (
@@ -26,7 +37,7 @@ function ResultFiltersAndShare({
         {isActiveSummary && (
           <p className='cio-results-explanation'>
             {summaryFirstPart}
-            <span>{matchedOptions}</span>
+            <span>{matchedOptionsTemplate}</span>
             {summaryLastPart}
           </p>
         )}
