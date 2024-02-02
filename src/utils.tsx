@@ -191,12 +191,14 @@ export function convertPrimaryColorsToString(primaryColorStyles: PrimaryColorSty
 
 export function formatMatchedOptions(
   options: string[],
-  separator: string,
-  lastSeparator: string
+  separator: string | null | undefined,
+  lastSeparator: string | null | undefined
 ): string {
-  if (!options.length) return '';
+  if (!options.length || !separator || !lastSeparator) {
+    return '';
+  }
 
-  const firstPart = options.slice(0, -1).join(`${separator} `);
+  const firstPart = options.slice(0, -1).join(separator);
 
-  return `${firstPart} ${lastSeparator} ${options[options.length - 1]}`;
+  return [firstPart, lastSeparator, options.at(-1)].join('');
 }

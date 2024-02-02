@@ -19,26 +19,26 @@ function ResultFiltersAndShare({
   const matchedOptions = state?.quiz?.matchedOptions || [];
   const {
     text = '',
-    isActive,
-    itemsSeparator,
-    lastSeparator,
-  } = state?.quiz?.resultsConfig?.desktop?.responseSummary || {};
-  const isActiveSummary = !!isActive && !!matchedOptions.length && !!text.length;
+    is_active: isActive,
+    items_separator: itemsSeparator,
+    last_separator: lastSeparator,
+  } = state?.quiz?.resultsConfig?.desktop?.response_summary || {};
+  const isActiveSummary = !!isActive && !!matchedOptions.length && !!text?.length;
+  const [summaryFirstPart, summaryLastPart] = text?.split(MATCHED_OPTIONS_PLACEHOLDER) || [];
   const matchedOptionsTemplate = formatMatchedOptions(
     matchedOptions,
     itemsSeparator,
     lastSeparator
   );
-  const [summaryFirstPart, summaryLastPart] = text.split(MATCHED_OPTIONS_PLACEHOLDER);
 
   return (
     <div className='cio-results-filter-and-redo-container cio-results-button-group'>
       <div className='cio-results-filter-container'>
         {isActiveSummary && (
           <p className='cio-results-explanation'>
-            {summaryFirstPart}
+            {!!summaryFirstPart?.length && summaryFirstPart}
             <span>{matchedOptionsTemplate}</span>
-            {summaryLastPart}
+            {!!summaryLastPart?.length && summaryLastPart}
           </p>
         )}
       </div>
