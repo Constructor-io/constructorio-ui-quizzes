@@ -13,7 +13,7 @@ import CioQuiz from '@constructor-io/constructorio-ui-quizzes';
 import '@constructor-io/constructorio-ui-quizzes/styles.css';
 
 export function YourComponent() {
-  const quizArgs = {
+  const args = {
     quizId: 'coffee-quiz',
     apiKey: 'key_n4SkMH5PFWLdStQZ',
     resultCardOptions: {
@@ -22,9 +22,7 @@ export function YourComponent() {
   };
 
   return (
-    <CioQuiz
-      {...args}
-    />
+    <CioQuiz {...args} />
   );
 }
 ```
@@ -42,7 +40,7 @@ import '@constructor-io/constructorio-ui-quizzes/styles.css';
 const cioJsClient = new ConstructorIOClient({ apiKey: 'key_n4SkMH5PFWLdStQZ' });
 
 export function YourComponent() {
-  const quizArgs = {
+  const args = {
     quizId: 'coffee-quiz',
     cioJsClient,
     resultCardOptions: {
@@ -51,32 +49,83 @@ export function YourComponent() {
   };
 
   return (
-    <CioQuiz
-      {...args}
-    />
+    <CioQuiz {...args} />
   );
 }
 ```
 
-### Handle Favorites On Results Page
-On quiz results page. You can add/remove results as favorites. This is an example on how to handle favorites states
+### Style Customizations
+If you would like to use a different primary color, pass a `primaryColor` string in RGB format ('R, G, B').
+
+Accent colors for borders and different states (hover, focus, active) will be calculated automatically based on the primary color you provided.
+
+By default, the primary color has a value of "35, 71, 199" (Constructor Blue).
+
+In the example below, the `primaryColor` prop has been used to override this color to "255, 82, 48" (Orange).
+
+> Advanced Option: Instead of passing a primaryColor prop, you can also override `--primary-color-h`, `--primary-color-s`, and `--primary-color-l` CSS variables within a `.cio-quiz` container element. If explicitly given a value in your CSS, then the values of these variables will be used as the HSL values for your quiz.
 
 ```jsx
 import CioQuiz from '@constructor-io/constructorio-ui-quizzes';
 import '@constructor-io/constructorio-ui-quizzes/styles.css';
 
 export function YourComponent() {
-  const quizArgs = {
+  const args = {
     quizId: 'coffee-quiz',
     apiKey: 'key_n4SkMH5PFWLdStQZ',
-    resultCardOptions: {
-      resultCardRegularPriceKey: 'price',
-    },
-    callbacks: {
-      onAddToFavoritesClick: 
+    primaryColor: '255, 82, 48'
+  };
+
+  return (
+    <CioQuiz {...args} />
+  );
+}
+```
+
+### Results Page Customizations
+
+Below are some customizations that you can apply to the results page:
+
+#### Handling Result Click
+
+You can pass a custom callback function (`onQuizResultClick`) that will run when a result is clicked. The following example logs the clicked result's `id`:
+
+```jsx
+import CioQuiz from '@constructor-io/constructorio-ui-quizzes';
+import '@constructor-io/constructorio-ui-quizzes/styles.css';
+
+export function YourComponent() {
+  const handleResultClick = (result) => {
+    if (result.data) {
+      console.log('Result ' + result.data.id + ' clicked!');
     }
   };
 
+  const args = {
+    quizId: 'coffee-quiz',
+    apiKey: 'key_n4SkMH5PFWLdStQZ',
+    callbacks: {
+      onQuizResultClick: handleResultClick
+    }
+  };
+
+  return (
+    <CioQuiz {...args} />
+  );
+}
+```
+
+#### Handling Favorites
+On quiz results page, you can add/remove results as favorites.
+In the following example, clicking on the add to favorites button on an item's card will add this item id to the `favorites` array.
+This array is then passed to the `resultsPageOptions` to render favorites:
+
+```jsx
+import { useState } from 'react';
+import CioQuiz from '@constructor-io/constructorio-ui-quizzes';
+import '@constructor-io/constructorio-ui-quizzes/styles.css';
+
+export function YourComponent() {
   const [favorites, setFavorites] = useState<string[]>([]);
 
   const handleFavoritesClick = (result) => {
@@ -87,43 +136,147 @@ export function YourComponent() {
         setFavorites(favorites.filter((id) => id !== result.data?.id));
       }
     }
-  }
+  };
+
+  const args = {
+    quizId: 'coffee-quiz',
+    apiKey: 'key_n4SkMH5PFWLdStQZ',
+    resultCardOptions: {
+      resultCardRegularPriceKey: 'price',
+    },
+    resultsPageOptions: {
+      favoriteItems: favorites,
+    },
+    callbacks: {
+      onAddToFavoritesClick: handleFavoritesClick,
+    }
+  };
 
   return (
-    <CioQuiz
-      {...args}
-      onAddToFavoritesClick={handleFavoritesClick}
-    />
+    <CioQuiz {...args} />
   );
 }
 ```
 
-### Style Customizations
-If you would like to use a different primary color, pass a \`primaryColor\` string in RGB format ('R, G, B').
+#### Handling Add To Cart
 
-Accent colors for borders and different states (hover, focus, active) will be calculated automatically based on the primary color you provided.
-
-By default, the primary color has a value of "35, 71, 199" (Constructor Blue).
-
-In the example below, the \`primaryColor\` prop has been used to override this color to "255, 82, 48" (Orange).
-
-> Advanced Option: Instead of passing a primaryColor prop, you can also override \`--primary-color-h\`, \`--primary-color-s\`, and \`--primary-color-l\` CSS variables within a \`.cio-quiz\` container element. If explicitly given a value in your CSS, then the values of these variables will be used as the HSL values for your quiz.
+You can pass a custom callback function (`onAddToCartClick`) that will run when the add to cart button in a result card is clicked. The following example logs the clicked result's `id`:
 
 ```jsx
 import CioQuiz from '@constructor-io/constructorio-ui-quizzes';
 import '@constructor-io/constructorio-ui-quizzes/styles.css';
 
 export function YourComponent() {
-  const quizArgs = {
+  const handleCartClick = (result) => {
+    if (result.data) {
+      console.log('Result ' + result.data.id + ' added to cart!');
+    }
+  };
+
+  const args = {
     quizId: 'coffee-quiz',
     apiKey: 'key_n4SkMH5PFWLdStQZ',
-    primaryColor: "255, 82, 48"
+    callbacks: {
+      onAddToCartClick: handleCartClick
+    }
   };
 
   return (
-    <CioQuiz
-      {...args}
-    />
+    <CioQuiz {...args} />
+  );
+}
+```
+
+#### Sale Price
+
+If you want to show a sale price on the product card, you can pass the sale price key (from the API response) to the `resultCardOptions`.\
+In the example below, the sale price is stored under the `salePrice` key in the results API response:
+
+```jsx
+import CioQuiz from '@constructor-io/constructorio-ui-quizzes';
+import '@constructor-io/constructorio-ui-quizzes/styles.css';
+
+/*
+API Response Snippet:
+
+response: {
+  results: [
+    {
+      data: {
+        id: '1',
+        price: '5.99', <-- Regular Price
+        salePrice: '4.99', <-- Sale Price
+        ...
+      },
+      ...
+    },
+    ...
+  ]
+  ...
+}
+*/
+
+export function YourComponent() {
+  const args = {
+    quizId: 'coffee-quiz',
+    apiKey: 'key_n4SkMH5PFWLdStQZ',
+    resultCardOptions: {
+      resultCardRegularPriceKey: 'price',
+      resultCardSalePriceKey: 'salePrice',
+    }
+  };
+
+  return (
+    <CioQuiz {...args} />
+  );
+}
+```
+
+#### Item Rating
+
+If you would like to show the item rating on the product card, you can pass the rating count and/or score keys (from the API response) to the `resultCardOptions`.\
+In the example below, the rating count and score are stored under `ratingCount` and `ratingScore` keys respectively in the results API response:
+
+```jsx
+import CioQuiz from '@constructor-io/constructorio-ui-quizzes';
+import '@constructor-io/constructorio-ui-quizzes/styles.css';
+
+/*
+API Response Snippet:
+
+response: {
+  results: [
+    {
+      data: {
+        id: '1',
+        price: '5.99',
+        salePrice: '4.99',
+        ratingCount: '100', <-- Rating Count
+        ratingScore: '5', <-- Rating Score
+        ...
+      },
+      ...
+    },
+    ...
+  ]
+  ...
+}
+*/
+
+export function YourComponent() {
+  const args = {
+    quizId: 'coffee-quiz',
+    apiKey: 'key_n4SkMH5PFWLdStQZ',
+    resultCardOptions: {
+      resultCardRegularPriceKey: 'price',
+      resultCardSalePriceKey: 'salePrice',
+      resultCardRatingCountKey: 'ratingCount',
+      resultCardRatingScoreKey: 'ratingScore',
+    }
+  };
+
+  return (
+    <CioQuiz {...args} />
   );
 }
 ```
