@@ -191,8 +191,8 @@ export function convertPrimaryColorsToString(primaryColorStyles: PrimaryColorSty
 
 export function formatMatchedOptions(
   options: string[],
-  separator: string | null | undefined,
-  lastSeparator: string | null | undefined
+  separator?: string | null,
+  lastSeparator?: string | null
 ): string {
   if (!options.length || !separator || !lastSeparator) {
     return '';
