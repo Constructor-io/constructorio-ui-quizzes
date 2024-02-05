@@ -45,7 +45,7 @@ export function QuizResultsWithSummaryDecorator(Story: any) {
     <div className='cio-quiz'>
       <QuizContext.Provider value={contextValue}>
         <div>
-          <Story Component={Story} />
+          <StoryPreview Component={Story} />
         </div>
       </QuizContext.Provider>
     </div>
