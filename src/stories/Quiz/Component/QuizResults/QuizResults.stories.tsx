@@ -5,6 +5,7 @@ import ResultContainer from '../../../../components/ResultContainer/ResultContai
 import { resultCardOptions } from '../../tests/mocks';
 import QuizResultsVariationsDecorator, {
   QuizResultsPrimaryDecorator,
+  QuizResultsWithSummaryDecorator,
 } from './QuizResultsDecorator';
 
 const meta: Meta<typeof ResultContainer> = {
@@ -38,4 +39,16 @@ export const QuizResultsPage: Story = {
     </div>
   ),
   decorators: [(story) => QuizResultsVariationsDecorator(story)],
+};
+
+export const QuizResultsPageWithSummary: Story = {
+  args: {
+    resultCardOptions,
+  },
+  render: (args) => (
+    <div className='results-example-wrapper'>
+      <ResultContainer resultCardOptions={resultCardOptions} onShare={args.onShare} />
+    </div>
+  ),
+  decorators: [(story) => QuizResultsWithSummaryDecorator(story)],
 };
