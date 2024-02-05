@@ -5,11 +5,10 @@ import React from 'react';
 import RedoSVG from '../../../components/RedoButton/RedoSVG';
 import { useCioQuiz } from '../../../index';
 import '../../../styles.css';
-import { convertPrimaryColorsToString, formatMatchedOptions } from '../../../utils';
+import { convertPrimaryColorsToString } from '../../../utils';
 import ShareSVG from '../../../components/ShareButton/ShareSVG';
-import { MATCHED_OPTIONS_PLACEHOLDER } from '../../../constants';
+import QuizResultsSummary from '../../../components/QuizResultsSummary/QuizResultsSummary';
 
-// eslint-disable-next-line complexity
 export default function HooksTemplate(args) {
   const {
     state,
@@ -26,29 +25,16 @@ export default function HooksTemplate(args) {
     getShareResultsButtonProps,
     primaryColorStyles,
   } = useCioQuiz(args);
-
   if (state.quiz.requestState === 'SUCCESS') {
     const quizResults = state.quiz.results?.response?.results;
+    const matchedOptions = state?.quiz?.matchedOptions;
+    const summary = state?.quiz?.resultsConfig?.desktop?.response_summary ?? null;
     const numberOfResults = quizResults?.length ?? 0;
     const zeroResults = !numberOfResults;
     const resultsTitle = zeroResults
       ? state.quiz.resultsConfig?.desktop?.title?.text || 'Here are your results'
       : '';
     const resultsDescription = state.quiz.resultsConfig?.desktop?.description?.text || '';
-    const matchedOptions = state.quiz.matchedOptions || [];
-    const {
-      text = '',
-      is_active: isActive,
-      items_separator: itemsSeparator,
-      last_separator: lastSeparator,
-    } = state?.quiz?.resultsConfig?.desktop?.response_summary || {};
-    const isActiveSummary = !!isActive && !!matchedOptions.length && !!text?.length;
-    const [summaryFirstPart, summaryLastPart] = text?.split(MATCHED_OPTIONS_PLACEHOLDER) || [];
-    const matchedOptionsTemplate = formatMatchedOptions(
-      matchedOptions,
-      itemsSeparator,
-      lastSeparator
-    );
 
     // Quiz Results
     if (quizResults) {
@@ -64,13 +50,7 @@ export default function HooksTemplate(args) {
             {!zeroResults && (
               <div className='cio-results-filter-and-redo-container cio-results-button-group'>
                 <div className='cio-results-filter-container'>
-                  {isActiveSummary && (
-                    <p className='cio-results-explanation'>
-                      {!!summaryFirstPart?.length && summaryFirstPart}
-                      <span>{matchedOptionsTemplate}</span>
-                      {!!summaryLastPart?.length && summaryLastPart}
-                    </p>
-                  )}
+                  <QuizResultsSummary summary={summary} matchedOptions={matchedOptions} />
                 </div>
                 <div className='cio-results-number-and-share-button-group'>
                   {numberOfResults} {numberOfResults === 1 ? 'result' : 'results'}
