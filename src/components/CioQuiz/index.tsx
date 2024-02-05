@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import QuizContext, { QuizContextValue } from './context';
 
 import useQuiz from '../../hooks/useQuiz';
@@ -12,27 +12,13 @@ import { RequestStates } from '../../constants';
 import ShareResultsModal from '../ShareResultsModal/ShareResultsModal';
 
 export default function CioQuiz(props: IQuizProps) {
+  const useQuizReturnValue = useQuiz(props);
+
   const {
-    cioClient,
     state,
     events: { hydrateQuiz, resetSessionStorageState },
-    getAddToCartButtonProps,
-    getAddToFavoritesButtonProps,
-    getCoverQuestionProps,
-    getHydrateQuizButtonProps,
-    getNextQuestionButtonProps,
-    getSkipQuestionButtonProps,
-    getOpenTextInputProps,
-    getPreviousQuestionButtonProps,
-    getQuizImageProps,
-    getQuizResultButtonProps,
-    getQuizResultLinkProps,
-    getResetQuizButtonProps,
-    getSelectInputProps,
     primaryColorStyles,
-    getShareResultsButtonProps,
-  } = useQuiz(props);
-
+  } = useQuizReturnValue;
   const [showSessionPrompt, setShowSessionPrompt] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
   const {
@@ -58,28 +44,14 @@ export default function CioQuiz(props: IQuizProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // eslint-disable-next-line react/jsx-no-constructed-context-values
-  const contextValue: QuizContextValue = {
-    cioClient,
-    state,
-    getAddToCartButtonProps,
-    getAddToFavoritesButtonProps,
-    getCoverQuestionProps,
-    getHydrateQuizButtonProps,
-    getNextQuestionButtonProps,
-    getSkipQuestionButtonProps,
-    getOpenTextInputProps,
-    getPreviousQuestionButtonProps,
-    getQuizImageProps,
-    getQuizResultButtonProps,
-    getQuizResultLinkProps,
-    getResetQuizButtonProps,
-    getShareResultsButtonProps,
-    getSelectInputProps,
-    customClickItemCallback: !!callbacks?.onQuizResultClick,
-    customAddToFavoritesCallback: !!callbacks?.onAddToFavoritesClick,
-    primaryColorStyles,
-  };
+  const contextValue: QuizContextValue = useMemo(
+    () => ({
+      ...useQuizReturnValue,
+      customClickItemCallback: !!callbacks?.onQuizResultClick,
+      customAddToFavoritesCallback: !!callbacks?.onAddToFavoritesClick,
+    }),
+    [useQuizReturnValue, callbacks?.onQuizResultClick, callbacks?.onAddToFavoritesClick]
+  );
 
   const questionData = state.quiz.currentQuestion?.next_question;
   const questionType = questionData?.type;
