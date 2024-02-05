@@ -188,3 +188,17 @@ export function convertPrimaryColorsToString(primaryColorStyles: PrimaryColorSty
     --primary-color-l: ${primaryColorStyles['--primary-color-l']}; 
   }`;
 }
+
+export function formatMatchedOptions(
+  options: string[],
+  separator?: string | null,
+  lastSeparator?: string | null
+): string {
+  if (!options.length || !separator || !lastSeparator) {
+    return '';
+  }
+
+  const firstPart = options.slice(0, -1).join(separator);
+
+  return [firstPart, lastSeparator, options.at(-1)].join('');
+}

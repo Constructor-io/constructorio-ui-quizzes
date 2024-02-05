@@ -18,6 +18,10 @@ import useOpenTextInputProps from '../../../hooks/usePropsGetters/useOpenTextInp
 import useCoverQuestionProps from '../../../hooks/usePropsGetters/useCoverQuestionProps';
 import useSelectInputProps from '../../../hooks/usePropsGetters/useSelectInputProps';
 
+type MockOptions = {
+  withSummary: boolean;
+};
+
 export const getMockQuestion = (type: `${QuestionTypes}`) => ({
   id: 1,
   title: 'This is question title',
@@ -77,7 +81,7 @@ export const questionOptions = [
   },
 ];
 
-export const getMockState = (question?: Question): QuizReturnState => ({
+export const getMockState = (question?: Question, options = {}): QuizReturnState => ({
   answers: {
     inputs: {
       1: {
@@ -153,11 +157,13 @@ export const getMockState = (question?: Question): QuizReturnState => ({
       quiz_version_id: '',
       quiz_selected_options: [
         { value: 'Chocolate', has_attribute: true, is_matched: true },
+        { value: 'Milk', has_attribute: true, is_matched: true },
+        { value: 'Potato', has_attribute: true, is_matched: true },
         { value: 'Medium', has_attribute: true, is_matched: false },
       ],
     },
     selectedOptionsWithAttributes: ['Chocolate', 'Medium'],
-    matchedOptions: ['Chocolate'],
+    matchedOptions: ['Chocolate', 'Milk', 'Medium', 'Cacao'],
     resultsConfig: {
       desktop: {
         description: {
@@ -168,6 +174,14 @@ export const getMockState = (question?: Question): QuizReturnState => ({
           is_active: true,
           text: 'Here are your results',
         },
+        response_summary: options.withSummary
+          ? {
+              items_separator: ', ',
+              last_separator: ' and ',
+              text: 'Based on your answers @matched_options we recommend these items:',
+              is_active: true,
+            }
+          : null,
       },
     },
   },
@@ -192,7 +206,10 @@ const mockElementProps = {
   value: '',
 };
 
-export const useMockContextValue = (question?: Question): QuizContextValue => {
+export const useMockContextValue = (
+  question?: Question,
+  options?: MockOptions
+): QuizContextValue => {
   const getOpenTextInputProps = useOpenTextInputProps(
     () => {},
     () => {},
@@ -208,7 +225,7 @@ export const useMockContextValue = (question?: Question): QuizContextValue => {
   );
 
   return {
-    state: getMockState(question),
+    state: getMockState(question, options),
     getCoverQuestionProps,
     getOpenTextInputProps,
     getSelectInputProps,

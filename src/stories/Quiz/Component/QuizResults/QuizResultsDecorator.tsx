@@ -37,3 +37,17 @@ export function QuizResultsPrimaryDecorator(Story: any) {
     </div>
   );
 }
+
+export function QuizResultsWithSummaryDecorator(Story: any) {
+  const contextValue = useMockContextValue(undefined, { withSummary: true });
+
+  return (
+    <div className='cio-quiz'>
+      <QuizContext.Provider value={contextValue}>
+        <div>
+          <StoryPreview Component={Story} />
+        </div>
+      </QuizContext.Provider>
+    </div>
+  );
+}

@@ -7,6 +7,7 @@ import { useCioQuiz } from '../../../index';
 import '../../../styles.css';
 import { convertPrimaryColorsToString } from '../../../utils';
 import ShareSVG from '../../../components/ShareButton/ShareSVG';
+import QuizResultsSummary from '../../../components/QuizResultsSummary/QuizResultsSummary';
 
 export default function HooksTemplate(args) {
   const {
@@ -24,16 +25,16 @@ export default function HooksTemplate(args) {
     getShareResultsButtonProps,
     primaryColorStyles,
   } = useCioQuiz(args);
-
   if (state.quiz.requestState === 'SUCCESS') {
     const quizResults = state.quiz.results?.response?.results;
+    const matchedOptions = state?.quiz?.matchedOptions;
+    const summary = state?.quiz?.resultsConfig?.desktop?.response_summary ?? null;
     const numberOfResults = quizResults?.length ?? 0;
     const zeroResults = !numberOfResults;
     const resultsTitle = zeroResults
       ? state.quiz.resultsConfig?.desktop?.title?.text || 'Here are your results'
       : '';
     const resultsDescription = state.quiz.resultsConfig?.desktop?.description?.text || '';
-    const matchedOptions = state.quiz.matchedOptions || [];
 
     // Quiz Results
     if (quizResults) {
@@ -49,12 +50,7 @@ export default function HooksTemplate(args) {
             {!zeroResults && (
               <div className='cio-results-filter-and-redo-container cio-results-button-group'>
                 <div className='cio-results-filter-container'>
-                  {!!matchedOptions.length && (
-                    <p className='cio-results-explanation'>
-                      Based on your answers <span>{matchedOptions.join(', ')}</span> we recommend
-                      these matches.
-                    </p>
-                  )}
+                  <QuizResultsSummary summary={summary} matchedOptions={matchedOptions} />
                 </div>
                 <div className='cio-results-number-and-share-button-group'>
                   {numberOfResults} {numberOfResults === 1 ? 'result' : 'results'}

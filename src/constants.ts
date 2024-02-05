@@ -11,3 +11,5 @@ export enum RequestStates {
   Success = 'SUCCESS',
   Error = 'ERROR',
 }
+
+export const MATCHED_OPTIONS_PLACEHOLDER = '@matched_options';
