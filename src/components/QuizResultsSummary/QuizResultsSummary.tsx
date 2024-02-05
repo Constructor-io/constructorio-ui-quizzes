@@ -35,6 +35,4 @@ export default function QuizResultsSummary({
       {!!summaryLastPart?.length && summaryLastPart}
     </p>
   );
-
-  return null;
 }
