@@ -14,7 +14,7 @@ const getSummaryVariables = ({ summary, matchedOptions = [] }: QuizResultsSummar
       summaryFirstPart: 'Based on your answers ',
       summaryLastPart: ' we recommend these matches.',
       itemsSeparator: ', ',
-      lastSeparator: 'and ',
+      lastSeparator: ' and ',
       isActiveSummary: true,
     };
   }
