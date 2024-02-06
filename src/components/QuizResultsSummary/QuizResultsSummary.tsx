@@ -8,18 +8,42 @@ interface QuizResultsSummaryProps {
   matchedOptions?: string[];
 }
 
-export default function QuizResultsSummary({
-  summary,
-  matchedOptions = [],
-}: QuizResultsSummaryProps) {
+const getSummaryVariables = ({ summary, matchedOptions = [] }: QuizResultsSummaryProps) => {
+  if (summary === null) {
+    return {
+      summaryFirstPart: 'Based on your answers ',
+      summaryLastPart: ' we recommend these matches.',
+      itemsSeparator: ', ',
+      lastSeparator: 'and ',
+      isActiveSummary: true,
+    };
+  }
+
   const {
     text = '',
     is_active: isActive,
     items_separator: itemsSeparator,
     last_separator: lastSeparator,
-  } = summary ?? {};
+  } = summary;
   const isActiveSummary = !!isActive && !!matchedOptions.length && !!text?.length;
   const [summaryFirstPart, summaryLastPart] = text?.split(MATCHED_OPTIONS_PLACEHOLDER) || [];
+
+  return {
+    summaryFirstPart,
+    summaryLastPart,
+    itemsSeparator,
+    lastSeparator,
+    isActiveSummary,
+  };
+};
+
+export default function QuizResultsSummary({
+  summary,
+  matchedOptions = [],
+}: QuizResultsSummaryProps) {
+  const { summaryFirstPart, summaryLastPart, itemsSeparator, lastSeparator, isActiveSummary } =
+    getSummaryVariables({ summary, matchedOptions });
+
   const matchedOptionsTemplate = formatMatchedOptions(
     matchedOptions,
     itemsSeparator,
