@@ -1,10 +1,9 @@
 name: Test Storybook
 
 on:
-  push:
+  pull_request:
     branches:
-      - '*'
-      - '!main'
+      - '**'
 concurrency:
   group: run-sorybook-tests-${{ github.head_ref }}
   cancel-in-progress: true     
