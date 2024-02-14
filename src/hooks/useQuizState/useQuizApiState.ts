@@ -111,7 +111,7 @@ const useQuizApiState: UseQuizApiState = (
         await dispatchSharedQuizResults();
       } else if (skipToResults && quizLocalState.answers.length) {
         await dispatchQuizResults();
-      } else {
+      } else if (!skipToResults) {
         try {
           const quizVersionId = quizLocalState.quizVersionId || quizVersionIdProp;
           const { quizSessionId } = quizLocalState;
