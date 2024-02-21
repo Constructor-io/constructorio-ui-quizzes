@@ -54,6 +54,7 @@ export interface ResultsPageOptions {
   numResultsToDisplay?: number;
   favoriteItems?: string[];
   showShareResultsButton?: boolean;
+  fmtOptions?: Record<string, unknown>;
 }
 
 export interface QuestionsPageOptions {
