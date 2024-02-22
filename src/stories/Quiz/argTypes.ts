@@ -224,7 +224,7 @@ export const argTypes = {
     },
   },
   'resultsPageOptions.requestConfigs': {
-    description: `[Additional Quiz results API request parameters to refine your results](https://constructor-io.github.io/constructorio-client-javascript/module-quizzes.html#~getQuizResults)`,
+    description: `[Additional Quiz results API request parameters to further refine your results](https://constructor-io.github.io/constructorio-client-javascript/module-quizzes.html#~getQuizResults)`,
     control: {
       type: 'QuizzesResultsParameters',
     },
