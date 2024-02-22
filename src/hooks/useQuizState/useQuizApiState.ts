@@ -46,7 +46,7 @@ const useQuizApiState: UseQuizApiState = (
         resultsPerPage: resultsPageOptions?.numResultsToDisplay,
         quizVersionId: quizLocalState.quizVersionId,
         quizSessionId: quizLocalState.quizSessionId,
-        fmtOptions: resultsPageOptions?.fmtOptions,
+        ...resultsPageOptions?.requestConfigs,
       });
       // Set quiz results state
       dispatchApiState({

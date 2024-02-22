@@ -6,6 +6,8 @@ import {
   QuestionOption,
   Question,
   QuizResultsConfig,
+  QuizzesResultsParameters,
+  QuizzesParameters,
 } from '@constructor-io/constructorio-client-javascript/lib/types';
 import ConstructorIOClient, {
   GetBrowseResultsForItemIdsResponse,
@@ -50,11 +52,16 @@ export namespace QuizResultsEventsProps {
   export type OnEmailResults = (data: QuizEmailResults) => Promise<void>;
 }
 
+export type QuizResultsRequestConfigs = Omit<
+  QuizzesResultsParameters,
+  keyof QuizzesParameters | 'page' | 'resultsPerPage'
+>;
+
 export interface ResultsPageOptions {
   numResultsToDisplay?: number;
   favoriteItems?: string[];
   showShareResultsButton?: boolean;
-  fmtOptions?: Record<string, unknown>;
+  requestConfigs?: QuizResultsRequestConfigs;
 }
 
 export interface QuestionsPageOptions {

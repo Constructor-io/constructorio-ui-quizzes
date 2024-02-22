@@ -214,12 +214,24 @@ export const argTypes = {
       type: 'boolean',
     },
     table: {
-      subcategory: 'resultCardOptions',
+      subcategory: 'resultsPageOptions',
       defaultValue: {
         summary: true,
       },
       type: {
         summary: 'boolean',
+      },
+    },
+  },
+  'resultsPageOptions.requestConfigs': {
+    description: `[Additional Quiz results API request parameters to refine your results](https://constructor-io.github.io/constructorio-client-javascript/module-quizzes.html#~getQuizResults)`,
+    control: {
+      type: 'QuizzesResultsParameters',
+    },
+    table: {
+      subcategory: 'resultsPageOptions',
+      type: {
+        summary: 'QuizzesResultsParameters',
       },
     },
   },
