@@ -203,8 +203,20 @@ export function formatMatchedOptions(
   return [firstPart, lastSeparator, options.at(-1)].join('');
 }
 
-export function getNestedValueUsingDotNotation(object: any, key: string | undefined) {
-  if (!key) {
+export const validateNumberOrString = (value: unknown): string | number | undefined => {
+  if (typeof value === 'string') {
+    return value as string;
+  }
+
+  if (typeof value === 'number') {
+    return value as number;
+  }
+
+  return undefined;
+};
+
+export function getNestedValueUsingDotNotation(object: any, key?: string): unknown | undefined {
+  if (!key || !object) {
     return undefined;
   }
 

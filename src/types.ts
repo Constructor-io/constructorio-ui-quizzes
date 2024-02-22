@@ -162,12 +162,12 @@ export namespace QuizEventsReturn {
   export type AddToCart = (
     e: React.MouseEvent<HTMLElement>,
     result: QuizResultDataPartial,
-    price?: number
+    price?: number | string
   ) => void;
   export type AddToFavorites = (
     e: React.MouseEvent<HTMLElement>,
     result: QuizResultDataPartial,
-    price?: number,
+    price?: number | string,
     sendEvent?: boolean
   ) => void;
   export type HydrateQuiz = () => void;
@@ -291,11 +291,11 @@ export type GetShareResultsButtonProps = () => ShareResultsButtonProps;
 export type GetHydrateQuizButtonProps = () => HydrateQuizButtonProps;
 export type GetAddToCartButtonProps = (
   result: QuizResultDataPartial,
-  price?: number
+  price?: number | string
 ) => AddToCartButtonProps;
 export type GetAddToFavoritesButtonProps = (
   result: QuizResultDataPartial,
-  price?: number,
+  price?: number | string,
   clickHandler?: () => void
 ) => AddToCartButtonProps;
 export type GetQuizImageProps = () => QuizImageProps;

@@ -4,7 +4,7 @@ import QuizContext from '../CioQuiz/context';
 
 interface ResultFavoritesButtonProps {
   item: QuizResultDataPartial;
-  price?: number;
+  price?: number | string;
 }
 
 export interface Favorited {
