@@ -3,6 +3,7 @@ import ResultCtaButton from '../ResultCtaButton/ResultCtaButton';
 import ResultFavoritesButton from '../ResultFavoritesButton/ResultFavoritesButton';
 import QuizContext from '../CioQuiz/context';
 import { QuizResultDataPartial } from '../../types';
+import { getNestedValueUsingDotNotation } from '../../utils';
 
 interface ResultCardOptions {
   result: QuizResultDataPartial;
@@ -31,10 +32,11 @@ export default function ResultCard(props: ResultCardOptions) {
     getQuizResultLinkProps,
   } = useContext(QuizContext);
 
-  const salePrice = salePriceKey && result?.data?.[salePriceKey];
-  const regularPrice = regularPriceKey && result?.data?.[regularPriceKey];
-  const ratingCount = ratingCountKey && result?.data?.[ratingCountKey];
-  const ratingScore = ratingScoreKey && result?.data?.[ratingScoreKey];
+  const salePrice = result?.data && getNestedValueUsingDotNotation(result.data, salePriceKey);
+  const regularPrice = result?.data && getNestedValueUsingDotNotation(result.data, regularPriceKey);
+  const ratingCount = result?.data && getNestedValueUsingDotNotation(result.data, ratingCountKey);
+  const ratingScore = result?.data && getNestedValueUsingDotNotation(result.data, ratingScoreKey);
+
   const resultCardContent = () => (
     <>
       <div className='cio-result-card-image'>

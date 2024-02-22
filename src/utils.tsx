@@ -202,3 +202,11 @@ export function formatMatchedOptions(
 
   return [firstPart, lastSeparator, options.at(-1)].join('');
 }
+
+export function getNestedValueUsingDotNotation(object: any, key: string | undefined) {
+  if (!key) {
+    return undefined;
+  }
+
+  return key.split('.').reduce((a, b) => a?.[b], object);
+}
