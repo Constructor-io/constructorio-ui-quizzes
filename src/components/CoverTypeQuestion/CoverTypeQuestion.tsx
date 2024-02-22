@@ -21,6 +21,7 @@ export default function CoverTypeQuestion() {
         cio-container${hasImage ? '--with-image' : ''}
         cio-cover-question-container${hasImage ? '--with-image' : ''}
       `}
+        data-cnstrc-question-type={question.type}
         data-question-key={question.key}>
         {hasImage ? renderImages(question.images, 'cio-question-image-container') : ''}
         <div className='cio-question-content'>
