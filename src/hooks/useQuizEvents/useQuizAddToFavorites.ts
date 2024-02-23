@@ -14,7 +14,7 @@ const useQuizAddToFavorites = (
     (
       e: React.MouseEvent<HTMLElement>,
       result: QuizResultDataPartial,
-      price?: number,
+      price?: number | string,
       sendEvent: boolean = true
     ) => {
       e.preventDefault();

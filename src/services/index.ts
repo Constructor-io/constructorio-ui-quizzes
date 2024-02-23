@@ -113,7 +113,7 @@ export const trackQuizConversion = (
   cioClient: ConstructorIOClient,
   quizResults: QuizResultsResponse | QuizSharedResultsData,
   result: QuizResultDataPartial,
-  price?: number,
+  price?: number | string,
   type?: string
   // eslint-disable-next-line max-params
 ) => {

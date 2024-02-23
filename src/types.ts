@@ -6,6 +6,8 @@ import {
   QuestionOption,
   Question,
   QuizResultsConfig,
+  QuizzesResultsParameters,
+  QuizzesParameters,
 } from '@constructor-io/constructorio-client-javascript/lib/types';
 import ConstructorIOClient, {
   GetBrowseResultsForItemIdsResponse,
@@ -50,10 +52,16 @@ export namespace QuizResultsEventsProps {
   export type OnEmailResults = (data: QuizEmailResults) => Promise<void>;
 }
 
+export type QuizResultsRequestConfigs = Omit<
+  QuizzesResultsParameters,
+  keyof QuizzesParameters | 'page' | 'resultsPerPage'
+>;
+
 export interface ResultsPageOptions {
   numResultsToDisplay?: number;
   favoriteItems?: string[];
   showShareResultsButton?: boolean;
+  requestConfigs?: QuizResultsRequestConfigs;
 }
 
 export interface QuestionsPageOptions {
@@ -154,12 +162,12 @@ export namespace QuizEventsReturn {
   export type AddToCart = (
     e: React.MouseEvent<HTMLElement>,
     result: QuizResultDataPartial,
-    price?: number
+    price?: number | string
   ) => void;
   export type AddToFavorites = (
     e: React.MouseEvent<HTMLElement>,
     result: QuizResultDataPartial,
-    price?: number,
+    price?: number | string,
     sendEvent?: boolean
   ) => void;
   export type HydrateQuiz = () => void;
@@ -283,11 +291,11 @@ export type GetShareResultsButtonProps = () => ShareResultsButtonProps;
 export type GetHydrateQuizButtonProps = () => HydrateQuizButtonProps;
 export type GetAddToCartButtonProps = (
   result: QuizResultDataPartial,
-  price?: number
+  price?: number | string
 ) => AddToCartButtonProps;
 export type GetAddToFavoritesButtonProps = (
   result: QuizResultDataPartial,
-  price?: number,
+  price?: number | string,
   clickHandler?: () => void
 ) => AddToCartButtonProps;
 export type GetQuizImageProps = () => QuizImageProps;

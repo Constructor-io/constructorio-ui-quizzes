@@ -4,7 +4,7 @@ import QuizContext from '../CioQuiz/context';
 
 interface ResultCtaButtonProps {
   item: QuizResultDataPartial;
-  price?: number;
+  price?: number | string;
 }
 
 export default function ResultCtaButton(props: ResultCtaButtonProps) {

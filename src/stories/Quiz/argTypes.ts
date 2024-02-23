@@ -110,7 +110,8 @@ export const argTypes = {
     },
   },
   'resultCardOptions.resultCardRegularPriceKey': {
-    description: 'Key name for the regular price in the API response',
+    description:
+      'Key name for the regular price value in the API response inside the `data` object. Supports nested keys using dot notation e.g., "priceDetails.regular_price"',
     control: {
       type: 'text',
     },
@@ -125,7 +126,8 @@ export const argTypes = {
     },
   },
   'resultCardOptions.resultCardSalePriceKey': {
-    description: 'Key name for the sale price in the API response',
+    description:
+      'Key name for the sale price value in the API response inside the `data` object. Supports nested keys using dot notation e.g., "priceDetails.sale_price"',
     control: {
       type: 'text',
     },
@@ -140,7 +142,8 @@ export const argTypes = {
     },
   },
   'resultCardOptions.resultCardRatingCountKey': {
-    description: 'Key name for the rating count in the API response',
+    description:
+      'Key name for the rating count value in the API response inside the `data` object. Supports nested keys using dot notation e.g., "ratingDetails.rating_count"',
     control: {
       type: 'text',
     },
@@ -155,7 +158,8 @@ export const argTypes = {
     },
   },
   'resultCardOptions.resultCardRatingScoreKey': {
-    description: 'Key name for the rating score in the API response',
+    description:
+      'Key name for the rating score value in the API response inside the `data` object. Supports nested keys using dot notation e.g., "ratingDetails.rating_score"',
     control: {
       type: 'text',
     },
@@ -214,12 +218,24 @@ export const argTypes = {
       type: 'boolean',
     },
     table: {
-      subcategory: 'resultCardOptions',
+      subcategory: 'resultsPageOptions',
       defaultValue: {
         summary: true,
       },
       type: {
         summary: 'boolean',
+      },
+    },
+  },
+  'resultsPageOptions.requestConfigs': {
+    description: `[Additional Quiz results API request parameters to further refine your results](https://constructor-io.github.io/constructorio-client-javascript/module-quizzes.html#~getQuizResults)`,
+    control: {
+      type: 'QuizzesResultsParameters',
+    },
+    table: {
+      subcategory: 'resultsPageOptions',
+      type: {
+        summary: 'QuizzesResultsParameters',
       },
     },
   },
