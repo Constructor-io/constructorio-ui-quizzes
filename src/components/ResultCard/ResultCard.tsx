@@ -100,7 +100,9 @@ export default function ResultCard(props: ResultCardOptions) {
 
   return (
     <div className='cio-result-card'>
-      {customAddToFavoritesCallback && <ResultFavoritesButton item={result} price={salePrice} />}
+      {customAddToFavoritesCallback && (
+        <ResultFavoritesButton item={result} price={salePrice || regularPrice} />
+      )}
       {!customClickItemCallback ? resultCardContentWithLink() : resultCardContentWithoutLink()}
       <ResultCtaButton item={result} price={salePrice || regularPrice} />
     </div>
