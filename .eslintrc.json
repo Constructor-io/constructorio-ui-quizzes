@@ -19,7 +19,7 @@
     "ecmaVersion": "latest",
     "project": "tsconfig.eslint.json"
   },
-  "plugins": ["@typescript-eslint", "prettier", "jsx-a11y", "jest"],
+  "plugins": ["@typescript-eslint", "prettier", "jsx-a11y", "jest", "no-snapshot-testing"],
   "rules": {
     "react/require-default-props": "off",
     "react/jsx-uses-react": "off",
@@ -51,6 +51,7 @@
     "complexity": ["error", 20],
     "@cspell/spellchecker": ["error"],
     "react/jsx-props-no-spreading": "off",
+    "no-snapshot-testing/no-snapshot-testing": "error",
     "import/no-extraneous-dependencies": [
       "error",
       {
