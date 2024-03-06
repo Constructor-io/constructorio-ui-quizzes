@@ -11,15 +11,14 @@
     "prettier",
     "plugin:@cspell/recommended",
     "plugin:jsx-a11y/recommended",
-    "plugin:storybook/recommended",
-    "plugin:jest/recommended"
+    "plugin:storybook/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",
     "project": "tsconfig.eslint.json"
   },
-  "plugins": ["@typescript-eslint", "prettier", "jsx-a11y", "jest"],
+  "plugins": ["@typescript-eslint", "prettier", "jsx-a11y"],
   "rules": {
     "react/require-default-props": "off",
     "react/jsx-uses-react": "off",
@@ -66,21 +65,17 @@
         "jest": true,
         "jest/globals": true
       },
-      "plugins": ["testing-library", "no-snapshot-testing"],
+      "plugins": ["jest", "no-snapshot-testing", "testing-library"],
       "extends": [
-        "airbnb",
-        "airbnb/hooks",
         "airbnb-typescript",
         "prettier",
         "plugin:@cspell/recommended",
-        "plugin:jsx-a11y/recommended",
-        "plugin:storybook/recommended",
         "plugin:jest/recommended",
         "plugin:testing-library/react"
       ],
       "rules": {
-        "no-snapshot-testing/no-snapshot-testing": "error",
         "testing-library/no-node-access": ["error", { "allowContainerFirstChild": true }],
+        "no-snapshot-testing/no-snapshot-testing": "error",
         "import/no-extraneous-dependencies": "off",
         "react/jsx-props-no-spreading": "off",
         "jest/valid-title": "off"
