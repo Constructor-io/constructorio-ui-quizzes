@@ -11,14 +11,15 @@
     "prettier",
     "plugin:@cspell/recommended",
     "plugin:jsx-a11y/recommended",
-    "plugin:storybook/recommended"
+    "plugin:storybook/recommended",
+    "plugin:jest/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",
     "project": "tsconfig.eslint.json"
   },
-  "plugins": ["@typescript-eslint", "prettier", "jsx-a11y"],
+  "plugins": ["@typescript-eslint", "prettier", "jsx-a11y", "jest"],
   "rules": {
     "react/require-default-props": "off",
     "react/jsx-uses-react": "off",
@@ -42,6 +43,7 @@
     ],
     "object-curly-newline": "off",
     "padded-blocks": "off",
+    "jest/valid-title": "off",
     "react/prefer-stateless-function": "off",
     "max-depth": ["error", 4],
     "max-nested-callbacks": ["error", 5],
@@ -54,7 +56,8 @@
       {
         "devDependencies": [
           "**/stories/**/*.*",
-          "**/.storybook/**/*.*"
+          "**/.storybook/**/*.*",
+          "**/*.test.{ts,tsx,js,jsx}"
         ],
         "peerDependencies": true
       }
@@ -65,9 +68,10 @@
       "files": "tests/**/*.ts",
       "env": {
         "node": true,
-        "jest": true
+        "jest": true,
+        "jest/globals": true
       }
     }
   ],
-  "ignorePatterns": ["*.config.js", "lib/**/*.js", "lib/**/*.d.ts", "docs/**/*.js"]
+  "ignorePatterns": ["*.config.js", "lib/**/*.js", "lib/**/*.d.ts", "docs/**/*.js", "jest.setup.ts"]
 }
