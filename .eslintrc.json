@@ -12,22 +12,14 @@
     "plugin:@cspell/recommended",
     "plugin:jsx-a11y/recommended",
     "plugin:storybook/recommended",
-    "plugin:jest/recommended",
-    "plugin:testing-library/react"
+    "plugin:jest/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",
     "project": "tsconfig.eslint.json"
   },
-  "plugins": [
-    "@typescript-eslint",
-    "prettier",
-    "jsx-a11y",
-    "jest",
-    "no-snapshot-testing",
-    "testing-library"
-  ],
+  "plugins": ["@typescript-eslint", "prettier", "jsx-a11y", "jest"],
   "rules": {
     "react/require-default-props": "off",
     "react/jsx-uses-react": "off",
@@ -51,7 +43,6 @@
     ],
     "object-curly-newline": "off",
     "padded-blocks": "off",
-    "jest/valid-title": "off",
     "react/prefer-stateless-function": "off",
     "max-depth": ["error", 4],
     "max-nested-callbacks": ["error", 5],
@@ -59,27 +50,40 @@
     "complexity": ["error", 20],
     "@cspell/spellchecker": ["error"],
     "react/jsx-props-no-spreading": "off",
-    "no-snapshot-testing/no-snapshot-testing": "error",
-    "testing-library/no-node-access": ["error", { "allowContainerFirstChild": true }],
     "import/no-extraneous-dependencies": [
       "error",
       {
-        "devDependencies": [
-          "**/stories/**/*.*",
-          "**/.storybook/**/*.*",
-          "**/*.test.{ts,tsx,js,jsx}"
-        ],
+        "devDependencies": ["**/stories/**/*.*", "**/.storybook/**/*.*"],
         "peerDependencies": true
       }
     ]
   },
   "overrides": [
     {
-      "files": "tests/**/*.ts",
+      "files": "**/*.test.{ts,tsx,js,jsx}",
       "env": {
         "node": true,
         "jest": true,
         "jest/globals": true
+      },
+      "plugins": ["testing-library", "no-snapshot-testing"],
+      "extends": [
+        "airbnb",
+        "airbnb/hooks",
+        "airbnb-typescript",
+        "prettier",
+        "plugin:@cspell/recommended",
+        "plugin:jsx-a11y/recommended",
+        "plugin:storybook/recommended",
+        "plugin:jest/recommended",
+        "plugin:testing-library/react"
+      ],
+      "rules": {
+        "no-snapshot-testing/no-snapshot-testing": "error",
+        "testing-library/no-node-access": ["error", { "allowContainerFirstChild": true }],
+        "import/no-extraneous-dependencies": "off",
+        "react/jsx-props-no-spreading": "off",
+        "jest/valid-title": "off"
       }
     }
   ],
