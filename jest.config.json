@@ -1,0 +1,15 @@
+{
+  "rootDir": "src",
+  "testMatch": ["**/?(*.)+test.[jt]s?(x)"],
+  "transform": { "^.+\\.(ts|tsx)?$": "ts-jest" },
+  "testEnvironment": "jsdom",
+  "setupFilesAfterEnv": ["<rootDir>/../jest.setup.ts"],
+  "collectCoverageFrom": ["<rootDir>/components/**/*.[jt]s?(x)"],
+  "coverageDirectory": "../coverage",
+  "coverageThreshold": {
+    "global": {
+      "branches": 85,
+      "functions": 85
+    }
+  }
+}
