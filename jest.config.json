@@ -1,15 +1,36 @@
 {
-  "rootDir": "src",
-  "testMatch": ["**/?(*.)+test.[jt]s?(x)"],
-  "transform": { "^.+\\.(ts|tsx)?$": "ts-jest" },
-  "testEnvironment": "jsdom",
-  "setupFilesAfterEnv": ["<rootDir>/../jest.setup.ts"],
-  "collectCoverageFrom": ["<rootDir>/components/**/*.[jt]s?(x)"],
-  "coverageDirectory": "../coverage",
-  "coverageThreshold": {
-    "global": {
-      "branches": 85,
-      "functions": 85
+  "projects": [
+    {
+      "displayName": "client",
+      "testEnvironment": "jsdom",
+      "testMatch": ["**/*.test.[jt]s?(x)", "!**/*.server.test.[jt]s?(x)"],
+      "rootDir": "src",
+      "transform": { "^.+\\.(ts|tsx)?$": "ts-jest" },
+      "setupFilesAfterEnv": ["<rootDir>/../jest.setup.ts"],
+      "collectCoverageFrom": ["<rootDir>/components/**/*.[jt]s?(x)"],
+      "coverageDirectory": "../coverage",
+      "coverageThreshold": {
+        "global": {
+          "branches": 85,
+          "functions": 85
+        }
+      }
+    },
+    {
+      "displayName": "server",
+      "testEnvironment": "node",
+      "testMatch": ["**/*.server.test.[jt]s?(x)"],
+      "rootDir": "src",
+      "transform": { "^.+\\.(ts|tsx)?$": "ts-jest" },
+      "setupFilesAfterEnv": ["<rootDir>/../jest.setup.ts"],
+      "collectCoverageFrom": ["<rootDir>/components/**/*.[jt]s?(x)"],
+      "coverageDirectory": "../coverage",
+      "coverageThreshold": {
+        "global": {
+          "branches": 85,
+          "functions": 85
+        }
+      }
     }
-  }
+  ]
 }

@@ -59,7 +59,7 @@
   },
   "overrides": [
     {
-      "files": "**/*.test.{ts,tsx,js,jsx}",
+      "files": ["**/*.test.{ts,tsx,js,jsx}"],
       "env": {
         "node": true,
         "jest": true,
@@ -74,9 +74,12 @@
         "plugin:testing-library/react"
       ],
       "rules": {
+        // https://github.com/testing-library/eslint-plugin-testing-library/blob/main/docs/rules/no-node-access.md
         "testing-library/no-node-access": ["error", { "allowContainerFirstChild": true }],
+        // https://github.com/VicJer/eslint-plugin-no-snapshot-testing
         "no-snapshot-testing/no-snapshot-testing": "error",
         "import/no-extraneous-dependencies": "off",
+        // https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-props-no-spreading.md
         "react/jsx-props-no-spreading": "off",
         "jest/valid-title": "off"
       }
