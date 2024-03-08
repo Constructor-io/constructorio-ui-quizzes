@@ -2,7 +2,7 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import SkipButton from './SkipButton';
 
-describe(SkipButton, () => {
+describe(`${SkipButton.name} server`, () => {
   const props: React.ComponentProps<typeof SkipButton> = {
     propsGetters: () => ({}),
     skipQuestionButtonText: 'Custom Button Text',

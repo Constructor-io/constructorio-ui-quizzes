@@ -16,7 +16,7 @@ class MockConstructorIO extends ConstructorIO {
 }
 
 export const mockConstructorIOClient =
-  typeof window !== 'undefined' ? new MockConstructorIO({ apiKey: DEMO_API_KEY }) : null;
+  typeof window !== 'undefined' ? new MockConstructorIO({ apiKey: DEMO_API_KEY }) : undefined;
 
 export function WithContextWrapper({
   contextMocks = {},
@@ -25,6 +25,9 @@ export function WithContextWrapper({
   contextMocks: Partial<QuizContextValue> | undefined;
   children: React.ReactNode;
 }) {
-  const value = useMemo(() => ({ ...defaultContextMocks, ...contextMocks }), [contextMocks]);
+  const value = useMemo(
+    () => ({ cioClient: mockConstructorIOClient, ...defaultContextMocks, ...contextMocks }),
+    [contextMocks]
+  );
   return <QuizContext.Provider value={value}>{children}</QuizContext.Provider>;
 }
