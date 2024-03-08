@@ -1,7 +1,6 @@
 const commonConfig = {
   rootDir: 'src',
   transform: { '^.+\\.(ts|tsx)?$': 'ts-jest' },
-  setupFilesAfterEnv: ['<rootDir>/../jest.setup.ts'],
   collectCoverageFrom: ['<rootDir>/(components|hooks)/**/*.[jt]s?(x)'],
   coverageDirectory: '../coverage',
   coverageThreshold: {
@@ -18,6 +17,7 @@ module.exports = {
       ...commonConfig,
       displayName: 'client',
       testEnvironment: 'jsdom',
+      setupFilesAfterEnv: ['<rootDir>/../jest.setup.ts'],
       testMatch: ['**/*.test.[jt]s?(x)', '!**/*.server.test.[jt]s?(x)'],
     },
     {

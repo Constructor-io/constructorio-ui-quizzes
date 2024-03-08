@@ -59,7 +59,7 @@
   },
   "overrides": [
     {
-      "files": ["**/*.test.{ts,tsx,js,jsx}"],
+      "files": ["**/*.test.{ts,tsx,js,jsx}", "**/__tests__/**/*.{ts,tsx,js,jsx}"],
       "env": {
         "node": true,
         "jest": true,
@@ -67,6 +67,7 @@
       },
       "plugins": ["jest", "no-snapshot-testing", "testing-library"],
       "extends": [
+        "airbnb",
         "airbnb-typescript",
         "prettier",
         "plugin:@cspell/recommended",
