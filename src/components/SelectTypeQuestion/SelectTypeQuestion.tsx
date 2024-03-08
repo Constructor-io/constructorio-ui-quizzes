@@ -47,7 +47,7 @@ function SelectTypeQuestion() {
                   {option.images ? renderImages(option.images, 'cio-question-option-image') : ''}
                   <div className='cio-question-option-value'>{option?.value}</div>
                 </div>
-              ),
+              )
           )}
         </div>
       </div>

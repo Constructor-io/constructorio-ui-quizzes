@@ -16,7 +16,7 @@ import {
   GetSelectQuestionImageProps,
   GetAddToFavoritesButtonProps,
   GetSkipQuestionButtonProps,
-  GetShareResultsButtonProps
+  GetShareResultsButtonProps,
 } from '../../types';
 import { QuizAPIReducerState } from '../../components/CioQuiz/quizApiReducer';
 import { QuizLocalReducerState } from '../../components/CioQuiz/quizLocalReducer';
@@ -43,7 +43,7 @@ const usePropsGetters = (
     hydrateQuiz,
     addToCart,
     addToFavorites,
-    resultClick
+    resultClick,
   } = quizEvents;
 
   const getOpenTextInputProps: GetOpenTextInputProps = useOpenTextInputProps(
@@ -83,7 +83,7 @@ const usePropsGetters = (
     (stylesType = 'primary') => ({
       className: stylesType === 'primary' ? 'cio-question-cta-button' : 'cio-question-redo-button',
       type: 'button',
-      onClick: () => resetQuiz()
+      onClick: () => resetQuiz(),
     }),
     [resetQuiz]
   );
@@ -97,7 +97,7 @@ const usePropsGetters = (
     () => ({
       className: '',
       type: 'button',
-      onClick: () => hydrateQuiz()
+      onClick: () => hydrateQuiz(),
     }),
     [hydrateQuiz]
   );
@@ -106,7 +106,7 @@ const usePropsGetters = (
     (result, price) => ({
       className: 'cio-result-card-cta-button',
       type: 'button',
-      onClick: (e) => addToCart(e, result, price)
+      onClick: (e) => addToCart(e, result, price),
     }),
     [addToCart]
   );
@@ -133,7 +133,8 @@ const usePropsGetters = (
       role: 'button',
       tabIndex: 0,
       onClick: () => resultClick(result, position),
-      onKeyDown: (event: KeyboardEvent<HTMLElement>) => quizResultClickDown(event, result, position)
+      onKeyDown: (event: KeyboardEvent<HTMLElement>) =>
+        quizResultClickDown(event, result, position),
     }),
     [quizResultClickDown, resultClick]
   );
@@ -142,7 +143,8 @@ const usePropsGetters = (
     ({ result, position }) => ({
       href: result.data?.url,
       onClick: () => resultClick(result, position),
-      onKeyDown: (event: KeyboardEvent<HTMLElement>) => quizResultClickDown(event, result, position)
+      onKeyDown: (event: KeyboardEvent<HTMLElement>) =>
+        quizResultClickDown(event, result, position),
     }),
     [quizResultClickDown, resultClick]
   );
@@ -150,7 +152,7 @@ const usePropsGetters = (
   const getQuizImageProps: GetQuizImageProps = useCallback(
     () => ({
       src: quizApiState.quizCurrentQuestion?.next_question?.images?.primary_url || undefined,
-      alt: quizApiState.quizCurrentQuestion?.next_question?.images?.primary_alt || undefined
+      alt: quizApiState.quizCurrentQuestion?.next_question?.images?.primary_alt || undefined,
     }),
     [quizApiState.quizCurrentQuestion]
   );
@@ -159,7 +161,7 @@ const usePropsGetters = (
     (option) => ({
       className: 'cio-question-option-image',
       src: option?.images?.primary_url || undefined,
-      alt: option?.images?.primary_alt || undefined
+      alt: option?.images?.primary_alt || undefined,
     }),
     []
   );
@@ -179,7 +181,7 @@ const usePropsGetters = (
     getAddToFavoritesButtonProps,
     getQuizResultButtonProps,
     getQuizResultLinkProps,
-    getSkipQuestionButtonProps
+    getSkipQuestionButtonProps,
   };
 };
 

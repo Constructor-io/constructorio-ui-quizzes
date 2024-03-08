@@ -23,7 +23,7 @@ export default function RetrievingAnswersStory() {
   const quizHook = useQuiz(quizProps);
   const { state } = quizHook;
   const openTextQuestionAnswers = Object.entries(state.answers.inputs).filter(
-    (entry) => entry[1].type === 'open',
+    (entry) => entry[1].type === 'open'
   );
 
   const currentQuestionData = state.quiz.currentQuestion?.next_question;
@@ -49,7 +49,7 @@ export default function RetrievingAnswersStory() {
                       <div>
                         Question {entry[0]} - {entry[1].value}
                       </div>
-                    ),
+                    )
                 )}
               </>
             )}

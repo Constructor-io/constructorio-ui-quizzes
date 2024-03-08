@@ -12,7 +12,7 @@ const useHydrateQuizLocalState = (
     if (sessionStorageQuizState) {
       dispatchLocalState({
         type: QuestionTypes.Hydrate,
-        payload: sessionStorageQuizState
+        payload: sessionStorageQuizState,
       });
     }
   }, [dispatchLocalState, sessionStorageQuizState]);

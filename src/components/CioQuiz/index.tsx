@@ -51,7 +51,7 @@ export default function CioQuiz(props: IQuizProps) {
     // Respect showSessionModal if defined, else default to true.
     if (sessionStateOptions?.showSessionModal !== undefined) {
       setShowSessionPrompt(
-        sessionStateOptions?.showSessionModal && hasSessionStorageState() && !skipToResults,
+        sessionStateOptions?.showSessionModal && hasSessionStorageState() && !skipToResults
       );
     } else {
       setShowSessionPrompt(hasSessionStorageState() && !skipToResults);

@@ -19,7 +19,7 @@ export default function useSkipQuestionButtonProps(
       type: 'button',
       onClick: () => {
         skipQuestion();
-      }
+      },
     };
   }, [quizApiState.quizCurrentQuestion, skipQuestion]);
 

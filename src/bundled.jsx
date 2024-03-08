@@ -27,7 +27,7 @@ const CioQuiz = ({ selector, includeCSS = true, ...rest }) => {
     ReactDOM.createRoot(containerElement).render(
       <React.StrictMode>
         <CioQuizComponent {...rest} />
-      </React.StrictMode>,
+      </React.StrictMode>
     );
   }
 };

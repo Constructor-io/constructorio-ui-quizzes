@@ -17,7 +17,7 @@ export default function useAddToFavoritesButtonProps(
       onClick: (e) => {
         addToFavorites(e, result, price, !isResultFavorited(result));
       },
-      type: 'button'
+      type: 'button',
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [addToFavorites]

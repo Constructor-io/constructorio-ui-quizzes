@@ -13,7 +13,7 @@ export default function usePreviousQuestionButtonProps(
       role: 'button',
       className: `cio-question-back-button ${buttonDisabled ? 'disabled' : ''}`,
       type: 'button',
-      onClick: () => previousQuestion()
+      onClick: () => previousQuestion(),
     };
   }, [quizApiState, previousQuestion]);
 

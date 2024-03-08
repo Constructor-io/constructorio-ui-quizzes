@@ -52,7 +52,7 @@ export default function useOpenTextInputProps(
       placeholder: currentQuestionData?.input_placeholder || 'Answer here...',
       value: input,
       onChange: onChangeHandler,
-      onKeyDown: onKeyDownHandler
+      onKeyDown: onKeyDownHandler,
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [currentQuestionData?.input_placeholder, currentQuestionData?.id, input, onKeyDownHandler]

@@ -4,7 +4,7 @@ import {
   NextQuestionResponse,
   QuizResultsResponse,
   QuizSharedResultsData,
-  QuizResultsConfig
+  QuizResultsConfig,
 } from '../../types';
 import { getQuestionTypes } from '../../utils';
 import { QuizAPIActionTypes, ActionQuizAPI } from './actions';
@@ -20,7 +20,7 @@ export type QuizAPIReducerState = {
 };
 
 export const initialState: QuizAPIReducerState = {
-  quizRequestState: RequestStates.Stale
+  quizRequestState: RequestStates.Stale,
 };
 
 export default function apiReducer(
@@ -33,7 +33,7 @@ export default function apiReducer(
         ...state,
         quizRequestState: RequestStates.Loading,
         quizCurrentQuestion: undefined,
-        quizResults: undefined
+        quizResults: undefined,
       };
     case QuizAPIActionTypes.SET_IS_ERROR:
       return {
@@ -42,7 +42,7 @@ export default function apiReducer(
         quizCurrentQuestion: undefined,
         quizResults: undefined,
         selectedOptionsWithAttributes: undefined,
-        matchedOptions: undefined
+        matchedOptions: undefined,
       };
     case QuizAPIActionTypes.SET_CURRENT_QUESTION: {
       const {
@@ -50,7 +50,7 @@ export default function apiReducer(
         isCoverQuestion,
         isSingleQuestion,
         isMultipleQuestion,
-        isSelectQuestion
+        isSelectQuestion,
       } = getQuestionTypes(action.payload?.quizCurrentQuestion?.next_question?.type);
       const quizFirstQuestion = state.quizFirstQuestion || action.payload?.quizCurrentQuestion;
       return {
@@ -65,12 +65,12 @@ export default function apiReducer(
           isCoverQuestion,
           isSingleQuestion,
           isMultipleQuestion,
-          isSelectQuestion
+          isSelectQuestion,
         },
         quizFirstQuestion,
         quizResults: undefined,
         selectedOptionsWithAttributes: undefined,
-        matchedOptions: undefined
+        matchedOptions: undefined,
       };
     }
     case QuizAPIActionTypes.SET_QUIZ_RESULTS: {
@@ -89,7 +89,7 @@ export default function apiReducer(
         quizResults: action.payload?.quizResults,
         quizCurrentQuestion: undefined,
         selectedOptionsWithAttributes,
-        matchedOptions
+        matchedOptions,
       };
     }
     case QuizAPIActionTypes.SET_QUIZ_SHARED_RESULTS: {
@@ -98,20 +98,20 @@ export default function apiReducer(
         quizRequestState: RequestStates.Success,
         quizResults: action.payload?.quizResults,
         quizCurrentQuestion: undefined,
-        selectedOptionsWithAttributes: action.payload?.quizResults.attributes
+        selectedOptionsWithAttributes: action.payload?.quizResults.attributes,
       };
     }
     case QuizAPIActionTypes.SET_QUIZ_RESULTS_CONFIG: {
       return {
         ...state,
-        resultsConfig: action.payload?.quizResultsConfig.results_config
+        resultsConfig: action.payload?.quizResultsConfig.results_config,
       };
     }
 
     case QuizAPIActionTypes.SET_QUIZ_RESULTS_CONFIG_ERROR: {
       return {
         ...state,
-        resultsConfig: null
+        resultsConfig: null,
       };
     }
 

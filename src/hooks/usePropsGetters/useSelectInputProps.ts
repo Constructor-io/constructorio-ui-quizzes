@@ -7,7 +7,7 @@ import {
   GetSelectInputProps,
   Question,
   QuestionOption,
-  QuizEventsReturn
+  QuizEventsReturn,
 } from '../../types';
 
 // eslint-disable-next-line max-params
@@ -83,7 +83,7 @@ export default function useSelectInputProps(
     currentQuestionData?.id,
     currentQuestionData?.type,
     currentQuestionData?.options,
-    quizAnswerChanged
+    quizAnswerChanged,
   ]);
 
   // Go to next question only every time answerInputs (answers input state) changes...
@@ -108,7 +108,7 @@ export default function useSelectInputProps(
       },
       role: 'button',
       tabIndex: 0,
-      key: option.id
+      key: option.id,
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [currentQuestionData?.id, selected]

@@ -49,8 +49,8 @@ const useQuizState: UseQuizState = (quizOptions, cioClient) => {
     quizSessionStorageState: {
       skipToResults,
       key: quizSessionStorageStateKey,
-      hasSessionStorageState
-    }
+      hasSessionStorageState,
+    },
   };
 };
 

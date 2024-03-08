@@ -7,10 +7,10 @@ import {
   Question,
   QuizResultsConfig,
   QuizzesResultsParameters,
-  QuizzesParameters
+  QuizzesParameters,
 } from '@constructor-io/constructorio-client-javascript/lib/types';
 import ConstructorIOClient, {
-  GetBrowseResultsForItemIdsResponse
+  GetBrowseResultsForItemIdsResponse,
 } from '@constructor-io/constructorio-client-javascript';
 import { RequestStates } from './constants';
 // eslint-disable-next-line import/no-cycle
@@ -27,7 +27,7 @@ export type {
   BrowseResultData,
   BrowseRequestType,
   QuizzesParameters,
-  QuizzesResultsParameters
+  QuizzesResultsParameters,
 } from '@constructor-io/constructorio-client-javascript/lib/types';
 
 export type QuizResultDataPartial = Partial<QuizResultData>;
