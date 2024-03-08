@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 
 import SkipButton from './SkipButton';
 
-describe(SkipButton, () => {
+describe(`${SkipButton.name} client`, () => {
   const props: React.ComponentProps<typeof SkipButton> = {
     propsGetters: () => ({}),
     skipQuestionButtonText: 'Custom Button Text',
