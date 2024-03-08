@@ -36,7 +36,7 @@ export function renderHookServerSide(
   };
 }
 
-export function renderHookServerSideWithCioPlp(
+export function renderHookServerSideWithQuizContext(
   renderCallback: (props: any) => ReturnType<typeof renderHookServerSide>['result'],
   contextMocks: Partial<QuizContextValue>,
   renderCallbackProps: { initialProps: any },
