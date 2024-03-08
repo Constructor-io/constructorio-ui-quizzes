@@ -1,11 +1,12 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 import SkipButton from './SkipButton';
 
 describe(`${SkipButton.name} client`, () => {
+  const onClickMock = jest.fn();
   const props: React.ComponentProps<typeof SkipButton> = {
-    propsGetters: () => ({}),
+    propsGetters: () => ({ onClick: onClickMock }),
     skipQuestionButtonText: 'Custom Button Text',
     className: 'custom-class',
   };
@@ -20,6 +21,12 @@ describe(`${SkipButton.name} client`, () => {
     const { container } = render(<SkipButton {...props} />);
     expect(screen.getByText('Custom Button Text')).toBeInTheDocument();
     expect(container.firstChild).toHaveClass('custom-class');
+  });
+
+  it('calls callback from prop getters', () => {
+    render(<SkipButton {...props} />);
+    fireEvent.click(screen.getByText('Custom Button Text'));
+    expect(onClickMock).toHaveBeenCalled();
   });
 
   it('does not render button without propsGetters', () => {
