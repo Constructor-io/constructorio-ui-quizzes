@@ -23,7 +23,7 @@ describe(SkipButton, () => {
   });
 
   it('does not render button without propsGetters', () => {
-    render(<SkipButton />);
+    render(<SkipButton className='' />);
     expect(screen.queryByRole('button', { name: 'Skip' })).not.toBeInTheDocument();
   });
 });

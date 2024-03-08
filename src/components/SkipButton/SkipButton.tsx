@@ -16,7 +16,7 @@ function SkipButton(props: SkipButtonProps) {
   const buttonText = skipQuestionButtonText || 'Skip';
 
   return (
-    <div className={className}>
+    <div className={`${className || ''}`}>
       {propsGetters && (
         // eslint-disable-next-line react/button-has-type
         <button {...rest} {...propsGetters()} title={buttonText}>
