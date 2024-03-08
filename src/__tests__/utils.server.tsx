@@ -24,7 +24,7 @@ export function renderHookServerSide(
   onRenderHookValue = jest.fn()
 ) {
   return {
-    view: renderToString(
+    html: renderToString(
       <RenderHookServerSideWrapper
         renderCallback={renderCallback}
         renderCallbackProps={renderCallbackProps}
@@ -43,7 +43,7 @@ export function renderHookServerSideWithCioPlp(
   onRenderHookValue = jest.fn()
 ) {
   return {
-    view: renderToString(
+    html: renderToString(
       <QuizContext.Provider value={{ ...defaultContextMocks, ...contextMocks }}>
         <RenderHookServerSideWrapper
           renderCallback={renderCallback}
