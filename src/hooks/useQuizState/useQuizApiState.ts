@@ -4,18 +4,18 @@ import {
   ActionAnswerQuestion,
   ActionQuizAPI,
   QuestionTypes,
-  QuizAPIActionTypes,
+  QuizAPIActionTypes
 } from '../../components/CioQuiz/actions';
 import apiReducer, {
   initialState,
-  QuizAPIReducerState,
+  QuizAPIReducerState
 } from '../../components/CioQuiz/quizApiReducer';
 import { QuizLocalReducerState } from '../../components/CioQuiz/quizLocalReducer';
 import {
   getNextQuestion,
   getQuizResults,
   getBrowseResultsForItemIds,
-  getQuizResultsConfig,
+  getQuizResultsConfig
 } from '../../services';
 import { IQuizProps } from '../../types';
 import useQueryParams from '../useQueryParams';
@@ -46,22 +46,22 @@ const useQuizApiState: UseQuizApiState = (
         resultsPerPage: resultsPageOptions?.numResultsToDisplay,
         quizVersionId: quizLocalState.quizVersionId,
         quizSessionId: quizLocalState.quizSessionId,
-        ...resultsPageOptions?.requestConfigs,
+        ...resultsPageOptions?.requestConfigs
       });
       // Set quiz results state
       dispatchApiState({
         type: QuizAPIActionTypes.SET_QUIZ_RESULTS,
         payload: {
-          quizResults,
-        },
+          quizResults
+        }
       });
       if (!quizLocalState.isQuizCompleted)
         dispatchLocalState({
-          type: QuestionTypes.Complete,
+          type: QuestionTypes.Complete
         });
     } catch (error) {
       dispatchApiState({
-        type: QuizAPIActionTypes.SET_IS_ERROR,
+        type: QuizAPIActionTypes.SET_IS_ERROR
       });
     }
   };
@@ -69,16 +69,16 @@ const useQuizApiState: UseQuizApiState = (
   const dispatchQuizResultsConfig = async () => {
     try {
       const quizResultsConfig = await getQuizResultsConfig(cioClient, quizId, {
-        quizVersionId: quizLocalState.quizVersionId,
+        quizVersionId: quizLocalState.quizVersionId
       });
       dispatchApiState({
         type: QuizAPIActionTypes.SET_QUIZ_RESULTS_CONFIG,
-        payload: { quizResultsConfig },
+        payload: { quizResultsConfig }
       });
     } catch (error) {
       dispatchApiState({
         type: QuizAPIActionTypes.SET_QUIZ_RESULTS_CONFIG_ERROR,
-        payload: { quizResultsConfigError: null },
+        payload: { quizResultsConfigError: null }
       });
     }
   };
@@ -89,11 +89,11 @@ const useQuizApiState: UseQuizApiState = (
 
       dispatchApiState({
         type: QuizAPIActionTypes.SET_QUIZ_SHARED_RESULTS,
-        payload: { quizResults: { ...quizResults, attributes: queryAttributes } },
+        payload: { quizResults: { ...quizResults, attributes: queryAttributes } }
       });
     } catch (error) {
       dispatchApiState({
-        type: QuizAPIActionTypes.SET_IS_ERROR,
+        type: QuizAPIActionTypes.SET_IS_ERROR
       });
     }
   };
@@ -106,7 +106,7 @@ const useQuizApiState: UseQuizApiState = (
   useEffect(() => {
     (async () => {
       dispatchApiState({
-        type: QuizAPIActionTypes.SET_IS_LOADING,
+        type: QuizAPIActionTypes.SET_IS_LOADING
       });
       if (isSharedResultsQuery) {
         await dispatchSharedQuizResults();
@@ -120,7 +120,7 @@ const useQuizApiState: UseQuizApiState = (
           const questionResult = await getNextQuestion(cioClient, quizId, {
             answers: quizLocalState.answers,
             quizVersionId,
-            quizSessionId,
+            quizSessionId
           });
 
           if (!questionResult.next_question) {
@@ -136,8 +136,8 @@ const useQuizApiState: UseQuizApiState = (
               type: QuestionTypes.Hydrate,
               payload: {
                 quizVersionId: questionResult?.quiz_version_id,
-                quizSessionId: questionResult?.quiz_session_id,
-              },
+                quizSessionId: questionResult?.quiz_session_id
+              }
             });
           }
 
@@ -145,12 +145,12 @@ const useQuizApiState: UseQuizApiState = (
           dispatchApiState({
             type: QuizAPIActionTypes.SET_CURRENT_QUESTION,
             payload: {
-              quizCurrentQuestion: questionResult,
-            },
+              quizCurrentQuestion: questionResult
+            }
           });
         } catch (error) {
           dispatchApiState({
-            type: QuizAPIActionTypes.SET_IS_ERROR,
+            type: QuizAPIActionTypes.SET_IS_ERROR
           });
         }
       }
@@ -161,12 +161,12 @@ const useQuizApiState: UseQuizApiState = (
     quizId,
     quizLocalState.answers,
     resultsPageOptions?.numResultsToDisplay,
-    isSharedResultsQuery,
+    isSharedResultsQuery
   ]);
 
   return {
     quizApiState,
-    dispatchApiState,
+    dispatchApiState
   };
 };
 

@@ -1,0 +1,4 @@
+{
+  "src/**/*.ts": ["eslint --fix --quiet", "prettier --write --ignore-unknown"],
+  "*.{json,md}": ["prettier --write"]
+}

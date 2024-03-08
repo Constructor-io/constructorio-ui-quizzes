@@ -15,7 +15,7 @@ export const initialState: QuizLocalReducerState = {
   answers: [],
   answerInputs: {},
   prevAnswerInputs: {},
-  isQuizCompleted: false,
+  isQuizCompleted: false
 };
 
 function answerInputReducer(state: AnswerInputState, action: ActionAnswerInputQuestion) {
@@ -23,8 +23,8 @@ function answerInputReducer(state: AnswerInputState, action: ActionAnswerInputQu
     ...state,
     [String(action.payload!.questionId)]: {
       type: action.type,
-      value: action.payload!.input,
-    },
+      value: action.payload!.input
+    }
   };
 }
 
@@ -37,25 +37,25 @@ export default function quizLocalReducer(
       return {
         ...state,
         answerInputs: answerInputReducer(state.answerInputs, action),
-        isQuizCompleted: false,
+        isQuizCompleted: false
       };
     case QuestionTypes.Cover:
       return {
         ...state,
         answerInputs: answerInputReducer(state.answerInputs, action),
-        isQuizCompleted: false,
+        isQuizCompleted: false
       };
     case QuestionTypes.SingleSelect:
       return {
         ...state,
         answerInputs: answerInputReducer(state.answerInputs, action),
-        isQuizCompleted: false,
+        isQuizCompleted: false
       };
     case QuestionTypes.MultipleSelect:
       return {
         ...state,
         answerInputs: answerInputReducer(state.answerInputs, action),
-        isQuizCompleted: false,
+        isQuizCompleted: false
       };
     case QuestionTypes.Next: {
       const { answers, answerInputs } = state;
@@ -85,7 +85,7 @@ export default function quizLocalReducer(
         // We now commit current answers to prevAnswerInputs
         prevAnswerInputs: answerInputs,
         answers: newAnswers,
-        isQuizCompleted: false,
+        isQuizCompleted: false
       };
     }
     case QuestionTypes.Skip: {
@@ -110,7 +110,7 @@ export default function quizLocalReducer(
         // We now commit current answers to prevAnswerInputs
         prevAnswerInputs: answerInputs,
         answers: newAnswers,
-        isQuizCompleted: false,
+        isQuizCompleted: false
       };
     }
 
@@ -120,23 +120,23 @@ export default function quizLocalReducer(
         ...state,
         answerInputs: prevAnswerInputs,
         answers: [...state.answers.slice(0, -1)],
-        isQuizCompleted: false,
+        isQuizCompleted: false
       };
     }
 
     case QuestionTypes.Reset:
       return {
-        ...initialState,
+        ...initialState
       };
     case QuestionTypes.Hydrate:
       return {
         ...state,
-        ...action.payload,
+        ...action.payload
       };
     case QuestionTypes.Complete:
       return {
         ...state,
-        isQuizCompleted: true,
+        isQuizCompleted: true
       };
     default:
       return state;

@@ -43,7 +43,7 @@ const useQuiz: UseQuiz = (quizOptions) => {
     cioClient,
     state: {
       answers: {
-        inputs: quizLocalState.answerInputs,
+        inputs: quizLocalState.answerInputs
       },
       quiz: {
         requestState: quizApiState.quizRequestState,
@@ -53,15 +53,15 @@ const useQuiz: UseQuiz = (quizOptions) => {
         results: quizApiState.quizResults,
         selectedOptionsWithAttributes: quizApiState.selectedOptionsWithAttributes,
         matchedOptions: quizApiState.matchedOptions,
-        resultsConfig: quizApiState.resultsConfig ?? null,
+        resultsConfig: quizApiState.resultsConfig ?? null
       },
-      quizSessionStorageState,
+      quizSessionStorageState
     },
     events: {
-      ...quizEvents,
+      ...quizEvents
     },
     ...propGetters,
-    primaryColorStyles,
+    primaryColorStyles
   };
 };
 

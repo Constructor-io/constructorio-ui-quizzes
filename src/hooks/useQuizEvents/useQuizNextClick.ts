@@ -21,7 +21,7 @@ const useQuizNextClick = (
       if (currentAnswerInput?.value?.length || currentQuestion?.type === 'cover') {
         dispatchLocalState({
           type: QuestionTypes.Next,
-          payload: quizApiState.quizCurrentQuestion,
+          payload: quizApiState.quizCurrentQuestion
         });
       }
 
@@ -33,7 +33,7 @@ const useQuizNextClick = (
     dispatchLocalState,
     quizApiState.quizCurrentQuestion,
     quizLocalState.answerInputs,
-    onQuizNextQuestion,
+    onQuizNextQuestion
   ]);
 
   return quizNexClickHandler;

@@ -25,7 +25,7 @@ const useQuizEvents: UseQuizEvents = (quizOptions, cioClient, quizState) => {
     dispatchLocalState,
     dispatchApiState,
     quizLocalState,
-    quizSessionStorageState,
+    quizSessionStorageState
   } = quizState;
   const { callbacks } = quizOptions;
   const {
@@ -34,7 +34,7 @@ const useQuizEvents: UseQuizEvents = (quizOptions, cioClient, quizState) => {
     onQuizNextQuestion,
     onQuizResultClick,
     onQuizResultsLoaded,
-    onQuizSkipQuestion,
+    onQuizSkipQuestion
   } = callbacks || {};
 
   // Quiz answer change
@@ -74,7 +74,7 @@ const useQuizEvents: UseQuizEvents = (quizOptions, cioClient, quizState) => {
     resetQuizSessionStorageState: resetQuizSessionStorageState(quizSessionStorageState.key),
     dispatchLocalState,
     dispatchApiState,
-    quizResults: quizApiState.quizResults,
+    quizResults: quizApiState.quizResults
   });
 
   // Quiz rehydrate
@@ -93,7 +93,7 @@ const useQuizEvents: UseQuizEvents = (quizOptions, cioClient, quizState) => {
     skipQuestion,
     resetQuiz,
     hydrateQuiz: hydrateQuizLocalState,
-    resetSessionStorageState: resetQuizSessionStorageState(quizSessionStorageState.key),
+    resetSessionStorageState: resetQuizSessionStorageState(quizSessionStorageState.key)
   };
 };
 

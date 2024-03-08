@@ -26,7 +26,7 @@ const useSessionStorageState = (
   return {
     skipToResults,
     quizSessionStorageStateKey,
-    hasSessionStorageState: () => getStateFromSessionStorage(quizSessionStorageStateKey) !== null,
+    hasSessionStorageState: () => getStateFromSessionStorage(quizSessionStorageStateKey) !== null
   };
 };
 

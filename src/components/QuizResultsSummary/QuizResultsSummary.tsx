@@ -47,7 +47,7 @@ export default function QuizResultsSummary({
   const matchedOptionsTemplate = formatMatchedOptions(
     matchedOptions,
     itemsSeparator,
-    lastSeparator
+    lastSeparator,
   );
 
   if (!isActiveSummary) return null;

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import ConstructorIOClient, {
-  type GetBrowseResultsForItemIdsResponse,
+  type GetBrowseResultsForItemIdsResponse
 } from '@constructor-io/constructorio-client-javascript';
 import {
   QuizzesParameters,
@@ -9,7 +9,7 @@ import {
   QuizResultsResponse,
   QuizResultDataPartial,
   QuizSharedResultsData,
-  QuizResultsConfigResponse,
+  QuizResultsConfigResponse
 } from '../types';
 import version from '../version';
 
@@ -18,7 +18,7 @@ export const getCioClient = (apiKey?: string) => {
     return new ConstructorIOClient({
       apiKey,
       sendTrackingEvents: true,
-      version: `cio-ui-quizzes-${version}`,
+      version: `cio-ui-quizzes-${version}`
     });
   }
 
@@ -60,7 +60,7 @@ export const trackQuizResultsLoaded = (
   const items = response?.results?.map((result) => ({
     itemId: result?.data?.id,
     variationId: result?.data?.variation_id,
-    itemName: result?.value,
+    itemName: result?.value
   }))!;
 
   cioClient?.tracker.trackQuizResultsLoaded({
@@ -72,7 +72,7 @@ export const trackQuizResultsLoaded = (
     resultCount: response?.total_num_results,
     resultPage: request?.page,
     resultId: result_id,
-    items,
+    items
   });
 };
 
@@ -89,7 +89,7 @@ export const trackQuizResultClick = (
       quiz_version_id,
       result_id,
       request: { section, page, num_results_per_page },
-      response: { total_num_results },
+      response: { total_num_results }
     } = quizResults;
 
     cioClient?.tracker.trackQuizResultClick({
@@ -104,7 +104,7 @@ export const trackQuizResultClick = (
       resultPage: page,
       resultId: result_id,
       resultPositionOnPage: position,
-      numResultsPerPage: num_results_per_page,
+      numResultsPerPage: num_results_per_page
     });
   }
 };
@@ -122,7 +122,7 @@ export const trackQuizConversion = (
       quiz_id,
       quiz_session_id,
       quiz_version_id,
-      request: { section },
+      request: { section }
     } = quizResults;
 
     cioClient?.tracker.trackQuizConversion({
@@ -134,7 +134,7 @@ export const trackQuizConversion = (
       section,
       variationId: result.data?.variation_id,
       revenue: (price && String(price)) || undefined,
-      type,
+      type
     });
   }
 };

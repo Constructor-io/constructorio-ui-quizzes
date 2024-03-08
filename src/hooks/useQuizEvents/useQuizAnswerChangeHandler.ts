@@ -18,8 +18,8 @@ const useQuizAnswerChangeHandler = (
               type: QuestionTypes.Cover,
               payload: {
                 questionId: currentQuestion.next_question.id,
-                input: '',
-              },
+                input: ''
+              }
             });
             break;
           case QuestionTypes.OpenText:
@@ -27,8 +27,8 @@ const useQuizAnswerChangeHandler = (
               type: QuestionTypes.OpenText,
               payload: {
                 questionId: currentQuestion!.next_question.id,
-                input: payload as string,
-              },
+                input: payload as string
+              }
             });
             break;
           case QuestionTypes.SingleSelect:
@@ -39,8 +39,8 @@ const useQuizAnswerChangeHandler = (
                 | QuestionTypes.MultipleSelect,
               payload: {
                 questionId: currentQuestion.next_question.id,
-                input: payload as Omit<QuestionOption, 'attribute' | 'images'>[],
-              },
+                input: payload as Omit<QuestionOption, 'attribute' | 'images'>[]
+              }
             });
             break;
           default:

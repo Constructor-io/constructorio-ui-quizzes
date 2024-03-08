@@ -33,16 +33,16 @@ export default function ResultCard(props: ResultCardOptions) {
   } = useContext(QuizContext);
 
   const salePrice = validateNumberOrString(
-    getNestedValueUsingDotNotation(result?.data, salePriceKey)
+    getNestedValueUsingDotNotation(result?.data, salePriceKey),
   );
   const regularPrice = validateNumberOrString(
-    getNestedValueUsingDotNotation(result?.data, regularPriceKey)
+    getNestedValueUsingDotNotation(result?.data, regularPriceKey),
   );
   const ratingCount = validateNumberOrString(
-    getNestedValueUsingDotNotation(result?.data, ratingCountKey)
+    getNestedValueUsingDotNotation(result?.data, ratingCountKey),
   );
   const ratingScore = validateNumberOrString(
-    getNestedValueUsingDotNotation(result?.data, ratingScoreKey)
+    getNestedValueUsingDotNotation(result?.data, ratingScoreKey),
   );
 
   const resultCardContent = () => (

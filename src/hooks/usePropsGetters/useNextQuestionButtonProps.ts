@@ -22,7 +22,7 @@ export default function useNextQuestionButtonProps(
       type: 'button',
       onClick: () => {
         nextQuestion();
-      },
+      }
     };
   }, [quizApiState.quizCurrentQuestion, quizLocalState.answerInputs, nextQuestion]);
 

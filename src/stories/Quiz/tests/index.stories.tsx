@@ -108,7 +108,7 @@ e2eInteractionTest.play = async ({ canvasElement }) => {
   // New Question
   await sleep(500);
   expect(
-    await canvas.findByText('Do you have a preferred coffee growing region?')
+    await canvas.findByText('Do you have a preferred coffee growing region?'),
   ).toBeInTheDocument();
   expect(canvas.getByRole('button', { name: 'Continue' })).toHaveClass('disabled');
   userEvent.click(canvas.getByRole('button', { name: /No, I'm open/ }));
@@ -132,7 +132,7 @@ e2eInteractionTest.play = async ({ canvasElement }) => {
   // Results Config data is fetched correctly
   expect(await canvas.findByText('Here are your results!!')).toBeInTheDocument();
   expect(
-    await canvas.findByText('Based on your answers, these are our recommendations.')
+    await canvas.findByText('Based on your answers, these are our recommendations.'),
   ).toBeInTheDocument();
   expect(await canvas.findByText('10 results')).toBeInTheDocument();
   expect(document.querySelector('.cio-results-explanation')).toBeInTheDocument();
@@ -141,8 +141,8 @@ e2eInteractionTest.play = async ({ canvasElement }) => {
   await userEvent.click(await canvas.findByText('Share Results'));
   expect(
     await canvas.findByText(
-      'Share or save your quiz results through email or using the link below.'
-    )
+      'Share or save your quiz results through email or using the link below.',
+    ),
   ).toBeInTheDocument();
 
   // Add mock clipboard functions that don't require user permissions and replace the native clipboard

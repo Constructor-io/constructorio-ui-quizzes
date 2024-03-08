@@ -208,12 +208,12 @@ const mockElementProps = {
 
 export const useMockContextValue = (
   question?: Question,
-  options?: MockOptions
+  options?: MockOptions,
 ): QuizContextValue => {
   const getOpenTextInputProps = useOpenTextInputProps(
     () => {},
     () => {},
-    question
+    question,
   );
 
   const getCoverQuestionProps = useCoverQuestionProps(() => {}, question);
@@ -221,7 +221,7 @@ export const useMockContextValue = (
   const getSelectInputProps = useSelectInputProps(
     () => {},
     () => {},
-    question
+    question,
   );
 
   return {
