@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import ConstructorIO from '@constructor-io/constructorio-client-javascript';
 
 import QuizContext, { QuizContextValue } from '../components/CioQuiz/context';
@@ -18,16 +18,14 @@ class MockConstructorIO extends ConstructorIO {
 export const mockConstructorIOClient =
   typeof window !== 'undefined' ? new MockConstructorIO({ apiKey: DEMO_API_KEY }) : undefined;
 
-export function WithContextWrapper({
+export function withContextWrapper({
   contextMocks = {},
-  children,
 }: {
   contextMocks: Partial<QuizContextValue> | undefined;
-  children: React.ReactNode;
 }) {
-  const value = useMemo(
-    () => ({ cioClient: mockConstructorIOClient, ...defaultContextMocks, ...contextMocks }),
-    [contextMocks]
-  );
-  return <QuizContext.Provider value={value}>{children}</QuizContext.Provider>;
+  const value = { cioClient: mockConstructorIOClient, ...defaultContextMocks, ...contextMocks };
+  function ContextWrapper({ children }: { children: React.ReactNode }) {
+    return <QuizContext.Provider value={value}>{children}</QuizContext.Provider>;
+  }
+  return ContextWrapper;
 }
