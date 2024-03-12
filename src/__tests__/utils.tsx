@@ -29,3 +29,23 @@ export function withContextWrapper({
   }
   return ContextWrapper;
 }
+
+export function withContext<Props extends JSX.IntrinsicAttributes>(
+  Component: React.ComponentType<Props>,
+  {
+    contextMocks = {},
+  }: {
+    contextMocks?: Partial<QuizContextValue>;
+  }
+): React.ComponentType<Props> {
+  const value = { cioClient: mockConstructorIOClient, ...defaultContextMocks, ...contextMocks };
+  function Provider(props: Props) {
+    return (
+      <QuizContext.Provider value={value}>
+        <Component {...props} />
+      </QuizContext.Provider>
+    );
+  }
+
+  return Provider;
+}
