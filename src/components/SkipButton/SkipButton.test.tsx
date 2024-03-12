@@ -19,13 +19,13 @@ describe(`${SkipButton.name} client`, () => {
 
   it('renders a button with custom properties', () => {
     const { container } = render(<SkipButton {...props} />);
-    expect(screen.getByText('Custom Button Text')).toBeInTheDocument();
-    expect(container.firstChild).toHaveClass('custom-class');
+    expect(screen.getByText(props.skipQuestionButtonText!)).toBeInTheDocument();
+    expect(container.firstChild).toHaveClass(props.className!);
   });
 
   it('calls callback from prop getters', () => {
     render(<SkipButton {...props} />);
-    fireEvent.click(screen.getByText('Custom Button Text'));
+    fireEvent.click(screen.getByText(props.skipQuestionButtonText!));
     expect(onClickMock).toHaveBeenCalled();
   });
 

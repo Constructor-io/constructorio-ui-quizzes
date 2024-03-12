@@ -21,7 +21,7 @@ export const mockConstructorIOClient =
 export function withContextWrapper({
   contextMocks = {},
 }: {
-  contextMocks: Partial<QuizContextValue> | undefined;
+  contextMocks?: Partial<QuizContextValue>;
 }) {
   const value = { cioClient: mockConstructorIOClient, ...defaultContextMocks, ...contextMocks };
   function ContextWrapper({ children }: { children: React.ReactNode }) {

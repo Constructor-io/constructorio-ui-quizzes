@@ -17,8 +17,8 @@ describe(`${SkipButton.name} server`, () => {
 
   it('renders a button with custom properties', () => {
     const view = renderToString(<SkipButton {...props} />);
-    expect(view).toContain('Custom Button Text');
-    expect(view).toContain('custom-class');
+    expect(view).toContain(props.skipQuestionButtonText!);
+    expect(view).toContain(props.className!);
   });
 
   it('does not render button without propsGetters', () => {
