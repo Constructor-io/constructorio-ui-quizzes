@@ -12,7 +12,7 @@ describe(`${SkipButton.name} client`, () => {
   };
 
   it('renders a button with the default properties', () => {
-    const { container } = render(<SkipButton propsGetters={() => ({})} />);
+    const { container } = render(<SkipButton propsGetters={props.propsGetters} />);
     expect(screen.getByText('Skip')).toBeInTheDocument();
     expect(container.firstChild).toHaveClass('cio-button-container');
   });
