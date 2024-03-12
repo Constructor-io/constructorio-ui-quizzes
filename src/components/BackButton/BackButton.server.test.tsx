@@ -28,7 +28,7 @@ describe(`${BackButton.name} server`, () => {
 
     it('does not render the previous button', () => {
       const view = renderToString(<Subject />);
-      expect(view).toContain('');
+      expect(view).toBe('');
     });
   });
 });
