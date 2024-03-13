@@ -16,16 +16,14 @@
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": false,
     "importHelpers": true,
-    "esModuleInterop": true,
     "types": ["node", "jest", "@testing-library/jest-dom"]
   },
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
-    "spec/**/*.ts",
-    "spec/**/*.tsx",
-    "jest.setup.ts",
     "generateVersion.js",
+    "spec",
+    "jest.setup.ts",
     "scripts/**/*.ts"
   ],
   "exclude": ["node_modules", "lib", "storybook-static", ".storybook"]

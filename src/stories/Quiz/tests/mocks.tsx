@@ -81,7 +81,7 @@ export const questionOptions = [
   },
 ];
 
-export const getMockState = (question?: Question, options = {}): QuizReturnState => ({
+export const getMockState = (question?: Question, options?: MockOptions): QuizReturnState => ({
   answers: {
     inputs: {
       1: {
@@ -174,7 +174,7 @@ export const getMockState = (question?: Question, options = {}): QuizReturnState
           is_active: true,
           text: 'Here are your results',
         },
-        response_summary: options.withSummary
+        response_summary: options?.withSummary
           ? {
               items_separator: ', ',
               last_separator: ' and ',

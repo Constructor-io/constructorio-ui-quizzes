@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": ["node"]
+  },
+  "exclude": [
+    "spec",
+    "scripts",
+    "jest.setup.ts",
+    "node_modules",
+    "lib",
+    "storybook-static",
+    ".storybook"
+  ]
+}
