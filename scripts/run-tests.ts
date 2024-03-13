@@ -69,10 +69,8 @@ function getAllChangedFiles(): Promise<string[]> {
                 .filter((item) => !deletedFiles.includes(item))
             ),
           ];
-
           return resolve(filtered);
         }
-
         return resolve([]);
       }
     );
@@ -93,5 +91,5 @@ getAllChangedFiles().then((files) => {
       }
       console.log(stdout);
     }
-  ); // eslint-disable-line no-console
+  );
 });
