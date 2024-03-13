@@ -1,7 +1,7 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 
-import CTAButton from 'src/components/CTAButton/CTAButton';
+import CTAButton from '../../../src/components/CTAButton/CTAButton';
 
 describe(`${CTAButton.name} server`, () => {
   const props: React.ComponentProps<typeof CTAButton> = {

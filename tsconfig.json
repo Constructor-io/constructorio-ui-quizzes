@@ -1,7 +1,6 @@
 {
   "$schema": "http://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "baseUrl": ".",
     "moduleResolution": "node",
     "removeComments": false,
     "jsx": "react",
