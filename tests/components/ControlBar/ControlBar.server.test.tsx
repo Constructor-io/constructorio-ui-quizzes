@@ -1,7 +1,7 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 
-import { withContext } from '../../../src/__tests__/utils';
+import { withContext } from '../../__tests__/utils';
 import ControlBar from '../../../src/components/ControlBar/ControlBar';
 
 describe(`${ControlBar.name} server`, () => {

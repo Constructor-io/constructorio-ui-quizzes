@@ -22,16 +22,10 @@
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
+    "tests/**/*.ts",
+    "tests/**/*.tsx",
     "jest.setup.ts",
-    "generateVersion.js",
-    "tests/components/BackButton/BackButton.server.test.tsx",
-    "tests/components/BackButton/BackButton.test.tsx",
-    "tests/components/ControlBar/ControlBar.server.test.tsx",
-    "tests/components/ControlBar/ControlBar.test.tsx",
-    "tests/components/CTAButton/CTAButton.test.tsx",
-    "tests/components/CTAButton/CTAButton.server.test.tsx",
-    "tests/components/SkipButton/SkipButton.server.test.tsx",
-    "tests/components/SkipButton/SkipButton.test.tsx"
+    "generateVersion.js"
   ],
   "exclude": ["node_modules", "lib", "storybook-static", ".storybook"]
 }
