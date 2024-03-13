@@ -13,7 +13,7 @@ describe(`${CTAButton.name} client`, () => {
   };
 
   it('renders button', () => {
-    const { container } = render(<CTAButton {...props} ctaText='' />);
+    const { container } = render(<CTAButton {...props} ctaText={undefined} />);
     expect(screen.getByText('Continue')).toBeInTheDocument();
     expect(container.firstChild).toHaveClass(props.className!);
   });
