@@ -81,7 +81,7 @@ function getAllChangedFiles(): Promise<string[]> {
           const deletedFiles = files[2];
           const flattened = changedFiles.flat();
 
-          console.log('getChangedLocalFiles()', getChangedLocalFiles());
+          console.log('getChangedLocalFiles()', getChangedLocalFiles().then(console.log));
 
           // Filter out items that aren't within ./src or ./spec
           const filtered = [
