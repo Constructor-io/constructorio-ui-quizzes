@@ -2,24 +2,27 @@
 const { exec } = require('child_process');
 const { exit } = require('process');
 
+function getFileNamesFromStdout(error: any, stdout: string, type: string): string[] {
+  if (error) {
+    console.error(`list of changed files (${type}) could not be compiled`);
+    console.error('');
+    exit(1);
+  }
+
+  let stdoutSplitLines = stdout.split('\n');
+  if (stdoutSplitLines.length > 1) {
+    stdoutSplitLines = stdoutSplitLines.slice(0, -1); // Trim last line break
+    return stdoutSplitLines;
+  }
+  return [];
+}
+
 // Get list of changed files from master that have been committed, but are unmerged
 function getChangedCommittedFiles(): Promise<string[]> {
   return new Promise((resolve) => {
     exec('git diff --diff-filter=ACMRTUXB origin/main...HEAD --name-only "$@"', (error, stdout) => {
-      if (error) {
-        console.error('list of changed (committed) files could not be compiled');
-        console.error(error);
-        process.exit(1);
-      }
-
-      let stdoutSplitLines = stdout.split('\n');
-
-      if (stdoutSplitLines.length > 1) {
-        stdoutSplitLines = stdoutSplitLines.slice(0, -1); // Trim last line break
-        return resolve(stdoutSplitLines);
-      }
-
-      return resolve([]);
+      const files = getFileNamesFromStdout(error, stdout, 'committed');
+      return resolve(files);
     });
   });
 }
@@ -28,21 +31,8 @@ function getChangedCommittedFiles(): Promise<string[]> {
 function getChangedLocalFiles(): Promise<string[]> {
   return new Promise((resolve) => {
     exec('git status --porcelain | sed "s/^...//"', (error, stdout) => {
-      if (error) {
-        console.error('list of changed (local) files could not be compiled');
-        console.error('');
-        process.exit(1);
-      }
-
-      let stdoutSplitLines = stdout.split('\n');
-
-      if (stdoutSplitLines.length > 1) {
-        stdoutSplitLines = stdoutSplitLines.slice(0, -1); // Trim last line break
-
-        return resolve(stdoutSplitLines);
-      }
-
-      return resolve([]);
+      const files = getFileNamesFromStdout(error, stdout, 'local');
+      return resolve(files);
     });
   });
 }
@@ -51,21 +41,8 @@ function getChangedLocalFiles(): Promise<string[]> {
 function getDeletedLocalFiles(): Promise<string[]> {
   return new Promise((resolve) => {
     exec('git ls-files --deleted', (error, stdout) => {
-      if (error) {
-        console.error('list of deleted (local) files could not be compiled');
-        console.error('');
-        process.exit(1);
-      }
-
-      let stdoutSplitLines = stdout.split('\n');
-
-      if (stdoutSplitLines.length > 1) {
-        stdoutSplitLines = stdoutSplitLines.slice(0, -1); // Trim last line break
-
-        return resolve(stdoutSplitLines);
-      }
-
-      return resolve([]);
+      const files = getFileNamesFromStdout(error, stdout, 'deleted');
+      return resolve(files);
     });
   });
 }
