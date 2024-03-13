@@ -72,11 +72,7 @@
         "testing-library/no-node-access": ["error", { "allowContainerFirstChild": true }],
         // https://github.com/VicJer/eslint-plugin-no-snapshot-testing
         "no-snapshot-testing/no-snapshot-testing": "error",
-        "import/no-extraneous-dependencies": "off",
-        // https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-props-no-spreading.md
-        "react/jsx-props-no-spreading": "off",
-        "@cspell/spellchecker": ["error"],
-        "jest/valid-title": "off"
+        "import/no-extraneous-dependencies": "off"
       }
     }
   ],
