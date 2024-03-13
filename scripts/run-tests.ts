@@ -2,6 +2,8 @@
 const { exec } = require('child_process');
 const { exit } = require('process');
 
+const { version } = require('../package.json');
+
 // Get list of changed files from master that have been committed, but are unmerged
 function getChangedCommittedFiles(): Promise<string[]> {
   return new Promise((resolve) => {
@@ -72,6 +74,7 @@ function getDeletedLocalFiles(): Promise<string[]> {
 
 // Get list of all changed files (using above two methods)
 function getAllChangedFiles(): Promise<string[]> {
+  console.log('> Fetching changed files');
   return new Promise((resolve) => {
     Promise.all([getChangedCommittedFiles(), getChangedLocalFiles(), getDeletedLocalFiles()]).then(
       (files) => {
@@ -79,7 +82,6 @@ function getAllChangedFiles(): Promise<string[]> {
           const changedFiles = files.slice(0, 2);
           const deletedFiles = files[2];
           const flattened = changedFiles.flat();
-          console.log('flattened', flattened);
 
           // Filter out items that aren't within ./src or ./spec
           const filtered = [
@@ -103,7 +105,7 @@ getAllChangedFiles().then((files) => {
   if (!files.length) {
     exit(0);
   }
-  console.log('Running tests...');
+  console.log('> Running tests');
   exec(`npm run test ${files.join(' ')} -- --coverage`, (err, stdout, stderr) => {
     if (err) {
       console.log(stderr);
