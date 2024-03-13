@@ -2,7 +2,7 @@
 const { exec } = require('child_process');
 const { exit } = require('process');
 
-function getFileNamesFromStdout(error: any, stdout: string, type: string): string[] {
+function getFileNamesFromStdout(error: Error, stdout: string, type: string): string[] {
   if (error) {
     console.error(`list of changed files (${type}) could not be compiled`);
     console.error('');
@@ -20,17 +20,20 @@ function getFileNamesFromStdout(error: any, stdout: string, type: string): strin
 // Get list of changed files from master that have been committed, but are unmerged
 function getChangedCommittedFiles(): Promise<string[]> {
   return new Promise((resolve) => {
-    exec('git diff --diff-filter=ACMRTUXB origin/main...HEAD --name-only "$@"', (error, stdout) => {
-      const files = getFileNamesFromStdout(error, stdout, 'committed');
-      return resolve(files);
-    });
+    exec(
+      'git diff --diff-filter=ACMRTUXB origin/main...HEAD --name-only "$@"',
+      (error: Error, stdout: string) => {
+        const files = getFileNamesFromStdout(error, stdout, 'committed');
+        return resolve(files);
+      }
+    );
   });
 }
 
 // Get list of changed files from master that have not yet been committed
 function getChangedLocalFiles(): Promise<string[]> {
   return new Promise((resolve) => {
-    exec('git status --porcelain | sed "s/^...//"', (error, stdout) => {
+    exec('git status --porcelain | sed "s/^...//"', (error: Error, stdout: string) => {
       const files = getFileNamesFromStdout(error, stdout, 'local');
       return resolve(files);
     });
@@ -40,7 +43,7 @@ function getChangedLocalFiles(): Promise<string[]> {
 // Get list of deleted files from master
 function getDeletedLocalFiles(): Promise<string[]> {
   return new Promise((resolve) => {
-    exec('git ls-files --deleted', (error, stdout) => {
+    exec('git ls-files --deleted', (error: Error, stdout: string) => {
       const files = getFileNamesFromStdout(error, stdout, 'deleted');
       return resolve(files);
     });
@@ -81,11 +84,14 @@ getAllChangedFiles().then((files) => {
     exit(0);
   }
   console.log('> Running tests');
-  exec(`npm run test ${files.join(' ')} -- --coverage`, (err, stdout, stderr) => {
-    if (err) {
-      console.log(stderr);
-      exit(1);
+  exec(
+    `npm run test ${files.join(' ')} -- --coverage`,
+    (err: Error, stdout: string, stderr: string) => {
+      if (err) {
+        console.log(stderr);
+        exit(1);
+      }
+      console.log(stdout);
     }
-    console.log(stdout);
-  }); // eslint-disable-line no-console
+  ); // eslint-disable-line no-console
 });
