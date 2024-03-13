@@ -25,7 +25,8 @@
     "spec/**/*.ts",
     "spec/**/*.tsx",
     "jest.setup.ts",
-    "generateVersion.js"
+    "generateVersion.js",
+    "scripts/**/*.ts"
   ],
   "exclude": ["node_modules", "lib", "storybook-static", ".storybook"]
 }

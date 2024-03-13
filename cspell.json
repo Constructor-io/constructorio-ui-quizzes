@@ -2,22 +2,30 @@
   "version": "0.2",
   "language": "en",
   "allowCompoundWords": false,
-  "dictionaries": ["en_US", "html", "css"],
-  "ignorePaths": ["lib", "docs"],
+  "dictionaries": [
+    "en_US",
+    "html",
+    "css"
+  ],
+  "ignorePaths": [
+    "lib",
+    "docs"
+  ],
   "flagWords": [],
   "words": [
-    "key_n4SkMH5PFWLdStQZ",
-    "constructorio",
-    "Combobox",
-    "searchandizing",
-    "testid",
-    "subcomponents",
-    "Dont",
-    "Chemex",
+    "ACMRTUXB",
     "autodocs",
-    "Favorited",
+    "Chemex",
+    "cnstrc",
+    "Combobox",
+    "constructorio",
+    "Dont",
     "favorited",
+    "Favorited",
+    "key_n4SkMH5PFWLdStQZ",
+    "searchandizing",
     "Skippable",
-    "cnstrc"
+    "subcomponents",
+    "testid"
   ]
 }
