@@ -1,8 +1,8 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 
-import { withContext } from '../../__tests__/utils';
-import ControlBar from '../../../src/components/ControlBar/ControlBar';
+import ControlBar from 'src/components/ControlBar/ControlBar';
+import { withContext } from 'spec/__tests__/utils';
 
 describe(`${ControlBar.name} server`, () => {
   const props: React.ComponentProps<typeof ControlBar> = {

@@ -1,8 +1,8 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import BackButton from '../../../src/components/BackButton/BackButton';
-import { withContext } from '../../__tests__/utils';
+import BackButton from 'src/components/BackButton/BackButton';
+import { withContext } from 'spec/__tests__/utils';
 
 describe(`${BackButton.name} client`, () => {
   const onPreviousMock = jest.fn();

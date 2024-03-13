@@ -1,7 +1,7 @@
 import { renderToString } from 'react-dom/server';
 import React from 'react';
 
-import QuizContext, { QuizContextValue } from '../../src/components/CioQuiz/context';
+import QuizContext, { QuizContextValue } from 'src/components/CioQuiz/context';
 import { defaultContextMocks } from './constants';
 
 export function RenderHookServerSideWrapper({

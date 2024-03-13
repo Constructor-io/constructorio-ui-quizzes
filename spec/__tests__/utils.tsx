@@ -1,7 +1,7 @@
 import React from 'react';
 import ConstructorIO from '@constructor-io/constructorio-client-javascript';
 
-import QuizContext, { QuizContextValue } from '../../src/components/CioQuiz/context';
+import QuizContext, { QuizContextValue } from 'src/components/CioQuiz/context';
 import { defaultContextMocks, DEMO_API_KEY } from './constants';
 
 class MockConstructorIO extends ConstructorIO {

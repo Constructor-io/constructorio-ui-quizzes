@@ -1,7 +1,7 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import SkipButton from '../../../src/components/SkipButton/SkipButton';
+import SkipButton from 'src/components/SkipButton/SkipButton';
 
 describe(`${SkipButton.name} client`, () => {
   const onClickMock = jest.fn();
