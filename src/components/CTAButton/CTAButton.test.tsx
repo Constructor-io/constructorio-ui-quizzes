@@ -13,9 +13,9 @@ describe(`${CTAButton.name} client`, () => {
   };
 
   it('renders button', () => {
-    const { container } = render(<CTAButton {...props} ctaText={undefined} />);
+    const { container } = render(<CTAButton propsGetters={props.propsGetters} />);
     expect(screen.getByText('Continue')).toBeInTheDocument();
-    expect(container.firstChild).toHaveClass(props.className!);
+    expect(container.firstChild).toHaveClass('cio-button-container');
   });
 
   it('executes callback on click', () => {
