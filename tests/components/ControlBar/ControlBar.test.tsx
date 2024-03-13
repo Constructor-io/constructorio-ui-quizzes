@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import ControlBar from './ControlBar';
 import { withContext } from '../../__tests__/utils';
+import ControlBar from '../../../src/components/ControlBar/ControlBar';
 
 describe(`${ControlBar.name} client`, () => {
   const props: React.ComponentProps<typeof ControlBar> = {

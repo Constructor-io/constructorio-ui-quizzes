@@ -59,7 +59,7 @@
   },
   "overrides": [
     {
-      "files": ["**/*.test.{ts,tsx,js,jsx}", "**/__tests__/**/*.{ts,tsx,js,jsx}"],
+      "files": ["tests/**/*.{ts,tsx,js,jsx}"],
       "env": {
         "node": true,
         "jest": true,
@@ -72,7 +72,10 @@
         "testing-library/no-node-access": ["error", { "allowContainerFirstChild": true }],
         // https://github.com/VicJer/eslint-plugin-no-snapshot-testing
         "no-snapshot-testing/no-snapshot-testing": "error",
-        "import/no-extraneous-dependencies": "off"
+        "import/no-extraneous-dependencies": [
+          "error",
+          { "devDependencies": true, "peerDependencies": true }
+        ]
       }
     }
   ],

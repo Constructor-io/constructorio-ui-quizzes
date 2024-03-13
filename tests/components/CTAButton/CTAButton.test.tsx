@@ -1,7 +1,7 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import CTAButton from './CTAButton';
+import CTAButton from '../../../src/components/CTAButton/CTAButton';
 
 describe(`${CTAButton.name} client`, () => {
   const propGettersMock = jest.fn();

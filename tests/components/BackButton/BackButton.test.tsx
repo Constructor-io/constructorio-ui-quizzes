@@ -1,10 +1,10 @@
 import React from 'react';
-import { renderToString } from 'react-dom/server';
+import { fireEvent, render, screen } from '@testing-library/react';
 
+import BackButton from '../../../src/components/BackButton/BackButton';
 import { withContext } from '../../__tests__/utils';
-import BackButton from './BackButton';
 
-describe(`${BackButton.name} server`, () => {
+describe(`${BackButton.name} client`, () => {
   const onPreviousMock = jest.fn();
   const onPreviousPropsMock = jest
     .fn()
@@ -16,8 +16,14 @@ describe(`${BackButton.name} server`, () => {
     });
 
     it('renders the previous button', () => {
-      const view = renderToString(<Subject />);
-      expect(view).toContain('aria-label="Previous"');
+      render(<Subject />);
+      expect(screen.getByRole('button', { name: 'Previous' })).toBeInTheDocument();
+    });
+
+    it('executes callback on click', () => {
+      render(<Subject />);
+      fireEvent.click(screen.getByRole('button', { name: 'Previous' }));
+      expect(onPreviousMock).toHaveBeenCalled();
     });
   });
 
@@ -26,9 +32,9 @@ describe(`${BackButton.name} server`, () => {
       contextMocks: { getPreviousQuestionButtonProps: undefined },
     });
 
-    it('does not render the previous button', () => {
-      const view = renderToString(<Subject />);
-      expect(view).toBe('');
+    it('returns empty element when function is undefined', () => {
+      const { container } = render(<Subject />);
+      expect(container).toBeEmptyDOMElement();
     });
   });
 });

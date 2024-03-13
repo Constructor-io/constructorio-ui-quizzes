@@ -1,7 +1,7 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 
-import SkipButton from './SkipButton';
+import SkipButton from '../../../src/components/SkipButton/SkipButton';
 
 describe(`${SkipButton.name} server`, () => {
   const props: React.ComponentProps<typeof SkipButton> = {
