@@ -2,8 +2,6 @@
 const { exec } = require('child_process');
 const { exit } = require('process');
 
-const { version } = require('../package.json');
-
 // Get list of changed files from master that have been committed, but are unmerged
 function getChangedCommittedFiles(): Promise<string[]> {
   return new Promise((resolve) => {
@@ -82,6 +80,8 @@ function getAllChangedFiles(): Promise<string[]> {
           const changedFiles = files.slice(0, 2);
           const deletedFiles = files[2];
           const flattened = changedFiles.flat();
+
+          console.log('getChangedLocalFiles()', getChangedLocalFiles());
 
           // Filter out items that aren't within ./src or ./spec
           const filtered = [
