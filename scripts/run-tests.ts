@@ -82,15 +82,18 @@ getAllChangedFiles().then((files) => {
     exit(0);
   }
   const runTest = spawn(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', ['run', 'test']);
+
   runTest.stdout.on('data', (data: string | Buffer) => {
     console.log(data.toString());
   });
-
   runTest.stderr.on('data', (data: string | Buffer) => {
     console.log(data.toString());
   });
 
   runTest.on('error', (error: Error) => {
     console.log(error.message);
+  });
+  runTest.on('close', (code: number) => {
+    exit(code);
   });
 });
