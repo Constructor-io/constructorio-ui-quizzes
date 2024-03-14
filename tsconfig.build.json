@@ -2,6 +2,8 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "esModuleInterop": false,
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "outDir": "lib/mjs",
     "types": ["node"]
   },
   "include": ["src"],
