@@ -21,19 +21,19 @@ const meta: Meta<typeof HooksTemplate> = {
       },
     },
   },
+  args: {
+    quizId,
+    apiKey,
+    quizVersionId: '',
+    resultsPageOptions,
+    resultCardOptions,
+    callbacks,
+    sessionStateOptions,
+    primaryColor: '35, 71, 199',
+  },
   argTypes,
 };
 
 export default meta;
 
 export const BasicUsage = HooksTemplate.bind({});
-BasicUsage.args = {
-  quizId,
-  apiKey,
-  quizVersionId: '',
-  resultsPageOptions,
-  resultCardOptions,
-  callbacks,
-  sessionStateOptions,
-  primaryColor: '35, 71, 199',
-};

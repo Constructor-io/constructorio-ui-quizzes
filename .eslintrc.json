@@ -52,22 +52,32 @@
     "import/no-extraneous-dependencies": [
       "error",
       {
-        "devDependencies": [
-          "**/stories/**/*.*",
-          "**/.storybook/**/*.*"
-        ],
+        "devDependencies": ["**/stories/**/*.*", "**/.storybook/**/*.*"],
         "peerDependencies": true
       }
     ]
   },
   "overrides": [
     {
-      "files": "tests/**/*.ts",
+      "files": ["spec/**/*.{ts,tsx,js,jsx}"],
       "env": {
         "node": true,
-        "jest": true
+        "jest": true,
+        "jest/globals": true
+      },
+      "plugins": ["jest", "no-snapshot-testing", "testing-library"],
+      "extends": ["plugin:jest/recommended", "plugin:testing-library/react"],
+      "rules": {
+        // https://github.com/testing-library/eslint-plugin-testing-library/blob/main/docs/rules/no-node-access.md
+        "testing-library/no-node-access": ["error", { "allowContainerFirstChild": true }],
+        // https://github.com/VicJer/eslint-plugin-no-snapshot-testing
+        "no-snapshot-testing/no-snapshot-testing": "error",
+        "import/no-extraneous-dependencies": [
+          "error",
+          { "devDependencies": true, "peerDependencies": true }
+        ]
       }
     }
   ],
-  "ignorePatterns": ["*.config.js", "lib/**/*.js", "lib/**/*.d.ts", "docs/**/*.js"]
+  "ignorePatterns": ["*.config.js", "lib/**/*.js", "lib/**/*.d.ts", "docs/**/*.js", "jest.setup.ts"]
 }

@@ -47,7 +47,7 @@ export default function RetrievingAnswersStory() {
                     entry[1].type === 'open' &&
                     !!entry[1].value && (
                       <div>
-                        Question {entry[0]} - {entry[1].value}
+                        Question {entry[0]} - {entry[1].value as string}
                       </div>
                     )
                 )}
@@ -62,7 +62,7 @@ export default function RetrievingAnswersStory() {
               <ControlBar ctaButtonText={currentQuestionData?.cta_text || undefined} />
             </>
           ) : (
-            <ResultContainer resultCardOptions={resultCardOptions} />
+            <ResultContainer resultCardOptions={resultCardOptions} onShare={() => {}} />
           )}
         </div>
       </QuizContext.Provider>

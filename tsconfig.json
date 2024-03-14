@@ -5,18 +5,18 @@
     "removeComments": false,
     "jsx": "react",
     "target": "esnext",
-    "outDir": "lib/mjs",
     "declaration": true,
     "declarationDir": "lib/types",
     "strict": true,
     "module": "esnext",
     "noEmitOnError": true,
-    "lib": ["esnext", "dom", "dom.iterable"],
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": false,
-    "importHelpers": true
+    "importHelpers": true,
+    "esModuleInterop": true,
+    "types": ["node", "jest", "@testing-library/jest-dom"]
   },
-  "include": ["src/**/*.ts", "generateVersion.js"],
+  "include": ["src", "spec", "scripts", "jest.setup.ts"],
   "exclude": ["node_modules", "lib", "storybook-static", ".storybook"]
 }
