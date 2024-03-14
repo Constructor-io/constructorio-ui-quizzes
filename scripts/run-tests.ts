@@ -1,8 +1,8 @@
-/* eslint-disable import/no-extraneous-dependencies, no-console, @cspell/spellchecker */
-const { exec } = require('child_process');
+/* eslint-disable no-console, @cspell/spellchecker */
+const { exec, spawn } = require('child_process');
 const { exit } = require('process');
 
-function getFileNamesFromStdout(error: Error, stdout: string, type: string): string[] {
+function getFileNamesFromStdout(error: Error | null, stdout: string, type: string): string[] {
   if (error) {
     console.error(`list of changed files (${type}) could not be compiled`);
     console.error('');
@@ -22,7 +22,7 @@ function getChangedCommittedFiles(): Promise<string[]> {
   return new Promise((resolve) => {
     exec(
       'git diff --diff-filter=ACMRTUXB origin/main...HEAD --name-only "$@"',
-      (error: Error, stdout: string) => {
+      (error: Error | null, stdout: string) => {
         const files = getFileNamesFromStdout(error, stdout, 'committed');
         return resolve(files);
       }
@@ -33,7 +33,7 @@ function getChangedCommittedFiles(): Promise<string[]> {
 // Get list of changed files from master that have not yet been committed
 function getChangedLocalFiles(): Promise<string[]> {
   return new Promise((resolve) => {
-    exec('git status --porcelain | sed "s/^...//"', (error: Error, stdout: string) => {
+    exec('git status --porcelain | sed "s/^...//"', (error: Error | null, stdout: string) => {
       const files = getFileNamesFromStdout(error, stdout, 'local');
       return resolve(files);
     });
@@ -43,7 +43,7 @@ function getChangedLocalFiles(): Promise<string[]> {
 // Get list of deleted files from master
 function getDeletedLocalFiles(): Promise<string[]> {
   return new Promise((resolve) => {
-    exec('git ls-files --deleted', (error: Error, stdout: string) => {
+    exec('git ls-files --deleted', (error: Error | null, stdout: string) => {
       const files = getFileNamesFromStdout(error, stdout, 'deleted');
       return resolve(files);
     });
@@ -81,15 +81,16 @@ getAllChangedFiles().then((files) => {
   if (!files.length) {
     exit(0);
   }
-  console.log('> Running tests');
-  exec(
-    `npm run test ${files.join(' ')} -- --coverage`,
-    (err: Error, stdout: string, stderr: string) => {
-      if (err) {
-        console.log(stderr);
-        exit(1);
-      }
-      console.log(stdout);
-    }
-  );
+  const runTest = spawn(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', ['run', 'test']);
+  runTest.stdout.on('data', (data: string | Buffer) => {
+    console.log(data.toString());
+  });
+
+  runTest.stderr.on('data', (data: string | Buffer) => {
+    console.log(data.toString());
+  });
+
+  runTest.on('error', (error: Error) => {
+    console.log(error.message);
+  });
 });
