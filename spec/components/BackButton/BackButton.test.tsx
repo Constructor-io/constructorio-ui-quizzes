@@ -23,7 +23,7 @@ describe(`${BackButton.name} client`, () => {
     it('executes callback on click', () => {
       render(<Subject />);
       fireEvent.click(screen.getByRole('button', { name: 'Previous' }));
-      expect(onPreviousMock).not.toHaveBeenCalled();
+      expect(onPreviousMock).toHaveBeenCalled();
     });
   });
 
