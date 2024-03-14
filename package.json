@@ -58,7 +58,7 @@
     "verify-node-version": "chmod +x ./scripts/verify-node-version.sh && ./scripts/verify-node-version.sh",
     "preversion": "node ./src/generateVersion.js",
     "version": "npm run preversion && npm run verify-node-version && npm run build-storybook-docs && git add -u ./docs && git add ./docs/* && git add ./src/version.ts && npm run compile",
-    "compile": "node ./src/generateVersion.js && rm -rf lib && tsc -p tsconfig.build.json && tsc -p tsconfig-cjs.json && npm run copy-styles && vite build",
+    "compile": "node ./src/generateVersion.js && rm -rf lib && tsc -p tsconfig-mjs.json && tsc -p tsconfig-cjs.json && npm run copy-styles && vite build",
     "check-license": "license-checker --production --onlyAllow 'Apache-2.0;BSD-3-Clause;MIT;0BSD;BSD-2-Clause' --excludePackages 'picocolors@1.0.0'"
   },
   "peerDependencies": {
