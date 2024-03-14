@@ -2,4 +2,4 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 npm run lint
-npx ts-node scripts/run-tests.ts
+npm run test -- --coverage --changedSince=main
