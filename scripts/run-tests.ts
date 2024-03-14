@@ -81,7 +81,11 @@ getAllChangedFiles().then((files) => {
   if (!files.length) {
     exit(0);
   }
-  const runTest = spawn(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', ['run', 'test']);
+  const runTest = spawn(
+    /^win/.test(process.platform) ? 'npm.cmd' : 'npm',
+    ['run', 'test', '--', '--coverage', files.join(' ')],
+    { shell: true }
+  );
 
   runTest.stdout.on('data', (data: string | Buffer) => {
     console.log(data.toString());
