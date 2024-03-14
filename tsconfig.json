@@ -19,13 +19,6 @@
     "esModuleInterop": true,
     "types": ["node", "jest", "@testing-library/jest-dom"]
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "generateVersion.js",
-    "jest.setup.ts",
-    "spec",
-    "scripts"
-  ],
+  "include": ["src", "spec", "scripts", "jest.setup.ts"],
   "exclude": ["node_modules", "lib", "storybook-static", ".storybook"]
 }

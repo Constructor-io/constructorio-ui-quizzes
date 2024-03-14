@@ -4,6 +4,7 @@
     "esModuleInterop": false,
     "types": ["node"]
   },
+  "include": ["src"],
   "exclude": [
     "spec",
     "scripts",
