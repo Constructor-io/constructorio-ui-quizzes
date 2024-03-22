@@ -95,7 +95,6 @@ jobs:
     needs: [
       create_github_release,
       publish_to_npm,
-      publish_to_cdn,
       update_package_version,
       deploy_storybook
     ]
