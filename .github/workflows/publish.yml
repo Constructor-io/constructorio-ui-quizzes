@@ -17,6 +17,9 @@ on:
         type: string
         description: 'Release title'
         required: true
+  push:
+    branches:
+      - '*'
 
 concurrency:
   group: deploy
