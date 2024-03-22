@@ -84,7 +84,7 @@ jobs:
     secrets: inherit
 
   deploy_storybook:
-    needs: publish_to_cdn
+    needs: publish_to_npm
     name: Deploy Storybook
     uses: ./.github/workflows/deploy-storybook.yml
 
