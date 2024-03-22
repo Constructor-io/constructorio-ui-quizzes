@@ -134,3 +134,6 @@ build
 
 # lib folder
 lib
+
+# docs folder
+docs

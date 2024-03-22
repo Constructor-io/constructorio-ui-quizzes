@@ -1,0 +1,72 @@
+
+name: 'Publish: Publish to NPM'
+
+on:
+  workflow_call:
+    inputs:
+      version:
+        description: 'The version to publish'
+        required: true
+        type: string
+
+  # This workflow is intended to be called from the primary publish workflow
+  # automatically. The manual trigger is maintained for partially failed workflows
+  # or edge cases that require this be run independently.
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'The version to publish.'
+        required: true
+        type: string
+  
+jobs:
+  publish-to-npm:
+    name: Publish to NPM
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          
+      - name: Remove version prefix
+        uses: ./.github/actions/remove-version-prefix
+        id: version
+        with:
+          version: ${{ inputs.version }}
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.12.x
+          registry-url: https://registry.npmjs.org/
+          scope: '@constructorio'
+          token: ${{ secrets.NPM_TOKEN }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build compiled package for publishing
+        uses: "./.github/actions/compile"
+        with: 
+          version: ${{ inputs.version }}
+
+      - name: Update package.json version field
+        id: update-version
+        run: |
+          # updates the package.json version field
+          jq --arg new_version "${{ steps.version.outputs.without_prefix }}" '.version = $new_version' package.json > tmp.json && mv tmp.json package.json
+          
+          echo "new-version=$new_version" >> $GITHUB_OUTPUT
+
+      - name: Publish to NPM
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Notify Slack about new publish to NPM
+        uses: ravsamhq/notify-slack-action@bca2d7f5660b833a27bda4f6b8bef389ebfefd25 # v2
+        with:
+          notification_title: "☁️ New constructor-ui-quizzes release published to npm at version ${{ steps.update-version.outputs.new-version }}"
+          status: ${{ job.status }}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
