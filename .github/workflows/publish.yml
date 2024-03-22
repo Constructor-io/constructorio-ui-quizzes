@@ -1,26 +1,22 @@
 name: Publish
 
-# on:
-#   # This allows us to run this workflow manually from the Actions tab
-#   workflow_dispatch:
-#     inputs:
-#       version-strategy:
-#         type: choice
-#         description: 'Version strategy'
-#         required: true
-#         options:
-#             - 'patch'
-#             - 'minor'
-#             - 'major'
-#         default: patch
-#       title:
-#         type: string
-#         description: 'Release title'
-#         required: true
-# on:
-#   push:
-#     branches:
-#       - '*'
+on:
+  # This allows us to run this workflow manually from the Actions tab
+  workflow_dispatch:
+    inputs:
+      version-strategy:
+        type: choice
+        description: 'Version strategy'
+        required: true
+        options:
+            - 'patch'
+            - 'minor'
+            - 'major'
+        default: patch
+      title:
+        type: string
+        description: 'Release title'
+        required: true
 
 concurrency:
   group: deploy
