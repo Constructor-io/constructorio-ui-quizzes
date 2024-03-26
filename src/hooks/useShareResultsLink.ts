@@ -1,6 +1,10 @@
 import { QuizReturnState } from '../types';
 
 export default function useShareResultsLink(quizState: QuizReturnState['quiz']) {
+  if (typeof window === 'undefined') {
+    return '';
+  }
+
   const urlObj = new URL(window.location.href);
   const existingParams = urlObj.searchParams;
 
