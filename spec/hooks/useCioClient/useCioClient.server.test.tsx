@@ -1,15 +1,15 @@
-import useCioClient from '../../src/hooks/useCioClient';
-import { getCioClient } from '../../src/services';
-import { renderHookServerSide } from '../__tests__/utils.server';
+import useCioClient from '../../../src/hooks/useCioClient';
+import { getCioClient } from '../../../src/services';
+import { renderHookServerSide } from '../../__tests__/utils.server';
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
 
-jest.mock('../../src/services', () => ({
+jest.mock('../../../src/services', () => ({
   getCioClient: jest.fn(),
 }));
 
 const apiKey = 'xx';
 
-describe('Testing Hook on the server: useCioClient', () => {
+describe('Testing Hook (server): useCioClient', () => {
   beforeEach(() => {
     const spy = jest.spyOn(console, 'error');
     spy.mockImplementation(() => {});

@@ -1,13 +1,13 @@
-import { render, renderHook } from '@testing-library/react';
-import useCioClient from '../../src/hooks/useCioClient';
-import { getCioClient } from '../../src/services';
+import { renderHook } from '@testing-library/react';
+import useCioClient from '../../../src/hooks/useCioClient';
+import { getCioClient } from '../../../src/services';
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
 
-jest.mock('../../src/services', () => ({
+jest.mock('../../../src/services', () => ({
   getCioClient: jest.fn(),
 }));
 
-describe('Testing Hook on the client side: useCioClient', () => {
+describe('Testing Hook (client): useCioClient', () => {
   it('throws an error when neither apiKey nor cioJsClient is provided', () => {
     expect(() =>
       renderHook(() => useCioClient({}), {
