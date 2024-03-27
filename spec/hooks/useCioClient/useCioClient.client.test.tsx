@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react';
+import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
 import useCioClient from '../../../src/hooks/useCioClient';
 import { getCioClient } from '../../../src/services';
-import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
 
 jest.mock('../../../src/services', () => ({
   getCioClient: jest.fn(),

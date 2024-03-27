@@ -1,7 +1,7 @@
+import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
 import useCioClient from '../../../src/hooks/useCioClient';
 import { getCioClient } from '../../../src/services';
 import { renderHookServerSide } from '../../__tests__/utils.server';
-import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
 
 jest.mock('../../../src/services', () => ({
   getCioClient: jest.fn(),
@@ -44,7 +44,6 @@ describe('Testing Hook (server): useCioClient', () => {
   });
 
   it('calls getCioClient with apiKey if cioJsClient is not provided', () => {
-    const apiKey = 'test-api-key';
     const mockCioClientInstance = {};
 
     (getCioClient as jest.Mock).mockImplementation(() => mockCioClientInstance);

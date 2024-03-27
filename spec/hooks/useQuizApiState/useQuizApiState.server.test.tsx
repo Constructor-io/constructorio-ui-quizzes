@@ -16,7 +16,7 @@ jest.mock('../../../src/services', () => ({
 }));
 
 describe('useQuizApiState - Server', () => {
-  it('handles server environment gracefully', () => {
+  it('handles server environment', () => {
     const quizOptions = { quizId: '123', quizVersionId: 'initialVersion', resultsPageOptions: {} };
     const cioClient = new ConstructorIOClient({
       apiKey: 'testApiKey',
@@ -43,13 +43,7 @@ describe('useQuizApiState - Server', () => {
             dispatchLocalState
           ),
         {
-          initialProps: {
-            quizOptions,
-            cioClient,
-            quizLocalState,
-            skipToResults,
-            dispatchLocalState,
-          },
+          initialProps: {},
         }
       );
     }).not.toThrow();

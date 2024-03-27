@@ -15,6 +15,7 @@ describe('Testing Hook (server): useConsoleErrors', () => {
 
     renderHookServerSide(() => useConsoleErrors(quizOptions), { initialProps: quizOptions });
 
+    // eslint-disable-next-line no-console
     expect(console.error).not.toHaveBeenCalled();
   });
 });
