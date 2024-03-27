@@ -21,6 +21,7 @@ describe('Testing Hook (client): useQueryParams', () => {
 
   it('parses query parameters correctly', () => {
     const { result } = renderHook(() => useQueryParams());
+
     expect(result.current.queryItems).toEqual(['item1', 'item2']);
     expect(result.current.queryAttributes).toEqual(['attr1', 'attr2']);
     expect(result.current.isSharedResultsQuery).toBe(true);
