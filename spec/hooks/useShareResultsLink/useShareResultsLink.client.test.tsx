@@ -1,6 +1,6 @@
+import { renderHook } from '@testing-library/react';
 import { QuizReturnState } from '../../../src/types';
 
-import { renderHook } from '@testing-library/react';
 import useShareResultsLink from '../../../src/hooks/useShareResultsLink';
 
 describe('Testing Hook (client): useShareResultsLink', () => {

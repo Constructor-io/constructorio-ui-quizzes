@@ -16,7 +16,7 @@ jest.mock('../../../src/services', () => ({
   }),
 }));
 
-describe('useQuizApiState - Client', () => {
+describe('Testing Hook (client): useQuizApiState', () => {
   (getQuizResults as jest.Mock).mockResolvedValue({
     quiz_selected_options: [
       { has_attribute: true, value: 'option1' },
