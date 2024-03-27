@@ -33,7 +33,7 @@ describe('useQuizApiState - Server', () => {
     const dispatchLocalState = jest.fn();
 
     expect(() => {
-      const { result } = renderHookServerSide(
+      renderHookServerSide(
         () =>
           useQuizApiState(
             quizOptions,
