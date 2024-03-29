@@ -3,7 +3,7 @@ import { QuizReturnState } from '../../../src/types';
 import { renderHookServerSide } from '../../__tests__/utils.server';
 import useShareResultsLink from '../../../src/hooks/useShareResultsLink';
 
-describe('useShareResultsLink - Server', () => {
+describe('Testing Hook (server): useShareResultsLink', () => {
   it('handles server environment', () => {
     const quizState = {
       results: {

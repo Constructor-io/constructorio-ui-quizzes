@@ -122,8 +122,11 @@ export function isFunction(fn): boolean {
 }
 
 export const getStateFromSessionStorage = (quizStateKey: string): QuizLocalReducerState | null => {
-  const state = window?.sessionStorage?.getItem(quizStateKey);
+  if (typeof window === 'undefined') {
+    return null;
+  }
 
+  const state = window?.sessionStorage?.getItem(quizStateKey);
   if (state) {
     return JSON.parse(state);
   }
