@@ -8,7 +8,6 @@ const mockGetItem = jest.fn();
 
 describe('Testing Hook (client): useSessionStorageState', () => {
   beforeAll(() => {
-    // Define sessionStorage mocks
     Object.defineProperty(window, 'sessionStorage', {
       value: {
         setItem: mockSetItem,
