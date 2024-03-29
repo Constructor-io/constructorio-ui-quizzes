@@ -1,4 +1,3 @@
-import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
 import useCioClient from '../../../src/hooks/useCioClient';
 import { getCioClient } from '../../../src/services';
 import { renderHookServerSide } from '../../__tests__/utils.server';
@@ -25,22 +24,6 @@ describe('Testing Hook (server): useCioClient', () => {
         initialProps: {},
       })
     ).toThrow('Either apiKey or cioJsClient is required');
-  });
-
-  it('uses provided cioJsClient without calling getCioClient', () => {
-    const mockClient = { tracker: () => {} } as unknown as ConstructorIOClient;
-    const { result } = renderHookServerSide(
-      () => useCioClient({ cioJsClient: mockClient, apiKey }),
-      {
-        initialProps: {
-          cioJsClient: mockClient,
-          apiKey,
-        },
-      }
-    );
-
-    expect(result).toBe(mockClient);
-    expect(getCioClient).not.toHaveBeenCalled();
   });
 
   it('calls getCioClient with apiKey if cioJsClient is not provided', () => {

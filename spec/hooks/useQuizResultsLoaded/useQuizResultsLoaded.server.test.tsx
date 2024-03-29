@@ -1,4 +1,4 @@
-import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
+import { mockConstructorIOClient } from '../../__tests__/utils';
 import { renderHookServerSide } from '../../__tests__/utils.server';
 import useQuizResultsLoaded from '../../../src/hooks/useQuizEvents/useQuizResultsLoaded';
 import { QuizAPIReducerState } from '../../../src/components/CioQuiz/quizApiReducer';
@@ -8,11 +8,6 @@ jest.mock('../../../src/services', () => ({
 }));
 
 describe('Testing Hook (server): useQuizResultsLoaded', () => {
-  const cioClientMock = new ConstructorIOClient({
-    apiKey: 'apiKey',
-    sessionId: 123,
-    clientId: '123',
-  });
   const quizApiStateMock = {
     quizResults: {
       response: {
@@ -25,7 +20,8 @@ describe('Testing Hook (server): useQuizResultsLoaded', () => {
   it('initializes without throwing errors', () => {
     const executeHook = () =>
       renderHookServerSide(
-        () => useQuizResultsLoaded(cioClientMock, quizApiStateMock, onQuizResultsLoadedMock),
+        () =>
+          useQuizResultsLoaded(mockConstructorIOClient, quizApiStateMock, onQuizResultsLoadedMock),
         { initialProps: {} }
       );
 

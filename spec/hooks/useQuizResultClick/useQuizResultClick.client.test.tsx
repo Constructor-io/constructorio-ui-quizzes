@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
+import { mockConstructorIOClient } from '../../__tests__/utils';
 import { trackQuizResultClick } from '../../../src/services';
 import useQuizResultClick from '../../../src/hooks/useQuizEvents/useQuizResultClick';
 import { QuizAPIReducerState } from '../../../src/components/CioQuiz/quizApiReducer';
@@ -10,7 +10,6 @@ jest.mock('../../../src/services', () => ({
 
 describe('Testing Hook (client): useQuizResultClick', () => {
   it('calls trackQuizResultClick and onQuizResultClick correctly', () => {
-    const cioClientMock = new ConstructorIOClient({ apiKey: 'apiKey' });
     const quizApiStateMock = {
       quizResults: { results: [{ item_name: 'Test Item' }] },
     } as unknown as QuizAPIReducerState;
@@ -19,7 +18,7 @@ describe('Testing Hook (client): useQuizResultClick', () => {
     const positionMock = 1;
 
     const { result } = renderHook(() =>
-      useQuizResultClick(cioClientMock, quizApiStateMock, onQuizResultClickMock)
+      useQuizResultClick(mockConstructorIOClient, quizApiStateMock, onQuizResultClickMock)
     );
 
     act(() => {
@@ -27,7 +26,7 @@ describe('Testing Hook (client): useQuizResultClick', () => {
     });
 
     expect(trackQuizResultClick).toHaveBeenCalledWith(
-      cioClientMock,
+      mockConstructorIOClient,
       quizApiStateMock.quizResults,
       resultMock,
       positionMock

@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react';
-import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
+import { mockConstructorIOClient } from '../../__tests__/utils';
 import useCioClient from '../../../src/hooks/useCioClient';
 import { getCioClient } from '../../../src/services';
 
@@ -17,10 +17,9 @@ describe('Testing Hook (client): useCioClient', () => {
   });
 
   it('uses provided cioJsClient without calling getCioClient', () => {
-    const mockClient = { tracker: () => {} } as unknown as ConstructorIOClient;
-    const { result } = renderHook(() => useCioClient({ cioJsClient: mockClient }));
+    const { result } = renderHook(() => useCioClient({ cioJsClient: mockConstructorIOClient }));
 
-    expect(result.current).toBe(mockClient);
+    expect(result.current).toBe(mockConstructorIOClient);
     expect(getCioClient).not.toHaveBeenCalled();
   });
 

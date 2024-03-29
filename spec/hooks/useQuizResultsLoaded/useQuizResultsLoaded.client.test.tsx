@@ -1,5 +1,5 @@
 import { renderHook, waitFor } from '@testing-library/react';
-import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
+import { mockConstructorIOClient } from '../../__tests__/utils';
 import { trackQuizResultsLoaded } from '../../../src/services';
 import useQuizResultsLoaded from '../../../src/hooks/useQuizEvents/useQuizResultsLoaded';
 import { QuizAPIReducerState } from '../../../src/components/CioQuiz/quizApiReducer';
@@ -9,7 +9,6 @@ jest.mock('../../../src/services', () => ({
 }));
 
 describe('Testing Hook (client): useQuizResultsLoaded', () => {
-  const cioClientMock = new ConstructorIOClient({ apiKey: 'fake' });
   const quizApiStateMock = {
     quizResults: {
       response: {
@@ -21,12 +20,12 @@ describe('Testing Hook (client): useQuizResultsLoaded', () => {
 
   it('calls trackQuizResultsLoaded and onQuizResultsLoaded correctly', async () => {
     renderHook(() =>
-      useQuizResultsLoaded(cioClientMock, quizApiStateMock, onQuizResultsLoadedMock)
+      useQuizResultsLoaded(mockConstructorIOClient, quizApiStateMock, onQuizResultsLoadedMock)
     );
 
     await waitFor(() => {
       expect(trackQuizResultsLoaded).toHaveBeenCalledWith(
-        cioClientMock,
+        mockConstructorIOClient,
         quizApiStateMock.quizResults
       );
     });

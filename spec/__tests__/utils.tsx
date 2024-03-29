@@ -16,7 +16,9 @@ class MockConstructorIO extends ConstructorIO {
 }
 
 export const mockConstructorIOClient =
-  typeof window !== 'undefined' ? new MockConstructorIO({ apiKey: DEMO_API_KEY }) : undefined;
+  typeof window !== 'undefined'
+    ? new MockConstructorIO({ apiKey: DEMO_API_KEY })
+    : (undefined as unknown as ConstructorIO);
 
 export function withContextWrapper({
   contextMocks = {},

@@ -1,5 +1,5 @@
 import { renderHook, waitFor } from '@testing-library/react';
-import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
+import { mockConstructorIOClient } from '../../__tests__/utils';
 import useQuizApiState from '../../../src/hooks/useQuizState/useQuizApiState';
 import { getQuizResults } from '../../../src/services';
 
@@ -26,7 +26,6 @@ describe('Testing Hook (client): useQuizApiState', () => {
 
   it('executes quiz flow correctly', async () => {
     const quizOptions = { quizId: '123', quizVersionId: 'initialVersion', resultsPageOptions: {} };
-    const cioClient = new ConstructorIOClient({ apiKey: 'testApiKey' });
     const quizLocalState = {
       answers: [],
       answerInputs: {},
@@ -37,7 +36,13 @@ describe('Testing Hook (client): useQuizApiState', () => {
     const dispatchLocalState = jest.fn();
 
     const { result } = renderHook(() =>
-      useQuizApiState(quizOptions, cioClient, quizLocalState, skipToResults, dispatchLocalState)
+      useQuizApiState(
+        quizOptions,
+        mockConstructorIOClient,
+        quizLocalState,
+        skipToResults,
+        dispatchLocalState
+      )
     );
 
     expect(result.current.quizApiState.quizRequestState).toBe('LOADING');

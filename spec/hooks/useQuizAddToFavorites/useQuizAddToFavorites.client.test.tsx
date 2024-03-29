@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
+import { mockConstructorIOClient } from '../../__tests__/utils';
 import useQuizAddToFavorites from '../../../src/hooks/useQuizEvents/useQuizAddToFavorites';
 import { trackQuizConversion } from '../../../src/services';
 import { QuizAPIReducerState } from '../../../src/components/CioQuiz/quizApiReducer';
@@ -10,7 +10,6 @@ jest.mock('../../../src/services', () => ({
 
 describe('Testing Hook (client): useQueryParams', () => {
   it('calls trackQuizConversion and custom callback correctly', () => {
-    const cioClientMock = new ConstructorIOClient({ apiKey: 'fake' });
     const quizApiStateMock = { quizResults: { some: 'results' } } as unknown as QuizAPIReducerState;
     const onAddToFavoritesClickMock = jest.fn();
     const resultMock = { item_id: '123' };
@@ -18,7 +17,7 @@ describe('Testing Hook (client): useQueryParams', () => {
     const eventMock = { preventDefault: jest.fn() };
 
     const { result } = renderHook(() =>
-      useQuizAddToFavorites(cioClientMock, quizApiStateMock, onAddToFavoritesClickMock)
+      useQuizAddToFavorites(mockConstructorIOClient, quizApiStateMock, onAddToFavoritesClickMock)
     );
 
     act(() => {
@@ -28,7 +27,7 @@ describe('Testing Hook (client): useQueryParams', () => {
     expect(eventMock.preventDefault).toHaveBeenCalled();
 
     expect(trackQuizConversion).toHaveBeenCalledWith(
-      cioClientMock,
+      mockConstructorIOClient,
       quizApiStateMock.quizResults,
       resultMock,
       priceMock,

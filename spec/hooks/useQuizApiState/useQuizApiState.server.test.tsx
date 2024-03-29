@@ -1,4 +1,4 @@
-import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
+import { mockConstructorIOClient } from '../../__tests__/utils';
 import { renderHookServerSide } from '../../__tests__/utils.server';
 import useQuizApiState from '../../../src/hooks/useQuizState/useQuizApiState';
 
@@ -18,11 +18,6 @@ jest.mock('../../../src/services', () => ({
 describe('useQuizApiState - Server', () => {
   it('handles server environment', () => {
     const quizOptions = { quizId: '123', quizVersionId: 'initialVersion', resultsPageOptions: {} };
-    const cioClient = new ConstructorIOClient({
-      apiKey: 'testApiKey',
-      sessionId: 12345,
-      clientId: '12345',
-    });
     const quizLocalState = {
       answers: [],
       answerInputs: {},
@@ -37,7 +32,7 @@ describe('useQuizApiState - Server', () => {
         () =>
           useQuizApiState(
             quizOptions,
-            cioClient,
+            mockConstructorIOClient,
             quizLocalState,
             skipToResults,
             dispatchLocalState
