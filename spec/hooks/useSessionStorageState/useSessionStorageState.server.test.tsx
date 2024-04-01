@@ -45,7 +45,7 @@ describe('Testing Hook (server): useSessionStorageState', () => {
 
     expect(result).toMatchObject({
       skipToResults: false,
-      quizSessionStorageStateKey: 'testKey',
+      quizSessionStorageStateKey: QUIZ_SESSION_KEY,
     });
 
     expect(typeof result.hasSessionStorageState).toBe('function');
