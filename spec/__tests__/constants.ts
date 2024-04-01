@@ -23,3 +23,9 @@ export const defaultContextMocks = {
 };
 
 export const DEMO_API_KEY = 'DEMO_API_KEY';
+export const QUIZ_SESSION_ID = 'QUIZ_SESSION_ID';
+export const QUIZ_SESSION_NAME = 'QUIZ_SESSION_NAME';
+export const QUIZ_API_KEY = 'QUIZ_API_KEY';
+export const QUIZ_ID = 'QUIZ_ID';
+export const QUIZ_VERSION_ID = 'QUIZ_ID';
+export const QUIZ_SESSION_KEY = 'QUIZ_SESSION_KEY';

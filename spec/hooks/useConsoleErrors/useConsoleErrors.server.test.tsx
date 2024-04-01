@@ -1,5 +1,6 @@
 import { renderHookServerSide } from '../../__tests__/utils.server';
 import useConsoleErrors from '../../../src/hooks/useConsoleErrors';
+import { QUIZ_ID } from '../../__tests__/constants';
 
 describe('Testing Hook (server): useConsoleErrors', () => {
   beforeEach(() => {
@@ -11,7 +12,7 @@ describe('Testing Hook (server): useConsoleErrors', () => {
   });
 
   it('initially does not throw or log errors', () => {
-    const quizOptions = { quizId: 'test-quiz-id', callbacks: { onAddToCartClick: () => {} } };
+    const quizOptions = { quizId: QUIZ_ID, callbacks: { onAddToCartClick: () => {} } };
 
     renderHookServerSide(() => useConsoleErrors(quizOptions), { initialProps: quizOptions });
 

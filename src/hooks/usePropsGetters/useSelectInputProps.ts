@@ -89,6 +89,7 @@ export default function useSelectInputProps(
   // Go to next question only every time answerInputs (answers input state) changes...
   // and it's a singleSelectQuestion and user has just clicked on an option
   useEffect(() => {
+    console.log(currentQuestionData?.type, singleSelectClicked.current, 'CHECK');
     if (currentQuestionData?.type === 'single' && singleSelectClicked.current) {
       nextQuestion();
     }

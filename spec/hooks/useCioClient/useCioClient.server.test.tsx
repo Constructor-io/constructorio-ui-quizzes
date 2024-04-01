@@ -1,12 +1,11 @@
 import useCioClient from '../../../src/hooks/useCioClient';
 import { getCioClient } from '../../../src/services';
 import { renderHookServerSide } from '../../__tests__/utils.server';
+import { DEMO_API_KEY } from '../../__tests__/constants';
 
 jest.mock('../../../src/services', () => ({
   getCioClient: jest.fn(),
 }));
-
-const apiKey = 'xx';
 
 describe('Testing Hook (server): useCioClient', () => {
   beforeEach(() => {
@@ -30,13 +29,13 @@ describe('Testing Hook (server): useCioClient', () => {
     const mockCioClientInstance = {};
 
     (getCioClient as jest.Mock).mockImplementation(() => mockCioClientInstance);
-    const { result } = renderHookServerSide(() => useCioClient({ apiKey }), {
+    const { result } = renderHookServerSide(() => useCioClient({ apiKey: DEMO_API_KEY }), {
       initialProps: {
-        apiKey,
+        apiKey: DEMO_API_KEY,
       },
     });
 
     expect(result).toBe(mockCioClientInstance);
-    expect(getCioClient).toHaveBeenCalledWith(apiKey);
+    expect(getCioClient).toHaveBeenCalledWith(DEMO_API_KEY);
   });
 });

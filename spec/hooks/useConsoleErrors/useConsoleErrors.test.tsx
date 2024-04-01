@@ -2,6 +2,7 @@
 import { renderHook } from '@testing-library/react';
 import useConsoleErrors from '../../../src/hooks/useConsoleErrors';
 import { IQuizProps } from '../../../src/types';
+import { QUIZ_ID } from '../../__tests__/constants';
 
 describe('Testing Hook (client): useConsoleErrors', () => {
   beforeEach(() => {
@@ -20,7 +21,7 @@ describe('Testing Hook (client): useConsoleErrors', () => {
   });
 
   it('logs error if onAddToCartClick is missing', () => {
-    const quizOptions = { quizId: '123' };
+    const quizOptions = { quizId: QUIZ_ID };
     renderHook(() => useConsoleErrors(quizOptions));
 
     expect(console.error).toHaveBeenCalledWith(

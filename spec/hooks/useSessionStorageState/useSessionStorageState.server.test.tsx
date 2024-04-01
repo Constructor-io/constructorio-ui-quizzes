@@ -2,6 +2,7 @@ import { renderHookServerSide } from '../../__tests__/utils.server';
 import useSessionStorageState from '../../../src/hooks/useQuizState/useSessionStorageState';
 import { QuizLocalReducerState } from '../../../src/components/CioQuiz/quizLocalReducer';
 import { QuestionTypes } from '../../../src/components/CioQuiz/actions';
+import { QUIZ_SESSION_ID, QUIZ_VERSION_ID, QUIZ_SESSION_KEY } from '../../__tests__/constants';
 
 describe('Testing Hook (server): useSessionStorageState', () => {
   const mockState: QuizLocalReducerState = {
@@ -19,14 +20,14 @@ describe('Testing Hook (server): useSessionStorageState', () => {
       },
     },
     isQuizCompleted: false,
-    quizVersionId: 'version1',
-    quizSessionId: 'session1',
+    quizVersionId: QUIZ_VERSION_ID,
+    quizSessionId: QUIZ_SESSION_ID,
   };
 
   it('does not throw when rendered server-side', () => {
     expect(() => {
       renderHookServerSide(
-        () => useSessionStorageState(mockState, { sessionStateKey: 'testKey' }, false),
+        () => useSessionStorageState(mockState, { sessionStateKey: QUIZ_SESSION_KEY }, false),
         {
           initialProps: {},
         }
@@ -36,7 +37,7 @@ describe('Testing Hook (server): useSessionStorageState', () => {
 
   it('return correct data on server-side when enableHydration equals false', () => {
     const { result } = renderHookServerSide(
-      () => useSessionStorageState(mockState, { sessionStateKey: 'testKey' }, false),
+      () => useSessionStorageState(mockState, { sessionStateKey: QUIZ_SESSION_KEY }, false),
       {
         initialProps: {},
       }

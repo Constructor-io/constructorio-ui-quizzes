@@ -2,12 +2,13 @@ import { renderHook, waitFor } from '@testing-library/react';
 import { mockConstructorIOClient } from '../../__tests__/utils';
 import useQuizApiState from '../../../src/hooks/useQuizState/useQuizApiState';
 import { getQuizResults } from '../../../src/services';
+import { QUIZ_SESSION_ID, QUIZ_VERSION_ID, QUIZ_ID } from '../../__tests__/constants';
 
 jest.mock('../../../src/services', () => ({
   getNextQuestion: jest.fn().mockResolvedValue({
     next_question: null,
-    quiz_session_id: 'mockSessionId',
-    quiz_version_id: 'mockVersionId',
+    quiz_session_id: QUIZ_SESSION_ID,
+    quiz_version_id: QUIZ_VERSION_ID,
   }),
   getQuizResults: jest.fn(),
   getBrowseResultsForItemIds: jest.fn(),
@@ -25,7 +26,7 @@ describe('Testing Hook (client): useQuizApiState', () => {
   });
 
   it('executes quiz flow correctly', async () => {
-    const quizOptions = { quizId: '123', quizVersionId: 'initialVersion', resultsPageOptions: {} };
+    const quizOptions = { quizId: QUIZ_ID, quizVersionId: QUIZ_VERSION_ID, resultsPageOptions: {} };
     const quizLocalState = {
       answers: [],
       answerInputs: {},
@@ -54,6 +55,7 @@ describe('Testing Hook (client): useQuizApiState', () => {
       'option1',
       'option2',
     ]);
+
     expect(result.current.quizApiState.resultsConfig).toEqual({});
     expect(result.current.quizApiState.quizRequestState).toBe('SUCCESS');
     expect(result.current.quizApiState.quizResults).toEqual({

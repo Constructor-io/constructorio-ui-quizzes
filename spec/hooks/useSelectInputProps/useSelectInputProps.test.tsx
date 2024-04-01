@@ -54,4 +54,10 @@ describe('Testing Hook (client): useSelectInputProps', () => {
 
     expect(quizAnswerChangedMock).toHaveBeenCalledWith([{ id: '2', value: 'Option 2' }]);
   });
+
+  it('does not advance to the next question for single select without selection', () => {
+    setupHook(currentQuestionData);
+
+    expect(nextQuestionMock).not.toHaveBeenCalled();
+  });
 });
