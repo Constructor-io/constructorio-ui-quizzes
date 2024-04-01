@@ -10,7 +10,7 @@ import {
   resetQuizSessionStorageState,
   getStateFromSessionStorage,
   isFunction,
-} from '../../../src/utils';
+} from '../../src/utils';
 
 describe('renderImages', () => {
   it('renders primary image if provided', () => {

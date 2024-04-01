@@ -9,11 +9,9 @@ jest.mock('../../../src/services', () => ({
 
 describe('Testing Hook (client): useCioClient', () => {
   it('throws an error when neither apiKey nor cioJsClient is provided', () => {
-    expect(() =>
-      renderHook(() => useCioClient({}), {
-        initialProps: {},
-      })
-    ).toThrow('Either apiKey or cioJsClient is required');
+    expect(() => renderHook(() => useCioClient({}))).toThrow(
+      'Either apiKey or cioJsClient is required'
+    );
   });
 
   it('uses provided cioJsClient without calling getCioClient', () => {
