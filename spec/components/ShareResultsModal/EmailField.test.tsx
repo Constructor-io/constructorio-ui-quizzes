@@ -36,9 +36,7 @@ describe(`${EmailField.name} client`, () => {
   });
 
   it('form handling on invalid email', async () => {
-    const onSubmitSpy = jest.fn();
-    onSubmitSpy.mockRejectedValueOnce(new Error());
-    render(<EmailField onSubmit={onSubmitSpy} />);
+    render(<EmailField {...props} />);
     fireEvent.change(screen.getByRole('textbox'), { target: { value: 'random text' } });
     // eslint-disable-next-line testing-library/no-unnecessary-act
     await act(async () => {
