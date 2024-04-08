@@ -13,6 +13,10 @@ export const renderImages = (images: Partial<QuestionImages>, cssClasses?: strin
   } = images;
 
   if (primaryUrl) {
+    if (typeof window === 'undefined') {
+      return null;
+    }
+
     const windowWidth = window.innerWidth;
     let src = primaryUrl;
     let alt = primaryAlt || '';

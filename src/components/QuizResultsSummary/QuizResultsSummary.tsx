@@ -50,7 +50,7 @@ export default function QuizResultsSummary({
     lastSeparator
   );
 
-  if (!isActiveSummary) return null;
+  if (!isActiveSummary || !matchedOptions.length) return null;
 
   return (
     <p className='cio-results-explanation'>
