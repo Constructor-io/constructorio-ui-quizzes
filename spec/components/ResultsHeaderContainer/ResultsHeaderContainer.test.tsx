@@ -30,6 +30,21 @@ describe(`${ResultsHeaderContainer.name} client`, () => {
     expect(screen.queryByText('Desktop title')).not.toBeInTheDocument();
   });
 
+  it('when text is nullish', () => {
+    render(
+      <ResultsHeaderContainer
+        resultsConfig={factories.quizResultsConfig.build({
+          desktop: {
+            description: { text: undefined },
+            title: { text: undefined },
+          },
+        })}
+      />
+    );
+    expect(screen.queryByText('Here are your results')).not.toBeInTheDocument();
+    expect(screen.queryByText('Desktop title')).not.toBeInTheDocument();
+  });
+
   it('renders default when config is null', () => {
     render(<ResultsHeaderContainer resultsConfig={null} />);
     expect(screen.getByText('Here are your results')).toBeInTheDocument();
