@@ -1,5 +1,5 @@
-import { renderHookServerSide } from '../../__tests__/utils.server';
-import useQuizLocalState from '../../../src/hooks/useQuizState/useQuizLocalState';
+import { renderHookServerSide } from '../../../__tests__/utils.server';
+import useQuizLocalState from '../../../../src/hooks/useQuizState/useQuizLocalState';
 
 describe('Testing Hook (server): useQuizLocalState', () => {
   it('handles server environment', () => {

@@ -1,8 +1,8 @@
-import { renderHookServerSide } from '../../__tests__/utils.server';
-import useSessionStorageState from '../../../src/hooks/useQuizState/useSessionStorageState';
-import { QuizLocalReducerState } from '../../../src/components/CioQuiz/quizLocalReducer';
-import { QuestionTypes } from '../../../src/components/CioQuiz/actions';
-import { QUIZ_SESSION_ID, QUIZ_VERSION_ID, QUIZ_SESSION_KEY } from '../../__tests__/constants';
+import { renderHookServerSide } from '../../../__tests__/utils.server';
+import useSessionStorageState from '../../../../src/hooks/useQuizState/useSessionStorageState';
+import { QuizLocalReducerState } from '../../../../src/components/CioQuiz/quizLocalReducer';
+import { QuestionTypes } from '../../../../src/components/CioQuiz/actions';
+import { QUIZ_SESSION_ID, QUIZ_VERSION_ID, QUIZ_SESSION_KEY } from '../../../__tests__/constants';
 
 describe('Testing Hook (server): useSessionStorageState', () => {
   const mockState: QuizLocalReducerState = {

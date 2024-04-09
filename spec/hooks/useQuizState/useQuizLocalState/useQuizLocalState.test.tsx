@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react';
-import useQuizLocalState from '../../../src/hooks/useQuizState/useQuizLocalState';
+import useQuizLocalState from '../../../../src/hooks/useQuizState/useQuizLocalState';
 
 describe('Testing Hook (client): useQuizLocalState', () => {
   it('handles client environment', () => {

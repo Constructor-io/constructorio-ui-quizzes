@@ -1,7 +1,7 @@
-import { mockConstructorIOClient } from '../../__tests__/utils';
-import { renderHookServerSide } from '../../__tests__/utils.server';
-import useQuizApiState from '../../../src/hooks/useQuizState/useQuizApiState';
-import { QUIZ_ID, QUIZ_VERSION_ID } from '../../__tests__/constants';
+import { mockConstructorIOClient } from '../../../__tests__/utils';
+import { renderHookServerSide } from '../../../__tests__/utils.server';
+import useQuizApiState from '../../../../src/hooks/useQuizState/useQuizApiState';
+import { QUIZ_ID, QUIZ_VERSION_ID } from '../../../__tests__/constants';
 
 jest.mock('../../../src/services', () => ({
   getNextQuestion: jest.fn().mockResolvedValue({

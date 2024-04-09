@@ -1,7 +1,7 @@
 import { renderHook, act } from '@testing-library/react';
-import useSessionStorageState from '../../../src/hooks/useQuizState/useSessionStorageState';
-import { QuizLocalReducerState } from '../../../src/components/CioQuiz/quizLocalReducer';
-import { QuestionTypes } from '../../../src/components/CioQuiz/actions';
+import useSessionStorageState from '../../../../src/hooks/useQuizState/useSessionStorageState';
+import { QuizLocalReducerState } from '../../../../src/components/CioQuiz/quizLocalReducer';
+import { QuestionTypes } from '../../../../src/components/CioQuiz/actions';
 
 const mockSetItem = jest.fn();
 const mockGetItem = jest.fn();
