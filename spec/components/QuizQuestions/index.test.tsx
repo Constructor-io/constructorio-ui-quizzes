@@ -109,9 +109,7 @@ describe(`${QuizQuestions.name} client`, () => {
       contextMocks: {
         getSelectInputProps: getSelectInputPropsMock,
         state: {
-          quiz: {
-            currentQuestion: undefined,
-          } as QuizReturnState['quiz'],
+          quiz: { currentQuestion: undefined } as QuizReturnState['quiz'],
         } as QuizContextValue['state'],
       },
     });

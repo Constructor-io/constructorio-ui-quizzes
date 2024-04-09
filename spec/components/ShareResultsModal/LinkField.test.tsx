@@ -11,9 +11,7 @@ describe(`${LinkField.name} client`, () => {
   const writeText = jest.fn();
 
   Object.assign(navigator, {
-    clipboard: {
-      writeText,
-    },
+    clipboard: { writeText },
   });
 
   it('renders the link area', () => {

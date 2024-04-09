@@ -19,9 +19,7 @@ describe(`${SelectTypeQuestion.name} client`, () => {
         getSelectInputProps: getSelectInputPropsMock,
         state: {
           quiz: {
-            currentQuestion: {
-              next_question: question,
-            } as CurrentQuestion,
+            currentQuestion: { next_question: question } as CurrentQuestion,
           } as QuizReturnState['quiz'],
         } as QuizContextValue['state'],
       },
@@ -44,9 +42,7 @@ describe(`${SelectTypeQuestion.name} client`, () => {
         getSelectInputProps: getSelectInputPropsMock,
         state: {
           quiz: {
-            currentQuestion: {
-              next_question: question,
-            } as CurrentQuestion,
+            currentQuestion: { next_question: question } as CurrentQuestion,
           } as QuizReturnState['quiz'],
         } as QuizContextValue['state'],
       },
@@ -91,9 +87,7 @@ describe(`${SelectTypeQuestion.name} client`, () => {
     const Subject = withContext(SelectTypeQuestion, {
       contextMocks: {
         state: {
-          quiz: {
-            currentQuestion: undefined,
-          } as QuizReturnState['quiz'],
+          quiz: { currentQuestion: undefined } as QuizReturnState['quiz'],
         } as QuizContextValue['state'],
       },
     });

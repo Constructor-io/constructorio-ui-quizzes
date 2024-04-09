@@ -14,9 +14,7 @@ describe(`${Results.name} client`, () => {
 
   const contextMocks: Partial<QuizContextValue> = {
     state: {
-      quiz: {
-        results: factories.quizResults.build(),
-      } as QuizReturnState['quiz'],
+      quiz: { results: factories.quizResults.build() } as QuizReturnState['quiz'],
     } as QuizContextValue['state'],
   };
 

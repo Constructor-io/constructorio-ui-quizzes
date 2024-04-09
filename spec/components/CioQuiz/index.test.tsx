@@ -19,12 +19,8 @@ describe(`${CioQuiz.name} client`, () => {
       onQuizSkipQuestion: jest.fn(),
       onQuizResultsLoaded: jest.fn(),
     },
-    questionsPageOptions: {
-      skipQuestionButtonText: 'Skip',
-    },
-    sessionStateOptions: {
-      showSessionModal: true,
-    },
+    questionsPageOptions: { skipQuestionButtonText: 'Skip' },
+    sessionStateOptions: { showSessionModal: true },
   };
 
   describe('loaded services with question', () => {
