@@ -4,7 +4,7 @@ import useQuizAddToFavorites from '../../../../src/hooks/useQuizEvents/useQuizAd
 import { trackQuizConversion } from '../../../../src/services';
 import { QuizAPIReducerState } from '../../../../src/components/CioQuiz/quizApiReducer';
 
-jest.mock('../../../src/services', () => ({
+jest.mock('../../../../src/services', () => ({
   trackQuizConversion: jest.fn(),
 }));
 

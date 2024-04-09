@@ -3,7 +3,7 @@ import useQuizSkipClick from '../../../../src/hooks/useQuizEvents/useQuizSkipCli
 import { QuizAPIReducerState } from '../../../../src/components/CioQuiz/quizApiReducer';
 import { QuizLocalReducerState } from '../../../../src/components/CioQuiz/quizLocalReducer';
 
-jest.mock('../../../src/services', () => ({
+jest.mock('../../../../src/services', () => ({
   trackQuizResultsLoaded: jest.fn(),
 }));
 

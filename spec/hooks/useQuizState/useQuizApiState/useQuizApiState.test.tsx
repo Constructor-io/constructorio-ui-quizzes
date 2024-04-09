@@ -4,7 +4,7 @@ import useQuizApiState from '../../../../src/hooks/useQuizState/useQuizApiState'
 import { getQuizResults } from '../../../../src/services';
 import { QUIZ_VERSION_ID, QUIZ_ID } from '../../../__tests__/constants';
 
-jest.mock('../../../src/services', () => ({
+jest.mock('../../../../src/services', () => ({
   getNextQuestion: jest.fn().mockResolvedValue({
     next_question: null,
     quiz_session_id: 'QUIZ_SESSION_ID',

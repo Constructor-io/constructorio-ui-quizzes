@@ -4,7 +4,7 @@ import { trackQuizResultClick } from '../../../../src/services';
 import useQuizResultClick from '../../../../src/hooks/useQuizEvents/useQuizResultClick';
 import { QuizAPIReducerState } from '../../../../src/components/CioQuiz/quizApiReducer';
 
-jest.mock('../../../src/services', () => ({
+jest.mock('../../../../src/services', () => ({
   trackQuizResultClick: jest.fn(),
 }));
 
