@@ -115,14 +115,14 @@ export const getQuestionTypes = (questionType?: `${QuestionTypes}`) => {
 export function getPreferredColorScheme() {
   let colorScheme = 'light';
   // Check if the dark-mode Media-Query matches
-  if (window.matchMedia('(prefers-color-scheme: dark)')?.matches) {
+  if (typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)')?.matches) {
     colorScheme = 'dark';
   }
   return colorScheme;
 }
 
 export function isFunction(fn): boolean {
-  return fn && typeof fn === 'function';
+  return !!(fn && typeof fn === 'function');
 }
 
 export const getStateFromSessionStorage = (quizStateKey: string): QuizLocalReducerState | null => {
