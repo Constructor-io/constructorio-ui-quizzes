@@ -65,4 +65,57 @@ describe('Testing Hook (client): useQuizApiState', () => {
       ],
     });
   });
+
+  it('sets loading state correctly around async operations', async () => {
+    const quizOptions = { quizId: QUIZ_ID, quizVersionId: QUIZ_VERSION_ID, resultsPageOptions: {} };
+    const quizLocalState = {
+      answers: [],
+      answerInputs: {},
+      prevAnswerInputs: {},
+      isQuizCompleted: false,
+    };
+    const skipToResults = false;
+    const dispatchLocalState = jest.fn();
+
+    const { result } = renderHook(() =>
+      useQuizApiState(
+        quizOptions,
+        mockConstructorIOClient,
+        quizLocalState,
+        skipToResults,
+        dispatchLocalState
+      )
+    );
+
+    expect(result.current.quizApiState.quizRequestState).toBe('LOADING');
+
+    await waitFor(() => expect(result.current.quizApiState.quizRequestState).not.toBe('LOADING'));
+  });
+
+  it('dispatches quiz results upon completion', async () => {
+    const quizOptions = { quizId: QUIZ_ID, quizVersionId: QUIZ_VERSION_ID, resultsPageOptions: {} };
+    const quizLocalState = {
+      answers: [['1']],
+      isQuizCompleted: true,
+      answerInputs: {},
+      prevAnswerInputs: {},
+    };
+    const skipToResults = true;
+    const dispatchLocalState = jest.fn();
+
+    const { result } = renderHook(() =>
+      useQuizApiState(
+        quizOptions,
+        mockConstructorIOClient,
+        quizLocalState,
+        skipToResults,
+        dispatchLocalState
+      )
+    );
+
+    await waitFor(() => expect(getQuizResults).toHaveBeenCalled());
+
+    expect(result.current.quizApiState.quizResults).toBeDefined();
+    expect(result.current.quizApiState.quizRequestState).toBe('SUCCESS');
+  });
 });
