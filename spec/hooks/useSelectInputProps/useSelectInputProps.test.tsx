@@ -66,4 +66,20 @@ describe('Testing Hook (client): useSelectInputProps', () => {
 
     expect(nextQuestionMock).not.toHaveBeenCalled();
   });
+
+  it('allows toggling options off in a multiple select question', () => {
+    currentQuestionData.type = 'multiple';
+    const { result } = setupHook(currentQuestionData);
+
+    act(() => {
+      result.current(currentQuestionData.options[0]).onClick(mockEvent);
+    });
+
+    act(() => {
+      result.current(currentQuestionData.options[0]).onClick(mockEvent);
+    });
+
+    expect(result.current(currentQuestionData.options[0]).className).not.toContain('selected');
+    expect(quizAnswerChangedMock).toHaveBeenCalledWith([]);
+  });
 });
