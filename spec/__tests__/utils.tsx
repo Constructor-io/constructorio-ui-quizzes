@@ -20,18 +20,6 @@ export const mockConstructorIOClient =
     ? new MockConstructorIO({ apiKey: DEMO_API_KEY })
     : (undefined as unknown as ConstructorIO);
 
-export function withContextWrapper({
-  contextMocks = {},
-}: {
-  contextMocks?: Partial<QuizContextValue>;
-}) {
-  const value = { cioClient: mockConstructorIOClient, ...defaultContextMocks, ...contextMocks };
-  function ContextWrapper({ children }: { children: React.ReactNode }) {
-    return <QuizContext.Provider value={value}>{children}</QuizContext.Provider>;
-  }
-  return ContextWrapper;
-}
-
 export function withContext<Props extends {}>(
   Component: React.ComponentType<Props>,
   {
