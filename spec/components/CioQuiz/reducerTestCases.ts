@@ -13,7 +13,7 @@ export const apiReducerCases = [
   {
     initialState: apiInitialState,
     action: { type: QuizAPIActionTypes.SET_IS_LOADING },
-    expectedState: {
+    expected: {
       quizRequestState: 'LOADING',
       quizCurrentQuestion: undefined,
       quizResults: undefined,
@@ -22,7 +22,7 @@ export const apiReducerCases = [
   {
     initialState: apiInitialState,
     action: { type: QuizAPIActionTypes.SET_IS_ERROR },
-    expectedState: {
+    expected: {
       quizRequestState: 'ERROR',
       quizCurrentQuestion: undefined,
       quizResults: undefined,
@@ -40,7 +40,7 @@ export const apiReducerCases = [
         },
       },
     },
-    expectedState: {
+    expected: {
       quizRequestState: 'SUCCESS',
       quizFirstQuestion: { next_question: question },
       quizCurrentQuestion: {
@@ -68,7 +68,7 @@ export const apiReducerCases = [
         },
       },
     },
-    expectedState: {
+    expected: {
       ...apiInitialState,
       quizRequestState: 'SUCCESS',
       quizResults: {
@@ -98,7 +98,7 @@ export const apiReducerCases = [
   {
     initialState: apiInitialState,
     action: { type: 'unknown' },
-    expectedState: apiInitialState,
+    expected: apiInitialState,
   },
   {
     initialState: apiInitialState,
@@ -108,7 +108,7 @@ export const apiReducerCases = [
         quizResults: results,
       },
     },
-    expectedState: {
+    expected: {
       ...apiInitialState,
       quizRequestState: 'SUCCESS',
       quizResults: results,
@@ -123,7 +123,7 @@ export const apiReducerCases = [
         quizResultsConfig: { results_config: factories.quizResultsConfig.build() },
       },
     },
-    expectedState: {
+    expected: {
       ...apiInitialState,
       resultsConfig: factories.quizResultsConfig.build(),
     },
@@ -133,7 +133,7 @@ export const apiReducerCases = [
     action: {
       type: QuizAPIActionTypes.SET_QUIZ_RESULTS_CONFIG_ERROR,
     },
-    expectedState: {
+    expected: {
       ...apiInitialState,
       resultsConfig: null,
     },
@@ -155,7 +155,7 @@ export const apiReducerCases = [
     action: {
       type: QuizAPIActionTypes.RESET_QUIZ,
     },
-    expectedState: apiInitialState,
+    expected: apiInitialState,
   },
 ];
 
@@ -169,7 +169,7 @@ export const localReducerCases = [
       },
     },
     initialState: localInitialState,
-    output: {
+    expected: {
       ...localInitialState,
       isQuizCompleted: false,
       answerInputs: {
@@ -189,7 +189,7 @@ export const localReducerCases = [
       },
     },
     initialState: localInitialState,
-    output: {
+    expected: {
       ...localInitialState,
       isQuizCompleted: false,
       answerInputs: {
@@ -209,7 +209,7 @@ export const localReducerCases = [
       },
     },
     initialState: localInitialState,
-    output: {
+    expected: {
       ...localInitialState,
       isQuizCompleted: false,
       answerInputs: {
@@ -229,7 +229,7 @@ export const localReducerCases = [
       },
     },
     initialState: localInitialState,
-    output: {
+    expected: {
       ...localInitialState,
       isQuizCompleted: false,
       answerInputs: {
@@ -261,7 +261,7 @@ export const localReducerCases = [
         isSelectQuestion: false,
       },
     },
-    output: {
+    expected: {
       ...localInitialState,
       isQuizCompleted: false,
       answers: [['true']],
@@ -300,7 +300,7 @@ export const localReducerCases = [
         isSelectQuestion: false,
       },
     },
-    output: {
+    expected: {
       ...localInitialState,
       isQuizCompleted: false,
       answers: [['seen']],
@@ -345,7 +345,7 @@ export const localReducerCases = [
         isSelectQuestion: false,
       },
     },
-    output: {
+    expected: {
       ...localInitialState,
       isQuizCompleted: false,
       answers: [[1]],
@@ -391,7 +391,7 @@ export const localReducerCases = [
         isSelectQuestion: false,
       },
     },
-    output: {
+    expected: {
       ...localInitialState,
       isQuizCompleted: false,
       answers: [[1, 2]],
@@ -430,7 +430,7 @@ export const localReducerCases = [
         isSelectQuestion: false,
       },
     },
-    output: {
+    expected: {
       ...localInitialState,
       isQuizCompleted: false,
       answers: [[]],
@@ -457,7 +457,7 @@ export const localReducerCases = [
         quizSessionId: 'quizSessionId',
       },
     },
-    output: {
+    expected: {
       ...localInitialState,
       isQuizCompleted: true,
     },
@@ -467,14 +467,14 @@ export const localReducerCases = [
     action: {
       type: QuestionTypes.Reset,
     },
-    output: localInitialState,
+    expected: localInitialState,
   },
   {
     initialState: localInitialState,
     action: {
       type: 'unknown',
     },
-    output: localInitialState,
+    expected: localInitialState,
   },
   {
     initialState: {
@@ -503,7 +503,7 @@ export const localReducerCases = [
         isSelectQuestion: false,
       },
     },
-    output: {
+    expected: {
       ...localInitialState,
       isQuizCompleted: false,
       answers: [[]],
@@ -543,7 +543,7 @@ export const localReducerCases = [
         isSelectQuestion: false,
       },
     },
-    output: {
+    expected: {
       ...localInitialState,
       isQuizCompleted: false,
       answers: [['false']],
@@ -583,7 +583,7 @@ export const localReducerCases = [
         isSelectQuestion: false,
       },
     },
-    output: {
+    expected: {
       ...localInitialState,
       isQuizCompleted: false,
       answers: [['seen']],
@@ -610,7 +610,7 @@ export const localReducerCases = [
         quizSessionId: 'quizSessionId',
       },
     },
-    output: {
+    expected: {
       ...localInitialState,
       quizVersionId: 'quizVersionId',
       quizSessionId: 'quizSessionId',
@@ -649,7 +649,7 @@ export const localReducerCases = [
         isSelectQuestion: false,
       },
     },
-    output: {
+    expected: {
       ...localInitialState,
       isQuizCompleted: false,
       answers: [],

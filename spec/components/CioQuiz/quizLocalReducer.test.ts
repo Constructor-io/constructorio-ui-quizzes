@@ -5,12 +5,9 @@ import quizLocalReducer, {
 import { localReducerCases } from './reducerTestCases';
 
 describe('quizLocalReducer', () => {
-  it.each(localReducerCases)(
-    'test action=$action.type',
-    ({ initialState: state, action, output }) => {
-      expect(
-        quizLocalReducer(state as QuizLocalReducerState, action as ActionAnswerQuestion)
-      ).toEqual(output);
-    }
-  );
+  it.each(localReducerCases)('test action=$action.type', ({ initialState, action, expected }) => {
+    expect(
+      quizLocalReducer(initialState as QuizLocalReducerState, action as ActionAnswerQuestion)
+    ).toEqual(expected);
+  });
 });
