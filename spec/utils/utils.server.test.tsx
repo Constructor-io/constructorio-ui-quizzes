@@ -1,7 +1,7 @@
-import { mockConstructorIOClient } from './__tests__/utils';
+import { mockConstructorIOClient } from '../__tests__/utils';
 
-import * as utils from '../src/utils';
-import { QuestionTypes } from '../src/components/CioQuiz/actions';
+import * as utils from '../../src/utils';
+import { QuestionTypes } from '../../src/components/CioQuiz/actions';
 
 describe(`${utils.stringifyWithDefaults.name}`, () => {
   it('does not error', () => {

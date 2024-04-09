@@ -157,16 +157,16 @@ describe('isFunction', () => {
   it('returns false for non-function values', () => {
     expect(isFunction(42)).toBe(false);
     expect(isFunction('string')).toBe(false);
-    expect(isFunction(null)).toBe(null);
-    expect(isFunction(undefined)).toBe(undefined);
+    expect(isFunction(null)).toBe(false);
+    expect(isFunction(undefined)).toBe(false);
   });
 
   it('returns undefined for undefined values', () => {
-    expect(isFunction(undefined)).toBe(undefined);
+    expect(isFunction(undefined)).toBe(false);
   });
 
   it('returns null for nullable values', () => {
-    expect(isFunction(null)).toBe(null);
+    expect(isFunction(null)).toBe(false);
   });
 });
 
