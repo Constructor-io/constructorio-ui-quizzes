@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 import EmailField from '../../../src/components/ShareResultsModal/EmailField';
 
@@ -16,11 +16,8 @@ describe(`${EmailField.name} client`, () => {
   it('form handling', async () => {
     render(<EmailField {...props} />);
     fireEvent.change(screen.getByRole('textbox'), { target: { value: 'hi@mail.com' } });
-    // eslint-disable-next-line testing-library/no-unnecessary-act
-    await act(async () => {
-      fireEvent.click(screen.getByRole('button', { name: 'Send' }));
-    });
-    expect(screen.getByText('Email sent')).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Send' }));
+    expect(await screen.findByText('Email sent')).toBeInTheDocument();
   });
 
   it('form handling on submit error', async () => {
@@ -28,20 +25,14 @@ describe(`${EmailField.name} client`, () => {
     onSubmitSpy.mockRejectedValueOnce(new Error());
     render(<EmailField onSubmit={onSubmitSpy} />);
     fireEvent.change(screen.getByRole('textbox'), { target: { value: 'hi@mail.com' } });
-    // eslint-disable-next-line testing-library/no-unnecessary-act
-    await act(async () => {
-      fireEvent.click(screen.getByRole('button', { name: 'Send' }));
-    });
-    expect(screen.getByText(/Sorry, there was an error sending./)).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Send' }));
+    expect(await screen.findByText(/Sorry, there was an error sending./)).toBeInTheDocument();
   });
 
   it('form handling on invalid email', async () => {
     render(<EmailField {...props} />);
     fireEvent.change(screen.getByRole('textbox'), { target: { value: 'random text' } });
-    // eslint-disable-next-line testing-library/no-unnecessary-act
-    await act(async () => {
-      fireEvent.click(screen.getByRole('button', { name: 'Send' }));
-    });
-    expect(screen.getByText(/Please enter a valid email address/)).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Send' }));
+    expect(await screen.findByText(/Please enter a valid email address/)).toBeInTheDocument();
   });
 });

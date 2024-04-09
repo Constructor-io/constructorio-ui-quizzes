@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
 import ShareResultsModal from '../../../src/components/ShareResultsModal/ShareResultsModal';
 import { QuizReturnState } from '../../../src/types';
@@ -20,14 +20,13 @@ describe(`${ShareResultsModal.name} client`, () => {
     render(<ShareResultsModal {...props} />);
     expect(screen.getByText(/Share or save your quiz results through email/)).toBeInTheDocument();
     fireEvent.change(screen.getAllByRole('textbox')[0], { target: { value: 'hi@mail.com' } });
-    // eslint-disable-next-line testing-library/no-unnecessary-act
-    await act(async () => {
-      fireEvent.click(screen.getByRole('button', { name: 'Send' }));
-    });
-    expect(props.onEmailResults).toHaveBeenCalledWith({
-      email: 'hi@mail.com',
-      url: 'http://example.com',
-    });
+    fireEvent.click(screen.getByRole('button', { name: 'Send' }));
+    await waitFor(async () =>
+      expect(props.onEmailResults).toHaveBeenCalledWith({
+        email: 'hi@mail.com',
+        url: 'http://example.com',
+      })
+    );
   });
 
   it('executes callback on close', () => {
