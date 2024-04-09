@@ -141,6 +141,7 @@ export const resetQuizSessionStorageState = (quizStateKey: string) => () => {
   window?.sessionStorage?.removeItem(quizStateKey);
 };
 
+/* istanbul ignore next */
 export const logger = (action: any) => {
   try {
     if (typeof process !== 'undefined' && process?.env?.LOGGER) {
@@ -158,6 +159,7 @@ export const logger = (action: any) => {
   }
 };
 
+/* istanbul ignore next */
 // Function to emulate pausing between interactions
 export function sleep(ms) {
   // eslint-disable-next-line

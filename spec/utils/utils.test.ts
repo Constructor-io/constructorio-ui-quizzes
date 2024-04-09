@@ -10,7 +10,23 @@ import {
   resetQuizSessionStorageState,
   getStateFromSessionStorage,
   isFunction,
+  convertPrimaryColorsToString,
 } from '../../src/utils';
+
+describe('convertPrimaryColorsToString', () => {
+  it('returns empty string when no images are provided', () => {
+    const result = convertPrimaryColorsToString({
+      '--primary-color-h': '0',
+      '--primary-color-s': '0',
+      '--primary-color-l': '0',
+    });
+    expect(result).toEqual(`{
+    --primary-color-h: 0; 
+    --primary-color-s: 0; 
+    --primary-color-l: 0; 
+  }`);
+  });
+});
 
 describe('renderImages', () => {
   it('renders primary image if provided', () => {
@@ -79,8 +95,16 @@ describe('getPreferredColorScheme', () => {
 });
 
 describe('rgbToHsl', () => {
-  it('converts RGB to HSL correctly', () => {
+  it('converts RGB to HSL correctly, max=r', () => {
     expect(rgbToHsl(255, 0, 0)).toEqual([0, 100, 50]);
+  });
+
+  it('converts RGB to HSL correctly, max=g', () => {
+    expect(rgbToHsl(0, 255, 0)).toEqual([120, 100, 50]);
+  });
+
+  it('converts RGB to HSL correctly, max=b', () => {
+    expect(rgbToHsl(0, 0, 255)).toEqual([240, 100, 50]);
   });
 });
 
