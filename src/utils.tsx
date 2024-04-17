@@ -13,6 +13,10 @@ export const renderImages = (images: Partial<QuestionImages>, cssClasses?: strin
   } = images;
 
   if (primaryUrl) {
+    if (typeof window === 'undefined') {
+      return null;
+    }
+
     const windowWidth = window.innerWidth;
     let src = primaryUrl;
     let alt = primaryAlt || '';
@@ -111,19 +115,22 @@ export const getQuestionTypes = (questionType?: `${QuestionTypes}`) => {
 export function getPreferredColorScheme() {
   let colorScheme = 'light';
   // Check if the dark-mode Media-Query matches
-  if (window.matchMedia('(prefers-color-scheme: dark)')?.matches) {
+  if (typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)')?.matches) {
     colorScheme = 'dark';
   }
   return colorScheme;
 }
 
 export function isFunction(fn): boolean {
-  return fn && typeof fn === 'function';
+  return !!(fn && typeof fn === 'function');
 }
 
 export const getStateFromSessionStorage = (quizStateKey: string): QuizLocalReducerState | null => {
-  const state = window?.sessionStorage?.getItem(quizStateKey);
+  if (typeof window === 'undefined') {
+    return null;
+  }
 
+  const state = window?.sessionStorage?.getItem(quizStateKey);
   if (state) {
     return JSON.parse(state);
   }
@@ -134,6 +141,7 @@ export const resetQuizSessionStorageState = (quizStateKey: string) => () => {
   window?.sessionStorage?.removeItem(quizStateKey);
 };
 
+/* istanbul ignore next */
 export const logger = (action: any) => {
   try {
     if (typeof process !== 'undefined' && process?.env?.LOGGER) {
@@ -151,6 +159,7 @@ export const logger = (action: any) => {
   }
 };
 
+/* istanbul ignore next */
 // Function to emulate pausing between interactions
 export function sleep(ms) {
   // eslint-disable-next-line

@@ -219,6 +219,8 @@ export interface PreviousQuestionButtonProps {
   type: 'submit' | 'reset' | 'button' | undefined;
   onClick: React.MouseEventHandler<HTMLElement>;
   style?: Record<string, string>;
+  role?: string;
+  title?: string;
 }
 
 export interface ResetQuizButtonProps {
