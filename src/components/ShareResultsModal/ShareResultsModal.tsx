@@ -19,6 +19,7 @@ export default function ShareResultsModal({
   onEmailResults,
 }: ShareResultsModalProps) {
   const url = useShareResultsLink(quizState);
+  const results = quizState?.results;
 
   return (
     <div className='cio-share-results-modal' role='presentation' onClick={onClose}>
@@ -42,7 +43,9 @@ export default function ShareResultsModal({
               ? 'Share or save your quiz results through email or using the link below.'
               : 'Share or save your quiz results with this link.'}
           </div>
-          {onEmailResults && <EmailField onSubmit={(email) => onEmailResults({ email, url })} />}
+          {onEmailResults && (
+            <EmailField onSubmit={(email) => onEmailResults({ email, url, results })} />
+          )}
           <LinkField url={url} />
         </div>
       </div>
