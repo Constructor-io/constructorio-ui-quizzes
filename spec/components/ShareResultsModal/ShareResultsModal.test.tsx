@@ -28,7 +28,7 @@ describe(`${ShareResultsModal.name} client`, () => {
       expect(props.onEmailResults).toHaveBeenCalledWith({
         email: 'hi@mail.com',
         url: 'http://example.com',
-        results,
+        results: results!.response!.results,
       })
     );
   });
