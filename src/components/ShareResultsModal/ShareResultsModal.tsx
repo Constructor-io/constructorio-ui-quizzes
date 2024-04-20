@@ -19,7 +19,7 @@ export default function ShareResultsModal({
   onEmailResults,
 }: ShareResultsModalProps) {
   const url = useShareResultsLink(quizState);
-  const results = quizState?.results;
+  const results = quizState?.results?.response?.results;
 
   return (
     <div className='cio-share-results-modal' role='presentation' onClick={onClose}>

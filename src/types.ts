@@ -34,7 +34,7 @@ export type QuizResultDataPartial = Partial<QuizResultData>;
 export type QuizEmailResults = {
   email: string;
   url: string;
-  results: QuizResultsResponse | QuizSharedResultsData | undefined;
+  results?: Partial<QuizResultData>[];
 };
 
 // QUIZ PROPS
