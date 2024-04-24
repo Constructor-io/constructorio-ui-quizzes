@@ -31,7 +31,11 @@ export type {
 } from '@constructor-io/constructorio-client-javascript/lib/types';
 
 export type QuizResultDataPartial = Partial<QuizResultData>;
-export type QuizEmailResults = { email: string; url: string };
+export type QuizEmailResults = {
+  email: string;
+  url: string;
+  results?: Partial<QuizResultData>[];
+};
 
 // QUIZ PROPS
 export interface ResultCardOptions {

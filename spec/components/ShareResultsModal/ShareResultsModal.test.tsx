@@ -1,15 +1,18 @@
 import React from 'react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
+import * as factories from '../../__tests__/factories';
+
 import ShareResultsModal from '../../../src/components/ShareResultsModal/ShareResultsModal';
 import { QuizReturnState } from '../../../src/types';
 import * as useShareResultsLink from '../../../src/hooks/useShareResultsLink';
 
 describe(`${ShareResultsModal.name} client`, () => {
+  const results = factories.quizResults.build();
   const props: React.ComponentProps<typeof ShareResultsModal> = {
     onClose: jest.fn(),
     onEmailResults: jest.fn(),
-    quizState: {} as QuizReturnState['quiz'],
+    quizState: { results } as QuizReturnState['quiz'],
   };
 
   beforeEach(() => {
@@ -25,6 +28,7 @@ describe(`${ShareResultsModal.name} client`, () => {
       expect(props.onEmailResults).toHaveBeenCalledWith({
         email: 'hi@mail.com',
         url: 'http://example.com',
+        results: results!.response!.results,
       })
     );
   });
