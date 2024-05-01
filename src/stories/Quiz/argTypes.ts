@@ -195,7 +195,7 @@ export const argTypes = {
     table: {
       subcategory: 'resultsPageOptions',
       defaultValue: {
-        summary: 5,
+        summary: 20,
       },
       type: {
         summary: 'number',
