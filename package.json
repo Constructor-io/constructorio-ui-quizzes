@@ -43,7 +43,7 @@
   "scripts": {
     "storybook-docs-dev": "storybook dev --docs -p 6007",
     "lint": "eslint src --ext js,ts,jsx,tsx",
-    "check-types": "npx tsc --noEmit",
+    "check-types": "tsc -p tsconfig-mjs.json --noEmit && tsc -p tsconfig-cjs.json --noEmit",
     "copy-styles": "cp src/styles.css lib/styles.css",
     "prepare": "husky install",
     "dev": "storybook dev -p 6006",
