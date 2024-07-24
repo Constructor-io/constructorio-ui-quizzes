@@ -15,7 +15,8 @@ const product = {
     ratingCount: '12',
     ratingScore: '4',
     discount: '49.95',
-    image_url: 'https://demo.constructor.io/sandbox_files/farmstandquizassets/HiThereNameInput.png',
+    image_url:
+      'https://constructorio-integrations.s3.amazonaws.com/farmstand/2024-07-23/HiThereNameInput.png',
   },
 };
 

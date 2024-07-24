@@ -34,7 +34,7 @@ export const getMockQuestion = (type: `${QuestionTypes}`) => ({
 const getMockImages = () => ({
   images: {
     primary_url:
-      'https://demo.constructor.io/sandbox_files/farmstandquizassets/HiThereNameInput.png',
+      'https://constructorio-integrations.s3.amazonaws.com/farmstand/2024-07-23/HiThereNameInput.png',
   },
 });
 
@@ -115,7 +115,7 @@ export const getMockState = (question?: Question, options?: MockOptions): QuizRe
               ratingCount: '12',
               ratingScore: '4',
               image_url:
-                'https://demo.constructor.io/sandbox_files/farmstandquizassets/HiThereNameInput.png',
+                'https://constructorio-integrations.s3.amazonaws.com/farmstand/2024-07-23/HiThereNameInput.png',
               discount: '59.9',
             },
           },
@@ -128,7 +128,7 @@ export const getMockState = (question?: Question, options?: MockOptions): QuizRe
               ratingCount: '6',
               ratingScore: '3',
               image_url:
-                'https://demo.constructor.io/sandbox_files/farmstandquizassets/HiThereNameInput.png',
+                'https://constructorio-integrations.s3.amazonaws.com/farmstand/2024-07-23/HiThereNameInput.png',
             },
           },
           {
@@ -140,7 +140,7 @@ export const getMockState = (question?: Question, options?: MockOptions): QuizRe
               ratingCount: '2',
               ratingScore: '5',
               image_url:
-                'https://demo.constructor.io/sandbox_files/farmstandquizassets/HiThereNameInput.png',
+                'https://constructorio-integrations.s3.amazonaws.com/farmstand/2024-07-23/HiThereNameInput.png',
             },
           },
         ],
