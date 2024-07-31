@@ -1,8 +1,14 @@
 import React from 'react';
 
-export default function CloseSVG() {
+export default function CloseSVG(props) {
   return (
-    <svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
+    <svg
+      {...props}
+      width='24'
+      height='24'
+      viewBox='0 0 24 24'
+      fill='none'
+      xmlns='http://www.w3.org/2000/svg'>
       <path
         d='M18.4748 4.11089C18.8653 3.72036 19.4985 3.72036 19.889 4.11089C20.2795 4.50141 20.2795 5.13458 19.889 5.5251L5.52503 19.8891C5.13451 20.2796 4.50134 20.2796 4.11082 19.8891C3.72029 19.4985 3.72029 18.8654 4.11082 18.4748L18.4748 4.11089Z'
         fill='#505A75'

@@ -1026,6 +1026,11 @@
   gap: 12px;
 }
 
+.cio-quiz .cio-share-results-notification .cio-toaster-close-button{
+  margin-left: auto;
+  cursor: pointer;
+}
+
 .cio-quiz .cio-share-results-link-input {
   font-size: 1rem;
   padding: 12px 20px;
