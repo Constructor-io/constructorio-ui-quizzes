@@ -53,6 +53,7 @@ export default function EmailField({ onSubmit }: EmailFieldProps) {
                 formError ? 'cio-share-results-email-input--error' : ''
               }`}
               onChange={(e) => setEmail(e.target.value)}
+              placeholder='Please enter email to share results'
             />
             {formError?.type === 'validate' && (
               <div className='cio-share-results-email-input-error-message'>{formError.message}</div>
