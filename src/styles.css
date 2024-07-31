@@ -1029,6 +1029,7 @@
 .cio-quiz .cio-share-results-notification .cio-toaster-close-button{
   margin-left: auto;
   cursor: pointer;
+  width: 16px;
 }
 
 .cio-quiz .cio-share-results-link-input {
