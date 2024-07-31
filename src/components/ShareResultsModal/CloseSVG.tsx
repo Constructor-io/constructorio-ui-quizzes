@@ -4,6 +4,8 @@ export default function CloseSVG(props) {
   return (
     <svg
       {...props}
+      role='button'
+      aria-label='Close'
       width='24'
       height='24'
       viewBox='0 0 24 24'
