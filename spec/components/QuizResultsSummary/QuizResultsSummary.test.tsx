@@ -22,6 +22,19 @@ describe(`${QuizResultsSummary.name} client`, () => {
     ).toBeInTheDocument();
   });
 
+  it('renders when active - only one option', () => {
+    render(<QuizResultsSummary {...props} matchedOptions={props.matchedOptions!.slice(0, 1)} />);
+    expect(screen.getByText('MATCHED_OPTION_1')).toBeInTheDocument();
+    expect(screen.queryByText('$')).not.toBeInTheDocument();
+    expect(screen.queryByText('and')).not.toBeInTheDocument();
+  });
+
+  it('renders when active - only two options', () => {
+    render(<QuizResultsSummary {...props} matchedOptions={props.matchedOptions!.slice(0, 2)} />);
+    expect(screen.getByText('MATCHED_OPTION_1 and MATCHED_OPTION_2')).toBeInTheDocument();
+    expect(screen.queryByText('$')).not.toBeInTheDocument();
+  });
+
   it('does not render when inactive', () => {
     const { container } = render(
       <QuizResultsSummary {...props} summary={{ ...summary, is_active: false }} />
