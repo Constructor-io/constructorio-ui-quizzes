@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import CheckMarkCircleSVG from './CheckMarkCircleSVG';
 import AlertCircleSVG from './AlertCircleSVG';
+import Toaster from './Toaster';
 
 interface EmailFieldProps {
   onSubmit: (email: string) => Promise<void>;
@@ -16,6 +17,7 @@ export default function EmailField({ onSubmit }: EmailFieldProps) {
   const [formError, setFormError] = useState<FormError | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [email, setEmail] = useState('');
+  const [showNotification, setShowNotification] = React.useState(false);
 
   const validate = () => {
     if (email.length > 0 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -42,6 +44,18 @@ export default function EmailField({ onSubmit }: EmailFieldProps) {
     }
   };
 
+  const onCloseToaster = () => {
+    setShowNotification(false);
+    setIsSubmitted(false);
+    setFormError(null);
+  };
+
+  useEffect(() => {
+    if (isSubmitted || formError?.type === 'callback') {
+      setShowNotification(true);
+    }
+  }, [isSubmitted, formError?.type]);
+
   return (
     <div className='cio-share-results-feature-group'>
       <form onSubmit={handleSubmit}>
@@ -64,17 +78,12 @@ export default function EmailField({ onSubmit }: EmailFieldProps) {
           </button>
         </div>
       </form>
-      {isSubmitted && (
-        <div className='cio-share-results-notification'>
-          <CheckMarkCircleSVG />
-          <div>Email sent</div>
-        </div>
-      )}
-      {formError?.type === 'callback' && (
-        <div className='cio-share-results-notification'>
-          <AlertCircleSVG />
-          <div>{formError.message}</div>
-        </div>
+      {showNotification && (
+        <Toaster
+          icon={isSubmitted ? CheckMarkCircleSVG : AlertCircleSVG}
+          message={isSubmitted ? 'Email sent' : formError?.message}
+          onCloseToaster={onCloseToaster}
+        />
       )}
     </div>
   );
