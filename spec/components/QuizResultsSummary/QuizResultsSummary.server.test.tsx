@@ -20,6 +20,23 @@ describe(`${QuizResultsSummary.name} client`, () => {
     expect(view).toContain('MATCHED_OPTION_1 $ MATCHED_OPTION_2 and MATCHED_OPTION_3');
   });
 
+  it('renders when active - only one option', () => {
+    const view = renderToString(
+      <QuizResultsSummary {...props} matchedOptions={props.matchedOptions!.slice(0, 1)} />
+    );
+    expect(view).toContain('MATCHED_OPTION_1');
+    expect(view).not.toContain('$');
+    expect(view).not.toContain('and');
+  });
+
+  it('renders when active - only two options', () => {
+    const view = renderToString(
+      <QuizResultsSummary {...props} matchedOptions={props.matchedOptions!.slice(0, 2)} />
+    );
+    expect(view).toContain('MATCHED_OPTION_1 and MATCHED_OPTION_2');
+    expect(view).not.toContain('$');
+  });
+
   it('does not render when inactive', () => {
     const view = renderToString(
       <QuizResultsSummary {...props} summary={{ ...summary, is_active: false }} />

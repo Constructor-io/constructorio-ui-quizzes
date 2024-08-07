@@ -207,6 +207,10 @@ export function formatMatchedOptions(
     return '';
   }
 
+  if (options.length === 1) {
+    return options[0];
+  }
+
   const firstPart = options.slice(0, -1).join(separator);
 
   return [firstPart, lastSeparator, options.at(-1)].join('');
