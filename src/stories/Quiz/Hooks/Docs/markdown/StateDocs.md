@@ -25,4 +25,4 @@
   | sessionId                     | string                                  | The quiz session                                              |
   | selectedOptionsWithAttributes | string[]                                | The selected options with attributes                          |
   | matchedOptions                | string[]                                | The selected options with attributed used in fetching results |
-  | resultsConfig                 | Object | null                           | The results page configuration set in the dashboard           |
+  | resultsConfig                 | Object \| null                           | The results page configuration set in the dashboard           |
