@@ -29,7 +29,7 @@ describe(`${QuizResultsSummary.name} client`, () => {
     expect(view).not.toContain('and');
   });
 
-  it('renders when active - only two option', () => {
+  it('renders when active - only two options', () => {
     const view = renderToString(
       <QuizResultsSummary {...props} matchedOptions={props.matchedOptions!.slice(0, 2)} />
     );
