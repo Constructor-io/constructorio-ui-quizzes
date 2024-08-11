@@ -22,6 +22,9 @@ function CTAButton(props: CTAButtonProps) {
           {ctaText || 'Continue'}
         </button>
       )}
+      <span id='next-button-help' style={{ display: 'none' }}>
+        Fill required fields to enable button.
+      </span>
     </div>
   );
 }

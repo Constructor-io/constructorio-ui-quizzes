@@ -204,7 +204,11 @@ export interface QuizSharedResultsData extends GetBrowseResultsForItemIdsRespons
 
 export interface CoverQuestionProps {}
 
-export interface NextQuestionButtonProps {
+export interface NextQuestionButtonProps
+  extends React.DetailedHTMLProps<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  > {
   className: string;
   type: 'submit' | 'reset' | 'button' | undefined;
   disabled?: boolean;

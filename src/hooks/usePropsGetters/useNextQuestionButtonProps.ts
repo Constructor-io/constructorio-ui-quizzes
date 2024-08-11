@@ -19,6 +19,9 @@ export default function useNextQuestionButtonProps(
 
     return {
       className: buttonDisabled ? 'cio-question-cta-button disabled' : 'cio-question-cta-button',
+      tabindex: buttonDisabled ? -1 : 0,
+      'aria-disabled': buttonDisabled ? 'true' : 'false',
+      'aria-describedby': buttonDisabled ? 'next-button-help' : '',
       type: 'button',
       onClick: () => {
         nextQuestion();
