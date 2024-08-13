@@ -58,7 +58,7 @@ describe(`${CTAButton.name} client`, () => {
 
     render(<CTAButton {...props} disabled />);
     const button = screen.getByText(props.ctaText!);
-    const description = screen.queryByText('Fill required fields to enable button.');
+    const description = screen.queryByText('Fill required fields to enable the button.');
     expect(description).toBeInTheDocument();
     expect(button).toHaveAttribute('aria-describedby', description?.id);
   });
