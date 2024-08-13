@@ -49,6 +49,6 @@ describe(`${CTAButton.name} server`, () => {
     });
     const view = renderToString(<CTAButton {...props} />);
     expect(view).toContain('aria-describedby="next-button-help"');
-    expect(view).toContain('Fill required fields to enable button');
+    expect(view).toContain('Fill required fields to enable the button');
   });
 });
