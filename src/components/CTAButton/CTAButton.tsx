@@ -23,7 +23,7 @@ function CTAButton(props: CTAButtonProps) {
         </button>
       )}
       <span id='next-button-help' style={{ display: 'none' }}>
-        Fill required fields to enable button.
+        Fill required fields to enable the button.
       </span>
     </div>
   );
