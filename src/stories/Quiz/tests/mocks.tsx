@@ -309,4 +309,10 @@ export const callbacks: Callbacks = {
   onEmailResults: async (data: QuizEmailResults) => {
     console.dir(data);
   },
+  onShareResultsModalOpen: async () => {
+    console.dir('Modal open');
+  },
+  onShareResultsModalClose: async () => {
+    console.dir('Modal close');
+  },
 };
