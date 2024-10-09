@@ -81,6 +81,20 @@ export default function CioQuiz(props: IQuizProps) {
     primaryColorStyles,
   };
 
+  const onModalClose = () => {
+    setShowShareModal(false);
+    if (callbacks?.onShareResultsModalClose) {
+      callbacks?.onShareResultsModalClose();
+    }
+  };
+
+  const onModalOpen = () => {
+    setShowShareModal(true);
+    if (callbacks?.onShareResultsModalOpen) {
+      callbacks?.onShareResultsModalOpen();
+    }
+  };
+
   if (state.quiz.requestState === RequestStates.Loading) {
     return (
       <div className='cio-quiz cio-quiz-loading'>
@@ -111,7 +125,7 @@ export default function CioQuiz(props: IQuizProps) {
 
         {state.quiz && showShareModal && (
           <ShareResultsModal
-            onClose={() => setShowShareModal(false)}
+            onClose={onModalClose}
             quizState={state.quiz}
             onEmailResults={callbacks?.onEmailResults}
           />
@@ -121,7 +135,7 @@ export default function CioQuiz(props: IQuizProps) {
           {state.quiz.results || skipToResults ? (
             <ResultContainer
               resultCardOptions={resultCardOptions}
-              onShare={() => setShowShareModal(true)}
+              onShare={onModalOpen}
               resultsPageOptions={resultsPageOptions}
             />
           ) : (
