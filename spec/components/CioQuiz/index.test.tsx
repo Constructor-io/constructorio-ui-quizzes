@@ -18,6 +18,8 @@ describe(`${CioQuiz.name} client`, () => {
       onQuizResultClick: jest.fn(),
       onQuizSkipQuestion: jest.fn(),
       onQuizResultsLoaded: jest.fn(),
+      onShareResultsModalOpen: jest.fn(),
+      onShareResultsModalClose: jest.fn(),
     },
     questionsPageOptions: { skipQuestionButtonText: 'Skip' },
     sessionStateOptions: { showSessionModal: true },
@@ -116,7 +118,9 @@ describe(`${CioQuiz.name} client`, () => {
       expect(
         screen.getByText(/Share or save your quiz results through email or/)
       ).toBeInTheDocument();
+      expect(props.callbacks?.onShareResultsModalOpen).toHaveBeenCalledTimes(1);
       fireEvent.click(screen.getByRole('button', { name: 'Close button' }));
+      expect(props.callbacks?.onShareResultsModalClose).toHaveBeenCalledTimes(1);
       expect(
         screen.queryByText(/Share or save your quiz results through email or/)
       ).not.toBeInTheDocument();
