@@ -96,6 +96,34 @@ export const argTypes = {
       },
     },
   },
+  'callbacks.onShareResultsModalOpen': {
+    description: 'Callback function to be called when the share results modal is opened.',
+    control: false,
+    table: {
+      subcategory: 'callbacks',
+      defaultValue: {
+        summary: 'null',
+      },
+      type: {
+        summary: '() => void',
+        detail: '() => void',
+      },
+    },
+  },
+  'callbacks.onShareResultsModalClose': {
+    description: 'Callback function to be called when the share results modal is closed.',
+    control: false,
+    table: {
+      subcategory: 'callbacks',
+      defaultValue: {
+        summary: 'null',
+      },
+      type: {
+        summary: '() => void',
+        detail: '() => void',
+      },
+    },
+  },
   cioJsClient: {
     description:
       'Optional custom constructor instance. Either `apiKey` or `cioJsClient` are required',

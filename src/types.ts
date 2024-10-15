@@ -54,6 +54,8 @@ export namespace QuizResultsEventsProps {
   export type OnQuizNextQuestion = (question: QuestionWithAnswer) => void;
   export type OnQuizSkipQuestion = (question: QuestionWithAnswer) => void;
   export type OnEmailResults = (data: QuizEmailResults) => Promise<void>;
+  export type OnShareResultsModalOpen = () => void;
+  export type OnShareResultsModalClose = () => void;
 }
 
 export type QuizResultsRequestConfigs = Omit<
@@ -90,6 +92,8 @@ export interface Callbacks {
   onAddToFavoritesClick?: QuizResultsEventsProps.OnAddToFavoritesClick;
   onQuizSkipQuestion?: QuizResultsEventsProps.OnQuizSkipQuestion;
   onEmailResults?: QuizResultsEventsProps.OnEmailResults;
+  onShareResultsModalOpen?: QuizResultsEventsProps.OnShareResultsModalOpen;
+  onShareResultsModalClose?: QuizResultsEventsProps.OnShareResultsModalClose;
 }
 
 export interface IQuizProps {
