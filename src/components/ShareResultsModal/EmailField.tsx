@@ -31,6 +31,7 @@ export default function EmailField({ onSubmit }: EmailFieldProps) {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsSubmitted(false);
     if (isInProgress) {
       return;
     }
