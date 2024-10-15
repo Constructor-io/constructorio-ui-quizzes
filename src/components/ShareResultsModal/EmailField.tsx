@@ -16,6 +16,7 @@ interface FormError {
 export default function EmailField({ onSubmit }: EmailFieldProps) {
   const [formError, setFormError] = useState<FormError | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isInProgress, setIsInProgress] = useState(false);
   const [email, setEmail] = useState('');
   const [showNotification, setShowNotification] = React.useState(false);
 
@@ -30,10 +31,17 @@ export default function EmailField({ onSubmit }: EmailFieldProps) {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsSubmitted(false);
+    if (isInProgress) {
+      return;
+    }
+
+    setShowNotification(false);
     const isValid = validate();
     if (!isValid) return;
 
     try {
+      setIsInProgress(true);
       await onSubmit(email);
       setIsSubmitted(true);
     } catch (_e) {
@@ -42,6 +50,8 @@ export default function EmailField({ onSubmit }: EmailFieldProps) {
         message: 'Sorry, there was an error sending. Please try again.',
       });
     }
+
+    setIsInProgress(false);
   };
 
   const onCloseToaster = () => {
@@ -73,7 +83,9 @@ export default function EmailField({ onSubmit }: EmailFieldProps) {
               <div className='cio-share-results-email-input-error-message'>{formError.message}</div>
             )}
           </div>
-          <button className='cio-share-results-share-button' type='submit'>
+          <button
+            className={`cio-share-results-share-button ${isInProgress ? 'disabled' : ''}`}
+            type='submit'>
             Send
           </button>
         </div>

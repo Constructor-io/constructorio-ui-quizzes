@@ -33,6 +33,40 @@ describe(`${ShareResultsModal.name} client`, () => {
     );
   });
 
+  it('handles resolved promise for onEmailResults', async () => {
+    props.onEmailResults = jest.fn().mockResolvedValue({});
+
+    render(<ShareResultsModal {...props} />);
+    fireEvent.change(screen.getAllByRole('textbox')[0], { target: { value: 'hi@mail.com' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Send' }));
+    await waitFor(() =>
+      expect(props.onEmailResults).toHaveBeenCalledWith({
+        email: 'hi@mail.com',
+        url: 'http://example.com',
+        results: results!.response!.results,
+      })
+    );
+    expect(screen.getByText(/Email sent/)).toBeInTheDocument();
+  });
+
+  it('handles rejected promise for onEmailResults', async () => {
+    props.onEmailResults = jest.fn().mockRejectedValue(new Error('Failed to send email'));
+
+    render(<ShareResultsModal {...props} />);
+    fireEvent.change(screen.getAllByRole('textbox')[0], { target: { value: 'hi@mail.com' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Send' }));
+    await waitFor(() =>
+      expect(props.onEmailResults).toHaveBeenCalledWith({
+        email: 'hi@mail.com',
+        url: 'http://example.com',
+        results: results!.response!.results,
+      })
+    );
+    expect(
+      screen.getByText(/Sorry, there was an error sending. Please try again./)
+    ).toBeInTheDocument();
+  });
+
   it('executes callback on close', () => {
     render(<ShareResultsModal {...props} />);
     fireEvent.click(screen.getByRole('button', { name: 'Close button' }));
