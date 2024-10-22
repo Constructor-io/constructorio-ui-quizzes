@@ -1012,6 +1012,10 @@
 .cio-quiz .cio-share-results-share-button:focus {
   outline: 3px solid var(--primary-color-variant-100);
 }
+.cio-quiz .cio-share-results-share-button.disabled {
+  background: var(--gray-dust-200);
+  border: 2px solid var(--gray-dust-200);
+}
 
 .cio-quiz .cio-share-results-notification {
   width: 100%;
