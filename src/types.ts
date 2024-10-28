@@ -44,6 +44,13 @@ export interface ResultCardOptions {
   resultCardRatingCountKey?: string;
   resultCardRatingScoreKey?: string;
   renderResultCardPriceDetails?: (result: QuizResultDataPartial) => JSX.Element;
+  renderResultCard?: (
+    result: QuizResultDataPartial,
+    getters: {
+      getAddToCartButtonProps?: GetAddToCartButtonProps;
+      getAddToFavoritesButtonProps?: GetAddToFavoritesButtonProps;
+    }
+  ) => JSX.Element;
 }
 
 export namespace QuizResultsEventsProps {
