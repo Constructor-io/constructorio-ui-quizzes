@@ -215,6 +215,21 @@ export const argTypes = {
       },
     },
   },
+  'resultCardOptions.renderResultCard': {
+    description: 'Callback function to render custom result card',
+    control: false,
+    table: {
+      subcategory: 'resultCardOptions',
+      defaultValue: {
+        summary: 'null',
+      },
+      type: {
+        summary: '(result, getters) => JSX.Element',
+        detail:
+          '(result: QuizResultDataPartial, getters: {getAddToCartButtonProps, getAddToFavoritesButtonProps}) => JSX.Element',
+      },
+    },
+  },
   'resultsPageOptions.numResultsToDisplay': {
     description: 'Number of results to display on the results page',
     control: {

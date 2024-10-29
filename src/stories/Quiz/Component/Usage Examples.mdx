@@ -314,11 +314,12 @@ export function YourComponent() {
     quizId: 'coffee-quiz',
     apiKey: 'key_n4SkMH5PFWLdStQZ',
     resultCardOptions: {
-      renderResultCard: (result) => {
+      renderResultCard: (result, getters: { getAddToCartButtonProps, getAddToFavoritesButtonProps }) => {
         <div>
           <img src={result.data?.image_url} className='product-image' />
           <div className='product-title'>{result.value}</div>
           <div className='product-price'>{result.data?.price}</div>
+          <button {...getAddToCartButtonProps}>Add to cart</button>
         </div>
       },
     }
