@@ -101,3 +101,21 @@ export const HandleFavoritesOnResultsPage: Story = {
     callbacks,
   },
 };
+
+export const RenderCustomResultCardOnResultsPage: Story = {
+  args: {
+    apiKey,
+    quizId,
+    resultsPageOptions,
+    resultCardOptions: {
+      renderResultCard: (result) => (
+        <div>
+          <img src={result.data?.image_url} className='product-image' alt='quiz-result' />
+          <div className='product-title'>{result.value}</div>
+          <div className='product-price'>{result.data?.price}</div>
+        </div>
+      ),
+    },
+    callbacks,
+  },
+};

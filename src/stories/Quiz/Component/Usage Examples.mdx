@@ -280,3 +280,53 @@ export function YourComponent() {
   );
 }
 ```
+
+#### Render Custom Result
+
+If you want to handle rendering custom markup/JSX for the result cards you can utilize the `renderResultCard` funciton on `ResultCardOptions`
+
+```jsx
+import CioQuiz from '@constructor-io/constructorio-ui-quizzes';
+import '@constructor-io/constructorio-ui-quizzes/styles.css';
+
+/*
+API Response Snippet:
+
+response: {
+  results: [
+    {
+      data: {
+        id: '1',
+        price: '5.99', <-- Regular Price
+        salePrice: '4.99', <-- Sale Price
+        ...
+      },
+      ...
+    },
+    ...
+  ]
+  ...
+}
+*/
+
+export function YourComponent() {
+  const args = {
+    quizId: 'coffee-quiz',
+    apiKey: 'key_n4SkMH5PFWLdStQZ',
+    resultCardOptions: {
+      renderResultCard: (result, getters: { getAddToCartButtonProps, getAddToFavoritesButtonProps }) => {
+        <div>
+          <img src={result.data?.image_url} className='product-image' />
+          <div className='product-title'>{result.value}</div>
+          <div className='product-price'>{result.data?.price}</div>
+          <button {...getAddToCartButtonProps}>Add to cart</button>
+        </div>
+      },
+    }
+  };
+
+  return (
+    <CioQuiz {...args} />
+  );
+}
+```

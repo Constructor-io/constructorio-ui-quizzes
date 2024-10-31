@@ -25,4 +25,20 @@ describe(`${Results.name} client`, () => {
     expect(container.firstChild).toHaveClass('cio-results');
     expect(screen.getAllByText('Add to Cart').length).toStrictEqual(1);
   });
+
+  it('renders custom results', () => {
+    props.renderResultCard = (result) => (
+      <div key={result.data?.id} className='custom-result'>
+        <img src={result.data?.image_url} className='product-image' alt='quiz-result' />
+        <div className='product-title'>{result.value}</div>
+        <div className='product-price'>{result.data?.price}</div>
+      </div>
+    );
+    const { container } = render(<Subject {...props} />);
+    expect(container.firstChild).toHaveClass('cio-results');
+    expect(container.firstChild?.firstChild).toHaveClass('custom-result');
+    expect(container.firstChild?.firstChild?.childNodes[0]).toHaveClass('product-image');
+    expect(container.firstChild?.firstChild?.childNodes[1]).toHaveClass('product-title');
+    expect(container.firstChild?.firstChild?.childNodes[2]).toHaveClass('product-price');
+  });
 });
