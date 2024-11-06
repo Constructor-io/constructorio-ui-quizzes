@@ -6,6 +6,9 @@ import usePropsGetters from './usePropsGetters';
 import usePrimaryColorStyles from './usePrimaryColorStyles';
 import useQuizEvents from './useQuizEvents';
 import useQuizState from './useQuizState';
+import usePrevious from './usePrevious';
+import { QuestionTypes, QuizAPIActionTypes } from '../components/CioQuiz/actions';
+import { resetQuizSessionStorageState } from '../utils';
 
 const useQuiz: UseQuiz = (quizOptions) => {
   const { apiKey, cioJsClient, primaryColor, resultsPageOptions } = quizOptions;
@@ -38,6 +41,24 @@ const useQuiz: UseQuiz = (quizOptions) => {
     if (skipToResults) quizEvents.hydrateQuiz();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const { quizId } = quizOptions;
+  const { dispatchApiState, dispatchLocalState } = quizState;
+
+  const prevQuizId = usePrevious(quizId);
+
+  useEffect(() => {
+    if (quizId === prevQuizId) return;
+    if (!prevQuizId) return;
+    dispatchLocalState({
+      type: QuestionTypes.Reset,
+    });
+    dispatchApiState({
+      type: QuizAPIActionTypes.RESET_QUIZ,
+    });
+    resetQuizSessionStorageState(quizSessionStorageState.key);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [quizId, prevQuizId]);
 
   return {
     cioClient,
