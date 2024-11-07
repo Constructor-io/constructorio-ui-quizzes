@@ -18,7 +18,7 @@ const useSessionStorageState = (
   // Save state to session storage
   useEffect(() => {
     // don't save state if initial state
-    if (quizId !== prevQuizId) return;
+    if (prevQuizId && quizId !== prevQuizId) return;
     if (enableHydration && quizLocalState?.answers?.length) {
       const data = getStateFromSessionStorage(quizSessionStorageStateKey);
       const dataToSave = {

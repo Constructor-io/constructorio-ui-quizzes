@@ -9,7 +9,8 @@ describe('Testing Hook (server): useHydrateQuizLocalState', () => {
     let hookExecutionResult;
     expect(() => {
       const { result } = renderHookServerSide(
-        () => useHydrateQuizLocalState(quizSessionStorageStateKey, dispatchLocalStateMock),
+        () =>
+          useHydrateQuizLocalState('quizId', quizSessionStorageStateKey, dispatchLocalStateMock),
         {
           initialProps: {},
         }

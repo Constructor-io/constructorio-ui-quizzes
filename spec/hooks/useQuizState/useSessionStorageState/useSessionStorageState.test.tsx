@@ -39,22 +39,37 @@ describe('Testing Hook (client): useSessionStorageState', () => {
     quizVersionId: 'version1',
     quizSessionId: 'session1',
   };
+  const quizId = 'quizId';
 
   it('should set item in sessionStorage when conditions are met', () => {
-    renderHook(() => useSessionStorageState(mockState, { sessionStateKey: 'testKey' }, true));
+    renderHook(() =>
+      useSessionStorageState(quizId, mockState, { sessionStateKey: 'testKey' }, true)
+    );
 
-    expect(mockSetItem).toHaveBeenCalledWith('testKey', JSON.stringify(mockState));
+    expect(mockSetItem).toHaveBeenCalledWith('testKey', JSON.stringify({ [quizId]: mockState }));
   });
 
   it('should retrieve "skipToResults" correctly based on sessionStorage', () => {
     const { result } = renderHook(() =>
-      useSessionStorageState(mockState, { sessionStateKey: 'testKey' }, true)
+      useSessionStorageState(quizId, mockState, { sessionStateKey: 'testKey' }, true)
     );
 
     act(() => {
-      window.sessionStorage.setItem('testKey', JSON.stringify(mockState));
+      window.sessionStorage.setItem('testKey', JSON.stringify({ [quizId]: mockState }));
     });
 
     expect(result.current.skipToResults).toBe(mockState.isQuizCompleted);
+  });
+
+  it('should return "hasSessionStorageState" correctly based on sessionStorage', () => {
+    const { result } = renderHook(() =>
+      useSessionStorageState(quizId, mockState, { sessionStateKey: 'testKey' }, true)
+    );
+
+    act(() => {
+      window.sessionStorage.setItem('testKey', JSON.stringify({ [quizId]: mockState }));
+    });
+
+    expect(result.current.hasSessionStorageState()).toBe(false);
   });
 });

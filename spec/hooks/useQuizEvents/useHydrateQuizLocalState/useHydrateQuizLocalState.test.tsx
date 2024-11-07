@@ -26,7 +26,7 @@ describe('Testing Hook (client): useHydrateQuizLocalState', () => {
     sessionStorageMock.getItem.mockReturnValue(JSON.stringify(quizSessionStorageStateKey));
 
     const { result } = renderHook(() =>
-      useHydrateQuizLocalState(quizSessionStorageStateKey, dispatchLocalStateMock)
+      useHydrateQuizLocalState('quizId', quizSessionStorageStateKey, dispatchLocalStateMock)
     );
 
     act(() => {
