@@ -2,8 +2,8 @@ import { create } from '@storybook/theming/create';
 import { getPreferredColorScheme } from '../src/utils'
 
 export default create({
-  brandTitle: 'Constructor.io',
+  brandTitle: 'Constructor',
   brandUrl: 'https://github.com/Constructor-io/constructorio-ui-quizzes',
-  brandImage:  getPreferredColorScheme() === 'light' ? 'https://docs.constructor.io/img/logo-dark.svg' : 'https://docs.constructor.io/img/logo-light.svg',
+  brandImage:  getPreferredColorScheme() === 'light' ? 'https://constructor.com/hubfs/Website%20-%202024/Logos/Logo-black.svg' : 'https://constructor.com/hubfs/Website%20-%202024/Logos/Logo-white.svg',
   brandTarget: '_blank',
 });
