@@ -3,6 +3,7 @@ import useHydrateQuizLocalState from '../../../../src/hooks/useQuizEvents/useHyd
 import { QuestionTypes } from '../../../../src/components/CioQuiz/actions';
 
 describe('Testing Hook (client): useHydrateQuizLocalState', () => {
+  const quizId = 'quizId';
   const quizSessionStorageStateKey = 'quizState';
   const sessionStorageMock = {
     getItem: jest.fn(),
@@ -23,10 +24,12 @@ describe('Testing Hook (client): useHydrateQuizLocalState', () => {
 
   it('correctly hydrates quiz local state from sessionStorage', () => {
     const dispatchLocalStateMock = jest.fn();
-    sessionStorageMock.getItem.mockReturnValue(JSON.stringify(quizSessionStorageStateKey));
+    sessionStorageMock.getItem.mockReturnValue(
+      JSON.stringify({ [quizId]: quizSessionStorageStateKey })
+    );
 
     const { result } = renderHook(() =>
-      useHydrateQuizLocalState('quizId', quizSessionStorageStateKey, dispatchLocalStateMock)
+      useHydrateQuizLocalState(quizId, quizSessionStorageStateKey, dispatchLocalStateMock)
     );
 
     act(() => {
