@@ -8,7 +8,7 @@ import useQuizEvents from './useQuizEvents';
 import useQuizState from './useQuizState';
 import usePrevious from './usePrevious';
 import { QuestionTypes, QuizAPIActionTypes } from '../components/CioQuiz/actions';
-import { getStateFromSessionStorage, resetQuizSessionStorageState } from '../utils';
+import { getStateFromSessionStorage } from '../utils';
 
 const useQuiz: UseQuiz = (quizOptions) => {
   const { apiKey, cioJsClient, primaryColor, resultsPageOptions } = quizOptions;
