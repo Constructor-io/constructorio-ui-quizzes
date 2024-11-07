@@ -50,13 +50,13 @@ const useQuiz: UseQuiz = (quizOptions) => {
   useEffect(() => {
     if (quizId === prevQuizId) return;
     if (!prevQuizId) return;
+    resetQuizSessionStorageState(quizSessionStorageState.key);
     dispatchLocalState({
       type: QuestionTypes.Reset,
     });
     dispatchApiState({
       type: QuizAPIActionTypes.RESET_QUIZ,
     });
-    resetQuizSessionStorageState(quizSessionStorageState.key);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [quizId, prevQuizId]);
 
