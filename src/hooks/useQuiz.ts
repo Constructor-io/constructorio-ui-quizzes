@@ -50,7 +50,7 @@ const useQuiz: UseQuiz = (quizOptions) => {
   useEffect(() => {
     if (quizId === prevQuizId) return;
     if (!prevQuizId) return;
-    resetQuizSessionStorageState(quizSessionStorageState.key);
+    resetQuizSessionStorageState(quizSessionStorageState.key)();
     dispatchLocalState({
       type: QuestionTypes.Reset,
     });

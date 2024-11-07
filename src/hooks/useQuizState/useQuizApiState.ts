@@ -165,6 +165,7 @@ const useQuizApiState: UseQuizApiState = (
   }, [
     cioClient,
     quizId,
+    prevQuizId,
     quizLocalState.answers,
     resultsPageOptions?.numResultsToDisplay,
     isSharedResultsQuery,
