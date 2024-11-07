@@ -40,14 +40,43 @@ export const BasicUsage: Story = {
   },
 };
 
+const quizzes = [
+  {
+    apiKey: 'key_1tigFZoUEs7Ygkww',
+    quizId: 'find-your-perfect-dining-room-set',
+    name: 'Dining',
+  },
+  {
+    apiKey: 'key_1tigFZoUEs7Ygkww',
+    quizId: 'find-your-sofa-v4',
+    name: 'Sofa',
+  },
+  {
+    apiKey: 'key_n4SkMH5PFWLdStQZ',
+    quizId: 'coffee-quiz',
+    name: 'Coffee',
+  },
+];
+
 function RenderInASmallContainerTemplate(args: IQuizProps) {
   const [favorites, setFavorites] = useState<string[]>([]);
+  const [quiz, setQuiz] = useState(quizzes[0]);
 
   return (
     <div className='small-container-example-wrapper'>
       <div className='small-container-example'>
+        {quizzes.map((q) => (
+          <div key={q.quizId} onClick={() => setQuiz(q)}>
+            <input type='radio' />
+            <span>{q.name}</span>
+          </div>
+        ))}
+        <br />
+        <div>{quiz.name}</div>
         <CioQuiz
           {...args}
+          apiKey={quiz.apiKey}
+          quizId={quiz.quizId}
           resultsPageOptions={{
             favoriteItems: favorites,
             showShareResultsButton: true,

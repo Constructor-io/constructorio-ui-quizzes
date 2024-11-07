@@ -8,7 +8,7 @@ import useQuizEvents from './useQuizEvents';
 import useQuizState from './useQuizState';
 import usePrevious from './usePrevious';
 import { QuestionTypes, QuizAPIActionTypes } from '../components/CioQuiz/actions';
-import { resetQuizSessionStorageState } from '../utils';
+import { getStateFromSessionStorage, resetQuizSessionStorageState } from '../utils';
 
 const useQuiz: UseQuiz = (quizOptions) => {
   const { apiKey, cioJsClient, primaryColor, resultsPageOptions } = quizOptions;
@@ -40,7 +40,7 @@ const useQuiz: UseQuiz = (quizOptions) => {
   useEffect(() => {
     if (skipToResults) quizEvents.hydrateQuiz();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [quizOptions.quizId]);
 
   const { quizId } = quizOptions;
   const { dispatchApiState, dispatchLocalState } = quizState;
@@ -50,10 +50,18 @@ const useQuiz: UseQuiz = (quizOptions) => {
   useEffect(() => {
     if (quizId === prevQuizId) return;
     if (!prevQuizId) return;
-    resetQuizSessionStorageState(quizSessionStorageState.key)();
-    dispatchLocalState({
-      type: QuestionTypes.Reset,
-    });
+
+    const quizData = getStateFromSessionStorage(quizSessionStorageState.key);
+    if (quizData && quizData[quizId]) {
+      dispatchLocalState({
+        type: QuestionTypes.Hydrate,
+        payload: quizData[quizId],
+      });
+    } else {
+      dispatchLocalState({
+        type: QuestionTypes.Reset,
+      });
+    }
     dispatchApiState({
       type: QuizAPIActionTypes.RESET_QUIZ,
     });
