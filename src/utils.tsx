@@ -137,8 +137,12 @@ export const getStateFromSessionStorage = (quizStateKey: string): QuizLocalReduc
   return null;
 };
 
-export const resetQuizSessionStorageState = (quizStateKey: string) => () => {
-  window?.sessionStorage?.removeItem(quizStateKey);
+export const resetQuizSessionStorageState = (quizStateKey: string, quizId: string) => () => {
+  const quizData = getStateFromSessionStorage(quizStateKey);
+  if (quizData) {
+    const updatedData = { ...quizData, [quizId]: null };
+    window?.sessionStorage?.setItem(quizStateKey, JSON.stringify(updatedData));
+  }
 };
 
 /* istanbul ignore next */
@@ -192,9 +196,9 @@ export function rgbToHsl(r: number, g: number, b: number) {
 
 export function convertPrimaryColorsToString(primaryColorStyles: PrimaryColorStyles) {
   return `{
-    --primary-color-h: ${primaryColorStyles['--primary-color-h']}; 
-    --primary-color-s: ${primaryColorStyles['--primary-color-s']}; 
-    --primary-color-l: ${primaryColorStyles['--primary-color-l']}; 
+    --primary-color-h: ${primaryColorStyles['--primary-color-h']};
+    --primary-color-s: ${primaryColorStyles['--primary-color-s']};
+    --primary-color-l: ${primaryColorStyles['--primary-color-l']};
   }`;
 }
 

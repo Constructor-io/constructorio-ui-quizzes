@@ -25,11 +25,13 @@ describe(`${usePrevious.name}`, () => {
     expect(container).toHaveTextContent('prevX=10');
   });
 
-  it('does not change the previous value if rendered again with the same value', () => {
+  it('changes the previous value if rendered again with the same value', () => {
     const { container, rerender } = render(<Component x={10} />);
-    rerender(<Component x={11} />);
     rerender(<Component x={11} />);
     expect(container).toHaveTextContent('x=11');
     expect(container).toHaveTextContent('prevX=10');
+    rerender(<Component x={11} />);
+    expect(container).toHaveTextContent('x=11');
+    expect(container).toHaveTextContent('prevX=11');
   });
 });

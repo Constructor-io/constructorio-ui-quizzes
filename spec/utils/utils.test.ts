@@ -21,9 +21,9 @@ describe('convertPrimaryColorsToString', () => {
       '--primary-color-l': '0',
     });
     expect(result).toEqual(`{
-    --primary-color-h: 0; 
-    --primary-color-s: 0; 
-    --primary-color-l: 0; 
+    --primary-color-h: 0;
+    --primary-color-s: 0;
+    --primary-color-l: 0;
   }`);
   });
 });
@@ -229,10 +229,32 @@ describe('resetQuizSessionStorageState', () => {
   });
 
   it('removes the specified key from sessionStorage', () => {
-    window.sessionStorage.removeItem = jest.fn();
+    window.sessionStorage.setItem = jest.fn();
 
-    const reset = resetQuizSessionStorageState('quizState');
+    const mockData = { QUIZ_ID_1: { answer: '42' } };
+
+    jest.spyOn(window.sessionStorage, 'getItem').mockReturnValue(JSON.stringify(mockData));
+
+    const reset = resetQuizSessionStorageState('quizState', 'QUIZ_ID_1');
     reset();
-    expect(window.sessionStorage.removeItem).toHaveBeenCalledWith('quizState');
+    expect(window.sessionStorage.setItem).toHaveBeenCalledWith(
+      'quizState',
+      JSON.stringify({ QUIZ_ID_1: null })
+    );
+  });
+
+  it('does not modify other quiz data from session', () => {
+    window.sessionStorage.setItem = jest.fn();
+
+    const mockData = { QUIZ_ID_2: { answer: '42' } };
+
+    jest.spyOn(window.sessionStorage, 'getItem').mockReturnValue(JSON.stringify(mockData));
+
+    const reset = resetQuizSessionStorageState('quizState', 'QUIZ_ID_1');
+    reset();
+    expect(window.sessionStorage.setItem).toHaveBeenCalledWith(
+      'quizState',
+      JSON.stringify({ ...mockData, QUIZ_ID_1: null })
+    );
   });
 });

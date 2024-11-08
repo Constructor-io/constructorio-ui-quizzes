@@ -24,10 +24,13 @@ describe('Testing Hook (server): useSessionStorageState', () => {
     quizSessionId: QUIZ_SESSION_ID,
   };
 
+  const quizId = 'quizId';
+
   it('does not throw when rendered server-side', () => {
     expect(() => {
       renderHookServerSide(
-        () => useSessionStorageState(mockState, { sessionStateKey: QUIZ_SESSION_KEY }, false),
+        () =>
+          useSessionStorageState(quizId, mockState, { sessionStateKey: QUIZ_SESSION_KEY }, false),
         {
           initialProps: {},
         }
@@ -37,7 +40,7 @@ describe('Testing Hook (server): useSessionStorageState', () => {
 
   it('return correct data on server-side when enableHydration equals false', () => {
     const { result } = renderHookServerSide(
-      () => useSessionStorageState(mockState, { sessionStateKey: QUIZ_SESSION_KEY }, false),
+      () => useSessionStorageState(quizId, mockState, { sessionStateKey: QUIZ_SESSION_KEY }, false),
       {
         initialProps: {},
       }
