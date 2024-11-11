@@ -1,13 +1,14 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { ActionAnswerQuestion, QuestionTypes } from '../../components/CioQuiz/actions';
-import { QuizEventsReturn } from '../../types';
+import { QuizEventsReturn, QuizSessionStorageState } from '../../types';
 import { getStateFromSessionStorage } from '../../utils';
 
 const useHydrateQuizLocalState = (
   quizId: string,
-  quizSessionStorageStateKey: string,
+  quizSessionStorageState: QuizSessionStorageState,
   dispatchLocalState: React.Dispatch<ActionAnswerQuestion>
 ): QuizEventsReturn.NextQuestion => {
+  const { key: quizSessionStorageStateKey, skipToResults } = quizSessionStorageState;
   const sessionStorageQuizState = getStateFromSessionStorage(quizSessionStorageStateKey);
   const hydrateQuizLocalStateHandler = useCallback(() => {
     const quizData = sessionStorageQuizState?.[quizId];
@@ -18,6 +19,11 @@ const useHydrateQuizLocalState = (
       });
     }
   }, [dispatchLocalState, quizId, sessionStorageQuizState]);
+
+  useEffect(() => {
+    if (skipToResults) hydrateQuizLocalStateHandler();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return hydrateQuizLocalStateHandler;
 };

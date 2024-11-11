@@ -85,7 +85,7 @@ const useQuizEvents: UseQuizEvents = (quizOptions, cioClient, quizState) => {
   // Quiz rehydrate
   const hydrateQuizLocalState = useHydrateQuizLocalState(
     quizOptions.quizId,
-    quizSessionStorageState.key,
+    quizSessionStorageState,
     dispatchLocalState
   );
 
