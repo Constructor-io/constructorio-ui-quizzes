@@ -35,7 +35,6 @@ export const BasicUsage: Story = {
     resultsPageOptions,
     resultCardOptions,
     callbacks,
-    sessionStateOptions,
     primaryColor: '35, 71, 199',
   },
 };
