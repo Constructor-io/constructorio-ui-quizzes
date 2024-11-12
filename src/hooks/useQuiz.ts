@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { UseQuiz } from '../types';
 import useCioClient from './useCioClient';
 import useConsoleErrors from './useConsoleErrors';
@@ -6,9 +5,6 @@ import usePropsGetters from './usePropsGetters';
 import usePrimaryColorStyles from './usePrimaryColorStyles';
 import useQuizEvents from './useQuizEvents';
 import useQuizState from './useQuizState';
-import usePrevious from './usePrevious';
-import { QuestionTypes, QuizAPIActionTypes } from '../components/CioQuiz/actions';
-import { resetQuizSessionStorageState } from '../utils';
 
 const useQuiz: UseQuiz = (quizOptions) => {
   const { apiKey, cioJsClient, primaryColor, resultsPageOptions } = quizOptions;
@@ -27,7 +23,6 @@ const useQuiz: UseQuiz = (quizOptions) => {
 
   // Props getters
   const { quizApiState, quizLocalState, quizSessionStorageState } = quizState;
-  const { skipToResults } = quizSessionStorageState;
   const propGetters = usePropsGetters(
     quizEvents,
     quizApiState,
@@ -36,29 +31,6 @@ const useQuiz: UseQuiz = (quizOptions) => {
   );
 
   const primaryColorStyles = usePrimaryColorStyles(primaryColor);
-
-  useEffect(() => {
-    if (skipToResults) quizEvents.hydrateQuiz();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const { quizId } = quizOptions;
-  const { dispatchApiState, dispatchLocalState } = quizState;
-
-  const prevQuizId = usePrevious(quizId);
-
-  useEffect(() => {
-    if (quizId === prevQuizId) return;
-    if (!prevQuizId) return;
-    dispatchLocalState({
-      type: QuestionTypes.Reset,
-    });
-    dispatchApiState({
-      type: QuizAPIActionTypes.RESET_QUIZ,
-    });
-    resetQuizSessionStorageState(quizSessionStorageState.key);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [quizId, prevQuizId]);
 
   return {
     cioClient,

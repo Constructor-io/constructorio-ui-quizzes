@@ -5,28 +5,37 @@ import { QuizLocalReducerState } from '../../components/CioQuiz/quizLocalReducer
 import { quizSessionStateKey } from '../../constants';
 
 const useSessionStorageState = (
+  quizId: string,
   quizLocalState?: QuizLocalReducerState,
   sessionStateOptions?: SessionStateOptions,
   enableHydration?: boolean
 ) => {
   const quizSessionStorageStateKey = sessionStateOptions?.sessionStateKey || quizSessionStateKey;
+
   // Save state to session storage
   useEffect(() => {
     // don't save state if initial state
     if (enableHydration && quizLocalState?.answers?.length) {
-      window?.sessionStorage?.setItem(quizSessionStorageStateKey, JSON.stringify(quizLocalState));
+      const data = getStateFromSessionStorage(quizSessionStorageStateKey);
+      const dataToSave = {
+        ...data,
+        [quizId]: quizLocalState,
+      };
+      window?.sessionStorage?.setItem(quizSessionStorageStateKey, JSON.stringify(dataToSave));
     }
-  }, [quizLocalState, quizSessionStorageStateKey, enableHydration]);
+  }, [quizLocalState, quizSessionStorageStateKey, enableHydration, quizId]);
+
+  const quizData = getStateFromSessionStorage(quizSessionStorageStateKey);
 
   const skipToResults =
     !!enableHydration &&
-    !!getStateFromSessionStorage(quizSessionStorageStateKey)?.isQuizCompleted &&
+    !!quizData?.[quizId]?.isQuizCompleted &&
     !sessionStateOptions?.showSessionModalOnResults;
 
   return {
     skipToResults,
     quizSessionStorageStateKey,
-    hasSessionStorageState: () => getStateFromSessionStorage(quizSessionStorageStateKey) !== null,
+    hasSessionStorageState: () => !!quizData && !!quizData[quizId],
   };
 };
 
