@@ -19,7 +19,6 @@ import {
 } from '../../services';
 import { IQuizProps } from '../../types';
 import useQueryParams from '../useQueryParams';
-import usePrevious from '../usePrevious';
 
 type UseQuizApiState = (
   quizOptions: IQuizProps,
@@ -104,13 +103,8 @@ const useQuizApiState: UseQuizApiState = (
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [quizApiState.resultsConfig]);
 
-  const prevQuizId = usePrevious(quizId);
-
   useEffect(() => {
     (async () => {
-      // If quizId is the same as the previous quizId, wait for next render after reset
-      if (!!prevQuizId && quizId !== prevQuizId) return;
-
       dispatchApiState({
         type: QuizAPIActionTypes.SET_IS_LOADING,
       });
@@ -165,7 +159,6 @@ const useQuizApiState: UseQuizApiState = (
   }, [
     cioClient,
     quizId,
-    prevQuizId,
     quizLocalState.answers,
     resultsPageOptions?.numResultsToDisplay,
     isSharedResultsQuery,

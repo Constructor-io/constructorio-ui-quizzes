@@ -3,7 +3,6 @@ import { mockConstructorIOClient } from '../../../__tests__/utils';
 import useQuizApiState from '../../../../src/hooks/useQuizState/useQuizApiState';
 import { getQuizResults } from '../../../../src/services';
 import { QUIZ_VERSION_ID, QUIZ_ID } from '../../../__tests__/constants';
-import * as usePrevious from '../../../../src/hooks/usePrevious';
 
 jest.mock('../../../../src/services', () => ({
   getNextQuestion: jest.fn().mockResolvedValue({
