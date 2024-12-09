@@ -5,12 +5,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import CioQuiz from '../../../components/CioQuiz';
 import { argTypes, storiesControls } from '../argTypes';
 import { apiKey, quizId } from '../../../constants';
-import {
-  callbacks,
-  resultsPageOptions,
-  sessionStateOptions,
-  resultCardOptions,
-} from '../tests/mocks';
+import { callbacks, resultsPageOptions, resultCardOptions } from '../tests/mocks';
 
 import { IQuizProps } from '../../../types';
 
@@ -35,7 +30,6 @@ export const BasicUsage: Story = {
     resultsPageOptions,
     resultCardOptions,
     callbacks,
-    sessionStateOptions,
     primaryColor: '35, 71, 199',
   },
 };

@@ -13,12 +13,9 @@ const useSessionStorageState = (
 ) => {
   const quizSessionStorageStateKey = sessionStateOptions?.sessionStateKey || quizSessionStateKey;
 
-  const prevQuizId = usePrevious(quizId);
-
   // Save state to session storage
   useEffect(() => {
     // don't save state if initial state
-    if (prevQuizId && quizId !== prevQuizId) return;
     if (enableHydration && quizLocalState?.answers?.length) {
       const data = getStateFromSessionStorage(quizSessionStorageStateKey);
       const dataToSave = {
@@ -27,7 +24,7 @@ const useSessionStorageState = (
       };
       window?.sessionStorage?.setItem(quizSessionStorageStateKey, JSON.stringify(dataToSave));
     }
-  }, [quizLocalState, quizSessionStorageStateKey, enableHydration, quizId, prevQuizId]);
+  }, [quizLocalState, quizSessionStorageStateKey, enableHydration, quizId]);
 
   const quizData = getStateFromSessionStorage(quizSessionStorageStateKey);
 

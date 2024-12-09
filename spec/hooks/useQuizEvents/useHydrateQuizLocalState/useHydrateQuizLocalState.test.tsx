@@ -13,6 +13,11 @@ describe('Testing Hook (client): useHydrateQuizLocalState', () => {
     key: jest.fn(),
     length: 0,
   };
+  const quizSessionStorage = {
+    key: quizSessionStorageStateKey,
+    skipToResults: true,
+    hasSessionStorageState: () => true,
+  };
 
   beforeAll(() => {
     global.sessionStorage = sessionStorageMock;
@@ -29,7 +34,7 @@ describe('Testing Hook (client): useHydrateQuizLocalState', () => {
     );
 
     const { result } = renderHook(() =>
-      useHydrateQuizLocalState(quizId, quizSessionStorageStateKey, dispatchLocalStateMock)
+      useHydrateQuizLocalState(quizId, quizSessionStorage, dispatchLocalStateMock)
     );
 
     act(() => {
