@@ -15,13 +15,14 @@ function Results(props: ResultsProps) {
     renderResultCard,
   } = props;
 
-  const { state, getAddToCartButtonProps, getAddToFavoritesButtonProps } = useContext(QuizContext);
-  const getters = { getAddToCartButtonProps, getAddToFavoritesButtonProps };
+  const { state, getAddToCartButtonProps, getAddToFavoritesButtonProps, getQuizResultLinkProps } =
+    useContext(QuizContext);
+  const getters = { getAddToCartButtonProps, getAddToFavoritesButtonProps, getQuizResultLinkProps };
   return (
     <div className='cio-results'>
       {state?.quiz?.results?.response?.results?.map((result, index) =>
         renderResultCard ? (
-          renderResultCard(result, getters)
+          renderResultCard(result, getters, index)
         ) : (
           <ResultCard
             result={result}
