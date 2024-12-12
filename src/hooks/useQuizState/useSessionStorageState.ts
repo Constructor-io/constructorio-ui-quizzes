@@ -3,6 +3,7 @@ import { getStateFromSessionStorage } from '../../utils';
 import { SessionStateOptions } from '../../types';
 import { QuizLocalReducerState } from '../../components/CioQuiz/quizLocalReducer';
 import { quizSessionStateKey } from '../../constants';
+import usePrevious from '../usePrevious';
 
 const useSessionStorageState = (
   quizId: string,
