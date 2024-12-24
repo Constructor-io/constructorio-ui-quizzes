@@ -37,6 +37,7 @@ const useQuiz: UseQuiz = (quizOptions) => {
     state: {
       answers: {
         inputs: quizLocalState.answerInputs,
+        answers: quizLocalState.answers,
       },
       quiz: {
         requestState: quizApiState.quizRequestState,

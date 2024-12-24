@@ -39,7 +39,13 @@ const useQuizApiState: UseQuizApiState = (
 ) => {
   const [quizApiState, dispatchApiState] = useReducer(apiReducer, initialState);
   const { quizId, quizVersionId: quizVersionIdProp, resultsPageOptions } = quizOptions;
-  const { queryItems, queryAttributes, isSharedResultsQuery } = useQueryParams();
+  const {
+    queryItems,
+    queryAttributes,
+    isSharedResultsQuery,
+    answers,
+    quizVersionId: quizVersionIdFromParam,
+  } = useQueryParams();
   const dispatchQuizResults = async () => {
     try {
       const quizResults = await getQuizResults(cioClient, quizId, {
@@ -86,7 +92,17 @@ const useQuizApiState: UseQuizApiState = (
 
   const dispatchSharedQuizResults = async () => {
     try {
-      const quizResults = await getBrowseResultsForItemIds(cioClient, queryItems);
+      let quizResults;
+      try {
+        quizResults = await getQuizResults(cioClient, quizId, {
+          answers,
+          resultsPerPage: resultsPageOptions?.numResultsToDisplay,
+          quizVersionId: quizVersionIdFromParam,
+          ...resultsPageOptions?.requestConfigs,
+        });
+      } catch (error) {
+        quizResults = await getBrowseResultsForItemIds(cioClient, queryItems);
+      }
 
       dispatchApiState({
         type: QuizAPIActionTypes.SET_QUIZ_SHARED_RESULTS,

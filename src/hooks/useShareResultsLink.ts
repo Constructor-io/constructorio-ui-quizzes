@@ -1,6 +1,9 @@
 import { QuizReturnState } from '../types';
 
-export default function useShareResultsLink(quizState: QuizReturnState['quiz']) {
+export default function useShareResultsLink(
+  quizState: QuizReturnState['quiz'],
+  answers: string[][]
+) {
   if (typeof window === 'undefined') {
     return '';
   }
@@ -23,6 +26,14 @@ export default function useShareResultsLink(quizState: QuizReturnState['quiz']) 
     'attributes',
     quizState.selectedOptionsWithAttributes?.map((option) => option).join(',') || ''
   );
+
+  if (quizState.versionId) {
+    existingParams.set('quiz_version_id', quizState.versionId);
+  }
+
+  if (answers && answers.length) {
+    existingParams.set('a', answers.map((ans) => ans.join('-')).join(',') || '');
+  }
 
   const value = urlObj.toString();
 
