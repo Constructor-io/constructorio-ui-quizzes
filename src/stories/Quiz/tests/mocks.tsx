@@ -89,7 +89,7 @@ export const getMockState = (question?: Question, options?: MockOptions): QuizRe
         value: '',
       },
     }, // Key is the question Id and value is the answer input
-    answers: [['']],
+    payload: [['']],
   },
   quiz: {
     requestState: RequestStates.Success,
