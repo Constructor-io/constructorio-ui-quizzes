@@ -93,14 +93,18 @@ const useQuizApiState: UseQuizApiState = (
   const dispatchSharedQuizResults = async () => {
     try {
       let quizResults;
-      try {
-        quizResults = await getQuizResults(cioClient, quizId, {
-          answers,
-          resultsPerPage: resultsPageOptions?.numResultsToDisplay,
-          quizVersionId: quizVersionIdFromParam,
-          ...resultsPageOptions?.requestConfigs,
-        });
-      } catch (error) {
+      if (quizVersionIdFromParam && answers && answers.length) {
+        try {
+          quizResults = await getQuizResults(cioClient, quizId, {
+            answers,
+            resultsPerPage: resultsPageOptions?.numResultsToDisplay,
+            quizVersionId: quizVersionIdFromParam,
+            ...resultsPageOptions?.requestConfigs,
+          });
+        } catch (error) {
+          quizResults = await getBrowseResultsForItemIds(cioClient, queryItems);
+        }
+      } else {
         quizResults = await getBrowseResultsForItemIds(cioClient, queryItems);
       }
 
