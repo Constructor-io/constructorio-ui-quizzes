@@ -115,7 +115,7 @@ export interface IQuizProps {
   sessionStateOptions?: SessionStateOptions;
   primaryColor?: string;
   enableHydration?: boolean;
-  callbacks?: Callbacks;
+  callbacks: Callbacks;
   questionsPageOptions?: QuestionsPageOptions;
 }
 
