@@ -21,6 +21,7 @@ describe('useQuizApiState - Server', () => {
     const quizOptions = {
       quizId: QUIZ_ID,
       quizVersionId: QUIZ_VERSION_ID,
+      callbacks: { onAddToCartClick: () => {}},
       resultsPageOptions: {},
     };
     const quizLocalState = {

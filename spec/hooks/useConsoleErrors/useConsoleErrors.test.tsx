@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+// @ts-nocheck
 import { renderHook } from '@testing-library/react';
 import useConsoleErrors from '../../../src/hooks/useConsoleErrors';
 import { IQuizProps } from '../../../src/types';
@@ -21,7 +22,7 @@ describe('Testing Hook (client): useConsoleErrors', () => {
   });
 
   it('logs error if onAddToCartClick is missing', () => {
-    const quizOptions = { quizId: QUIZ_ID };
+    const quizOptions = { quizId: QUIZ_ID, callbacks: {} };
     renderHook(() => useConsoleErrors(quizOptions));
 
     expect(console.error).toHaveBeenCalledWith(
