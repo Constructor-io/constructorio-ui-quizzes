@@ -49,7 +49,7 @@ export interface ResultCardOptions {
     getters: {
       getAddToCartButtonProps?: GetAddToCartButtonProps;
       getAddToFavoritesButtonProps?: GetAddToFavoritesButtonProps;
-      getResultLinkProps?: GetQuizResultLinkProps;
+      getQuizResultLinkProps?: GetQuizResultLinkProps;
     },
     index: number
   ) => JSX.Element;
