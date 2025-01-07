@@ -13,6 +13,10 @@ describe(`${ShareResultsModal.name} client`, () => {
     onClose: jest.fn(),
     onEmailResults: jest.fn(),
     quizState: { results } as QuizReturnState['quiz'],
+    answers: [
+      ['1', '2'],
+      ['3', '4'],
+    ],
   };
 
   beforeEach(() => {

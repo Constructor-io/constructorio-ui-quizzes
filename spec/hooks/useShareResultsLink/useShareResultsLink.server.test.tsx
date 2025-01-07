@@ -15,7 +15,7 @@ describe('Testing Hook (server): useShareResultsLink', () => {
     };
 
     const { result } = renderHookServerSide(
-      () => useShareResultsLink(quizState as unknown as QuizReturnState['quiz']),
+      () => useShareResultsLink(quizState as unknown as QuizReturnState['quiz'], []),
       {
         initialProps: {},
       }

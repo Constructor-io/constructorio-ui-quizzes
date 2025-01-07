@@ -10,6 +10,7 @@ describe(`${ShareResultsModal.name} client`, () => {
     onClose: jest.fn(),
     onEmailResults: jest.fn(),
     quizState: {} as QuizReturnState['quiz'],
+    answers: [],
   };
 
   beforeEach(() => {

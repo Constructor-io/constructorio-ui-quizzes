@@ -26,12 +26,13 @@ describe('Testing Hook (client): useShareResultsLink', () => {
     };
 
     const { result } = renderHook(() =>
-      useShareResultsLink(quizState as unknown as QuizReturnState['quiz'])
+      useShareResultsLink(quizState as unknown as QuizReturnState['quiz'], [['1', '2'], ['seen']])
     );
 
     const decodedResult = decodeURIComponent(result.current);
 
     expect(decodedResult).toContain('items=1,2');
     expect(decodedResult).toContain('attributes=attr1,attr2');
+    expect(decodedResult).toContain('a=1-2,seen');
   });
 });

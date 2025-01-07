@@ -128,6 +128,7 @@ export default function CioQuiz(props: IQuizProps) {
             onClose={onModalClose}
             quizState={state.quiz}
             onEmailResults={callbacks?.onEmailResults}
+            answers={state.answers.payload}
           />
         )}
 
