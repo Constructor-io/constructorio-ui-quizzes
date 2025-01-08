@@ -21,7 +21,8 @@ describe('Testing Hook (client): useConsoleErrors', () => {
   });
 
   it('logs error if onAddToCartClick is missing', () => {
-    const quizOptions = { quizId: QUIZ_ID };
+    const quizOptions = { quizId: QUIZ_ID, callbacks: {} };
+    // @ts-expect-error Testing the error itself
     renderHook(() => useConsoleErrors(quizOptions));
 
     expect(console.error).toHaveBeenCalledWith(

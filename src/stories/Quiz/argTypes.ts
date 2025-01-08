@@ -55,7 +55,7 @@ export const argTypes = {
     },
   },
   'callbacks.onAddToCartClick': {
-    description: 'Callback function to be called when the add to cart button is clicked',
+    description: 'Callback function to be called when the add to cart button is clicked. Required',
     control: false,
     table: {
       subcategory: 'callbacks',
