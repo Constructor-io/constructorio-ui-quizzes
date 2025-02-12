@@ -13,6 +13,7 @@ function Results(props: ResultsProps) {
     resultCardRatingScoreKey,
     renderResultCardPriceDetails,
     renderResultCard,
+    getResultCardImageUrl,
   } = props;
 
   const { state, getAddToCartButtonProps, getAddToFavoritesButtonProps, getQuizResultLinkProps } =
@@ -32,6 +33,7 @@ function Results(props: ResultsProps) {
             ratingCountKey={resultCardRatingCountKey}
             ratingScoreKey={resultCardRatingScoreKey}
             renderResultCardPriceDetails={renderResultCardPriceDetails}
+            getResultCardImageUrl={getResultCardImageUrl}
             resultPosition={index + 1}
           />
         )
