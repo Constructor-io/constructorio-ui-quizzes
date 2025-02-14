@@ -13,7 +13,7 @@ interface ResultCardOptions {
   ratingScoreKey?: string;
   resultPosition: number;
   renderResultCardPriceDetails?: (result: QuizResultDataPartial) => JSX.Element;
-  getResultCardImageUrl?: (imageUrl: string) => string;
+  getResultCardImageUrl?: (result: QuizResultDataPartial) => string;
 }
 
 export default function ResultCard(props: ResultCardOptions) {
@@ -51,11 +51,7 @@ export default function ResultCard(props: ResultCardOptions) {
     <>
       <div className='cio-result-card-image'>
         <img
-          src={
-            getResultCardImageUrl
-              ? getResultCardImageUrl(result.data?.image_url)
-              : result.data?.image_url
-          }
+          src={getResultCardImageUrl ? getResultCardImageUrl(result) : result.data?.image_url}
           alt='product'
         />
       </div>

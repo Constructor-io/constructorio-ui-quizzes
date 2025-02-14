@@ -53,7 +53,7 @@ export interface ResultCardOptions {
     },
     index: number
   ) => JSX.Element;
-  getResultCardImageUrl?: (imageUrl: string) => string;
+  getResultCardImageUrl?: (result: QuizResultDataPartial) => string;
 }
 
 export namespace QuizResultsEventsProps {
