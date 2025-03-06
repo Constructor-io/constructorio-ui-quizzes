@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 
 import OpenTextQuestion from '../../../src/components/OpenTextTypeQuestion/OpenTextTypeQuestion';
 import { withContext } from '../../__tests__/utils';
@@ -80,6 +80,58 @@ describe(`${OpenTextQuestion.name} client`, () => {
     it('renders empty', () => {
       const { container } = render(<Subject />);
       expect(container).toBeEmptyDOMElement();
+    });
+  });
+
+  describe('callback on enter key event', () => {
+    const onOpenQuestionInput = jest.fn();
+    let inputValue = '';
+
+    const Subject = withContext(OpenTextQuestion, {
+      contextMocks: {
+        getOpenTextInputProps: () => ({
+          placeholder: 'placeholder',
+          className: 'test-input',
+          value: inputValue,
+          onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+            inputValue = e.target.value;
+          },
+          onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => {
+            if (e.key === 'Enter') {
+              onOpenQuestionInput(inputValue, 'open');
+            }
+          },
+        }),
+        state: {
+          quiz: {
+            currentQuestion: {
+              next_question: {
+                title: 'Title',
+                description: 'Description',
+                cta_text: 'CTA Text',
+                id: 1,
+                type: 'open',
+              },
+            } as CurrentQuestion,
+          } as QuizReturnState['quiz'],
+        } as QuizContextValue['state'],
+      },
+    });
+
+    beforeEach(() => {
+      onOpenQuestionInput.mockClear();
+      inputValue = '';
+    });
+
+    it('calls callback when pressing Enter', () => {
+      render(<Subject />);
+      const input = screen.getByRole('textbox');
+
+      fireEvent.change(input, { target: { value: 'test text' } });
+      fireEvent.keyDown(input, { key: 'Enter' });
+
+      expect(onOpenQuestionInput).toHaveBeenCalledTimes(1);
+      expect(onOpenQuestionInput).toHaveBeenCalledWith('test text', 'open');
     });
   });
 });

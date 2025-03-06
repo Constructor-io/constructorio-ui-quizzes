@@ -1,30 +1,44 @@
 import { Nullable } from '@constructor-io/constructorio-client-javascript/lib/types';
 import { useState, useCallback, useEffect } from 'react';
-import { AnswerInputState, GetOpenTextInputProps, Question, QuizEventsReturn } from '../../types';
+import {
+  AnswerInputState,
+  GetOpenTextInputProps,
+  Question,
+  QuizEventsReturn,
+  OpenQuestionCallback,
+} from '../../types';
 
+// eslint-disable-next-line max-params
 export default function useOpenTextInputProps(
   setQuizAnswers: QuizEventsReturn.QuizAnswerChanged,
   nextQuestion: QuizEventsReturn.NextQuestion,
   currentQuestionData?: Nullable<Question>,
-  answerInputs?: AnswerInputState
+  answerInputs?: AnswerInputState,
+  onOpenQuestionInput?: OpenQuestionCallback
 ): GetOpenTextInputProps {
   const [input, setInput] = useState('');
 
   const onChangeHandler = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value);
+    const newValue = e.target.value;
+    setInput(newValue);
   }, []);
 
   const onKeyDownHandler = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
       const { key } = e;
+      if (key !== 'Enter') {
+        return;
+      }
 
-      if (key === 'Enter') {
-        if (input && currentQuestionData?.type === 'open') {
-          nextQuestion();
+      if (input && currentQuestionData?.type === 'open') {
+        if (onOpenQuestionInput) {
+          onOpenQuestionInput(input, currentQuestionData);
         }
+
+        nextQuestion();
       }
     },
-    [currentQuestionData?.type, input, nextQuestion]
+    [currentQuestionData, input, nextQuestion, onOpenQuestionInput]
   );
 
   useEffect(() => {

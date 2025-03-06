@@ -17,6 +17,7 @@ import {
   GetAddToFavoritesButtonProps,
   GetSkipQuestionButtonProps,
   GetShareResultsButtonProps,
+  OpenQuestionCallback,
 } from '../../types';
 import { QuizAPIReducerState } from '../../components/CioQuiz/quizApiReducer';
 import { QuizLocalReducerState } from '../../components/CioQuiz/quizLocalReducer';
@@ -32,7 +33,9 @@ const usePropsGetters = (
   quizEvents: QuizEventsReturn,
   quizApiState: QuizAPIReducerState,
   quizLocalState: QuizLocalReducerState,
-  favoriteItems?: string[]
+  favoriteItems?: string[],
+  onOpenQuestionInput?: OpenQuestionCallback
+  // eslint-disable-next-line max-params
 ) => {
   const {
     quizAnswerChanged,
@@ -50,7 +53,8 @@ const usePropsGetters = (
     quizAnswerChanged,
     nextQuestion,
     quizApiState.quizCurrentQuestion?.next_question,
-    quizLocalState.answerInputs
+    quizLocalState.answerInputs,
+    onOpenQuestionInput
   );
 
   const getCoverQuestionProps: GetCoverQuestionProps = useCoverQuestionProps(
@@ -68,7 +72,8 @@ const usePropsGetters = (
   const getNextQuestionButtonProps: GetNextQuestionButtonProps = useNextQuestionButtonProps(
     nextQuestion,
     quizApiState,
-    quizLocalState
+    quizLocalState,
+    onOpenQuestionInput
   );
 
   const getSkipQuestionButtonProps: GetSkipQuestionButtonProps = useSkipQuestionButtonProps(

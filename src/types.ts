@@ -106,6 +106,8 @@ export interface Callbacks {
   onShareResultsModalClose?: QuizResultsEventsProps.OnShareResultsModalClose;
 }
 
+export type OpenQuestionCallback = (value: string, questionData: Question) => void;
+
 export interface IQuizProps {
   apiKey?: string;
   cioJsClient?: ConstructorIOClient;
@@ -118,6 +120,7 @@ export interface IQuizProps {
   enableHydration?: boolean;
   callbacks: Callbacks;
   questionsPageOptions?: QuestionsPageOptions;
+  onOpenQuestionInput?: OpenQuestionCallback;
 }
 
 // QUIZ RETURN VALUES
