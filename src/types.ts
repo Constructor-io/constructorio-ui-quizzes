@@ -120,7 +120,7 @@ export interface IQuizProps {
   enableHydration?: boolean;
   callbacks: Callbacks;
   questionsPageOptions?: QuestionsPageOptions;
-  onOpenQuestionInput?: OpenQuestionCallback;
+  onOpenQuestionAnswered?: OpenQuestionCallback;
 }
 
 // QUIZ RETURN VALUES

@@ -14,7 +14,7 @@ export default function useOpenTextInputProps(
   nextQuestion: QuizEventsReturn.NextQuestion,
   currentQuestionData?: Nullable<Question>,
   answerInputs?: AnswerInputState,
-  onOpenQuestionInput?: OpenQuestionCallback
+  onOpenQuestionAnswered?: OpenQuestionCallback
 ): GetOpenTextInputProps {
   const [input, setInput] = useState('');
 
@@ -31,14 +31,14 @@ export default function useOpenTextInputProps(
       }
 
       if (input && currentQuestionData?.type === 'open') {
-        if (onOpenQuestionInput) {
-          onOpenQuestionInput(input, currentQuestionData);
+        if (onOpenQuestionAnswered) {
+          onOpenQuestionAnswered(input, currentQuestionData);
         }
 
         nextQuestion();
       }
     },
-    [currentQuestionData, input, nextQuestion, onOpenQuestionInput]
+    [currentQuestionData, input, nextQuestion, onOpenQuestionAnswered]
   );
 
   useEffect(() => {

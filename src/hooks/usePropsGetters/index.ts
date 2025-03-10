@@ -34,7 +34,7 @@ const usePropsGetters = (
   quizApiState: QuizAPIReducerState,
   quizLocalState: QuizLocalReducerState,
   favoriteItems?: string[],
-  onOpenQuestionInput?: OpenQuestionCallback
+  onOpenQuestionAnswered?: OpenQuestionCallback
   // eslint-disable-next-line max-params
 ) => {
   const {
@@ -54,7 +54,7 @@ const usePropsGetters = (
     nextQuestion,
     quizApiState.quizCurrentQuestion?.next_question,
     quizLocalState.answerInputs,
-    onOpenQuestionInput
+    onOpenQuestionAnswered
   );
 
   const getCoverQuestionProps: GetCoverQuestionProps = useCoverQuestionProps(
@@ -73,7 +73,7 @@ const usePropsGetters = (
     nextQuestion,
     quizApiState,
     quizLocalState,
-    onOpenQuestionInput
+    onOpenQuestionAnswered
   );
 
   const getSkipQuestionButtonProps: GetSkipQuestionButtonProps = useSkipQuestionButtonProps(

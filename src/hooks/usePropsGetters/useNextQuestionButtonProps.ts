@@ -7,7 +7,7 @@ export default function useNextQuestionButtonProps(
   nextQuestion: QuizEventsReturn.NextQuestion,
   quizApiState: QuizAPIReducerState,
   quizLocalState: QuizLocalReducerState,
-  onOpenQuestionInput?: OpenQuestionCallback
+  onOpenQuestionAnswered?: OpenQuestionCallback
 ): GetNextQuestionButtonProps {
   const getNextQuestionButtonProps: GetNextQuestionButtonProps = useCallback(() => {
     const currentQuestion = quizApiState.quizCurrentQuestion?.next_question;
@@ -27,11 +27,11 @@ export default function useNextQuestionButtonProps(
       'aria-describedby': buttonDisabled ? 'next-button-help' : '',
       type: 'button',
       onClick: () => {
-        if (currentQuestion?.type === 'open' && onOpenQuestionInput && currentQuestionId) {
+        if (currentQuestion?.type === 'open' && onOpenQuestionAnswered && currentQuestionId) {
           const value = quizLocalState.answerInputs[currentQuestionId]?.value;
 
           if (value && typeof value === 'string') {
-            onOpenQuestionInput(value, currentQuestion);
+            onOpenQuestionAnswered(value, currentQuestion);
           }
         }
         nextQuestion();
@@ -41,7 +41,7 @@ export default function useNextQuestionButtonProps(
     quizApiState.quizCurrentQuestion,
     quizLocalState.answerInputs,
     nextQuestion,
-    onOpenQuestionInput,
+    onOpenQuestionAnswered,
   ]);
 
   return getNextQuestionButtonProps;

@@ -84,7 +84,7 @@ describe(`${OpenTextQuestion.name} client`, () => {
   });
 
   describe('callback on enter key event', () => {
-    const onOpenQuestionInput = jest.fn();
+    const onOpenQuestionAnswered = jest.fn();
     let inputValue = '';
 
     const Subject = withContext(OpenTextQuestion, {
@@ -98,7 +98,7 @@ describe(`${OpenTextQuestion.name} client`, () => {
           },
           onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => {
             if (e.key === 'Enter') {
-              onOpenQuestionInput(inputValue, 'open');
+              onOpenQuestionAnswered(inputValue, 'open');
             }
           },
         }),
@@ -119,7 +119,7 @@ describe(`${OpenTextQuestion.name} client`, () => {
     });
 
     beforeEach(() => {
-      onOpenQuestionInput.mockClear();
+      onOpenQuestionAnswered.mockClear();
       inputValue = '';
     });
 
@@ -130,8 +130,8 @@ describe(`${OpenTextQuestion.name} client`, () => {
       fireEvent.change(input, { target: { value: 'test text' } });
       fireEvent.keyDown(input, { key: 'Enter' });
 
-      expect(onOpenQuestionInput).toHaveBeenCalledTimes(1);
-      expect(onOpenQuestionInput).toHaveBeenCalledWith('test text', 'open');
+      expect(onOpenQuestionAnswered).toHaveBeenCalledTimes(1);
+      expect(onOpenQuestionAnswered).toHaveBeenCalledWith('test text', 'open');
     });
   });
 });

@@ -7,7 +7,7 @@ import useQuizEvents from './useQuizEvents';
 import useQuizState from './useQuizState';
 
 const useQuiz: UseQuiz = (quizOptions) => {
-  const { apiKey, cioJsClient, primaryColor, resultsPageOptions, onOpenQuestionInput } =
+  const { apiKey, cioJsClient, primaryColor, resultsPageOptions, onOpenQuestionAnswered } =
     quizOptions;
 
   // Log console errors for required parameters quizId
@@ -29,7 +29,7 @@ const useQuiz: UseQuiz = (quizOptions) => {
     quizApiState,
     quizLocalState,
     resultsPageOptions?.favoriteItems,
-    onOpenQuestionInput
+    onOpenQuestionAnswered
   );
 
   const primaryColorStyles = usePrimaryColorStyles(primaryColor);
