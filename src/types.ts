@@ -8,6 +8,7 @@ import {
   QuizResultsConfig,
   QuizzesResultsParameters,
   QuizzesParameters,
+  QuizResult,
 } from '@constructor-io/constructorio-client-javascript/lib/types';
 import ConstructorIOClient, {
   GetBrowseResultsForItemIdsResponse,
@@ -43,6 +44,7 @@ export interface ResultCardOptions {
   resultCardRegularPriceKey?: string;
   resultCardRatingCountKey?: string;
   resultCardRatingScoreKey?: string;
+  swatchImageKey?: string;
   renderResultCardPriceDetails?: (result: QuizResultDataPartial) => JSX.Element;
   renderResultCard?: (
     result: QuizResultDataPartial,
@@ -303,6 +305,16 @@ export interface SelectInputProps {
   key: number;
 }
 
+export interface SwatchProps
+  extends React.DetailedHTMLProps<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  > {
+  key: string;
+  className: string;
+  type: 'button';
+}
+
 export type GetOpenTextInputProps = () => OpenTextInputProps;
 export type GetCoverQuestionProps = () => CoverQuestionProps;
 export type GetSelectInputProps = (option: QuestionOption) => SelectInputProps;
@@ -325,7 +337,12 @@ export type GetAddToFavoritesButtonProps = (
 ) => AddToCartButtonProps;
 export type GetQuizImageProps = () => QuizImageProps;
 export type GetSelectQuestionImageProps = (option: QuestionOption) => QuizImageProps;
-
+export type GetQuizResultSwatchProps = (
+  variation: QuizResultDataPartial,
+  onVariationClick: (variation: QuizResultDataPartial) => void,
+  faceOutResult: QuizResultDataPartial,
+  swatchImageKey?: string
+) => SwatchProps;
 export interface QuizResultOptions<T = 'button' | 'link'> {
   result: QuizResultDataPartial;
   position: number;
@@ -361,6 +378,7 @@ export interface UseQuizReturn {
   getAddToFavoritesButtonProps: GetAddToFavoritesButtonProps;
   getQuizResultButtonProps: GetQuizResultButtonProps;
   getQuizResultLinkProps: GetQuizResultLinkProps;
+  getQuizResultSwatchProps: GetQuizResultSwatchProps;
   primaryColorStyles: PrimaryColorStyles;
 }
 

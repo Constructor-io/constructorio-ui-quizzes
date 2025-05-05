@@ -26,6 +26,7 @@ export default function ResultContainer(props: IResultContainerProps) {
     renderResultCardPriceDetails,
     renderResultCard,
     getResultCardImageUrl,
+    swatchImageKey,
   } = resultCardOptions || {};
   const numberOfResults = state?.quiz.results?.response?.results?.length;
   const resultsConfig = state?.quiz.resultsConfig;
@@ -48,6 +49,7 @@ export default function ResultContainer(props: IResultContainerProps) {
             resultCardRegularPriceKey={resultCardRegularPriceKey}
             resultCardRatingCountKey={resultCardRatingCountKey}
             resultCardRatingScoreKey={resultCardRatingScoreKey}
+            swatchImageKey={swatchImageKey}
             renderResultCardPriceDetails={renderResultCardPriceDetails}
             renderResultCard={renderResultCard}
             getResultCardImageUrl={getResultCardImageUrl}

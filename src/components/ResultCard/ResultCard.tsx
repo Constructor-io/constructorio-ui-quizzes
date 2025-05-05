@@ -4,6 +4,8 @@ import ResultFavoritesButton from '../ResultFavoritesButton/ResultFavoritesButto
 import QuizContext from '../CioQuiz/context';
 import { QuizResultDataPartial } from '../../types';
 import { getNestedValueUsingDotNotation, validateNumberOrString } from '../../utils';
+import ResultCardSwatches from '../ResultCardSwatches/ResultCardSwatches';
+import useResult from './useResult';
 
 interface ResultCardOptions {
   result: QuizResultDataPartial;
@@ -11,6 +13,7 @@ interface ResultCardOptions {
   regularPriceKey?: string;
   ratingCountKey?: string;
   ratingScoreKey?: string;
+  swatchImageKey?: string;
   resultPosition: number;
   renderResultCardPriceDetails?: (result: QuizResultDataPartial) => JSX.Element;
   getResultCardImageUrl?: (result: QuizResultDataPartial) => string;
@@ -24,6 +27,7 @@ export default function ResultCard(props: ResultCardOptions) {
     resultPosition,
     ratingCountKey,
     ratingScoreKey,
+    swatchImageKey,
     renderResultCardPriceDetails,
     getResultCardImageUrl,
   } = props;
@@ -33,30 +37,40 @@ export default function ResultCard(props: ResultCardOptions) {
     getQuizResultButtonProps,
     getQuizResultLinkProps,
   } = useContext(QuizContext);
+  const { faceOutResult, onVariationClick } = useResult(result);
 
   const salePrice = validateNumberOrString(
-    getNestedValueUsingDotNotation(result?.data, salePriceKey)
+    getNestedValueUsingDotNotation(faceOutResult?.data, salePriceKey)
   );
   const regularPrice = validateNumberOrString(
-    getNestedValueUsingDotNotation(result?.data, regularPriceKey)
+    getNestedValueUsingDotNotation(faceOutResult?.data, regularPriceKey)
   );
   const ratingCount = validateNumberOrString(
-    getNestedValueUsingDotNotation(result?.data, ratingCountKey)
+    getNestedValueUsingDotNotation(faceOutResult?.data, ratingCountKey)
   );
   const ratingScore = validateNumberOrString(
-    getNestedValueUsingDotNotation(result?.data, ratingScoreKey)
+    getNestedValueUsingDotNotation(faceOutResult?.data, ratingScoreKey)
   );
 
   const resultCardContent = () => (
     <>
       <div className='cio-result-card-image'>
         <img
-          src={getResultCardImageUrl ? getResultCardImageUrl(result) : result.data?.image_url}
+          src={
+            getResultCardImageUrl
+              ? getResultCardImageUrl(faceOutResult)
+              : faceOutResult.data?.image_url
+          }
           alt='product'
         />
       </div>
+      <ResultCardSwatches
+        swatchImageKey={swatchImageKey}
+        faceOutResult={faceOutResult}
+        onVariationClick={onVariationClick}
+      />
       <div className='cio-result-card-text'>
-        <p className='cio-result-card-title'>{result.value}</p>
+        <p className='cio-result-card-title'>{faceOutResult.value}</p>
         <div className='cio-result-card-details'>
           <div className='cio-result-card-rating'>
             {!!ratingScore && (
@@ -68,7 +82,7 @@ export default function ResultCard(props: ResultCardOptions) {
             {!!ratingCount && <span className='cio-result-card-rating-count'>({ratingCount})</span>}
           </div>
           {renderResultCardPriceDetails ? (
-            renderResultCardPriceDetails(result)
+            renderResultCardPriceDetails(faceOutResult)
           ) : (
             <div className='cio-result-card-prices'>
               {!!salePrice && <span className='cio-result-card-sale-price'>${salePrice}</span>}
@@ -87,7 +101,12 @@ export default function ResultCard(props: ResultCardOptions) {
 
   const resultCardContentWithoutLink = () =>
     getQuizResultButtonProps && (
-      <div {...getQuizResultButtonProps({ result, position: resultPosition, type: 'button' })}>
+      <div
+        {...getQuizResultButtonProps({
+          result: faceOutResult,
+          position: resultPosition,
+          type: 'button',
+        })}>
         {resultCardContent()}
       </div>
     );
@@ -98,7 +117,11 @@ export default function ResultCard(props: ResultCardOptions) {
         className='cio-result-card-anchor'
         rel='noreferrer'
         target='_blank'
-        {...getQuizResultLinkProps({ result, position: resultPosition, type: 'link' })}>
+        {...getQuizResultLinkProps({
+          result: faceOutResult,
+          position: resultPosition,
+          type: 'link',
+        })}>
         {resultCardContent()}
       </a>
     );
@@ -106,10 +129,10 @@ export default function ResultCard(props: ResultCardOptions) {
   return (
     <div className='cio-result-card'>
       {customAddToFavoritesCallback && (
-        <ResultFavoritesButton item={result} price={salePrice || regularPrice} />
+        <ResultFavoritesButton item={faceOutResult} price={salePrice || regularPrice} />
       )}
       {!customClickItemCallback ? resultCardContentWithLink() : resultCardContentWithoutLink()}
-      <ResultCtaButton item={result} price={salePrice || regularPrice} />
+      <ResultCtaButton item={faceOutResult} price={salePrice || regularPrice} />
     </div>
   );
 }

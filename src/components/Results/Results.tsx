@@ -11,6 +11,7 @@ function Results(props: ResultsProps) {
     resultCardRegularPriceKey,
     resultCardRatingCountKey,
     resultCardRatingScoreKey,
+    swatchImageKey,
     renderResultCardPriceDetails,
     renderResultCard,
     getResultCardImageUrl,
@@ -32,6 +33,7 @@ function Results(props: ResultsProps) {
             regularPriceKey={resultCardRegularPriceKey}
             ratingCountKey={resultCardRatingCountKey}
             ratingScoreKey={resultCardRatingScoreKey}
+            swatchImageKey={swatchImageKey}
             renderResultCardPriceDetails={renderResultCardPriceDetails}
             getResultCardImageUrl={getResultCardImageUrl}
             resultPosition={index + 1}

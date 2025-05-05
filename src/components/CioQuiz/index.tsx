@@ -30,6 +30,7 @@ export default function CioQuiz(props: IQuizProps) {
     getQuizResultLinkProps,
     getResetQuizButtonProps,
     getSelectInputProps,
+    getQuizResultSwatchProps,
     primaryColorStyles,
     getShareResultsButtonProps,
   } = useQuiz(props);
@@ -76,6 +77,7 @@ export default function CioQuiz(props: IQuizProps) {
     getResetQuizButtonProps,
     getShareResultsButtonProps,
     getSelectInputProps,
+    getQuizResultSwatchProps,
     customClickItemCallback: !!callbacks?.onQuizResultClick,
     customAddToFavoritesCallback: !!callbacks?.onAddToFavoritesClick,
     primaryColorStyles,
