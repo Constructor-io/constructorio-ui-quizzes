@@ -24,6 +24,11 @@ describe(`${ResultCard.name} client`, () => {
     getQuizResultButtonProps: jest.fn(),
     getQuizResultLinkProps: jest.fn(),
     getAddToFavoritesButtonProps: jest.fn().mockReturnValue({ 'aria-label': 'Add to favorites' }),
+    getQuizResultSwatchProps: jest.fn().mockReturnValue({
+      className: 'cio-result-card-swatch',
+      type: 'button',
+      onClick: jest.fn(),
+    }),
   };
 
   describe('with context function', () => {
@@ -64,6 +69,42 @@ describe(`${ResultCard.name} client`, () => {
     it('renders custom image url', () => {
       render(<Subject {...props} />);
       expect(screen.getByRole('img').getAttribute('src')).toEqual('www.custom_img.com');
+    });
+
+    it('passes correct parameters to getQuizResultSwatchProps', () => {
+      const renderResultCardMock = jest.fn((result, getters) => {
+        getters.getQuizResultSwatchProps(result.variations?.[0]);
+        return <div>Custom Result Card</div>;
+      });
+
+      render(
+        <Subject
+          {...props}
+          result={{
+            ...props.result,
+            variations: [
+              {
+                data: {
+                  variation_id: 'var1',
+                  image_url: 'test-image.jpg',
+                },
+                value: 'Variation 1',
+              },
+            ],
+          }}
+          renderResultCard={renderResultCardMock}
+          swatchImageKey='option_image_source'
+        />
+      );
+
+      expect(renderResultCardMock).toHaveBeenCalled();
+
+      expect(contextMocks.getQuizResultSwatchProps).toHaveBeenCalledWith(
+        expect.objectContaining({ data: expect.objectContaining({ variation_id: 'var1' }) }),
+        expect.any(Function), // onVariationClick
+        expect.objectContaining({ variations: expect.any(Array) }), // faceOutResult
+        'option_image_source' // swatchImageKey
+      );
     });
   });
 
