@@ -5,7 +5,7 @@ import QuizContext from '../CioQuiz/context';
 import { QuizResultDataPartial } from '../../types';
 import { getNestedValueUsingDotNotation, validateNumberOrString } from '../../utils';
 import ResultCardSwatches from '../ResultCardSwatches/ResultCardSwatches';
-import useResult from './useResult';
+import useResult from '../../hooks/useResult';
 
 interface ResultCardOptions {
   result: QuizResultDataPartial;

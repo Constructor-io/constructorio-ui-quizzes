@@ -24,9 +24,8 @@ type Story = StoryObj<typeof CioQuiz>;
 
 export const BasicUsage: Story = {
   args: {
-    quizId,
     apiKey,
-    quizVersionId: '',
+    quizId,
     resultsPageOptions,
     resultCardOptions,
     callbacks,

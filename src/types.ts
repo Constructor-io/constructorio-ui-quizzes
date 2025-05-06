@@ -8,7 +8,6 @@ import {
   QuizResultsConfig,
   QuizzesResultsParameters,
   QuizzesParameters,
-  QuizResult,
 } from '@constructor-io/constructorio-client-javascript/lib/types';
 import ConstructorIOClient, {
   GetBrowseResultsForItemIdsResponse,

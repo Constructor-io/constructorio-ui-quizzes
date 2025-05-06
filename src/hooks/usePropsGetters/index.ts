@@ -160,7 +160,6 @@ const usePropsGetters = (
         backgroundSize: 'fit-object',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        // outline: isSelected ? '3px solid black' : undefined,
       };
 
       const onClick = (e: React.MouseEvent<HTMLElement>) => {

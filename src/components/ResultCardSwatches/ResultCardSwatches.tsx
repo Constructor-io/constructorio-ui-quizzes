@@ -9,7 +9,7 @@ interface ResultCardSwatchesOptions {
 }
 
 export default function ResultCardSwatches(props: ResultCardSwatchesOptions) {
-  const { faceOutResult, onVariationClick } = props;
+  const { faceOutResult, onVariationClick, swatchImageKey } = props;
   const { getQuizResultSwatchProps } = useContext(QuizContext);
 
   return (
@@ -20,7 +20,13 @@ export default function ResultCardSwatches(props: ResultCardSwatchesOptions) {
         return (
           getQuizResultSwatchProps && (
             // eslint-disable-next-line react/button-has-type
-            <button {...getQuizResultSwatchProps(variation, onVariationClick, faceOutResult)}>
+            <button
+              {...getQuizResultSwatchProps(
+                variation,
+                onVariationClick,
+                faceOutResult,
+                swatchImageKey
+              )}>
               {isSelected && <div className='cio-swatch-selected' />}
             </button>
           )
