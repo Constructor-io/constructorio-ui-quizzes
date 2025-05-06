@@ -338,12 +338,7 @@ export type GetAddToFavoritesButtonProps = (
 ) => AddToCartButtonProps;
 export type GetQuizImageProps = () => QuizImageProps;
 export type GetSelectQuestionImageProps = (option: QuestionOption) => QuizImageProps;
-export type GetQuizResultSwatchProps = (
-  variation: QuizResultDataPartial,
-  onVariationClick: (variation: QuizResultDataPartial) => void,
-  faceOutResult: QuizResultDataPartial,
-  swatchImageKey?: string
-) => SwatchProps;
+export type GetQuizResultSwatchProps = (variation: QuizResultDataPartial) => SwatchProps;
 export interface QuizResultOptions<T = 'button' | 'link'> {
   result: QuizResultDataPartial;
   position: number;
@@ -379,7 +374,6 @@ export interface UseQuizReturn {
   getAddToFavoritesButtonProps: GetAddToFavoritesButtonProps;
   getQuizResultButtonProps: GetQuizResultButtonProps;
   getQuizResultLinkProps: GetQuizResultLinkProps;
-  getQuizResultSwatchProps: GetQuizResultSwatchProps;
   primaryColorStyles: PrimaryColorStyles;
 }
 

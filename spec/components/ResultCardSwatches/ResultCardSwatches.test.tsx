@@ -42,27 +42,25 @@ describe(`${ResultCardSwatches.name} client`, () => {
     ],
   });
 
-  const getQuizResultSwatchPropsWithVariationClickMock = jest
-    .fn()
-    .mockImplementation((variation) => ({
-      className: 'cio-result-card-swatch',
-      type: 'button',
-      onClick: () => onVariationClickMock(variation),
-      style: {
-        background: `url(${variation.data.image_url})`,
-      },
-    }));
+  const getQuizResultSwatchPropsMock = jest.fn().mockImplementation((variation) => ({
+    className: 'cio-result-card-swatch',
+    type: 'button',
+    onClick: () => onVariationClickMock(variation),
+    style: {
+      background: `url(${variation.data.image_url})`,
+    },
+  }));
 
   const props = {
     faceOutResult: mockResult,
-    getQuizResultSwatchPropsWithVariationClick: getQuizResultSwatchPropsWithVariationClickMock,
+    getQuizResultSwatchProps: getQuizResultSwatchPropsMock,
   };
 
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  describe('with getQuizResultSwatchPropsWithVariationClick function', () => {
+  describe('with getQuizResultSwatchProps function', () => {
     it('renders swatches for each variation', () => {
       render(<ResultCardSwatches {...props} />);
 
@@ -70,13 +68,11 @@ describe(`${ResultCardSwatches.name} client`, () => {
       expect(swatches).toHaveLength(2);
     });
 
-    it('calls getQuizResultSwatchPropsWithVariationClick with correct parameters', () => {
+    it('calls getQuizResultSwatchProps with correct parameters', () => {
       render(<ResultCardSwatches {...props} />);
 
-      expect(getQuizResultSwatchPropsWithVariationClickMock).toHaveBeenCalledTimes(2);
-      expect(getQuizResultSwatchPropsWithVariationClickMock).toHaveBeenCalledWith(
-        mockResult?.variations?.[0]
-      );
+      expect(getQuizResultSwatchPropsMock).toHaveBeenCalledTimes(2);
+      expect(getQuizResultSwatchPropsMock).toHaveBeenCalledWith(mockResult?.variations?.[0]);
     });
 
     it('calls onVariationClick when a swatch is clicked', () => {
@@ -89,7 +85,7 @@ describe(`${ResultCardSwatches.name} client`, () => {
     });
   });
 
-  describe('without getQuizResultSwatchPropsWithVariationClick function', () => {
+  describe('without getQuizResultSwatchProps function', () => {
     it('does not render swatches', () => {
       const propsWithoutFunction = {
         faceOutResult: mockResult,

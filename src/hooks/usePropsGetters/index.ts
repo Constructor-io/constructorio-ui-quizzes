@@ -17,7 +17,6 @@ import {
   GetAddToFavoritesButtonProps,
   GetSkipQuestionButtonProps,
   GetShareResultsButtonProps,
-  GetQuizResultSwatchProps,
 } from '../../types';
 import { QuizAPIReducerState } from '../../components/CioQuiz/quizApiReducer';
 import { QuizLocalReducerState } from '../../components/CioQuiz/quizLocalReducer';
@@ -150,33 +149,6 @@ const usePropsGetters = (
     [quizResultClickDown, resultClick]
   );
 
-  const getQuizResultSwatchProps: GetQuizResultSwatchProps = useCallback(
-    (variation, onVariationClick, faceOutResult, swatchImageKey) => {
-      const isSelected = variation?.data?.variation_id === faceOutResult?.data?.variation_id;
-      const style = {
-        background: `url(${
-          swatchImageKey ? variation?.data?.[swatchImageKey] : variation?.data?.image_url
-        })`,
-        backgroundSize: 'fit-object',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-      };
-
-      const onClick = (e: React.MouseEvent<HTMLElement>) => {
-        e.stopPropagation();
-        onVariationClick(variation);
-      };
-      return {
-        key: variation?.data?.variation_id,
-        className: `cio-result-card-swatch ${isSelected ? 'selected' : ''}`,
-        type: 'button',
-        onClick,
-        style,
-      };
-    },
-    []
-  );
-
   const getQuizImageProps: GetQuizImageProps = useCallback(
     () => ({
       src: quizApiState.quizCurrentQuestion?.next_question?.images?.primary_url || undefined,
@@ -210,7 +182,6 @@ const usePropsGetters = (
     getQuizResultButtonProps,
     getQuizResultLinkProps,
     getSkipQuestionButtonProps,
-    getQuizResultSwatchProps,
   };
 };
 

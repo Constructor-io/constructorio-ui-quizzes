@@ -1,13 +1,13 @@
 import React from 'react';
-import { QuizResultDataPartial } from '../../types';
+import { GetQuizResultSwatchProps, QuizResultDataPartial } from '../../types';
 
 interface ResultCardSwatchesOptions {
   faceOutResult: QuizResultDataPartial;
-  getQuizResultSwatchPropsWithVariationClick?: (variation: QuizResultDataPartial) => {};
+  getQuizResultSwatchProps?: GetQuizResultSwatchProps;
 }
 
 export default function ResultCardSwatches(props: ResultCardSwatchesOptions) {
-  const { faceOutResult, getQuizResultSwatchPropsWithVariationClick } = props;
+  const { faceOutResult, getQuizResultSwatchProps } = props;
 
   return (
     <div className='result-card-swatches-container'>
@@ -15,9 +15,9 @@ export default function ResultCardSwatches(props: ResultCardSwatchesOptions) {
         const isSelected = faceOutResult?.data?.variation_id === variation.data.variation_id;
 
         return (
-          getQuizResultSwatchPropsWithVariationClick && (
+          getQuizResultSwatchProps && (
             // eslint-disable-next-line react/button-has-type
-            <button {...getQuizResultSwatchPropsWithVariationClick(variation)}>
+            <button {...getQuizResultSwatchProps(variation)}>
               {isSelected && <div className='cio-swatch-selected' />}
             </button>
           )

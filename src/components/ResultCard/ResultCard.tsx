@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useContext } from 'react';
 import ResultCtaButton from '../ResultCtaButton/ResultCtaButton';
 import ResultFavoritesButton from '../ResultFavoritesButton/ResultFavoritesButton';
 import QuizContext from '../CioQuiz/context';
@@ -40,19 +40,9 @@ export default function ResultCard(props: ResultCardOptions) {
     getAddToCartButtonProps,
     getAddToFavoritesButtonProps,
     getQuizResultLinkProps,
-    getQuizResultSwatchProps,
   } = useContext(QuizContext);
 
-  const { faceOutResult, onVariationClick } = useResult(result);
-
-  // Create a wrapper for getQuizResultSwatchProps that automatically includes onVariationClick
-  const getQuizResultSwatchPropsWithVariationClick = useCallback(
-    (variation: QuizResultDataPartial) => {
-      if (!getQuizResultSwatchProps) return {};
-      return getQuizResultSwatchProps(variation, onVariationClick, faceOutResult, swatchImageKey);
-    },
-    [getQuizResultSwatchProps, onVariationClick, faceOutResult, swatchImageKey]
-  );
+  const { faceOutResult, getQuizResultSwatchProps } = useResult(result, swatchImageKey);
 
   const salePrice = validateNumberOrString(
     getNestedValueUsingDotNotation(faceOutResult?.data, salePriceKey)
@@ -81,7 +71,7 @@ export default function ResultCard(props: ResultCardOptions) {
       </div>
       <ResultCardSwatches
         faceOutResult={faceOutResult}
-        getQuizResultSwatchPropsWithVariationClick={getQuizResultSwatchPropsWithVariationClick}
+        getQuizResultSwatchProps={getQuizResultSwatchProps}
       />
       <div className='cio-result-card-text'>
         <p className='cio-result-card-title'>{faceOutResult.value}</p>
@@ -145,7 +135,7 @@ export default function ResultCard(props: ResultCardOptions) {
     getAddToCartButtonProps,
     getAddToFavoritesButtonProps,
     getQuizResultLinkProps,
-    getQuizResultSwatchProps: getQuizResultSwatchPropsWithVariationClick,
+    getQuizResultSwatchProps, // The only getter function that's not from useProgGetters
   };
 
   if (renderResultCard) {

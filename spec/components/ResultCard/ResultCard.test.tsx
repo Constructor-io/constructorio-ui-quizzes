@@ -24,11 +24,6 @@ describe(`${ResultCard.name} client`, () => {
     getQuizResultButtonProps: jest.fn(),
     getQuizResultLinkProps: jest.fn(),
     getAddToFavoritesButtonProps: jest.fn().mockReturnValue({ 'aria-label': 'Add to favorites' }),
-    getQuizResultSwatchProps: jest.fn().mockReturnValue({
-      className: 'cio-result-card-swatch',
-      type: 'button',
-      onClick: jest.fn(),
-    }),
   };
 
   describe('with context function', () => {
@@ -98,13 +93,6 @@ describe(`${ResultCard.name} client`, () => {
       );
 
       expect(renderResultCardMock).toHaveBeenCalled();
-
-      expect(contextMocks.getQuizResultSwatchProps).toHaveBeenCalledWith(
-        expect.objectContaining({ data: expect.objectContaining({ variation_id: 'var1' }) }),
-        expect.any(Function), // onVariationClick
-        expect.objectContaining({ variations: expect.any(Array) }), // faceOutResult
-        'option_image_source' // swatchImageKey
-      );
     });
   });
 

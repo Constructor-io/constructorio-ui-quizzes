@@ -33,31 +33,29 @@ describe(`${ResultCardSwatches.name} server`, () => {
     ],
   });
 
-  const getQuizResultSwatchPropsWithVariationClickMock = jest
-    .fn()
-    .mockImplementation((variation) => ({
-      className: 'cio-result-card-swatch',
-      type: 'button',
-      onClick: () => onVariationClickMock(variation),
-      style: {
-        background: `url(${variation.data.image_url})`,
-      },
-    }));
+  const getQuizResultSwatchPropsMock = jest.fn().mockImplementation((variation) => ({
+    className: 'cio-result-card-swatch',
+    type: 'button',
+    onClick: () => onVariationClickMock(variation),
+    style: {
+      background: `url(${variation.data.image_url})`,
+    },
+  }));
 
   const props = {
     faceOutResult: mockResult,
-    getQuizResultSwatchPropsWithVariationClick: getQuizResultSwatchPropsWithVariationClickMock,
+    getQuizResultSwatchProps: getQuizResultSwatchPropsMock,
   };
 
-  describe('with getQuizResultSwatchPropsWithVariationClick function', () => {
+  describe('with getQuizResultSwatchProps function', () => {
     it('renders swatches for each variation', () => {
       const view = renderToString(<ResultCardSwatches {...props} />);
       expect(view).toContain('cio-result-card-swatch');
-      expect(getQuizResultSwatchPropsWithVariationClickMock).toHaveBeenCalledTimes(2);
+      expect(getQuizResultSwatchPropsMock).toHaveBeenCalledTimes(2);
     });
   });
 
-  describe('without getQuizResultSwatchPropsWithVariationClick function', () => {
+  describe('without getQuizResultSwatchProps function', () => {
     it('does not render swatches', () => {
       const propsWithoutFunction = {
         faceOutResult: mockResult,
