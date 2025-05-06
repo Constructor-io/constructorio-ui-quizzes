@@ -1,0 +1,31 @@
+import { Meta, Markdown } from '@storybook/blocks';
+import UseResultDocs from './markdown/UseResultDocs.md';
+
+<Meta title="Quiz/useResult" />
+
+<Markdown>{UseResultDocs}</Markdown>
+
+### Example Usage
+
+```tsx
+const QuizResultComponent = ({ result }) => {
+  const { faceOutResult, onVariationClick, getQuizResultSwatchProps } = useResult(result, 'swatch_image');
+
+  return (
+    <div>
+      <h1>{faceOutResult.value}</h1>
+      <div className="variations">
+        {faceOutResult.variations?.map((variation) => (
+          <button
+            key={variation.data.variation_id}
+            {...getQuizResultSwatchProps(variation)}
+          />
+        ))}
+      </div>
+      <p>Price: ${faceOutResult.data?.price}</p>
+    </div>
+  );
+};
+
+export default QuizResultComponent;
+```
