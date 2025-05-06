@@ -314,11 +314,16 @@ export function YourComponent() {
     quizId: 'coffee-quiz',
     apiKey: 'key_n4SkMH5PFWLdStQZ',
     resultCardOptions: {
-      renderResultCard: (result, getters: { getAddToCartButtonProps, getAddToFavoritesButtonProps }) => {
+      renderResultCard: (result, getters: { getAddToCartButtonProps, getAddToFavoritesButtonProps, getQuizResultSwatchProps }) => {
         <div>
           <img src={result.data?.image_url} className='product-image' />
           <div className='product-title'>{result.value}</div>
           <div className='product-price'>{result.data?.price}</div>
+            <div className='product-variations'>
+              {result.data?.variations?.map((variation) => (
+                <button key={variation.variation_id} {...getQuizResultSwatchProps(variation)} />
+              ))}
+            </div>
           <button {...getAddToCartButtonProps}>Add to cart</button>
         </div>
       },

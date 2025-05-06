@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useCallback, useContext } from 'react';
 import ResultCtaButton from '../ResultCtaButton/ResultCtaButton';
 import ResultFavoritesButton from '../ResultFavoritesButton/ResultFavoritesButton';
 import QuizContext from '../CioQuiz/context';
-import { QuizResultDataPartial } from '../../types';
+import { QuizResultDataPartial, RenderResultCard } from '../../types';
 import { getNestedValueUsingDotNotation, validateNumberOrString } from '../../utils';
 import ResultCardSwatches from '../ResultCardSwatches/ResultCardSwatches';
 import useResult from '../../hooks/useResult';
@@ -17,6 +17,7 @@ interface ResultCardOptions {
   resultPosition: number;
   renderResultCardPriceDetails?: (result: QuizResultDataPartial) => JSX.Element;
   getResultCardImageUrl?: (result: QuizResultDataPartial) => string;
+  renderResultCard?: RenderResultCard;
 }
 
 export default function ResultCard(props: ResultCardOptions) {
@@ -30,14 +31,28 @@ export default function ResultCard(props: ResultCardOptions) {
     swatchImageKey,
     renderResultCardPriceDetails,
     getResultCardImageUrl,
+    renderResultCard,
   } = props;
   const {
     customAddToFavoritesCallback,
     customClickItemCallback,
     getQuizResultButtonProps,
+    getAddToCartButtonProps,
+    getAddToFavoritesButtonProps,
     getQuizResultLinkProps,
+    getQuizResultSwatchProps,
   } = useContext(QuizContext);
+
   const { faceOutResult, onVariationClick } = useResult(result);
+
+  // Create a wrapper for getQuizResultSwatchProps that automatically includes onVariationClick
+  const getQuizResultSwatchPropsWithVariationClick = useCallback(
+    (variation: QuizResultDataPartial) => {
+      if (!getQuizResultSwatchProps) return {};
+      return getQuizResultSwatchProps(variation, onVariationClick, faceOutResult, swatchImageKey);
+    },
+    [getQuizResultSwatchProps, onVariationClick, faceOutResult, swatchImageKey]
+  );
 
   const salePrice = validateNumberOrString(
     getNestedValueUsingDotNotation(faceOutResult?.data, salePriceKey)
@@ -65,9 +80,8 @@ export default function ResultCard(props: ResultCardOptions) {
         />
       </div>
       <ResultCardSwatches
-        swatchImageKey={swatchImageKey}
         faceOutResult={faceOutResult}
-        onVariationClick={onVariationClick}
+        getQuizResultSwatchPropsWithVariationClick={getQuizResultSwatchPropsWithVariationClick}
       />
       <div className='cio-result-card-text'>
         <p className='cio-result-card-title'>{faceOutResult.value}</p>
@@ -125,6 +139,18 @@ export default function ResultCard(props: ResultCardOptions) {
         {resultCardContent()}
       </a>
     );
+
+  const getters = {
+    getQuizResultButtonProps,
+    getAddToCartButtonProps,
+    getAddToFavoritesButtonProps,
+    getQuizResultLinkProps,
+    getQuizResultSwatchProps: getQuizResultSwatchPropsWithVariationClick,
+  };
+
+  if (renderResultCard) {
+    return renderResultCard(faceOutResult, getters, resultPosition);
+  }
 
   return (
     <div className='cio-result-card'>

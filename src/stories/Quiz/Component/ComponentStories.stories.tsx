@@ -26,6 +26,7 @@ export const BasicUsage: Story = {
   args: {
     apiKey,
     quizId,
+    quizVersionId: '',
     resultsPageOptions,
     resultCardOptions,
     callbacks,

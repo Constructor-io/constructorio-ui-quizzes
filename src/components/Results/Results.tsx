@@ -17,29 +17,25 @@ function Results(props: ResultsProps) {
     getResultCardImageUrl,
   } = props;
 
-  const { state, getAddToCartButtonProps, getAddToFavoritesButtonProps, getQuizResultLinkProps } =
-    useContext(QuizContext);
-  const getters = { getAddToCartButtonProps, getAddToFavoritesButtonProps, getQuizResultLinkProps };
+  const { state } = useContext(QuizContext);
+
   return (
     <div className='cio-results'>
-      {state?.quiz?.results?.response?.results?.map((result, index) =>
-        renderResultCard ? (
-          renderResultCard(result, getters, index)
-        ) : (
-          <ResultCard
-            result={result}
-            key={result.data?.id}
-            salePriceKey={resultCardSalePriceKey}
-            regularPriceKey={resultCardRegularPriceKey}
-            ratingCountKey={resultCardRatingCountKey}
-            ratingScoreKey={resultCardRatingScoreKey}
-            swatchImageKey={swatchImageKey}
-            renderResultCardPriceDetails={renderResultCardPriceDetails}
-            getResultCardImageUrl={getResultCardImageUrl}
-            resultPosition={index + 1}
-          />
-        )
-      )}
+      {state?.quiz?.results?.response?.results?.map((result, index) => (
+        <ResultCard
+          result={result}
+          key={result.data?.id}
+          salePriceKey={resultCardSalePriceKey}
+          regularPriceKey={resultCardRegularPriceKey}
+          ratingCountKey={resultCardRatingCountKey}
+          ratingScoreKey={resultCardRatingScoreKey}
+          swatchImageKey={swatchImageKey}
+          renderResultCardPriceDetails={renderResultCardPriceDetails}
+          getResultCardImageUrl={getResultCardImageUrl}
+          resultPosition={index + 1}
+          renderResultCard={renderResultCard}
+        />
+      ))}
     </div>
   );
 }

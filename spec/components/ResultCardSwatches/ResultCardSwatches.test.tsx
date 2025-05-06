@@ -2,8 +2,6 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 
 import ResultCardSwatches from '../../../src/components/ResultCardSwatches/ResultCardSwatches';
-import { withContext } from '../../__tests__/utils';
-import { QuizContextValue } from '../../../src/components/CioQuiz/context';
 import * as factories from '../../__tests__/factories';
 
 describe(`${ResultCardSwatches.name} client`, () => {
@@ -44,64 +42,45 @@ describe(`${ResultCardSwatches.name} client`, () => {
     ],
   });
 
-  const props = {
-    faceOutResult: mockResult,
-    onVariationClick: onVariationClickMock,
-  };
-
-  const getQuizResultSwatchPropsMock = jest
+  const getQuizResultSwatchPropsWithVariationClickMock = jest
     .fn()
-    .mockImplementation((variation, onVariationClick) => ({
+    .mockImplementation((variation) => ({
       className: 'cio-result-card-swatch',
       type: 'button',
-      onClick: () => onVariationClick(variation),
-      style: { background: `url(${variation.data.image_url})` },
+      onClick: () => onVariationClickMock(variation),
+      style: {
+        background: `url(${variation.data.image_url})`,
+      },
     }));
 
-  const contextMocks: Partial<QuizContextValue> = {
-    getQuizResultSwatchProps: getQuizResultSwatchPropsMock,
+  const props = {
+    faceOutResult: mockResult,
+    getQuizResultSwatchPropsWithVariationClick: getQuizResultSwatchPropsWithVariationClickMock,
   };
 
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  describe('with context function', () => {
-    const Subject = withContext(ResultCardSwatches, { contextMocks });
-
+  describe('with getQuizResultSwatchPropsWithVariationClick function', () => {
     it('renders swatches for each variation', () => {
-      render(<Subject {...props} />);
+      render(<ResultCardSwatches {...props} />);
 
       const swatches = screen.getAllByRole('button');
       expect(swatches).toHaveLength(2);
     });
 
-    it('calls getQuizResultSwatchProps with correct parameters', () => {
-      render(<Subject {...props} />);
+    it('calls getQuizResultSwatchPropsWithVariationClick with correct parameters', () => {
+      render(<ResultCardSwatches {...props} />);
 
-      expect(getQuizResultSwatchPropsMock).toHaveBeenCalledTimes(2);
-      expect(getQuizResultSwatchPropsMock).toHaveBeenCalledWith(
-        mockResult?.variations?.[0],
-        onVariationClickMock,
-        mockResult,
-        undefined
-      );
-    });
-
-    it('passes swatchImageKey when provided', () => {
-      const swatchImageKey = 'option_image_source';
-      render(<Subject {...props} swatchImageKey={swatchImageKey} />);
-
-      expect(getQuizResultSwatchPropsMock).toHaveBeenCalledWith(
-        mockResult?.variations?.[0],
-        onVariationClickMock,
-        mockResult,
-        swatchImageKey
+      expect(getQuizResultSwatchPropsWithVariationClickMock).toHaveBeenCalledTimes(2);
+      expect(getQuizResultSwatchPropsWithVariationClickMock).toHaveBeenCalledWith(
+        mockResult?.variations?.[0]
       );
     });
 
     it('calls onVariationClick when a swatch is clicked', () => {
-      render(<Subject {...props} />);
+      render(<ResultCardSwatches {...props} />);
 
       const swatches = screen.getAllByRole('button');
       fireEvent.click(swatches[1]);
@@ -110,13 +89,13 @@ describe(`${ResultCardSwatches.name} client`, () => {
     });
   });
 
-  describe('without context function', () => {
-    const Subject = withContext(ResultCardSwatches, {
-      contextMocks: { getQuizResultSwatchProps: undefined },
-    });
-
+  describe('without getQuizResultSwatchPropsWithVariationClick function', () => {
     it('does not render swatches', () => {
-      render(<Subject {...props} />);
+      const propsWithoutFunction = {
+        faceOutResult: mockResult,
+      };
+
+      render(<ResultCardSwatches {...propsWithoutFunction} />);
 
       const swatches = screen.queryAllByRole('button');
       expect(swatches).toHaveLength(0);
@@ -124,15 +103,13 @@ describe(`${ResultCardSwatches.name} client`, () => {
   });
 
   describe('with no variations', () => {
-    const Subject = withContext(ResultCardSwatches, { contextMocks });
-
     it('renders no swatches when variations is undefined', () => {
       const propsWithoutVariations = {
         ...props,
         faceOutResult: { ...mockResult, variations: undefined },
       };
 
-      render(<Subject {...propsWithoutVariations} />);
+      render(<ResultCardSwatches {...propsWithoutVariations} />);
 
       const swatches = screen.queryAllByRole('button');
       expect(swatches).toHaveLength(0);
@@ -144,7 +121,7 @@ describe(`${ResultCardSwatches.name} client`, () => {
         faceOutResult: { ...mockResult, variations: [] },
       };
 
-      render(<Subject {...propsWithEmptyVariations} />);
+      render(<ResultCardSwatches {...propsWithEmptyVariations} />);
 
       const swatches = screen.queryAllByRole('button');
       expect(swatches).toHaveLength(0);

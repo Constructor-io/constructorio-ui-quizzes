@@ -37,6 +37,16 @@ export type QuizEmailResults = {
   results?: Partial<QuizResultData>[];
 };
 
+export type RenderResultCard = (
+  result: QuizResultDataPartial,
+  getters: {
+    getAddToCartButtonProps?: GetAddToCartButtonProps;
+    getAddToFavoritesButtonProps?: GetAddToFavoritesButtonProps;
+    getQuizResultLinkProps?: GetQuizResultLinkProps;
+  },
+  index: number
+) => JSX.Element;
+
 // QUIZ PROPS
 export interface ResultCardOptions {
   resultCardSalePriceKey?: string;
@@ -45,15 +55,7 @@ export interface ResultCardOptions {
   resultCardRatingScoreKey?: string;
   swatchImageKey?: string;
   renderResultCardPriceDetails?: (result: QuizResultDataPartial) => JSX.Element;
-  renderResultCard?: (
-    result: QuizResultDataPartial,
-    getters: {
-      getAddToCartButtonProps?: GetAddToCartButtonProps;
-      getAddToFavoritesButtonProps?: GetAddToFavoritesButtonProps;
-      getQuizResultLinkProps?: GetQuizResultLinkProps;
-    },
-    index: number
-  ) => JSX.Element;
+  renderResultCard?: RenderResultCard;
   getResultCardImageUrl?: (result: QuizResultDataPartial) => string;
 }
 

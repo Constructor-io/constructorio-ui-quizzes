@@ -2,8 +2,6 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 
 import ResultCardSwatches from '../../../src/components/ResultCardSwatches/ResultCardSwatches';
-import { withContext } from '../../__tests__/utils';
-import { QuizContextValue } from '../../../src/components/CioQuiz/context';
 import * as factories from '../../__tests__/factories';
 
 describe(`${ResultCardSwatches.name} server`, () => {
@@ -35,67 +33,49 @@ describe(`${ResultCardSwatches.name} server`, () => {
     ],
   });
 
-  const props = {
-    faceOutResult: mockResult,
-    onVariationClick: onVariationClickMock,
-  };
-
-  const getQuizResultSwatchPropsMock = jest
+  const getQuizResultSwatchPropsWithVariationClickMock = jest
     .fn()
-    .mockImplementation((variation, onVariationClick) => ({
+    .mockImplementation((variation) => ({
       className: 'cio-result-card-swatch',
       type: 'button',
-      onClick: () => onVariationClick(variation),
-      style: { background: `url(${variation.data.image_url})` },
+      onClick: () => onVariationClickMock(variation),
+      style: {
+        background: `url(${variation.data.image_url})`,
+      },
     }));
 
-  const contextMocks: Partial<QuizContextValue> = {
-    getQuizResultSwatchProps: getQuizResultSwatchPropsMock,
+  const props = {
+    faceOutResult: mockResult,
+    getQuizResultSwatchPropsWithVariationClick: getQuizResultSwatchPropsWithVariationClickMock,
   };
 
-  describe('with context function', () => {
-    const Subject = withContext(ResultCardSwatches, { contextMocks });
-
+  describe('with getQuizResultSwatchPropsWithVariationClick function', () => {
     it('renders swatches for each variation', () => {
-      const view = renderToString(<Subject {...props} />);
+      const view = renderToString(<ResultCardSwatches {...props} />);
       expect(view).toContain('cio-result-card-swatch');
-      expect(getQuizResultSwatchPropsMock).toHaveBeenCalledTimes(2);
-    });
-
-    it('passes swatchImageKey when provided', () => {
-      const swatchImageKey = 'option_image_source';
-      renderToString(<Subject {...props} swatchImageKey={swatchImageKey} />);
-
-      expect(getQuizResultSwatchPropsMock).toHaveBeenCalledWith(
-        mockResult?.variations?.[0],
-        onVariationClickMock,
-        mockResult,
-        swatchImageKey
-      );
+      expect(getQuizResultSwatchPropsWithVariationClickMock).toHaveBeenCalledTimes(2);
     });
   });
 
-  describe('without context function', () => {
-    const Subject = withContext(ResultCardSwatches, {
-      contextMocks: { getQuizResultSwatchProps: undefined },
-    });
-
+  describe('without getQuizResultSwatchPropsWithVariationClick function', () => {
     it('does not render swatches', () => {
-      const view = renderToString(<Subject {...props} />);
+      const propsWithoutFunction = {
+        faceOutResult: mockResult,
+      };
+
+      const view = renderToString(<ResultCardSwatches {...propsWithoutFunction} />);
       expect(view).not.toContain('cio-result-card-swatch');
     });
   });
 
   describe('with no variations', () => {
-    const Subject = withContext(ResultCardSwatches, { contextMocks });
-
     it('renders no swatches when variations is undefined', () => {
       const propsWithoutVariations = {
         ...props,
         faceOutResult: { ...mockResult, variations: undefined },
       };
 
-      const view = renderToString(<Subject {...propsWithoutVariations} />);
+      const view = renderToString(<ResultCardSwatches {...propsWithoutVariations} />);
       expect(view).not.toContain('cio-result-card-swatch');
     });
 
@@ -105,7 +85,7 @@ describe(`${ResultCardSwatches.name} server`, () => {
         faceOutResult: { ...mockResult, variations: [] },
       };
 
-      const view = renderToString(<Subject {...propsWithEmptyVariations} />);
+      const view = renderToString(<ResultCardSwatches {...propsWithEmptyVariations} />);
       expect(view).not.toContain('cio-result-card-swatch');
     });
   });
