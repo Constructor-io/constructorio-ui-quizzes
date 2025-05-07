@@ -16,6 +16,7 @@ describe(`${ResultCard.name} client`, () => {
     ratingScoreKey: 'rating_score',
     renderResultCardPriceDetails: jest.fn().mockReturnValue(<div>Price Details</div>),
     getResultCardImageUrl: jest.fn().mockReturnValue('www.custom_img.com'),
+    swatchImageKey: 'option_image_source',
   };
 
   const contextMocks: Partial<QuizContextValue> = {
@@ -66,37 +67,24 @@ describe(`${ResultCard.name} client`, () => {
       expect(screen.getByRole('img').getAttribute('src')).toEqual('www.custom_img.com');
     });
 
-    it('passes correct parameters to getQuizResultSwatchProps', () => {
-      const renderResultCardMock = jest.fn((result, getters) => {
-        getters.getQuizResultSwatchProps(result.variations?.[0]);
-        return <div>Custom Result Card</div>;
-      });
-
-      render(
-        <Subject
-          {...props}
-          result={{
-            ...props.result,
-            variations: [
-              {
-                data: {
-                  variation_id: 'var1',
-                  image_url: 'test-image.jpg',
-                },
-                value: 'Variation 1',
-              },
-            ],
-          }}
-          renderResultCard={renderResultCardMock}
-          swatchImageKey='option_image_source'
-        />
+    it('renders custom results', () => {
+      props.renderResultCard = (result) => (
+        <div key={result.data?.id} className='custom-result'>
+          <img src={result.data?.image_url} className='product-image' alt='quiz-result' />
+          <div className='product-title'>{result.value}</div>
+          <div className='product-price'>{result.data?.price}</div>
+        </div>
       );
-
-      expect(renderResultCardMock).toHaveBeenCalled();
+      const { container } = render(<Subject {...props} />);
+      expect(container.firstChild?.firstChild).toHaveClass('custom-result');
+      expect(container.firstChild?.firstChild?.childNodes[0]).toHaveClass('product-image');
+      expect(container.firstChild?.firstChild?.childNodes[1]).toHaveClass('product-title');
+      expect(container.firstChild?.firstChild?.childNodes[2]).toHaveClass('product-price');
     });
   });
 
   describe('without context function', () => {
+    props.renderResultCard = undefined;
     const Subject = withContext(ResultCard, {
       contextMocks: {
         ...contextMocks,
@@ -111,6 +99,7 @@ describe(`${ResultCard.name} client`, () => {
   });
 
   describe('with custom callbacks', () => {
+    props.renderResultCard = undefined;
     const Subject = withContext(ResultCard, {
       contextMocks: {
         ...contextMocks,
