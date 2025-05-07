@@ -43,8 +43,10 @@ export type RenderResultCard = (
     getAddToCartButtonProps?: GetAddToCartButtonProps;
     getAddToFavoritesButtonProps?: GetAddToFavoritesButtonProps;
     getQuizResultLinkProps?: GetQuizResultLinkProps;
+    getQuizResultButtonProps?: GetQuizResultButtonProps;
+    getQuizResultSwatchProps?: GetQuizResultSwatchProps;
   },
-  index: number
+  resultPosition: number
 ) => JSX.Element;
 
 // QUIZ PROPS
@@ -306,16 +308,6 @@ export interface SelectInputProps {
   key: number;
 }
 
-export interface SwatchProps
-  extends React.DetailedHTMLProps<
-    React.ButtonHTMLAttributes<HTMLButtonElement>,
-    HTMLButtonElement
-  > {
-  key: string;
-  className: string;
-  type: 'button';
-}
-
 export type GetOpenTextInputProps = () => OpenTextInputProps;
 export type GetCoverQuestionProps = () => CoverQuestionProps;
 export type GetSelectInputProps = (option: QuestionOption) => SelectInputProps;
@@ -338,7 +330,9 @@ export type GetAddToFavoritesButtonProps = (
 ) => AddToCartButtonProps;
 export type GetQuizImageProps = () => QuizImageProps;
 export type GetSelectQuestionImageProps = (option: QuestionOption) => QuizImageProps;
-export type GetQuizResultSwatchProps = (variation: QuizResultDataPartial) => SwatchProps;
+export type GetQuizResultSwatchProps = (
+  variation: QuizResultDataPartial
+) => React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
 export interface QuizResultOptions<T = 'button' | 'link'> {
   result: QuizResultDataPartial;
   position: number;

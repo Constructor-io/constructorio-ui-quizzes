@@ -9,7 +9,8 @@ import UseResultDocs from './markdown/UseResultDocs.md';
 
 ```tsx
 const QuizResultComponent = ({ result }) => {
-  const { faceOutResult, onVariationClick, getQuizResultSwatchProps } = useResult(result, 'swatch_image');
+  const swatch_key = `swatch_image`
+  const { faceOutResult, onVariationClick, getQuizResultSwatchProps } = useResult(result, swatch_key);
 
   return (
     <div>

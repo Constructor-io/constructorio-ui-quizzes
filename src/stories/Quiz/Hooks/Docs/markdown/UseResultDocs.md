@@ -3,7 +3,7 @@
 The `useResult` hook is designed to manage and manipulate quiz results, providing state management for variations and prop getters for seamless UI integration.
 
 ```tsx
-    const { faceOutResult, onVariationClick, getQuizResultSwatchProps } = useResult(result, 'swatch_image');
+    const { faceOutResult, onVariationClick, getQuizResultSwatchProps } = useResult(result);
 ```
 
 ### Props 

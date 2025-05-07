@@ -43,29 +43,20 @@ export default function ResultCard(props: ResultCardOptions) {
   } = useContext(QuizContext);
 
   const { faceOutResult, getQuizResultSwatchProps } = useResult(result, swatchImageKey);
+  const { data, value } = faceOutResult || {};
 
-  const salePrice = validateNumberOrString(
-    getNestedValueUsingDotNotation(faceOutResult?.data, salePriceKey)
-  );
+  const salePrice = validateNumberOrString(getNestedValueUsingDotNotation(data, salePriceKey));
   const regularPrice = validateNumberOrString(
-    getNestedValueUsingDotNotation(faceOutResult?.data, regularPriceKey)
+    getNestedValueUsingDotNotation(data, regularPriceKey)
   );
-  const ratingCount = validateNumberOrString(
-    getNestedValueUsingDotNotation(faceOutResult?.data, ratingCountKey)
-  );
-  const ratingScore = validateNumberOrString(
-    getNestedValueUsingDotNotation(faceOutResult?.data, ratingScoreKey)
-  );
+  const ratingCount = validateNumberOrString(getNestedValueUsingDotNotation(data, ratingCountKey));
+  const ratingScore = validateNumberOrString(getNestedValueUsingDotNotation(data, ratingScoreKey));
 
   const resultCardContent = () => (
     <>
       <div className='cio-result-card-image'>
         <img
-          src={
-            getResultCardImageUrl
-              ? getResultCardImageUrl(faceOutResult)
-              : faceOutResult.data?.image_url
-          }
+          src={getResultCardImageUrl ? getResultCardImageUrl(faceOutResult) : data?.image_url}
           alt='product'
         />
       </div>
@@ -74,7 +65,7 @@ export default function ResultCard(props: ResultCardOptions) {
         getQuizResultSwatchProps={getQuizResultSwatchProps}
       />
       <div className='cio-result-card-text'>
-        <p className='cio-result-card-title'>{faceOutResult.value}</p>
+        <p className='cio-result-card-title'>{value}</p>
         <div className='cio-result-card-details'>
           <div className='cio-result-card-rating'>
             {!!ratingScore && (

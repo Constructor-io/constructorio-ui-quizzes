@@ -5,10 +5,37 @@ import ResultCard from '../../../src/components/ResultCard/ResultCard';
 import { withContext } from '../../__tests__/utils';
 import { QuizContextValue } from '../../../src/components/CioQuiz/context';
 import * as factories from '../../__tests__/factories';
+import * as useResultModule from '../../../src/hooks/useResult';
+
+jest.mock('../../../src/hooks/useResult');
 
 describe(`${ResultCard.name} client`, () => {
+  const mockResult = factories.quizResult.build({ data: { id: 'test-id' } });
+  const mockFaceOutResult = {
+    ...mockResult,
+    data: {
+      ...mockResult.data,
+      image_url: 'default.jpg',
+      sale_price: 80,
+      regular_price: 100,
+      rating_count: 10,
+      rating_score: 4,
+      id: 'test-id',
+    },
+  };
+
+  const mockUseResult = {
+    faceOutResult: mockFaceOutResult,
+    getQuizResultSwatchProps: jest.fn(),
+    onVariationClick: jest.fn(),
+  };
+
+  beforeEach(() => {
+    jest.spyOn(useResultModule, 'default').mockReturnValue(mockUseResult);
+  });
+
   const props: React.ComponentProps<typeof ResultCard> = {
-    result: factories.quizResult.build(),
+    result: mockResult,
     salePriceKey: 'sale_price',
     regularPriceKey: 'regular_price',
     resultPosition: 0,
@@ -16,22 +43,30 @@ describe(`${ResultCard.name} client`, () => {
     ratingScoreKey: 'rating_score',
     renderResultCardPriceDetails: jest.fn().mockReturnValue(<div>Price Details</div>),
     getResultCardImageUrl: jest.fn().mockReturnValue('www.custom_img.com'),
+    swatchImageKey: 'option_image_source',
   };
 
   const contextMocks: Partial<QuizContextValue> = {
     customAddToFavoritesCallback: false,
     customClickItemCallback: false,
-    getQuizResultButtonProps: jest.fn(),
-    getQuizResultLinkProps: jest.fn(),
+    getQuizResultButtonProps: jest.fn().mockReturnValue({ role: 'button' }),
+    getQuizResultLinkProps: jest
+      .fn()
+      .mockReturnValue({ 'aria-label': 'View product', role: 'link', href: '#' }),
     getAddToFavoritesButtonProps: jest.fn().mockReturnValue({ 'aria-label': 'Add to favorites' }),
   };
 
   describe('with context function', () => {
     const Subject = withContext(ResultCard, { contextMocks });
 
-    it('renders the previous button', () => {
+    it('renders the result value from useResult hook', () => {
       const view = renderToString(<Subject {...props} />);
-      expect(view).toContain('VALUE');
+      expect(view).toContain(mockFaceOutResult.value);
+    });
+
+    it('uses useResult hook with correct parameters', () => {
+      renderToString(<Subject {...props} />);
+      expect(useResultModule.default).toHaveBeenCalledWith(mockResult, props.swatchImageKey);
     });
 
     it('renders custom price details', () => {
@@ -50,15 +85,18 @@ describe(`${ResultCard.name} client`, () => {
       expect(view).toContain('100');
     });
 
-    it('without sale price', () => {
-      const view = renderToString(
-        <Subject
-          {...props}
-          renderResultCardPriceDetails={undefined}
-          result={{ ...props.result, data: { ...props.result.data!, sale_price: undefined } }}
-        />
-      );
+    it('renders only regular price when sale price is not available', () => {
+      const resultWithoutSale = {
+        ...mockFaceOutResult,
+        data: { ...mockFaceOutResult.data, sale_price: undefined, id: 'test-id' },
+      };
+      jest.spyOn(useResultModule, 'default').mockReturnValue({
+        ...mockUseResult,
+        faceOutResult: resultWithoutSale,
+      });
+      const view = renderToString(<Subject {...props} renderResultCardPriceDetails={undefined} />);
       expect(view).toContain('100');
+      expect(view).not.toContain('80');
     });
 
     it('does not render fav button', () => {
@@ -66,25 +104,31 @@ describe(`${ResultCard.name} client`, () => {
       expect(view).not.toContain('Add to favorites');
     });
 
-    it('renders custom results', () => {
-      props.renderResultCard = (result) => (
-        <div key={result.data?.id} className='custom-result'>
-          <img src={result.data?.image_url} className='product-image' alt='quiz-result' />
-          <div className='product-title'>{result.value}</div>
-          <div className='product-price'>{result.data?.price}</div>
+    it('uses custom render function when provided', () => {
+      const customRender = jest.fn().mockReturnValue(
+        <div className='custom-result'>
+          <div className='custom-content'>Custom Content</div>
         </div>
       );
-      const view = renderToString(<Subject {...props} />);
-      expect(view).toContain('cio-results');
-      expect(view).toContain('custom-result');
-      expect(view).toContain('product-image');
-      expect(view).toContain('product-title');
-      expect(view).toContain('product-price');
+
+      const view = renderToString(<Subject {...props} renderResultCard={customRender} />);
+
+      expect(customRender).toHaveBeenCalledWith(
+        mockFaceOutResult,
+        expect.objectContaining({
+          getQuizResultButtonProps: expect.any(Function),
+          getAddToCartButtonProps: expect.any(Function),
+          getAddToFavoritesButtonProps: expect.any(Function),
+          getQuizResultLinkProps: expect.any(Function),
+          getQuizResultSwatchProps: expect.any(Function),
+        }),
+        props.resultPosition
+      );
+      expect(view).toContain('Custom Content');
     });
   });
 
   describe('without context function', () => {
-    props.renderResultCard = undefined;
     const Subject = withContext(ResultCard, {
       contextMocks: {
         ...contextMocks,
@@ -93,28 +137,40 @@ describe(`${ResultCard.name} client`, () => {
       },
     });
     it('does not render content', () => {
-      const view = renderToString(<Subject {...props} />);
-      expect(view).not.toContain('VALUE');
+      const view = renderToString(<Subject {...props} renderResultCard={undefined} />);
+      expect(view).not.toContain(mockFaceOutResult.value);
     });
   });
 
-  describe('with custom callbacks', () => {
-    props.renderResultCard = undefined;
-    const Subject = withContext(ResultCard, {
-      contextMocks: {
-        ...contextMocks,
-        customClickItemCallback: true,
-        customAddToFavoritesCallback: true,
-      },
-    });
-    it('renders content', () => {
-      const view = renderToString(<Subject {...props} />);
-      expect(view).toContain('VALUE');
+  describe('interaction modes', () => {
+    it('uses button interaction when customClickItemCallback is true', () => {
+      const Subject = withContext(ResultCard, {
+        contextMocks: {
+          ...contextMocks,
+          customClickItemCallback: true,
+        },
+      });
+      const view = renderToString(<Subject {...props} renderResultCard={undefined} />);
+      expect(view).not.toContain('cio-result-card-anchor');
+      expect(view).toContain('role="button"');
     });
 
-    it('renders fav button', () => {
-      const view = renderToString(<Subject {...props} />);
+    it('renders favorites button when customAddToFavoritesCallback is true', () => {
+      const Subject = withContext(ResultCard, {
+        contextMocks: {
+          ...contextMocks,
+          customAddToFavoritesCallback: true,
+        },
+      });
+      const view = renderToString(<Subject {...props} renderResultCard={undefined} />);
       expect(view).toContain('Add to favorites');
+    });
+
+    it('uses link interaction when customClickItemCallback is false', () => {
+      const Subject = withContext(ResultCard, { contextMocks });
+      const view = renderToString(<Subject {...props} renderResultCard={undefined} />);
+      expect(view).toContain('cio-result-card-anchor');
+      expect(view).toContain('role="link"');
     });
   });
 });
