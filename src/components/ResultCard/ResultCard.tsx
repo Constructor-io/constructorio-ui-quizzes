@@ -13,6 +13,7 @@ interface ResultCardOptions {
   ratingScoreKey?: string;
   resultPosition: number;
   renderResultCardPriceDetails?: (result: QuizResultDataPartial) => JSX.Element;
+  getResultCardImageUrl?: (result: QuizResultDataPartial) => string;
 }
 
 export default function ResultCard(props: ResultCardOptions) {
@@ -24,6 +25,7 @@ export default function ResultCard(props: ResultCardOptions) {
     ratingCountKey,
     ratingScoreKey,
     renderResultCardPriceDetails,
+    getResultCardImageUrl,
   } = props;
   const {
     customAddToFavoritesCallback,
@@ -48,7 +50,10 @@ export default function ResultCard(props: ResultCardOptions) {
   const resultCardContent = () => (
     <>
       <div className='cio-result-card-image'>
-        <img src={result.data?.image_url} alt='product' />
+        <img
+          src={getResultCardImageUrl ? getResultCardImageUrl(result) : result.data?.image_url}
+          alt='product'
+        />
       </div>
       <div className='cio-result-card-text'>
         <p className='cio-result-card-title'>{result.value}</p>

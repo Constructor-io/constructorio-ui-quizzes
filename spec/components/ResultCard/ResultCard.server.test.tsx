@@ -15,6 +15,7 @@ describe(`${ResultCard.name} client`, () => {
     ratingCountKey: 'rating_count',
     ratingScoreKey: 'rating_score',
     renderResultCardPriceDetails: jest.fn().mockReturnValue(<div>Price Details</div>),
+    getResultCardImageUrl: jest.fn().mockReturnValue('www.custom_img.com'),
   };
 
   const contextMocks: Partial<QuizContextValue> = {
@@ -36,6 +37,11 @@ describe(`${ResultCard.name} client`, () => {
     it('renders custom price details', () => {
       const view = renderToString(<Subject {...props} />);
       expect(view).toContain('Price Details');
+    });
+
+    it('renders custom image url', () => {
+      const view = renderToString(<Subject {...props} />);
+      expect(view).toContain('www.custom_img.com');
     });
 
     it('calls default price details', () => {

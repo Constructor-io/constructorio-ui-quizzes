@@ -49,10 +49,11 @@ export interface ResultCardOptions {
     getters: {
       getAddToCartButtonProps?: GetAddToCartButtonProps;
       getAddToFavoritesButtonProps?: GetAddToFavoritesButtonProps;
-      getResultLinkProps?: GetQuizResultLinkProps;
+      getQuizResultLinkProps?: GetQuizResultLinkProps;
     },
     index: number
   ) => JSX.Element;
+  getResultCardImageUrl?: (result: QuizResultDataPartial) => string;
 }
 
 export namespace QuizResultsEventsProps {
@@ -115,7 +116,7 @@ export interface IQuizProps {
   sessionStateOptions?: SessionStateOptions;
   primaryColor?: string;
   enableHydration?: boolean;
-  callbacks?: Callbacks;
+  callbacks: Callbacks;
   questionsPageOptions?: QuestionsPageOptions;
 }
 
@@ -123,6 +124,7 @@ export interface IQuizProps {
 export interface QuizReturnState {
   answers: {
     inputs: AnswerInputState; // Key is the question Id and value is the answer input
+    payload: string[][];
   };
   quiz: {
     requestState: RequestStates;

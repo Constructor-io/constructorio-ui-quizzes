@@ -19,6 +19,13 @@ jest.mock('../../../../src/services', () => ({
 }));
 
 describe('Testing Hook (client): useQuizApiState', () => {
+  const quizOptions = {
+    quizId: QUIZ_ID,
+    quizVersionId: QUIZ_VERSION_ID,
+    callbacks: { onAddToCartClick: () => {} },
+    resultsPageOptions: {},
+  };
+
   (getQuizResults as jest.Mock).mockResolvedValue({
     quiz_selected_options: [
       { has_attribute: true, value: 'option1' },
@@ -27,7 +34,6 @@ describe('Testing Hook (client): useQuizApiState', () => {
   });
 
   it('executes quiz flow correctly', async () => {
-    const quizOptions = { quizId: QUIZ_ID, quizVersionId: QUIZ_VERSION_ID, resultsPageOptions: {} };
     const quizLocalState = {
       answers: [],
       answerInputs: {},
@@ -68,7 +74,6 @@ describe('Testing Hook (client): useQuizApiState', () => {
   });
 
   it('sets loading state correctly around async operations', async () => {
-    const quizOptions = { quizId: QUIZ_ID, quizVersionId: QUIZ_VERSION_ID, resultsPageOptions: {} };
     const quizLocalState = {
       answers: [],
       answerInputs: {},
@@ -94,7 +99,6 @@ describe('Testing Hook (client): useQuizApiState', () => {
   });
 
   it('dispatches quiz results upon completion', async () => {
-    const quizOptions = { quizId: QUIZ_ID, quizVersionId: QUIZ_VERSION_ID, resultsPageOptions: {} };
     const quizLocalState = {
       answers: [['1']],
       isQuizCompleted: true,

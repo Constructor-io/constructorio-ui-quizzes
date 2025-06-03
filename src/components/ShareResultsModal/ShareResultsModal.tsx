@@ -11,14 +11,16 @@ interface ShareResultsModalProps {
   onClose: () => void;
   quizState: QuizReturnState['quiz'];
   onEmailResults?: QuizResultsEventsProps.OnEmailResults;
+  answers: string[][];
 }
 
 export default function ShareResultsModal({
   onClose,
   quizState,
+  answers,
   onEmailResults,
 }: ShareResultsModalProps) {
-  const url = useShareResultsLink(quizState);
+  const url = useShareResultsLink(quizState, answers);
   const results = quizState?.results?.response?.results;
 
   return (

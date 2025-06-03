@@ -23,7 +23,7 @@ const useHydrateQuizLocalState = (
   useEffect(() => {
     if (skipToResults) hydrateQuizLocalStateHandler();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [quizId]);
 
   return hydrateQuizLocalStateHandler;
 };

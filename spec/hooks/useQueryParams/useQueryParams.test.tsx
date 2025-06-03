@@ -7,7 +7,7 @@ describe('Testing Hook (client): useQueryParams', () => {
   beforeAll(() => {
     delete (global as any).window.location;
     (global as any).window.location = new URL(
-      'https://example.com/?items=item1,item2&attributes=attr1,attr2'
+      'https://example.com/?items=item1,item2&attributes=attr1,attr2&a=1-2,3-4&quiz_version_id=123'
     );
 
     window.history.replaceState = jest.fn((state, title, url) => {
@@ -24,6 +24,11 @@ describe('Testing Hook (client): useQueryParams', () => {
 
     expect(result.current.queryItems).toEqual(['item1', 'item2']);
     expect(result.current.queryAttributes).toEqual(['attr1', 'attr2']);
+    expect(result.current.answers).toEqual([
+      ['1', '2'],
+      ['3', '4'],
+    ]);
+    expect(result.current.quizVersionId).toBe('123');
     expect(result.current.isSharedResultsQuery).toBe(true);
   });
 

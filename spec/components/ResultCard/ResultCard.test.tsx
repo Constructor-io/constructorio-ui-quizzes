@@ -15,6 +15,7 @@ describe(`${ResultCard.name} client`, () => {
     ratingCountKey: 'rating_count',
     ratingScoreKey: 'rating_score',
     renderResultCardPriceDetails: jest.fn().mockReturnValue(<div>Price Details</div>),
+    getResultCardImageUrl: jest.fn().mockReturnValue('www.custom_img.com'),
   };
 
   const contextMocks: Partial<QuizContextValue> = {
@@ -58,6 +59,11 @@ describe(`${ResultCard.name} client`, () => {
     it('does not render fav button', () => {
       render(<Subject {...props} />);
       expect(screen.queryByLabelText('Add to favorites')).not.toBeInTheDocument();
+    });
+
+    it('renders custom image url', () => {
+      render(<Subject {...props} />);
+      expect(screen.getByRole('img').getAttribute('src')).toEqual('www.custom_img.com');
     });
   });
 
