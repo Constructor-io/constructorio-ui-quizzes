@@ -39,8 +39,6 @@ export default function useSelectInputProps(
         } else {
           setSelected({ ...selected, [id]: true });
         }
-
-        return;
       }
     },
     [selected, type]
