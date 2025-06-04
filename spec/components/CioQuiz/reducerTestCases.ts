@@ -51,6 +51,8 @@ export const apiReducerCases = [
         isSingleQuestion: true,
         isMultipleQuestion: false,
         isSelectQuestion: true,
+        isFilterMultipleQuestion: false,
+        isFilterSingleQuestion: false,
       },
     },
   },
@@ -150,6 +152,8 @@ export const apiReducerCases = [
         isSingleQuestion: true,
         isMultipleQuestion: false,
         isSelectQuestion: true,
+        isFilterMultipleQuestion: false,
+        isFilterSingleQuestion: false,
       },
     },
     action: {
@@ -241,6 +245,46 @@ export const localReducerCases = [
     },
   },
   {
+    action: {
+      type: QuestionTypes.SingleFilterValue,
+      payload: {
+        questionId: '1',
+        input: 'filter',
+      },
+    },
+    initialState: localInitialState,
+    expected: {
+      ...localInitialState,
+      isQuizCompleted: false,
+      answerInputs: {
+        '1': {
+          type: QuestionTypes.SingleFilterValue,
+          value: 'filter',
+        },
+      },
+    },
+  },
+  {
+    action: {
+      type: QuestionTypes.MultipleFilterValues,
+      payload: {
+        questionId: '1',
+        input: 'filter',
+      },
+    },
+    initialState: localInitialState,
+    expected: {
+      ...localInitialState,
+      isQuizCompleted: false,
+      answerInputs: {
+        '1': {
+          type: QuestionTypes.MultipleFilterValues,
+          value: 'filter',
+        },
+      },
+    },
+  },
+  {
     initialState: {
       ...localInitialState,
       answerInputs: {
@@ -259,6 +303,8 @@ export const localReducerCases = [
         isSingleQuestion: false,
         isMultipleQuestion: false,
         isSelectQuestion: false,
+        isFilterMultipleQuestion: false,
+        isFilterSingleQuestion: false,
       },
     },
     expected: {
@@ -298,6 +344,8 @@ export const localReducerCases = [
         isSingleQuestion: false,
         isMultipleQuestion: false,
         isSelectQuestion: false,
+        isFilterMultipleQuestion: false,
+        isFilterSingleQuestion: false,
       },
     },
     expected: {
@@ -343,6 +391,8 @@ export const localReducerCases = [
         isSingleQuestion: false,
         isMultipleQuestion: false,
         isSelectQuestion: false,
+        isFilterMultipleQuestion: false,
+        isFilterSingleQuestion: false,
       },
     },
     expected: {
@@ -389,6 +439,8 @@ export const localReducerCases = [
         isSingleQuestion: false,
         isMultipleQuestion: false,
         isSelectQuestion: false,
+        isFilterMultipleQuestion: false,
+        isFilterSingleQuestion: false,
       },
     },
     expected: {
@@ -428,6 +480,8 @@ export const localReducerCases = [
         isSingleQuestion: false,
         isMultipleQuestion: false,
         isSelectQuestion: false,
+        isFilterMultipleQuestion: false,
+        isFilterSingleQuestion: false,
       },
     },
     expected: {
@@ -501,6 +555,8 @@ export const localReducerCases = [
         isSingleQuestion: false,
         isMultipleQuestion: false,
         isSelectQuestion: false,
+        isFilterMultipleQuestion: false,
+        isFilterSingleQuestion: false,
       },
     },
     expected: {
@@ -541,6 +597,8 @@ export const localReducerCases = [
         isSingleQuestion: false,
         isMultipleQuestion: false,
         isSelectQuestion: false,
+        isFilterMultipleQuestion: false,
+        isFilterSingleQuestion: false,
       },
     },
     expected: {
@@ -581,6 +639,8 @@ export const localReducerCases = [
         isSingleQuestion: false,
         isMultipleQuestion: false,
         isSelectQuestion: false,
+        isFilterMultipleQuestion: false,
+        isFilterSingleQuestion: false,
       },
     },
     expected: {
@@ -647,6 +707,8 @@ export const localReducerCases = [
         isSingleQuestion: false,
         isMultipleQuestion: false,
         isSelectQuestion: false,
+        isFilterMultipleQuestion: false,
+        isFilterSingleQuestion: false,
       },
     },
     expected: {

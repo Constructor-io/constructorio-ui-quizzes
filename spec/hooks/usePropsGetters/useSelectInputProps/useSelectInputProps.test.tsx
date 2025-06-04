@@ -36,6 +36,18 @@ describe('Testing Hook (client): useSelectInputProps', () => {
     expect(quizAnswerChangedMock).toHaveBeenCalledWith([{ id: '1', value: 'Option 1' }]);
   });
 
+  it('correctly toggles selected class on click with single filter value question', () => {
+    currentQuestionData.type = 'single_filter_value';
+    const { result } = setupHook(currentQuestionData);
+
+    act(() => {
+      result.current(currentQuestionData.options[0]).onClick(mockEvent);
+    });
+
+    expect(result.current(currentQuestionData.options[0]).className).toContain('selected');
+    expect(quizAnswerChangedMock).toHaveBeenCalledWith([{ id: '1', value: 'Option 1' }]);
+  });
+
   it('handles keyboard selection correctly', () => {
     const { result } = renderHook(() =>
       useSelectInputProps(
@@ -69,6 +81,22 @@ describe('Testing Hook (client): useSelectInputProps', () => {
 
   it('allows toggling options off in a multiple select question', () => {
     currentQuestionData.type = 'multiple';
+    const { result } = setupHook(currentQuestionData);
+
+    act(() => {
+      result.current(currentQuestionData.options[0]).onClick(mockEvent);
+    });
+
+    act(() => {
+      result.current(currentQuestionData.options[0]).onClick(mockEvent);
+    });
+
+    expect(result.current(currentQuestionData.options[0]).className).not.toContain('selected');
+    expect(quizAnswerChangedMock).toHaveBeenCalledWith([]);
+  });
+
+  it('allows toggling options off in a multiple filter value question', () => {
+    currentQuestionData.type = 'multiple_filter_values';
     const { result } = setupHook(currentQuestionData);
 
     act(() => {

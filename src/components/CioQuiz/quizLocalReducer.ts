@@ -57,6 +57,18 @@ export default function quizLocalReducer(
         answerInputs: answerInputReducer(state.answerInputs, action),
         isQuizCompleted: false,
       };
+    case QuestionTypes.SingleFilterValue:
+      return {
+        ...state,
+        answerInputs: answerInputReducer(state.answerInputs, action),
+        isQuizCompleted: false,
+      };
+    case QuestionTypes.MultipleFilterValues:
+      return {
+        ...state,
+        answerInputs: answerInputReducer(state.answerInputs, action),
+        isQuizCompleted: false,
+      };
     case QuestionTypes.Next: {
       const { answers, answerInputs } = state;
       const newAnswers = [...answers];
@@ -71,6 +83,8 @@ export default function quizLocalReducer(
           break;
         case QuestionTypes.SingleSelect:
         case QuestionTypes.MultipleSelect:
+        case QuestionTypes.SingleFilterValue:
+        case QuestionTypes.MultipleFilterValues:
           newAnswers.push(
             (currentAnswerInput.value as Omit<QuestionOption, 'attribute' | 'images'>[]).map(
               (answer) => answer.id
@@ -102,6 +116,8 @@ export default function quizLocalReducer(
           break;
         case QuestionTypes.SingleSelect:
         case QuestionTypes.MultipleSelect:
+        case QuestionTypes.SingleFilterValue:
+        case QuestionTypes.MultipleFilterValues:
         default:
           newAnswers.push([]);
       }

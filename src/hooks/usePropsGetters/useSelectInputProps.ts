@@ -24,11 +24,14 @@ export default function useSelectInputProps(
   const singleSelectClicked = useRef({});
 
   const toggleIdSelected = useCallback(
-    (id: number) => {
-      if (type === QuestionTypes.SingleSelect) {
+    (id: number | string) => {
+      if (type === QuestionTypes.SingleSelect || type === QuestionTypes.SingleFilterValue) {
         singleSelectClicked.current = true;
         setSelected({ [id]: true });
-      } else if (type === QuestionTypes.MultipleSelect) {
+        return;
+      }
+
+      if (type === QuestionTypes.MultipleSelect || type === QuestionTypes.MultipleFilterValues) {
         if (selected[id]) {
           const newState = { ...selected };
           delete newState[id];
@@ -36,12 +39,14 @@ export default function useSelectInputProps(
         } else {
           setSelected({ ...selected, [id]: true });
         }
+
+        return;
       }
     },
     [selected, type]
   );
 
-  const onOptionKeyDown = (event: KeyboardEvent<HTMLElement>, id: number) => {
+  const onOptionKeyDown = (event: KeyboardEvent<HTMLElement>, id: number | string) => {
     if (event?.key === ' ' || event?.key === 'Enter') {
       toggleIdSelected(id);
     }
@@ -78,6 +83,20 @@ export default function useSelectInputProps(
 
       quizAnswerChanged(selectedAnswers);
     }
+
+    if (
+      currentQuestionData?.type === 'multiple_filter_values' ||
+      currentQuestionData?.type === 'single_filter_value'
+    ) {
+      const selectedAnswers = currentQuestionData?.options
+        ?.filter((opt) => selected[String(opt.id)])
+        ?.map((opt) => ({
+          id: opt.id,
+          value: opt.value,
+        }));
+
+      quizAnswerChanged(selectedAnswers);
+    }
   }, [
     selected,
     currentQuestionData?.id,
@@ -89,7 +108,11 @@ export default function useSelectInputProps(
   // Go to next question only every time answerInputs (answers input state) changes...
   // and it's a singleSelectQuestion and user has just clicked on an option
   useEffect(() => {
-    if (currentQuestionData?.type === 'single' && singleSelectClicked.current) {
+    if (
+      (currentQuestionData?.type === 'single' ||
+        currentQuestionData?.type === 'single_filter_value') &&
+      singleSelectClicked.current
+    ) {
       nextQuestion();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

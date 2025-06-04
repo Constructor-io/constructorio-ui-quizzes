@@ -33,6 +33,8 @@ describe(`${utils.getQuestionTypes.name}`, () => {
         isSingleQuestion: false,
         isMultipleQuestion: false,
         isSelectQuestion: false,
+        isFilterMultipleQuestion: false,
+        isFilterSingleQuestion: false,
       },
     },
     {
@@ -43,6 +45,8 @@ describe(`${utils.getQuestionTypes.name}`, () => {
         isSingleQuestion: false,
         isMultipleQuestion: false,
         isSelectQuestion: false,
+        isFilterMultipleQuestion: false,
+        isFilterSingleQuestion: false,
       },
     },
     {
@@ -53,6 +57,8 @@ describe(`${utils.getQuestionTypes.name}`, () => {
         isSingleQuestion: true,
         isMultipleQuestion: false,
         isSelectQuestion: true,
+        isFilterMultipleQuestion: false,
+        isFilterSingleQuestion: false,
       },
     },
     {
@@ -63,6 +69,32 @@ describe(`${utils.getQuestionTypes.name}`, () => {
         isSingleQuestion: false,
         isMultipleQuestion: true,
         isSelectQuestion: true,
+        isFilterMultipleQuestion: false,
+        isFilterSingleQuestion: false,
+      },
+    },
+    {
+      questionType: QuestionTypes.SingleFilterValue,
+      output: {
+        isOpenQuestion: false,
+        isCoverQuestion: false,
+        isSingleQuestion: false,
+        isMultipleQuestion: false,
+        isSelectQuestion: true,
+        isFilterMultipleQuestion: false,
+        isFilterSingleQuestion: true,
+      },
+    },
+    {
+      questionType: QuestionTypes.MultipleFilterValues,
+      output: {
+        isOpenQuestion: false,
+        isCoverQuestion: false,
+        isSingleQuestion: false,
+        isMultipleQuestion: false,
+        isSelectQuestion: true,
+        isFilterMultipleQuestion: true,
+        isFilterSingleQuestion: false,
       },
     },
     {
@@ -73,6 +105,8 @@ describe(`${utils.getQuestionTypes.name}`, () => {
         isSingleQuestion: false,
         isMultipleQuestion: false,
         isSelectQuestion: false,
+        isFilterMultipleQuestion: false,
+        isFilterSingleQuestion: false,
       },
     },
   ])('returns data for $questionType', ({ questionType, output }) => {

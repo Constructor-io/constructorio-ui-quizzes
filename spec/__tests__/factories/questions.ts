@@ -5,6 +5,7 @@ import {
   SelectQuestion,
   QuestionOption,
   QuestionImages,
+  FilterValueQuestion,
 } from '@constructor-io/constructorio-client-javascript';
 
 export const images = Factory.define<QuestionImages>(() => ({
@@ -44,6 +45,17 @@ export const selectQuestion = Factory.define<SelectQuestion>(() => ({
   cta_text: 'CTA Text',
   id: 1,
   type: 'single',
+  options: selectOption.buildList(2),
+  images: null,
+}));
+
+export const filterValueQuestion = Factory.define<FilterValueQuestion>(() => ({
+  title: 'Title',
+  description: 'Description',
+  cta_text: 'CTA Text',
+  id: 1,
+  type: 'single_filter_value',
+  filter_name: 'filter_name',
   options: selectOption.buildList(2),
   images: null,
 }));

@@ -55,6 +55,49 @@ describe(`${SelectTypeQuestion.name} client`, () => {
     });
   });
 
+  describe('single select', () => {
+    const question = factories.filterValueQuestion.build();
+    const Subject = withContext(SelectTypeQuestion, {
+      contextMocks: {
+        getSelectInputProps: getSelectInputPropsMock,
+        state: {
+          quiz: {
+            currentQuestion: { next_question: question } as CurrentQuestion,
+          } as QuizReturnState['quiz'],
+        } as QuizContextValue['state'],
+      },
+    });
+
+    it('renders select question', () => {
+      const { container } = render(<Subject />);
+      expect(screen.getByText('Title')).toBeInTheDocument();
+      expect(container.firstChild).toHaveAttribute('data-cnstrc-question-type', question.type);
+      expect(container.firstChild).toHaveClass('cio-select-question-container');
+    });
+  });
+
+  describe('multiple filter values', () => {
+    const question = factories.filterValueQuestion.build({
+      type: 'multiple_filter_values',
+    });
+    const Subject = withContext(SelectTypeQuestion, {
+      contextMocks: {
+        getSelectInputProps: getSelectInputPropsMock,
+        state: {
+          quiz: {
+            currentQuestion: { next_question: question } as CurrentQuestion,
+          } as QuizReturnState['quiz'],
+        } as QuizContextValue['state'],
+      },
+    });
+
+    it('renders select question', () => {
+      const { container } = render(<Subject />);
+      expect(screen.getByText('Select one or more options')).toBeInTheDocument();
+      expect(container.firstChild).toHaveAttribute('data-cnstrc-question-type', question.type);
+    });
+  });
+
   describe('with image', () => {
     const Subject = withContext(SelectTypeQuestion, {
       contextMocks: {
