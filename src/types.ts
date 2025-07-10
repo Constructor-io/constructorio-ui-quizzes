@@ -168,8 +168,8 @@ export type CurrentQuestion = NextQuestionResponse & {
   isCoverQuestion: boolean;
   isSingleQuestion: boolean;
   isMultipleQuestion: boolean;
-  isFilterSingleQuestion: boolean;
-  isFilterMultipleQuestion: boolean;
+  isSingleFilterQuestion: boolean;
+  isMultipleFilterQuestion: boolean;
   isSelectQuestion: boolean;
 };
 

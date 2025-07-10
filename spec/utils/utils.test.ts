@@ -67,8 +67,8 @@ describe('getQuestionTypes', () => {
       isSingleQuestion: false,
       isMultipleQuestion: false,
       isSelectQuestion: false,
-      isFilterMultipleQuestion: false,
-      isFilterSingleQuestion: false,
+      isMultipleFilterQuestion: false,
+      isSingleFilterQuestion: false,
     });
     expect(getQuestionTypes('cover')).toEqual({
       isOpenQuestion: false,
@@ -76,8 +76,8 @@ describe('getQuestionTypes', () => {
       isSingleQuestion: false,
       isMultipleQuestion: false,
       isSelectQuestion: false,
-      isFilterMultipleQuestion: false,
-      isFilterSingleQuestion: false,
+      isMultipleFilterQuestion: false,
+      isSingleFilterQuestion: false,
     });
     expect(getQuestionTypes('single_filter_value')).toEqual({
       isOpenQuestion: false,
@@ -85,8 +85,8 @@ describe('getQuestionTypes', () => {
       isSingleQuestion: false,
       isMultipleQuestion: false,
       isSelectQuestion: true,
-      isFilterMultipleQuestion: false,
-      isFilterSingleQuestion: true,
+      isMultipleFilterQuestion: false,
+      isSingleFilterQuestion: true,
     });
   });
 });
