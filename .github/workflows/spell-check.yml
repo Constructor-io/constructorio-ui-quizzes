@@ -17,6 +17,6 @@ jobs:
       - name: Set up node
         uses: actions/setup-node@v2
         with:
-          node-version: '18.13.0'
+          node-version: '20.19.0'
       - name: Spell check
         run: npx cspell "**/*.{ts,tsx}"
