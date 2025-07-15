@@ -1,5 +1,6 @@
 import { renderHook, act } from '@testing-library/react';
 import useSelectInputProps from '../../../../src/hooks/usePropsGetters/useSelectInputProps';
+import { QuestionTypes } from '../../../../src/components/CioQuiz/actions';
 
 describe('Testing Hook (client): useSelectInputProps', () => {
   let quizAnswerChangedMock;
@@ -37,7 +38,7 @@ describe('Testing Hook (client): useSelectInputProps', () => {
   });
 
   it('correctly toggles selected class on click with single filter value question', () => {
-    currentQuestionData.type = 'single_filter_value';
+    currentQuestionData.type = QuestionTypes.SingleFilterValue;
     const { result } = setupHook(currentQuestionData);
 
     act(() => {
@@ -96,7 +97,7 @@ describe('Testing Hook (client): useSelectInputProps', () => {
   });
 
   it('allows toggling options off in a multiple filter value question', () => {
-    currentQuestionData.type = 'multiple_filter_values';
+    currentQuestionData.type = QuestionTypes.MultipleFilterValues;
     const { result } = setupHook(currentQuestionData);
 
     act(() => {

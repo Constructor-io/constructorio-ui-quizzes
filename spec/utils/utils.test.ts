@@ -12,6 +12,7 @@ import {
   isFunction,
   convertPrimaryColorsToString,
 } from '../../src/utils';
+import { QuestionTypes } from '../../src/components/CioQuiz/actions';
 
 describe('convertPrimaryColorsToString', () => {
   it('returns empty string when no images are provided', () => {
@@ -61,7 +62,7 @@ describe('renderImages', () => {
 
 describe('getQuestionTypes', () => {
   it('identifies the correct question types', () => {
-    expect(getQuestionTypes('open')).toEqual({
+    expect(getQuestionTypes(QuestionTypes.OpenText)).toEqual({
       isOpenQuestion: true,
       isCoverQuestion: false,
       isSingleQuestion: false,
@@ -70,7 +71,7 @@ describe('getQuestionTypes', () => {
       isMultipleFilterQuestion: false,
       isSingleFilterQuestion: false,
     });
-    expect(getQuestionTypes('cover')).toEqual({
+    expect(getQuestionTypes(QuestionTypes.Cover)).toEqual({
       isOpenQuestion: false,
       isCoverQuestion: true,
       isSingleQuestion: false,
@@ -79,7 +80,7 @@ describe('getQuestionTypes', () => {
       isMultipleFilterQuestion: false,
       isSingleFilterQuestion: false,
     });
-    expect(getQuestionTypes('single_filter_value')).toEqual({
+    expect(getQuestionTypes(QuestionTypes.SingleFilterValue)).toEqual({
       isOpenQuestion: false,
       isCoverQuestion: false,
       isSingleQuestion: false,

@@ -74,7 +74,10 @@ export default function useSelectInputProps(
 
   // Update global state
   useEffect(() => {
-    if (currentQuestionData?.type === 'multiple' || currentQuestionData?.type === 'single') {
+    if (
+      currentQuestionData?.type === QuestionTypes.MultipleSelect ||
+      currentQuestionData?.type === QuestionTypes.SingleSelect
+    ) {
       const selectedAnswers = currentQuestionData?.options
         ?.filter((opt) => selected[Number(opt.id)])
         ?.map((opt) => ({ id: opt.id, value: opt.value }));
@@ -83,8 +86,8 @@ export default function useSelectInputProps(
     }
 
     if (
-      currentQuestionData?.type === 'multiple_filter_values' ||
-      currentQuestionData?.type === 'single_filter_value'
+      currentQuestionData?.type === QuestionTypes.MultipleFilterValues ||
+      currentQuestionData?.type === QuestionTypes.SingleFilterValue
     ) {
       const selectedAnswers = currentQuestionData?.options
         ?.filter((opt) => selected[String(opt.id)])
@@ -107,8 +110,8 @@ export default function useSelectInputProps(
   // and it's a singleSelectQuestion and user has just clicked on an option
   useEffect(() => {
     if (
-      (currentQuestionData?.type === 'single' ||
-        currentQuestionData?.type === 'single_filter_value') &&
+      (currentQuestionData?.type === QuestionTypes.SingleSelect ||
+        currentQuestionData?.type === QuestionTypes.SingleFilterValue) &&
       singleSelectClicked.current
     ) {
       nextQuestion();

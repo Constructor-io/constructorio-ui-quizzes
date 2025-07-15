@@ -6,6 +6,7 @@ import { withContext } from '../../__tests__/utils';
 import { CurrentQuestion, QuizReturnState } from '../../../src/types';
 import * as factories from '../../__tests__/factories';
 import { QuizContextValue } from '../../../src/components/CioQuiz/context';
+import { QuestionTypes } from '../../../src/components/CioQuiz/actions';
 
 describe(`${SelectTypeQuestion.name} client`, () => {
   const getSelectInputPropsMock = jest.fn().mockImplementation((props) => ({
@@ -76,7 +77,7 @@ describe(`${SelectTypeQuestion.name} client`, () => {
 
   describe('multiple filter values', () => {
     const question = factories.filterValueQuestion.build({
-      type: 'multiple_filter_values',
+      type: QuestionTypes.MultipleFilterValues,
     });
     const Subject = withContext(SelectTypeQuestion, {
       contextMocks: {
