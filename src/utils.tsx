@@ -101,7 +101,10 @@ export const getQuestionTypes = (questionType?: `${QuestionTypes}`) => {
   const isCoverQuestion = questionType === QuestionTypes.Cover;
   const isSingleQuestion = questionType === QuestionTypes.SingleSelect;
   const isMultipleQuestion = questionType === QuestionTypes.MultipleSelect;
-  const isSelectQuestion = isSingleQuestion || isMultipleQuestion;
+  const isSingleFilterQuestion = questionType === QuestionTypes.SingleFilterValue;
+  const isMultipleFilterQuestion = questionType === QuestionTypes.MultipleFilterValues;
+  const isSelectQuestion =
+    isSingleQuestion || isMultipleQuestion || isSingleFilterQuestion || isMultipleFilterQuestion;
 
   return {
     isOpenQuestion,
@@ -109,6 +112,8 @@ export const getQuestionTypes = (questionType?: `${QuestionTypes}`) => {
     isSingleQuestion,
     isMultipleQuestion,
     isSelectQuestion,
+    isSingleFilterQuestion,
+    isMultipleFilterQuestion,
   };
 };
 

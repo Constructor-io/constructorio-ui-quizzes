@@ -28,6 +28,41 @@ function answerInputReducer(state: AnswerInputState, action: ActionAnswerInputQu
   };
 }
 
+function handleNextQuestion(state: QuizLocalReducerState) {
+  const { answers, answerInputs } = state;
+  const newAnswers = [...answers];
+  const lastAnswerInputIndex = answers.length;
+  const currentAnswerInput = Object.values(state.answerInputs)?.[lastAnswerInputIndex];
+  switch (currentAnswerInput.type) {
+    case QuestionTypes.OpenText:
+      newAnswers.push(['true']);
+      break;
+    case QuestionTypes.Cover:
+      newAnswers.push(['seen']);
+      break;
+    case QuestionTypes.SingleSelect:
+    case QuestionTypes.MultipleSelect:
+    case QuestionTypes.SingleFilterValue:
+    case QuestionTypes.MultipleFilterValues:
+      newAnswers.push(
+        (currentAnswerInput.value as Omit<QuestionOption, 'attribute' | 'images'>[]).map(
+          (answer) => answer.id
+        )
+      );
+      break;
+    default:
+      newAnswers.push([]);
+  }
+
+  return {
+    ...state,
+    // We now commit current answers to prevAnswerInputs
+    prevAnswerInputs: answerInputs,
+    answers: newAnswers,
+    isQuizCompleted: false,
+  };
+}
+
 export default function quizLocalReducer(
   state: QuizLocalReducerState,
   action: ActionAnswerQuestion
@@ -57,36 +92,20 @@ export default function quizLocalReducer(
         answerInputs: answerInputReducer(state.answerInputs, action),
         isQuizCompleted: false,
       };
-    case QuestionTypes.Next: {
-      const { answers, answerInputs } = state;
-      const newAnswers = [...answers];
-      const lastAnswerInputIndex = answers.length;
-      const currentAnswerInput = Object.values(state.answerInputs)?.[lastAnswerInputIndex];
-      switch (currentAnswerInput.type) {
-        case QuestionTypes.OpenText:
-          newAnswers.push(['true']);
-          break;
-        case QuestionTypes.Cover:
-          newAnswers.push(['seen']);
-          break;
-        case QuestionTypes.SingleSelect:
-        case QuestionTypes.MultipleSelect:
-          newAnswers.push(
-            (currentAnswerInput.value as Omit<QuestionOption, 'attribute' | 'images'>[]).map(
-              (answer) => answer.id
-            )
-          );
-          break;
-        default:
-          newAnswers.push([]);
-      }
+    case QuestionTypes.SingleFilterValue:
       return {
         ...state,
-        // We now commit current answers to prevAnswerInputs
-        prevAnswerInputs: answerInputs,
-        answers: newAnswers,
+        answerInputs: answerInputReducer(state.answerInputs, action),
         isQuizCompleted: false,
       };
+    case QuestionTypes.MultipleFilterValues:
+      return {
+        ...state,
+        answerInputs: answerInputReducer(state.answerInputs, action),
+        isQuizCompleted: false,
+      };
+    case QuestionTypes.Next: {
+      return handleNextQuestion(state);
     }
     case QuestionTypes.Skip: {
       const { answers, answerInputs } = state;
@@ -102,6 +121,8 @@ export default function quizLocalReducer(
           break;
         case QuestionTypes.SingleSelect:
         case QuestionTypes.MultipleSelect:
+        case QuestionTypes.SingleFilterValue:
+        case QuestionTypes.MultipleFilterValues:
         default:
           newAnswers.push([]);
       }

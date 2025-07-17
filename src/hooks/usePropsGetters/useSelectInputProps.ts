@@ -24,11 +24,14 @@ export default function useSelectInputProps(
   const singleSelectClicked = useRef({});
 
   const toggleIdSelected = useCallback(
-    (id: number) => {
-      if (type === QuestionTypes.SingleSelect) {
+    (id: number | string) => {
+      if (type === QuestionTypes.SingleSelect || type === QuestionTypes.SingleFilterValue) {
         singleSelectClicked.current = true;
         setSelected({ [id]: true });
-      } else if (type === QuestionTypes.MultipleSelect) {
+        return;
+      }
+
+      if (type === QuestionTypes.MultipleSelect || type === QuestionTypes.MultipleFilterValues) {
         if (selected[id]) {
           const newState = { ...selected };
           delete newState[id];
@@ -41,7 +44,7 @@ export default function useSelectInputProps(
     [selected, type]
   );
 
-  const onOptionKeyDown = (event: KeyboardEvent<HTMLElement>, id: number) => {
+  const onOptionKeyDown = (event: KeyboardEvent<HTMLElement>, id: number | string) => {
     if (event?.key === ' ' || event?.key === 'Enter') {
       toggleIdSelected(id);
     }
@@ -71,10 +74,27 @@ export default function useSelectInputProps(
 
   // Update global state
   useEffect(() => {
-    if (currentQuestionData?.type === 'multiple' || currentQuestionData?.type === 'single') {
+    if (
+      currentQuestionData?.type === QuestionTypes.MultipleSelect ||
+      currentQuestionData?.type === QuestionTypes.SingleSelect
+    ) {
       const selectedAnswers = currentQuestionData?.options
         ?.filter((opt) => selected[Number(opt.id)])
         ?.map((opt) => ({ id: opt.id, value: opt.value }));
+
+      quizAnswerChanged(selectedAnswers);
+    }
+
+    if (
+      currentQuestionData?.type === QuestionTypes.MultipleFilterValues ||
+      currentQuestionData?.type === QuestionTypes.SingleFilterValue
+    ) {
+      const selectedAnswers = currentQuestionData?.options
+        ?.filter((opt) => selected[String(opt.id)])
+        ?.map((opt) => ({
+          id: opt.id,
+          value: opt.value,
+        }));
 
       quizAnswerChanged(selectedAnswers);
     }
@@ -89,7 +109,11 @@ export default function useSelectInputProps(
   // Go to next question only every time answerInputs (answers input state) changes...
   // and it's a singleSelectQuestion and user has just clicked on an option
   useEffect(() => {
-    if (currentQuestionData?.type === 'single' && singleSelectClicked.current) {
+    if (
+      (currentQuestionData?.type === QuestionTypes.SingleSelect ||
+        currentQuestionData?.type === QuestionTypes.SingleFilterValue) &&
+      singleSelectClicked.current
+    ) {
       nextQuestion();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

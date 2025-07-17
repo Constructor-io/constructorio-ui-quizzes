@@ -1,5 +1,6 @@
 import { renderHook, act } from '@testing-library/react';
 import useSelectInputProps from '../../../../src/hooks/usePropsGetters/useSelectInputProps';
+import { QuestionTypes } from '../../../../src/components/CioQuiz/actions';
 
 describe('Testing Hook (client): useSelectInputProps', () => {
   let quizAnswerChangedMock;
@@ -26,6 +27,18 @@ describe('Testing Hook (client): useSelectInputProps', () => {
     renderHook(() => useSelectInputProps(quizAnswerChangedMock, nextQuestionMock, questionData));
 
   it('correctly toggles selected class on click', () => {
+    const { result } = setupHook(currentQuestionData);
+
+    act(() => {
+      result.current(currentQuestionData.options[0]).onClick(mockEvent);
+    });
+
+    expect(result.current(currentQuestionData.options[0]).className).toContain('selected');
+    expect(quizAnswerChangedMock).toHaveBeenCalledWith([{ id: '1', value: 'Option 1' }]);
+  });
+
+  it('correctly toggles selected class on click with single filter value question', () => {
+    currentQuestionData.type = QuestionTypes.SingleFilterValue;
     const { result } = setupHook(currentQuestionData);
 
     act(() => {
@@ -69,6 +82,22 @@ describe('Testing Hook (client): useSelectInputProps', () => {
 
   it('allows toggling options off in a multiple select question', () => {
     currentQuestionData.type = 'multiple';
+    const { result } = setupHook(currentQuestionData);
+
+    act(() => {
+      result.current(currentQuestionData.options[0]).onClick(mockEvent);
+    });
+
+    act(() => {
+      result.current(currentQuestionData.options[0]).onClick(mockEvent);
+    });
+
+    expect(result.current(currentQuestionData.options[0]).className).not.toContain('selected');
+    expect(quizAnswerChangedMock).toHaveBeenCalledWith([]);
+  });
+
+  it('allows toggling options off in a multiple filter value question', () => {
+    currentQuestionData.type = QuestionTypes.MultipleFilterValues;
     const { result } = setupHook(currentQuestionData);
 
     act(() => {

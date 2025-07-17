@@ -158,7 +158,9 @@ export type InputQuestionsTypes =
   | QuestionTypes.OpenText
   | QuestionTypes.Cover
   | QuestionTypes.SingleSelect
-  | QuestionTypes.MultipleSelect;
+  | QuestionTypes.MultipleSelect
+  | QuestionTypes.SingleFilterValue
+  | QuestionTypes.MultipleFilterValues;
 
 export type CurrentQuestion = NextQuestionResponse & {
   isFirstQuestion: boolean;
@@ -166,6 +168,8 @@ export type CurrentQuestion = NextQuestionResponse & {
   isCoverQuestion: boolean;
   isSingleQuestion: boolean;
   isMultipleQuestion: boolean;
+  isSingleFilterQuestion: boolean;
+  isMultipleFilterQuestion: boolean;
   isSelectQuestion: boolean;
 };
 
@@ -300,7 +304,7 @@ export interface SelectInputProps {
   onKeyDown: React.KeyboardEventHandler<HTMLElement>;
   role: 'button';
   tabIndex: number;
-  key: number;
+  key: number | string;
 }
 
 export type GetOpenTextInputProps = () => OpenTextInputProps;

@@ -15,6 +15,8 @@ export enum QuestionTypes {
   Cover = 'cover',
   SingleSelect = 'single',
   MultipleSelect = 'multiple',
+  SingleFilterValue = 'single_filter_value',
+  MultipleFilterValues = 'multiple_filter_values',
   Next = 'next',
   Skip = 'skip',
   Back = 'back',
@@ -41,6 +43,8 @@ export type ActionAnswerInputQuestion =
   | Action<QuestionTypes.OpenText, OpenTextQuestionPayload>
   | Action<QuestionTypes.SingleSelect, SelectQuestionPayload>
   | Action<QuestionTypes.MultipleSelect, SelectQuestionPayload>
+  | Action<QuestionTypes.SingleFilterValue, SelectQuestionPayload>
+  | Action<QuestionTypes.MultipleFilterValues, SelectQuestionPayload>
   | Action<QuestionTypes.Cover, CoverQuestionPayload>;
 
 export type ActionAnswerQuestion =
