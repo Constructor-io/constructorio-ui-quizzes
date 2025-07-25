@@ -25,11 +25,13 @@
     },
     ".": {
       "import": "./lib/mjs/index.js",
-      "require": "./lib/cjs/index.js"
+      "require": "./lib/cjs/index.js",
+      "types": "./lib/types/index.d.ts"
     },
     "./cjs": {
       "import": "./lib/cjs/index.js",
-      "require": "./lib/cjs/index.js"
+      "require": "./lib/cjs/index.js",
+      "types": "./lib/types/index.d.ts"
     }
   },
   "files": [
