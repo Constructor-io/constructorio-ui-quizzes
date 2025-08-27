@@ -54,6 +54,7 @@ export const functionStrings = {
   onQuizNextQuestion: `(question) => console.dir(question)`,
   onQuizSkipQuestion: `(question) => console.dir(question)`,
   onEmailResults: `(data) => console.dir(data)`,
+  onQuizResultsConfigLoaded: `(resultsConfig, metadata) => console.dir(resultsConfig, metadata)`,
   cioJsClient: `cioJsClient`,
 };
 

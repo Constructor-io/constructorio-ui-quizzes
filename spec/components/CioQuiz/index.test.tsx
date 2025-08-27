@@ -20,6 +20,7 @@ describe(`${CioQuiz.name} client`, () => {
       onQuizResultsLoaded: jest.fn(),
       onShareResultsModalOpen: jest.fn(),
       onShareResultsModalClose: jest.fn(),
+      onQuizResultsConfigLoaded: jest.fn(),
     },
     questionsPageOptions: { skipQuestionButtonText: 'Skip' },
     sessionStateOptions: { showSessionModal: true },

@@ -66,6 +66,10 @@ export namespace QuizResultsEventsProps {
   export type OnEmailResults = (data: QuizEmailResults) => Promise<void>;
   export type OnShareResultsModalOpen = () => void;
   export type OnShareResultsModalClose = () => void;
+  export type OnQuizResultsConfigLoaded = (
+    resultsConfig?: QuizResultsConfig | null,
+    metadata?: object | null
+  ) => void;
 }
 
 export type QuizResultsRequestConfigs = Omit<
@@ -104,6 +108,7 @@ export interface Callbacks {
   onEmailResults?: QuizResultsEventsProps.OnEmailResults;
   onShareResultsModalOpen?: QuizResultsEventsProps.OnShareResultsModalOpen;
   onShareResultsModalClose?: QuizResultsEventsProps.OnShareResultsModalClose;
+  onQuizResultsConfigLoaded?: QuizResultsEventsProps.OnQuizResultsConfigLoaded;
 }
 
 export interface IQuizProps {
