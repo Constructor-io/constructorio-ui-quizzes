@@ -144,7 +144,7 @@ e2eInteractionTest.play = async ({ canvasElement }) => {
   expect(
     await canvas.findByText('Based on your answers, these are our recommendations.')
   ).toBeInTheDocument();
-  expect(await canvas.findByText('5 results')).toBeInTheDocument();
+  expect(await canvas.findByText('1 result')).toBeInTheDocument();
   expect(document.querySelector('.cio-results-explanation')).toBeInTheDocument();
 
   // Share modal test
