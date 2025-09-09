@@ -32,6 +32,7 @@ describe(`${CioQuiz.name} client`, () => {
         quiz_id: 'quiz_id',
         quiz_version_id: 'quiz_version_id',
         results_config: factories.quizResultsConfig.build(),
+        metadata: null,
       });
 
       jest.spyOn(services, 'getNextQuestion').mockResolvedValue({
@@ -78,6 +79,7 @@ describe(`${CioQuiz.name} client`, () => {
         quiz_id: 'quiz_id',
         quiz_version_id: 'quiz_version_id',
         results_config: factories.quizResultsConfig.build(),
+        metadata: null,
       });
 
       jest.spyOn(services, 'getNextQuestion').mockResolvedValue({
