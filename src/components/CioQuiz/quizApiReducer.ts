@@ -17,6 +17,7 @@ export type QuizAPIReducerState = {
   selectedOptionsWithAttributes?: string[];
   matchedOptions?: string[];
   resultsConfig?: QuizResultsConfig | null;
+  metadata?: object | null;
 };
 
 export const initialState: QuizAPIReducerState = {
@@ -108,6 +109,7 @@ export default function apiReducer(
     case QuizAPIActionTypes.SET_QUIZ_RESULTS_CONFIG: {
       return {
         ...state,
+        metadata: action.payload?.quizResultsConfig.metadata,
         resultsConfig: action.payload?.quizResultsConfig.results_config,
       };
     }
@@ -115,6 +117,7 @@ export default function apiReducer(
     case QuizAPIActionTypes.SET_QUIZ_RESULTS_CONFIG_ERROR: {
       return {
         ...state,
+        metadata: null,
         resultsConfig: null,
       };
     }

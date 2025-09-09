@@ -91,6 +91,7 @@ describe(`${QuizQuestions.name} client`, () => {
                     image: { primary_url: 'https://example.com/image.jpg', primary_alt: 'Image' },
                   },
                 ],
+                is_skippable: false,
               } as Question,
             } as CurrentQuestion,
           } as QuizReturnState['quiz'],

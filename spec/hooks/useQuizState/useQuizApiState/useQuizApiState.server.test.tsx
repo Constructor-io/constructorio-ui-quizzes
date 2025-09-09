@@ -13,6 +13,7 @@ jest.mock('../../../../src/services', () => ({
   getBrowseResultsForItemIds: jest.fn(),
   getQuizResultsConfig: jest.fn().mockResolvedValue({
     results_config: {},
+    metadata: { key: 'value' },
   }),
 }));
 
@@ -21,7 +22,7 @@ describe('useQuizApiState - Server', () => {
     const quizOptions = {
       quizId: QUIZ_ID,
       quizVersionId: QUIZ_VERSION_ID,
-      callbacks: { onAddToCartClick: () => {}},
+      callbacks: { onAddToCartClick: () => {} },
       resultsPageOptions: {},
     };
     const quizLocalState = {

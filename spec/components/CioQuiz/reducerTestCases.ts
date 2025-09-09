@@ -122,12 +122,16 @@ export const apiReducerCases = [
     action: {
       type: QuizAPIActionTypes.SET_QUIZ_RESULTS_CONFIG,
       payload: {
-        quizResultsConfig: { results_config: factories.quizResultsConfig.build() },
+        quizResultsConfig: {
+          results_config: factories.quizResultsConfig.build(),
+          metadata: { key: 'value' },
+        },
       },
     },
     expected: {
       ...apiInitialState,
       resultsConfig: factories.quizResultsConfig.build(),
+      metadata: { key: 'value' },
     },
   },
   {
@@ -138,6 +142,7 @@ export const apiReducerCases = [
     expected: {
       ...apiInitialState,
       resultsConfig: null,
+      metadata: null,
     },
   },
   {

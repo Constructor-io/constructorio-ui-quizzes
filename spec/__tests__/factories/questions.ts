@@ -29,6 +29,7 @@ export const coverQuestion = Factory.define<CoverQuestion>(() => ({
   id: 1,
   type: QuestionTypes.Cover,
   images: null,
+  is_skippable: false,
 }));
 
 export const openQuestion = Factory.define<OpenQuestion>(() => ({
@@ -38,6 +39,7 @@ export const openQuestion = Factory.define<OpenQuestion>(() => ({
   id: 1,
   type: QuestionTypes.OpenText,
   images: null,
+  is_skippable: false,
 }));
 
 export const selectQuestion = Factory.define<SelectQuestion>(() => ({
@@ -48,6 +50,7 @@ export const selectQuestion = Factory.define<SelectQuestion>(() => ({
   type: QuestionTypes.SingleSelect,
   options: selectOption.buildList(2),
   images: null,
+  is_skippable: false,
 }));
 
 export const filterValueQuestion = Factory.define<FilterValueQuestion>(() => ({
@@ -59,4 +62,5 @@ export const filterValueQuestion = Factory.define<FilterValueQuestion>(() => ({
   filter_name: 'filter_name',
   options: selectOption.buildList(2),
   images: null,
+  is_skippable: false,
 }));
