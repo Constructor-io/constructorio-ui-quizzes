@@ -4,11 +4,11 @@ import {
   NextQuestionResponse,
   QuizResultsResponse,
   QuestionOption,
-  Question,
   QuizResultsConfig,
   QuizzesResultsParameters,
   QuizzesParameters,
 } from '@constructor-io/constructorio-client-javascript/lib/types';
+import { Question } from '@constructor-io/constructorio-client-javascript/lib/types/quizzes';
 import ConstructorIOClient, {
   GetBrowseResultsForItemIdsResponse,
 } from '@constructor-io/constructorio-client-javascript';
@@ -19,7 +19,6 @@ import { QuestionTypes } from './components/CioQuiz/actions';
 export type {
   QuestionOption,
   QuestionImages,
-  Question,
   NextQuestionResponse,
   QuizResultsResponse,
   QuizResultsConfigResponse,
@@ -28,7 +27,9 @@ export type {
   BrowseRequestType,
   QuizzesParameters,
   QuizzesResultsParameters,
-} from '@constructor-io/constructorio-client-javascript/lib/types';
+} from '@constructor-io/constructorio-client-javascript/lib/types/';
+
+export type { Question } from '@constructor-io/constructorio-client-javascript/lib/types/quizzes';
 
 export type QuizResultDataPartial = Partial<QuizResultData>;
 export type QuizEmailResults = {
@@ -66,6 +67,10 @@ export namespace QuizResultsEventsProps {
   export type OnEmailResults = (data: QuizEmailResults) => Promise<void>;
   export type OnShareResultsModalOpen = () => void;
   export type OnShareResultsModalClose = () => void;
+  export type OnQuizResultsConfigLoaded = (
+    resultsConfig?: QuizResultsConfig | null,
+    metadata?: object | null
+  ) => void;
 }
 
 export type QuizResultsRequestConfigs = Omit<
@@ -104,6 +109,7 @@ export interface Callbacks {
   onEmailResults?: QuizResultsEventsProps.OnEmailResults;
   onShareResultsModalOpen?: QuizResultsEventsProps.OnShareResultsModalOpen;
   onShareResultsModalClose?: QuizResultsEventsProps.OnShareResultsModalClose;
+  onQuizResultsConfigLoaded?: QuizResultsEventsProps.OnQuizResultsConfigLoaded;
 }
 
 export interface IQuizProps {
@@ -158,7 +164,9 @@ export type InputQuestionsTypes =
   | QuestionTypes.OpenText
   | QuestionTypes.Cover
   | QuestionTypes.SingleSelect
-  | QuestionTypes.MultipleSelect;
+  | QuestionTypes.MultipleSelect
+  | QuestionTypes.SingleFilterValue
+  | QuestionTypes.MultipleFilterValues;
 
 export type CurrentQuestion = NextQuestionResponse & {
   isFirstQuestion: boolean;
@@ -166,6 +174,8 @@ export type CurrentQuestion = NextQuestionResponse & {
   isCoverQuestion: boolean;
   isSingleQuestion: boolean;
   isMultipleQuestion: boolean;
+  isSingleFilterQuestion: boolean;
+  isMultipleFilterQuestion: boolean;
   isSelectQuestion: boolean;
 };
 
@@ -300,7 +310,7 @@ export interface SelectInputProps {
   onKeyDown: React.KeyboardEventHandler<HTMLElement>;
   role: 'button';
   tabIndex: number;
-  key: number;
+  key: number | string;
 }
 
 export type GetOpenTextInputProps = () => OpenTextInputProps;

@@ -33,10 +33,14 @@ const useQuizAnswerChangeHandler = (
             break;
           case QuestionTypes.SingleSelect:
           case QuestionTypes.MultipleSelect:
+          case QuestionTypes.SingleFilterValue:
+          case QuestionTypes.MultipleFilterValues:
             dispatchLocalState({
               type: currentQuestion!.next_question.type as
                 | QuestionTypes.SingleSelect
-                | QuestionTypes.MultipleSelect,
+                | QuestionTypes.MultipleSelect
+                | QuestionTypes.SingleFilterValue
+                | QuestionTypes.MultipleFilterValues,
               payload: {
                 questionId: currentQuestion.next_question.id,
                 input: payload as Omit<QuestionOption, 'attribute' | 'images'>[],

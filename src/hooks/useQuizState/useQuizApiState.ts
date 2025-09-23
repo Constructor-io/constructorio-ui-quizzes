@@ -20,6 +20,7 @@ import {
 import { IQuizProps } from '../../types';
 import useQueryParams from '../useQueryParams';
 import usePrevious from '../usePrevious';
+import { isFunction } from '../../utils';
 
 type UseQuizApiState = (
   quizOptions: IQuizProps,
@@ -38,7 +39,7 @@ const useQuizApiState: UseQuizApiState = (
   // eslint-disable-next-line max-params
 ) => {
   const [quizApiState, dispatchApiState] = useReducer(apiReducer, initialState);
-  const { quizId, quizVersionId: quizVersionIdProp, resultsPageOptions } = quizOptions;
+  const { quizId, quizVersionId: quizVersionIdProp, resultsPageOptions, callbacks } = quizOptions;
   const {
     queryItems,
     queryAttributes,
@@ -120,7 +121,15 @@ const useQuizApiState: UseQuizApiState = (
   };
 
   useEffect(() => {
-    if (typeof quizApiState.resultsConfig === 'undefined') dispatchQuizResultsConfig();
+    if (typeof quizApiState.resultsConfig === 'undefined') {
+      dispatchQuizResultsConfig();
+      return;
+    }
+
+    const { onQuizResultsConfigLoaded } = callbacks;
+    if (onQuizResultsConfigLoaded && isFunction(onQuizResultsConfigLoaded)) {
+      onQuizResultsConfigLoaded(quizApiState.resultsConfig, quizApiState.metadata);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [quizApiState.resultsConfig]);
 

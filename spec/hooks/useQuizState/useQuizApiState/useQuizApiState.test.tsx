@@ -15,6 +15,7 @@ jest.mock('../../../../src/services', () => ({
   getBrowseResultsForItemIds: jest.fn(),
   getQuizResultsConfig: jest.fn().mockResolvedValue({
     results_config: {},
+    metadata: { key: 'value' },
   }),
 }));
 
@@ -42,10 +43,11 @@ describe('Testing Hook (client): useQuizApiState', () => {
     };
     const skipToResults = false;
     const dispatchLocalState = jest.fn();
+    const onQuizResultsConfigLoaded = jest.fn();
 
     const { result } = renderHook(() =>
       useQuizApiState(
-        quizOptions,
+        { ...quizOptions, callbacks: { ...quizOptions.callbacks, onQuizResultsConfigLoaded } },
         mockConstructorIOClient,
         quizLocalState,
         skipToResults,
@@ -64,6 +66,7 @@ describe('Testing Hook (client): useQuizApiState', () => {
     ]);
 
     expect(result.current.quizApiState.resultsConfig).toEqual({});
+    expect(result.current.quizApiState.metadata).toEqual({ key: 'value' });
     expect(result.current.quizApiState.quizRequestState).toBe('SUCCESS');
     expect(result.current.quizApiState.quizResults).toEqual({
       quiz_selected_options: [
@@ -71,6 +74,13 @@ describe('Testing Hook (client): useQuizApiState', () => {
         { has_attribute: true, value: 'option2' },
       ],
     });
+
+    await waitFor(() =>
+      expect(onQuizResultsConfigLoaded).toHaveBeenCalledWith(
+        result.current.quizApiState.resultsConfig,
+        result.current.quizApiState.metadata
+      )
+    );
   });
 
   it('sets loading state correctly around async operations', async () => {

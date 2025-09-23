@@ -17,6 +17,7 @@ export type QuizAPIReducerState = {
   selectedOptionsWithAttributes?: string[];
   matchedOptions?: string[];
   resultsConfig?: QuizResultsConfig | null;
+  metadata?: object | null;
 };
 
 export const initialState: QuizAPIReducerState = {
@@ -51,6 +52,8 @@ export default function apiReducer(
         isSingleQuestion,
         isMultipleQuestion,
         isSelectQuestion,
+        isSingleFilterQuestion,
+        isMultipleFilterQuestion,
       } = getQuestionTypes(action.payload?.quizCurrentQuestion?.next_question?.type);
       const quizFirstQuestion = state.quizFirstQuestion || action.payload?.quizCurrentQuestion;
       return {
@@ -66,6 +69,8 @@ export default function apiReducer(
           isSingleQuestion,
           isMultipleQuestion,
           isSelectQuestion,
+          isSingleFilterQuestion,
+          isMultipleFilterQuestion,
         },
         quizFirstQuestion,
         quizResults: undefined,
@@ -104,6 +109,7 @@ export default function apiReducer(
     case QuizAPIActionTypes.SET_QUIZ_RESULTS_CONFIG: {
       return {
         ...state,
+        metadata: action.payload?.quizResultsConfig.metadata,
         resultsConfig: action.payload?.quizResultsConfig.results_config,
       };
     }
@@ -111,6 +117,7 @@ export default function apiReducer(
     case QuizAPIActionTypes.SET_QUIZ_RESULTS_CONFIG_ERROR: {
       return {
         ...state,
+        metadata: null,
         resultsConfig: null,
       };
     }
