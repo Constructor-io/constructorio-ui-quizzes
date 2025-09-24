@@ -187,6 +187,7 @@ export namespace QuizEventsReturn {
   export type SkipQuestion = () => void;
   export type PreviousQuestion = () => void;
   export type ResetQuiz = () => void;
+  export type JumpToQuestion = (questionId: number) => void;
   export type ResultClick = (result: QuizResultDataPartial, position: number) => void;
   export type AddToCart = (
     e: React.MouseEvent<HTMLElement>,
@@ -206,6 +207,7 @@ export namespace QuizEventsReturn {
 export interface QuizEventsReturn {
   nextQuestion: QuizEventsReturn.NextQuestion;
   skipQuestion: QuizEventsReturn.SkipQuestion;
+  jumpToQuestion: QuizEventsReturn.JumpToQuestion;
   quizAnswerChanged: QuizEventsReturn.QuizAnswerChanged;
   previousQuestion: QuizEventsReturn.PreviousQuestion;
   resetQuiz: QuizEventsReturn.ResetQuiz;
@@ -313,12 +315,19 @@ export interface SelectInputProps {
   key: number | string;
 }
 
+export interface JumpToQuestionButtonProps {
+  className: string;
+  onClick: React.MouseEventHandler<HTMLElement>;
+  style?: Record<string, string>;
+}
+
 export type GetOpenTextInputProps = () => OpenTextInputProps;
 export type GetCoverQuestionProps = () => CoverQuestionProps;
 export type GetSelectInputProps = (option: QuestionOption) => SelectInputProps;
 export type GetNextQuestionButtonProps = () => NextQuestionButtonProps;
 export type GetSkipQuestionButtonProps = () => SkipQuestionButtonProps;
 export type GetPreviousQuestionButtonProps = () => PreviousQuestionButtonProps;
+export type GetJumpToQuestionButtonProps = (id: number) => JumpToQuestionButtonProps;
 export type GetResetQuizButtonProps = (
   stylesType?: 'primary' | 'secondary'
 ) => ResetQuizButtonProps;
@@ -371,6 +380,7 @@ export interface UseQuizReturn {
   getAddToFavoritesButtonProps: GetAddToFavoritesButtonProps;
   getQuizResultButtonProps: GetQuizResultButtonProps;
   getQuizResultLinkProps: GetQuizResultLinkProps;
+  getJumpToQuestionButtonProps: GetJumpToQuestionButtonProps;
   primaryColorStyles: PrimaryColorStyles;
 }
 

@@ -106,6 +106,14 @@ export default function apiReducer(
         selectedOptionsWithAttributes: action.payload?.quizResults.attributes,
       };
     }
+    case QuizAPIActionTypes.JUMP_TO_QUESTION: {
+      return {
+        ...state,
+        quizResults: undefined,
+        selectedOptionsWithAttributes: undefined,
+        matchedOptions: undefined,
+      };
+    }
     case QuizAPIActionTypes.SET_QUIZ_RESULTS_CONFIG: {
       return {
         ...state,

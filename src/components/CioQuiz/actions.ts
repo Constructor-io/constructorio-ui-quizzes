@@ -23,6 +23,7 @@ export enum QuestionTypes {
   Reset = 'reset',
   Hydrate = 'hydrate',
   Complete = 'complete',
+  JumpToQuestion = 'jump_to_question',
 }
 
 export interface QuestionAnswer<Value> {
@@ -54,6 +55,7 @@ export type ActionAnswerQuestion =
   | Action<QuestionTypes.Back, CurrentQuestion>
   | Action<QuestionTypes.Reset>
   | Action<QuestionTypes.Complete>
+  | Action<QuestionTypes.JumpToQuestion, { questionId: number }>
   | Action<QuestionTypes.Hydrate, Partial<QuizLocalReducerState>>;
 
 // API actions
@@ -63,6 +65,7 @@ export enum QuizAPIActionTypes {
   SET_QUIZ_RESULTS,
   SET_CURRENT_QUESTION,
   RESET_QUIZ,
+  JUMP_TO_QUESTION,
   SET_QUIZ_SHARED_RESULTS,
   SET_QUIZ_RESULTS_CONFIG,
   SET_QUIZ_RESULTS_CONFIG_ERROR,
@@ -85,7 +88,10 @@ export type ActionSetCurrentQuestion = Action<
   QuizAPIActionTypes.SET_CURRENT_QUESTION,
   { quizCurrentQuestion: NextQuestionResponse; quizSessionId?: string; quizVersionId?: string }
 >;
-
+export type ActionJumpToQuestion = Action<
+  QuizAPIActionTypes.JUMP_TO_QUESTION,
+  { questionId: number }
+>;
 export type ActionResetQuiz = Action<QuizAPIActionTypes.RESET_QUIZ>;
 export type ActionSetQuizResultsConfig =
   | Action<
@@ -100,4 +106,5 @@ export type ActionQuizAPI =
   | ActionSetCurrentQuestion
   | ActionResetQuiz
   | ActionSetQuizSharedResults
-  | ActionSetQuizResultsConfig;
+  | ActionSetQuizResultsConfig
+  | ActionJumpToQuestion;
