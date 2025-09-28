@@ -131,10 +131,13 @@ export default function quizLocalReducer(
         filteredAnswerInputs[key] = prevAnswerInputs[key];
       });
 
+      // Calculate the number of questions to keep (questions <= questionId)
+      const questionsToKeep = Object.keys(filteredAnswerInputs).length;
+
       return {
         ...state,
         answerInputs: filteredAnswerInputs,
-        answers: [...state.answers.slice(0, -1)],
+        answers: state.answers.slice(0, questionsToKeep),
         isQuizCompleted: false,
       };
     }

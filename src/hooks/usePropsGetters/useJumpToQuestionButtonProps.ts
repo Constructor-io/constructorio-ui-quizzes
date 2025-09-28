@@ -18,7 +18,7 @@ export default function useNextQuestionButtonProps(
         className: buttonDisabled ? 'cio-question-cta-button disabled' : 'cio-question-cta-button',
         tabIndex: buttonDisabled ? -1 : 0,
         'aria-disabled': buttonDisabled ? 'true' : 'false',
-        'aria-describedby': buttonDisabled ? 'next-button-help' : '',
+        'aria-describedby': buttonDisabled ? 'jump-to-button-help' : '',
         type: 'button',
         onClick: () => {
           jumpToQuestion(id);
