@@ -10,7 +10,7 @@ The `useResultCard` hook is designed to manage and manipulate quiz results, prov
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| `result` | `QuizResultDataPartial` | Yes | The initial quiz result data that will be managed by the hook. |
+| `result` | `QuizResultDataPartial` | Yes | The initial quiz result item data that will be managed by the hook. |
 | `swatchImageKey` | `string` | No | Specifies the key to use for swatch images in the variation data. Defaults to `image_url` if not provided. |
 
 ### Returns
