@@ -16,7 +16,10 @@ export default function ResultCardSwatches(props: ResultCardSwatchesOptions) {
 
         return (
           getQuizResultSwatchProps && (
-            <button {...getQuizResultSwatchProps(variation)} type='button'>
+            <button
+              key={variation.data.variation_id}
+              type='button'
+              {...getQuizResultSwatchProps(variation)}>
               {isSelected && <div className='cio-swatch-selected' />}
             </button>
           )
