@@ -16,8 +16,7 @@ export default function ResultCardSwatches(props: ResultCardSwatchesOptions) {
 
         return (
           getQuizResultSwatchProps && (
-            // eslint-disable-next-line react/button-has-type
-            <button {...getQuizResultSwatchProps(variation)}>
+            <button {...getQuizResultSwatchProps(variation)} type='button'>
               {isSelected && <div className='cio-swatch-selected' />}
             </button>
           )
