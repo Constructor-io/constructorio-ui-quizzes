@@ -20,7 +20,10 @@ function SelectTypeQuestion() {
   if (state?.quiz.currentQuestion) {
     question = state.quiz.currentQuestion.next_question;
     hasImages = question?.options.some((option: QuestionOption) => option.images);
-    instructions = question?.type === QuestionTypes.MultipleSelect && 'Select one or more options';
+    instructions =
+      (question?.type === QuestionTypes.MultipleSelect ||
+        question.type === QuestionTypes.MultipleFilterValues) &&
+      'Select one or more options';
   }
 
   if (question) {

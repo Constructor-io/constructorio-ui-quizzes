@@ -11,6 +11,7 @@ import ShareResultsModal from '../ShareResultsModal/ShareResultsModal';
 import { IQuizProps } from '../../types';
 import { convertPrimaryColorsToString, renderImages } from '../../utils';
 import ProgressBar from '../ProgressBar/ProgressBar';
+import { QuestionTypes } from './actions';
 
 export default function CioQuiz(props: IQuizProps) {
   const {
@@ -107,7 +108,9 @@ export default function CioQuiz(props: IQuizProps) {
   const questionType = questionData?.type;
   const questionImages = questionData?.images;
   const displayBackgroundImage =
-    (questionType === 'single' || questionType === 'multiple') && questionImages;
+    (questionType === QuestionTypes.SingleSelect ||
+      questionType === QuestionTypes.MultipleSelect) &&
+    questionImages;
 
   if (state.quiz.requestState === RequestStates.Success) {
     return (

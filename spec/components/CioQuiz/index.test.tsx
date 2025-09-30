@@ -20,6 +20,7 @@ describe(`${CioQuiz.name} client`, () => {
       onQuizResultsLoaded: jest.fn(),
       onShareResultsModalOpen: jest.fn(),
       onShareResultsModalClose: jest.fn(),
+      onQuizResultsConfigLoaded: jest.fn(),
     },
     questionsPageOptions: { skipQuestionButtonText: 'Skip' },
     sessionStateOptions: { showSessionModal: true },
@@ -31,6 +32,7 @@ describe(`${CioQuiz.name} client`, () => {
         quiz_id: 'quiz_id',
         quiz_version_id: 'quiz_version_id',
         results_config: factories.quizResultsConfig.build(),
+        metadata: null,
       });
 
       jest.spyOn(services, 'getNextQuestion').mockResolvedValue({
@@ -77,6 +79,7 @@ describe(`${CioQuiz.name} client`, () => {
         quiz_id: 'quiz_id',
         quiz_version_id: 'quiz_version_id',
         results_config: factories.quizResultsConfig.build(),
+        metadata: null,
       });
 
       jest.spyOn(services, 'getNextQuestion').mockResolvedValue({

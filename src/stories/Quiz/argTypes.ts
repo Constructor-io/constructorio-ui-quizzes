@@ -124,6 +124,20 @@ export const argTypes = {
       },
     },
   },
+  'callbacks.onQuizResultsConfigLoaded': {
+    description: 'Callback function to be called when results config is loaded.',
+    control: false,
+    table: {
+      subcategory: 'callbacks',
+      defaultValue: {
+        summary: 'null',
+      },
+      type: {
+        summary: '(resultsConfig, metadata) => void',
+        detail: '(resultsConfig?: QuizResultsConfig | null, metadata?: object | null) => void',
+      },
+    },
+  },
   cioJsClient: {
     description:
       'Optional custom constructor instance. Either `apiKey` or `cioJsClient` are required',

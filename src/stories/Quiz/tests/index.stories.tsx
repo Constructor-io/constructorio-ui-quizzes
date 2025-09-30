@@ -127,14 +127,24 @@ e2eInteractionTest.play = async ({ canvasElement }) => {
   expect(await canvas.findByText('Are you into latte-art?')).toBeInTheDocument();
   userEvent.click(canvas.getByRole('button', { name: /I have no idea/ }));
 
+  await sleep(500);
+  expect(await canvas.findByText('What brands would you prefer?')).toBeInTheDocument();
+  userEvent.click(canvas.getByRole('button', { name: /Signature Select/ }));
+
+  await sleep(500);
+  expect(await canvas.findByText('What would be the ideal price for you?')).toBeInTheDocument();
+  userEvent.click(canvas.getByRole('button', { name: /6.89/ }));
+  await sleep(100);
+  userEvent.click(canvas.getByRole('button', { name: 'Continue' }));
+
   // Results page
   await sleep(500);
   // Results Config data is fetched correctly
-  expect(await canvas.findByText('Here are your results!!')).toBeInTheDocument();
+  expect(await canvas.findByText('Here are your results!')).toBeInTheDocument();
   expect(
     await canvas.findByText('Based on your answers, these are our recommendations.')
   ).toBeInTheDocument();
-  expect(await canvas.findByText('10 results')).toBeInTheDocument();
+  expect(await canvas.findByText('1 result')).toBeInTheDocument();
   expect(document.querySelector('.cio-results-explanation')).toBeInTheDocument();
 
   // Share modal test

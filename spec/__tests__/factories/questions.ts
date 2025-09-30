@@ -5,7 +5,9 @@ import {
   SelectQuestion,
   QuestionOption,
   QuestionImages,
+  FilterValueQuestion,
 } from '@constructor-io/constructorio-client-javascript';
+import { QuestionTypes } from '../../../src/components/CioQuiz/actions';
 
 export const images = Factory.define<QuestionImages>(() => ({
   primary_alt: 'Primary Alt',
@@ -25,8 +27,9 @@ export const coverQuestion = Factory.define<CoverQuestion>(() => ({
   description: 'Description',
   cta_text: 'CTA Text',
   id: 1,
-  type: 'cover',
+  type: QuestionTypes.Cover,
   images: null,
+  is_skippable: false,
 }));
 
 export const openQuestion = Factory.define<OpenQuestion>(() => ({
@@ -34,8 +37,9 @@ export const openQuestion = Factory.define<OpenQuestion>(() => ({
   description: 'Description',
   cta_text: 'CTA Text',
   id: 1,
-  type: 'open',
+  type: QuestionTypes.OpenText,
   images: null,
+  is_skippable: false,
 }));
 
 export const selectQuestion = Factory.define<SelectQuestion>(() => ({
@@ -43,7 +47,20 @@ export const selectQuestion = Factory.define<SelectQuestion>(() => ({
   description: 'Description',
   cta_text: 'CTA Text',
   id: 1,
-  type: 'single',
+  type: QuestionTypes.SingleSelect,
   options: selectOption.buildList(2),
   images: null,
+  is_skippable: false,
+}));
+
+export const filterValueQuestion = Factory.define<FilterValueQuestion>(() => ({
+  title: 'Title',
+  description: 'Description',
+  cta_text: 'CTA Text',
+  id: 1,
+  type: QuestionTypes.SingleFilterValue,
+  filter_name: 'filter_name',
+  options: selectOption.buildList(2),
+  images: null,
+  is_skippable: false,
 }));

@@ -98,11 +98,13 @@ export const getMockState = (question?: Question, options?: MockOptions): QuizRe
     currentQuestion: {
       next_question: question!,
       isFirstQuestion: false,
-      isOpenQuestion: question?.type === 'open',
-      isCoverQuestion: question?.type === 'cover',
-      isSingleQuestion: question?.type === 'single',
-      isMultipleQuestion: question?.type === 'multiple',
-      isSelectQuestion: question?.type === 'single',
+      isOpenQuestion: question?.type === QuestionTypes.OpenText,
+      isCoverQuestion: question?.type === QuestionTypes.Cover,
+      isSingleQuestion: question?.type === QuestionTypes.SingleSelect,
+      isMultipleQuestion: question?.type === QuestionTypes.MultipleSelect,
+      isSingleFilterQuestion: question?.type === QuestionTypes.SingleFilterValue,
+      isMultipleFilterQuestion: question?.type === QuestionTypes.MultipleFilterValues,
+      isSelectQuestion: question?.type === QuestionTypes.SingleSelect,
       total_questions: 1,
     },
     results: {

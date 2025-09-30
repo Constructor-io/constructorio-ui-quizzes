@@ -33,6 +33,8 @@ describe(`${utils.getQuestionTypes.name}`, () => {
         isSingleQuestion: false,
         isMultipleQuestion: false,
         isSelectQuestion: false,
+        isMultipleFilterQuestion: false,
+        isSingleFilterQuestion: false,
       },
     },
     {
@@ -43,6 +45,8 @@ describe(`${utils.getQuestionTypes.name}`, () => {
         isSingleQuestion: false,
         isMultipleQuestion: false,
         isSelectQuestion: false,
+        isMultipleFilterQuestion: false,
+        isSingleFilterQuestion: false,
       },
     },
     {
@@ -53,6 +57,8 @@ describe(`${utils.getQuestionTypes.name}`, () => {
         isSingleQuestion: true,
         isMultipleQuestion: false,
         isSelectQuestion: true,
+        isMultipleFilterQuestion: false,
+        isSingleFilterQuestion: false,
       },
     },
     {
@@ -63,6 +69,32 @@ describe(`${utils.getQuestionTypes.name}`, () => {
         isSingleQuestion: false,
         isMultipleQuestion: true,
         isSelectQuestion: true,
+        isMultipleFilterQuestion: false,
+        isSingleFilterQuestion: false,
+      },
+    },
+    {
+      questionType: QuestionTypes.SingleFilterValue,
+      output: {
+        isOpenQuestion: false,
+        isCoverQuestion: false,
+        isSingleQuestion: false,
+        isMultipleQuestion: false,
+        isSelectQuestion: true,
+        isMultipleFilterQuestion: false,
+        isSingleFilterQuestion: true,
+      },
+    },
+    {
+      questionType: QuestionTypes.MultipleFilterValues,
+      output: {
+        isOpenQuestion: false,
+        isCoverQuestion: false,
+        isSingleQuestion: false,
+        isMultipleQuestion: false,
+        isSelectQuestion: true,
+        isMultipleFilterQuestion: true,
+        isSingleFilterQuestion: false,
       },
     },
     {
@@ -73,6 +105,8 @@ describe(`${utils.getQuestionTypes.name}`, () => {
         isSingleQuestion: false,
         isMultipleQuestion: false,
         isSelectQuestion: false,
+        isMultipleFilterQuestion: false,
+        isSingleFilterQuestion: false,
       },
     },
   ])('returns data for $questionType', ({ questionType, output }) => {
