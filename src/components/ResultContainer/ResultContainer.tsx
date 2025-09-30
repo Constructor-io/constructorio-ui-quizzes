@@ -23,10 +23,10 @@ export default function ResultContainer(props: IResultContainerProps) {
     resultCardRegularPriceKey,
     resultCardRatingCountKey,
     resultCardRatingScoreKey,
+    swatchImageKey,
     renderResultCardPriceDetails,
     renderResultCard,
     getResultCardImageUrl,
-    swatchImageKey,
   } = resultCardOptions || {};
   const numberOfResults = state?.quiz.results?.response?.results?.length;
   const resultsConfig = state?.quiz.resultsConfig;
