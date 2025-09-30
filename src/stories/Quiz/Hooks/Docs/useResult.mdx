@@ -1,7 +1,7 @@
 import { Meta, Markdown } from '@storybook/blocks';
 import UseResultDocs from './markdown/UseResultDocs.md';
 
-<Meta title="Quiz/useResult" />
+<Meta title="Quiz/useResultCard" />
 
 <Markdown>{UseResultDocs}</Markdown>
 
@@ -10,7 +10,7 @@ import UseResultDocs from './markdown/UseResultDocs.md';
 ```tsx
 const QuizResultComponent = ({ result }) => {
   const swatch_key = `swatch_image`
-  const { faceOutResult, onVariationClick, getQuizResultSwatchProps } = useResult(result, swatch_key);
+  const { faceOutResult, onVariationClick, getQuizResultSwatchProps } = useResultCard(result, swatch_key);
 
   return (
     <div>

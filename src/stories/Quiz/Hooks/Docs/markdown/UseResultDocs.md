@@ -1,9 +1,9 @@
-# useResult
+# useResultCard
 
-The `useResult` hook is designed to manage and manipulate quiz results, providing state management for variations and prop getters for seamless UI integration.
+The `useResultCard` hook is designed to manage and manipulate quiz results, providing state management for variations and prop getters for seamless UI integration.
 
 ```tsx
-    const { faceOutResult, onVariationClick, getQuizResultSwatchProps } = useResult(result);
+    const { faceOutResult, onVariationClick, getQuizResultSwatchProps } = useResultCard(result);
 ```
 
 ### Props 
@@ -15,7 +15,7 @@ The `useResult` hook is designed to manage and manipulate quiz results, providin
 
 ### Returns
 
-The `useResult` hook returns the following:
+The `useResultCard` hook returns the following:
 
 #### State
 

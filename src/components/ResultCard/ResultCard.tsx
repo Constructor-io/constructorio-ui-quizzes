@@ -5,7 +5,7 @@ import QuizContext from '../CioQuiz/context';
 import { QuizResultDataPartial, RenderResultCard } from '../../types';
 import { getNestedValueUsingDotNotation, validateNumberOrString } from '../../utils';
 import ResultCardSwatches from '../ResultCardSwatches/ResultCardSwatches';
-import useResult from '../../hooks/useResult';
+import useResultCard from '../../hooks/useResultCard';
 
 interface ResultCardOptions {
   result: QuizResultDataPartial;
@@ -42,7 +42,7 @@ export default function ResultCard(props: ResultCardOptions) {
     getQuizResultLinkProps,
   } = useContext(QuizContext);
 
-  const { faceOutResult, getQuizResultSwatchProps } = useResult(result, swatchImageKey);
+  const { faceOutResult, getQuizResultSwatchProps } = useResultCard(result, swatchImageKey);
   const { data, value } = faceOutResult || {};
 
   const salePrice = validateNumberOrString(getNestedValueUsingDotNotation(data, salePriceKey));

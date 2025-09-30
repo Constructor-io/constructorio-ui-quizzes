@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { GetQuizResultSwatchProps, QuizResultDataPartial } from '../types';
 
-const useResult = (result: QuizResultDataPartial, swatchImageKey?: string) => {
+const useResultCard = (result: QuizResultDataPartial, swatchImageKey?: string) => {
   if (!result) {
     throw new Error('The "result" parameter is required and cannot be undefined.');
   }
@@ -50,4 +50,4 @@ const useResult = (result: QuizResultDataPartial, swatchImageKey?: string) => {
     getQuizResultSwatchProps,
   };
 };
-export default useResult;
+export default useResultCard;

@@ -1,8 +1,8 @@
 import { renderHook, act } from '@testing-library/react';
-import useResult from '../../../src/hooks/useResult';
+import useResultCard from '../../../src/hooks/useResultCard';
 import * as factories from '../../__tests__/factories';
 
-describe('useResult Hook', () => {
+describe('useResultCard Hook', () => {
   beforeEach(() => {
     const spy = jest.spyOn(console, 'error');
     spy.mockImplementation(() => {});
@@ -37,14 +37,14 @@ describe('useResult Hook', () => {
   });
 
   it('should initialize with the correct faceOutResult', () => {
-    const { result } = renderHook(() => useResult(mockResult));
+    const { result } = renderHook(() => useResultCard(mockResult));
 
     expect(result.current.faceOutResult).toBeDefined();
     expect(result.current.faceOutResult.data?.variation_id).toBe('var1');
   });
 
   it('should update faceOutResult when onVariationClick is called', () => {
-    const { result } = renderHook(() => useResult(mockResult));
+    const { result } = renderHook(() => useResultCard(mockResult));
 
     const newVariation = mockResult.variations![1];
 
@@ -58,7 +58,7 @@ describe('useResult Hook', () => {
 
   it('should throw an error if result is undefined', () => {
     // @ts-ignore
-    expect(() => renderHook(() => useResult(undefined))).toThrow(
+    expect(() => renderHook(() => useResultCard(undefined))).toThrow(
       'The "result" parameter is required and cannot be undefined.'
     );
   });
@@ -71,7 +71,7 @@ describe('useResult Hook', () => {
         image_url: 'test-image1.jpg',
       },
     };
-    const { result } = renderHook(() => useResult(resultWithoutVariations));
+    const { result } = renderHook(() => useResultCard(resultWithoutVariations));
 
     expect(result.current.faceOutResult).toBeDefined();
     expect(result.current.faceOutResult.data?.variation_id).toBe(undefined);
@@ -85,7 +85,7 @@ describe('useResult Hook', () => {
       extraProp: 'should be preserved',
     };
 
-    const { result } = renderHook(() => useResult(resultWithExtraProps));
+    const { result } = renderHook(() => useResultCard(resultWithExtraProps));
 
     const newVariation = {
       ...mockResult.variations![1],

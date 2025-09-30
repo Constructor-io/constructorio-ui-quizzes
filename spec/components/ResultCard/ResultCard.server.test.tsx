@@ -5,9 +5,9 @@ import ResultCard from '../../../src/components/ResultCard/ResultCard';
 import { withContext } from '../../__tests__/utils';
 import { QuizContextValue } from '../../../src/components/CioQuiz/context';
 import * as factories from '../../__tests__/factories';
-import * as useResultModule from '../../../src/hooks/useResult';
+import * as useResultModule from '../../../src/hooks/useResultCard';
 
-jest.mock('../../../src/hooks/useResult');
+jest.mock('../../../src/hooks/useResultCard');
 
 describe(`${ResultCard.name} client`, () => {
   const mockResult = factories.quizResult.build({ data: { id: 'test-id' } });
@@ -24,14 +24,14 @@ describe(`${ResultCard.name} client`, () => {
     },
   };
 
-  const mockUseResult = {
+  const mockUseResultCard = {
     faceOutResult: mockFaceOutResult,
     getQuizResultSwatchProps: jest.fn(),
     onVariationClick: jest.fn(),
   };
 
   beforeEach(() => {
-    jest.spyOn(useResultModule, 'default').mockReturnValue(mockUseResult);
+    jest.spyOn(useResultModule, 'default').mockReturnValue(mockUseResultCard);
   });
 
   const props: React.ComponentProps<typeof ResultCard> = {
@@ -59,12 +59,12 @@ describe(`${ResultCard.name} client`, () => {
   describe('with context function', () => {
     const Subject = withContext(ResultCard, { contextMocks });
 
-    it('renders the result value from useResult hook', () => {
+    it('renders the result value from useResultCard hook', () => {
       const view = renderToString(<Subject {...props} />);
       expect(view).toContain(mockFaceOutResult.value);
     });
 
-    it('uses useResult hook with correct parameters', () => {
+    it('uses useResultCard hook with correct parameters', () => {
       renderToString(<Subject {...props} />);
       expect(useResultModule.default).toHaveBeenCalledWith(mockResult, props.swatchImageKey);
     });
@@ -91,7 +91,7 @@ describe(`${ResultCard.name} client`, () => {
         data: { ...mockFaceOutResult.data, sale_price: undefined, id: 'test-id' },
       };
       jest.spyOn(useResultModule, 'default').mockReturnValue({
-        ...mockUseResult,
+        ...mockUseResultCard,
         faceOutResult: resultWithoutSale,
       });
       const view = renderToString(<Subject {...props} renderResultCardPriceDetails={undefined} />);

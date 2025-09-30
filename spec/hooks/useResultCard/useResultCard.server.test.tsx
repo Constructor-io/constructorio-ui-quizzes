@@ -2,10 +2,10 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import * as factories from '../../__tests__/factories';
 
-import useResult from '../../../src/hooks/useResult';
+import useResultCard from '../../../src/hooks/useResultCard';
 import { QuizResultDataPartial } from '../../../src/types';
 
-const mockUseResult = (result: any) => ({
+const mockUseResultCard = (result: any) => ({
   faceOutResult: {
     ...result,
     ...result?.variations?.find(
@@ -15,14 +15,14 @@ const mockUseResult = (result: any) => ({
   onVariationClick: jest.fn(),
 });
 
-jest.mock('../../../src/hooks/useResult', () => ({
+jest.mock('../../../src/hooks/useResultCard', () => ({
   __esModule: true,
-  default: (result: any) => mockUseResult(result),
+  default: (result: any) => mockUseResultCard(result),
 }));
 
 // Test component that uses the hook
 function TestComponent({ result }: { result?: QuizResultDataPartial }) {
-  const { faceOutResult } = useResult(result || {});
+  const { faceOutResult } = useResultCard(result || {});
   return (
     <div>
       <div data-testid='variation-id'>{faceOutResult?.data?.variation_id}</div>
@@ -32,7 +32,7 @@ function TestComponent({ result }: { result?: QuizResultDataPartial }) {
   );
 }
 
-describe('useResult Hook (Server)', () => {
+describe('useResultCard Hook (Server)', () => {
   const mockResult = factories.quizResult.build({
     data: {
       variation_id: 'var1',
