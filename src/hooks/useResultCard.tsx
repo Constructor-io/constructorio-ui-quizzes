@@ -22,7 +22,7 @@ const useResultCard = (result: QuizResultDataPartial, swatchImageKey?: string) =
       const isSelected = variation?.data?.variation_id === faceOutResult?.data?.variation_id;
       const style = {
         background: `url(${
-          swatchImageKey ? variation?.data?.[swatchImageKey] : variation?.data?.image_url
+          validateNumberOrString(getNestedValueUsingDotNotation(variation, swatchImageKey)) || variation?.data?.image_url
         })`,
         backgroundSize: 'fit-object',
         backgroundPosition: 'center',
