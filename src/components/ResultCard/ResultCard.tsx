@@ -7,7 +7,7 @@ import { getNestedValueUsingDotNotation, validateNumberOrString } from '../../ut
 import ResultCardSwatches from '../ResultCardSwatches/ResultCardSwatches';
 import useResultCard from '../../hooks/useResultCard';
 
-interface ResultCardOptions {
+interface ResultCardProps {
   result: QuizResultDataPartial;
   salePriceKey?: string;
   regularPriceKey?: string;
@@ -20,7 +20,7 @@ interface ResultCardOptions {
   renderResultCard?: RenderResultCard;
 }
 
-export default function ResultCard(props: ResultCardOptions) {
+export default function ResultCard(props: ResultCardProps) {
   const {
     result,
     salePriceKey,
