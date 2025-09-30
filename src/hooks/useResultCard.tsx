@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react';
 import { GetQuizResultSwatchProps, QuizResultDataPartial } from '../types';
+import { getNestedValueUsingDotNotation, validateNumberOrString } from '../utils';
 
 const useResultCard = (result: QuizResultDataPartial, swatchImageKey?: string) => {
   if (!result) {
@@ -22,7 +23,8 @@ const useResultCard = (result: QuizResultDataPartial, swatchImageKey?: string) =
       const isSelected = variation?.data?.variation_id === faceOutResult?.data?.variation_id;
       const style = {
         background: `url(${
-          validateNumberOrString(getNestedValueUsingDotNotation(variation, swatchImageKey)) || variation?.data?.image_url
+          validateNumberOrString(getNestedValueUsingDotNotation(variation, swatchImageKey)) ||
+          variation?.data?.image_url
         })`,
         backgroundSize: 'contain',
         backgroundPosition: 'center',
