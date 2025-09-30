@@ -33,6 +33,7 @@ const useResultCard = (result: QuizResultDataPartial, swatchImageKey?: string) =
         e.stopPropagation();
         onVariationClick(variation);
       };
+
       return {
         key: variation?.data?.variation_id,
         className: `cio-result-card-swatch ${isSelected ? 'selected' : ''}`,
