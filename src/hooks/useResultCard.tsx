@@ -24,7 +24,7 @@ const useResultCard = (result: QuizResultDataPartial, swatchImageKey?: string) =
         background: `url(${
           validateNumberOrString(getNestedValueUsingDotNotation(variation, swatchImageKey)) || variation?.data?.image_url
         })`,
-        backgroundSize: 'fit-object',
+        backgroundSize: 'contain',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
       };
