@@ -14,9 +14,9 @@
       <input {...getOpenTextInputProps()} />
     );
     ```
-  
+
   - ##### `getSelectInputProps`
-  
+
     This method should be applied to an element of type `<li>` or `<dev>` on quiz questions of type SelectQuestion.
 
     This handles selection state, events and styles.
@@ -71,7 +71,7 @@
     );
     ```
 
-    
+
   - ##### `getSkipQuestionButtonProps`
 
     This method should be applied to an element of type `<button>` or `<div>` on quiz.
@@ -99,6 +99,21 @@
     const ui = (
       /* button, dev, ... */
       <button {...getResetQuizButtonProps()}>Reset Quiz</button>
+    );
+    ```
+
+  - ##### `getJumpToQuestionButtonProps`
+
+    This method should be applied to an element of type `<button>` or `<div>` on quiz.
+
+    This handles the styles and the click event for jumping back to a specific question
+
+    ```jsx
+    const { getJumpToQuestionButtonProps } = useCioQuiz(args);
+
+    const ui = (
+      /* button, dev, ... */
+      <button {...getJumpToQuestionButtonProps()}>Jump To Question 2</button>
     );
     ```
 
