@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { QuizAPIReducerState } from '../../components/CioQuiz/quizApiReducer';
 import { GetJumpToQuestionButtonProps, QuizEventsReturn } from '../../types';
 
-export default function useNextQuestionButtonProps(
+export default function useJumpToQuestionButtonProps(
   jumpToQuestion: QuizEventsReturn.JumpToQuestion,
   quizApiState: QuizAPIReducerState
 ): GetJumpToQuestionButtonProps {
@@ -10,7 +10,7 @@ export default function useNextQuestionButtonProps(
     (id: number) => {
       const currentQuestionId = quizApiState.quizCurrentQuestion?.next_question?.id;
       let buttonDisabled;
-      if (!currentQuestionId || (currentQuestionId && id >= currentQuestionId)) {
+      if (currentQuestionId && id >= currentQuestionId) {
         buttonDisabled = true;
       }
 

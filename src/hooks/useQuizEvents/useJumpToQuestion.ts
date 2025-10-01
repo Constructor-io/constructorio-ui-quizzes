@@ -7,23 +7,20 @@ import {
 } from '../../components/CioQuiz/actions';
 import { QuizEventsReturn } from '../../types';
 import { QuizAPIReducerState } from '../../components/CioQuiz/quizApiReducer';
-import { QuizLocalReducerState } from '../../components/CioQuiz/quizLocalReducer';
 
 type IUseJumpToQuestionProps = {
   dispatchLocalState: React.Dispatch<ActionAnswerQuestion>;
   dispatchApiState: React.Dispatch<ActionQuizAPI>;
   quizApiState: QuizAPIReducerState;
-  quizLocalState: QuizLocalReducerState;
 };
 
 const useJumpToQuestion = (props: IUseJumpToQuestionProps): QuizEventsReturn.JumpToQuestion => {
-  const { dispatchLocalState, dispatchApiState, quizApiState, quizLocalState } = props;
-  const quizResetClickHandler = useCallback(
+  const { dispatchLocalState, dispatchApiState, quizApiState } = props;
+  const quizJumpToQuestionClickHandler = useCallback(
     (questionId: number) => {
-      const isComplete = quizLocalState.isQuizCompleted;
       const currentQuestionId = quizApiState.quizCurrentQuestion?.id;
 
-      if (isComplete || questionId >= currentQuestionId) {
+      if (questionId >= currentQuestionId) {
         return;
       }
       dispatchLocalState({
@@ -35,15 +32,10 @@ const useJumpToQuestion = (props: IUseJumpToQuestionProps): QuizEventsReturn.Jum
         payload: { questionId },
       });
     },
-    [
-      quizLocalState.isQuizCompleted,
-      quizApiState.quizCurrentQuestion?.id,
-      dispatchLocalState,
-      dispatchApiState,
-    ]
+    [quizApiState.quizCurrentQuestion?.id, dispatchLocalState, dispatchApiState]
   );
 
-  return quizResetClickHandler;
+  return quizJumpToQuestionClickHandler;
 };
 
 export default useJumpToQuestion;

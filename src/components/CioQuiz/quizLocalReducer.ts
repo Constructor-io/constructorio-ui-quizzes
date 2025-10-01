@@ -1,4 +1,3 @@
-/* eslint-disable complexity */
 import { AnswerInputState, QuestionOption } from '../../types';
 import { ActionAnswerQuestion, QuestionTypes, ActionAnswerInputQuestion } from './actions';
 
@@ -66,6 +65,7 @@ const handleAnswerInput = (state: QuizLocalReducerState, action: ActionAnswerInp
   isQuizCompleted: false,
 });
 
+// eslint-disable-next-line complexity
 export default function quizLocalReducer(
   state: QuizLocalReducerState,
   action: ActionAnswerQuestion
