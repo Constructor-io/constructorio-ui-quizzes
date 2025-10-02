@@ -127,7 +127,7 @@ export default function quizLocalReducer(
       // Remove all keys greater than questionId from answerInputs
       const filteredAnswerInputs: AnswerInputState = {};
       Object.keys(prevAnswerInputs).forEach((key) => {
-        if (parseInt(key, 10) > questionId) return;
+        if (parseInt(key, 10) >= questionId) return;
         filteredAnswerInputs[key] = prevAnswerInputs[key];
       });
 
@@ -137,6 +137,7 @@ export default function quizLocalReducer(
       return {
         ...state,
         answerInputs: filteredAnswerInputs,
+        prevAnswerInputs: filteredAnswerInputs,
         answers: state.answers.slice(0, questionsToKeep),
         isQuizCompleted: false,
       };

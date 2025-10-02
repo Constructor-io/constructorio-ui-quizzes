@@ -106,14 +106,18 @@
 
     This method should be applied to an element of type `<button>` or `<div>` on quiz.
 
-    This handles the styles and the click event for jumping back to a specific question
+    This handles the styles and the click event for jumping back to a specific question.
+
+    It is required to pass `questionId` to `getJumpToQuestionButtonProps` in order to apply the logic.
+
+     - `questionId`: The ID of the question the quiz should navigate back to.
 
     ```jsx
     const { getJumpToQuestionButtonProps } = useCioQuiz(args);
 
     const ui = (
       /* button, dev, ... */
-      <button {...getJumpToQuestionButtonProps()}>Jump To Question 2</button>
+      <button {...getJumpToQuestionButtonProps(questionId)}>Jump To Question 2</button>
     );
     ```
 
