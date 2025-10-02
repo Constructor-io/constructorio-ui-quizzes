@@ -18,16 +18,6 @@ export const initialState: QuizLocalReducerState = {
   isQuizCompleted: false,
 };
 
-function answerInputReducer(state: AnswerInputState, action: ActionAnswerInputQuestion) {
-  return {
-    ...state,
-    [String(action.payload!.questionId)]: {
-      type: action.type,
-      value: action.payload!.input,
-    },
-  };
-}
-
 function handleNextQuestion(state: QuizLocalReducerState) {
   const { answers, answerInputs } = state;
   const newAnswers = [...answers];
@@ -63,47 +53,31 @@ function handleNextQuestion(state: QuizLocalReducerState) {
   };
 }
 
+const handleAnswerInput = (state: QuizLocalReducerState, action: ActionAnswerInputQuestion) => ({
+  ...state,
+  answerInputs: {
+    ...state.answerInputs,
+    [String(action.payload!.questionId)]: {
+      type: action.type,
+      value: action.payload!.input,
+    },
+  },
+  isQuizCompleted: false,
+});
+
+// eslint-disable-next-line complexity
 export default function quizLocalReducer(
   state: QuizLocalReducerState,
   action: ActionAnswerQuestion
 ): QuizLocalReducerState {
   switch (action.type) {
     case QuestionTypes.OpenText:
-      return {
-        ...state,
-        answerInputs: answerInputReducer(state.answerInputs, action),
-        isQuizCompleted: false,
-      };
     case QuestionTypes.Cover:
-      return {
-        ...state,
-        answerInputs: answerInputReducer(state.answerInputs, action),
-        isQuizCompleted: false,
-      };
     case QuestionTypes.SingleSelect:
-      return {
-        ...state,
-        answerInputs: answerInputReducer(state.answerInputs, action),
-        isQuizCompleted: false,
-      };
     case QuestionTypes.MultipleSelect:
-      return {
-        ...state,
-        answerInputs: answerInputReducer(state.answerInputs, action),
-        isQuizCompleted: false,
-      };
     case QuestionTypes.SingleFilterValue:
-      return {
-        ...state,
-        answerInputs: answerInputReducer(state.answerInputs, action),
-        isQuizCompleted: false,
-      };
     case QuestionTypes.MultipleFilterValues:
-      return {
-        ...state,
-        answerInputs: answerInputReducer(state.answerInputs, action),
-        isQuizCompleted: false,
-      };
+      return handleAnswerInput(state, action);
     case QuestionTypes.Next: {
       return handleNextQuestion(state);
     }
@@ -141,6 +115,30 @@ export default function quizLocalReducer(
         ...state,
         answerInputs: prevAnswerInputs,
         answers: [...state.answers.slice(0, -1)],
+        isQuizCompleted: false,
+      };
+    }
+
+    case QuestionTypes.JumpToQuestion: {
+      const questionId = action.payload?.questionId;
+      if (questionId === undefined) return state;
+      const prevAnswerInputs = { ...state.prevAnswerInputs };
+
+      // Remove all keys greater than questionId from answerInputs
+      const filteredAnswerInputs: AnswerInputState = {};
+      Object.keys(prevAnswerInputs).forEach((key) => {
+        if (parseInt(key, 10) >= questionId) return;
+        filteredAnswerInputs[key] = prevAnswerInputs[key];
+      });
+
+      // Calculate the number of questions to keep (questions <= questionId)
+      const questionsToKeep = Object.keys(filteredAnswerInputs).length;
+
+      return {
+        ...state,
+        answerInputs: filteredAnswerInputs,
+        prevAnswerInputs: filteredAnswerInputs,
+        answers: state.answers.slice(0, questionsToKeep),
         isQuizCompleted: false,
       };
     }

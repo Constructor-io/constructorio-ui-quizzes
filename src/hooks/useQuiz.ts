@@ -23,12 +23,13 @@ const useQuiz: UseQuiz = (quizOptions) => {
 
   // Props getters
   const { quizApiState, quizLocalState, quizSessionStorageState } = quizState;
-  const propGetters = usePropsGetters(
+  const propGetters = usePropsGetters({
     quizEvents,
     quizApiState,
     quizLocalState,
-    resultsPageOptions?.favoriteItems
-  );
+    favoriteItems: resultsPageOptions?.favoriteItems,
+    questionsPageOptions: quizOptions.questionsPageOptions,
+  });
 
   const primaryColorStyles = usePrimaryColorStyles(primaryColor);
 

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getStateFromSessionStorage } from '../../utils';
 import { SessionStateOptions } from '../../types';
 import { QuizLocalReducerState } from '../../components/CioQuiz/quizLocalReducer';
@@ -11,6 +11,7 @@ const useSessionStorageState = (
   enableHydration?: boolean
 ) => {
   const quizSessionStorageStateKey = sessionStateOptions?.sessionStateKey || quizSessionStateKey;
+  const [quizData, setQuizData] = useState(getStateFromSessionStorage(quizSessionStorageStateKey));
 
   // Save state to session storage
   useEffect(() => {
@@ -22,10 +23,9 @@ const useSessionStorageState = (
         [quizId]: quizLocalState,
       };
       window?.sessionStorage?.setItem(quizSessionStorageStateKey, JSON.stringify(dataToSave));
+      setQuizData(data);
     }
   }, [quizLocalState, quizSessionStorageStateKey, enableHydration, quizId]);
-
-  const quizData = getStateFromSessionStorage(quizSessionStorageStateKey);
 
   const skipToResults =
     !!enableHydration &&

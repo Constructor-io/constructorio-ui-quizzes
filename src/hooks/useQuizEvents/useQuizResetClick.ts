@@ -15,7 +15,7 @@ type IUseQuizResetClickProps = {
   quizResults?: QuizResultsResponse | QuizSharedResultsData;
 };
 
-const useQuizResetClick = (props: IUseQuizResetClickProps): QuizEventsReturn.NextQuestion => {
+const useQuizResetClick = (props: IUseQuizResetClickProps): QuizEventsReturn.ResetQuiz => {
   const { resetQuizSessionStorageState, dispatchLocalState, dispatchApiState, quizResults } = props;
   const { removeSharedResultsQueryParams, isSharedResultsQuery } = useQueryParams();
   const quizResetClickHandler = useCallback(() => {

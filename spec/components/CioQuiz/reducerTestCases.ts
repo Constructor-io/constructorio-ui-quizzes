@@ -98,6 +98,47 @@ export const apiReducerCases = [
     },
   },
   {
+    initialState: {
+      ...apiInitialState,
+      quizRequestState: 'SUCCESS',
+      quizResults: {
+        ...results,
+        quiz_selected_options: [
+          {
+            attribute: null,
+            has_attribute: false,
+            id: 1,
+            is_matched: true,
+            value: 'VALUE',
+          },
+          {
+            attribute: null,
+            has_attribute: true,
+            id: 4,
+            is_matched: false,
+            value: 'VALUE',
+          },
+        ],
+      },
+      quizCurrentQuestion: undefined,
+      selectedOptionsWithAttributes: ['VALUE'],
+      matchedOptions: [],
+    },
+    action: {
+      type: QuizAPIActionTypes.JUMP_TO_QUESTION,
+      payload: {
+        questionId: 2,
+      },
+    },
+    expected: {
+      ...apiInitialState,
+      quizRequestState: 'SUCCESS',
+      quizResults: apiInitialState.quizResults,
+      selectedOptionsWithAttributes: apiInitialState.selectedOptionsWithAttributes,
+      matchedOptions: undefined,
+    },
+  },
+  {
     initialState: apiInitialState,
     action: { type: 'unknown' },
     expected: apiInitialState,
@@ -326,6 +367,62 @@ export const localReducerCases = [
         '1': {
           type: 'open',
           value: 'true',
+        },
+      },
+    },
+  },
+  {
+    initialState: {
+      ...localInitialState,
+      answerInputs: {
+        '1': {
+          type: QuestionTypes.SingleSelect,
+          value: [{ id: 1 }],
+        },
+        '2': {
+          type: QuestionTypes.OpenText,
+          value: 'true',
+        },
+        '3': {
+          type: QuestionTypes.SingleSelect,
+          value: [{ id: 1 }],
+        },
+      },
+      prevAnswerInputs: {
+        '1': {
+          type: QuestionTypes.SingleSelect,
+          value: [{ id: 1 }],
+        },
+        '2': {
+          type: QuestionTypes.OpenText,
+          value: 'true',
+        },
+        '3': {
+          type: QuestionTypes.SingleSelect,
+          value: [{ id: 1 }],
+        },
+      },
+      answers: [[1], ['true'], [1]],
+      isQuizCompleted: true,
+    },
+    action: {
+      type: QuestionTypes.JumpToQuestion,
+      payload: { questionId: 2 },
+    },
+    expected: {
+      ...localInitialState,
+      isQuizCompleted: false,
+      answers: [[1]],
+      answerInputs: {
+        '1': {
+          type: QuestionTypes.SingleSelect,
+          value: [{ id: 1 }],
+        },
+      },
+      prevAnswerInputs: {
+        '1': {
+          type: QuestionTypes.SingleSelect,
+          value: [{ id: 1 }],
         },
       },
     },
