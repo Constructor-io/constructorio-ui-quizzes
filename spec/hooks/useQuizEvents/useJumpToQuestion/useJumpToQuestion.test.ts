@@ -7,18 +7,38 @@ import { QuestionTypes, QuizAPIActionTypes } from '../../../../src/components/Ci
 describe('Testing Hook (client): useJumpToQuestion', () => {
   const dispatchLocalStateMock = jest.fn();
   const dispatchApiStateMock = jest.fn();
+  const quizApiStateMock = {
+    quizCurrentQuestion: {
+      id: 2,
+      next_question: {
+        id: 3,
+        type: 'singleChoice',
+      },
+    },
+  } as unknown as QuizAPIReducerState;
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('does not call dispatchLocalState and dispatchApiState', () => {
+    const { result } = renderHook(() =>
+      useJumpToQuestion({
+        quizApiState: quizApiStateMock,
+        dispatchLocalState: dispatchLocalStateMock,
+        dispatchApiState: dispatchApiStateMock,
+      })
+    );
+
+    act(() => {
+      result.current(2);
+    });
+
+    expect(dispatchLocalStateMock).not.toHaveBeenCalled();
+    expect(dispatchApiStateMock).not.toHaveBeenCalled();
+  });
 
   it('calls dispatchLocalState and dispatchApiState correctly', () => {
-    const quizApiStateMock = {
-      quizCurrentQuestion: {
-        id: '2',
-        next_question: {
-          id: '3',
-          type: 'singleChoice',
-        },
-      },
-    } as unknown as QuizAPIReducerState;
-
     const { result } = renderHook(() =>
       useJumpToQuestion({
         quizApiState: quizApiStateMock,
