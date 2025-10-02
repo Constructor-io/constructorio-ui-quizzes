@@ -87,6 +87,7 @@ export interface ResultsPageOptions {
 
 export interface QuestionsPageOptions {
   skipQuestionButtonText?: string;
+  nextQuestionOnSingleSelect?: boolean;
 }
 
 export interface SessionStateOptions {
