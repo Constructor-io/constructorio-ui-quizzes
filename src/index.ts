@@ -3,6 +3,7 @@ import CioQuiz from './components/CioQuiz';
 // Hook
 export { default as useCioQuiz } from './hooks/useQuiz';
 export { default as useShareResultsLink } from './hooks/useShareResultsLink';
+export { default as useResultCard } from './hooks/useResultCard';
 
 // Questions Components
 export { default as QuizQuestions } from './components/QuizQuestions/index';

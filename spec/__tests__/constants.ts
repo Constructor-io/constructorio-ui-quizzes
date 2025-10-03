@@ -13,6 +13,7 @@ export const defaultContextMocks = {
   getAddToFavoritesButtonProps: jest.fn(),
   getQuizResultButtonProps: jest.fn(),
   getQuizResultLinkProps: jest.fn(),
+  getQuizResultSwatchProps: jest.fn(),
   customClickItemCallback: true,
   customAddToFavoritesCallback: true,
   primaryColorStyles: {
