@@ -80,6 +80,9 @@ export const ProvideCIOClientInstance: Story = {
     resultsPageOptions,
     cioJsClient,
     resultCardOptions,
+    callbacks: {
+      onAddToCartClick: () => {},
+    },
   },
 };
 
