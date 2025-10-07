@@ -1,6 +1,7 @@
 import { renderHookServerSide } from '../../../__tests__/utils.server';
 import useJumpToQuestionButtonProps from '../../../../src/hooks/usePropsGetters/useJumpToQuestionButtonProps';
 import { QuizAPIReducerState } from '../../../../src/components/CioQuiz/quizApiReducer';
+import { QuizLocalReducerState } from '../../../../src/components/CioQuiz/quizLocalReducer';
 
 describe('Testing Hook (server): useJumpToQuestionButtonProps', () => {
   it('initializes without errors and returns a function that provides button props', () => {
@@ -12,8 +13,14 @@ describe('Testing Hook (server): useJumpToQuestionButtonProps', () => {
       },
     } as unknown as QuizAPIReducerState;
 
+    const quizLocalStateMock = {
+      prevAnswerInputs: {
+        1: { type: 'open', value: '' },
+      },
+    } as unknown as QuizLocalReducerState;
+
     const { result } = renderHookServerSide(
-      () => useJumpToQuestionButtonProps(jumpToQuestionMock, quizApiStateMock),
+      () => useJumpToQuestionButtonProps(jumpToQuestionMock, quizApiStateMock, quizLocalStateMock),
       {
         initialProps: {},
       }

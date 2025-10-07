@@ -90,7 +90,8 @@ const usePropsGetters = ({
 
   const getJumpToQuestionButtonProps: GetJumpToQuestionButtonProps = useJumpToQuestionButtonProps(
     jumpToQuestion,
-    quizApiState
+    quizApiState,
+    quizLocalState
   );
 
   const getPreviousQuestionButtonProps: GetPreviousQuestionButtonProps =
