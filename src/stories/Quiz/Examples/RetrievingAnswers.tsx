@@ -18,6 +18,9 @@ export default function RetrievingAnswersStory() {
     apiKey,
     quizId,
     resultsPageOptions,
+    callbacks: {
+      onAddToCartClick: () => {},
+    },
   };
 
   const quizHook = useQuiz(quizProps);
