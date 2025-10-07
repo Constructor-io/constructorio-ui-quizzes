@@ -125,7 +125,7 @@ const useQuizApiState: UseQuizApiState = (
       return;
     }
 
-    const { onQuizResultsConfigLoaded } = callbacks;
+    const { onQuizResultsConfigLoaded } = callbacks || {};
     if (onQuizResultsConfigLoaded && isFunction(onQuizResultsConfigLoaded)) {
       onQuizResultsConfigLoaded(quizApiState.resultsConfig, quizApiState.metadata);
     }

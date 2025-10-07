@@ -15,7 +15,8 @@ export default function useSelectInputProps(
   quizAnswerChanged: QuizEventsReturn.QuizAnswerChanged,
   nextQuestion: QuizEventsReturn.NextQuestion,
   currentQuestionData?: Nullable<Question>,
-  answerInputs?: AnswerInputState
+  answerInputs?: AnswerInputState,
+  nextQuestionOnSingleSelect = true
 ): GetSelectInputProps {
   const type: `${QuestionTypes}` | undefined = currentQuestionData?.type;
   const hasImages = currentQuestionData?.options?.some((option: QuestionOption) => option.images);
@@ -112,7 +113,8 @@ export default function useSelectInputProps(
     if (
       (currentQuestionData?.type === QuestionTypes.SingleSelect ||
         currentQuestionData?.type === QuestionTypes.SingleFilterValue) &&
-      singleSelectClicked.current
+      singleSelectClicked.current &&
+      nextQuestionOnSingleSelect
     ) {
       nextQuestion();
     }
