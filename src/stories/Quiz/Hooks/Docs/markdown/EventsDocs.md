@@ -15,4 +15,4 @@
   | addToCart         | `function(e: React.MouseEvent<HTMLElement>, item, price) => void` | Action event to trigger add to cart click events |
   | addToFavorites    | `function(e: React.MouseEvent<HTMLElement>, item, price) => void` | Action event trigger add to favorites click events |
   | hydrateQuiz       | `function() => void` | Action event to hydrate the quiz with saved state in session storage on reload |
-  | quizAnswerChanged | `function(payload: string \| string[] ) => void` | Action event to trigger add to cart click events |
+  | quizAnswerChanged | `function(payload: string \| options[] ) => void` | Action event to change an answer to a question |

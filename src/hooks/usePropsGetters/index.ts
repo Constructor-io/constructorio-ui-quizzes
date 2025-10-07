@@ -17,6 +17,8 @@ import {
   GetAddToFavoritesButtonProps,
   GetSkipQuestionButtonProps,
   GetShareResultsButtonProps,
+  GetJumpToQuestionButtonProps,
+  QuestionsPageOptions,
 } from '../../types';
 import { QuizAPIReducerState } from '../../components/CioQuiz/quizApiReducer';
 import { QuizLocalReducerState } from '../../components/CioQuiz/quizLocalReducer';
@@ -27,13 +29,21 @@ import useNextQuestionButtonProps from './useNextQuestionButtonProps';
 import usePreviousQuestionButtonProps from './usePreviousQuestionButtonProps';
 import useAddToFavoritesButtonProps from './useAddToFavoritesButtonProps';
 import useSkipQuestionButtonProps from './useSkipQuestionButtonProps';
+import useJumpToQuestionButtonProps from './useJumpToQuestionButtonProps';
 
-const usePropsGetters = (
-  quizEvents: QuizEventsReturn,
-  quizApiState: QuizAPIReducerState,
-  quizLocalState: QuizLocalReducerState,
-  favoriteItems?: string[]
-) => {
+const usePropsGetters = ({
+  questionsPageOptions,
+  favoriteItems,
+  quizEvents,
+  quizApiState,
+  quizLocalState,
+}: {
+  quizEvents: QuizEventsReturn;
+  quizApiState: QuizAPIReducerState;
+  quizLocalState: QuizLocalReducerState;
+  favoriteItems?: string[];
+  questionsPageOptions?: QuestionsPageOptions;
+}) => {
   const {
     quizAnswerChanged,
     nextQuestion,
@@ -44,6 +54,7 @@ const usePropsGetters = (
     addToCart,
     addToFavorites,
     resultClick,
+    jumpToQuestion,
   } = quizEvents;
 
   const getOpenTextInputProps: GetOpenTextInputProps = useOpenTextInputProps(
@@ -62,7 +73,8 @@ const usePropsGetters = (
     quizAnswerChanged,
     nextQuestion,
     quizApiState.quizCurrentQuestion?.next_question,
-    quizLocalState.answerInputs
+    quizLocalState.answerInputs,
+    questionsPageOptions?.nextQuestionOnSingleSelect
   );
 
   const getNextQuestionButtonProps: GetNextQuestionButtonProps = useNextQuestionButtonProps(
@@ -74,6 +86,12 @@ const usePropsGetters = (
   const getSkipQuestionButtonProps: GetSkipQuestionButtonProps = useSkipQuestionButtonProps(
     skipQuestion,
     quizApiState
+  );
+
+  const getJumpToQuestionButtonProps: GetJumpToQuestionButtonProps = useJumpToQuestionButtonProps(
+    jumpToQuestion,
+    quizApiState,
+    quizLocalState
   );
 
   const getPreviousQuestionButtonProps: GetPreviousQuestionButtonProps =
@@ -182,6 +200,7 @@ const usePropsGetters = (
     getQuizResultButtonProps,
     getQuizResultLinkProps,
     getSkipQuestionButtonProps,
+    getJumpToQuestionButtonProps,
   };
 };
 

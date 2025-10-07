@@ -24,7 +24,9 @@ describe('Testing Hook (client): useSelectInputProps', () => {
   });
 
   const setupHook = (questionData) =>
-    renderHook(() => useSelectInputProps(quizAnswerChangedMock, nextQuestionMock, questionData));
+    renderHook(() =>
+      useSelectInputProps(quizAnswerChangedMock, nextQuestionMock, questionData, answerInputs)
+    );
 
   it('correctly toggles selected class on click', () => {
     const { result } = setupHook(currentQuestionData);
@@ -77,6 +79,25 @@ describe('Testing Hook (client): useSelectInputProps', () => {
   it('does not advance to the next question for single select without selection', () => {
     setupHook(currentQuestionData);
 
+    expect(nextQuestionMock).not.toHaveBeenCalled();
+  });
+
+  it('does not advance when configured not to', () => {
+    currentQuestionData.type = 'single';
+    const { result } = renderHook(() =>
+      useSelectInputProps(
+        quizAnswerChangedMock,
+        nextQuestionMock,
+        currentQuestionData,
+        answerInputs,
+        false
+      )
+    );
+
+    act(() => {
+      result.current(currentQuestionData.options[0]).onClick(mockEvent);
+    });
+    expect(result.current(currentQuestionData.options[0]).className).toContain('selected');
     expect(nextQuestionMock).not.toHaveBeenCalled();
   });
 

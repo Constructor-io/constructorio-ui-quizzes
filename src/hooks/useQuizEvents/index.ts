@@ -12,6 +12,7 @@ import useQuizState from '../useQuizState';
 import { resetQuizSessionStorageState } from '../../utils';
 import useQuizAddToFavorites from './useQuizAddToFavorites';
 import useQuizSkipClick from './useQuizSkipClick';
+import useJumpToQuestion from './useJumpToQuestion';
 
 type UseQuizEvents = (
   quizOptions: IQuizProps,
@@ -82,6 +83,12 @@ const useQuizEvents: UseQuizEvents = (quizOptions, cioClient, quizState) => {
     quizResults: quizApiState.quizResults,
   });
 
+  const jumpToQuestion = useJumpToQuestion({
+    dispatchLocalState,
+    dispatchApiState,
+    quizApiState,
+  });
+
   // Quiz rehydrate
   const hydrateQuizLocalState = useHydrateQuizLocalState(
     quizOptions.quizId,
@@ -98,6 +105,7 @@ const useQuizEvents: UseQuizEvents = (quizOptions, cioClient, quizState) => {
     nextQuestion,
     skipQuestion,
     resetQuiz,
+    jumpToQuestion,
     hydrateQuiz: hydrateQuizLocalState,
     resetSessionStorageState,
   };
