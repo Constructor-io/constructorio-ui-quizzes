@@ -18,6 +18,7 @@ import { QuestionTypes } from './components/CioQuiz/actions';
 
 export type {
   QuestionOption,
+  FilterQuestionOption,
   QuestionImages,
   NextQuestionResponse,
   QuizResultsResponse,
