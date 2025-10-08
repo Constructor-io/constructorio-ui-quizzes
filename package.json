@@ -61,7 +61,7 @@
     "check-license": "license-checker --production --onlyAllow 'Apache-2.0;BSD-3-Clause;MIT;0BSD;BSD-2-Clause' --excludePackages 'picocolors@1.0.0'"
   },
   "peerDependencies": {
-    "@constructor-io/constructorio-client-javascript": "^2.67.5",
+    "@constructor-io/constructorio-client-javascript": "^2.68.1",
     "react": ">=16.12.0",
     "react-dom": ">=16.12.0",
     "tslib": "^2.4.0"
