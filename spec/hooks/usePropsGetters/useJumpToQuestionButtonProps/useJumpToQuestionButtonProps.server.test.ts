@@ -1,6 +1,6 @@
 import { renderHookServerSide } from '../../../__tests__/utils.server';
-import useJumpToQuestionButtonProps from '../../../../src/hooks/usePropsGetters/useJumpToQuestionButtonProps';
 import { QuizAPIReducerState } from '../../../../src/components/CioQuiz/quizApiReducer';
+import useJumpToQuestionButtonProps from '../../../../src/hooks/usePropsGetters/useJumpToQuestionButtonProps';
 
 describe('Testing Hook (server): useJumpToQuestionButtonProps', () => {
   it('initializes without errors and returns a function that provides button props', () => {
