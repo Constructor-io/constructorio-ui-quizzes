@@ -4,6 +4,7 @@ import {
   OpenQuestion,
   SelectQuestion,
   QuestionOption,
+  FilterQuestionOption,
   QuestionImages,
   FilterValueQuestion,
 } from '@constructor-io/constructorio-client-javascript';
@@ -19,6 +20,12 @@ export const images = Factory.define<QuestionImages>(() => ({
 export const selectOption = Factory.define<QuestionOption>(({ sequence }) => ({
   attribute: null,
   id: sequence,
+  value: 'VALUE',
+}));
+
+export const filterSelectOption = Factory.define<FilterQuestionOption>(({ sequence }) => ({
+  attribute: null,
+  id: String(sequence),
   value: 'VALUE',
 }));
 
@@ -60,7 +67,7 @@ export const filterValueQuestion = Factory.define<FilterValueQuestion>(() => ({
   id: 1,
   type: QuestionTypes.SingleFilterValue,
   filter_name: 'filter_name',
-  options: selectOption.buildList(2),
+  options: filterSelectOption.buildList(2),
   images: null,
   is_skippable: false,
 }));
