@@ -142,6 +142,7 @@ export interface QuizReturnState {
     selectedOptionsWithAttributes?: string[];
     matchedOptions?: string[];
     resultsConfig: QuizResultsConfig | null;
+    metadata?: object | null;
   };
   quizSessionStorageState: QuizSessionStorageState;
 }
