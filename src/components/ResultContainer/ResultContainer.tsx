@@ -23,6 +23,7 @@ export default function ResultContainer(props: IResultContainerProps) {
     resultCardRegularPriceKey,
     resultCardRatingCountKey,
     resultCardRatingScoreKey,
+    swatchImageKey,
     renderResultCardPriceDetails,
     renderResultCard,
     getResultCardImageUrl,
@@ -48,6 +49,7 @@ export default function ResultContainer(props: IResultContainerProps) {
             resultCardRegularPriceKey={resultCardRegularPriceKey}
             resultCardRatingCountKey={resultCardRatingCountKey}
             resultCardRatingScoreKey={resultCardRatingScoreKey}
+            swatchImageKey={swatchImageKey}
             renderResultCardPriceDetails={renderResultCardPriceDetails}
             renderResultCard={renderResultCard}
             getResultCardImageUrl={getResultCardImageUrl}
