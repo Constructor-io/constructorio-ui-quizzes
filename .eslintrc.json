@@ -65,13 +65,12 @@
         "jest": true,
         "jest/globals": true
       },
-      "plugins": ["jest", "no-snapshot-testing", "testing-library"],
+      "plugins": ["jest", "testing-library"],
       "extends": ["plugin:jest/recommended", "plugin:testing-library/react"],
       "rules": {
         // https://github.com/testing-library/eslint-plugin-testing-library/blob/main/docs/rules/no-node-access.md
         "testing-library/no-node-access": ["error", { "allowContainerFirstChild": true }],
         // https://github.com/VicJer/eslint-plugin-no-snapshot-testing
-        "no-snapshot-testing/no-snapshot-testing": "error",
         "import/no-extraneous-dependencies": [
           "error",
           { "devDependencies": true, "peerDependencies": true }
