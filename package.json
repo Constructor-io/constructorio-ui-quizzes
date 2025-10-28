@@ -106,6 +106,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "jest-fail-on-console": "^3.2.0",
     "license-checker": "^25.0.1",
+    "playwright": "^1.56.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "start-server-and-test": "^2.0.0",
