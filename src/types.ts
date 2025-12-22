@@ -39,22 +39,27 @@ export type QuizEmailResults = {
   results?: Partial<QuizResultData>[];
 };
 
+export type RenderResultCard = (
+  result: QuizResultDataPartial,
+  getters: {
+    getAddToCartButtonProps?: GetAddToCartButtonProps;
+    getAddToFavoritesButtonProps?: GetAddToFavoritesButtonProps;
+    getQuizResultLinkProps?: GetQuizResultLinkProps;
+    getQuizResultButtonProps?: GetQuizResultButtonProps;
+    getQuizResultSwatchProps?: GetQuizResultSwatchProps;
+  },
+  resultPosition: number
+) => JSX.Element;
+
 // QUIZ PROPS
 export interface ResultCardOptions {
   resultCardSalePriceKey?: string;
   resultCardRegularPriceKey?: string;
   resultCardRatingCountKey?: string;
   resultCardRatingScoreKey?: string;
+  swatchImageKey?: string;
   renderResultCardPriceDetails?: (result: QuizResultDataPartial) => JSX.Element;
-  renderResultCard?: (
-    result: QuizResultDataPartial,
-    getters: {
-      getAddToCartButtonProps?: GetAddToCartButtonProps;
-      getAddToFavoritesButtonProps?: GetAddToFavoritesButtonProps;
-      getQuizResultLinkProps?: GetQuizResultLinkProps;
-    },
-    index: number
-  ) => JSX.Element;
+  renderResultCard?: RenderResultCard;
   getResultCardImageUrl?: (result: QuizResultDataPartial) => string;
 }
 
@@ -347,7 +352,9 @@ export type GetAddToFavoritesButtonProps = (
 ) => AddToCartButtonProps;
 export type GetQuizImageProps = () => QuizImageProps;
 export type GetSelectQuestionImageProps = (option: QuestionOption) => QuizImageProps;
-
+export type GetQuizResultSwatchProps = (
+  variation: QuizResultDataPartial
+) => React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
 export interface QuizResultOptions<T = 'button' | 'link'> {
   result: QuizResultDataPartial;
   position: number;
