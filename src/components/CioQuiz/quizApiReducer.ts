@@ -54,6 +54,7 @@ export default function apiReducer(
         isSelectQuestion,
         isSingleFilterQuestion,
         isMultipleFilterQuestion,
+        isFreeFormQuestion,
       } = getQuestionTypes(action.payload?.quizCurrentQuestion?.next_question?.type);
       const quizFirstQuestion = state.quizFirstQuestion || action.payload?.quizCurrentQuestion;
       return {
@@ -71,6 +72,7 @@ export default function apiReducer(
           isSelectQuestion,
           isSingleFilterQuestion,
           isMultipleFilterQuestion,
+          isFreeFormQuestion,
         },
         quizFirstQuestion,
         quizResults: undefined,

@@ -174,7 +174,9 @@ export type InputQuestionsTypes =
   | QuestionTypes.SingleSelect
   | QuestionTypes.MultipleSelect
   | QuestionTypes.SingleFilterValue
-  | QuestionTypes.MultipleFilterValues;
+  | QuestionTypes.MultipleFilterValues
+  | QuestionTypes.FreeForm;
+
 
 export type CurrentQuestion = NextQuestionResponse & {
   isFirstQuestion: boolean;
@@ -184,6 +186,7 @@ export type CurrentQuestion = NextQuestionResponse & {
   isMultipleQuestion: boolean;
   isSingleFilterQuestion: boolean;
   isMultipleFilterQuestion: boolean;
+  isFreeFormQuestion: boolean;
   isSelectQuestion: boolean;
 };
 
