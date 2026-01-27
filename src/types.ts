@@ -177,7 +177,6 @@ export type InputQuestionsTypes =
   | QuestionTypes.MultipleFilterValues
   | QuestionTypes.FreeForm;
 
-
 export type CurrentQuestion = NextQuestionResponse & {
   isFirstQuestion: boolean;
   isOpenQuestion: boolean;
