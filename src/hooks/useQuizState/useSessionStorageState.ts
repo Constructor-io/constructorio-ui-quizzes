@@ -18,9 +18,11 @@ const useSessionStorageState = (
     // don't save state if initial state
     if (enableHydration && quizLocalState?.answers?.length) {
       const data = getStateFromSessionStorage(quizSessionStorageStateKey);
-      const dataToSave = {
+      const dataToSave: Record<string, QuizLocalReducerState> = {
         ...data,
-        [quizId]: quizLocalState,
+        // A hack to circumvent condition in src/hooks/useQuizState/useQuizApiState.ts
+        // for showing summary page
+        [quizId]: { ...quizLocalState, showSummaryPage: false },
       };
       window?.sessionStorage?.setItem(quizSessionStorageStateKey, JSON.stringify(dataToSave));
       setQuizData(data);

@@ -9,6 +9,7 @@ export type QuizLocalReducerState = {
   isQuizCompleted: boolean;
   quizVersionId?: string;
   quizSessionId?: string;
+  showSummaryPage?: boolean;
 };
 
 export const initialState: QuizLocalReducerState = {
@@ -16,6 +17,7 @@ export const initialState: QuizLocalReducerState = {
   answerInputs: {},
   prevAnswerInputs: {},
   isQuizCompleted: false,
+  showSummaryPage: false,
 };
 
 function handleNextQuestion(state: QuizLocalReducerState) {
@@ -60,6 +62,7 @@ const handleAnswerInput = (state: QuizLocalReducerState, action: ActionAnswerInp
     [String(action.payload!.questionId)]: {
       type: action.type,
       value: action.payload!.input,
+      questionTitle: action.payload!.questionTitle,
     },
   },
   isQuizCompleted: false,
@@ -116,6 +119,7 @@ export default function quizLocalReducer(
         answerInputs: prevAnswerInputs,
         answers: [...state.answers.slice(0, -1)],
         isQuizCompleted: false,
+        showSummaryPage: false,
       };
     }
 
@@ -140,8 +144,15 @@ export default function quizLocalReducer(
         prevAnswerInputs: filteredAnswerInputs,
         answers: state.answers.slice(0, questionsToKeep),
         isQuizCompleted: false,
+        showSummaryPage: false,
       };
     }
+
+    case QuestionTypes.SummaryPage:
+      return {
+        ...state,
+        showSummaryPage: action.payload?.showSummaryPage,
+      };
 
     case QuestionTypes.Reset:
       return {

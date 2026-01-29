@@ -27,6 +27,29 @@ export function YourComponent() {
 }
 ```
 
+### With summary page
+Quiz implementation including summary page
+
+```jsx
+import CioQuiz from '@constructor-io/constructorio-ui-quizzes';
+import '@constructor-io/constructorio-ui-quizzes/styles.css';
+
+export function YourComponent() {
+  const args = {
+    quizId: 'coffee-quiz',
+    apiKey: 'key_n4SkMH5PFWLdStQZ',
+    resultCardOptions: {
+      resultCardRegularPriceKey: 'price',
+    },
+    showSummaryPage: true,
+  };
+
+  return (
+    <CioQuiz {...args} />
+  );
+}
+```
+
 ### Provide CIO Client Instance
 If you are already using an instance of the `ConstructorIOClient`, you can pass a `cioJsClient` instead of an `apiKey` to request results from Constructor's servers
 
