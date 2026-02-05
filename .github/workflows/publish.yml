@@ -83,6 +83,14 @@ jobs:
       version: ${{ needs.update_package_version.outputs.version }}
     secrets: inherit
 
+  publish_to_cdn:
+    name: Publish to CDN
+    needs: [publish_to_npm, update_package_version]
+    uses: ./.github/workflows/publish-cdn.yml
+    with:
+      version: ${{ needs.update_package_version.outputs.version }}
+    secrets: inherit
+
   deploy_storybook:
     needs: publish_to_npm
     name: Deploy Storybook
@@ -95,6 +103,7 @@ jobs:
     needs: [
       create_github_release,
       publish_to_npm,
+      publish_to_cdn,
       update_package_version,
       deploy_storybook
     ]
