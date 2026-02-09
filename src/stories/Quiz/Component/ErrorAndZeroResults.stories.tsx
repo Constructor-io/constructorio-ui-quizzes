@@ -28,7 +28,7 @@ function ErrorStateComponent() {
   );
 }
 
-function ErrorStateDecorator(Story: any) {
+function ErrorStateDecorator() {
   return (
     <div className='cio-quiz'>
       <StoryPreview Component={ErrorStateComponent} />
@@ -38,5 +38,5 @@ function ErrorStateDecorator(Story: any) {
 
 export const ErrorState: StoryObj = {
   render: () => <ErrorStateComponent />,
-  decorators: [(story) => ErrorStateDecorator(story)],
+  decorators: [() => ErrorStateDecorator()],
 };
