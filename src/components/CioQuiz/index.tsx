@@ -119,9 +119,7 @@ export default function CioQuiz(props: IQuizProps) {
           <p className='cio-error-description'>
             Something unexpected happened. Please retake the quiz to continue.
           </p>
-          <button {...getResetQuizButtonProps()}>
-            Retake Quiz
-          </button>
+          <button {...getResetQuizButtonProps()} type='button'>Retake Quiz</button>
         </div>
       </div>
     );
