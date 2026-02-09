@@ -38,7 +38,7 @@ describe(`${ResultContainer.name} client`, () => {
 
     it('does not render any text', () => {
       render(<Subject {...props} />);
-      expect(screen.queryByText(/Sorry, /)).not.toBeInTheDocument();
+      expect(screen.queryByText(/We did not find products/)).not.toBeInTheDocument();
     });
   });
 
@@ -72,7 +72,7 @@ describe(`${ResultContainer.name} client`, () => {
 
     it('renders zero results', () => {
       render(<Subject {...props} resultCardOptions={undefined} />);
-      expect(screen.getByText(/Sorry, /)).toBeInTheDocument();
+      expect(screen.getByText(/We did not find products/)).toBeInTheDocument();
     });
 
     it('does not render share button', () => {

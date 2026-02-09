@@ -9,6 +9,6 @@ describe(`${ZeroResults.name} client`, () => {
 
   it('renders', () => {
     render(<Subject />);
-    expect(screen.getByText(/Sorry, we /)).toBeInTheDocument();
+    expect(screen.getByText(/We did not find products/)).toBeInTheDocument();
   });
 });

@@ -9,6 +9,6 @@ describe(`${ZeroResults.name} client`, () => {
 
   it('renders', () => {
     const view = renderToString(<Subject />);
-    expect(view).toContain('Sorry, we ');
+    expect(view).toContain('We did not find products');
   });
 });
