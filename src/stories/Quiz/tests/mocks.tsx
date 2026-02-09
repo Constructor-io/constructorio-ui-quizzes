@@ -259,7 +259,10 @@ export const useMockContextValue = (
     getQuizImageProps: () => mockElementProps,
     getQuizResultButtonProps: () => mockElementProps,
     getQuizResultLinkProps: () => mockElementProps,
-    getResetQuizButtonProps: () => ({ ...mockElementProps, className: 'cio-question-redo-button' }),
+    getResetQuizButtonProps: (stylesType = 'primary') => ({
+      ...mockElementProps,
+      className: stylesType === 'primary' ? 'cio-question-cta-button' : 'cio-question-redo-button',
+    }),
     getShareResultsButtonProps: () => ({
       ...mockElementProps,
       className: 'cio-question-share-results-button',
