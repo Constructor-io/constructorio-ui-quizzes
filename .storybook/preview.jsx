@@ -20,9 +20,7 @@ export const parameters = {
   previewTabs: {
     'storybook/docs/panel': { index: -1 }
   },
-  backgrounds: {
-    default: 'light',
-  },
+  backgrounds: {},
   docs: {
     toc: {
       disable: false,
@@ -30,4 +28,10 @@ export const parameters = {
       ignoreSelector: '.docs-story h2, .docs-story h3',
     },
   },
+};
+
+export const initialGlobals = {
+  backgrounds: {
+    value: 'light'
+  }
 };
