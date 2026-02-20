@@ -17,7 +17,7 @@ module.exports = {
     LOGGER: true,
   }),
   typescript: {
-    reactDocgen: false,
+    reactDocgen: 'react-docgen-typescript',
     reactDocgenTypescriptOptions: {
       shouldRemoveUndefinedFromOptional: true,
       shouldExtractLiteralValuesFromEnum: true,

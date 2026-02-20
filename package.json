@@ -67,6 +67,10 @@
     "tslib": "^2.4.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.24.0",
+    "@babel/preset-env": "^7.24.0",
+    "@babel/preset-react": "^7.23.3",
+    "@babel/preset-typescript": "^7.23.3",
     "@axe-core/react": "^4.7.0",
     "@cspell/eslint-plugin": "^6.18.1",
     "@storybook/addon-a11y": "^10.2.10",
