@@ -10,14 +10,23 @@ module.exports = {
     options: {}
   },
   docs: {
+    //👇 See the table below for the list of supported options
     autodocs: 'tag',
     defaultName: 'Docs',
   },
+  /*
+   * 👇 The `config` argument contains all the other existing environment variables.
+   * Either configured in an `.env` file or configured on the command line.
+  */
   env: (config) => ({
     ...config,
     LOGGER: true,
   }),
   typescript: {
+    check: false,
+    checkOptions: {
+      eslint: true,
+    },
     reactDocgen: 'react-docgen-typescript',
     reactDocgenTypescriptOptions: {
       shouldRemoveUndefinedFromOptional: true,
