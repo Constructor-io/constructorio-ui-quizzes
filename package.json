@@ -75,7 +75,7 @@
     "@cspell/eslint-plugin": "^6.18.1",
     "@storybook/addon-a11y": "^10.2.10",
     "@storybook/addon-docs": "^10.2.10",
-    "@storybook/addon-links": "10.2.10",
+    "@storybook/addon-links": "^10.2.10",
     "@storybook/react-vite": "^10.2.10",
     "@storybook/test-runner": "0.24.2",
     "@testing-library/jest-dom": "^6.4.2",
