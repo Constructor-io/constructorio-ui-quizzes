@@ -10,7 +10,8 @@ module.exports = {
     options: {}
   },
   docs: {
-    defaultName: 'Docs'
+    autodocs: 'tag',
+    defaultName: 'Docs',
   },
   env: (config) => ({
     ...config,
