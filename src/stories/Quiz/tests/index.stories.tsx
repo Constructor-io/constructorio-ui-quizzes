@@ -1,5 +1,5 @@
 import { within, userEvent, expect } from 'storybook/test';
-import type { StoryObj } from '@storybook/react';
+import type { StoryObj } from '@storybook/react-vite';
 import CioQuiz from '../../../components/CioQuiz';
 import { argTypes, docsControls } from '../argTypes';
 import { sleep } from '../../../utils';
