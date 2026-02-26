@@ -1,5 +1,5 @@
 import { SelectQuestion } from '@constructor-io/constructorio-client-javascript/lib/types';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { QuestionTypes } from '../../../../components/CioQuiz/actions';
 
 import SelectTypeQuestion from '../../../../components/SelectTypeQuestion/SelectTypeQuestion';
