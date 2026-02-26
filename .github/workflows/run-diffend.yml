@@ -16,7 +16,7 @@ jobs:
       - name: Set up node
         uses: actions/setup-node@v4
         with:
-          node-version: '18.x'
+          node-version: '18.13.0'
       - name: Install Diffend (Mend)
         run: npm install -g https://my.diffend.io/releases/npm/stable.tgz
       - name: Install dependencies with Diffend
