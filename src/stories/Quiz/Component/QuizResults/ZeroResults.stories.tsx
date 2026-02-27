@@ -11,5 +11,5 @@ export default meta;
 
 export const ZeroResultsState: StoryObj = {
   render: () => <ZeroResults />,
-  decorators: [() => ZeroResultsDecorator()],
+  decorators: [() => <ZeroResultsDecorator />],
 };
