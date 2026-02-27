@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 import HooksTemplate from './index';
 import '../../../styles.css';
 import { apiKey, quizId } from '../../../constants';

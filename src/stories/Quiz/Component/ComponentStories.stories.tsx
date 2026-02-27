@@ -1,7 +1,7 @@
 /* eslint-disable no-console, react/jsx-props-no-spreading */
 import React, { useState } from 'react';
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import CioQuiz from '../../../components/CioQuiz';
 import { argTypes, storiesControls } from '../argTypes';
 import { apiKey, quizId } from '../../../constants';
