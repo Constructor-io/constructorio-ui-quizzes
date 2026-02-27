@@ -1,6 +1,7 @@
 import { renderHookServerSide } from '../../../__tests__/utils.server';
 import useQuizResetClick from '../../../../src/hooks/useQuizEvents/useQuizResetClick';
 import * as factories from '../../../__tests__/factories';
+import { RequestStates } from '../../../../src/constants';
 
 describe('Testing Hook (server): useQuizResetClick', () => {
   it('initializes without throwing errors', async () => {
@@ -13,6 +14,7 @@ describe('Testing Hook (server): useQuizResetClick', () => {
       dispatchLocalState: dispatchLocalStateMock,
       dispatchApiState: dispatchApiStateMock,
       quizResults: factories.quizResults.build(),
+      quizRequestState: RequestStates.Success,
     };
 
     const executeHook = () =>

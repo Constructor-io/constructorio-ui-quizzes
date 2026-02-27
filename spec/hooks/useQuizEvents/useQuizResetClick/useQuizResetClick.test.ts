@@ -5,6 +5,7 @@ import * as factories from '../../../__tests__/factories';
 import useQuizResetClick from '../../../../src/hooks/useQuizEvents/useQuizResetClick';
 import * as useQueryParams from '../../../../src/hooks/useQueryParams';
 import { QuestionTypes, QuizAPIActionTypes } from '../../../../src/components/CioQuiz/actions';
+import { RequestStates } from '../../../../src/constants';
 
 describe('Testing Hook (client): useQuizResetClick', () => {
   const resetQuizSessionStorageStateMock = jest.fn();
@@ -24,6 +25,7 @@ describe('Testing Hook (client): useQuizResetClick', () => {
     dispatchLocalState: dispatchLocalStateMock,
     dispatchApiState: dispatchApiStateMock,
     quizResults: factories.quizResults.build(),
+    quizRequestState: RequestStates.Success,
   };
 
   beforeEach(() => {
