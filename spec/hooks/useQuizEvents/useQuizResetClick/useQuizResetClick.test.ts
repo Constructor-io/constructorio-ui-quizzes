@@ -50,4 +50,27 @@ describe('Testing Hook (client): useQuizResetClick', () => {
     expect(resetQuizSessionStorageStateMock).toHaveBeenCalled();
     expect(removeSharedResultsQueryParamsMock).toHaveBeenCalled();
   });
+
+  it('should reset the quiz when in error state with no results', () => {
+    const errorProps: Parameters<typeof useQuizResetClick>[0] = {
+      ...props,
+      quizResults: undefined,
+      quizRequestState: RequestStates.Error,
+    };
+
+    const { result } = renderHook(() => useQuizResetClick(errorProps));
+
+    act(() => {
+      result.current();
+    });
+
+    expect(dispatchLocalStateMock).toHaveBeenCalledWith({
+      type: QuestionTypes.Reset,
+    });
+
+    expect(dispatchApiStateMock).toHaveBeenCalledWith({
+      type: QuizAPIActionTypes.RESET_QUIZ,
+    });
+    expect(resetQuizSessionStorageStateMock).toHaveBeenCalled();
+  });
 });

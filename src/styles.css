@@ -560,8 +560,7 @@
 }
 
 /* Error state */
-.cio-quiz.cio-quiz-error,
-.cio-quiz .cio-quiz-error {
+.cio-quiz.cio-quiz-error {
   display: flex;
   justify-content: center;
   align-items: center;

@@ -261,6 +261,7 @@ export const useMockContextValue = (
     getQuizResultLinkProps: () => mockElementProps,
     getResetQuizButtonProps: (stylesType = 'primary') => ({
       ...mockElementProps,
+      type: 'button' as const,
       className: stylesType === 'primary' ? 'cio-question-cta-button' : 'cio-question-redo-button',
     }),
     getShareResultsButtonProps: () => ({
