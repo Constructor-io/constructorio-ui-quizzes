@@ -1,5 +1,5 @@
 import { FreeFormQuestion } from '@constructor-io/constructorio-client-javascript/lib/types';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import OpenTextTypeQuestion from '../../../../components/OpenTextTypeQuestion/OpenTextTypeQuestion';
 import { getMockQuestionWithImage, getMockQuestion } from '../../tests/mocks';
