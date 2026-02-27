@@ -27,6 +27,9 @@ function handleNextQuestion(state: QuizLocalReducerState) {
     case QuestionTypes.OpenText:
       newAnswers.push(['true']);
       break;
+    case QuestionTypes.FreeForm:
+      newAnswers.push([currentAnswerInput.value as string]);
+      break;
     case QuestionTypes.Cover:
       newAnswers.push(['seen']);
       break;
@@ -73,6 +76,7 @@ export default function quizLocalReducer(
   switch (action.type) {
     case QuestionTypes.OpenText:
     case QuestionTypes.Cover:
+    case QuestionTypes.FreeForm:
     case QuestionTypes.SingleSelect:
     case QuestionTypes.MultipleSelect:
     case QuestionTypes.SingleFilterValue:
@@ -88,6 +92,7 @@ export default function quizLocalReducer(
       const currentAnswerInput = Object.values(state.answerInputs)[lastAnswerInputIndex];
       switch (currentAnswerInput.type) {
         case QuestionTypes.OpenText:
+        case QuestionTypes.FreeForm:
           newAnswers.push(['false']);
           break;
         case QuestionTypes.Cover:

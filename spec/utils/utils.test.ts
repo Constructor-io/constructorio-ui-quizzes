@@ -70,6 +70,7 @@ describe('getQuestionTypes', () => {
       isSelectQuestion: false,
       isMultipleFilterQuestion: false,
       isSingleFilterQuestion: false,
+      isFreeFormQuestion: false,
     });
     expect(getQuestionTypes(QuestionTypes.Cover)).toEqual({
       isOpenQuestion: false,
@@ -79,6 +80,7 @@ describe('getQuestionTypes', () => {
       isSelectQuestion: false,
       isMultipleFilterQuestion: false,
       isSingleFilterQuestion: false,
+      isFreeFormQuestion: false,
     });
     expect(getQuestionTypes(QuestionTypes.SingleFilterValue)).toEqual({
       isOpenQuestion: false,
@@ -88,6 +90,17 @@ describe('getQuestionTypes', () => {
       isSelectQuestion: true,
       isMultipleFilterQuestion: false,
       isSingleFilterQuestion: true,
+      isFreeFormQuestion: false,
+    });
+    expect(getQuestionTypes(QuestionTypes.FreeForm)).toEqual({
+      isOpenQuestion: false,
+      isCoverQuestion: false,
+      isSingleQuestion: false,
+      isMultipleQuestion: false,
+      isSelectQuestion: false,
+      isMultipleFilterQuestion: false,
+      isSingleFilterQuestion: false,
+      isFreeFormQuestion: true,
     });
   });
 });
