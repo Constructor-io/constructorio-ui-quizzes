@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
 import * as factories from '../../__tests__/factories';
 
@@ -70,6 +70,51 @@ describe(`${CioQuiz.name} client`, () => {
       render(<CioQuiz {...props} sessionStateOptions={{ showSessionModal: undefined }} />);
       await screen.findByText('Title');
       expect(screen.getByAltText('Secondary Alt')).toBeInTheDocument();
+    });
+  });
+
+  describe('loaded services with summary page', () => {
+    beforeEach(() => {
+      jest.spyOn(services, 'getQuizResultsConfig').mockResolvedValue({
+        quiz_id: 'quiz_id',
+        quiz_version_id: 'quiz_version_id',
+        results_config: factories.quizResultsConfig.build(),
+        metadata: null,
+      });
+
+      jest.spyOn(services, 'getNextQuestion').mockResolvedValue({
+        quiz_id: 'quiz_id',
+        quiz_version_id: 'quiz_version_id',
+        next_question: factories.coverQuestion.build({
+          title: 'Cover Question',
+          cta_text: undefined,
+        }),
+        total_questions: 4,
+      });
+    });
+
+    it('summary page shown', async () => {
+      render(
+        <CioQuiz
+          {...props}
+          sessionStateOptions={{ showSessionModal: undefined }}
+          summaryPage={{ isShown: true }}
+        />
+      );
+      await screen.findByText('Cover Question');
+
+      jest.spyOn(services, 'getNextQuestion').mockResolvedValue({
+        quiz_id: 'quiz_id',
+        quiz_version_id: 'quiz_version_id',
+        // @ts-ignore
+        next_question: undefined,
+        total_questions: 4,
+      });
+
+      fireEvent.click(screen.getByText('Continue'));
+      await waitFor(() => {
+        expect(screen.getByLabelText('Summary page')).toBeInTheDocument();
+      });
     });
   });
 

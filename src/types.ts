@@ -119,6 +119,11 @@ export interface Callbacks {
   onQuizResultsConfigLoaded?: QuizResultsEventsProps.OnQuizResultsConfigLoaded;
 }
 
+export interface SummaryPageOptions {
+  isShown: boolean;
+  resultsButtonText?: string;
+}
+
 export interface IQuizProps {
   apiKey?: string;
   cioJsClient?: ConstructorIOClient;
@@ -131,6 +136,7 @@ export interface IQuizProps {
   enableHydration?: boolean;
   callbacks: Callbacks;
   questionsPageOptions?: QuestionsPageOptions;
+  summaryPage?: SummaryPageOptions;
 }
 
 // QUIZ RETURN VALUES
@@ -149,12 +155,14 @@ export interface QuizReturnState {
     matchedOptions?: string[];
     resultsConfig: QuizResultsConfig | null;
     metadata?: object | null;
+    showSummaryPage?: boolean;
   };
   quizSessionStorageState: QuizSessionStorageState;
 }
 
 export type AnswerInput = {
   type: InputQuestionsTypes;
+  questionTitle: string;
   value: string | Omit<QuestionOption, 'attribute' | 'images'>[] | null;
 };
 
@@ -212,6 +220,7 @@ export namespace QuizEventsReturn {
   ) => void;
   export type HydrateQuiz = () => void;
   export type ResetSessionStorageState = () => void;
+  export type ProceedToResultsFromSummaryPage = () => void;
 }
 
 export interface QuizEventsReturn {
@@ -226,6 +235,7 @@ export interface QuizEventsReturn {
   addToFavorites: QuizEventsReturn.AddToFavorites;
   hydrateQuiz: QuizEventsReturn.HydrateQuiz;
   resetSessionStorageState: QuizEventsReturn.ResetSessionStorageState;
+  proceedToResultsFromSummaryPage: QuizEventsReturn.ProceedToResultsFromSummaryPage;
 }
 
 export interface OpenTextInputProps {

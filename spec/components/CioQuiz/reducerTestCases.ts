@@ -836,4 +836,17 @@ export const localReducerCases = [
       },
     },
   },
+  {
+    initialState: localInitialState,
+    action: {
+      type: QuestionTypes.SummaryPage,
+      payload: {
+        showSummaryPage: true,
+      },
+    },
+    expected: {
+      ...localInitialState,
+      showSummaryPage: true,
+    },
+  },
 ];

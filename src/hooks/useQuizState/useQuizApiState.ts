@@ -27,7 +27,11 @@ type UseQuizApiState = (
   quizLocalState: QuizLocalReducerState,
   skipToResults: boolean,
   dispatchLocalState: React.Dispatch<ActionAnswerQuestion>
-) => { quizApiState: QuizAPIReducerState; dispatchApiState: React.Dispatch<ActionQuizAPI> };
+) => {
+  quizApiState: QuizAPIReducerState;
+  dispatchApiState: React.Dispatch<ActionQuizAPI>;
+  dispatchApiStateQuizResults: () => void;
+};
 
 const useQuizApiState: UseQuizApiState = (
   quizOptions,
@@ -38,7 +42,13 @@ const useQuizApiState: UseQuizApiState = (
   // eslint-disable-next-line max-params
 ) => {
   const [quizApiState, dispatchApiState] = useReducer(apiReducer, initialState);
-  const { quizId, quizVersionId: quizVersionIdProp, resultsPageOptions, callbacks } = quizOptions;
+  const {
+    quizId,
+    quizVersionId: quizVersionIdProp,
+    resultsPageOptions,
+    callbacks,
+    summaryPage,
+  } = quizOptions;
   const {
     queryItems,
     queryAttributes,
@@ -137,6 +147,7 @@ const useQuizApiState: UseQuizApiState = (
       dispatchApiState({
         type: QuizAPIActionTypes.SET_IS_LOADING,
       });
+
       if (isSharedResultsQuery) {
         await dispatchSharedQuizResults();
       } else if (skipToResults && quizLocalState.answers.length) {
@@ -153,7 +164,29 @@ const useQuizApiState: UseQuizApiState = (
           });
 
           if (!questionResult.next_question) {
-            await dispatchQuizResults();
+            if (summaryPage?.isShown) {
+              dispatchLocalState({
+                type: QuestionTypes.SummaryPage,
+                payload: { showSummaryPage: true },
+              });
+              // Set current question state
+              dispatchApiState({
+                type: QuizAPIActionTypes.SET_CURRENT_QUESTION,
+                payload: {
+                  quizCurrentQuestion: questionResult,
+                },
+              });
+              console.log(
+                JSON.stringify({
+                  type: QuizAPIActionTypes.SET_CURRENT_QUESTION,
+                  payload: {
+                    quizCurrentQuestion: questionResult,
+                  },
+                })
+              );
+            } else {
+              await dispatchQuizResults();
+            }
             return;
           }
           // Update quizSessionId, quizVersionId
@@ -196,6 +229,7 @@ const useQuizApiState: UseQuizApiState = (
   return {
     quizApiState,
     dispatchApiState,
+    dispatchApiStateQuizResults: dispatchQuizResults,
   };
 };
 

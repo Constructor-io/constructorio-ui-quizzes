@@ -27,17 +27,20 @@ describe('Testing Hook (client): useSessionStorageState', () => {
       q1: {
         type: QuestionTypes.OpenText,
         value: 'value',
+        questionTitle: 'title',
       },
     },
     prevAnswerInputs: {
       q1: {
         type: QuestionTypes.OpenText,
         value: 'prev',
+        questionTitle: 'title',
       },
     },
     isQuizCompleted: false,
     quizVersionId: 'version1',
     quizSessionId: 'session1',
+    showSummaryPage: false,
   };
   const quizId = 'quizId';
 
