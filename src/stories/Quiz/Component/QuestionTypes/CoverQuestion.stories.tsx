@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { CoverQuestion } from '@constructor-io/constructorio-client-javascript/lib/types';
 import CoverTypeQuestion from '../../../../components/CoverTypeQuestion/CoverTypeQuestion';
 import { getMockQuestionWithImage, getMockQuestion } from '../../tests/mocks';

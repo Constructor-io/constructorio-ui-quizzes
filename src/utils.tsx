@@ -104,6 +104,7 @@ export const getQuestionTypes = (questionType?: `${QuestionTypes}`) => {
   const isMultipleQuestion = questionType === QuestionTypes.MultipleSelect;
   const isSingleFilterQuestion = questionType === QuestionTypes.SingleFilterValue;
   const isMultipleFilterQuestion = questionType === QuestionTypes.MultipleFilterValues;
+  const isFreeFormQuestion = questionType === QuestionTypes.FreeForm;
   const isSelectQuestion =
     isSingleQuestion || isMultipleQuestion || isSingleFilterQuestion || isMultipleFilterQuestion;
 
@@ -115,6 +116,7 @@ export const getQuestionTypes = (questionType?: `${QuestionTypes}`) => {
     isSelectQuestion,
     isSingleFilterQuestion,
     isMultipleFilterQuestion,
+    isFreeFormQuestion,
   };
 };
 

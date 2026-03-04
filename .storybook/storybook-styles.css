@@ -2,7 +2,7 @@
   background-color: #212425;
 }
 
-#storybook-root {
+#storybook-root:not(:empty) {
   min-height: 100dvh;
   height: 100dvh;
   display: flex;

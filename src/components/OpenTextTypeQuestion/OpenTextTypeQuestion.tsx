@@ -4,6 +4,10 @@ import QuestionDescription from '../QuestionDescription/QuestionDescription';
 import { renderImages } from '../../utils';
 import QuizContext from '../CioQuiz/context';
 
+/**
+ * This component handles both "OpenText" and "FreeForm" question types.
+ * Both types share the same UI and behavior for text input.
+ */
 function OpenTextQuestion() {
   const { state, getOpenTextInputProps } = useContext(QuizContext);
 
