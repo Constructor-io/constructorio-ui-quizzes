@@ -38,7 +38,7 @@ describe(`${ResultContainer.name} client`, () => {
 
     it('does not render any text', () => {
       const view = renderToString(<Subject {...props} />);
-      expect(view).not.toContain('Sorry, ');
+      expect(view).not.toContain('We did not find products');
     });
   });
 
@@ -72,7 +72,7 @@ describe(`${ResultContainer.name} client`, () => {
 
     it('renders zero results', () => {
       const view = renderToString(<Subject {...props} resultCardOptions={undefined} />);
-      expect(view).toContain('Sorry, ');
+      expect(view).toContain('We did not find products');
     });
 
     it('does not render share button', () => {

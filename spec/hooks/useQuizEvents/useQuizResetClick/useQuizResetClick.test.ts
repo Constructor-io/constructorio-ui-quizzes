@@ -5,6 +5,7 @@ import * as factories from '../../../__tests__/factories';
 import useQuizResetClick from '../../../../src/hooks/useQuizEvents/useQuizResetClick';
 import * as useQueryParams from '../../../../src/hooks/useQueryParams';
 import { QuestionTypes, QuizAPIActionTypes } from '../../../../src/components/CioQuiz/actions';
+import { RequestStates } from '../../../../src/constants';
 
 describe('Testing Hook (client): useQuizResetClick', () => {
   const resetQuizSessionStorageStateMock = jest.fn();
@@ -24,6 +25,7 @@ describe('Testing Hook (client): useQuizResetClick', () => {
     dispatchLocalState: dispatchLocalStateMock,
     dispatchApiState: dispatchApiStateMock,
     quizResults: factories.quizResults.build(),
+    quizRequestState: RequestStates.Success,
   };
 
   beforeEach(() => {
@@ -47,5 +49,28 @@ describe('Testing Hook (client): useQuizResetClick', () => {
     });
     expect(resetQuizSessionStorageStateMock).toHaveBeenCalled();
     expect(removeSharedResultsQueryParamsMock).toHaveBeenCalled();
+  });
+
+  it('should reset the quiz when in error state with no results', () => {
+    const errorProps: Parameters<typeof useQuizResetClick>[0] = {
+      ...props,
+      quizResults: undefined,
+      quizRequestState: RequestStates.Error,
+    };
+
+    const { result } = renderHook(() => useQuizResetClick(errorProps));
+
+    act(() => {
+      result.current();
+    });
+
+    expect(dispatchLocalStateMock).toHaveBeenCalledWith({
+      type: QuestionTypes.Reset,
+    });
+
+    expect(dispatchApiStateMock).toHaveBeenCalledWith({
+      type: QuizAPIActionTypes.RESET_QUIZ,
+    });
+    expect(resetQuizSessionStorageStateMock).toHaveBeenCalled();
   });
 });
