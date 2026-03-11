@@ -7,7 +7,11 @@ module.exports = {
   ],
   framework: {
     name: '@storybook/react-vite',
-    options: {}
+    options: {
+      builder: {
+        viteConfigPath: '.storybook/vite.config.js',
+      },
+    },
   },
   docs: {
     //👇 See the table below for the list of supported options
@@ -36,21 +40,5 @@ module.exports = {
       typePropName: 'type',
       propFilter: (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
     },
-  },
-  async viteFinal(config) {
-    config.resolve = config.resolve || {};
-    config.resolve.alias = config.resolve.alias || {};
-    config.resolve.alias['@axe-core/react'] = require.resolve('@axe-core/react');
-
-    config.plugins = config.plugins || [];
-    config.plugins.push({
-      name: 'raw-md-loader',
-      transform(code, id) {
-        if (id.endsWith('.md')) {
-          return `export default ${JSON.stringify(code)};`;
-        }
-      },
-    });
-    return config;
   },
 };
