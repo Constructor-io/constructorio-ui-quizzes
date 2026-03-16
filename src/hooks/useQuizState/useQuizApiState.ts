@@ -30,7 +30,7 @@ type UseQuizApiState = (
 ) => {
   quizApiState: QuizAPIReducerState;
   dispatchApiState: React.Dispatch<ActionQuizAPI>;
-  dispatchApiStateQuizResults: () => void;
+  dispatchApiStateQuizResults: () => Promise<void>;
 };
 
 const useQuizApiState: UseQuizApiState = (

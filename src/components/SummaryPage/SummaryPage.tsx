@@ -52,8 +52,7 @@ export default function SummaryPage(props: ISummaryPageProps) {
     if (sessionStateStorage && onSummaryPageLoaded) {
       onSummaryPageLoaded();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [sessionStateStorage, onSummaryPageLoaded]);
 
   // Render nothing while the useEffect above handles navigation to results
   if (!sessionStateStorage || !getJumpToQuestionButtonProps) {

@@ -15,7 +15,7 @@ type UseQuizState = (
   quizLocalState: QuizLocalReducerState;
   dispatchApiState: React.Dispatch<ActionQuizAPI>;
   dispatchLocalState: React.Dispatch<ActionAnswerQuestion>;
-  dispatchApiStateQuizResults: () => void;
+  dispatchApiStateQuizResults: () => Promise<void>;
   quizSessionStorageState: QuizSessionStorageState;
 };
 

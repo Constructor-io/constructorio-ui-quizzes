@@ -10,7 +10,7 @@ import { QuizEventsReturn } from '../../types';
 const useProceedToResultsFromSummaryPage = (
   dispatchLocalState: React.Dispatch<ActionAnswerQuestion>,
   dispatchApiState: React.Dispatch<ActionQuizAPI>,
-  dispatchApiStateQuizResults: () => void
+  dispatchApiStateQuizResults: () => Promise<void>
 ): QuizEventsReturn.ProceedToResultsFromSummaryPage => {
   const proceedToResultsFromSummaryPage = useCallback(() => {
     dispatchApiState({
