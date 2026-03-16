@@ -110,7 +110,7 @@ describe(`${CioQuiz.name} client`, () => {
       jest.spyOn(services, 'getNextQuestion').mockResolvedValue({
         quiz_id: 'quiz_id',
         quiz_version_id: 'quiz_version_id',
-        // @ts-ignore
+        // @ts-expect-error - simulating end of quiz with no next question
         next_question: undefined,
         total_questions: 4,
       });
@@ -151,7 +151,7 @@ describe(`${CioQuiz.name} client`, () => {
       jest.spyOn(services, 'getNextQuestion').mockResolvedValue({
         quiz_id: 'quiz_id',
         quiz_version_id: 'quiz_version_id',
-        // @ts-ignore
+        // @ts-expect-error - simulating end of quiz with no next question
         next_question: undefined,
         total_questions: 4,
       });
@@ -198,7 +198,7 @@ describe(`${CioQuiz.name} client`, () => {
       jest.spyOn(services, 'getNextQuestion').mockResolvedValue({
         quiz_id: 'quiz_id',
         quiz_version_id: 'quiz_version_id',
-        // @ts-ignore
+        // @ts-expect-error - simulating end of quiz with no next question
         next_question: undefined,
         total_questions: 4,
       });

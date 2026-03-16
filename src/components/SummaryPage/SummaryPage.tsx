@@ -5,6 +5,16 @@ import { AnswerInput, RenderSummaryPage } from '../../types';
 import { getStateFromSessionStorage } from '../../utils';
 import { QuestionTypes } from '../CioQuiz/actions';
 
+const getAnswerInputDisplayedValue = (answerInput: AnswerInput): string => {
+  const { value } = answerInput;
+
+  if (Array.isArray(value)) {
+    return value.map((q) => q.value).join(', ');
+  }
+
+  return value || '';
+};
+
 export interface ISummaryPageProps {
   quizId: string;
   onResultsClick: () => void;
@@ -30,16 +40,6 @@ export default function SummaryPage(props: ISummaryPageProps) {
     ? getStateFromSessionStorage(state.quizSessionStorageState.key)?.[quizId]
     : null;
 
-  const getAnswerInputDisplayedValue = (answerInput: AnswerInput): string => {
-    const { value } = answerInput;
-
-    if (Array.isArray(value)) {
-      return value.map((q) => q.value).join(', ');
-    }
-
-    return value || '';
-  };
-
   useEffect(() => {
     // If, for some reason, there is a key, but no session storage -
     // we navigate user to the results page
@@ -55,12 +55,14 @@ export default function SummaryPage(props: ISummaryPageProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Render nothing while the useEffect above handles navigation to results
   if (!sessionStateStorage || !getJumpToQuestionButtonProps) {
     return null;
   }
 
   const onJumpToQuestion = (questionId: number) => {
-    getJumpToQuestionButtonProps(questionId).onClick({} as React.MouseEvent<HTMLElement>);
+    const { onClick } = getJumpToQuestionButtonProps(questionId);
+    onClick(new MouseEvent('click') as unknown as React.MouseEvent<HTMLElement>);
   };
 
   if (renderSummaryPage) {
@@ -85,14 +87,15 @@ export default function SummaryPage(props: ISummaryPageProps) {
             }
 
             return (
-              <button
-                key={questionId}
-                className='cio-summary-page-answer-option'
-                onClick={getJumpToQuestionButtonProps(Number(questionId)).onClick}
-                type='button'>
-                <span>{questionTitle}</span>
-                <span>{getAnswerInputDisplayedValue(answerInput)}</span>
-              </button>
+              <li key={questionId} className='cio-summary-page-answer-item'>
+                <button
+                  className='cio-summary-page-answer-option'
+                  onClick={getJumpToQuestionButtonProps(Number(questionId)).onClick}
+                  type='button'>
+                  <span>{questionTitle}</span>
+                  <span>{getAnswerInputDisplayedValue(answerInput)}</span>
+                </button>
+              </li>
             );
           })}
         </ul>

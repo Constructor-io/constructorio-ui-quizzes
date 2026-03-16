@@ -1310,7 +1310,10 @@
   font-size: 1rem;
 }
 
-.cio-quiz .cio-summary-page-answer-option:not(:first-child) {
+.cio-quiz .cio-summary-page-answer-item {
+  list-style: none;
+}
+.cio-quiz .cio-summary-page-answer-item:not(:first-child) {
   margin-top: 1rem;
 }
 .cio-quiz .cio-summary-page .cio-summary-page-actions {}
