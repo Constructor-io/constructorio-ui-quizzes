@@ -35,6 +35,7 @@ describe(`${utils.getQuestionTypes.name}`, () => {
         isSelectQuestion: false,
         isMultipleFilterQuestion: false,
         isSingleFilterQuestion: false,
+        isFreeFormQuestion: false,
       },
     },
     {
@@ -47,6 +48,7 @@ describe(`${utils.getQuestionTypes.name}`, () => {
         isSelectQuestion: false,
         isMultipleFilterQuestion: false,
         isSingleFilterQuestion: false,
+        isFreeFormQuestion: false,
       },
     },
     {
@@ -59,6 +61,7 @@ describe(`${utils.getQuestionTypes.name}`, () => {
         isSelectQuestion: true,
         isMultipleFilterQuestion: false,
         isSingleFilterQuestion: false,
+        isFreeFormQuestion: false,
       },
     },
     {
@@ -71,6 +74,7 @@ describe(`${utils.getQuestionTypes.name}`, () => {
         isSelectQuestion: true,
         isMultipleFilterQuestion: false,
         isSingleFilterQuestion: false,
+        isFreeFormQuestion: false,
       },
     },
     {
@@ -83,6 +87,7 @@ describe(`${utils.getQuestionTypes.name}`, () => {
         isSelectQuestion: true,
         isMultipleFilterQuestion: false,
         isSingleFilterQuestion: true,
+        isFreeFormQuestion: false,
       },
     },
     {
@@ -95,6 +100,20 @@ describe(`${utils.getQuestionTypes.name}`, () => {
         isSelectQuestion: true,
         isMultipleFilterQuestion: true,
         isSingleFilterQuestion: false,
+        isFreeFormQuestion: false,
+      },
+    },
+    {
+      questionType: QuestionTypes.FreeForm,
+      output: {
+        isOpenQuestion: false,
+        isCoverQuestion: false,
+        isSingleQuestion: false,
+        isMultipleQuestion: false,
+        isSelectQuestion: false,
+        isMultipleFilterQuestion: false,
+        isSingleFilterQuestion: false,
+        isFreeFormQuestion: true,
       },
     },
     {
@@ -107,6 +126,7 @@ describe(`${utils.getQuestionTypes.name}`, () => {
         isSelectQuestion: false,
         isMultipleFilterQuestion: false,
         isSingleFilterQuestion: false,
+        isFreeFormQuestion: false,
       },
     },
   ])('returns data for $questionType', ({ questionType, output }) => {

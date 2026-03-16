@@ -13,6 +13,7 @@ import { IQuizProps } from '../../types';
 import { convertPrimaryColorsToString, renderImages } from '../../utils';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import { QuestionTypes } from './actions';
+import ErrorIconSVG from './ErrorIconSVG';
 
 export default function CioQuiz(props: IQuizProps) {
   const {
@@ -108,6 +109,26 @@ export default function CioQuiz(props: IQuizProps) {
     );
   }
 
+  if (state.quiz.requestState === RequestStates.Error) {
+    return (
+      <div className='cio-quiz cio-quiz-error'>
+        <style>{`.cio-quiz ${convertPrimaryColorsToString(primaryColorStyles)}`}</style>
+        <div className='cio-error-message'>
+          <div className='cio-error-icon'>
+            <ErrorIconSVG />
+          </div>
+          <h3 className='cio-error-title'>Something went wrong</h3>
+          <p className='cio-error-description'>
+            Something unexpected happened. Please retake the quiz to continue.
+          </p>
+          <button {...getResetQuizButtonProps()} type='button'>
+            Retake Quiz
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   const questionData = state.quiz.currentQuestion?.next_question;
   const questionType = questionData?.type;
   const questionImages = questionData?.images;
@@ -122,7 +143,7 @@ export default function CioQuiz(props: IQuizProps) {
         className='cio-quiz'
         style={{ overflow: showShareModal || showSessionPrompt ? 'hidden' : undefined }}>
         {displayBackgroundImage && renderImages(questionImages, 'cio-question-background-image')}
-        <style>.cio-quiz {convertPrimaryColorsToString(primaryColorStyles)}</style>
+        <style>{`.cio-quiz ${convertPrimaryColorsToString(primaryColorStyles)}`}</style>
         <SessionPromptModal
           resetStoredState={resetSessionStorageState}
           continueSession={hydrateQuiz}

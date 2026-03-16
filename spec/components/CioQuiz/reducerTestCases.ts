@@ -53,7 +53,11 @@ export const apiReducerCases = [
         isSelectQuestion: true,
         isMultipleFilterQuestion: false,
         isSingleFilterQuestion: false,
+        isFreeFormQuestion: false,
       },
+      quizResults: undefined,
+      selectedOptionsWithAttributes: undefined,
+      matchedOptions: undefined,
     },
   },
   {
@@ -200,6 +204,7 @@ export const apiReducerCases = [
         isSelectQuestion: true,
         isMultipleFilterQuestion: false,
         isSingleFilterQuestion: false,
+        isFreeFormQuestion: false,
       },
     },
     action: {

@@ -117,6 +117,23 @@ describe(`${CioQuiz.name} client`, () => {
       });
     });
   });
+  describe('error state', () => {
+    beforeEach(() => {
+      jest.spyOn(services, 'getQuizResultsConfig').mockRejectedValue(new Error('Network error'));
+      jest.spyOn(services, 'getNextQuestion').mockRejectedValue(new Error('Network error'));
+    });
+
+    it('renders error UI and reset button triggers reset', async () => {
+      render(<CioQuiz {...props} />);
+      await screen.findByText('Something went wrong');
+      expect(
+        screen.getByText('Something unexpected happened. Please retake the quiz to continue.')
+      ).toBeInTheDocument();
+
+      const retakeButton = screen.getByRole('button', { name: 'Retake Quiz' });
+      expect(retakeButton).toBeInTheDocument();
+    });
+  });
 
   describe('loaded services with results', () => {
     beforeEach(() => {

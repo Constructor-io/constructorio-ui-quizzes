@@ -83,6 +83,7 @@ const useQuizEvents: UseQuizEvents = (quizOptions, cioClient, quizState) => {
     dispatchLocalState,
     dispatchApiState,
     quizResults: quizApiState.quizResults,
+    quizRequestState: quizApiState.quizRequestState,
   });
 
   const jumpToQuestion = useJumpToQuestion({

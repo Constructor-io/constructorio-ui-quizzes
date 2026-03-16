@@ -1,14 +1,12 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
 import { Question } from '@constructor-io/constructorio-client-javascript/lib/types';
 import QuizContext from '../../../../components/CioQuiz/context';
 import { useMockContextValue } from '../../tests/mocks';
 import StoryPreview from '../../utils/StoryPreview';
 
-const React = require('react');
-const ReactDOM = require('react-dom');
-
 if (process.env.NODE_ENV !== 'production') {
-  const axe = require('@axe-core/react');
-  axe(React, ReactDOM, 1000, {});
+  import('@axe-core/react').then((axe) => axe.default(React, ReactDOM, 1000, {})).catch(() => {});
 }
 
 export default function QuestionTypeVariationsDecorator(Story: any, questions: Question[]) {
