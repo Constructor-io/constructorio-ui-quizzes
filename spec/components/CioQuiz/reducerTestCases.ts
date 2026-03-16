@@ -849,4 +849,125 @@ export const localReducerCases = [
       showSummaryPage: true,
     },
   },
+  {
+    initialState: {
+      ...localInitialState,
+      showSummaryPage: true,
+    },
+    action: {
+      type: QuestionTypes.SummaryPage,
+      payload: {
+        showSummaryPage: false,
+      },
+    },
+    expected: {
+      ...localInitialState,
+      showSummaryPage: false,
+    },
+  },
+  {
+    initialState: {
+      ...localInitialState,
+      showSummaryPage: true,
+      prevAnswerInputs: {
+        '1': {
+          type: QuestionTypes.OpenText,
+          value: [],
+        },
+      },
+      answerInputs: {
+        '1': {
+          type: QuestionTypes.OpenText,
+          value: [],
+        },
+        '2': {
+          type: QuestionTypes.SingleSelect,
+          value: [],
+        },
+      },
+      answers: [['false']],
+    },
+    action: {
+      type: QuestionTypes.Back,
+      payload: {
+        next_question: factories.selectQuestion.build(),
+        isFirstQuestion: false,
+        isOpenQuestion: true,
+        isCoverQuestion: false,
+        isSingleQuestion: false,
+        isMultipleQuestion: false,
+        isSelectQuestion: false,
+        isMultipleFilterQuestion: false,
+        isSingleFilterQuestion: false,
+      },
+    },
+    expected: {
+      ...localInitialState,
+      isQuizCompleted: false,
+      showSummaryPage: false,
+      answers: [],
+      answerInputs: {
+        '1': {
+          type: QuestionTypes.OpenText,
+          value: [],
+        },
+      },
+      prevAnswerInputs: {
+        '1': {
+          type: 'open',
+          value: [],
+        },
+      },
+    },
+  },
+  {
+    initialState: {
+      ...localInitialState,
+      showSummaryPage: true,
+      answerInputs: {
+        '1': {
+          type: QuestionTypes.SingleSelect,
+          value: [{ id: 1 }],
+        },
+        '2': {
+          type: QuestionTypes.OpenText,
+          value: 'true',
+        },
+      },
+      prevAnswerInputs: {
+        '1': {
+          type: QuestionTypes.SingleSelect,
+          value: [{ id: 1 }],
+        },
+        '2': {
+          type: QuestionTypes.OpenText,
+          value: 'true',
+        },
+      },
+      answers: [[1], ['true']],
+      isQuizCompleted: true,
+    },
+    action: {
+      type: QuestionTypes.JumpToQuestion,
+      payload: { questionId: 2 },
+    },
+    expected: {
+      ...localInitialState,
+      isQuizCompleted: false,
+      showSummaryPage: false,
+      answers: [[1]],
+      answerInputs: {
+        '1': {
+          type: QuestionTypes.SingleSelect,
+          value: [{ id: 1 }],
+        },
+      },
+      prevAnswerInputs: {
+        '1': {
+          type: QuestionTypes.SingleSelect,
+          value: [{ id: 1 }],
+        },
+      },
+    },
+  },
 ];

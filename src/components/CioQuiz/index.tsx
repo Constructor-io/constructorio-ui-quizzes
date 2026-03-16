@@ -47,6 +47,7 @@ export default function CioQuiz(props: IQuizProps) {
     resultCardOptions,
     resultsPageOptions,
     quizId,
+    summaryPage,
   } = props;
   const {
     quizSessionStorageState: { hasSessionStorageState, skipToResults },
@@ -162,7 +163,14 @@ export default function CioQuiz(props: IQuizProps) {
 
         <QuizContext.Provider value={contextValue}>
           {!state.quiz.results && state.quiz.showSummaryPage && (
-            <SummaryPage quizId={quizId} onResultsClick={proceedToResultsFromSummaryPage} />
+            <SummaryPage
+              quizId={quizId}
+              onResultsClick={proceedToResultsFromSummaryPage}
+              resultsButtonText={summaryPage?.resultsButtonText}
+              title={summaryPage?.title}
+              renderSummaryPage={summaryPage?.renderSummaryPage}
+              onSummaryPageLoaded={callbacks?.onSummaryPageLoaded}
+            />
           )}
           {state.quiz.results || skipToResults ? (
             <ResultContainer

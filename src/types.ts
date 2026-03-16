@@ -117,11 +117,20 @@ export interface Callbacks {
   onShareResultsModalOpen?: QuizResultsEventsProps.OnShareResultsModalOpen;
   onShareResultsModalClose?: QuizResultsEventsProps.OnShareResultsModalClose;
   onQuizResultsConfigLoaded?: QuizResultsEventsProps.OnQuizResultsConfigLoaded;
+  onSummaryPageLoaded?: () => void;
 }
+
+export type RenderSummaryPage = (props: {
+  answerInputs: AnswerInputState;
+  onResultsClick: () => void;
+  onJumpToQuestion: (questionId: number) => void;
+}) => JSX.Element;
 
 export interface SummaryPageOptions {
   isShown: boolean;
+  title?: string;
   resultsButtonText?: string;
+  renderSummaryPage?: RenderSummaryPage;
 }
 
 export interface IQuizProps {

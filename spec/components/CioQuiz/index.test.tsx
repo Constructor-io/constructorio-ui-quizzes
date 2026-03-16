@@ -93,6 +93,10 @@ describe(`${CioQuiz.name} client`, () => {
       });
     });
 
+    afterEach(() => {
+      jest.restoreAllMocks();
+    });
+
     it('summary page shown', async () => {
       render(
         <CioQuiz
@@ -115,6 +119,53 @@ describe(`${CioQuiz.name} client`, () => {
       await waitFor(() => {
         expect(screen.getByLabelText('Summary page')).toBeInTheDocument();
       });
+    });
+
+    it('proceeds from summary page to results', async () => {
+      jest.spyOn(services, 'getQuizResults').mockResolvedValue({
+        quiz_id: 'quiz_id',
+        quiz_version_id: 'quiz_version_id',
+        quiz_selected_options: [{ value: 'VALUE', has_attribute: true, is_matched: false }],
+        response: {
+          result_sources: {},
+          facets: [],
+          groups: [],
+          results: [factories.quizResult.build()],
+          sort_options: [],
+          refined_content: [],
+          total_num_results: 1,
+          features: [],
+        },
+        quiz_session_id: 'quiz_session_id',
+      });
+
+      render(
+        <CioQuiz
+          {...props}
+          sessionStateOptions={{ showSessionModal: undefined }}
+          summaryPage={{ isShown: true }}
+        />
+      );
+      await screen.findByText('Cover Question');
+
+      jest.spyOn(services, 'getNextQuestion').mockResolvedValue({
+        quiz_id: 'quiz_id',
+        quiz_version_id: 'quiz_version_id',
+        // @ts-ignore
+        next_question: undefined,
+        total_questions: 4,
+      });
+
+      fireEvent.click(screen.getByText('Continue'));
+      await waitFor(() => {
+        expect(screen.getByLabelText('Summary page')).toBeInTheDocument();
+      });
+
+      fireEvent.click(screen.getByText('Results'));
+      await waitFor(() => {
+        expect(screen.getByText('Desktop title')).toBeInTheDocument();
+      });
+      expect(screen.queryByLabelText('Summary page')).not.toBeInTheDocument();
     });
   });
   describe('error state', () => {

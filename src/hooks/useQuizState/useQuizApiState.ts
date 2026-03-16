@@ -176,14 +176,6 @@ const useQuizApiState: UseQuizApiState = (
                   quizCurrentQuestion: questionResult,
                 },
               });
-              console.log(
-                JSON.stringify({
-                  type: QuizAPIActionTypes.SET_CURRENT_QUESTION,
-                  payload: {
-                    quizCurrentQuestion: questionResult,
-                  },
-                })
-              );
             } else {
               await dispatchQuizResults();
             }

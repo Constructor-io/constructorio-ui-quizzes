@@ -1282,6 +1282,11 @@
   flex-direction: column;
   width: 100%;
 }
+.cio-quiz .cio-summary-page-title {
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
 .cio-quiz .cio-summary-page-answered-list {
   padding: 0;
   margin: 0;

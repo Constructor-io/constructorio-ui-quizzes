@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import QuizContext from '../CioQuiz/context';
 import BackButton from '../BackButton/BackButton';
-import { AnswerInput } from '../../types';
+import { AnswerInput, RenderSummaryPage } from '../../types';
 import { getStateFromSessionStorage } from '../../utils';
 import { QuestionTypes } from '../CioQuiz/actions';
 
@@ -9,10 +9,20 @@ export interface ISummaryPageProps {
   quizId: string;
   onResultsClick: () => void;
   resultsButtonText?: string;
+  title?: string;
+  renderSummaryPage?: RenderSummaryPage;
+  onSummaryPageLoaded?: () => void;
 }
 
 export default function SummaryPage(props: ISummaryPageProps) {
-  const { quizId, onResultsClick, resultsButtonText = 'Results' } = props;
+  const {
+    quizId,
+    onResultsClick,
+    resultsButtonText = 'Results',
+    title,
+    renderSummaryPage,
+    onSummaryPageLoaded,
+  } = props;
 
   const { getJumpToQuestionButtonProps, state } = useContext(QuizContext);
 
@@ -21,25 +31,13 @@ export default function SummaryPage(props: ISummaryPageProps) {
     : null;
 
   const getAnswerInputDisplayedValue = (answerInput: AnswerInput): string => {
-    const { type, value } = answerInput;
+    const { value } = answerInput;
 
     if (Array.isArray(value)) {
       return value.map((q) => q.value).join(', ');
     }
 
-    if (!value) {
-      return '';
-    }
-
-    if (type === QuestionTypes.OpenText) {
-      return value;
-    }
-
-    if (type === QuestionTypes.Cover) {
-      return '';
-    }
-
-    return value;
+    return value || '';
   };
 
   useEffect(() => {
@@ -50,20 +48,39 @@ export default function SummaryPage(props: ISummaryPageProps) {
     }
   }, [onResultsClick, sessionStateStorage, state?.quizSessionStorageState.key]);
 
-  // TODO: Skip to results?
+  useEffect(() => {
+    if (sessionStateStorage && onSummaryPageLoaded) {
+      onSummaryPageLoaded();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   if (!sessionStateStorage || !getJumpToQuestionButtonProps) {
     return null;
+  }
+
+  const onJumpToQuestion = (questionId: number) => {
+    getJumpToQuestionButtonProps(questionId).onClick({} as React.MouseEvent<HTMLElement>);
+  };
+
+  if (renderSummaryPage) {
+    return renderSummaryPage({
+      answerInputs: sessionStateStorage.answerInputs,
+      onResultsClick,
+      onJumpToQuestion,
+    });
   }
 
   return (
     <div className='cio-select-question-container'>
       <div className='cio-summary-page' aria-label='Summary page'>
+        {title && <h2 className='cio-summary-page-title'>{title}</h2>}
         <ul className='cio-summary-page-answered-list'>
           {Object.keys(sessionStateStorage.answerInputs).map((questionId) => {
             const answerInput = sessionStateStorage.answerInputs[questionId];
             const { questionTitle, value: answerValue } = answerInput;
 
-            if (!answerValue) {
+            if (!answerValue || answerInput.type === QuestionTypes.Cover) {
               return null;
             }
 

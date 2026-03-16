@@ -1,7 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-
-import { fireEvent } from '@storybook/testing-library';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { withContext } from '../../__tests__/utils';
 import SummaryPage from '../../../src/components/SummaryPage/SummaryPage';
 import * as utils from '../../../src/utils';
@@ -144,5 +142,126 @@ describe(`${SummaryPage.name} client`, () => {
     );
 
     expect(screen.getByText('Random outcome text')).toBeInTheDocument();
+  });
+
+  it('renders title when provided', () => {
+    jest.spyOn(utils, 'getStateFromSessionStorage').mockReturnValue({
+      quizId: {
+        answerInputs: mockState.answers.inputs,
+        answers: [],
+        isQuizCompleted: false,
+        prevAnswerInputs: mockState.answers.inputs,
+      },
+    });
+
+    render(<Subject quizId='quizId' onResultsClick={() => {}} title='Review your answers' />);
+
+    expect(screen.getByText('Review your answers')).toBeInTheDocument();
+  });
+
+  it('does not render title when not provided', () => {
+    jest.spyOn(utils, 'getStateFromSessionStorage').mockReturnValue({
+      quizId: {
+        answerInputs: mockState.answers.inputs,
+        answers: [],
+        isQuizCompleted: false,
+        prevAnswerInputs: mockState.answers.inputs,
+      },
+    });
+
+    render(<Subject quizId='quizId' onResultsClick={() => {}} />);
+
+    expect(screen.queryByRole('heading')).not.toBeInTheDocument();
+  });
+
+  it('calls onSummaryPageLoaded when summary page mounts', () => {
+    jest.spyOn(utils, 'getStateFromSessionStorage').mockReturnValue({
+      quizId: {
+        answerInputs: mockState.answers.inputs,
+        answers: [],
+        isQuizCompleted: false,
+        prevAnswerInputs: mockState.answers.inputs,
+      },
+    });
+
+    const onSummaryPageLoaded = jest.fn();
+
+    render(
+      <Subject
+        quizId='quizId'
+        onResultsClick={() => {}}
+        onSummaryPageLoaded={onSummaryPageLoaded}
+      />
+    );
+
+    expect(onSummaryPageLoaded).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not call onSummaryPageLoaded when not provided', () => {
+    jest.spyOn(utils, 'getStateFromSessionStorage').mockReturnValue({
+      quizId: {
+        answerInputs: mockState.answers.inputs,
+        answers: [],
+        isQuizCompleted: false,
+        prevAnswerInputs: mockState.answers.inputs,
+      },
+    });
+
+    expect(() => {
+      render(<Subject quizId='quizId' onResultsClick={() => {}} />);
+    }).not.toThrow();
+  });
+
+  it('renders custom summary page when renderSummaryPage is provided', () => {
+    jest.spyOn(utils, 'getStateFromSessionStorage').mockReturnValue({
+      quizId: {
+        answerInputs: mockState.answers.inputs,
+        answers: [],
+        isQuizCompleted: false,
+        prevAnswerInputs: mockState.answers.inputs,
+      },
+    });
+
+    const renderSummaryPage = jest.fn().mockReturnValue(<div>Custom Summary</div>);
+
+    render(
+      <Subject quizId='quizId' onResultsClick={() => {}} renderSummaryPage={renderSummaryPage} />
+    );
+
+    expect(screen.getByText('Custom Summary')).toBeInTheDocument();
+    expect(screen.queryByLabelText('Summary page')).not.toBeInTheDocument();
+    expect(renderSummaryPage).toHaveBeenCalledWith(
+      expect.objectContaining({
+        answerInputs: mockState.answers.inputs,
+        onResultsClick: expect.any(Function),
+        onJumpToQuestion: expect.any(Function),
+      })
+    );
+  });
+
+  it('renderSummaryPage onJumpToQuestion calls getJumpToQuestionButtonProps', () => {
+    jest.spyOn(utils, 'getStateFromSessionStorage').mockReturnValue({
+      quizId: {
+        answerInputs: mockState.answers.inputs,
+        answers: [],
+        isQuizCompleted: false,
+        prevAnswerInputs: mockState.answers.inputs,
+      },
+    });
+
+    const renderSummaryPage = jest.fn().mockImplementation(({ onJumpToQuestion }) => (
+      <button type='button' onClick={() => onJumpToQuestion(2)}>
+        Jump
+      </button>
+    ));
+
+    render(
+      <Subject quizId='quizId' onResultsClick={() => {}} renderSummaryPage={renderSummaryPage} />
+    );
+
+    fireEvent.click(screen.getByText('Jump'));
+
+    expect(getJumpToQuestionButtonProps).toHaveBeenCalledWith(2);
+    expect(onJumpToQuestionMock).toHaveBeenCalled();
   });
 });

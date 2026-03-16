@@ -43,7 +43,7 @@ export const WithSummaryPage: Story = {
     resultCardOptions,
     callbacks,
     primaryColor: '35, 71, 199',
-    showSummaryPage: true,
+    summaryPage: { isShown: true },
   },
 };
 
