@@ -1,24 +1,11 @@
+/**
+ * @jest-environment jsdom
+ * @jest-environment-options {"url": "https://example.com/?items=item1,item2&attributes=attr1,attr2&a=1-2,3-4&quiz_version_id=123"}
+ */
 import { renderHook, act } from '@testing-library/react';
 import useQueryParams from '../../../src/hooks/useQueryParams';
 
 describe('Testing Hook (client): useQueryParams', () => {
-  const originalReplaceState = window.history.replaceState;
-
-  beforeAll(() => {
-    delete (global as any).window.location;
-    (global as any).window.location = new URL(
-      'https://example.com/?items=item1,item2&attributes=attr1,attr2&a=1-2,3-4&quiz_version_id=123'
-    );
-
-    window.history.replaceState = jest.fn((state, title, url) => {
-      (global as any).window.location = new URL(url as string, window.location.origin);
-    });
-  });
-
-  afterAll(() => {
-    window.history.replaceState = originalReplaceState;
-  });
-
   it('parses query parameters correctly', () => {
     const { result } = renderHook(() => useQueryParams());
 
