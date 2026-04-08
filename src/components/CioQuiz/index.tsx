@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import QuizContext, { QuizContextValue } from './context';
 import QuizQuestions from '../QuizQuestions';
 import ResultContainer from '../ResultContainer/ResultContainer';
+import SummaryPage from '../SummaryPage/SummaryPage';
 import ControlBar from '../ControlBar/ControlBar';
 import { RequestStates } from '../../constants';
 import Spinner from '../Spinner/Spinner';
@@ -18,7 +19,7 @@ export default function CioQuiz(props: IQuizProps) {
   const {
     cioClient,
     state,
-    events: { hydrateQuiz, resetSessionStorageState },
+    events: { hydrateQuiz, resetSessionStorageState, proceedToResultsFromSummaryPage },
     getAddToCartButtonProps,
     getAddToFavoritesButtonProps,
     getCoverQuestionProps,
@@ -45,6 +46,8 @@ export default function CioQuiz(props: IQuizProps) {
     questionsPageOptions,
     resultCardOptions,
     resultsPageOptions,
+    quizId,
+    summaryPage,
   } = props;
   const {
     quizSessionStorageState: { hasSessionStorageState, skipToResults },
@@ -159,6 +162,16 @@ export default function CioQuiz(props: IQuizProps) {
         )}
 
         <QuizContext.Provider value={contextValue}>
+          {!state.quiz.results && state.quiz.showSummaryPage && (
+            <SummaryPage
+              quizId={quizId}
+              onResultsClick={proceedToResultsFromSummaryPage}
+              resultsButtonText={summaryPage?.resultsButtonText}
+              title={summaryPage?.title}
+              renderSummaryPage={summaryPage?.renderSummaryPage}
+              onSummaryPageLoaded={callbacks?.onSummaryPageLoaded}
+            />
+          )}
           {state.quiz.results || skipToResults ? (
             <ResultContainer
               resultCardOptions={resultCardOptions}
@@ -166,7 +179,7 @@ export default function CioQuiz(props: IQuizProps) {
               resultsPageOptions={resultsPageOptions}
             />
           ) : (
-            state.quiz.currentQuestion && (
+            state.quiz.currentQuestion?.next_question && (
               <>
                 <ProgressBar />
                 <QuizQuestions />
@@ -181,5 +194,6 @@ export default function CioQuiz(props: IQuizProps) {
       </div>
     );
   }
+
   return null;
 }

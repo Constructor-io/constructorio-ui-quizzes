@@ -117,6 +117,20 @@ export interface Callbacks {
   onShareResultsModalOpen?: QuizResultsEventsProps.OnShareResultsModalOpen;
   onShareResultsModalClose?: QuizResultsEventsProps.OnShareResultsModalClose;
   onQuizResultsConfigLoaded?: QuizResultsEventsProps.OnQuizResultsConfigLoaded;
+  onSummaryPageLoaded?: () => void;
+}
+
+export type RenderSummaryPage = (props: {
+  answerInputs: AnswerInputState;
+  onResultsClick: () => void;
+  onJumpToQuestion: (questionId: number) => void;
+}) => JSX.Element;
+
+export interface SummaryPageOptions {
+  isShown: boolean;
+  title?: string;
+  resultsButtonText?: string;
+  renderSummaryPage?: RenderSummaryPage;
 }
 
 export interface IQuizProps {
@@ -131,6 +145,7 @@ export interface IQuizProps {
   enableHydration?: boolean;
   callbacks: Callbacks;
   questionsPageOptions?: QuestionsPageOptions;
+  summaryPage?: SummaryPageOptions;
 }
 
 // QUIZ RETURN VALUES
@@ -149,12 +164,14 @@ export interface QuizReturnState {
     matchedOptions?: string[];
     resultsConfig: QuizResultsConfig | null;
     metadata?: object | null;
+    showSummaryPage?: boolean;
   };
   quizSessionStorageState: QuizSessionStorageState;
 }
 
 export type AnswerInput = {
   type: InputQuestionsTypes;
+  questionTitle: string;
   value: string | Omit<QuestionOption, 'attribute' | 'images'>[] | null;
 };
 
@@ -212,6 +229,7 @@ export namespace QuizEventsReturn {
   ) => void;
   export type HydrateQuiz = () => void;
   export type ResetSessionStorageState = () => void;
+  export type ProceedToResultsFromSummaryPage = () => void;
 }
 
 export interface QuizEventsReturn {
@@ -226,6 +244,7 @@ export interface QuizEventsReturn {
   addToFavorites: QuizEventsReturn.AddToFavorites;
   hydrateQuiz: QuizEventsReturn.HydrateQuiz;
   resetSessionStorageState: QuizEventsReturn.ResetSessionStorageState;
+  proceedToResultsFromSummaryPage: QuizEventsReturn.ProceedToResultsFromSummaryPage;
 }
 
 export interface OpenTextInputProps {
