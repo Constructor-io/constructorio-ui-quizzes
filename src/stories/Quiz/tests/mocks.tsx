@@ -84,7 +84,8 @@ export const questionOptions = [
 export const questionOptionsWithDescriptions = [
   {
     ...getMockOption(0, 'coffee'),
-    description: 'A rich, bold beverage made from roasted coffee beans. Perfect for morning energy.',
+    description:
+      'A rich, bold beverage made from roasted coffee beans. Perfect for morning energy.',
   },
   {
     ...getMockOption(1, 'tea'),

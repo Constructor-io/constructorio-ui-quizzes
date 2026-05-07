@@ -18,8 +18,8 @@ import {
   QuizReturnState,
   GetShareResultsButtonProps,
   GetJumpToQuestionButtonProps,
+  Selected,
 } from '../../types';
-import { Selected } from '../SelectTypeQuestion/SelectTypeQuestion';
 
 export interface QuizContextValue {
   cioClient?: ConstructorIOClient;

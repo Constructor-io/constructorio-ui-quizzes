@@ -7,7 +7,6 @@ import {
   GetOpenTextInputProps,
   GetPreviousQuestionButtonProps,
   GetQuizImageProps,
-  GetSelectInputProps,
   QuizEventsReturn,
   GetHydrateQuizButtonProps,
   GetAddToCartButtonProps,

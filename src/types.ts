@@ -15,7 +15,10 @@ import ConstructorIOClient, {
 import { RequestStates } from './constants';
 // eslint-disable-next-line import/no-cycle
 import { QuestionTypes } from './components/CioQuiz/actions';
-import { Selected } from './components/SelectTypeQuestion/SelectTypeQuestion';
+
+export interface Selected {
+  [key: number]: boolean;
+}
 
 export type {
   QuestionOption,

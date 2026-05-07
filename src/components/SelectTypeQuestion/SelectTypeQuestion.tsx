@@ -3,13 +3,11 @@ import { Nullable } from '@constructor-io/constructorio-client-javascript/lib/ty
 import QuestionTitle from '../QuestionTitle/QuestionTitle';
 import QuestionDescription from '../QuestionDescription/QuestionDescription';
 import QuizContext from '../CioQuiz/context';
-import { Question, QuestionOption } from '../../types';
+import { Question, QuestionOption, Selected } from '../../types';
 import { getDisplayedDescription, renderImages } from '../../utils';
 import { QuestionTypes } from '../CioQuiz/actions';
 
-export interface Selected {
-  [key: number]: boolean;
-}
+export type { Selected };
 
 function SelectTypeQuestion() {
   const { state, getSelectInputProps, selectQuestionSelectedOptions } = useContext(QuizContext);

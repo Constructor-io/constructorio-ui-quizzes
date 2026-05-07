@@ -2,8 +2,7 @@
 import React from 'react';
 import { QuestionTypes } from './components/CioQuiz/actions';
 import { QuizLocalReducerState } from './components/CioQuiz/quizLocalReducer';
-import { Selected } from './components/SelectTypeQuestion/SelectTypeQuestion';
-import { PrimaryColorStyles, Question, QuestionImages } from './types';
+import { PrimaryColorStyles, Question, QuestionImages, Selected } from './types';
 
 export const renderImages = (images: Partial<QuestionImages>, cssClasses?: string) => {
   const {
@@ -261,9 +260,7 @@ export function getDisplayedDescription(
   const selectedIds = Object.keys(selected).filter((id) => selected[Number(id)]);
   if (selectedIds.length !== 1) return question?.description;
 
-  const selectedOption = question?.options?.find(
-    (opt) => String(opt.id) === selectedIds[0]
-  );
+  const selectedOption = question?.options?.find((opt) => String(opt.id) === selectedIds[0]);
 
   return selectedOption?.description || question?.description;
 }

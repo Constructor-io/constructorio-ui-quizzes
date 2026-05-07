@@ -1,13 +1,13 @@
 import { Nullable } from '@constructor-io/constructorio-client-javascript/lib/types';
 import { useState, useCallback, useEffect, KeyboardEvent, useRef } from 'react';
 import { QuestionTypes } from '../../components/CioQuiz/actions';
-import { Selected } from '../../components/SelectTypeQuestion/SelectTypeQuestion';
 import {
   AnswerInputState,
   GetSelectInputProps,
   Question,
   QuestionOption,
   QuizEventsReturn,
+  Selected,
 } from '../../types';
 
 // eslint-disable-next-line max-params
