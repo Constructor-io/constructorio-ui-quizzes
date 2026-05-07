@@ -81,6 +81,22 @@ export const questionOptions = [
   },
 ];
 
+export const questionOptionsWithDescriptions = [
+  {
+    ...getMockOption(0, 'coffee'),
+    description:
+      'A rich, bold beverage made from roasted coffee beans. Perfect for morning energy.',
+  },
+  {
+    ...getMockOption(1, 'tea'),
+    description: 'A soothing warm drink with a variety of flavors. Great for relaxation.',
+  },
+  {
+    ...getMockOption(2, 'water'),
+    description: 'Pure and refreshing hydration. The healthiest choice for any time of day.',
+  },
+];
+
 export const getMockState = (question?: Question, options?: MockOptions): QuizReturnState => ({
   answers: {
     inputs: {
@@ -221,7 +237,7 @@ export const useMockContextValue = (
 
   const getCoverQuestionProps = useCoverQuestionProps(() => {}, question);
 
-  const getSelectInputProps = useSelectInputProps(
+  const { getSelectInputProps, selected: selectQuestionSelectedOptions } = useSelectInputProps(
     () => {},
     () => {},
     question
@@ -232,6 +248,7 @@ export const useMockContextValue = (
     getCoverQuestionProps,
     getOpenTextInputProps,
     getSelectInputProps,
+    selectQuestionSelectedOptions,
     getAddToCartButtonProps: () => ({
       ...mockElementProps,
       className: 'cio-result-card-cta-button',

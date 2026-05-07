@@ -7,7 +7,6 @@ import {
   GetOpenTextInputProps,
   GetPreviousQuestionButtonProps,
   GetQuizImageProps,
-  GetSelectInputProps,
   QuizEventsReturn,
   GetHydrateQuizButtonProps,
   GetAddToCartButtonProps,
@@ -69,7 +68,7 @@ const usePropsGetters = ({
     quizApiState.quizCurrentQuestion?.next_question
   );
 
-  const getSelectInputProps: GetSelectInputProps = useSelectInputProps(
+  const { getSelectInputProps, selected: selectQuestionSelectedOptions } = useSelectInputProps(
     quizAnswerChanged,
     nextQuestion,
     quizApiState.quizCurrentQuestion?.next_question,
@@ -191,6 +190,7 @@ const usePropsGetters = ({
     getQuizImageProps,
     getSelectQuestionImageProps,
     getSelectInputProps,
+    selectQuestionSelectedOptions,
     getCoverQuestionProps,
     getResetQuizButtonProps,
     getShareResultsButtonProps,

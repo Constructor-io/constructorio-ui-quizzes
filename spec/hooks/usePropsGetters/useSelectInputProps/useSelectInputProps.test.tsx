@@ -32,10 +32,10 @@ describe('Testing Hook (client): useSelectInputProps', () => {
     const { result } = setupHook(currentQuestionData);
 
     act(() => {
-      result.current(currentQuestionData.options[0]).onClick(mockEvent);
+      result.current.getSelectInputProps(currentQuestionData.options[0]).onClick(mockEvent);
     });
 
-    expect(result.current(currentQuestionData.options[0]).className).toContain('selected');
+    expect(result.current.getSelectInputProps(currentQuestionData.options[0]).className).toContain('selected');
     expect(quizAnswerChangedMock).toHaveBeenCalledWith([{ id: '1', value: 'Option 1' }]);
   });
 
@@ -44,10 +44,10 @@ describe('Testing Hook (client): useSelectInputProps', () => {
     const { result } = setupHook(currentQuestionData);
 
     act(() => {
-      result.current(currentQuestionData.options[0]).onClick(mockEvent);
+      result.current.getSelectInputProps(currentQuestionData.options[0]).onClick(mockEvent);
     });
 
-    expect(result.current(currentQuestionData.options[0]).className).toContain('selected');
+    expect(result.current.getSelectInputProps(currentQuestionData.options[0]).className).toContain('selected');
     expect(quizAnswerChangedMock).toHaveBeenCalledWith([{ id: '1', value: 'Option 1' }]);
   });
 
@@ -62,8 +62,8 @@ describe('Testing Hook (client): useSelectInputProps', () => {
     );
 
     act(() => {
-      result
-        .current({ id: 2, value: 'Option 2', attribute: null })
+      result.current
+        .getSelectInputProps({ id: 2, value: 'Option 2', attribute: null })
         .onKeyDown({ key: 'Enter' } as React.KeyboardEvent<HTMLElement>);
     });
 
@@ -95,10 +95,53 @@ describe('Testing Hook (client): useSelectInputProps', () => {
     );
 
     act(() => {
-      result.current(currentQuestionData.options[0]).onClick(mockEvent);
+      result.current.getSelectInputProps(currentQuestionData.options[0]).onClick(mockEvent);
     });
-    expect(result.current(currentQuestionData.options[0]).className).toContain('selected');
+    expect(result.current.getSelectInputProps(currentQuestionData.options[0]).className).toContain('selected');
     expect(nextQuestionMock).not.toHaveBeenCalled();
+  });
+
+  it('does not advance to the next question for single select when selected option has a description', () => {
+    currentQuestionData.type = 'single';
+    currentQuestionData.options[0] = {
+      ...currentQuestionData.options[0],
+      description: 'Additional details',
+    };
+    const { result } = renderHook(() =>
+      useSelectInputProps(
+        quizAnswerChangedMock,
+        nextQuestionMock,
+        currentQuestionData,
+        answerInputs,
+        true
+      )
+    );
+    act(() => {
+      result.current.getSelectInputProps(currentQuestionData.options[0]).onClick(mockEvent);
+    });
+    expect(result.current.getSelectInputProps(currentQuestionData.options[0]).className).toContain('selected');
+    expect(nextQuestionMock).not.toHaveBeenCalled();
+  });
+
+  it('advances to the next question for single select when selected option does not have a description', () => {
+    currentQuestionData.type = 'single';
+    let inputs = {};
+    const { result, rerender } = renderHook(() =>
+      useSelectInputProps(
+        quizAnswerChangedMock,
+        nextQuestionMock,
+        currentQuestionData,
+        inputs,
+        true
+      )
+    );
+    act(() => {
+      result.current.getSelectInputProps(currentQuestionData.options[0]).onClick(mockEvent);
+    });
+    expect(result.current.getSelectInputProps(currentQuestionData.options[0]).className).toContain('selected');
+    inputs = { 1: { value: [{ id: '1', value: 'Option 1' }] } };
+    rerender();
+    expect(nextQuestionMock).toHaveBeenCalled();
   });
 
   it('allows toggling options off in a multiple select question', () => {
@@ -106,14 +149,14 @@ describe('Testing Hook (client): useSelectInputProps', () => {
     const { result } = setupHook(currentQuestionData);
 
     act(() => {
-      result.current(currentQuestionData.options[0]).onClick(mockEvent);
+      result.current.getSelectInputProps(currentQuestionData.options[0]).onClick(mockEvent);
     });
 
     act(() => {
-      result.current(currentQuestionData.options[0]).onClick(mockEvent);
+      result.current.getSelectInputProps(currentQuestionData.options[0]).onClick(mockEvent);
     });
 
-    expect(result.current(currentQuestionData.options[0]).className).not.toContain('selected');
+    expect(result.current.getSelectInputProps(currentQuestionData.options[0]).className).not.toContain('selected');
     expect(quizAnswerChangedMock).toHaveBeenCalledWith([]);
   });
 
@@ -122,14 +165,14 @@ describe('Testing Hook (client): useSelectInputProps', () => {
     const { result } = setupHook(currentQuestionData);
 
     act(() => {
-      result.current(currentQuestionData.options[0]).onClick(mockEvent);
+      result.current.getSelectInputProps(currentQuestionData.options[0]).onClick(mockEvent);
     });
 
     act(() => {
-      result.current(currentQuestionData.options[0]).onClick(mockEvent);
+      result.current.getSelectInputProps(currentQuestionData.options[0]).onClick(mockEvent);
     });
 
-    expect(result.current(currentQuestionData.options[0]).className).not.toContain('selected');
+    expect(result.current.getSelectInputProps(currentQuestionData.options[0]).className).not.toContain('selected');
     expect(quizAnswerChangedMock).toHaveBeenCalledWith([]);
   });
 });

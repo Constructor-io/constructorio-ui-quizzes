@@ -1,13 +1,13 @@
 import { Nullable } from '@constructor-io/constructorio-client-javascript/lib/types';
 import { useState, useCallback, useEffect, KeyboardEvent, useRef } from 'react';
 import { QuestionTypes } from '../../components/CioQuiz/actions';
-import { Selected } from '../../components/SelectTypeQuestion/SelectTypeQuestion';
 import {
   AnswerInputState,
   GetSelectInputProps,
   Question,
   QuestionOption,
   QuizEventsReturn,
+  Selected,
 } from '../../types';
 
 // eslint-disable-next-line max-params
@@ -17,7 +17,7 @@ export default function useSelectInputProps(
   currentQuestionData?: Nullable<Question>,
   answerInputs?: AnswerInputState,
   nextQuestionOnSingleSelect = true
-): GetSelectInputProps {
+): { getSelectInputProps: GetSelectInputProps; selected: Selected } {
   const type: `${QuestionTypes}` | undefined = currentQuestionData?.type;
   const hasImages = currentQuestionData?.options?.some((option: QuestionOption) => option.images);
 
@@ -80,7 +80,7 @@ export default function useSelectInputProps(
       currentQuestionData?.type === QuestionTypes.SingleSelect
     ) {
       const selectedAnswers = currentQuestionData?.options
-        ?.filter((opt) => selected[Number(opt.id)])
+        ?.filter((opt) => selected[opt.id])
         ?.map((opt) => ({ id: opt.id, value: opt.value }));
 
       quizAnswerChanged(selectedAnswers);
@@ -91,7 +91,7 @@ export default function useSelectInputProps(
       currentQuestionData?.type === QuestionTypes.SingleFilterValue
     ) {
       const selectedAnswers = currentQuestionData?.options
-        ?.filter((opt) => selected[String(opt.id)])
+        ?.filter((opt) => selected[opt.id])
         ?.map((opt) => ({
           id: opt.id,
           value: opt.value,
@@ -116,7 +116,12 @@ export default function useSelectInputProps(
       singleSelectClicked.current &&
       nextQuestionOnSingleSelect
     ) {
-      nextQuestion();
+      const selectedOption = (currentQuestionData?.options as QuestionOption[] | undefined)?.find(
+        (opt) => selected[opt.id]
+      );
+      if (!selectedOption?.description) {
+        nextQuestion();
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [answerInputs]);
@@ -140,5 +145,5 @@ export default function useSelectInputProps(
     [currentQuestionData?.id, selected]
   );
 
-  return getSelectInputProps;
+  return { getSelectInputProps, selected };
 }
