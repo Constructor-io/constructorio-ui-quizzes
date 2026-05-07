@@ -19,6 +19,7 @@ import {
   GetShareResultsButtonProps,
   GetJumpToQuestionButtonProps,
 } from '../../types';
+import { Selected } from '../SelectTypeQuestion/SelectTypeQuestion';
 
 export interface QuizContextValue {
   cioClient?: ConstructorIOClient;
@@ -38,6 +39,7 @@ export interface QuizContextValue {
   getQuizResultButtonProps: GetQuizResultButtonProps;
   getQuizResultLinkProps: GetQuizResultLinkProps;
   getJumpToQuestionButtonProps: GetJumpToQuestionButtonProps;
+  selectQuestionSelectedOptions: Selected;
   primaryColorStyles: PrimaryColorStyles;
   customClickItemCallback: boolean;
   customAddToFavoritesCallback: boolean;

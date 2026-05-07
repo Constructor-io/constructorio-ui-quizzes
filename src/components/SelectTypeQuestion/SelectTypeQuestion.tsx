@@ -4,7 +4,7 @@ import QuestionTitle from '../QuestionTitle/QuestionTitle';
 import QuestionDescription from '../QuestionDescription/QuestionDescription';
 import QuizContext from '../CioQuiz/context';
 import { Question, QuestionOption } from '../../types';
-import { renderImages } from '../../utils';
+import { getDisplayedDescription, renderImages } from '../../utils';
 import { QuestionTypes } from '../CioQuiz/actions';
 
 export interface Selected {
@@ -12,7 +12,7 @@ export interface Selected {
 }
 
 function SelectTypeQuestion() {
-  const { state, getSelectInputProps } = useContext(QuizContext);
+  const { state, getSelectInputProps, selectQuestionSelectedOptions } = useContext(QuizContext);
   let question: Nullable<Question> | undefined;
   let hasImages = false;
   let instructions;
@@ -26,6 +26,11 @@ function SelectTypeQuestion() {
       'Select one or more options';
   }
 
+  const displayedDescription = getDisplayedDescription(
+    question,
+    selectQuestionSelectedOptions || {}
+  );
+
   if (question) {
     return (
       <div
@@ -34,7 +39,7 @@ function SelectTypeQuestion() {
         data-question-key={question.key}>
         <div className='cio-select-question-text'>
           <QuestionTitle title={question.title} />
-          {question?.description ? <QuestionDescription description={question.description} /> : ''}
+          {displayedDescription ? <QuestionDescription description={displayedDescription} /> : ''}
         </div>
         {instructions && <div className='cio-select-question-instructions'>{instructions}</div>}
         <div

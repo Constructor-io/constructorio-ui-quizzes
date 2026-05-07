@@ -15,6 +15,7 @@ import ConstructorIOClient, {
 import { RequestStates } from './constants';
 // eslint-disable-next-line import/no-cycle
 import { QuestionTypes } from './components/CioQuiz/actions';
+import { Selected } from './components/SelectTypeQuestion/SelectTypeQuestion';
 
 export type {
   QuestionOption,
@@ -393,6 +394,7 @@ export interface UseQuizReturn {
   getQuizResultButtonProps: GetQuizResultButtonProps;
   getQuizResultLinkProps: GetQuizResultLinkProps;
   getJumpToQuestionButtonProps: GetJumpToQuestionButtonProps;
+  selectQuestionSelectedOptions: Selected;
   primaryColorStyles: PrimaryColorStyles;
 }
 

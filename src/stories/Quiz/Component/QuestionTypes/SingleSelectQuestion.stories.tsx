@@ -8,6 +8,7 @@ import {
   getMockQuestionWithImage,
   questionOptionsWithImages,
   questionOptions,
+  questionOptionsWithDescriptions,
 } from '../../tests/mocks';
 import QuestionTypeVariationsDecorator, {
   QuestionTypePrimaryDecorator,
@@ -20,6 +21,10 @@ const singleSelectQuestionWithImages = {
 const singleSelectQuestionWithoutImages = {
   ...getMockQuestion(QuestionTypes.SingleSelect),
   options: questionOptions,
+};
+const singleSelectQuestionWithDescriptions = {
+  ...getMockQuestion(QuestionTypes.SingleSelect),
+  options: questionOptionsWithDescriptions,
 };
 
 const meta: Meta<typeof SelectTypeQuestion> = {
@@ -49,5 +54,12 @@ export const WithoutImages: Story = {
   decorators: [
     (story) =>
       QuestionTypeVariationsDecorator(story, [singleSelectQuestionWithoutImages as SelectQuestion]),
+  ],
+};
+
+export const WithOptionDescriptions: Story = {
+  decorators: [
+    (story) =>
+      QuestionTypePrimaryDecorator(story, [singleSelectQuestionWithDescriptions as SelectQuestion]),
   ],
 };

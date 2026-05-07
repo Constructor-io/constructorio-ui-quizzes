@@ -17,7 +17,7 @@ export default function useSelectInputProps(
   currentQuestionData?: Nullable<Question>,
   answerInputs?: AnswerInputState,
   nextQuestionOnSingleSelect = true
-): GetSelectInputProps {
+): { getSelectInputProps: GetSelectInputProps; selected: Selected } {
   const type: `${QuestionTypes}` | undefined = currentQuestionData?.type;
   const hasImages = currentQuestionData?.options?.some((option: QuestionOption) => option.images);
 
@@ -116,7 +116,12 @@ export default function useSelectInputProps(
       singleSelectClicked.current &&
       nextQuestionOnSingleSelect
     ) {
-      nextQuestion();
+      const selectedOption = (currentQuestionData?.options as QuestionOption[] | undefined)?.find(
+        (opt) => selected[opt.id]
+      );
+      if (!selectedOption?.description) {
+        nextQuestion();
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [answerInputs]);
@@ -140,5 +145,5 @@ export default function useSelectInputProps(
     [currentQuestionData?.id, selected]
   );
 
-  return getSelectInputProps;
+  return { getSelectInputProps, selected };
 }

@@ -2,7 +2,8 @@
 import React from 'react';
 import { QuestionTypes } from './components/CioQuiz/actions';
 import { QuizLocalReducerState } from './components/CioQuiz/quizLocalReducer';
-import { PrimaryColorStyles, QuestionImages } from './types';
+import { Selected } from './components/SelectTypeQuestion/SelectTypeQuestion';
+import { PrimaryColorStyles, Question, QuestionImages } from './types';
 
 export const renderImages = (images: Partial<QuestionImages>, cssClasses?: string) => {
   const {
@@ -246,4 +247,23 @@ export function getNestedValueUsingDotNotation(object: any, key?: string): unkno
   }
 
   return key.split('.').reduce((a, b) => a?.[b], object);
+}
+
+export function getDisplayedDescription(
+  question: Question | null | undefined,
+  selected: Selected
+): string | undefined {
+  if (!question?.description && !question?.options) return undefined;
+
+  const { isSingleQuestion } = getQuestionTypes(question?.type);
+  if (!isSingleQuestion) return question?.description;
+
+  const selectedIds = Object.keys(selected).filter((id) => selected[Number(id)]);
+  if (selectedIds.length !== 1) return question?.description;
+
+  const selectedOption = question?.options?.find(
+    (opt) => String(opt.id) === selectedIds[0]
+  );
+
+  return selectedOption?.description || question?.description;
 }
