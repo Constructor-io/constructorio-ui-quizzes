@@ -10,7 +10,7 @@ import { QuestionTypes } from '../CioQuiz/actions';
 export type { Selected };
 
 function SelectTypeQuestion() {
-  const { state, getSelectInputProps, selectQuestionSelectedOptions } = useContext(QuizContext);
+  const { state, getSelectInputProps, selectQuestionSelectedOptions = {} } = useContext(QuizContext);
   let question: Nullable<Question> | undefined;
   let hasImages = false;
   let instructions;
@@ -26,7 +26,7 @@ function SelectTypeQuestion() {
 
   const displayedDescription = getDisplayedDescription(
     question,
-    selectQuestionSelectedOptions || {}
+    selectQuestionSelectedOptions
   );
 
   if (question) {

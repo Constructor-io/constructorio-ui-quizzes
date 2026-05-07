@@ -80,7 +80,7 @@ export default function useSelectInputProps(
       currentQuestionData?.type === QuestionTypes.SingleSelect
     ) {
       const selectedAnswers = currentQuestionData?.options
-        ?.filter((opt) => selected[Number(opt.id)])
+        ?.filter((opt) => selected[opt.id])
         ?.map((opt) => ({ id: opt.id, value: opt.value }));
 
       quizAnswerChanged(selectedAnswers);
@@ -91,7 +91,7 @@ export default function useSelectInputProps(
       currentQuestionData?.type === QuestionTypes.SingleFilterValue
     ) {
       const selectedAnswers = currentQuestionData?.options
-        ?.filter((opt) => selected[String(opt.id)])
+        ?.filter((opt) => selected[opt.id])
         ?.map((opt) => ({
           id: opt.id,
           value: opt.value,

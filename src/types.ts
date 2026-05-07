@@ -17,7 +17,7 @@ import { RequestStates } from './constants';
 import { QuestionTypes } from './components/CioQuiz/actions';
 
 export interface Selected {
-  [key: number]: boolean;
+  [key: string]: boolean;
 }
 
 export type {
