@@ -254,11 +254,15 @@ export function getDisplayedDescription(
 ): string | undefined {
   if (!question?.description && !question?.options) return undefined;
 
-  const { isSingleQuestion } = getQuestionTypes(question?.type);
-  if (!isSingleQuestion) return question?.description;
+  const { isSingleQuestion, isSingleFilterQuestion } = getQuestionTypes(question?.type);
+  if (!isSingleQuestion && !isSingleFilterQuestion) {
+     return question?.description;
+  }
 
   const selectedEntries = Object.entries(selected).filter(([, isSelected]) => Boolean(isSelected));
-  if (selectedEntries.length !== 1) return question?.description;
+  if (selectedEntries.length !== 1) {
+    return question?.description;
+  }
 
   const [selectedId] = selectedEntries[0];
   const selectedOption = question?.options?.find((opt) => String(opt.id) === selectedId);
