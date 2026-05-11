@@ -2,7 +2,13 @@ import React, { useContext } from 'react';
 import QuizContext from '../CioQuiz/context';
 import ShareButton from '../ShareButton/ShareButton';
 import QuizResultsSummary from '../QuizResultsSummary/QuizResultsSummary';
-import { QuizResultsResponse } from '../../types';
+import { QuizResultsResponse, QuizSharedResultsData } from '../../types';
+
+function isQuizResultsResponse(
+  results: QuizResultsResponse | QuizSharedResultsData | undefined
+): results is QuizResultsResponse {
+  return !!results && 'quiz_id' in results;
+}
 
 interface ResultFiltersAndShareProps {
   onShare: () => void;
@@ -18,8 +24,9 @@ function ResultFiltersAndShare({
   const { state } = useContext(QuizContext);
   const matchedOptions = state?.quiz?.matchedOptions;
   const summary = state?.quiz?.resultsConfig?.desktop?.response_summary ?? null;
+  const results = state?.quiz?.results;
   const asaMessage =
-    (state?.quiz?.results as QuizResultsResponse | undefined)?.quiz_asa_results_message ?? null;
+    (isQuizResultsResponse(results) && results.quiz_asa_results_message) || null;
 
   return (
     <div className='cio-results-filter-and-redo-container cio-results-button-group'>
