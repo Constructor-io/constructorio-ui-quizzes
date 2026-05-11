@@ -24,7 +24,11 @@ function ResultFiltersAndShare({
   return (
     <div className='cio-results-filter-and-redo-container cio-results-button-group'>
       <div className='cio-results-filter-container'>
-        <QuizResultsSummary summary={summary} matchedOptions={matchedOptions} asaMessage={asaMessage} />
+        <QuizResultsSummary
+          summary={summary}
+          matchedOptions={matchedOptions}
+          asaMessage={asaMessage}
+        />
       </div>
       <div className='cio-results-number-and-share-button-group'>
         {numberOfResults} {numberOfResults === 1 ? 'result' : 'results'}
