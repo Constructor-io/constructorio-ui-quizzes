@@ -7,7 +7,7 @@ import { QuizResultsResponse, QuizSharedResultsData } from '../../types';
 function isQuizResultsResponse(
   results: QuizResultsResponse | QuizSharedResultsData | undefined
 ): results is QuizResultsResponse {
-  return !!results && 'quiz_id' in results;
+  return !!results && 'quiz_selected_options' in results;
 }
 
 interface ResultFiltersAndShareProps {
