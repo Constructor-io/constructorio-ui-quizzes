@@ -51,6 +51,23 @@ export function QuizResultsWithSummaryDecorator(Story: any) {
   );
 }
 
+export function QuizResultsWithAsaMessageDecorator(Story: any) {
+  const contextValue = useMockContextValue(undefined, {
+    asaMessage:
+      'Here are some perfect coffee options to energize your mornings with rich flavor and smooth taste.',
+  });
+
+  return (
+    <div className='cio-quiz'>
+      <QuizContext.Provider value={contextValue}>
+        <div>
+          <StoryPreview Component={Story} />
+        </div>
+      </QuizContext.Provider>
+    </div>
+  );
+}
+
 function ZeroResultsComponent() {
   return <ZeroResults />;
 }

@@ -60,4 +60,24 @@ describe(`${QuizResultsSummary.name} client`, () => {
     );
     expect(view).toContain('');
   });
+
+  describe('with asaMessage', () => {
+    it('renders ASA message instead of matched options', () => {
+      const view = renderToString(
+        <QuizResultsSummary {...props} asaMessage='Here are some great products for you' />
+      );
+      expect(view).toContain('Here are some great products for you');
+      expect(view).not.toContain('MATCHED_OPTION_1');
+    });
+
+    it('renders default summary when asaMessage is null', () => {
+      const view = renderToString(<QuizResultsSummary {...props} asaMessage={null} />);
+      expect(view).toContain('MATCHED_OPTION_1 $ MATCHED_OPTION_2 and MATCHED_OPTION_3');
+    });
+
+    it('renders default summary when asaMessage is not provided', () => {
+      const view = renderToString(<QuizResultsSummary {...props} />);
+      expect(view).toContain('MATCHED_OPTION_1 $ MATCHED_OPTION_2 and MATCHED_OPTION_3');
+    });
+  });
 });

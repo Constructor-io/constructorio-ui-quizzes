@@ -19,7 +19,8 @@ import useCoverQuestionProps from '../../../hooks/usePropsGetters/useCoverQuesti
 import useSelectInputProps from '../../../hooks/usePropsGetters/useSelectInputProps';
 
 type MockOptions = {
-  withSummary: boolean;
+  withSummary?: boolean;
+  asaMessage?: string | null;
 };
 
 export const getMockQuestion = (type: `${QuestionTypes}`) => ({
@@ -164,6 +165,9 @@ export const getMockState = (question?: Question, options?: MockOptions): QuizRe
         { value: 'Potato', has_attribute: true, is_matched: true },
         { value: 'Medium', has_attribute: true, is_matched: false },
       ],
+      ...(options?.asaMessage !== undefined && {
+        quiz_asa_results_message: options.asaMessage,
+      }),
     },
     selectedOptionsWithAttributes: ['Chocolate', 'Medium'],
     matchedOptions: ['Chocolate', 'Milk', 'Medium', 'Cacao'],
