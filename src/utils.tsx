@@ -256,7 +256,7 @@ export function getDisplayedDescription(
 
   const { isSingleQuestion, isSingleFilterQuestion } = getQuestionTypes(question?.type);
   if (!isSingleQuestion && !isSingleFilterQuestion) {
-     return question?.description;
+    return question?.description;
   }
 
   const selectedEntries = Object.entries(selected).filter(([, isSelected]) => Boolean(isSelected));
