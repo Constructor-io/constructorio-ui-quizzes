@@ -14,6 +14,7 @@ import {
   getDisplayedDescription,
 } from '../../src/utils';
 import { QuestionTypes } from '../../src/components/CioQuiz/actions';
+import { Question } from '../../src/types';
 
 describe('convertPrimaryColorsToString', () => {
   it('returns empty string when no images are provided', () => {
@@ -288,8 +289,11 @@ describe('resetQuizSessionStorageState', () => {
 });
 
 describe('getDisplayedDescription', () => {
-  const makeQuestion = (type: string, description?: string, options?: any[]) =>
-    ({ type, description, options } as any);
+  const makeQuestion = (
+    type: string,
+    description?: string,
+    options?: { id: number | string; value: string; description?: string }[]
+  ) => ({ type, description, options } as unknown as Question);
 
   it('returns undefined when question is null or undefined', () => {
     expect(getDisplayedDescription(null, {})).toBeUndefined();
