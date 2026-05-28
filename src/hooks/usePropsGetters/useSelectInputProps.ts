@@ -28,17 +28,17 @@ export default function useSelectInputProps(
     (id: number | string) => {
       if (type === QuestionTypes.SingleSelect || type === QuestionTypes.SingleFilterValue) {
         singleSelectClicked.current = true;
-        setSelected({ [id]: true });
+        setSelected({ [String(id)]: true });
         return;
       }
 
       if (type === QuestionTypes.MultipleSelect || type === QuestionTypes.MultipleFilterValues) {
-        if (selected[id]) {
+        if (selected[String(id)]) {
           const newState = { ...selected };
-          delete newState[id];
+          delete newState[String(id)];
           setSelected(newState);
         } else {
-          setSelected({ ...selected, [id]: true });
+          setSelected({ ...selected, [String(id)]: true });
         }
       }
     },
@@ -80,7 +80,7 @@ export default function useSelectInputProps(
       currentQuestionData?.type === QuestionTypes.SingleSelect
     ) {
       const selectedAnswers = currentQuestionData?.options
-        ?.filter((opt) => selected[opt.id])
+        ?.filter((opt) => selected[String(opt.id)])
         ?.map((opt) => ({ id: opt.id, value: opt.value }));
 
       quizAnswerChanged(selectedAnswers);
@@ -91,7 +91,7 @@ export default function useSelectInputProps(
       currentQuestionData?.type === QuestionTypes.SingleFilterValue
     ) {
       const selectedAnswers = currentQuestionData?.options
-        ?.filter((opt) => selected[opt.id])
+        ?.filter((opt) => selected[String(opt.id)])
         ?.map((opt) => ({
           id: opt.id,
           value: opt.value,
@@ -117,7 +117,7 @@ export default function useSelectInputProps(
       nextQuestionOnSingleSelect
     ) {
       const selectedOption = (currentQuestionData?.options as QuestionOption[] | undefined)?.find(
-        (opt) => selected[opt.id]
+        (opt) => selected[String(opt.id)]
       );
       if (!selectedOption?.description) {
         nextQuestion();
@@ -130,7 +130,7 @@ export default function useSelectInputProps(
     (option: QuestionOption) => ({
       className: `${
         !hasImages ? 'cio-question-option-container-text-only' : 'cio-question-option-container'
-      } ${selected[option.id] ? 'selected' : ''}`,
+      } ${selected[String(option.id)] ? 'selected' : ''}`,
       onClick: () => {
         toggleIdSelected(option.id);
       },
