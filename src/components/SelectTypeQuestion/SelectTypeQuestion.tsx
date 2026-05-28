@@ -7,8 +7,6 @@ import { Question, QuestionOption, Selected } from '../../types';
 import { getDisplayedDescription, renderImages } from '../../utils';
 import { QuestionTypes } from '../CioQuiz/actions';
 
-export type { Selected };
-
 function SelectTypeQuestion() {
   const {
     state,
