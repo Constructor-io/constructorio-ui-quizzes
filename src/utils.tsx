@@ -252,7 +252,7 @@ export function getDisplayedDescription(
   question: Question | null | undefined,
   selected: Selected
 ): string | undefined {
-  if (!question?.description && !question?.options) return undefined;
+  if (!question) return undefined;
 
   const { isSingleQuestion, isSingleFilterQuestion } = getQuestionTypes(question?.type);
   if (!isSingleQuestion && !isSingleFilterQuestion) {
