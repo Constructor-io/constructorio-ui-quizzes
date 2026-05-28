@@ -22,7 +22,7 @@ export default function useSelectInputProps(
   const hasImages = currentQuestionData?.options?.some((option: QuestionOption) => option.images);
 
   const [selected, setSelected] = useState<Selected>({});
-  const singleSelectClicked = useRef({});
+  const singleSelectClicked = useRef(false);
 
   const toggleIdSelected = useCallback(
     (id: number | string) => {
