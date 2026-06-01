@@ -16,6 +16,10 @@ import { RequestStates } from './constants';
 // eslint-disable-next-line import/no-cycle
 import { QuestionTypes } from './components/CioQuiz/actions';
 
+export interface Selected {
+  [key: string]: boolean;
+}
+
 export type {
   QuestionOption,
   FilterQuestionOption,
@@ -393,6 +397,7 @@ export interface UseQuizReturn {
   getQuizResultButtonProps: GetQuizResultButtonProps;
   getQuizResultLinkProps: GetQuizResultLinkProps;
   getJumpToQuestionButtonProps: GetJumpToQuestionButtonProps;
+  selectQuestionSelectedOptions: Selected;
   primaryColorStyles: PrimaryColorStyles;
 }
 

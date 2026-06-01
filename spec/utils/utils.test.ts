@@ -11,8 +11,10 @@ import {
   getStateFromSessionStorage,
   isFunction,
   convertPrimaryColorsToString,
+  getDisplayedDescription,
 } from '../../src/utils';
 import { QuestionTypes } from '../../src/components/CioQuiz/actions';
+import { Question } from '../../src/types';
 
 describe('convertPrimaryColorsToString', () => {
   it('returns empty string when no images are provided', () => {
@@ -283,5 +285,66 @@ describe('resetQuizSessionStorageState', () => {
       'quizState',
       JSON.stringify({ ...mockData, QUIZ_ID_1: null })
     );
+  });
+});
+
+describe('getDisplayedDescription', () => {
+  const makeQuestion = (
+    type: string,
+    description?: string,
+    options?: { id: number | string; value: string; description?: string }[]
+  ) => ({ type, description, options } as unknown as Question);
+
+  it('returns undefined when question is null or undefined', () => {
+    expect(getDisplayedDescription(null, {})).toBeUndefined();
+    expect(getDisplayedDescription(undefined, {})).toBeUndefined();
+  });
+
+  it('returns undefined when question has no description and no options', () => {
+    const question = makeQuestion(QuestionTypes.SingleSelect, undefined, undefined);
+    expect(getDisplayedDescription(question, {})).toBeUndefined();
+  });
+
+  it('returns question description for non-single question types', () => {
+    const question = makeQuestion(QuestionTypes.MultipleSelect, 'Question desc', [
+      { id: 1, value: 'A', description: 'Option desc' },
+    ]);
+    expect(getDisplayedDescription(question, { 1: true })).toBe('Question desc');
+  });
+
+  it('returns question description when no option is selected (single select)', () => {
+    const question = makeQuestion(QuestionTypes.SingleSelect, 'Question desc', [
+      { id: 1, value: 'A', description: 'Option desc' },
+    ]);
+    expect(getDisplayedDescription(question, {})).toBe('Question desc');
+  });
+
+  it('returns selected option description when one option is selected (single select)', () => {
+    const question = makeQuestion(QuestionTypes.SingleSelect, 'Question desc', [
+      { id: 1, value: 'A', description: 'Option desc' },
+      { id: 2, value: 'B', description: 'Other desc' },
+    ]);
+    expect(getDisplayedDescription(question, { 1: true })).toBe('Option desc');
+  });
+
+  it('returns question description when selected option has no description (single select)', () => {
+    const question = makeQuestion(QuestionTypes.SingleSelect, 'Question desc', [
+      { id: 1, value: 'A' },
+    ]);
+    expect(getDisplayedDescription(question, { 1: true })).toBe('Question desc');
+  });
+
+  it('returns selected option description for single filter value type', () => {
+    const question = makeQuestion(QuestionTypes.SingleFilterValue, 'Question desc', [
+      { id: 1, value: 'A', description: 'Filter option desc' },
+    ]);
+    expect(getDisplayedDescription(question, { 1: true })).toBe('Filter option desc');
+  });
+
+  it('returns question description when selected option has no description (single filter value)', () => {
+    const question = makeQuestion(QuestionTypes.SingleFilterValue, 'Question desc', [
+      { id: 1, value: 'A' },
+    ]);
+    expect(getDisplayedDescription(question, { 1: true })).toBe('Question desc');
   });
 });

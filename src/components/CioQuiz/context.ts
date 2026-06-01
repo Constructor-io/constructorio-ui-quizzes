@@ -18,6 +18,7 @@ import {
   QuizReturnState,
   GetShareResultsButtonProps,
   GetJumpToQuestionButtonProps,
+  Selected,
 } from '../../types';
 
 export interface QuizContextValue {
@@ -38,6 +39,7 @@ export interface QuizContextValue {
   getQuizResultButtonProps: GetQuizResultButtonProps;
   getQuizResultLinkProps: GetQuizResultLinkProps;
   getJumpToQuestionButtonProps: GetJumpToQuestionButtonProps;
+  selectQuestionSelectedOptions: Selected;
   primaryColorStyles: PrimaryColorStyles;
   customClickItemCallback: boolean;
   customAddToFavoritesCallback: boolean;
