@@ -25,7 +25,11 @@ function ResultFiltersAndShare({
   const matchedOptions = state?.quiz?.matchedOptions;
   const summary = state?.quiz?.resultsConfig?.desktop?.response_summary ?? null;
   const results = state?.quiz?.results;
-  const asaMessage = (isQuizResultsResponse(results) && results.quiz_asa_results_message) || null;
+  const asaMessage =
+    (isQuizResultsResponse(results) &&
+      typeof results.quiz_asa_results_message === 'string' &&
+      results.quiz_asa_results_message) ||
+    null;
 
   return (
     <div className='cio-results-filter-and-redo-container cio-results-button-group'>

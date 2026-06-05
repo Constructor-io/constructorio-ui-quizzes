@@ -20,7 +20,7 @@ import useSelectInputProps from '../../../hooks/usePropsGetters/useSelectInputPr
 
 type MockOptions = {
   withSummary?: boolean;
-  asaMessage?: string | null;
+  asaMessage?: string;
 };
 
 export const getMockQuestion = (type: `${QuestionTypes}`) => ({
