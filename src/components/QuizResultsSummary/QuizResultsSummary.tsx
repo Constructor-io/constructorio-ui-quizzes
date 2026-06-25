@@ -6,6 +6,7 @@ import { QuizResultsConfig } from '../../types';
 interface QuizResultsSummaryProps {
   summary: QuizResultsConfig['desktop']['response_summary'];
   matchedOptions?: string[];
+  asaMessage?: string | null;
 }
 
 const getSummaryVariables = ({ summary, matchedOptions = [] }: QuizResultsSummaryProps) => {
@@ -40,7 +41,12 @@ const getSummaryVariables = ({ summary, matchedOptions = [] }: QuizResultsSummar
 export default function QuizResultsSummary({
   summary,
   matchedOptions = [],
+  asaMessage,
 }: QuizResultsSummaryProps) {
+  if (asaMessage) {
+    return <p className='cio-results-explanation'>{asaMessage}</p>;
+  }
+
   const { summaryFirstPart, summaryLastPart, itemsSeparator, lastSeparator, isActiveSummary } =
     getSummaryVariables({ summary, matchedOptions });
 

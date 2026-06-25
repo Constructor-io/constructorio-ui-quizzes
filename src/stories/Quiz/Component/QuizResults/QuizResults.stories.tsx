@@ -6,6 +6,7 @@ import { resultCardOptions } from '../../tests/mocks';
 import QuizResultsVariationsDecorator, {
   QuizResultsPrimaryDecorator,
   QuizResultsWithSummaryDecorator,
+  QuizResultsWithAsaMessageDecorator,
 } from './QuizResultsDecorator';
 
 const meta: Meta<typeof ResultContainer> = {
@@ -51,4 +52,16 @@ export const QuizResultsPageWithSummary: Story = {
     </div>
   ),
   decorators: [(story) => QuizResultsWithSummaryDecorator(story)],
+};
+
+export const QuizResultsPageWithAsaMessage: Story = {
+  args: {
+    resultCardOptions,
+  },
+  render: (args) => (
+    <div className='results-example-wrapper'>
+      <ResultContainer resultCardOptions={resultCardOptions} onShare={args.onShare} />
+    </div>
+  ),
+  decorators: [(story) => QuizResultsWithAsaMessageDecorator(story)],
 };
