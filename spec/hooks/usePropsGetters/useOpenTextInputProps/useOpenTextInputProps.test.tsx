@@ -12,7 +12,9 @@ describe('Testing Hook (client): useOpenTextInputProps', () => {
       type: 'open',
       input_placeholder: 'Your answer...',
     } as unknown as Question;
-    const answerInputs = { '1': { value: 'Initial answer', type: 'open' } } as AnswerInputState;
+    const answerInputs = {
+      '1': { value: 'Initial answer', type: 'open', questionTitle: 'title' },
+    } as AnswerInputState;
 
     const { result } = renderHook(() =>
       useOpenTextInputProps(setQuizAnswersMock, nextQuestionMock, currentQuestionData, answerInputs)

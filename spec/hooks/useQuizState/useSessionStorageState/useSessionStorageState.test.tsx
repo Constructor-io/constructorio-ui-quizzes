@@ -27,17 +27,20 @@ describe('Testing Hook (client): useSessionStorageState', () => {
       q1: {
         type: QuestionTypes.OpenText,
         value: 'value',
+        questionTitle: 'title',
       },
     },
     prevAnswerInputs: {
       q1: {
         type: QuestionTypes.OpenText,
         value: 'prev',
+        questionTitle: 'title',
       },
     },
     isQuizCompleted: false,
     quizVersionId: 'version1',
     quizSessionId: 'session1',
+    showSummaryPage: false,
   };
   const quizId = 'quizId';
 
@@ -46,7 +49,8 @@ describe('Testing Hook (client): useSessionStorageState', () => {
       useSessionStorageState(quizId, mockState, { sessionStateKey: 'testKey' }, true)
     );
 
-    expect(mockSetItem).toHaveBeenCalledWith('testKey', JSON.stringify({ [quizId]: mockState }));
+    const { showSummaryPage, ...expectedState } = mockState;
+    expect(mockSetItem).toHaveBeenCalledWith('testKey', JSON.stringify({ [quizId]: expectedState }));
   });
 
   it('should retrieve "skipToResults" correctly based on sessionStorage', () => {
@@ -59,6 +63,16 @@ describe('Testing Hook (client): useSessionStorageState', () => {
     });
 
     expect(result.current.skipToResults).toBe(mockState.isQuizCompleted);
+  });
+
+  it('should exclude showSummaryPage from sessionStorage even when true', () => {
+    const stateWithSummary = { ...mockState, showSummaryPage: true };
+    renderHook(() =>
+      useSessionStorageState(quizId, stateWithSummary, { sessionStateKey: 'testKey' }, true)
+    );
+
+    const { showSummaryPage, ...expectedState } = stateWithSummary;
+    expect(mockSetItem).toHaveBeenCalledWith('testKey', JSON.stringify({ [quizId]: expectedState }));
   });
 
   it('should return "hasSessionStorageState" correctly based on sessionStorage', () => {

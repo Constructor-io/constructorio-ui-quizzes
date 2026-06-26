@@ -27,6 +27,92 @@ export function YourComponent() {
 }
 ```
 
+### With summary page
+Quiz implementation including summary page
+
+```jsx
+import CioQuiz from '@constructor-io/constructorio-ui-quizzes';
+import '@constructor-io/constructorio-ui-quizzes/styles.css';
+
+export function YourComponent() {
+  const args = {
+    quizId: 'coffee-quiz',
+    apiKey: 'key_n4SkMH5PFWLdStQZ',
+    resultCardOptions: {
+      resultCardRegularPriceKey: 'price',
+    },
+    summaryPage: { isShown: true },
+  };
+
+  return (
+    <CioQuiz {...args} />
+  );
+}
+```
+
+### Summary page with title and callback
+You can pass a `title` to display a heading on the summary page and an `onSummaryPageLoaded` callback that fires when the summary page is shown.
+
+```jsx
+import CioQuiz from '@constructor-io/constructorio-ui-quizzes';
+import '@constructor-io/constructorio-ui-quizzes/styles.css';
+
+export function YourComponent() {
+  const args = {
+    quizId: 'coffee-quiz',
+    apiKey: 'key_n4SkMH5PFWLdStQZ',
+    summaryPage: {
+      isShown: true,
+      title: 'Review your answers',
+      resultsButtonText: 'See Results',
+    },
+    callbacks: {
+      onSummaryPageLoaded: () => {
+        console.log('Summary page loaded');
+      },
+    },
+  };
+
+  return (
+    <CioQuiz {...args} />
+  );
+}
+```
+
+### Custom summary page rendering
+If you want full control over the summary page markup, use `renderSummaryPage`. It receives the user's answer inputs, a callback to proceed to results, and a callback to jump back to a specific question.
+
+```jsx
+import CioQuiz from '@constructor-io/constructorio-ui-quizzes';
+import '@constructor-io/constructorio-ui-quizzes/styles.css';
+
+export function YourComponent() {
+  const args = {
+    quizId: 'coffee-quiz',
+    apiKey: 'key_n4SkMH5PFWLdStQZ',
+    summaryPage: {
+      isShown: true,
+      renderSummaryPage: ({ answerInputs, onResultsClick, onJumpToQuestion }) => (
+        <div>
+          <h2>Your Selections</h2>
+          {Object.entries(answerInputs).map(([questionId, answer]) => (
+            <div key={questionId}>
+              <span>{answer.questionTitle}</span>
+              <button onClick={() => onJumpToQuestion(Number(questionId))}>Edit</button>
+            </div>
+          ))}
+          <button onClick={onResultsClick}>View Results</button>
+        </div>
+      ),
+    },
+  };
+
+  return (
+    <CioQuiz {...args} />
+  );
+}
+```
+
 ### Provide CIO Client Instance
 If you are already using an instance of the `ConstructorIOClient`, you can pass a `cioJsClient` instead of an `apiKey` to request results from Constructor's servers
 

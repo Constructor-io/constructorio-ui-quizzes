@@ -10,6 +10,7 @@ describe('Testing Hook (client): useQuizLocalState', () => {
       answerInputs: {},
       prevAnswerInputs: {},
       isQuizCompleted: false,
+      showSummaryPage: false,
     });
 
     expect(typeof result.current.dispatchLocalState).toBe('function');

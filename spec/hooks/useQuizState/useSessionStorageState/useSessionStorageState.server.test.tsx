@@ -11,12 +11,14 @@ describe('Testing Hook (server): useSessionStorageState', () => {
       q1: {
         type: QuestionTypes.OpenText,
         value: 'value',
+        questionTitle: 'title',
       },
     },
     prevAnswerInputs: {
       q1: {
         type: QuestionTypes.OpenText,
         value: 'prev',
+        questionTitle: 'title',
       },
     },
     isQuizCompleted: false,

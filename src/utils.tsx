@@ -133,7 +133,9 @@ export function isFunction(fn): boolean {
   return !!(fn && typeof fn === 'function');
 }
 
-export const getStateFromSessionStorage = (quizStateKey: string): QuizLocalReducerState | null => {
+export const getStateFromSessionStorage = (
+  quizStateKey: string
+): Record<string, QuizLocalReducerState> | null => {
   if (typeof window === 'undefined') {
     return null;
   }

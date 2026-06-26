@@ -103,6 +103,7 @@ export const getMockState = (question?: Question, options?: MockOptions): QuizRe
     inputs: {
       1: {
         type: question?.type as InputQuestionsTypes,
+        questionTitle: question?.question || '',
         value: '',
       },
     }, // Key is the question Id and value is the answer input

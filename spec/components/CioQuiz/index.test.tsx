@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
 import * as factories from '../../__tests__/factories';
 
@@ -73,6 +73,101 @@ describe(`${CioQuiz.name} client`, () => {
     });
   });
 
+  describe('loaded services with summary page', () => {
+    beforeEach(() => {
+      jest.spyOn(services, 'getQuizResultsConfig').mockResolvedValue({
+        quiz_id: 'quiz_id',
+        quiz_version_id: 'quiz_version_id',
+        results_config: factories.quizResultsConfig.build(),
+        metadata: null,
+      });
+
+      jest.spyOn(services, 'getNextQuestion').mockResolvedValue({
+        quiz_id: 'quiz_id',
+        quiz_version_id: 'quiz_version_id',
+        next_question: factories.coverQuestion.build({
+          title: 'Cover Question',
+          cta_text: undefined,
+        }),
+        total_questions: 4,
+      });
+    });
+
+    afterEach(() => {
+      jest.restoreAllMocks();
+    });
+
+    it('summary page shown', async () => {
+      render(
+        <CioQuiz
+          {...props}
+          sessionStateOptions={{ showSessionModal: undefined }}
+          summaryPage={{ isShown: true }}
+        />
+      );
+      await screen.findByText('Cover Question');
+
+      jest.spyOn(services, 'getNextQuestion').mockResolvedValue({
+        quiz_id: 'quiz_id',
+        quiz_version_id: 'quiz_version_id',
+        // @ts-expect-error - simulating end of quiz with no next question
+        next_question: undefined,
+        total_questions: 4,
+      });
+
+      fireEvent.click(screen.getByText('Continue'));
+      await waitFor(() => {
+        expect(screen.getByLabelText('Summary page')).toBeInTheDocument();
+      });
+    });
+
+    it('proceeds from summary page to results', async () => {
+      jest.spyOn(services, 'getQuizResults').mockResolvedValue({
+        quiz_id: 'quiz_id',
+        quiz_version_id: 'quiz_version_id',
+        quiz_selected_options: [{ value: 'VALUE', has_attribute: true, is_matched: false }],
+        response: {
+          result_sources: {},
+          facets: [],
+          groups: [],
+          results: [factories.quizResult.build()],
+          sort_options: [],
+          refined_content: [],
+          total_num_results: 1,
+          features: [],
+        },
+        quiz_session_id: 'quiz_session_id',
+      });
+
+      render(
+        <CioQuiz
+          {...props}
+          sessionStateOptions={{ showSessionModal: undefined }}
+          summaryPage={{ isShown: true }}
+        />
+      );
+      await screen.findByText('Cover Question');
+
+      jest.spyOn(services, 'getNextQuestion').mockResolvedValue({
+        quiz_id: 'quiz_id',
+        quiz_version_id: 'quiz_version_id',
+        // @ts-expect-error - simulating end of quiz with no next question
+        next_question: undefined,
+        total_questions: 4,
+      });
+
+      fireEvent.click(screen.getByText('Continue'));
+      await waitFor(() => {
+        expect(screen.getByLabelText('Summary page')).toBeInTheDocument();
+      });
+
+      fireEvent.click(screen.getByText('Results'));
+      await waitFor(() => {
+        expect(screen.getByText('Desktop title')).toBeInTheDocument();
+      });
+      expect(screen.queryByLabelText('Summary page')).not.toBeInTheDocument();
+    });
+  });
   describe('error state', () => {
     beforeEach(() => {
       jest.spyOn(services, 'getQuizResultsConfig').mockRejectedValue(new Error('Network error'));
@@ -103,7 +198,7 @@ describe(`${CioQuiz.name} client`, () => {
       jest.spyOn(services, 'getNextQuestion').mockResolvedValue({
         quiz_id: 'quiz_id',
         quiz_version_id: 'quiz_version_id',
-        // @ts-ignore
+        // @ts-expect-error - simulating end of quiz with no next question
         next_question: undefined,
         total_questions: 4,
       });

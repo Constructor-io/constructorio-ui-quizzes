@@ -27,10 +27,23 @@ export const BasicUsage: Story = {
     quizId,
     apiKey,
     quizVersionId: '',
-    resultsPageOptions,
+    resultsPageOptions: { ...resultsPageOptions },
     resultCardOptions,
     callbacks,
     primaryColor: '35, 71, 199',
+  },
+};
+
+export const WithSummaryPage: Story = {
+  args: {
+    quizId,
+    apiKey,
+    quizVersionId: '',
+    resultsPageOptions: { ...resultsPageOptions },
+    resultCardOptions,
+    callbacks,
+    primaryColor: '35, 71, 199',
+    summaryPage: { isShown: true },
   },
 };
 
