@@ -97,6 +97,53 @@ describe(`${SelectTypeQuestion.name} client`, () => {
     });
   });
 
+  describe('multiple select with option descriptions', () => {
+    const question = factories.selectQuestion.build({
+      type: QuestionTypes.MultipleSelect,
+      options: [
+        factories.selectOption.build({ description: 'OPTION DESCRIPTION' }),
+        factories.selectOption.build({ description: null }),
+      ],
+    });
+    const Subject = withContext(SelectTypeQuestion, {
+      contextMocks: {
+        getSelectInputProps: getSelectInputPropsMock,
+        state: {
+          quiz: {
+            currentQuestion: { next_question: question } as CurrentQuestion,
+          } as QuizReturnState['quiz'],
+        } as QuizContextValue['state'],
+      },
+    });
+
+    it('renders the description of the options that have one', () => {
+      const view = renderToString(<Subject />);
+      expect(view).toContain('OPTION DESCRIPTION');
+      expect(view).toContain('cio-question-option-description');
+    });
+  });
+
+  describe('single select with option descriptions', () => {
+    const question = factories.selectQuestion.build({
+      options: factories.selectOption.buildList(2, { description: 'OPTION DESCRIPTION' }),
+    });
+    const Subject = withContext(SelectTypeQuestion, {
+      contextMocks: {
+        getSelectInputProps: getSelectInputPropsMock,
+        state: {
+          quiz: {
+            currentQuestion: { next_question: question } as CurrentQuestion,
+          } as QuizReturnState['quiz'],
+        } as QuizContextValue['state'],
+      },
+    });
+
+    it('does not render option descriptions inside the option cards', () => {
+      const view = renderToString(<Subject />);
+      expect(view).not.toContain('cio-question-option-description');
+    });
+  });
+
   describe('when question is null', () => {
     const Subject = withContext(SelectTypeQuestion, {
       contextMocks: {

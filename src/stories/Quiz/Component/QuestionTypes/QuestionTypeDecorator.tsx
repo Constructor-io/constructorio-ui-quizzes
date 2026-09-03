@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Question } from '@constructor-io/constructorio-client-javascript/lib/types';
+import { Question } from '@constructor-io/constructorio-client-javascript/lib/types/quizzes';
 import QuizContext from '../../../../components/CioQuiz/context';
 import { useMockContextValue } from '../../tests/mocks';
 import StoryPreview from '../../utils/StoryPreview';

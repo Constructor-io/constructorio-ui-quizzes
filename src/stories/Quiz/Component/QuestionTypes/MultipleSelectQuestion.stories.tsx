@@ -8,6 +8,7 @@ import {
   getMockQuestion,
   questionOptionsWithImages,
   questionOptions,
+  questionOptionsWithDescriptions,
 } from '../../tests/mocks';
 import QuestionTypeVariationsDecorator, {
   QuestionTypePrimaryDecorator,
@@ -20,6 +21,24 @@ const multipleSelectQuestionWithImages = {
 const multipleSelectQuestionWithoutImages = {
   ...getMockQuestion(QuestionTypes.MultipleSelect),
   options: questionOptions,
+};
+const multipleSelectQuestionWithDescriptions = {
+  ...getMockQuestion(QuestionTypes.MultipleSelect),
+  options: questionOptionsWithDescriptions,
+};
+const multipleSelectQuestionWithSomeDescriptions = {
+  ...getMockQuestion(QuestionTypes.MultipleSelect),
+  options: questionOptionsWithDescriptions.map(({ description, ...option }, index) => ({
+    ...option,
+    ...(index % 2 === 0 && { description }),
+  })),
+};
+const multipleSelectQuestionWithImagesAndDescriptions = {
+  ...getMockQuestionWithImage(QuestionTypes.MultipleSelect),
+  options: questionOptionsWithImages.map((option, index) => ({
+    ...option,
+    description: questionOptionsWithDescriptions[index]?.description,
+  })),
 };
 
 const meta: Meta<typeof SelectTypeQuestion> = {
@@ -50,6 +69,33 @@ export const WithoutImages: Story = {
     (story) =>
       QuestionTypeVariationsDecorator(story, [
         multipleSelectQuestionWithoutImages as SelectQuestion,
+      ]),
+  ],
+};
+
+export const WithOptionDescriptions: Story = {
+  decorators: [
+    (story) =>
+      QuestionTypePrimaryDecorator(story, [
+        multipleSelectQuestionWithDescriptions as SelectQuestion,
+      ]),
+  ],
+};
+
+export const WithSomeOptionDescriptions: Story = {
+  decorators: [
+    (story) =>
+      QuestionTypePrimaryDecorator(story, [
+        multipleSelectQuestionWithSomeDescriptions as SelectQuestion,
+      ]),
+  ],
+};
+
+export const WithImagesAndOptionDescriptions: Story = {
+  decorators: [
+    (story) =>
+      QuestionTypePrimaryDecorator(story, [
+        multipleSelectQuestionWithImagesAndDescriptions as SelectQuestion,
       ]),
   ],
 };
