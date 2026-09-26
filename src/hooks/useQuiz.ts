@@ -50,6 +50,7 @@ const useQuiz: UseQuiz = (quizOptions) => {
         matchedOptions: quizApiState.matchedOptions,
         resultsConfig: quizApiState.resultsConfig ?? null,
         metadata: quizApiState.metadata ?? null,
+        showSummaryPage: quizLocalState.showSummaryPage,
       },
       quizSessionStorageState,
     },

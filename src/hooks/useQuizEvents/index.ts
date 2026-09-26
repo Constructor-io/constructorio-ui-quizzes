@@ -13,6 +13,7 @@ import { resetQuizSessionStorageState } from '../../utils';
 import useQuizAddToFavorites from './useQuizAddToFavorites';
 import useQuizSkipClick from './useQuizSkipClick';
 import useJumpToQuestion from './useJumpToQuestion';
+import useProceedToResultsFromSummaryPage from './useProceedToResultsFromSummaryPage';
 
 type UseQuizEvents = (
   quizOptions: IQuizProps,
@@ -25,6 +26,7 @@ const useQuizEvents: UseQuizEvents = (quizOptions, cioClient, quizState) => {
     quizApiState,
     dispatchLocalState,
     dispatchApiState,
+    dispatchApiStateQuizResults,
     quizLocalState,
     quizSessionStorageState,
   } = quizState;
@@ -97,6 +99,12 @@ const useQuizEvents: UseQuizEvents = (quizOptions, cioClient, quizState) => {
     dispatchLocalState
   );
 
+  const proceedToResultsFromSummaryPage = useProceedToResultsFromSummaryPage(
+    dispatchLocalState,
+    dispatchApiState,
+    dispatchApiStateQuizResults
+  );
+
   return {
     addToCart,
     addToFavorites,
@@ -109,6 +117,7 @@ const useQuizEvents: UseQuizEvents = (quizOptions, cioClient, quizState) => {
     jumpToQuestion,
     hydrateQuiz: hydrateQuizLocalState,
     resetSessionStorageState,
+    proceedToResultsFromSummaryPage,
   };
 };
 

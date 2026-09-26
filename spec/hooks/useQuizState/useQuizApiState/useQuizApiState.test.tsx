@@ -3,6 +3,8 @@ import { mockConstructorIOClient } from '../../../__tests__/utils';
 import useQuizApiState from '../../../../src/hooks/useQuizState/useQuizApiState';
 import { getQuizResults } from '../../../../src/services';
 import { QUIZ_VERSION_ID, QUIZ_ID } from '../../../__tests__/constants';
+import { QuestionTypes, QuizAPIActionTypes } from '../../../../src/components/CioQuiz/actions';
+import * as apiReducer from '../../../../src/components/CioQuiz/quizApiReducer';
 
 jest.mock('../../../../src/services', () => ({
   getNextQuestion: jest.fn().mockResolvedValue({
@@ -131,5 +133,48 @@ describe('Testing Hook (client): useQuizApiState', () => {
 
     expect(result.current.quizApiState.quizResults).toBeDefined();
     expect(result.current.quizApiState.quizRequestState).toBe('SUCCESS');
+  });
+
+  it('shows summary page if has to', async () => {
+    const quizLocalState = {
+      answers: [['1']],
+      isQuizCompleted: true,
+      answerInputs: {},
+      prevAnswerInputs: {},
+    };
+    const skipToResults = false;
+    const dispatchLocalState = jest.fn();
+
+    const apiReducerMock = jest.spyOn(apiReducer, 'default');
+
+    renderHook(() =>
+      useQuizApiState(
+        { ...quizOptions, summaryPage: { isShown: true } },
+        mockConstructorIOClient,
+        quizLocalState,
+        skipToResults,
+        dispatchLocalState
+      )
+    );
+
+    await waitFor(() =>
+      expect(dispatchLocalState).toHaveBeenCalledWith({
+        type: QuestionTypes.SummaryPage,
+        payload: { showSummaryPage: true },
+      })
+    );
+
+    await waitFor(() =>
+      expect(apiReducerMock).toHaveBeenLastCalledWith(expect.any(Object), {
+        type: QuizAPIActionTypes.SET_CURRENT_QUESTION,
+        payload: {
+          quizCurrentQuestion: {
+            next_question: null,
+            quiz_session_id: 'QUIZ_SESSION_ID',
+            quiz_version_id: 'QUIZ_VERSION_ID',
+          },
+        },
+      })
+    );
   });
 });

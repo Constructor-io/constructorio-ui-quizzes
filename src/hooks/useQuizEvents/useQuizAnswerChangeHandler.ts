@@ -18,6 +18,7 @@ const useQuizAnswerChangeHandler = (
               type: QuestionTypes.Cover,
               payload: {
                 questionId: currentQuestion.next_question.id,
+                questionTitle: currentQuestion.next_question.title,
                 input: '',
               },
             });
@@ -27,6 +28,7 @@ const useQuizAnswerChangeHandler = (
               type: QuestionTypes.OpenText,
               payload: {
                 questionId: currentQuestion!.next_question.id,
+                questionTitle: currentQuestion.next_question.title,
                 input: payload as string,
               },
             });
@@ -43,6 +45,7 @@ const useQuizAnswerChangeHandler = (
                 | QuestionTypes.MultipleFilterValues,
               payload: {
                 questionId: currentQuestion.next_question.id,
+                questionTitle: currentQuestion.next_question.title,
                 input: payload as Omit<QuestionOption, 'attribute' | 'images'>[],
               },
             });

@@ -25,11 +25,13 @@ export enum QuestionTypes {
   Hydrate = 'hydrate',
   Complete = 'complete',
   JumpToQuestion = 'jump_to_question',
+  SummaryPage = 'summary_page',
 }
 
 export interface QuestionAnswer<Value> {
   questionId: number;
   input: Value;
+  questionTitle: string;
 }
 
 export type SelectQuestionPayload = QuestionAnswer<Omit<QuestionOption, 'attribute' | 'images'>[]>;
@@ -58,7 +60,8 @@ export type ActionAnswerQuestion =
   | Action<QuestionTypes.Reset>
   | Action<QuestionTypes.Complete>
   | Action<QuestionTypes.JumpToQuestion, { questionId: number }>
-  | Action<QuestionTypes.Hydrate, Partial<QuizLocalReducerState>>;
+  | Action<QuestionTypes.Hydrate, Partial<QuizLocalReducerState>>
+  | Action<QuestionTypes.SummaryPage, { showSummaryPage: boolean }>;
 
 // API actions
 export enum QuizAPIActionTypes {
