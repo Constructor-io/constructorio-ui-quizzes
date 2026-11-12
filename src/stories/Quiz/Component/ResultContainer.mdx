@@ -1,8 +1,14 @@
 import { Meta, Canvas } from '@storybook/addon-docs/blocks';
 import * as ComponentStories from './ComponentStories.stories';
 import * as QuizResultsStories from './QuizResults/QuizResults.stories';
+import * as ZeroResultsStories from './QuizResults/ZeroResults.stories';
 
 <Meta of={ComponentStories} />
 
 ### QuizResults
 <Canvas of={QuizResultsStories.Primary} />
+
+### ZeroResults
+Shown instead of the results when no products match the shopper's answers.
+
+<Canvas of={ZeroResultsStories.ZeroResultsState} />
