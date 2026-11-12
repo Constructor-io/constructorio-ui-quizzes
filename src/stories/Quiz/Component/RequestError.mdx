@@ -1,0 +1,10 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as ComponentStories from './ComponentStories.stories';
+import * as ErrorStateStories from './ErrorState.stories';
+
+<Meta of={ComponentStories} />
+
+### RequestError
+Shown when a quiz question or results request fails. The shopper can retake the quiz from here.
+
+<Canvas of={ErrorStateStories.ErrorState} />
